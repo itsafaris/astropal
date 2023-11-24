@@ -4,7 +4,7 @@ import type { HeadFC, PageProps } from "gatsby";
 export const Head: HeadFC = () => <title>Astropal</title>;
 
 const IndexPage: React.FC<PageProps> = () => {
-  return <>Hello 2</>;
+  return <>Hello</>;
 };
 
 export default IndexPage;
