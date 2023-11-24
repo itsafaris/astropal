@@ -1,0 +1,63 @@
+{
+  "name": "astropal",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Vilius Linge",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.0",
+    "@chakra-ui/react": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/inter": "^5.0.8",
+    "@fontsource-variable/manrope": "^5.0.8",
+    "@stripe/react-stripe-js": "^2.3.1",
+    "@stripe/stripe-js": "^2.1.7",
+    "@types/color": "^3.0.4",
+    "@types/react-helmet": "^6.1.8",
+    "@types/seedrandom": "^3.0.6",
+    "autoprefixer": "^10.4.14",
+    "color": "^4.2.3",
+    "framer-motion": "^10.16.1",
+    "gatsby": "^5.11.0",
+    "gatsby-plugin-google-tagmanager": "^5.11.0",
+    "gatsby-plugin-image": "^3.11.0",
+    "gatsby-plugin-manifest": "^5.11.0",
+    "gatsby-plugin-postcss": "^6.11.0",
+    "gatsby-plugin-sharp": "^5.11.0",
+    "gatsby-source-filesystem": "^5.11.0",
+    "gatsby-transformer-sharp": "^5.11.0",
+    "lodash": "^4.17.21",
+    "mixpanel-browser": "^2.47.0",
+    "postcss": "^8.4.25",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.10.1",
+    "recharts": "^2.8.0",
+    "seedrandom": "^3.0.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@chakra-ui/gatsby-plugin": "^3.1.3",
+    "@types/mixpanel-browser": "^2.47.1",
+    "@types/node": "^20.3.3",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/uuid": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "gatsby-plugin-emotion": "^8.11.0",
+    "gatsby-plugin-tsconfig-paths": "^1.0.6",
+    "typescript": "^5.0.2"
+  }
+}
