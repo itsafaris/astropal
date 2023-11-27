@@ -13,7 +13,7 @@ export default function IndexPage() {
       </Text>
       <Text textAlign={"center"}>Select your gender to start</Text>
       <Flex justifyContent="center" mt={8} gap={4}>
-        <Button as={Link} to="/quiz" colorScheme="teal">
+        <Button as={Link} to="/quiz" colorScheme="brand">
           Male
         </Button>
         <Button as={Link} to="/quiz" colorScheme="teal">
