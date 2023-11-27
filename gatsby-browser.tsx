@@ -3,6 +3,7 @@ import { GatsbyBrowser } from "gatsby";
 
 import mixpanel from "mixpanel-browser";
 import { initMixpanel } from "./src/utils/tracking";
+import { RootWrapper } from "./src/components/root/RootWrapper";
 
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/inter";
@@ -35,3 +36,9 @@ const GATSBY_MIXPANEL_TOKEN = "";
 // export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
 //   mixpanel.track_pageview();
 // };
+
+export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({
+  element,
+}) => {
+  return <RootWrapper>{element}</RootWrapper>;
+};
