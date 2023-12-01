@@ -1,8 +1,30 @@
-import { Callout, Selector, Slide, Title } from "@martynasj/quiz-lib";
+import {
+  Callout,
+  Selector,
+  Slide,
+  Title,
+  ContainerPropsOverride,
+} from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
+
+import { TestimonialCard } from "@components/testimonial";
+
+import { StaticImage } from "gatsby-plugin-image";
+
+import { Text, Box } from "@chakra-ui/react";
+
+const fillerStyles: ContainerPropsOverride = {
+  bg: "radial-gradient(circle,rgba(56,4,59,.8) 0,#1c0630 70%)",
+  progressBar: {
+    activeSegmentBg: "#989898",
+    inactiveSegmentBg: "#565656",
+    textColor: "white",
+    colorScheme: "whiteAlpha",
+  },
+};
 
 // Your Goal
 
@@ -1064,13 +1086,61 @@ export function socialProofFiller() {
   return (
     <Slide
       type="filler"
-      id="social-proof-filler-one"
-      containerProps={{ backgroundColor: "teal" }}
+      id="user-testimonial"
+      quizContainerProps={fillerStyles}
     >
-      <Title>
-        Testimonial + statistics "8/10 users report increased relationship
-        satisfaction"
-      </Title>
+      <Box
+        display="flex"
+        flexDirection={"column"}
+        alignItems={"center"}
+        gap={1}
+        width={"full"}
+        mb={5}
+      >
+        <Text
+          color="white"
+          textAlign="center"
+          fontSize={"4xl"}
+          fontWeight={700}
+        >
+          9 out of 10 users
+        </Text>
+
+        <Text color="white" textAlign="center" fontSize={"lg"} fontWeight={500}>
+          say AstroPal helped overcome relationship challenges.
+        </Text>
+      </Box>
+
+      <TestimonialCard
+        testimonial={{
+          authorName: "Louise Peereman",
+          text: "Grateful for the genuine support and insights that made a profound difference in my life. Finding love after divorce is challenging, but with your guidance, I feel much more confident in my journey.",
+          rating: 5,
+          imgComponent: (
+            <StaticImage
+              layout={"constrained"}
+              placeholder={"none"}
+              src={"../../images/testimonial-one.jpeg"}
+              alt=""
+            />
+          ),
+        }}
+      />
+    </Slide>
+  );
+}
+
+export function yourProfileIntroFiller() {
+  return (
+    <Slide
+      type="filler"
+      id={String(Math.random())}
+      quizContainerProps={{
+        bg: "url('../../images/bg-1.jpeg')",
+        // backgroundImage: `url(${withPrefix('../../images/bg-1.jpeg')})`
+      }}
+    >
+      <Title>We will generate your avatar. Be ready!!!!!</Title>
     </Slide>
   );
 }

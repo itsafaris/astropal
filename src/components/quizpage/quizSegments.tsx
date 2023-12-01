@@ -33,6 +33,7 @@ import {
   partnerPersonalityTypeSlide,
   socialProofFiller,
   yourProfileSummaryFiller,
+  yourProfileIntroFiller,
   partnerProfileSummaryFiller,
   goalSlide,
 } from "./allSlides";
@@ -49,6 +50,7 @@ export function goalSegment() {
 export function personalInfoSegment({ birthname }: { birthname: string }) {
   return (
     <Segment title="Your personality">
+      {yourProfileIntroFiller()}
       {genderSlide()}
       {birthNameSlide()}
       {birthDateSlide()}
@@ -66,6 +68,7 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
 export function partnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's personality">
+      {yourProfileIntroFiller()}
       {partnerGenderSlide()}
       {partnerBirthNameSlide()}
       {partnerBirthDateSlide()}
@@ -93,11 +96,13 @@ export function idealPartnerSegment() {
 export function relationshipsNonSingleSegment() {
   return (
     <Segment title="Relationship satisfaction">
+      {yourProfileIntroFiller()}
       {feelingsAboutRelationshipSlide()}
       {relationshipImportanceSlide()}
       {relationshipFactorsSlide()}
       {conflictResolutionSatisfactionSlide()}
       {appFeaturesImportanceSlide()}
+      {yourProfileIntroFiller()}
     </Segment>
   );
 }
