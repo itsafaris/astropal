@@ -56,7 +56,7 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
       {birthNameSlide()}
       {birthDateSlide()}
       {birthPlaceSlide()}
-      {loadingAfterPersonalInfo({ birthname })}
+      {/* {loadingAfterPersonalInfo({ birthname })} */}
       {personalityTypeSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}

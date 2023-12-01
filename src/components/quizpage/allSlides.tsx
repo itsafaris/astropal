@@ -1,10 +1,4 @@
-import {
-  Callout,
-  Selector,
-  Slide,
-  Title,
-  ContainerPropsOverride,
-} from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide, Title, ContainerPropsOverride } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
@@ -66,13 +60,10 @@ export function goalSlide() {
         },
       ]}
     >
-      <Title>
-        What are your current primary goals and aspirations regarding
-        relationships?
-      </Title>
+      <Title>What are your current primary goals and aspirations regarding relationships?</Title>
       <Callout>
-        Don't worry if none of the options reflect your goal. You will be able
-        to define it later as well.
+        Don't worry if none of the options reflect your goal. You will be able to define it later as
+        well.
       </Callout>
       <Selector />
     </Slide>
@@ -114,8 +105,7 @@ export function birthNameSlide() {
     <Slide id="birth-name" type="short-text" placeholder="Your birth name">
       <Title>What is your full birth name?</Title>
       <Callout>
-        A person's name holds a significant information about their personality
-        and life path
+        A person's name holds a significant information about their personality and life path
       </Callout>
       <Selector />
     </Slide>
@@ -127,8 +117,8 @@ export function birthDateSlide() {
     <Slide id="birth-date" type="date">
       <Title>What's your date of birth?</Title>
       <Callout emoji="🎂">
-        Knowing your birth date enables precise astrological and numerological
-        analysis, key to unlocking personalized relationship guidance.
+        Knowing your birth date enables precise astrological and numerological analysis, key to
+        unlocking personalized relationship guidance.
       </Callout>
       <Selector />
     </Slide>
@@ -137,16 +127,11 @@ export function birthDateSlide() {
 
 export function birthPlaceSlide() {
   return (
-    <Slide
-      id="birth-place"
-      type="location"
-      placeholder="Your birthplace"
-      optional
-    >
+    <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where were you born?</Title>
       <Callout>
-        Discovering this place is key to uncovering the fundamental aspects of
-        who you are, your innermost yearnings, and your true aspirations.
+        Discovering this place is key to uncovering the fundamental aspects of who you are, your
+        innermost yearnings, and your true aspirations.
       </Callout>
       <Selector />
     </Slide>
@@ -174,8 +159,8 @@ export function loadingAfterPersonalInfo({ birthname }: { birthname: string }) {
       ]}
     >
       <Title>
-        Thanks for your patience {birthname}! We will configure your meta
-        profile based on the phase 1 answers
+        Thanks for your patience {birthname}! We will configure your meta profile based on the phase
+        1 answers
       </Title>
       <Selector />
     </Slide>
@@ -214,15 +199,10 @@ export function partnerGenderSlide() {
 
 export function partnerBirthNameSlide() {
   return (
-    <Slide
-      id="partner-birth-name"
-      type="short-text"
-      placeholder="Your birth name"
-    >
+    <Slide id="partner-birth-name" type="short-text" placeholder="Your birth name">
       <Title>What's your partner's full birth name?</Title>
       <Callout>
-        A person's name holds a significant information about their personality
-        and life path
+        A person's name holds a significant information about their personality and life path
       </Callout>
       <Selector />
     </Slide>
@@ -234,8 +214,7 @@ export function partnerBirthDateSlide() {
     <Slide id="partner-birth-date" type="date">
       <Title>What's your partner's date of birth?</Title>
       <Callout>
-        Knowing the day you were born is vital for crafting thorough and precise
-        forecasts as well.
+        Knowing the day you were born is vital for crafting thorough and precise forecasts as well.
       </Callout>
       <Selector />
     </Slide>
@@ -244,16 +223,11 @@ export function partnerBirthDateSlide() {
 
 export function partnerBirthPlaceSlide() {
   return (
-    <Slide
-      id="partner-birth-place"
-      type="location"
-      placeholder="Your birthplace"
-      optional
-    >
+    <Slide id="partner-birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where was your partner born?</Title>
       <Callout>
-        Discovering this place is key to uncovering the fundamental aspects of
-        who you are, your innermost yearnings, and your true aspirations.
+        Discovering this place is key to uncovering the fundamental aspects of who you are, your
+        innermost yearnings, and your true aspirations.
       </Callout>
       <Selector />
     </Slide>
@@ -344,8 +318,8 @@ export function personalityTypeSlide() {
     >
       <Title>Which personality type best describes you?</Title>
       <Callout emoji="🧠">
-        Selecting your personality type helps identify spiritual and emotional
-        compatibilities, fostering deeper and more meaningful relationships.
+        Selecting your personality type helps identify spiritual and emotional compatibilities,
+        fostering deeper and more meaningful relationships.
       </Callout>
       <Selector />
     </Slide>
@@ -383,9 +357,7 @@ export function partnerEmotionalOpennessSlide() {
         },
       ]}
     >
-      <Title>
-        What level of emotional openness does your current partner exhibit?
-      </Title>
+      <Title>What level of emotional openness does your current partner exhibit?</Title>
       <Selector />
     </Slide>
   );
@@ -484,12 +456,10 @@ export function spiritualInvolvementSlide() {
         },
       ]}
     >
-      <Title>
-        To what extent are you engaged with spiritual practices and concepts?
-      </Title>
+      <Title>To what extent are you engaged with spiritual practices and concepts?</Title>
       <Callout emoji="✨">
-        Your engagement level with spiritual practices allows us to fine-tune
-        the insights and advice to resonate with your spiritual journey.
+        Your engagement level with spiritual practices allows us to fine-tune the insights and
+        advice to resonate with your spiritual journey.
       </Callout>
       <Selector />
     </Slide>
@@ -530,13 +500,11 @@ export function colorResonanceSlide() {
       ]}
     >
       <Title>
-        Is there a color that you feel particularly drawn to or that resonates
-        with you?
+        Is there a color that you feel particularly drawn to or that resonates with you?
       </Title>
       <Callout emoji="🌈">
-        Colors are deeply symbolic in spirituality, often linked to specific
-        energy vibrations that can harmonize with your love life and personal
-        aura.
+        Colors are deeply symbolic in spirituality, often linked to specific energy vibrations that
+        can harmonize with your love life and personal aura.
       </Callout>
       <Selector />
     </Slide>
@@ -617,10 +585,7 @@ export function sharedLifestyleAspectSlide() {
         },
       ]}
     >
-      <Title>
-        Which lifestyle aspect should your ideal partner absolutely share with
-        you?
-      </Title>
+      <Title>Which lifestyle aspect should your ideal partner absolutely share with you?</Title>
       <Selector />
     </Slide>
   );
@@ -655,9 +620,7 @@ export function approachToConflictsSlide() {
         },
       ]}
     >
-      <Title>
-        How should your ideal partner approach conflicts and disagreements?
-      </Title>
+      <Title>How should your ideal partner approach conflicts and disagreements?</Title>
       <Selector />
     </Slide>
   );
@@ -688,9 +651,7 @@ export function emotionalOpennessSlide() {
         },
       ]}
     >
-      <Title>
-        What level of emotional openness do you desire from your ideal partner?
-      </Title>
+      <Title>What level of emotional openness do you desire from your ideal partner?</Title>
       <Selector />
     </Slide>
   );
@@ -721,9 +682,7 @@ export function viewOnGrowthSlide() {
         },
       ]}
     >
-      <Title>
-        How should your ideal partner view personal and career growth?
-      </Title>
+      <Title>How should your ideal partner view personal and career growth?</Title>
       <Selector />
     </Slide>
   );
@@ -830,9 +789,7 @@ export function relationshipFactorsSlide() {
         },
       ]}
     >
-      <Title>
-        Are any of these factors currently affecting your relationship?
-      </Title>
+      <Title>Are any of these factors currently affecting your relationship?</Title>
       <Selector />
     </Slide>
   );
@@ -867,9 +824,7 @@ export function conflictResolutionSatisfactionSlide() {
         },
       ]}
     >
-      <Title>
-        Are you satisfied with the way you and your partner deal with conflict?
-      </Title>
+      <Title>Are you satisfied with the way you and your partner deal with conflict?</Title>
       <Selector />
     </Slide>
   );
@@ -949,9 +904,7 @@ export function potentialPartnerValuesSlide() {
         },
       ]}
     >
-      <Title>
-        What do you value most when considering a potential partner?
-      </Title>
+      <Title>What do you value most when considering a potential partner?</Title>
       <Selector />
     </Slide>
   );
@@ -990,10 +943,7 @@ export function relationshipDealBreakersSlide() {
         },
       ]}
     >
-      <Title>
-        Are there specific deal-breakers you're aware of from past
-        relationships?
-      </Title>
+      <Title>Are there specific deal-breakers you're aware of from past relationships?</Title>
       <Selector />
     </Slide>
   );
@@ -1028,10 +978,7 @@ export function findingCompatiblePartnerSatisfactionSlide() {
         },
       ]}
     >
-      <Title>
-        How satisfied are you with your approach to finding a compatible
-        partner?
-      </Title>
+      <Title>How satisfied are you with your approach to finding a compatible partner?</Title>
       <Selector />
     </Slide>
   );
@@ -1072,10 +1019,7 @@ export function appFeaturesImportanceSlide() {
         },
       ]}
     >
-      <Title>
-        What kind of assistance are you seeking that would be most beneficial to
-        you?
-      </Title>
+      <Title>What kind of assistance are you seeking that would be most beneficial to you?</Title>
       <Selector />
     </Slide>
   );
@@ -1085,11 +1029,7 @@ export function appFeaturesImportanceSlide() {
 
 export function socialProofFiller() {
   return (
-    <Slide
-      type="filler"
-      id="user-testimonial"
-      quizContainerProps={fillerStyles}
-    >
+    <Slide type="filler" id="user-testimonial" quizContainerProps={fillerStyles}>
       <Box
         display="flex"
         flexDirection={"column"}
@@ -1098,12 +1038,7 @@ export function socialProofFiller() {
         width={"full"}
         mb={5}
       >
-        <Text
-          color="white"
-          textAlign="center"
-          fontSize={"4xl"}
-          fontWeight={700}
-        >
+        <Text color="white" textAlign="center" fontSize={"4xl"} fontWeight={700}>
           9 out of 10 users
         </Text>
 
@@ -1133,22 +1068,19 @@ export function socialProofFiller() {
 
 export function yourProfileIntroFiller() {
   return (
-    <Slide type="filler" id={"your-profile"} quizContainerProps={fillerStyles}>
-      <Title color="white">Your personalized metaphysical profile</Title>
+    <Slide type="filler" id={"your-profile"}>
+      <Title>Your personal metaphysical profile</Title>
       <Callout>
-        To unveil the unique tapestry of energies shaping your love life, we'll
-        create your personalized metaphysical profile through questions
+        To unveil the energies shaping your love life, we'll create your personalized metaphysical
+        profile through questions.
       </Callout>
       <Box
-        height={"300px"}
-        width={"300px"}
+        height={"200px"}
+        width={"200px"}
         mx="auto"
-        shadow={"2xl"}
-        dropShadow={"white"}
+        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
         borderRadius={"50%"}
-        background={`url(${withPrefix(
-          "/images/bg-5.jpeg"
-        )}) no-repeat center center / cover`}
+        background={`url(${withPrefix("/images/bg-5.jpeg")}) no-repeat center center / cover`}
       ></Box>
     </Slide>
   );
@@ -1159,17 +1091,16 @@ export function partnerProfileIntroFiller() {
     <Slide type="filler" id={"partner-profile"}>
       <Title>Let us create metaphysical profile of your partner</Title>
       <Callout>
-        We'll ask a couple of questions about your partner to reveal
-        compatibility insights in your relationship.
+        We'll ask a couple of questions about your partner to reveal compatibility insights in your
+        relationship.
       </Callout>
       <Box
-        height={"300px"}
-        width={"300px"}
+        height={"200px"}
+        width={"200px"}
         mx="auto"
+        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
         borderRadius={"50%"}
-        background={`url(${withPrefix(
-          "/images/bg-9.jpeg"
-        )}) no-repeat center center / cover`}
+        background={`url(${withPrefix("/images/bg-9.jpeg")}) no-repeat center center / cover`}
       ></Box>
     </Slide>
   );
@@ -1177,11 +1108,7 @@ export function partnerProfileIntroFiller() {
 
 export function yourProfileSummaryFiller() {
   return (
-    <Slide
-      type="filler"
-      id="your-profile-summary"
-      containerProps={{ backgroundColor: "teal" }}
-    >
+    <Slide type="filler" id="your-profile-summary" quizContainerProps={fillerStyles}>
       <Title>Generating your profile...</Title>
     </Slide>
   );
@@ -1189,11 +1116,7 @@ export function yourProfileSummaryFiller() {
 
 export function partnerProfileSummaryFiller() {
   return (
-    <Slide
-      type="filler"
-      id="partner-profile-summary"
-      containerProps={{ backgroundColor: "teal" }}
-    >
+    <Slide type="filler" id="partner-profile-summary" containerProps={{ backgroundColor: "teal" }}>
       <Title>Generating partners profile...</Title>
     </Slide>
   );
