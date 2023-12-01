@@ -36,6 +36,7 @@ import {
   yourProfileIntroFiller,
   partnerProfileSummaryFiller,
   goalSlide,
+  partnerProfileIntroFiller,
 } from "./allSlides";
 
 export function goalSegment() {
@@ -68,7 +69,7 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
 export function partnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's personality">
-      {yourProfileIntroFiller()}
+      {partnerProfileIntroFiller()}
       {partnerGenderSlide()}
       {partnerBirthNameSlide()}
       {partnerBirthDateSlide()}
@@ -96,13 +97,11 @@ export function idealPartnerSegment() {
 export function relationshipsNonSingleSegment() {
   return (
     <Segment title="Relationship satisfaction">
-      {yourProfileIntroFiller()}
       {feelingsAboutRelationshipSlide()}
       {relationshipImportanceSlide()}
       {relationshipFactorsSlide()}
       {conflictResolutionSatisfactionSlide()}
       {appFeaturesImportanceSlide()}
-      {yourProfileIntroFiller()}
     </Segment>
   );
 }

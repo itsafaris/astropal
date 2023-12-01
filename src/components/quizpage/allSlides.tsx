@@ -15,6 +15,7 @@ import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { Text, Box } from "@chakra-ui/react";
+import { withPrefix } from "gatsby";
 
 const fillerStyles: ContainerPropsOverride = {
   bg: "radial-gradient(circle,rgba(56,4,59,.8) 0,#1c0630 70%)",
@@ -1132,15 +1133,44 @@ export function socialProofFiller() {
 
 export function yourProfileIntroFiller() {
   return (
-    <Slide
-      type="filler"
-      id={String(Math.random())}
-      quizContainerProps={{
-        bg: "url('../../images/bg-1.jpeg')",
-        // backgroundImage: `url(${withPrefix('../../images/bg-1.jpeg')})`
-      }}
-    >
-      <Title>We will generate your avatar. Be ready!!!!!</Title>
+    <Slide type="filler" id={"your-profile"} quizContainerProps={fillerStyles}>
+      <Title color="white">Your personalized metaphysical profile</Title>
+      <Callout>
+        To unveil the unique tapestry of energies shaping your love life, we'll
+        create your personalized metaphysical profile through questions
+      </Callout>
+      <Box
+        height={"300px"}
+        width={"300px"}
+        mx="auto"
+        shadow={"2xl"}
+        dropShadow={"white"}
+        borderRadius={"50%"}
+        background={`url(${withPrefix(
+          "/images/bg-5.jpeg"
+        )}) no-repeat center center / cover`}
+      ></Box>
+    </Slide>
+  );
+}
+
+export function partnerProfileIntroFiller() {
+  return (
+    <Slide type="filler" id={"partner-profile"}>
+      <Title>Let us create metaphysical profile of your partner</Title>
+      <Callout>
+        We'll ask a couple of questions about your partner to reveal
+        compatibility insights in your relationship.
+      </Callout>
+      <Box
+        height={"300px"}
+        width={"300px"}
+        mx="auto"
+        borderRadius={"50%"}
+        background={`url(${withPrefix(
+          "/images/bg-9.jpeg"
+        )}) no-repeat center center / cover`}
+      ></Box>
     </Slide>
   );
 }
@@ -1161,7 +1191,7 @@ export function partnerProfileSummaryFiller() {
   return (
     <Slide
       type="filler"
-      id="partners-profile-summary"
+      id="partner-profile-summary"
       containerProps={{ backgroundColor: "teal" }}
     >
       <Title>Generating partners profile...</Title>

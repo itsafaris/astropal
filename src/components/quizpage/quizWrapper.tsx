@@ -33,7 +33,7 @@ export function QuizWrapper(props: Omit<QuizProps, "locationApiKey">) {
         //
       }}
       {...props}
-      // showDebugUI
+      showDebugUI
       locationApiKey={locationApiKey}
     />
   );
