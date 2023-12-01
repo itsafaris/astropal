@@ -1,7 +1,6 @@
 import { ChakraProvider, Flex, Text } from "@chakra-ui/react";
 import {
   Callout,
-  Image,
   Quiz,
   QuizTheme,
   Segment,
@@ -10,11 +9,7 @@ import {
   Subtitle,
   Title,
 } from "@martynasj/quiz-lib";
-import femaleImg from "../images/female.png";
-import maleImg from "../images/male.png";
-import neutralImg from "../images/neutral.png";
-import palmImg from "../images/palm-map.png";
-import skymapImg from "../images/skymap.png";
+
 import { isSSR } from "@utils/ssr";
 import { brandColor } from "@utils/theme";
 import { useRef } from "react";
@@ -57,143 +52,6 @@ export default function QuizPage() {
             //
           }}
         >
-          <Segment title={"Intro"}>
-            <Slide
-              id="relationship-goals"
-              type="single"
-              variant="list"
-              options={[
-                {
-                  text: "Fix relationship problems",
-                },
-                {
-                  text: "Increase relationship satisfaction",
-                },
-                {
-                  text: "Find partner",
-                },
-              ]}
-            >
-              <Title>
-                What are your primary goals and aspirations right now?
-              </Title>
-              <Selector />
-            </Slide>
-
-            <Slide id="filler-sky-map" type="filler">
-              <Title>
-                Good! Now that we have a clear goal in mind, let's create your
-                astrological avatar.
-              </Title>
-              <Image src={skymapImg} />
-            </Slide>
-          </Segment>
-
-          <Segment title="Avatar creation">
-            <Slide
-              id="gender"
-              type="single"
-              variant="picture"
-              size="small"
-              options={[
-                {
-                  text: "Male",
-                  imgUrl: maleImg,
-                },
-                {
-                  text: "Female",
-                  imgUrl: femaleImg,
-                },
-                {
-                  text: "Other",
-                  imgUrl: neutralImg,
-                },
-              ]}
-            >
-              <Title>What is your gender?</Title>
-              <Selector />
-            </Slide>
-
-            <Slide
-              id="birth-name"
-              type="short-text"
-              placeholder="Your birth name"
-            >
-              <Title>What is your full birth name?</Title>
-              <Callout>
-                A person's name holds a significant information about their
-                personality and life path
-              </Callout>
-              <Selector />
-            </Slide>
-
-            <Slide id="filler-birth-name" type="filler">
-              <Title>What is your full birth name {birthname}?</Title>
-              <Callout>
-                A person's name holds a significant information about their
-                personality and life path
-              </Callout>
-              <Selector />
-            </Slide>
-
-            <Slide id="birth-date" type="date">
-              <Title>What's your date of birth?</Title>
-              <Callout>
-                Knowing the day you were born is vital for crafting thorough and
-                precise forecasts as well.
-              </Callout>
-              <Selector />
-            </Slide>
-
-            {/* TODO: birth time  */}
-
-            <Slide
-              id="birth-place"
-              type="location"
-              placeholder="Your birthplace"
-              optional
-            >
-              <Title>Where were you born?</Title>
-              <Callout>
-                Discovering this place is key to uncovering the fundamental
-                aspects of who you are, your innermost yearnings, and your true
-                aspirations.
-              </Callout>
-              <Selector />
-            </Slide>
-
-            <Slide
-              id="loading-one"
-              type="loading"
-              phases={[
-                {
-                  title: "Creating your meta profile",
-                  duration: 2,
-                },
-                {
-                  title: "Connecting to the stars",
-                  duration: 2,
-                },
-                {
-                  title: "Matching personalised psychics readers",
-                  duration: 2,
-                },
-              ]}
-            >
-              <Title>
-                We will configure your meta profile based on the phase 1 answers
-              </Title>
-              <Selector />
-            </Slide>
-
-            <Slide id="filler-palm" type="filler">
-              <Title>
-                Thank you for waiting! We can now continue with the phase 2
-              </Title>
-              <Image src={palmImg} />
-            </Slide>
-          </Segment>
-
           <Segment title={"Personality"}>
             <Slide
               id="personality-type"
