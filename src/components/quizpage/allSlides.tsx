@@ -51,9 +51,9 @@ export function birthDateSlide() {
   return (
     <Slide id="birth-date" type="date">
       <Title>What's your date of birth?</Title>
-      <Callout>
-        Knowing the day you were born is vital for crafting thorough and precise
-        forecasts as well.
+      <Callout emoji="🎂">
+        Knowing your birth date enables precise astrological and numerological
+        analysis, key to unlocking personalized relationship guidance.
       </Callout>
       <Selector />
     </Slide>
@@ -268,6 +268,10 @@ export function personalityTypeSlide() {
       ]}
     >
       <Title>Which personality type best describes you?</Title>
+      <Callout emoji="🧠">
+        Selecting your personality type helps identify spiritual and emotional
+        compatibilities, fostering deeper and more meaningful relationships.
+      </Callout>
       <Selector />
     </Slide>
   );
@@ -408,6 +412,10 @@ export function spiritualInvolvementSlide() {
       <Title>
         To what extent are you engaged with spiritual practices and concepts?
       </Title>
+      <Callout emoji="✨">
+        Your engagement level with spiritual practices allows us to fine-tune
+        the insights and advice to resonate with your spiritual journey.
+      </Callout>
       <Selector />
     </Slide>
   );
@@ -450,6 +458,11 @@ export function colorResonanceSlide() {
         Is there a color that you feel particularly drawn to or that resonates
         with you?
       </Title>
+      <Callout emoji="🌈">
+        Colors are deeply symbolic in spirituality, often linked to specific
+        energy vibrations that can harmonize with your love life and personal
+        aura.
+      </Callout>
       <Selector />
     </Slide>
   );
