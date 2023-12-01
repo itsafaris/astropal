@@ -5,6 +5,7 @@ import {
   partnerPersonalInfoSegment,
   personalInfoSegment,
   relationshipsNonSingleSegment,
+  goalSegment,
 } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
 import { ShortTextState } from "@martynasj/quiz-lib/dist/internal/state";
@@ -21,6 +22,7 @@ export default function QuizInRelationship() {
           }
         }}
       >
+        {goalSegment()}
         {personalInfoSegment({ birthname })}
         {partnerPersonalInfoSegment()}
         {relationshipsNonSingleSegment()}

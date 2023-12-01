@@ -1,6 +1,4 @@
-import { Segment, Selector, Slide, Title, Image } from "@martynasj/quiz-lib";
-
-import skymapImg from "@images/skymap.png";
+import { Segment } from "@martynasj/quiz-lib";
 
 import {
   valuesAndPrioritiesSlide,
@@ -33,39 +31,17 @@ import {
   spiritualInvolvementSlide,
   partnerEmotionalOpennessSlide,
   partnerPersonalityTypeSlide,
-  fillerOne,
+  socialProofFiller,
+  yourProfileSummaryFiller,
+  partnerProfileSummaryFiller,
+  goalSlide,
 } from "./allSlides";
 
-export function introGoalsSegment() {
+export function goalSegment() {
   return (
-    <Segment title={"Intro"}>
-      <Slide
-        id="relationship-goals"
-        type="single"
-        variant="list"
-        options={[
-          {
-            text: "Fix relationship problems",
-          },
-          {
-            text: "Increase relationship satisfaction",
-          },
-          {
-            text: "Find partner",
-          },
-        ]}
-      >
-        <Title>What are your primary goals and aspirations right now?</Title>
-        <Selector />
-      </Slide>
-
-      <Slide id="filler-sky-map" type="filler">
-        <Title>
-          Good! Now that we have a clear goal in mind, let's create your
-          astrological avatar.
-        </Title>
-        <Image src={skymapImg} />
-      </Slide>
+    <Segment title="Your goal">
+      {goalSlide()}
+      {socialProofFiller()}
     </Segment>
   );
 }
@@ -73,7 +49,6 @@ export function introGoalsSegment() {
 export function personalInfoSegment({ birthname }: { birthname: string }) {
   return (
     <Segment title="Your personality">
-      {fillerOne()}
       {genderSlide()}
       {birthNameSlide()}
       {birthDateSlide()}
@@ -83,6 +58,7 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
       {colorResonanceSlide()}
+      {yourProfileSummaryFiller()}
     </Segment>
   );
 }
@@ -97,6 +73,7 @@ export function partnerPersonalInfoSegment() {
       {partnerPersonalityTypeSlide()}
       {partnerEmotionalOpennessSlide()}
       {partnerTemperamentSlide()}
+      {partnerProfileSummaryFiller()}
     </Segment>
   );
 }

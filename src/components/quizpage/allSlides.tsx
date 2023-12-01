@@ -4,6 +4,58 @@ import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
 
+// Your Goal
+
+export function goalSlide() {
+  return (
+    <Slide
+      id="your-goal"
+      type="multi"
+      variant="list"
+      options={[
+        {
+          text: "Find partner",
+          icon: "💑",
+        },
+        {
+          text: "Fix relationship problems",
+          icon: "🔥",
+        },
+        {
+          text: "Increase relationship satisfaction",
+          icon: "💞",
+        },
+        {
+          text: "End toxic relationship",
+          icon: "💔",
+        },
+        {
+          text: "Get married",
+          icon: "💍",
+        },
+        {
+          text: "Have children",
+          icon: "🍼",
+        },
+        {
+          text: "Other",
+          icon: "",
+        },
+      ]}
+    >
+      <Title>
+        What are your current primary goals and aspirations regarding
+        relationships?
+      </Title>
+      <Callout>
+        Don't worry if none of the options reflect your goal. You will be able
+        to define it later as well.
+      </Callout>
+      <Selector />
+    </Slide>
+  );
+}
+
 // Your Info
 
 export function genderSlide() {
@@ -1008,14 +1060,41 @@ export function appFeaturesImportanceSlide() {
 
 // filler
 
-export function fillerOne() {
+export function socialProofFiller() {
   return (
     <Slide
       type="filler"
-      id="filler-one"
-      containerProps={{ backgroundColor: "pink" }}
+      id="social-proof-filler-one"
+      containerProps={{ backgroundColor: "teal" }}
     >
-      <Title>hello</Title>
+      <Title>
+        Testimonial + statistics "8/10 users report increased relationship
+        satisfaction"
+      </Title>
+    </Slide>
+  );
+}
+
+export function yourProfileSummaryFiller() {
+  return (
+    <Slide
+      type="filler"
+      id="your-profile-summary"
+      containerProps={{ backgroundColor: "teal" }}
+    >
+      <Title>Generating your profile...</Title>
+    </Slide>
+  );
+}
+
+export function partnerProfileSummaryFiller() {
+  return (
+    <Slide
+      type="filler"
+      id="partners-profile-summary"
+      containerProps={{ backgroundColor: "teal" }}
+    >
+      <Title>Generating partners profile...</Title>
     </Slide>
   );
 }
