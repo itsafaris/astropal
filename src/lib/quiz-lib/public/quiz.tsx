@@ -146,8 +146,8 @@ export function QuizUI({ theme, children, headerComponent, containerProps }: Qui
       resetScope="#quiz-lib-root"
     >
       <Flex id="#quiz-lib-root" ref={$quizRoot} direction={"column"} {...containerProps}>
-        {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
         {config.showDebugUI && <DebugUI />}
+        {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
         <ProgressIndicator />
         <Flex position={"relative"} flexGrow={1} width={"100%"}>
           <AnimatePresence initial={false} custom={snap.direction}>
