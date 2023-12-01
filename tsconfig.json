@@ -10,7 +10,9 @@
       "@components/*": ["src/components/*"],
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@martynasj/quiz-lib/*": ["src/lib/quiz-lib/*"],
+      "@martynasj/quiz-lib": ["src/lib/quiz-lib/index.ts"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,
