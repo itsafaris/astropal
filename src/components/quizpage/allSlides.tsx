@@ -1,5 +1,12 @@
 import { Fragment } from "react";
-import { Callout, Selector, Slide, Title, ContainerPropsOverride } from "@martynasj/quiz-lib";
+import {
+  Callout,
+  Selector,
+  Slide,
+  Title,
+  ContainerPropsOverride,
+  TransitionText,
+} from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
@@ -142,7 +149,7 @@ export function loadingAfterPersonalInfo() {
       id="loading-one"
       type="loading"
       from={0}
-      to={34}
+      to={100}
       duration={6}
       quizContainerProps={fillerStyles}
     >
@@ -150,13 +157,21 @@ export function loadingAfterPersonalInfo() {
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {state.isComplete
-                ? "🙌 First part of building your avatar is now complete 🙌"
-                : `Based on your answers we're now creating the first part of your
-              profile`}
+              {`Profile creation`}
             </Title>
+
+            <TransitionText
+              height={6}
+              textAlign={"center"}
+              color="white"
+              text={
+                state.isComplete
+                  ? `First part of building your avatar is now complete`
+                  : "Sit tight and wait while we're creating your personal profile"
+              }
+            />
+
             <Selector />
-            {state.isComplete && <Text color="white">Nu vo jau galim vaziuoti toliau </Text>}
           </Fragment>
         );
       }}
@@ -235,15 +250,21 @@ export function loadingAfterPartnersInfo() {
   return (
     <Slide id="loading-two" type="loading" quizContainerProps={fillerStyles}>
       {({ state }) => {
-        console.log(state);
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {state.isComplete
-                ? "🙌 First part of building your avatar is now complete 🙌"
-                : `Based on your answers we're now creating the first part of your
-              profile`}
+              {`Fine-tuning your profile`}
             </Title>
+            <TransitionText
+              height={6}
+              textAlign={"center"}
+              color="white"
+              text={
+                state.isComplete
+                  ? `Your profile is now improved`
+                  : "Based on your partner's details, we're fine-tuning your meta profile"
+              }
+            />
             <Selector />
           </Fragment>
         );

@@ -37,6 +37,13 @@ export function Slide<T extends ISelectorType>({
 
   const showSkipButton = slideProps.optional;
 
+  const realChildren =
+    typeof children === "function"
+      ? children({
+          state: snap.currentSlideState as Snapshot<GetSlideStateType<T>>,
+        })
+      : children;
+
   return (
     <SlideCtx.Provider value={slideProps}>
       <Flex
@@ -48,12 +55,8 @@ export function Slide<T extends ISelectorType>({
         minHeight={"100%"}
         {...containerProps}
       >
-        <Flex w="full" maxW={"440px"} flexDir={"column"} alignItems={"start"} gap={4} py={4} px={4}>
-          {typeof children === "function"
-            ? children({
-                state: snap.currentSlideState as Snapshot<GetSlideStateType<T>>,
-              })
-            : children}
+        <Flex w="full" maxW={"440px"} flexDir={"column"} gap={4} py={4} px={4}>
+          {realChildren}
 
           {!hideNextButton() && (
             <Box
