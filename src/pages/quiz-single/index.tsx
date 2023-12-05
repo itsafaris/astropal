@@ -3,7 +3,7 @@ import { useState } from "react";
 import { QuizPageWrapper } from "@components/quizpage/pageWrapper";
 import { personalInfoSegment } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
-import { ShortTextState } from "@martynasj/quiz-lib/dist/internal/state";
+import { ShortTextState } from "@martynasj/quiz-lib";
 
 export default function QuizSingle() {
   const [birthname, setBirthname] = useState("");

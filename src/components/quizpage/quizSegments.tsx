@@ -32,11 +32,10 @@ import {
   partnerEmotionalOpennessSlide,
   partnerPersonalityTypeSlide,
   socialProofFiller,
-  yourProfileSummaryFiller,
   yourProfileIntroFiller,
-  partnerProfileSummaryFiller,
   goalSlide,
   partnerProfileIntroFiller,
+  loadingAfterPartnersInfo,
 } from "./allSlides";
 
 export function goalSegment() {
@@ -56,12 +55,11 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
       {birthNameSlide()}
       {birthDateSlide()}
       {birthPlaceSlide()}
-      {loadingAfterPersonalInfo({ birthname })}
       {personalityTypeSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
       {colorResonanceSlide()}
-      {yourProfileSummaryFiller()}
+      {loadingAfterPersonalInfo()}
     </Segment>
   );
 }
@@ -77,7 +75,7 @@ export function partnerPersonalInfoSegment() {
       {partnerPersonalityTypeSlide()}
       {partnerEmotionalOpennessSlide()}
       {partnerTemperamentSlide()}
-      {partnerProfileSummaryFiller()}
+      {loadingAfterPartnersInfo()}
     </Segment>
   );
 }

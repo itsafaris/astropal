@@ -1,7 +1,13 @@
 import { createContext, useContext } from "react";
-import { proxy, ref, useSnapshot } from "valtio";
+import { INTERNAL_Snapshot, proxy, ref, useSnapshot } from "valtio";
 import { ISelectorType, LogicDefinition, SlideProps } from "../public/types";
 import { findDuplicates, getPosInBounds } from "./utils";
+
+// E.g. GetSlideStateType<'multi'>
+export type GetSlideStateType<T extends ISelectorType> = Extract<SelectorState, { type: T }>;
+
+// re-export valtio utility to create a snapshot type
+export type Snapshot<T> = INTERNAL_Snapshot<T>;
 
 export type SelectorState =
   | MultiState
@@ -46,6 +52,7 @@ export type DateState = {
 
 export type LoadingState = {
   type: "loading";
+  isComplete?: boolean;
 } & BaseSelectorState;
 
 export type FillerState = {
@@ -199,7 +206,10 @@ export function createQuizState(input: {
 
       currentSlideState.confirmed = true;
       currentSlideState.attempts = 0;
-      input.onSlideSubmitted?.({ id: currentSlide.id, state: currentSlideState });
+      input.onSlideSubmitted?.({
+        id: currentSlide.id,
+        state: currentSlideState,
+      });
 
       if (currentSlide.type === "single" && currentSlide.logic) {
         const slideState = state.currentSlideState as SingleState;
@@ -283,6 +293,11 @@ export function createQuizState(input: {
     setLocationValue(selectorID: string, value: LocationValue | undefined) {
       const slideState = state.slideStateByID[selectorID] as LocationState;
       slideState.value = value == null ? value : ref(value);
+    },
+
+    setLoadingStateComplete(selectorID: string, value: boolean) {
+      const slideState = state.slideStateByID[selectorID] as LoadingState;
+      slideState.isComplete = value;
     },
   };
 

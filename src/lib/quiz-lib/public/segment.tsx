@@ -1,8 +1,7 @@
-import { SlideComponentProps } from "./slide";
 import { SegmentProps } from "./types";
 
 export type SegmentComponentProps = SegmentProps & {
-  children?: React.ReactElement<SlideComponentProps>[] | React.ReactElement<SlideComponentProps>;
+  children?: React.ReactNode;
 };
 
 export function Segment(props: SegmentComponentProps) {

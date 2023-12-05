@@ -74,3 +74,7 @@ export function flattenChildren(children: ReactNode): React.ReactElement[] {
 
   return flattenedChildren;
 }
+
+export function randomInt(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

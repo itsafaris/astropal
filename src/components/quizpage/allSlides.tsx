@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   Callout,
   Selector,
@@ -5,15 +6,11 @@ import {
   Title,
   ContainerPropsOverride,
 } from "@martynasj/quiz-lib";
-
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
-
 import { TestimonialCard } from "@components/testimonial";
-
 import { StaticImage } from "gatsby-plugin-image";
-
 import { Text, Box } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
 
@@ -153,11 +150,12 @@ export function birthPlaceSlide() {
   );
 }
 
-export function loadingAfterPersonalInfo({ birthname }: { birthname: string }) {
+export function loadingAfterPersonalInfo() {
   return (
     <Slide
       id="loading-one"
       type="loading"
+      quizContainerProps={fillerStyles}
       phases={[
         {
           title: "Creating your meta profile",
@@ -173,11 +171,22 @@ export function loadingAfterPersonalInfo({ birthname }: { birthname: string }) {
         },
       ]}
     >
-      <Title>
-        Thanks for your patience {birthname}! We will configure your meta
-        profile based on the phase 1 answers
-      </Title>
-      <Selector />
+      {({ state }) => {
+        return (
+          <Fragment>
+            <Title color="white" textAlign={"center"}>
+              {state.isComplete
+                ? "🙌 First part of building your avatar is now complete 🙌"
+                : `Based on your answers we're now creating the first part of your
+              profile`}
+            </Title>
+            <Selector />
+            {state.isComplete && (
+              <Text color="white">Nu vo jau galim vaziuoti toliau </Text>
+            )}
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }
@@ -256,6 +265,48 @@ export function partnerBirthPlaceSlide() {
         who you are, your innermost yearnings, and your true aspirations.
       </Callout>
       <Selector />
+    </Slide>
+  );
+}
+
+export function loadingAfterPartnersInfo() {
+  return (
+    <Slide
+      id="loading-two"
+      type="loading"
+      quizContainerProps={fillerStyles}
+      phases={[
+        {
+          title: "Creating your meta profile",
+          duration: 2,
+        },
+        {
+          title: "Connecting to the stars",
+          duration: 2,
+        },
+        {
+          title: "Matching personalised psychics readers",
+          duration: 2,
+        },
+      ]}
+    >
+      {({ state }) => {
+        return (
+          <Fragment>
+            <Title color="white" textAlign={"center"}>
+              {state.isComplete
+                ? "🙌 First part of building your avatar is now complete 🙌"
+                : `Based on your answers we're now creating the first part of your
+              profile`}
+            </Title>
+            <Selector />
+
+            {state.isComplete && (
+              <Text color="white">Nu vo jau galim vaziuoti toliau </Text>
+            )}
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }
@@ -1171,30 +1222,6 @@ export function partnerProfileIntroFiller() {
           "/images/bg-9.jpeg"
         )}) no-repeat center center / cover`}
       ></Box>
-    </Slide>
-  );
-}
-
-export function yourProfileSummaryFiller() {
-  return (
-    <Slide
-      type="filler"
-      id="your-profile-summary"
-      containerProps={{ backgroundColor: "teal" }}
-    >
-      <Title>Generating your profile...</Title>
-    </Slide>
-  );
-}
-
-export function partnerProfileSummaryFiller() {
-  return (
-    <Slide
-      type="filler"
-      id="partner-profile-summary"
-      containerProps={{ backgroundColor: "teal" }}
-    >
-      <Title>Generating partners profile...</Title>
     </Slide>
   );
 }
