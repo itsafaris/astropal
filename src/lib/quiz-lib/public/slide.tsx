@@ -2,7 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { ComponentProps, createContext, useContext } from "react";
 import { NextButton, SkipButton } from "../internal/ui";
 import { ExtractSlideProps, ISelectorType, SlideProps } from "./types";
-import { GetSlideStateType, Snapshot, useQuizSnapshot } from "../internal/state";
+import { GetSlideStateType, SelectorState, Snapshot, useQuizSnapshot } from "../internal/state";
 
 const SlideCtx = createContext<SlideProps>(null as any);
 
@@ -13,7 +13,10 @@ export function useSlide() {
 export type SlideComponentProps<T extends ISelectorType> = ExtractSlideProps<T> & {
   children?:
     | React.ReactNode
-    | ((param: { state: Snapshot<GetSlideStateType<T>> }) => React.ReactNode);
+    | ((param: {
+        state: Snapshot<GetSlideStateType<T>>;
+        quizState: Record<string, Snapshot<SelectorState>>;
+      }) => React.ReactNode);
   containerProps?: ComponentProps<typeof Flex>;
 };
 
@@ -41,6 +44,7 @@ export function Slide<T extends ISelectorType>({
     typeof children === "function"
       ? children({
           state: snap.currentSlideState as Snapshot<GetSlideStateType<T>>,
+          quizState: snap.slideStateByID,
         })
       : children;
 

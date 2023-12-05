@@ -6,6 +6,8 @@ import {
   Title,
   ContainerPropsOverride,
   TransitionText,
+  Span,
+  ShortTextState,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -153,11 +155,12 @@ export function loadingAfterPersonalInfo() {
       duration={6}
       quizContainerProps={fillerStyles}
     >
-      {({ state }) => {
+      {({ state, quizState }) => {
+        const personName = (quizState["birth-name"] as ShortTextState).value ?? "Anonymous";
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {`Profile creation`}
+              👏 Great <Span color="teal.300">{personName}</Span>!<br /> Let's create your avatar
             </Title>
 
             <TransitionText

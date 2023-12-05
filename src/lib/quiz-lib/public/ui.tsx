@@ -17,6 +17,10 @@ export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
   );
 }
 
+export function Span(props: PropsWithChildren<TextProps>) {
+  return <Text as="span" {...props} />;
+}
+
 export function Subtitle({ children }: PropsWithChildren) {
   return (
     <Text fontSize="xl" fontWeight="medium" color="blackAlpha.700">
