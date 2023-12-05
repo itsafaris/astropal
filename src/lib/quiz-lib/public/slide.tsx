@@ -2,11 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { ComponentProps, createContext, useContext } from "react";
 import { NextButton, SkipButton } from "../internal/ui";
 import { ExtractSlideProps, ISelectorType, SlideProps } from "./types";
-import {
-  GetSlideStateType,
-  Snapshot,
-  useQuizSnapshot,
-} from "../internal/state";
+import { GetSlideStateType, Snapshot, useQuizSnapshot } from "../internal/state";
 
 const SlideCtx = createContext<SlideProps>(null as any);
 
@@ -14,13 +10,12 @@ export function useSlide() {
   return useContext(SlideCtx);
 }
 
-export type SlideComponentProps<T extends ISelectorType> =
-  ExtractSlideProps<T> & {
-    children?:
-      | React.ReactNode
-      | ((param: { state: Snapshot<GetSlideStateType<T>> }) => React.ReactNode);
-    containerProps?: ComponentProps<typeof Flex>;
-  };
+export type SlideComponentProps<T extends ISelectorType> = ExtractSlideProps<T> & {
+  children?:
+    | React.ReactNode
+    | ((param: { state: Snapshot<GetSlideStateType<T>> }) => React.ReactNode);
+  containerProps?: ComponentProps<typeof Flex>;
+};
 
 export function Slide<T extends ISelectorType>({
   children,
@@ -28,9 +23,17 @@ export function Slide<T extends ISelectorType>({
   ...slideProps
 }: SlideComponentProps<T>) {
   const snap = useQuizSnapshot();
-  const hideNextButton = (["single", "loading"] as ISelectorType[]).includes(
-    slideProps.type
-  );
+  const slideState = snap.slideStateByID[slideProps.id];
+
+  let hideNextButton = () => {
+    if (slideProps.type === "single") {
+      return true;
+    }
+    if (slideState.type === "loading" && !slideState.isComplete) {
+      return true;
+    }
+    return false;
+  };
 
   const showSkipButton = slideProps.optional;
 
@@ -45,22 +48,14 @@ export function Slide<T extends ISelectorType>({
         minHeight={"100%"}
         {...containerProps}
       >
-        <Flex
-          w="full"
-          maxW={"440px"}
-          flexDir={"column"}
-          alignItems={"start"}
-          gap={4}
-          py={4}
-          px={4}
-        >
+        <Flex w="full" maxW={"440px"} flexDir={"column"} alignItems={"start"} gap={4} py={4} px={4}>
           {typeof children === "function"
             ? children({
                 state: snap.currentSlideState as Snapshot<GetSlideStateType<T>>,
               })
             : children}
 
-          {!hideNextButton && (
+          {!hideNextButton() && (
             <Box
               width={"full"}
               mt={4}

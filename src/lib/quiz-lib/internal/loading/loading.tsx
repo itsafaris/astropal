@@ -4,65 +4,53 @@ import { Flex, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import { SlidePropsLoading } from "../../public/types";
-import { LoadingState, useQuizActions, useQuizSnapshot } from "../state";
+import { useQuizActions } from "../state";
 import { randomInt } from "../utils";
 import { useSlide } from "../..";
-import { NextButton } from "../ui";
 
 type LoadingSlideComponentProps = {} & SlidePropsLoading;
 
-export function LoadingSlide({ phases }: LoadingSlideComponentProps) {
+export function LoadingSlide(props: LoadingSlideComponentProps) {
+  const { from, to, duration, completedText } = props;
+
   const actions = useQuizActions();
   const slide = useSlide();
-  const snap = useQuizSnapshot();
-
-  const state = snap.currentSlideState as LoadingState;
 
   return (
     <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"}>
       <SpinnerWihtText
-        fromValue={0}
-        toValue={70}
-        duration={5}
-        completedText={"✅ Done"}
+        from={from}
+        to={to}
+        duration={duration}
+        completedText={completedText}
         onComplete={() => {
           actions.setLoadingStateComplete(slide.id, true);
         }}
       />
-      {state.isComplete && <NextButton />}
     </Flex>
   );
 }
 
 type SpinnerWihtTextProps = {
-  fromValue?: number; // 0 - 100
-  toValue?: number; // 0 - 100
-  duration?: number; // seconds
-  completedText?: string;
+  from?: SlidePropsLoading["from"];
+  to?: SlidePropsLoading["to"];
+  duration?: SlidePropsLoading["duration"];
+  completedText?: SlidePropsLoading["completedText"];
   onComplete?: () => void;
 };
 
 function SpinnerWihtText(props: SpinnerWihtTextProps) {
-  const {
-    fromValue = 0,
-    toValue = 100,
-    duration = 5,
-    completedText,
-    onComplete,
-  } = props;
+  const { from = 0, to = 100, duration = 5, completedText, onComplete } = props;
 
   const firedOnComplete = useRef(false);
-  const [loadingValue, setLoadingValue] = useState(fromValue); // 0 - 100
+  const [loadingValue, setLoadingValue] = useState(from); // 0 - 100
 
   const INTERVAL_DURATION = 100;
   const numberOfIntervals = (duration * 1000) / INTERVAL_DURATION;
 
-  const delta = toValue - fromValue;
+  const delta = to - from;
   const increment = Math.round(delta / numberOfIntervals);
-  const incrRandRange = [
-    Math.round(increment * 0.7),
-    Math.round(increment * 1.5),
-  ];
+  const incrRandRange = [Math.round(increment * 0.7), Math.round(increment * 1.5)];
 
   useEffect(() => {
     let i = 0;
@@ -70,7 +58,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
       // last iteration
       // just set the loading value to the desired value
       if (i + 1 === numberOfIntervals) {
-        setLoadingValue(toValue);
+        setLoadingValue(to);
         fireOnComplete();
         clearInterval(interval);
         return;
@@ -79,8 +67,8 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
       const randomIncrement = randomInt(incrRandRange[0], incrRandRange[1]);
 
       setLoadingValue((prevValue) => {
-        const nextVal = Math.min(prevValue + randomIncrement, toValue);
-        if (nextVal === toValue) {
+        const nextVal = Math.min(prevValue + randomIncrement, to);
+        if (nextVal === to) {
           fireOnComplete();
         }
         return nextVal;
@@ -120,7 +108,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         opacity={0.75}
       >
         <Text fontWeight={"bold"} color="white" fontSize={"2xl"}>
-          {loadingValue === toValue ? completedText : `${loadingValue}%`}
+          {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
       </Flex>
     </Flex>
@@ -162,13 +150,7 @@ function SpinnerCircleSvg({
           primitiveUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feGaussianBlur
-            stdDeviation="25 25"
-            x="0%"
-            y="0%"
-            in="SourceGraphic"
-            result="blur"
-          />
+          <feGaussianBlur stdDeviation="25 25" x="0%" y="0%" in="SourceGraphic" result="blur" />
         </filter>
         <filter
           x="-100%"
@@ -179,13 +161,7 @@ function SpinnerCircleSvg({
           primitiveUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feGaussianBlur
-            stdDeviation="17 20"
-            x="0%"
-            y="0%"
-            in="SourceGraphic"
-            result="blur"
-          />
+          <feGaussianBlur stdDeviation="17 20" x="0%" y="0%" in="SourceGraphic" result="blur" />
         </filter>
       </defs>
       <g strokeWidth={30} stroke="url(#a)" fill="none" rotate={90}>

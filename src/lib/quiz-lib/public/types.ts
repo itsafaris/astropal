@@ -1,8 +1,4 @@
-import {
-  BackgroundProps,
-  ColorProps,
-  ThemeTypings,
-} from "@chakra-ui/styled-system";
+import { BackgroundProps, ColorProps, ThemeTypings } from "@chakra-ui/styled-system";
 
 export type IOptionInputType = "checkbox" | "radio" | "none";
 
@@ -69,10 +65,7 @@ export type SelectorPropsList = {
   options?: OptionPropsSimple[];
 };
 
-export type CommonSelectorProps = {} & (
-  | SelectorPropsList
-  | SelectorPropsPicture
-);
+export type CommonSelectorProps = {} & (SelectorPropsList | SelectorPropsPicture);
 
 export type SlidePropsMulti = {
   type: "multi";
@@ -101,7 +94,13 @@ export type SlidePropsLocation = {
 
 export type SlidePropsLoading = {
   type: "loading";
-  phases: LoadingPhase[];
+  /** 0 - 100 */
+  from?: number;
+  /** 0 - 100 */
+  to?: number;
+  /** In seconds */
+  duration?: number;
+  completedText?: React.ReactNode;
 } & SlidePropsBase;
 
 export type SlidePropsFiller = {
@@ -136,7 +135,4 @@ export type QuizTheme = {
 };
 
 // A helper type to extract specific SlideProps based on the 'type' discriminator
-export type ExtractSlideProps<T extends SlideProps["type"]> = Extract<
-  SlideProps,
-  { type: T }
->;
+export type ExtractSlideProps<T extends SlideProps["type"]> = Extract<SlideProps, { type: T }>;
