@@ -16,19 +16,19 @@ export function QuizWrapper(props: Omit<QuizProps, "locationApiKey">) {
       containerProps={{
         minH: "100vh",
       }}
-      headerComponent={
-        <Text
-          p={3}
-          bg={"white"}
-          fontSize={"2xl"}
-          textAlign={"center"}
-          fontWeight={"bold"}
-          fontFamily={"mono"}
-          colorScheme={"brand"}
-        >
-          AstroPal
-        </Text>
-      }
+      // headerComponent={
+      //   <Text
+      //     p={3}
+      //     bg={"white"}
+      //     fontSize={"2xl"}
+      //     textAlign={"center"}
+      //     fontWeight={"bold"}
+      //     fontFamily={"mono"}
+      //     colorScheme={"brand"}
+      //   >
+      //     AstroPal
+      //   </Text>
+      // }
       theme={quizTheme}
       onErrorEvent={(_) => {
         //

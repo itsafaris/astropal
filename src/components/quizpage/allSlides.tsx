@@ -6,6 +6,7 @@ import {
   Title,
   ContainerPropsOverride,
 } from "@martynasj/quiz-lib";
+
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
@@ -1184,18 +1185,17 @@ export function socialProofFiller() {
 
 export function yourProfileIntroFiller() {
   return (
-    <Slide type="filler" id={"your-profile"} quizContainerProps={fillerStyles}>
-      <Title color="white">Your personalized metaphysical profile</Title>
+    <Slide type="filler" id={"your-profile"}>
+      <Title>Your personal metaphysical profile</Title>
       <Callout>
-        To unveil the unique tapestry of energies shaping your love life, we'll
-        create your personalized metaphysical profile through questions
+        To unveil the energies shaping your love life, we'll create your
+        personalized metaphysical profile through questions.
       </Callout>
       <Box
-        height={"300px"}
-        width={"300px"}
+        height={"200px"}
+        width={"200px"}
         mx="auto"
-        shadow={"2xl"}
-        dropShadow={"white"}
+        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
         borderRadius={"50%"}
         background={`url(${withPrefix(
           "/images/bg-5.jpeg"
@@ -1214,9 +1214,10 @@ export function partnerProfileIntroFiller() {
         compatibility insights in your relationship.
       </Callout>
       <Box
-        height={"300px"}
-        width={"300px"}
+        height={"200px"}
+        width={"200px"}
         mx="auto"
+        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
         borderRadius={"50%"}
         background={`url(${withPrefix(
           "/images/bg-9.jpeg"
