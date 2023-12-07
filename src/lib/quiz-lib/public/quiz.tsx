@@ -1,4 +1,4 @@
-import { Box, Button, ChakraProvider, Flex, FlexProps } from "@chakra-ui/react";
+import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { devtools } from "valtio/utils";
@@ -9,10 +9,10 @@ import {
   useQuizActions,
   useQuizSnapshot,
 } from "../internal/state";
-import { chakraTheme } from "../internal/theme";
+
 import { ChildrenArr, omit } from "../internal/utils";
 import { ProgressIndicator } from "./progress";
-import { QuizErrorEvent, QuizTheme, SlideProps } from "./types";
+import { QuizErrorEvent, SlideProps } from "./types";
 
 const variants = {
   enter: (direction: number) => {
@@ -37,7 +37,6 @@ const variants = {
 
 export type QuizProps = {
   children?: React.ReactNode;
-  theme?: QuizTheme;
   headerComponent?: React.ReactNode;
   containerProps?: FlexProps;
 } & QuizConfigType;
@@ -111,7 +110,7 @@ export function Quiz(props: QuizProps) {
   );
 }
 
-export function QuizUI({ theme, children, headerComponent, containerProps }: QuizProps) {
+export function QuizUI({ children, headerComponent, containerProps }: QuizProps) {
   const $quizRoot = useRef<HTMLDivElement>(null);
 
   useStateSyncToUrl();
@@ -139,40 +138,33 @@ export function QuizUI({ theme, children, headerComponent, containerProps }: Qui
   }, [snap.currentSlide]);
 
   return (
-    <ChakraProvider
-      theme={chakraTheme(theme ?? {})}
-      cssVarsRoot="#quiz-lib-root"
-      resetCSS={true}
-      resetScope="#quiz-lib-root"
-    >
-      <Flex id="#quiz-lib-root" ref={$quizRoot} direction={"column"} {...containerProps}>
-        {config.showDebugUI && <DebugUI />}
-        {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
-        <ProgressIndicator />
-        <Flex position={"relative"} flexGrow={1} width={"100%"}>
-          <AnimatePresence initial={false} custom={snap.direction}>
-            <motion.div
-              style={{
-                width: "100%",
-                position: "absolute",
-              }}
-              key={snap.currentSlideID}
-              custom={snap.direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 },
-              }}
-            >
-              {currentSlide}
-            </motion.div>
-          </AnimatePresence>
-        </Flex>
+    <Flex id="#quiz-lib-root" ref={$quizRoot} direction={"column"} {...containerProps}>
+      {config.showDebugUI && <DebugUI />}
+      {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
+      <ProgressIndicator />
+      <Flex position={"relative"} flexGrow={1} width={"100%"}>
+        <AnimatePresence initial={false} custom={snap.direction}>
+          <motion.div
+            style={{
+              width: "100%",
+              position: "absolute",
+            }}
+            key={snap.currentSlideID}
+            custom={snap.direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+          >
+            {currentSlide}
+          </motion.div>
+        </AnimatePresence>
       </Flex>
-    </ChakraProvider>
+    </Flex>
   );
 }
 

@@ -1,22 +1,28 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useTheme } from "@chakra-ui/react";
 import { ComponentProps } from "react";
 import { useQuizActions } from "./state";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const quiz = useQuizActions();
+  const theme = useTheme();
+
   return (
-    <Button
-      px={6}
-      variant={"solid"}
-      colorScheme="brand"
-      width={"full"}
-      onClick={() => {
-        quiz.submitQuestion();
-      }}
-      {...props}
-    >
-      Next
-    </Button>
+    <Box px={8}>
+      <Button
+        px={6}
+        py={4}
+        variant={"solid"}
+        colorScheme="brand"
+        width={"full"}
+        boxShadow={`0 0 0 10px ${theme.colors.brand["100"]}`}
+        onClick={() => {
+          quiz.submitQuestion();
+        }}
+        {...props}
+      >
+        Next
+      </Button>
+    </Box>
   );
 }
 

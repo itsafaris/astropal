@@ -85,8 +85,8 @@ function BaseOption({ isSelected, children, ...chakraButtonProps }: BaseOptionPr
       borderRadius={"md"}
       fontWeight="semibold"
       outline={`${isSelected ? 3 : 0}px solid`}
-      outlineColor={"brand.400"}
-      backgroundColor={isSelected ? "brand.100" : "brand.50"}
+      outlineColor={"secondary.400"}
+      backgroundColor={isSelected ? "secondary.100" : "secondary.50"}
       // @ts-expect-error
       transition={{
         scale: { type: "spring", stiffness: 800, damping: 25 },

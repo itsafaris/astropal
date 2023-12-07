@@ -67,7 +67,7 @@ export function Slide<T extends ISelectorType>({
               mt={4}
               mb={2}
               position={snap.currentSlideState.isValid ? "sticky" : "unset"}
-              bottom={4}
+              bottom={8}
             >
               <NextButton />
             </Box>

@@ -117,22 +117,5 @@ export type LogicDefinition = {
   slideID: string;
 }[];
 
-export type ShadedColor = {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
-};
-
-export type QuizTheme = {
-  mainColor?: ShadedColor;
-};
-
 // A helper type to extract specific SlideProps based on the 'type' discriminator
 export type ExtractSlideProps<T extends SlideProps["type"]> = Extract<SlideProps, { type: T }>;
