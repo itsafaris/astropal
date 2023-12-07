@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
   const slide = useSlide();
   return (
-    <Text fontSize="2xl" lineHeight={1.4} fontWeight="semibold" color="bg.900" {...rest}>
+    <Text fontSize="2xl" lineHeight={1.4} mb={8} fontWeight="semibold" color="bg.900" {...rest}>
       {children}{" "}
       {slide.optional && (
         <Text as="span" my={2} color="bg.300">
@@ -61,6 +61,7 @@ export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
       px={6}
       py={4}
       mx={4}
+      mb={8}
       gap={1}
       borderRadius={"xl"}
       borderStyle={"solid"}

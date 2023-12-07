@@ -58,7 +58,7 @@ export function Slide<T extends ISelectorType>({
         minHeight={"100%"}
         {...containerProps}
       >
-        <Flex w="full" maxW={"440px"} flexDir={"column"} gap={8} py={4} px={6}>
+        <Flex w="full" maxW={"440px"} flexDir={"column"} py={4} px={6}>
           {realChildren}
 
           {!hideNextButton() && (

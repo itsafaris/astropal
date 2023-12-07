@@ -7,7 +7,7 @@ export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
 
   return (
-    <Box px={8}>
+    <Box mx={4} mb={4}>
       <Button
         px={6}
         py={4}
