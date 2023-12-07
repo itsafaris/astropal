@@ -53,12 +53,12 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
       {yourProfileIntroFiller()}
       {genderSlide()}
       {birthNameSlide()}
+      {colorResonanceSlide()}
       {birthDateSlide()}
       {birthPlaceSlide()}
       {personalityTypeSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
-      {colorResonanceSlide()}
       {loadingAfterPersonalInfo()}
     </Segment>
   );

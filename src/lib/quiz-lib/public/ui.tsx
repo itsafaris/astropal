@@ -1,4 +1,11 @@
-import { Box, Image as ChakraImage, Flex, Text, TextProps } from "@chakra-ui/react";
+import {
+  Box,
+  Image as ChakraImage,
+  ImageProps as ChakraImageProps,
+  Flex,
+  Text,
+  TextProps,
+} from "@chakra-ui/react";
 import { ComponentProps, PropsWithChildren } from "react";
 import { useSlide } from "./slide";
 import { AnimatePresence, motion } from "framer-motion";
@@ -55,23 +62,22 @@ export function TransitionText({
 }
 
 export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
-  const { emoji = "💡", children } = props;
+  const { emoji = "Did you know:", children } = props;
   return (
     <Flex
-      px={6}
+      px={4}
       py={4}
-      mx={4}
       mb={8}
       gap={1}
-      borderRadius={"xl"}
+      borderRadius={"2xl"}
       borderStyle={"solid"}
       borderWidth={1}
-      borderColor={"bg.400"}
+      borderColor={"bg.200"}
       flexDirection="column"
       backgroundColor={"bg.50"}
     >
       <Box flexShrink={0} borderRadius={"full"} color="bg.900" fontWeight={"bold"} fontSize={"sm"}>
-        Tip! {emoji}
+        {emoji}
       </Box>
       <Flex borderRadius={"md"}>
         <Text fontSize="sm" color="bg.600">
@@ -82,6 +88,15 @@ export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
   );
 }
 
-export function Image(props: { src: string }) {
-  return <ChakraImage width={"100%"} maxHeight={300} src={props.src} objectFit={"contain"} />;
+export function Image(props: ChakraImageProps) {
+  return (
+    <ChakraImage
+      {...props}
+      width={"100%"}
+      maxHeight={300}
+      src={props.src}
+      objectFit={"contain"}
+      borderRadius={"xl"}
+    />
+  );
 }

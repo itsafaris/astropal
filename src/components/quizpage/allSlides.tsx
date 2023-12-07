@@ -8,11 +8,14 @@ import {
   TransitionText,
   Span,
   ShortTextState,
+  Image,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
+import planetPositionsImg from "@images/planet_positions.png";
+
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box } from "@chakra-ui/react";
@@ -67,8 +70,8 @@ export function goalSlide() {
         },
       ]}
     >
-      <Title>What are your current primary goals and aspirations regarding relationships?</Title>
-      <Callout>You will be able to change your goal later on as well.</Callout>
+      <Title>What are your primary goals regarding relationships?</Title>
+      <Callout emoji="Tip">Knowing your goal will allow us to provide a better advice</Callout>
       <Selector />
     </Slide>
   );
@@ -98,7 +101,10 @@ export function genderSlide() {
         },
       ]}
     >
-      <Title>What is your gender?</Title>
+      <Title>Let's start with your gender</Title>
+      <Callout emoji="In astrology:">
+        Gender nuances the meanings in cosmic energies, refining relationship insights.
+      </Callout>
       <Selector />
     </Slide>
   );
@@ -106,11 +112,9 @@ export function genderSlide() {
 
 export function birthNameSlide() {
   return (
-    <Slide id="birth-name" type="short-text" placeholder="Your birth name">
-      <Title>What is your full birth name?</Title>
-      <Callout>
-        A person's name holds a significant information about their personality and life path
-      </Callout>
+    <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
+      <Title>Now, tell us your full birth name</Title>
+      <Callout emoji="Tip">If you don't remember it, use your current full name.</Callout>
       <Selector />
     </Slide>
   );
@@ -119,10 +123,10 @@ export function birthNameSlide() {
 export function birthDateSlide() {
   return (
     <Slide id="birth-date" type="date">
-      <Title>What's your date of birth?</Title>
-      <Callout emoji="🎂">
-        Knowing your birth date enables precise astrological and numerological analysis, key to
-        unlocking personalized relationship guidance.
+      <Title>When were you born?</Title>
+      <Callout emoji="Did you know:">
+        Your birth date guides us to tailored astrological and numerological insights for your
+        relationships.
       </Callout>
       <Selector />
     </Slide>
@@ -132,10 +136,10 @@ export function birthDateSlide() {
 export function birthPlaceSlide() {
   return (
     <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
-      <Title>Where were you born?</Title>
-      <Callout>
-        Discovering this place is key to uncovering the fundamental aspects of who you are, your
-        innermost yearnings, and your true aspirations.
+      <Title>Do you know your birthplace?</Title>
+      <Callout emoji="In astrology:">
+        Birthplace determines the exact position of the planets at the time of birth
+        <Image src={planetPositionsImg} mt={4} />
       </Callout>
       <Selector />
     </Slide>
@@ -536,14 +540,35 @@ export function colorResonanceSlide() {
           text: "Indigo",
           icon: "🟣",
         },
+        {
+          text: "Violet",
+          icon: "🟣",
+        },
+        {
+          text: "Pink",
+          icon: "🌸",
+        },
+        {
+          text: "Gold",
+          icon: "🟡",
+        },
+        {
+          text: "Silver",
+          icon: "⚪",
+        },
+        {
+          text: "White",
+          icon: "⚪",
+        },
+        {
+          text: "Black",
+          icon: "⚫",
+        },
       ]}
     >
-      <Title>
-        Is there a color that you feel particularly drawn to or that resonates with you?
-      </Title>
-      <Callout emoji="🌈">
-        Colors are deeply symbolic in spirituality, often linked to specific energy vibrations that
-        can harmonize with your love life and personal aura.
+      <Title>Which color resonates with you the most?</Title>
+      <Callout emoji="In astrology:">
+        Colors are often associated with planets and signs, carrying symbolic meanings.
       </Callout>
       <Selector />
     </Slide>

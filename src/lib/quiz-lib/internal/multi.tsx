@@ -1,4 +1,6 @@
 import { useCallback } from "react";
+import { Box, Text } from "@chakra-ui/react";
+
 import { useSlide } from "../public/slide";
 import { SlidePropsMulti } from "../public/types";
 import { CommonSelect } from "./commonSelect";
@@ -18,11 +20,16 @@ export function MultiSelect({}: MultiSelectProps) {
   const selectorState = snap.slideStateByID[slideCtx.id] as MultiState | undefined;
 
   return (
-    <CommonSelect
-      handleOptionClick={handleClick}
-      isOptionSelected={(optionID) =>
-        selectorState?.value?.some((v) => v.formattedValue === optionID) ?? false
-      }
-    />
+    <Box>
+      <Text pb={2} fontWeight={"medium"} color="bg.400" fontSize={"sm"}>
+        Choose one or more
+      </Text>
+      <CommonSelect
+        handleOptionClick={handleClick}
+        isOptionSelected={(optionID) =>
+          selectorState?.value?.some((v) => v.formattedValue === optionID) ?? false
+        }
+      />
+    </Box>
   );
 }
