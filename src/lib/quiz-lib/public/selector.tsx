@@ -70,7 +70,7 @@ export function Selector({}: SelectorProps) {
   }
 
   return (
-    <Box as={motion.div} my={5} width={"full"} animate={controls}>
+    <Box as={motion.div} width={"full"} animate={controls}>
       {getSpecificSelector()}
     </Box>
   );

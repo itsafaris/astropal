@@ -2,7 +2,7 @@ import { Button, Flex, Image, Text, chakra, shouldForwardProp } from "@chakra-ui
 
 import { isValidMotionProp, motion } from "framer-motion";
 import { ComponentProps } from "react";
-import { CheckIcon, CheckIconEmpty, RadioIcon, RadioIconEmpty } from "./icons";
+import { CheckIcon, CheckIconEmpty } from "./icons";
 
 const ChakraButton = chakra(motion.button, {
   shouldForwardProp: (p) => isValidMotionProp(p) || shouldForwardProp(p),
@@ -21,11 +21,7 @@ function OptionInput({ type, isSelected }: { type: "radio" | "checkbox"; isSelec
       );
     }
     case "radio": {
-      return isSelected ? (
-        <RadioIcon width={size} height={size} />
-      ) : (
-        <RadioIconEmpty width={size} height={size} />
-      );
+      return null;
     }
     default: {
       return null;
@@ -90,7 +86,7 @@ function BaseOption({ isSelected, children, ...chakraButtonProps }: BaseOptionPr
       fontWeight="semibold"
       outline={`${isSelected ? 3 : 0}px solid`}
       outlineColor={"brand.400"}
-      backgroundColor={isSelected ? "brand.50" : "blackAlpha.50"}
+      backgroundColor={isSelected ? "brand.100" : "brand.50"}
       // @ts-expect-error
       transition={{
         scale: { type: "spring", stiffness: 800, damping: 25 },

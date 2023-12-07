@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
+import { Text, Box } from "@chakra-ui/react";
 import { useSlide } from "../public/slide";
 import { SlidePropsSingle } from "../public/types";
 import { CommonSelect } from "./commonSelect";
@@ -18,9 +19,14 @@ export function SingleSelect(_: SingleSelectProps) {
   const selectorState = snap.slideStateByID[slideCtx.id] as SingleState | undefined;
 
   return (
-    <CommonSelect
-      handleOptionClick={handleClick}
-      isOptionSelected={(optionID) => selectorState?.value?.formattedValue === optionID}
-    />
+    <Box>
+      <Text pb={2} fontWeight={"medium"} color="brand.200" fontSize={"sm"}>
+        Choose one
+      </Text>
+      <CommonSelect
+        handleOptionClick={handleClick}
+        isOptionSelected={(optionID) => selectorState?.value?.formattedValue === optionID}
+      />
+    </Box>
   );
 }

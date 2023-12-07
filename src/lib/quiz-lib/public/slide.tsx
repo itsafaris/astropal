@@ -55,11 +55,10 @@ export function Slide<T extends ISelectorType>({
         direction={"column"}
         justifyContent={"start"}
         alignItems={"center"}
-        pt={8}
         minHeight={"100%"}
         {...containerProps}
       >
-        <Flex w="full" maxW={"440px"} flexDir={"column"} gap={4} py={4} px={4}>
+        <Flex w="full" maxW={"440px"} flexDir={"column"} gap={8} py={4} px={6}>
           {realChildren}
 
           {!hideNextButton() && (

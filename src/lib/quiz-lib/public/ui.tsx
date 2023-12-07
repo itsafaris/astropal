@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
   const slide = useSlide();
   return (
-    <Text fontSize="xl" fontWeight="medium" {...rest}>
+    <Text fontSize="2xl" lineHeight={1.4} fontWeight="medium" {...rest}>
       {children}{" "}
       {slide.optional && (
         <Text as="span" my={2} color="blackAlpha.500">
@@ -57,11 +57,32 @@ export function TransitionText({
 export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
   const { emoji = "💡", children } = props;
   return (
-    <Flex px={4} py={3} backgroundColor={"blackAlpha.100"} gap={2} borderRadius={"md"}>
-      <Box>
-        <Text fontSize={"2xl"}>{emoji}</Text>
+    <Flex
+      px={6}
+      py={4}
+      mx={4}
+      gap={1}
+      borderRadius={"xl"}
+      borderStyle={"solid"}
+      borderWidth={1}
+      borderColor={"#b596b74f"}
+      flexDirection="column"
+      backgroundColor={"#fef1ffab"}
+    >
+      <Box
+        flexShrink={0}
+        borderRadius={"full"}
+        color="brand.700"
+        fontWeight={"bold"}
+        fontSize={"sm"}
+      >
+        Tip! {emoji}
       </Box>
-      <Text fontSize="md">{children}</Text>
+      <Flex borderRadius={"md"}>
+        <Text fontSize="sm" color="#512551">
+          {children}
+        </Text>
+      </Flex>
     </Flex>
   );
 }

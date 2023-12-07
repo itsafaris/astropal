@@ -68,10 +68,7 @@ export function goalSlide() {
       ]}
     >
       <Title>What are your current primary goals and aspirations regarding relationships?</Title>
-      <Callout>
-        Don't worry if none of the options reflect your goal. You will be able to define it later as
-        well.
-      </Callout>
+      <Callout>You will be able to change your goal later on as well.</Callout>
       <Selector />
     </Slide>
   );
