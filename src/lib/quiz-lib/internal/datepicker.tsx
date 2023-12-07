@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSlide } from "../public/slide";
 import { SlidePropsDate } from "../public/types";
 import { DateState, DateValue, useQuizActions, useQuizSnapshot } from "./state";
+import { commonInputStyles } from "./commonInput";
 
 const DEFAULT_DATE: DateValue = { year: 1990, month: 1, day: 1 };
 
@@ -47,8 +48,9 @@ export function DatePicker(_: DatePickerProps) {
   return (
     <Flex width={"full"} gap={2}>
       <Box flex={3} width={"full"}>
-        <Text>Day</Text>
+        <Text color="bg.500">Day</Text>
         <Select
+          {...commonInputStyles()}
           onChange={(e) => {
             const v = parseInt(e.target.value);
             actions.setDateValue(slide.id, {
@@ -67,8 +69,9 @@ export function DatePicker(_: DatePickerProps) {
         </Select>
       </Box>
       <Box flex={5} width={"full"}>
-        <Text>Month</Text>
+        <Text color="bg.500">Month</Text>
         <Select
+          {...commonInputStyles()}
           onChange={(e) => {
             const v = parseInt(e.target.value);
             actions.setDateValue(slide.id, {
@@ -87,8 +90,9 @@ export function DatePicker(_: DatePickerProps) {
         </Select>
       </Box>
       <Box flex={4} width={"full"}>
-        <Text>Year</Text>
+        <Text color="bg.500">Year</Text>
         <Select
+          {...commonInputStyles()}
           onChange={(e) => {
             const v = parseInt(e.target.value);
             actions.setDateValue(slide.id, {

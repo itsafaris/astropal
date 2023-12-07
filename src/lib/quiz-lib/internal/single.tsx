@@ -20,7 +20,7 @@ export function SingleSelect(_: SingleSelectProps) {
 
   return (
     <Box>
-      <Text pb={2} fontWeight={"medium"} color="secondary.400" fontSize={"sm"}>
+      <Text pb={2} fontWeight={"medium"} color="bg.400" fontSize={"sm"}>
         Choose one
       </Text>
       <CommonSelect

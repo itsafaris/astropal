@@ -6,10 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
   const slide = useSlide();
   return (
-    <Text fontSize="2xl" lineHeight={1.4} fontWeight="semibold" {...rest}>
+    <Text fontSize="2xl" lineHeight={1.4} fontWeight="semibold" color="bg.900" {...rest}>
       {children}{" "}
       {slide.optional && (
-        <Text as="span" my={2} color="blackAlpha.500">
+        <Text as="span" my={2} color="bg.300">
           (optional)
         </Text>
       )}
@@ -65,22 +65,15 @@ export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
       borderRadius={"xl"}
       borderStyle={"solid"}
       borderWidth={1}
-      borderColor={"secondary.300"}
+      borderColor={"bg.400"}
       flexDirection="column"
-      backgroundColor={"secondary.50"}
-      opacity={0.6}
+      backgroundColor={"bg.50"}
     >
-      <Box
-        flexShrink={0}
-        borderRadius={"full"}
-        color="secondary.900"
-        fontWeight={"bold"}
-        fontSize={"sm"}
-      >
+      <Box flexShrink={0} borderRadius={"full"} color="bg.900" fontWeight={"bold"} fontSize={"sm"}>
         Tip! {emoji}
       </Box>
       <Flex borderRadius={"md"}>
-        <Text fontSize="sm" color="secondary.900">
+        <Text fontSize="sm" color="bg.600">
           {children}
         </Text>
       </Flex>

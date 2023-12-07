@@ -19,8 +19,8 @@ export function ProgressIndicator() {
   const overallProgress = Math.ceil(((snap.currentIdx + 1) / snap.slideCount) * 100);
 
   const colorScheme = colorOverrides?.colorScheme ?? "brand";
-  const activeSegmentBg = colorOverrides?.activeSegmentBg ?? "brand.100";
-  const inactiveSegmentBg = colorOverrides?.inactiveSegmentBg ?? "blackAlpha.300";
+  const activeSegmentBg = colorOverrides?.activeSegmentBg ?? "bg.200";
+  const inactiveSegmentBg = colorOverrides?.inactiveSegmentBg ?? "bg.200";
   const textColor = colorOverrides?.textColor ?? "brand.500";
 
   return (

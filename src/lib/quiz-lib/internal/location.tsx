@@ -5,6 +5,7 @@ import { useSlide } from "../public/slide";
 import { SlidePropsLocation } from "../public/types";
 import { LocationState, LocationValue, useQuizActions, useQuizSnapshot } from "./state";
 import { debounce } from "./utils";
+import { commonInputStyles } from "./commonInput";
 
 type SelectOptionType = LocationValue;
 
@@ -101,6 +102,10 @@ export function Location({ placeholder }: LocationProps) {
         container: (provided) => ({
           ...provided,
           width: "full",
+        }),
+        control: (provided) => ({
+          ...provided,
+          ...commonInputStyles(),
         }),
       }}
       cacheOptions

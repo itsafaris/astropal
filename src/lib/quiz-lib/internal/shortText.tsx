@@ -2,6 +2,7 @@ import { Input } from "@chakra-ui/react";
 import { useSlide } from "../public/slide";
 import { SlidePropsShortText } from "../public/types";
 import { ShortTextState, useQuizActions, useQuizSnapshot } from "./state";
+import { commonInputStyles } from "./commonInput";
 
 export type ShortTextProps = {} & SlidePropsShortText;
 
@@ -14,6 +15,7 @@ export function ShortText({ placeholder }: ShortTextProps) {
 
   return (
     <Input
+      {...commonInputStyles()}
       size={"lg"}
       placeholder={placeholder}
       value={state.value ?? ""}

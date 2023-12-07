@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
+import { Box, Button, Flex, FlexProps, useTheme } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { devtools } from "valtio/utils";
@@ -112,6 +112,7 @@ export function Quiz(props: QuizProps) {
 
 export function QuizUI({ children, headerComponent, containerProps }: QuizProps) {
   const $quizRoot = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
   useStateSyncToUrl();
 
@@ -134,7 +135,7 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizProps)
   // Change quiz bg color when slide has it defined
   useEffect(() => {
     const bg = snap.currentSlide.quizContainerProps?.bg;
-    document.body.style.background = bg ?? "";
+    document.body.style.background = bg ?? theme.colors.bg["50"];
   }, [snap.currentSlide]);
 
   return (

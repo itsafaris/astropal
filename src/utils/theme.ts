@@ -1,29 +1,40 @@
 import { ChakraTheme, DeepPartial, extendTheme } from "@chakra-ui/react";
 
 export const brandColor = {
-  50: "#ffe8f1",
-  100: "#f0c4d1",
-  200: "#e09fb2",
-  300: "#d27a93",
-  400: "#c45574",
-  500: "#aa3b5a",
-  600: "#852d46",
-  700: "#611f32",
-  800: "#3c111e",
-  900: "#1b020a",
+  50: "#190500",
+  100: "#3b1d0f",
+  200: "#60371f",
+  300: "#85532d",
+  400: "#ab733b",
+  500: "#c49354",
+  600: "#d2a879",
+  700: "#dfbe9d",
+  800: "#eed6c1",
+  900: "#feeee1",
 };
 
-export const secondary = {
-  50: "#e8f8ff",
-  100: "#c8ddea",
-  200: "#a8c2d7",
-  300: "#86a8c5",
-  400: "#658cb4",
-  500: "#4b709a",
-  600: "#3a5579",
-  700: "#284057",
-  800: "#162937",
-  900: "#011118",
+export const bg = {
+  0: "#000",
+  50: "#051215",
+  100: "#092025",
+  150: "#0D2E35",
+  200: "#113C45",
+  250: "#154A55",
+  300: "#195865",
+  350: "#1D6675",
+  400: "#217485",
+  450: "#258295",
+  500: "#258FA7",
+  550: "#3B9BB0",
+  600: "#51A7B9",
+  650: "#67B3C2",
+  700: "#7DBFCB",
+  750: "#93CBD4",
+  800: "#A9D7DD",
+  850: "#BFE3E6",
+  900: "#D5EFEF",
+  950: "#EAF7FA",
+  1000: "#FFFFFF",
 };
 
 export const _theme: DeepPartial<ChakraTheme> = {
@@ -33,7 +44,7 @@ export const _theme: DeepPartial<ChakraTheme> = {
   },
   colors: {
     brand: brandColor,
-    secondary,
+    bg,
   },
 };
 

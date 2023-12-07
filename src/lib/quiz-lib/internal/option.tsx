@@ -1,4 +1,4 @@
-import { Button, Flex, Image, Text, chakra, shouldForwardProp } from "@chakra-ui/react";
+import { Button, Flex, Image, Text, chakra, shouldForwardProp, useTheme } from "@chakra-ui/react";
 
 import { isValidMotionProp, motion } from "framer-motion";
 import { ComponentProps } from "react";
@@ -12,12 +12,13 @@ export type OptionProps = OptionPropsSimple | OptionPropsPicture;
 
 function OptionInput({ type, isSelected }: { type: "radio" | "checkbox"; isSelected: boolean }) {
   const size = "20px";
+  const theme = useTheme();
   switch (type) {
     case "checkbox": {
       return isSelected ? (
-        <CheckIcon width={size} height={size} />
+        <CheckIcon width={size} height={size} color={theme.colors.bg["700"]} />
       ) : (
-        <CheckIconEmpty width={size} height={size} />
+        <CheckIconEmpty width={size} height={size} color={theme.colors.bg["400"]} />
       );
     }
     case "radio": {
@@ -83,15 +84,15 @@ function BaseOption({ isSelected, children, ...chakraButtonProps }: BaseOptionPr
     <ChakraButton
       as={motion.button}
       borderRadius={"md"}
-      fontWeight="semibold"
       outline={`${isSelected ? 3 : 0}px solid`}
-      outlineColor={"secondary.400"}
-      backgroundColor={isSelected ? "secondary.100" : "secondary.50"}
+      outlineColor={"bg.400"}
+      backgroundColor={isSelected ? "bg.200" : "bg.100"}
       // @ts-expect-error
       transition={{
         scale: { type: "spring", stiffness: 800, damping: 25 },
       }}
       whileTap={{ scale: 0.98 }}
+      color={"bg.900"}
       {...chakraButtonProps}
     >
       {children}

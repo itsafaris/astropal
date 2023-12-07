@@ -12,9 +12,12 @@ export function NextButton(props: ComponentProps<typeof Button>) {
         px={6}
         py={4}
         variant={"solid"}
-        colorScheme="brand"
+        backgroundColor="brand.600"
+        _hover={{
+          backgroundColor: "brand.500",
+        }}
         width={"full"}
-        boxShadow={`0 0 0 10px ${theme.colors.brand["100"]}`}
+        boxShadow={`0 0 0 6px ${theme.colors.brand["800"]}`}
         onClick={() => {
           quiz.submitQuestion();
         }}
