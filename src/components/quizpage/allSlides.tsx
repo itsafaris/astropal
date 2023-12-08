@@ -200,7 +200,7 @@ export function fillerUserCount() {
             <Subtitle>Here is the first part of your profile.</Subtitle>
             <Card my={8} p={4} bg="bg.200" boxShadow={"dark-lg"}>
               <Text textAlign={"center"} color="bg.500" fontWeight={"bold"}>
-                {zodiac}
+                {zodiac.name}
               </Text>
               <Box height={160}></Box>
             </Card>
