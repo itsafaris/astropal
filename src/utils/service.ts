@@ -1,3 +1,16 @@
+import aquariusImg from "static/images/zodiacSigns/aquarius.svg";
+import ariesImg from "static/images/zodiacSigns/aries.svg";
+import cancerImg from "static/images/zodiacSigns/cancer.svg";
+import capricornImg from "static/images/zodiacSigns/capricorn.svg";
+import geminiImg from "static/images/zodiacSigns/gemini.svg";
+import leoImg from "static/images/zodiacSigns/leo.svg";
+import libraImg from "static/images/zodiacSigns/libra.svg";
+import piscesImg from "static/images/zodiacSigns/pisces.svg";
+import sagittariusImg from "static/images/zodiacSigns/sagittarius.svg";
+import scorpioImg from "static/images/zodiacSigns/scorpio.svg";
+import taurusImg from "static/images/zodiacSigns/taurus.svg";
+import virgoImg from "static/images/zodiacSigns/virgo.svg";
+
 type ZodiacSignType =
   | "aries"
   | "taurus"
@@ -51,47 +64,74 @@ interface NumerologyData {
   radical_ruler: string;
 }
 
-function getZodiacSign(birthDate: string): ZodiacSignType {
+function getZodiacSign(birthDate: string): {
+  name: ZodiacSignType;
+  imgUrl: string;
+} {
   const date = new Date(birthDate);
   const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript Date object
 
   switch (true) {
-    case (month === 3 && date.getDate() >= 21) ||
-      (month === 4 && date.getDate() <= 19):
-      return "aries";
-    case (month === 4 && date.getDate() >= 20) ||
-      (month === 5 && date.getDate() <= 20):
-      return "taurus";
-    case (month === 5 && date.getDate() >= 21) ||
-      (month === 6 && date.getDate() <= 20):
-      return "gemini";
-    case (month === 6 && date.getDate() >= 21) ||
-      (month === 7 && date.getDate() <= 22):
-      return "cancer";
-    case (month === 7 && date.getDate() >= 23) ||
-      (month === 8 && date.getDate() <= 22):
-      return "leo";
-    case (month === 8 && date.getDate() >= 23) ||
-      (month === 9 && date.getDate() <= 22):
-      return "virgo";
-    case (month === 9 && date.getDate() >= 23) ||
-      (month === 10 && date.getDate() <= 22):
-      return "libra";
-    case (month === 10 && date.getDate() >= 23) ||
-      (month === 11 && date.getDate() <= 21):
-      return "scorpio";
-    case (month === 11 && date.getDate() >= 22) ||
-      (month === 12 && date.getDate() <= 21):
-      return "sagittarius";
-    case (month === 12 && date.getDate() >= 22) ||
-      (month === 1 && date.getDate() <= 19):
-      return "capricorn";
-    case (month === 1 && date.getDate() >= 20) ||
-      (month === 2 && date.getDate() <= 18):
-      return "aquarius";
-    case (month === 2 && date.getDate() >= 19) ||
-      (month === 3 && date.getDate() <= 20):
-      return "pisces";
+    case (month === 3 && date.getDate() >= 21) || (month === 4 && date.getDate() <= 19):
+      return {
+        name: "aries",
+        imgUrl: ariesImg,
+      };
+    case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
+      return {
+        name: "taurus",
+        imgUrl: taurusImg,
+      };
+    case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
+      return {
+        name: "gemini",
+        imgUrl: geminiImg,
+      };
+    case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
+      return {
+        name: "cancer",
+        imgUrl: cancerImg,
+      };
+    case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
+      return {
+        name: "leo",
+        imgUrl: leoImg,
+      };
+    case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
+      return {
+        name: "virgo",
+        imgUrl: virgoImg,
+      };
+    case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
+      return {
+        name: "libra",
+        imgUrl: libraImg,
+      };
+    case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
+      return {
+        name: "scorpio",
+        imgUrl: scorpioImg,
+      };
+    case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
+      return {
+        name: "sagittarius",
+        imgUrl: sagittariusImg,
+      };
+    case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
+      return {
+        name: "capricorn",
+        imgUrl: capricornImg,
+      };
+    case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
+      return {
+        name: "aquarius",
+        imgUrl: aquariusImg,
+      };
+    case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
+      return {
+        name: "pisces",
+        imgUrl: piscesImg,
+      };
     default:
       throw new Error("Failed to compute Zodiac sign");
   }
@@ -99,7 +139,7 @@ function getZodiacSign(birthDate: string): ZodiacSignType {
 
 interface Service {
   getDailyPhrase(): Promise<string>;
-  getZodiacSign(birthDate: string): ZodiacSignType;
+  getZodiacSign(birthDate: string): { name: ZodiacSignType; imgUrl: string };
   getZodiacSignData(signType: ZodiacSignType): Promise<ZodiacSignData>;
   getNumerologyData(): Promise<NumerologyData>;
 }
@@ -107,9 +147,7 @@ interface Service {
 const serviceMock: Service = {
   getDailyPhrase: () => {
     return new Promise((res) =>
-      res(
-        "Success is not the key to happiness. Happiness is the key to success."
-      )
+      res("Success is not the key to happiness. Happiness is the key to success.")
     );
   },
 
@@ -137,8 +175,7 @@ const serviceMock: Service = {
         ruling_planet: "Venus",
         strengths: "Cooperative, diplomatic, gracious, fair-minded, social",
         symbol: "Scales",
-        weaknesses:
-          "Indecisive, avoids confrontations, will carry a grudge, self-pity",
+        weaknesses: "Indecisive, avoids confrontations, will carry a grudge, self-pity",
         woman:
           "Libra women are very intelligent, coquettish, charming, captivating, and friendly. So you can draw people to you naturally and easily. You are always up for a wild and playful adventure. You embody fairness, justice, and balance. Libra women are represented by the scales, so ideally weighted, flawless, and complete. Also, you are highly sociable and have a gift for communication. You are a fascinating mix of rational logic and erratic emotion. You shoot holes in others’ flawed opinions then make up for winning the argument with your charm. You are always open to reason and common sense. You will good-naturedly admit your mistakes if people talk to you logically. You are always fashionable, elegant, tasteful, and well-groomed. Above this, you have an eye for quality, beauty, and harmony in all things. Your refined and caring nature will help you take care of your partner both physically and emotionally. You love everything about romance and partnership and will constantly work towards improving a relationship.",
       });
@@ -206,8 +243,7 @@ const service: Service = {
   },
 
   getNumerologyData: async () => {
-    const url =
-      "https://vedicrishi-horoscope-matching-v1.p.rapidapi.com/numero_table/";
+    const url = "https://vedicrishi-horoscope-matching-v1.p.rapidapi.com/numero_table/";
     const options = {
       method: "POST",
       headers: {
