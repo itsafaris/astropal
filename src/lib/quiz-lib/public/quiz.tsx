@@ -112,7 +112,6 @@ export function Quiz(props: QuizProps) {
 
 export function QuizUI({ children, headerComponent, containerProps }: QuizProps) {
   const $quizRoot = useRef<HTMLDivElement>(null);
-  const theme = useTheme();
 
   useStateSyncToUrl();
 
@@ -132,14 +131,9 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizProps)
     root!.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [snap.currentSlideID]);
 
-  // Change quiz bg color when slide has it defined
-  useEffect(() => {
-    const bg = snap.currentSlide.quizContainerProps?.bg;
-    document.body.style.background = bg ?? theme.colors.bg["50"];
-  }, [snap.currentSlide]);
-
   return (
     <Flex id="#quiz-lib-root" ref={$quizRoot} direction={"column"} {...containerProps}>
+      <QuizBg />
       {config.showDebugUI && <DebugUI />}
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
       <ProgressIndicator />
@@ -231,6 +225,27 @@ function useStateSyncToUrl() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+}
+
+/**
+ * Renders a full screen background below the quiz
+ * It's a separate component for performance reasons
+ */
+function QuizBg() {
+  const snap = useQuizSnapshot();
+  const customBg = snap.currentSlide.quizContainerProps?.bg;
+
+  return (
+    <Box
+      id="bg-div"
+      zIndex={-1}
+      width={"100%"}
+      height={"100vh"}
+      position={"fixed"}
+      background={customBg}
+      bgGradient={customBg ? undefined : "radial(bg.100, bg.50)"}
+    />
+  );
 }
 
 function getInitialSlideID() {
