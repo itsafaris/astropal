@@ -27,6 +27,7 @@ export type ISelectorType = SlideProps["type"];
 
 export type ContainerPropsOverride = {
   bg?: string;
+  bgGradient?: string;
   progressBar?: {
     textColor?: ColorProps["color"];
     colorScheme?: ThemeTypings["colorSchemes"];
