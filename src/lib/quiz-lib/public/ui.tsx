@@ -41,7 +41,7 @@ export function TransitionText({
   ...rest
 }: Omit<ComponentProps<typeof Text>, "children"> & { text: string }) {
   return (
-    <Text {...rest} position={"relative"}>
+    <Text position={"relative"} {...rest}>
       <AnimatePresence>
         <motion.span
           style={{ position: "absolute", width: "100%", left: 0, top: 0 }}
