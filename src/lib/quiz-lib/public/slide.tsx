@@ -10,12 +10,14 @@ export function useSlide() {
   return useContext(SlideCtx);
 }
 
+export type QuizQuestionsState = Record<string, Snapshot<SelectorState>>;
+
 export type SlideComponentProps<T extends ISelectorType> = ExtractSlideProps<T> & {
   children?:
     | React.ReactNode
     | ((param: {
         state: Snapshot<GetSlideStateType<T>>;
-        quizState: Record<string, Snapshot<SelectorState>>;
+        quizState: QuizQuestionsState;
       }) => React.ReactNode);
   containerProps?: ComponentProps<typeof Flex>;
 };

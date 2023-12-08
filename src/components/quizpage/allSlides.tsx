@@ -9,6 +9,9 @@ import {
   Span,
   ShortTextState,
   Image,
+  QuizQuestionsState,
+  DateState,
+  Subtitle,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -18,8 +21,9 @@ import planetPositionsImg from "@images/planet_positions.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box, Card } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
+import { getService } from "@utils/service";
 
 const fillerStyles: ContainerPropsOverride = {
   bg: "radial-gradient(circle,rgba(56,4,59,.8) 0,#1c0630 70%)",
@@ -30,6 +34,29 @@ const fillerStyles: ContainerPropsOverride = {
     colorScheme: "whiteAlpha",
   },
 };
+
+function getPersonalInfoFromState(state: QuizQuestionsState) {
+  const _name = (state["birth-name"] as ShortTextState).value ?? "Anonymous";
+  const _birthDate = (state["birth-date"] as DateState).value ?? { year: 1990, month: 1, day: 1 };
+
+  let [firstLetter, ...rest] = _name.trim();
+  firstLetter = firstLetter.toUpperCase();
+  let fullName = [firstLetter, ...rest].join("");
+
+  const service = getService({ mock: true });
+  const birthDatetime = new Date(
+    _birthDate.year,
+    _birthDate.month - 1,
+    _birthDate.day
+  ).toISOString();
+  const zodiac = service.getZodiacSign(birthDatetime);
+
+  return {
+    fullName,
+    birthDate: _birthDate,
+    zodiac,
+  };
+}
 
 // Your Goal
 
@@ -146,6 +173,44 @@ export function birthPlaceSlide() {
   );
 }
 
+export function fillerUserCount() {
+  return (
+    <Slide
+      id="filler-user-count"
+      type="filler"
+      quizContainerProps={{
+        bg: "bg.300",
+      }}
+    >
+      {({ quizState }) => {
+        const { fullName, zodiac } = getPersonalInfoFromState(quizState);
+        const countOfProfiles = 35000;
+        return (
+          <Fragment>
+            <Title>
+              <Text as="span" color="brand.600">
+                {fullName}
+              </Text>
+              , based on your date, we've found{" "}
+              <Text as="span" color="brand.600">
+                {countOfProfiles}
+              </Text>{" "}
+              that we've already helped.
+            </Title>
+            <Subtitle>Here is the first part of your profile.</Subtitle>
+            <Card my={8} p={4} bg="bg.200" boxShadow={"dark-lg"}>
+              <Text textAlign={"center"} color="bg.500" fontWeight={"bold"}>
+                {zodiac}
+              </Text>
+              <Box height={160}></Box>
+            </Card>
+          </Fragment>
+        );
+      }}
+    </Slide>
+  );
+}
+
 export function loadingAfterPersonalInfo() {
   return (
     <Slide
@@ -157,11 +222,11 @@ export function loadingAfterPersonalInfo() {
       quizContainerProps={fillerStyles}
     >
       {({ state, quizState }) => {
-        const personName = (quizState["birth-name"] as ShortTextState).value ?? "Anonymous";
+        const { fullName } = getPersonalInfoFromState(quizState);
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              👏 Great <Span color="teal.300">{personName}</Span>!<br /> Let's create your avatar
+              👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
             </Title>
 
             <TransitionText
@@ -566,11 +631,24 @@ export function colorResonanceSlide() {
         },
       ]}
     >
-      <Title>Which color resonates with you the most?</Title>
-      <Callout emoji="In astrology:">
-        Colors are often associated with planets and signs, carrying symbolic meanings.
-      </Callout>
-      <Selector />
+      {({ quizState }) => {
+        const { fullName } = getPersonalInfoFromState(quizState);
+        return (
+          <Fragment>
+            <Title>
+              <Text as="span" color="brand.500">
+                {fullName}
+              </Text>
+              {", "}
+              which color resonates with you the most?
+            </Title>
+            <Callout emoji="In astrology:">
+              Colors are often associated with planets and signs, carrying symbolic meanings.
+            </Callout>
+            <Selector />
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }

@@ -36,6 +36,7 @@ import {
   goalSlide,
   partnerProfileIntroFiller,
   loadingAfterPartnersInfo,
+  fillerUserCount,
 } from "./allSlides";
 
 export function goalSegment() {
@@ -55,8 +56,9 @@ export function personalInfoSegment({ birthname }: { birthname: string }) {
       {birthNameSlide()}
       {colorResonanceSlide()}
       {birthDateSlide()}
-      {birthPlaceSlide()}
+      {fillerUserCount()}
       {personalityTypeSlide()}
+      {birthPlaceSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
       {loadingAfterPersonalInfo()}
