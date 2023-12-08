@@ -23,6 +23,9 @@ export function LoadingSlide(props: LoadingSlideComponentProps) {
         to={to}
         duration={duration}
         completedText={completedText}
+        onProgressValueChange={(value) => {
+          actions.setLoadingStateProgress(slide.id, value);
+        }}
         onComplete={() => {
           actions.setLoadingStateComplete(slide.id, true);
         }}
@@ -36,11 +39,19 @@ type SpinnerWihtTextProps = {
   to?: SlidePropsLoading["to"];
   duration?: SlidePropsLoading["duration"];
   completedText?: SlidePropsLoading["completedText"];
+  onProgressValueChange?: (value: number) => void;
   onComplete?: () => void;
 };
 
 function SpinnerWihtText(props: SpinnerWihtTextProps) {
-  const { from = 0, to = 100, duration = 5, completedText, onComplete } = props;
+  const {
+    from = 0,
+    to = 100,
+    duration = 5,
+    completedText,
+    onComplete,
+    onProgressValueChange,
+  } = props;
 
   const firedOnComplete = useRef(false);
   const [loadingValue, setLoadingValue] = useState(from); // 0 - 100
@@ -83,6 +94,10 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    onProgressValueChange?.(loadingValue);
+  }, [loadingValue]);
 
   function fireOnComplete() {
     if (!firedOnComplete.current) {

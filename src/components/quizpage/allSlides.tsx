@@ -212,13 +212,27 @@ export function fillerUserCount() {
 }
 
 export function loadingAfterPersonalInfo() {
+  function renderText(progressValue?: number): string {
+    if (progressValue == null) {
+      return "";
+    }
+
+    return progressValue < 33
+      ? "Calculating astrological shit..."
+      : progressValue < 67
+      ? "Generating numerology report..."
+      : progressValue < 100
+      ? "Preparing dfdff dsfd fds fdf ..."
+      : "fgdgffdggf fddff dfdf dsfds fdf dd";
+  }
+
   return (
     <Slide
       id="loading-one"
       type="loading"
       from={0}
       to={100}
-      duration={6}
+      duration={3}
       quizContainerProps={fillerStyles}
     >
       {({ state, quizState }) => {
@@ -226,18 +240,22 @@ export function loadingAfterPersonalInfo() {
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
+              {state.isComplete ? (
+                <Span>
+                  👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
+                </Span>
+              ) : (
+                <Span>
+                  👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
+                </Span>
+              )}
             </Title>
 
             <TransitionText
               height={6}
               textAlign={"center"}
               color="white"
-              text={
-                state.isComplete
-                  ? `First part of building your avatar is now complete`
-                  : "Sit tight and wait while we're creating your personal profile"
-              }
+              text={renderText(state.progressValue)}
             />
 
             <Selector />
