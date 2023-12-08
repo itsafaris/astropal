@@ -182,24 +182,30 @@ export function fillerUserCount() {
       }}
     >
       {({ quizState }) => {
-        const { fullName, zodiac } = getPersonalInfoFromState(quizState);
-        const countOfProfiles = 35000;
+        const { zodiac } = getPersonalInfoFromState(quizState);
+        const countOfProfiles = 35422;
         return (
           <Fragment>
             <Title>
+              We are currently guiding{" "}
               <Text as="span" color="brand.600">
-                {fullName}
-              </Text>
-              , based on your date, we've found{" "}
-              <Text as="span" color="brand.600">
-                {countOfProfiles}
+                {countOfProfiles.toLocaleString()}
               </Text>{" "}
-              that we've already helped.
+              people with similar profiles to yours, reporting an average{" "}
+              <Text as="span" color="brand.600">
+                2x
+              </Text>{" "}
+              improvement in relationships within just{" "}
+              <Text as="span" color="brand.600">
+                two weeks
+              </Text>{" "}
+              of usage.
             </Title>
+
             <Flex p={8} gap={2} flexDirection={"column"}>
               {zodiac.svgComponent &&
                 createElement(zodiac.svgComponent, {
-                  height: 240,
+                  height: 160,
                   width: "100%",
                   fill: theme.colors.bg["200"],
                   stroke: theme.colors.bg["400"],
