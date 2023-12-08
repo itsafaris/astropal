@@ -1,15 +1,15 @@
-import aquariusImg from "static/images/zodiacSigns/aquarius.svg";
-import ariesImg from "static/images/zodiacSigns/aries.svg";
-import cancerImg from "static/images/zodiacSigns/cancer.svg";
-import capricornImg from "static/images/zodiacSigns/capricorn.svg";
-import geminiImg from "static/images/zodiacSigns/gemini.svg";
-import leoImg from "static/images/zodiacSigns/leo.svg";
-import libraImg from "static/images/zodiacSigns/libra.svg";
-import piscesImg from "static/images/zodiacSigns/pisces.svg";
-import sagittariusImg from "static/images/zodiacSigns/sagittarius.svg";
-import scorpioImg from "static/images/zodiacSigns/scorpio.svg";
-import taurusImg from "static/images/zodiacSigns/taurus.svg";
-import virgoImg from "static/images/zodiacSigns/virgo.svg";
+import aquariusImg from "@components/zodiacSigns/aquarius";
+import ariesImg from "@components/zodiacSigns/aries";
+import cancerImg from "@components/zodiacSigns/cancer";
+import capricornImg from "@components/zodiacSigns/capricorn";
+import geminiImg from "@components/zodiacSigns/gemini";
+import leoImg from "@components/zodiacSigns/leo";
+import libraImg from "@components/zodiacSigns/libra";
+import piscesImg from "@components/zodiacSigns/pisces";
+import sagittariusImg from "@components/zodiacSigns/sagittarius";
+import scorpioImg from "@components/zodiacSigns/scorpio";
+import taurusImg from "@components/zodiacSigns/taurus";
+import virgoImg from "@components/zodiacSigns/virgo";
 
 type ZodiacSignType =
   | "aries"
@@ -64,9 +64,10 @@ interface NumerologyData {
   radical_ruler: string;
 }
 
-function getZodiacSign(birthDate: string): {
+export function getZodiacSign(birthDate: string): {
   name: ZodiacSignType;
-  imgUrl: string;
+  imgUrl?: string;
+  svgComponent: typeof aquariusImg;
 } {
   const date = new Date(birthDate);
   const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript Date object
@@ -75,62 +76,62 @@ function getZodiacSign(birthDate: string): {
     case (month === 3 && date.getDate() >= 21) || (month === 4 && date.getDate() <= 19):
       return {
         name: "aries",
-        imgUrl: ariesImg,
+        svgComponent: ariesImg,
       };
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
         name: "taurus",
-        imgUrl: taurusImg,
+        svgComponent: taurusImg,
       };
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
         name: "gemini",
-        imgUrl: geminiImg,
+        svgComponent: geminiImg,
       };
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
         name: "cancer",
-        imgUrl: cancerImg,
+        svgComponent: cancerImg,
       };
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
         name: "leo",
-        imgUrl: leoImg,
+        svgComponent: leoImg,
       };
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
         name: "virgo",
-        imgUrl: virgoImg,
+        svgComponent: virgoImg,
       };
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
         name: "libra",
-        imgUrl: libraImg,
+        svgComponent: libraImg,
       };
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
         name: "scorpio",
-        imgUrl: scorpioImg,
+        svgComponent: scorpioImg,
       };
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
         name: "sagittarius",
-        imgUrl: sagittariusImg,
+        svgComponent: sagittariusImg,
       };
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
         name: "capricorn",
-        imgUrl: capricornImg,
+        svgComponent: capricornImg,
       };
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
         name: "aquarius",
-        imgUrl: aquariusImg,
+        svgComponent: aquariusImg,
       };
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
         name: "pisces",
-        imgUrl: piscesImg,
+        svgComponent: piscesImg,
       };
     default:
       throw new Error("Failed to compute Zodiac sign");
@@ -139,7 +140,6 @@ function getZodiacSign(birthDate: string): {
 
 interface Service {
   getDailyPhrase(): Promise<string>;
-  getZodiacSign(birthDate: string): { name: ZodiacSignType; imgUrl: string };
   getZodiacSignData(signType: ZodiacSignType): Promise<ZodiacSignData>;
   getNumerologyData(): Promise<NumerologyData>;
 }
@@ -150,8 +150,6 @@ const serviceMock: Service = {
       res("Success is not the key to happiness. Happiness is the key to success.")
     );
   },
-
-  getZodiacSign,
 
   getZodiacSignData: () => {
     return new Promise((res) => {
@@ -223,8 +221,6 @@ const service: Service = {
 
     return result.daily;
   },
-
-  getZodiacSign,
 
   getZodiacSignData: async (signType: ZodiacSignType) => {
     const url = `https://horoscope-astrology.p.rapidapi.com/sign?s=${signType}`;

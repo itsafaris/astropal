@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, createElement } from "react";
 import {
   Callout,
   Selector,
@@ -11,7 +11,6 @@ import {
   Image,
   QuizQuestionsState,
   DateState,
-  Subtitle,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -21,9 +20,11 @@ import planetPositionsImg from "@images/planet_positions.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
-import { Text, Box, Card } from "@chakra-ui/react";
+import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
-import { getService } from "@utils/service";
+import { getZodiacSign } from "@utils/service";
+
+import { toTitleCase } from "@utils/string";
 
 const fillerStyles: ContainerPropsOverride = {
   bg: "radial-gradient(circle,rgba(56,4,59,.8) 0,#1c0630 70%)",
@@ -39,17 +40,14 @@ function getPersonalInfoFromState(state: QuizQuestionsState) {
   const _name = (state["birth-name"] as ShortTextState).value ?? "Anonymous";
   const _birthDate = (state["birth-date"] as DateState).value ?? { year: 1990, month: 1, day: 1 };
 
-  let [firstLetter, ...rest] = _name.trim();
-  firstLetter = firstLetter.toUpperCase();
-  let fullName = [firstLetter, ...rest].join("");
+  const fullName = toTitleCase(_name);
 
-  const service = getService({ mock: true });
   const birthDatetime = new Date(
     _birthDate.year,
     _birthDate.month - 1,
     _birthDate.day
   ).toISOString();
-  const zodiac = service.getZodiacSign(birthDatetime);
+  const zodiac = getZodiacSign(birthDatetime);
 
   return {
     fullName,
@@ -174,12 +172,13 @@ export function birthPlaceSlide() {
 }
 
 export function fillerUserCount() {
+  const theme = useTheme();
   return (
     <Slide
       id="filler-user-count"
       type="filler"
       quizContainerProps={{
-        bgGradient: "radial(bg.300, bg.50)",
+        bgGradient: "radial(bg.400, bg.50)",
       }}
     >
       {({ quizState }) => {
@@ -197,13 +196,24 @@ export function fillerUserCount() {
               </Text>{" "}
               that we've already helped.
             </Title>
-            <Subtitle>Here is the first part of your profile.</Subtitle>
-            <Card my={8} p={4} bg="bg.200" boxShadow={"dark-lg"}>
-              <Text textAlign={"center"} color="bg.500" fontWeight={"bold"}>
+            <Flex p={8} gap={2} flexDirection={"column"}>
+              {zodiac.svgComponent &&
+                createElement(zodiac.svgComponent, {
+                  height: 240,
+                  width: "100%",
+                  fill: theme.colors.bg["200"],
+                  stroke: theme.colors.bg["400"],
+                })}
+              <Text
+                fontSize={"4xl"}
+                fontWeight={"semibold"}
+                textAlign={"center"}
+                fontFamily={"cursive"}
+                color="bg.200"
+              >
                 {zodiac.name}
               </Text>
-              <Box height={160}></Box>
-            </Card>
+            </Flex>
           </Fragment>
         );
       }}
