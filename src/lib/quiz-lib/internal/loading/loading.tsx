@@ -152,8 +152,8 @@ function SpinnerCircleSvg({
     >
       <defs>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
-          <stop stopColor="hsl(184, 74%, 44%)" offset="0%" />
-          <stop stopColor="hsl(332, 87%, 70%)" offset="100%" />
+          <stop stopColor="#5fb0a1" offset="0%" />
+          <stop stopColor="white" offset="100%" />
         </linearGradient>
         <filter
           id="b"

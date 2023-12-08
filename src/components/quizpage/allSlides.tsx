@@ -223,7 +223,7 @@ export function loadingAfterPersonalInfo() {
       ? "Generating numerology report..."
       : progressValue < 100
       ? "Preparing dfdff dsfd fds fdf ..."
-      : "fgdgffdggf fddff dfdf dsfds fdf dd";
+      : "Done!";
   }
 
   return (
@@ -232,8 +232,10 @@ export function loadingAfterPersonalInfo() {
       type="loading"
       from={0}
       to={100}
-      duration={3}
-      quizContainerProps={fillerStyles}
+      duration={10}
+      quizContainerProps={{
+        bgGradient: "radial(bg.300, bg.50)",
+      }}
     >
       {({ state, quizState }) => {
         const { fullName } = getPersonalInfoFromState(quizState);
@@ -241,18 +243,16 @@ export function loadingAfterPersonalInfo() {
           <Fragment>
             <Title color="white" textAlign={"center"}>
               {state.isComplete ? (
-                <Span>
-                  👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
-                </Span>
+                <Span>Congratz, we have created your avatar. Lets continue further</Span>
               ) : (
                 <Span>
-                  👏 Great <Span color="teal.300">{fullName}</Span>!<br /> Let's create your avatar
+                  Great <Span color="brand.500">{fullName}</Span>!<br /> Let's create your avatar
                 </Span>
               )}
             </Title>
 
             <TransitionText
-              height={6}
+              height={8}
               textAlign={"center"}
               color="white"
               text={renderText(state.progressValue)}
