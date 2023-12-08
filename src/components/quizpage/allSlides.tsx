@@ -179,7 +179,7 @@ export function fillerUserCount() {
       id="filler-user-count"
       type="filler"
       quizContainerProps={{
-        bg: "bg.300",
+        bgGradient: "radial(bg.300, bg.50)",
       }}
     >
       {({ quizState }) => {

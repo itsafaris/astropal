@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FlexProps, useTheme } from "@chakra-ui/react";
+import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { devtools } from "valtio/utils";
@@ -234,6 +234,7 @@ function useStateSyncToUrl() {
 function QuizBg() {
   const snap = useQuizSnapshot();
   const customBg = snap.currentSlide.quizContainerProps?.bg;
+  const customBgGradient = snap.currentSlide.quizContainerProps?.bgGradient;
 
   return (
     <Box
@@ -243,7 +244,9 @@ function QuizBg() {
       height={"100vh"}
       position={"fixed"}
       background={customBg}
-      bgGradient={customBg ? undefined : "radial(bg.100, bg.50)"}
+      bgGradient={
+        customBgGradient ? customBgGradient : customBg ? undefined : "radial(bg.100, bg.50)"
+      }
     />
   );
 }
