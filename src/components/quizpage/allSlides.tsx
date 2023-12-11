@@ -253,20 +253,6 @@ export function loadingAfterPersonalInfo() {
     return index;
   }
 
-  function renderText(progressValue?: number): string {
-    if (progressValue == null) {
-      return "";
-    }
-
-    return progressValue < 33
-      ? "Calculating astrological shit..."
-      : progressValue < 67
-      ? "Generating numerology report..."
-      : progressValue < 100
-      ? "Preparing dfdff dsfd fds fdf ..."
-      : "Done!";
-  }
-
   const zodiac = getZodiacSign(new Date().toISOString());
   const numerology = {
     date: "25-12-1988",
@@ -316,6 +302,10 @@ export function loadingAfterPersonalInfo() {
       return "";
     }
 
+    if (progressValue === 100) {
+      return "Profile completed";
+    }
+
     const index = findIntervalIndex(progressValue, data);
 
     return `${data[index]?.text}: ${data[index]?.value}`;
@@ -331,35 +321,18 @@ export function loadingAfterPersonalInfo() {
       quizContainerProps={{
         bgGradient: "radial(bg.300, bg.50)",
       }}
+      statusText={({ progress }) => renderFacts(progress)}
     >
-      {({ state, quizState }) => {
+      {({ quizState }) => {
         const { fullName } = getPersonalInfoFromState(quizState);
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {state.isComplete ? (
-                <Span>Congratz, we have created your avatar. Lets continue further</Span>
-              ) : (
-                <Span>
-                  Great <Span color="brand.500">{fullName}</Span>!<br /> Let's create your avatar
-                </Span>
-              )}
+              <Span>
+                Great <Span color="brand.500">{fullName}</Span>!<br /> We are setting up your
+                astrological profile
+              </Span>
             </Title>
-
-            <TransitionText
-              height={8}
-              textAlign={"center"}
-              color="white"
-              text={renderText(state.progressValue)}
-            />
-
-            <TransitionText
-              height={8}
-              textAlign={"center"}
-              color="white"
-              text={renderFacts(state.progressValue)}
-            />
-
             <Selector />
           </Fragment>
         );
