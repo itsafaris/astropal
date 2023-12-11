@@ -34,7 +34,7 @@ function Quiz_() {
       }}
     >
       <GoalSegment />
-      {personalInfoSegment({ birthname: "gaidis" })}
+      {personalInfoSegment()}
       {partnerPersonalInfoSegment()}
       {relationshipsNonSingleSegment()}
     </QuizUI>

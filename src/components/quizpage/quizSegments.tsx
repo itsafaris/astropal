@@ -48,7 +48,7 @@ export function GoalSegment() {
   );
 }
 
-export function personalInfoSegment({ birthname }: { birthname: string }) {
+export function personalInfoSegment() {
   return (
     <Segment title="Your personality">
       {yourProfileIntroFiller()}
