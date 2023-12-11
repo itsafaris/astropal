@@ -1,6 +1,6 @@
 import { AsyncSelect } from "chakra-react-select";
 import { useCallback, useState } from "react";
-import { useQuizConfig } from "../public/quiz";
+import { useQuizConfig } from "../public/quizProvider";
 import { useSlide } from "../public/slide";
 import { SlidePropsLocation } from "../public/types";
 import { LocationState, LocationValue, useQuizActions, useQuizSnapshot } from "./state";

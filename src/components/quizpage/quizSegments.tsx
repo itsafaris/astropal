@@ -31,19 +31,19 @@ import {
   spiritualInvolvementSlide,
   partnerEmotionalOpennessSlide,
   partnerPersonalityTypeSlide,
-  socialProofFiller,
   yourProfileIntroFiller,
-  goalSlide,
   partnerProfileIntroFiller,
   loadingAfterPartnersInfo,
   fillerUserCount,
+  GoalSlide,
+  SocialProofFiller,
 } from "./allSlides";
 
-export function goalSegment() {
+export function GoalSegment() {
   return (
     <Segment title="Your goal">
-      {goalSlide()}
-      {socialProofFiller()}
+      <GoalSlide />
+      <SocialProofFiller />
     </Segment>
   );
 }

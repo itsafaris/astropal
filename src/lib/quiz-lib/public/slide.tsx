@@ -1,8 +1,14 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { ComponentProps, createContext, useContext } from "react";
+import { ComponentProps, createContext, useContext, useEffect } from "react";
 import { NextButton, SkipButton } from "../internal/ui";
 import { ExtractSlideProps, ISelectorType, SlideProps } from "./types";
-import { GetSlideStateType, SelectorState, Snapshot, useQuizSnapshot } from "../internal/state";
+import {
+  GetSlideStateType,
+  SelectorState,
+  Snapshot,
+  useQuizActions,
+  useQuizSnapshot,
+} from "../internal/state";
 
 const SlideCtx = createContext<SlideProps>(null as any);
 
@@ -22,61 +28,88 @@ export type SlideComponentProps<T extends ISelectorType> = ExtractSlideProps<T> 
   containerProps?: ComponentProps<typeof Flex>;
 };
 
-export function Slide<T extends ISelectorType>({
-  children,
-  containerProps,
-  ...slideProps
-}: SlideComponentProps<T>) {
+export function Slide<T extends ISelectorType>(props: SlideComponentProps<T>) {
+  const { children, containerProps, ...slideProps } = props;
+
   const snap = useQuizSnapshot();
-  const slideState = snap.slideStateByID[slideProps.id];
+  const actions = useQuizActions();
+
+  // this effect needs to run for all slides, in order to render the progress bar and etc.
+  useEffect(() => {
+    actions.registerSlide(slideProps);
+  }, []);
+
+  // here we cut short and only render the slide contents of the currently active slide
+  if (slideProps.id !== snap.currentSlide?.id) {
+    return null;
+  }
+
+  return (
+    <SlideCtx.Provider value={slideProps}>
+      <CurrentSlide {...props} />
+    </SlideCtx.Provider>
+  );
+}
+
+function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
+  const { children, containerProps, ...slideProps } = props;
+  const snap = useQuizSnapshot();
+  const state = snap.currentSlideState;
 
   let hideNextButton = () => {
     if (slideProps.type === "single") {
       return true;
     }
-    if (slideState.type === "loading" && !slideState.isComplete) {
+    if (state?.type === "loading" && !state.isComplete) {
       return true;
     }
     return false;
   };
+
+  if (!state) {
+    return;
+  }
 
   const showSkipButton = slideProps.optional;
 
   const realChildren =
     typeof children === "function"
       ? children({
-          state: snap.currentSlideState as Snapshot<GetSlideStateType<T>>,
+          // @ts-expect-error
+          state: state,
           quizState: snap.slideStateByID,
         })
       : children;
 
-  return (
-    <SlideCtx.Provider value={slideProps}>
-      <Flex
-        id="slide"
-        direction={"column"}
-        justifyContent={"start"}
-        alignItems={"center"}
-        minHeight={"100%"}
-        {...containerProps}
-      >
-        <Flex w="full" maxW={"440px"} flexDir={"column"} py={4} px={6}>
-          {realChildren}
+  if (!state) {
+    return null;
+  }
 
-          {!hideNextButton() && (
-            <Box
-              width={"full"}
-              mt={4}
-              mb={2}
-              position={snap.currentSlideState.isValid ? "sticky" : "unset"}
-              bottom={8}
-            >
-              <NextButton />
-            </Box>
-          )}
-          {showSkipButton && <SkipButton mt={2} />}
-        </Flex>
+  return (
+    <Flex
+      id="slide"
+      direction={"column"}
+      justifyContent={"start"}
+      alignItems={"center"}
+      minHeight={"100%"}
+      {...containerProps}
+    >
+      <Flex w="full" maxW={"440px"} flexDir={"column"} py={4} px={6}>
+        {realChildren}
+
+        {!hideNextButton() && (
+          <Box
+            width={"full"}
+            mt={4}
+            mb={2}
+            position={state.isValid ? "sticky" : "unset"}
+            bottom={8}
+          >
+            <NextButton />
+          </Box>
+        )}
+        {showSkipButton && <SkipButton mt={2} />}
       </Flex>
-    </SlideCtx.Provider>
+    </Flex>
   );
 }

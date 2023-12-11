@@ -1,18 +1,10 @@
 import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { createContext, useContext, useEffect, useRef } from "react";
-import { devtools } from "valtio/utils";
-import {
-  QuizCtx,
-  SelectorState,
-  createQuizState,
-  useQuizActions,
-  useQuizSnapshot,
-} from "../internal/state";
+import React, { useEffect } from "react";
 
-import { ChildrenArr, omit } from "../internal/utils";
+import { useQuizActions, useQuizSnapshot } from "../internal/state";
 import { ProgressIndicator } from "./progress";
-import { QuizErrorEvent, SlideProps } from "./types";
+import { useQuizConfig } from "./quizProvider";
 
 const variants = {
   enter: (direction: number) => {
@@ -35,92 +27,17 @@ const variants = {
   },
 };
 
-export type QuizProps = {
+export type QuizUIProps = {
   children?: React.ReactNode;
   headerComponent?: React.ReactNode;
   containerProps?: FlexProps;
-} & QuizConfigType;
-
-type QuizConfigType = {
-  locationApiKey: string;
-  showDebugUI?: boolean;
-  onErrorEvent?: (event: QuizErrorEvent) => void;
-  // return only the id for now to not expose the proxied objects
-  onSlideChange?: (newSlide: { id: string }) => void;
-  onSlideSubmitted?: (state: { id: string; state: SelectorState }) => void;
 };
 
-const QuizConfigCtx = createContext<QuizConfigType>(null as any);
-
-export function useQuizConfig() {
-  return useContext(QuizConfigCtx);
-}
-
-export function Quiz(props: QuizProps) {
-  const { children, locationApiKey, showDebugUI, onErrorEvent, onSlideChange, onSlideSubmitted } =
-    props;
-
-  const _children = ChildrenArr(children);
-
-  const segments = _children
-    .map((c) => c.props)
-    .map((c) => ({
-      title: c.title,
-      slideCount: React.Children.count(c.children),
-    }));
-
-  const slides = _children.flatMap(
-    (c) =>
-      React.Children.map(c.props.children, (c) => omit(c!.props, "children") as SlideProps) ?? []
-  );
-
-  const q = useRef(
-    (function () {
-      return createQuizState({
-        initialState: {
-          slideID: getInitialSlideID(),
-        },
-        slides,
-        segments,
-        onSlideSubmitted,
-      });
-    })()
-  ).current;
-
-  const { state } = q;
-
-  useEffect(() => {
-    devtools(state, {});
-  }, []);
-
-  return (
-    <QuizConfigCtx.Provider
-      value={{
-        locationApiKey,
-        showDebugUI,
-        onErrorEvent,
-        onSlideChange,
-        onSlideSubmitted,
-      }}
-    >
-      <QuizCtx.Provider value={q}>
-        <QuizUI {...props} />
-      </QuizCtx.Provider>
-    </QuizConfigCtx.Provider>
-  );
-}
-
-export function QuizUI({ children, headerComponent, containerProps }: QuizProps) {
-  const $quizRoot = useRef<HTMLDivElement>(null);
-
+export function QuizUI({ children, headerComponent, containerProps }: QuizUIProps) {
   useStateSyncToUrl();
 
   const config = useQuizConfig();
-
   const snap = useQuizSnapshot();
-
-  const slideChildren = ChildrenArr(children).flatMap((c) => c.props.children ?? []);
-  const currentSlide = slideChildren[snap.currentIdx];
 
   useEffect(() => {
     config.onSlideChange?.({ id: snap.currentSlideID });
@@ -132,13 +49,13 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizProps)
   }, [snap.currentSlideID]);
 
   return (
-    <Flex id="#quiz-lib-root" ref={$quizRoot} direction={"column"} {...containerProps}>
+    <Flex id="#quiz-lib-root" direction={"column"} {...containerProps}>
       <QuizBg />
       {config.showDebugUI && <DebugUI />}
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
       <ProgressIndicator />
       <Flex position={"relative"} flexGrow={1} width={"100%"}>
-        <AnimatePresence initial={false} custom={snap.direction}>
+        {/* <AnimatePresence initial={false} custom={snap.direction}>
           <motion.div
             style={{
               width: "100%",
@@ -155,9 +72,10 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizProps)
               opacity: { duration: 0.2 },
             }}
           >
-            {currentSlide}
+            {children}
           </motion.div>
-        </AnimatePresence>
+        </AnimatePresence> */}
+        {children}
       </Flex>
     </Flex>
   );
@@ -233,8 +151,8 @@ function useStateSyncToUrl() {
  */
 function QuizBg() {
   const snap = useQuizSnapshot();
-  const customBg = snap.currentSlide.quizContainerProps?.bg;
-  const customBgGradient = snap.currentSlide.quizContainerProps?.bgGradient;
+  const customBg = snap.currentSlide?.quizContainerProps?.bg;
+  const customBgGradient = snap.currentSlide?.quizContainerProps?.bgGradient;
 
   return (
     <Box
@@ -249,9 +167,4 @@ function QuizBg() {
       }
     />
   );
-}
-
-function getInitialSlideID() {
-  const params = new URLSearchParams(location.search);
-  return params.get("slideid") ?? undefined;
 }

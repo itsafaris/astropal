@@ -58,7 +58,7 @@ function getPersonalInfoFromState(state: QuizQuestionsState) {
 
 // Your Goal
 
-export function goalSlide() {
+export function GoalSlide() {
   return (
     <Slide
       id="your-goal"
@@ -1262,7 +1262,7 @@ export function appFeaturesImportanceSlide() {
 
 // filler
 
-export function socialProofFiller() {
+export function SocialProofFiller() {
   return (
     <Slide type="filler" id="user-testimonial" quizContainerProps={fillerStyles}>
       <Box

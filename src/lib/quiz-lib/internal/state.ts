@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { INTERNAL_Snapshot, proxy, ref, useSnapshot } from "valtio";
 import { ISelectorType, LogicDefinition, SlideProps } from "../public/types";
-import { findDuplicates, getPosInBounds } from "./utils";
+import { getPosInBounds } from "./utils";
 
 // E.g. GetSlideStateType<'multi'>
 export type GetSlideStateType<T extends ISelectorType> = Extract<SelectorState, { type: T }>;
@@ -89,58 +89,38 @@ function createSlideState(type: ISelectorType): SelectorState {
   };
 }
 
-function validateSegments(segments: SegmentDescriptor[]): string | undefined {
-  const ids = segments.map((s) => s.title);
-  const duplicateIds = findDuplicates(ids);
-  // check if all segments have unique ids
-  if (duplicateIds.length !== 0) {
-    return `more than one segment is using the same id: ${duplicateIds.join(", ")}`;
-  }
-}
-
-function validateSlides(slides: SlideProps[]): string | undefined {
-  const ids = slides.map((c) => c.id);
-  const duplicateIds = findDuplicates(ids);
-  // check if all slides have unique ids
-  if (duplicateIds.length !== 0) {
-    return `more than one slide is using the same id: ${duplicateIds.join(", ")}`;
-  }
-}
-
 export function createQuizState(input: {
   initialState?: {
     slideID?: string;
   };
-  segments: SegmentDescriptor[];
-  slides: SlideProps[];
+  // segments: SegmentDescriptor[];
+  // slides: SlideProps[];
   onSlideSubmitted?: (slideState: { id: string; state: SelectorState }) => void;
 }) {
-  let validationError = validateSegments(input.segments);
-  if (validationError) {
-    throw new Error(validationError);
-  }
+  // let validationError = validateSegments(input.segments);
+  // if (validationError) {
+  //   throw new Error(validationError);
+  // }
 
-  validationError = validateSlides(input.slides);
-  if (validationError) {
-    throw new Error(validationError);
-  }
-
-  // use provided initial slide id
-  let initialSlideIdx = 0;
-  if (input.initialState?.slideID) {
-    const idx = input.slides.findIndex((s) => s.id === input.initialState?.slideID);
-    if (idx !== -1) {
-      initialSlideIdx = idx;
-    }
-  }
+  // validationError = validateSlides(input.slides);
+  // if (validationError) {
+  //   throw new Error(validationError);
+  // }
 
   const state = proxy({
-    currentIdx: initialSlideIdx,
+    currentSlideID: input.initialState?.slideID,
     direction: 0, // -1 or 1
     slideStateByID: {} as Record<string, SelectorState>,
-    segments: input.segments,
-    slides: input.slides,
-    slideCount: input.slides.length,
+    segments: [] as SegmentDescriptor[],
+    slides: [] as SlideProps[],
+
+    get currentIdx() {
+      return this.slides.findIndex((s) => s.id === this.currentSlideID) ?? 0;
+    },
+
+    get slideCount() {
+      return Object.keys(this.slideStateByID).length;
+    },
 
     get segmentsFull() {
       let accLength = 0;
@@ -157,20 +137,18 @@ export function createQuizState(input: {
       });
     },
 
-    get currentSlideID() {
-      const s = this.slides[this.currentIdx];
-      return s.id;
-    },
-
-    get currentSlide() {
+    get currentSlide(): SlideProps | undefined {
       return this.slides[this.currentIdx];
     },
 
     get currentSlideState() {
-      if (!this.slideStateByID[this.currentSlideID]) {
-        this.slideStateByID[this.currentSlideID] = createSlideState(this.currentSlide.type);
+      if (!this.currentSlide) {
+        return;
       }
-      const state = this.slideStateByID[this.currentSlideID];
+      if (!this.slideStateByID[this.currentSlide.id]) {
+        this.slideStateByID[this.currentSlide.id] = createSlideState(this.currentSlide.type);
+      }
+      const state = this.slideStateByID[this.currentSlide.id];
       return {
         ...state,
         isValid: isSlideStateValid(state),
@@ -189,14 +167,33 @@ export function createQuizState(input: {
     },
   });
 
-  input.slides.forEach((s) => {
-    state.slideStateByID[s.id] = createSlideState(s.type);
-  });
+  // input.slides.forEach((s) => {
+  //   state.slideStateByID[s.id] = createSlideState(s.type);
+  // });
 
   const actions = {
+    registerSlide(slide: SlideProps) {
+      if (state.slides.some((s) => s.id === slide.id)) {
+        throw new Error(`duplicate slide id: ${slide.id}`);
+      }
+      state.slides.push(slide);
+      state.slideStateByID[slide.id] = createSlideState(slide.type);
+    },
+
+    registerSegment(segment: SegmentDescriptor) {
+      if (state.segments.some((s) => s.title === segment.title)) {
+        throw new Error(`duplicate slide id: ${segment.title}`);
+      }
+      state.segments.push(segment);
+    },
+
     /** Validate everything and go to next question */
     submitQuestion() {
-      const currentSlideState = state.slideStateByID[state.currentSlideID];
+      if (!state.currentSlide || !state.currentSlideState) {
+        return;
+      }
+
+      const currentSlideState = state.currentSlideState;
       const currentSlide = state.currentSlide;
 
       if (!isSlideStateValid(state.currentSlideState)) {
@@ -225,6 +222,9 @@ export function createQuizState(input: {
     },
 
     skipQuestion() {
+      if (!state.currentSlide) {
+        return;
+      }
       if (!state.currentSlide.optional) {
         throw new Error("only optional question can be skipped");
       }
@@ -242,11 +242,6 @@ export function createQuizState(input: {
 
     goToSlideID(id: string) {
       const idx = state.slides.findIndex((s) => s.id === id);
-      if (idx === -1) {
-        console.warn(`Go to slide id '${id}' impossible: slide with this id does not exist`);
-        return;
-      }
-
       actions.goToSlideIdx(idx);
     },
 
@@ -255,7 +250,8 @@ export function createQuizState(input: {
         return;
       }
       state.direction = idx < state.currentIdx ? -1 : 1;
-      state.currentIdx = idx;
+      const slideId = state.slides[idx];
+      state.currentSlideID = slideId.id;
     },
 
     toggleRadioOption(selectorID: string, value: SelectorValue) {

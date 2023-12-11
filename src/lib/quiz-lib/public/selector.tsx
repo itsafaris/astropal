@@ -22,13 +22,13 @@ export function Selector({}: SelectorProps) {
   const isActive = slide.id === currentSlide;
 
   useEffect(() => {
-    if (!isActive) {
+    if (!isActive || !slideState) {
       return;
     }
     if (!slideState.isValid && slideState.attempts > 0) {
       handleFlash();
     }
-  }, [isActive, slideState, slideState.attempts]);
+  }, [isActive, slideState, slideState?.attempts]);
 
   const handleFlash = async () => {
     await controls.start({
@@ -67,6 +67,10 @@ export function Selector({}: SelectorProps) {
         return <LoadingSlide {...slide} />;
       }
     }
+  }
+
+  if (!slideState) {
+    return null;
   }
 
   return (

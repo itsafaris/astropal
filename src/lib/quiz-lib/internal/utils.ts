@@ -12,25 +12,6 @@ export function debounce<T extends Function>(fn: T, delay = 250): T {
   };
 }
 
-export function findDuplicates<T>(array: T[]): T[] {
-  const itemMap = new Map<T, number>();
-  const duplicates: T[] = [];
-
-  for (const item of array) {
-    const itemCount = itemMap.get(item) || 0;
-
-    // If this count is exactly 1 before incrementing, it means this is the
-    // second encounter of the item and should be added to the duplicates array.
-    if (itemCount === 1) {
-      duplicates.push(item);
-    }
-
-    itemMap.set(item, itemCount + 1);
-  }
-
-  return duplicates;
-}
-
 export function omit<T extends object, K extends keyof T>(obj: T, keyToOmit: K): Omit<T, K> {
   const { [keyToOmit]: _, ...rest } = obj;
   return rest;

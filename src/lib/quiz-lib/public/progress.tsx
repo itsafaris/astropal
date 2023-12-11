@@ -13,6 +13,9 @@ export function ProgressIndicator() {
 
   // override colors when slide change
   useEffect(() => {
+    if (!snap.currentSlide) {
+      return;
+    }
     setColorOverrides(snap.currentSlide.quizContainerProps?.progressBar as any);
   }, [snap.currentSlide]);
 
