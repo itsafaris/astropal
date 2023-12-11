@@ -11,18 +11,13 @@ import { useSlide } from "../..";
 type LoadingSlideComponentProps = {} & SlidePropsLoading;
 
 export function LoadingSlide(props: LoadingSlideComponentProps) {
-  const { from, to, duration, completedText } = props;
-
   const actions = useQuizActions();
   const slide = useSlide();
 
   return (
     <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"}>
       <SpinnerWihtText
-        from={from}
-        to={to}
-        duration={duration}
-        completedText={completedText}
+        {...props}
         onProgressValueChange={(value) => {
           actions.setLoadingStateProgress(slide.id, value);
         }}
@@ -39,6 +34,7 @@ type SpinnerWihtTextProps = {
   to?: SlidePropsLoading["to"];
   duration?: SlidePropsLoading["duration"];
   completedText?: SlidePropsLoading["completedText"];
+  statusText?: SlidePropsLoading["statusText"];
   onProgressValueChange?: (value: number) => void;
   onComplete?: () => void;
 };
@@ -49,6 +45,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
     to = 100,
     duration = 5,
     completedText,
+    statusText,
     onComplete,
     onProgressValueChange,
   } = props;
@@ -106,6 +103,13 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
     }
   }
 
+  function getStatusText() {
+    const defaultStatusText: SlidePropsLoading["statusText"] =
+      loadingValue === 100 ? "Completed" : "Loading...";
+    const _statusText = statusText ?? defaultStatusText;
+    return typeof _statusText === "string" ? _statusText : _statusText({ progress: loadingValue });
+  }
+
   return (
     <Flex position={"relative"}>
       <SpinnerCircleSvg
@@ -118,12 +122,18 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         alignItems={"center"}
         justifyContent={"center"}
         position={"absolute"}
-        width={"100%"}
+        width={"70%"}
         height={"100%"}
         opacity={0.75}
+        transform={"translateX(-50%)"}
+        left="50%"
       >
         <Text fontWeight={"bold"} color="white" fontSize={"2xl"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
+        </Text>
+
+        <Text height={8} textAlign={"center"} color="bg.900" fontSize={"sm"} fontWeight={"bold"}>
+          {getStatusText()}
         </Text>
       </Flex>
     </Flex>

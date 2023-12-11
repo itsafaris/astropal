@@ -102,6 +102,7 @@ export type SlidePropsLoading = {
   /** In seconds */
   duration?: number;
   completedText?: React.ReactNode;
+  statusText?: string | ((s: { progress: number }) => string);
 } & SlidePropsBase;
 
 export type SlidePropsFiller = {
