@@ -115,7 +115,7 @@ export function createQuizState(input: {
     slides: [] as SlideProps[],
 
     get currentIdx() {
-      return this.slides.findIndex((s) => s.id === this.currentSlideID) ?? 0;
+      return this.slides.findIndex((s) => s.id === this.currentSlideID);
     },
 
     get slideCount() {
@@ -167,14 +167,13 @@ export function createQuizState(input: {
     },
   });
 
-  // input.slides.forEach((s) => {
-  //   state.slideStateByID[s.id] = createSlideState(s.type);
-  // });
-
   const actions = {
     registerSlide(slide: SlideProps) {
       if (state.slides.some((s) => s.id === slide.id)) {
         throw new Error(`duplicate slide id: ${slide.id}`);
+      }
+      if (!state.currentSlideID) {
+        state.currentSlideID = slide.id;
       }
       state.slides.push(slide);
       state.slideStateByID[slide.id] = createSlideState(slide.type);
