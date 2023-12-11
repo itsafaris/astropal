@@ -170,8 +170,10 @@ export function createQuizState(input: {
   const actions = {
     registerSlide(slide: SlideProps) {
       if (state.slides.some((s) => s.id === slide.id)) {
-        throw new Error(`duplicate slide id: ${slide.id}`);
+        // throw new Error(`duplicate slide id: ${slide.id}`);
+        return;
       }
+
       if (!state.currentSlideID) {
         state.currentSlideID = slide.id;
       }
@@ -181,7 +183,8 @@ export function createQuizState(input: {
 
     registerSegment(segment: SegmentDescriptor) {
       if (state.segments.some((s) => s.title === segment.title)) {
-        throw new Error(`duplicate slide id: ${segment.title}`);
+        // throw new Error(`duplicate slide id: ${segment.title}`);
+        return;
       }
       state.segments.push(segment);
     },
