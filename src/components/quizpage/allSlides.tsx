@@ -222,6 +222,31 @@ export function fillerUserCount() {
 }
 
 export function loadingAfterPersonalInfo() {
+  function findIntervalIndex(progressValue: number, count: Array<Record<string, any>>): number {
+    if (progressValue < 0 || progressValue > 100) {
+      throw new Error("ProgressValue must be between 0 and 100 inclusive.");
+    }
+
+    if (count.length === 0) {
+      throw new Error("Count array must have at least one element.");
+    }
+
+    const intervals = count.length;
+    const intervalSize = 100 / intervals;
+
+    const progressInInterval = progressValue % intervalSize;
+    const index = Math.floor(progressValue / intervalSize);
+
+    // Adjust index for the last interval
+    const lastIndex = intervals - 1;
+    const lastIntervalSize = 100 - lastIndex * intervalSize;
+    if (index === lastIndex && progressInInterval > lastIntervalSize) {
+      return lastIndex;
+    }
+
+    return index;
+  }
+
   function renderText(progressValue?: number): string {
     if (progressValue == null) {
       return "";
@@ -234,6 +259,60 @@ export function loadingAfterPersonalInfo() {
       : progressValue < 100
       ? "Preparing dfdff dsfd fds fdf ..."
       : "Done!";
+  }
+
+  const zodiac = getZodiacSign(new Date().toISOString());
+  const numerology = {
+    date: "25-12-1988",
+    destiny_number: 9,
+    evil_num: "1,9",
+    fav_color: "Black",
+    fav_day: "Sunday, Monday",
+    fav_god: "Narsingh Bhagawan",
+    fav_mantra: "|| Om Keng Ketave Namah ||",
+    fav_metal: "Iron",
+    fav_stone: "Cat's Eye",
+    fav_substone: "Golden Hakik",
+    friendly_num: "3,2,6",
+    name: "demo",
+    name_number: 2,
+    neutral_num: "4,5,8",
+    radical_num: "7",
+    radical_number: 7,
+    radical_ruler: "Ketu",
+  };
+
+  const data = [
+    {
+      text: "Zodiac sign",
+      value: zodiac.name,
+    },
+    {
+      text: "Destiny number",
+      value: numerology.destiny_number,
+    },
+    {
+      text: "Favorite day",
+      value: numerology.fav_day,
+    },
+    {
+      text: "Matching metal",
+      value: numerology.fav_metal,
+    },
+    {
+      text: "Lucky stone",
+      value: numerology.fav_stone,
+    },
+  ];
+
+  function renderFacts(progressValue?: number): string {
+    if (progressValue == null) {
+      return "";
+    }
+
+    const index = findIntervalIndex(progressValue, data);
+
+    return `${data[index]?.text}: ${data[index]?.value}`;
   }
 
   return (
@@ -266,6 +345,13 @@ export function loadingAfterPersonalInfo() {
               textAlign={"center"}
               color="white"
               text={renderText(state.progressValue)}
+            />
+
+            <TransitionText
+              height={8}
+              textAlign={"center"}
+              color="white"
+              text={renderFacts(state.progressValue)}
             />
 
             <Selector />
