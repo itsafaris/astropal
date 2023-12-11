@@ -192,7 +192,7 @@ export function createQuizState(input: {
         return;
       }
 
-      const currentSlideState = state.currentSlideState;
+      const currentSlideState = state.slideStateByID[state.currentSlideID!];
       const currentSlide = state.currentSlide;
 
       if (!isSlideStateValid(state.currentSlideState)) {
