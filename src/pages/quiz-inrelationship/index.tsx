@@ -10,6 +10,11 @@ import {
 } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
 
+import { ShortTextState, DateState } from "@martynasj/quiz-lib";
+import { getService } from "@utils/service";
+import { getPersonalInfoFromState } from "@utils/state";
+import { useQuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
+
 export default function QuizInRelationship() {
   return (
     <QuizPageWrapper>
@@ -22,9 +27,46 @@ export default function QuizInRelationship() {
 
 function Quiz_() {
   const state = useQuizSnapshot();
+  const serviceState = useQuizServiceWrapper();
 
   useEffect(() => {
-    console.log(state.slideStateByID);
+    async function fetchNumerologyData() {
+      if (!state) {
+        return;
+      }
+
+      const nameState = state.slideStateByID["birth-name"] as ShortTextState;
+      const birthdateState = state.slideStateByID["birth-date"] as DateState;
+
+      if (
+        nameState &&
+        nameState.value &&
+        nameState.confirmed &&
+        birthdateState &&
+        birthdateState.value &&
+        birthdateState.confirmed &&
+        !serviceState.numerologyData
+      ) {
+        const service = getService({ mock: true });
+        const personalInfo = getPersonalInfoFromState(state.slideStateByID);
+        const numerologyData = await service.getNumerologyData({
+          day: birthdateState.value.day,
+          month: birthdateState.value.month,
+          year: birthdateState.value.year,
+          name: nameState.value,
+        });
+
+        serviceState.setNumerologyData({
+          zodiacSign: personalInfo.zodiac.name,
+          destinyNumber: numerologyData.destiny_number,
+          favDay: numerologyData.fav_day,
+          favMetal: numerologyData.fav_metal,
+          favStone: numerologyData.fav_stone,
+        });
+      }
+    }
+
+    fetchNumerologyData();
   }, [state.slideStateByID]);
 
   return (

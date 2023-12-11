@@ -7,10 +7,7 @@ import {
   ContainerPropsOverride,
   TransitionText,
   Span,
-  ShortTextState,
   Image,
-  QuizQuestionsState,
-  DateState,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -22,9 +19,9 @@ import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
-import { getZodiacSign } from "@utils/service";
 
-import { toTitleCase } from "@utils/string";
+import { getPersonalInfoFromState } from "@utils/state";
+import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 const fillerStyles: ContainerPropsOverride = {
   bg: "radial-gradient(circle,rgba(56,4,59,.8) 0,#1c0630 70%)",
@@ -35,27 +32,6 @@ const fillerStyles: ContainerPropsOverride = {
     colorScheme: "whiteAlpha",
   },
 };
-
-function getPersonalInfoFromState(state: QuizQuestionsState) {
-  const _name = (state["birth-name"] as ShortTextState).value ?? "Anonymous";
-  const _birthDate = (state["birth-date"] as DateState).value ?? { year: 1990, month: 1, day: 1 };
-
-  const fullName = toTitleCase(_name);
-
-  const birthDatetime = new Date(
-    _birthDate.year,
-    _birthDate.month - 1,
-    _birthDate.day
-  ).toISOString();
-  const zodiac = getZodiacSign(birthDatetime);
-
-  return {
-    fullName,
-    birthDate: _birthDate,
-    zodiac,
-  };
-}
-
 // Your Goal
 
 export function GoalSlide() {
@@ -227,14 +203,41 @@ export function fillerUserCount() {
   );
 }
 
-export function loadingAfterPersonalInfo() {
+export function LoadingAfterPersonalInfo() {
+  const { numerologyData } = useQuizServiceWrapper();
+
+  const data = numerologyData
+    ? [
+        {
+          text: "Zodiac sign",
+          value: numerologyData.zodiacSign,
+        },
+        {
+          text: "Destiny number",
+          value: numerologyData.destinyNumber,
+        },
+        {
+          text: "Lucky day",
+          value: numerologyData.favDay,
+        },
+        {
+          text: "Matching metal",
+          value: numerologyData.favMetal,
+        },
+        {
+          text: "Lucky stone",
+          value: numerologyData.favStone,
+        },
+      ]
+    : [];
+
   function findIntervalIndex(progressValue: number, count: Array<Record<string, any>>): number {
     if (progressValue < 0 || progressValue > 100) {
       throw new Error("ProgressValue must be between 0 and 100 inclusive.");
     }
 
     if (count.length === 0) {
-      throw new Error("Count array must have at least one element.");
+      return -1;
     }
 
     const intervals = count.length;
@@ -253,51 +256,7 @@ export function loadingAfterPersonalInfo() {
     return index;
   }
 
-  const zodiac = getZodiacSign(new Date().toISOString());
-  const numerology = {
-    date: "25-12-1988",
-    destiny_number: 9,
-    evil_num: "1,9",
-    fav_color: "Black",
-    fav_day: "Sunday, Monday",
-    fav_god: "Narsingh Bhagawan",
-    fav_mantra: "|| Om Keng Ketave Namah ||",
-    fav_metal: "Iron",
-    fav_stone: "Cat's Eye",
-    fav_substone: "Golden Hakik",
-    friendly_num: "3,2,6",
-    name: "demo",
-    name_number: 2,
-    neutral_num: "4,5,8",
-    radical_num: "7",
-    radical_number: 7,
-    radical_ruler: "Ketu",
-  };
-
-  const data = [
-    {
-      text: "Zodiac sign",
-      value: zodiac.name,
-    },
-    {
-      text: "Destiny number",
-      value: numerology.destiny_number,
-    },
-    {
-      text: "Favorite day",
-      value: numerology.fav_day,
-    },
-    {
-      text: "Matching metal",
-      value: numerology.fav_metal,
-    },
-    {
-      text: "Lucky stone",
-      value: numerology.fav_stone,
-    },
-  ];
-
-  function renderFacts(progressValue?: number): string {
+  function renderNumerologyData(progressValue?: number): string {
     if (progressValue == null) {
       return "";
     }
@@ -307,6 +266,9 @@ export function loadingAfterPersonalInfo() {
     }
 
     const index = findIntervalIndex(progressValue, data);
+    if (index === -1) {
+      return "";
+    }
 
     return `${data[index]?.text}: ${data[index]?.value}`;
   }
@@ -321,7 +283,7 @@ export function loadingAfterPersonalInfo() {
       quizContainerProps={{
         bgGradient: "radial(bg.300, bg.50)",
       }}
-      statusText={({ progress }) => renderFacts(progress)}
+      statusText={({ progress }) => renderNumerologyData(progress)}
     >
       {({ quizState }) => {
         const { fullName } = getPersonalInfoFromState(quizState);

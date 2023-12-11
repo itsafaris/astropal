@@ -7,7 +7,7 @@ import {
   birthNameSlide,
   birthDateSlide,
   birthPlaceSlide,
-  loadingAfterPersonalInfo,
+  LoadingAfterPersonalInfo,
   partnerGenderSlide,
   partnerBirthNameSlide,
   partnerBirthDateSlide,
@@ -61,7 +61,7 @@ export function personalInfoSegment() {
       {birthPlaceSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
-      {loadingAfterPersonalInfo()}
+      <LoadingAfterPersonalInfo />
     </Segment>
   );
 }

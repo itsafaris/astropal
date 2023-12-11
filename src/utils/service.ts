@@ -11,6 +11,8 @@ import scorpioImg from "@components/zodiacSigns/scorpio";
 import taurusImg from "@components/zodiacSigns/taurus";
 import virgoImg from "@components/zodiacSigns/virgo";
 
+const RAPID_API_KEY = "d666bab423msh3c76e4627e8fc65p1a17d2jsn04a8b2236f8b";
+
 type ZodiacSignType =
   | "aries"
   | "taurus"
@@ -42,6 +44,13 @@ interface ZodiacSignData {
   symbol: string;
   weaknesses: string;
   woman: string;
+}
+
+interface NumerologyDataInput {
+  day: number;
+  month: number;
+  year: number;
+  name: string;
 }
 
 interface NumerologyData {
@@ -141,7 +150,7 @@ export function getZodiacSign(birthDate: string): {
 interface Service {
   getDailyPhrase(): Promise<string>;
   getZodiacSignData(signType: ZodiacSignType): Promise<ZodiacSignData>;
-  getNumerologyData(): Promise<NumerologyData>;
+  getNumerologyData(input: NumerologyDataInput): Promise<NumerologyData>;
 }
 
 const serviceMock: Service = {
@@ -180,7 +189,7 @@ const serviceMock: Service = {
     });
   },
 
-  getNumerologyData: () => {
+  getNumerologyData: (_input: NumerologyDataInput) => {
     return new Promise((res) => {
       res({
         date: "25-12-1988",
@@ -211,7 +220,7 @@ const service: Service = {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "d666bab423msh3c76e4627e8fc65p1a17d2jsn04a8b2236f8b",
+        "X-RapidAPI-Key": RAPID_API_KEY,
         "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com",
       },
     };
@@ -227,7 +236,7 @@ const service: Service = {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "d666bab423msh3c76e4627e8fc65p1a17d2jsn04a8b2236f8b",
+        "X-RapidAPI-Key": RAPID_API_KEY,
         "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com",
       },
     };
@@ -238,25 +247,20 @@ const service: Service = {
     return result;
   },
 
-  getNumerologyData: async () => {
+  getNumerologyData: async (input: NumerologyDataInput) => {
     const url = "https://vedicrishi-horoscope-matching-v1.p.rapidapi.com/numero_table/";
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "d666bab423msh3c76e4627e8fc65p1a17d2jsn04a8b2236f8b",
+        "X-RapidAPI-Key": RAPID_API_KEY,
         "X-RapidAPI-Host": "vedicrishi-horoscope-matching-v1.p.rapidapi.com",
       },
       body: JSON.stringify({
-        day: "25",
-        month: "12",
-        year: "1988",
-        hour: "2",
-        min: "30",
-        name: "demo",
-        lat: "25.123",
-        lon: "82.34",
-        tzone: "5.5",
+        day: input.day,
+        month: input.month,
+        year: input.year,
+        name: input.name,
       }),
     };
 
