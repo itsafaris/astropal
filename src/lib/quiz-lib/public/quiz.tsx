@@ -40,7 +40,9 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
   const snap = useQuizSnapshot();
 
   useEffect(() => {
-    config.onSlideChange?.({ id: snap.currentSlideID });
+    if (snap.currentSlideID) {
+      config.onSlideChange?.({ id: snap.currentSlideID });
+    }
   }, [snap.currentSlideID]);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
       <ProgressIndicator />
       <Flex position={"relative"} flexGrow={1} width={"100%"}>
-        {/* <AnimatePresence initial={false} custom={snap.direction}>
+        <AnimatePresence initial={false} custom={snap.direction}>
           <motion.div
             style={{
               width: "100%",
@@ -74,8 +76,7 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
           >
             {children}
           </motion.div>
-        </AnimatePresence> */}
-        {children}
+        </AnimatePresence>
       </Flex>
     </Flex>
   );
