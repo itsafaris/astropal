@@ -145,7 +145,7 @@ export function GoalSlide() {
 
 // Your Info
 
-export function genderSlide() {
+export function GenderSlide() {
   return (
     <Slide
       id="gender"
@@ -1365,9 +1365,15 @@ export function SocialProofFiller() {
   );
 }
 
-export function yourProfileIntroFiller() {
+export function YourProfileIntroFiller() {
   return (
-    <Slide type="filler" id={"your-profile"}>
+    <Slide
+      type="filler"
+      id={"your-profile"}
+      quizContainerProps={{
+        bgGradient: "radial(bg.400, bg.50)",
+      }}
+    >
       <Title textAlign={"center"}>Creation of your spiritual DNA profile</Title>
       <Text color="bg.800" textAlign={"center"} mb={4}>
         Your{" "}
