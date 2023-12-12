@@ -7,18 +7,19 @@ import {
   ContainerPropsOverride,
   TransitionText,
   Span,
-  Image,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
 import planetPositionsImg from "@images/planet_positions.png";
+import astroProfileImg from "@images/astro_profile.png";
+import colorMap from "@images/color_map.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
 import { StaticImage } from "gatsby-plugin-image";
-import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
+import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
 
 import { getPersonalInfoFromState } from "@utils/state";
@@ -33,6 +34,69 @@ const fillerStyles: ContainerPropsOverride = {
     colorScheme: "whiteAlpha",
   },
 };
+
+const numerologyNumbersJson = [
+  {
+    Name: "Life Path Number",
+    "Significance in Relationships":
+      "Reflects life's journey and personal characteristics, influencing relationship style and partner compatibility.",
+    "Source of Calculation": "Date of Birth",
+  },
+  {
+    Name: "Expression Number (Destiny Number)",
+    "Significance in Relationships":
+      "Indicates talents and expression, key to understanding roles in relationships.",
+    "Source of Calculation": "Birth Name",
+  },
+  {
+    Name: "Soul Urge Number (Heart's Desire Number)",
+    "Significance in Relationships": "Reveals deepest desires and values in relationships.",
+    "Source of Calculation": "Vowels in Birth Name",
+  },
+  {
+    Name: "Birthday Number",
+    "Significance in Relationships":
+      "Highlights specific talents and their role in personal interactions.",
+    "Source of Calculation": "Day of Birth",
+  },
+  {
+    Name: "Personality Number",
+    "Significance in Relationships":
+      "Affects how one is perceived socially, influencing social and romantic relationships.",
+    "Source of Calculation": "Consonants in Birth Name",
+  },
+  {
+    Name: "Sun Sign",
+    "Significance in Relationships":
+      "Determines fundamental personality traits and identity, crucial for compatibility.",
+    "Source of Calculation": "Date of Birth",
+  },
+  {
+    Name: "Moon Sign",
+    "Significance in Relationships":
+      "Reflects emotional inner self and relational emotional needs, essential for emotional connections.",
+    "Source of Calculation": "Date and Time of Birth",
+  },
+  {
+    Name: "Venus Sign",
+    "Significance in Relationships":
+      "Governs love style and preferences in relationships, vital for romantic interactions.",
+    "Source of Calculation": "Date and Time of Birth",
+  },
+  {
+    Name: "Mars Sign",
+    "Significance in Relationships":
+      "Influences assertiveness and pursuit of desires, affecting relationship dynamics.",
+    "Source of Calculation": "Date and Time of Birth",
+  },
+  {
+    Name: "Ascendant (Rising Sign)",
+    "Significance in Relationships":
+      "Represents self-image and initial approach to relationships, impacting first impressions.",
+    "Source of Calculation": "Date, Time, and Place of Birth",
+  },
+];
+
 // Your Goal
 
 export function GoalSlide() {
@@ -104,8 +168,10 @@ export function genderSlide() {
       ]}
     >
       <Title>Let's start with your gender</Title>
-      <Callout emoji="In astrology:">
-        Gender nuances the meanings in cosmic energies, refining relationship insights.
+      <Callout emoji="Role of gender">
+        Understanding your gender helps us to customize our relationship guidance, taking into
+        account how gender-specific experiences and societal dynamics may shape your interactions
+        and connections with others.
       </Callout>
       <Selector />
     </Slide>
@@ -171,7 +237,8 @@ export function fillerUserCount() {
         const countOfProfiles = 35422;
         return (
           <Fragment>
-            <Title>
+            <Title textAlign={"center"}>Found matching profiles</Title>
+            <Text textAlign={"center"} color="bg.900" fontWeight={"bold"}>
               We are currently guiding{" "}
               <Text as="span" color="brand.600">
                 {countOfProfiles.toLocaleString()}
@@ -185,7 +252,7 @@ export function fillerUserCount() {
                 two weeks
               </Text>{" "}
               of usage.
-            </Title>
+            </Text>
 
             <Flex p={8} gap={2} flexDirection={"column"}>
               {zodiac.svgComponent &&
@@ -397,6 +464,29 @@ export function loadingAfterPartnersInfo() {
                   ? `Your profile is now improved`
                   : "Based on your partner's details, we're fine-tuning your meta profile"
               }
+            />
+            <Selector />
+          </Fragment>
+        );
+      }}
+    </Slide>
+  );
+}
+
+export function QuickLoading() {
+  return (
+    <Slide id="loading-quick" type="loading" duration={1}>
+      {({ state }) => {
+        return (
+          <Fragment>
+            <Title color="white" textAlign={"center"}>
+              {`Saving profile`}
+            </Title>
+            <TransitionText
+              height={6}
+              textAlign={"center"}
+              color="white"
+              text={state.isComplete ? `Your profile is created` : ""}
             />
             <Selector />
           </Fragment>
@@ -706,6 +796,9 @@ export function colorResonanceSlide() {
               {", "}
               which color resonates with you the most?
             </Title>
+            <Box>
+              <Image src={colorMap} height={"220px"} mb={4} mx={"auto"} />
+            </Box>
             <Callout emoji="In astrology:">
               Colors are often associated with planets and signs, carrying symbolic meanings.
             </Callout>
@@ -1275,19 +1368,48 @@ export function SocialProofFiller() {
 export function yourProfileIntroFiller() {
   return (
     <Slide type="filler" id={"your-profile"}>
-      <Title>Your personal metaphysical profile</Title>
-      <Callout>
-        To unveil the energies shaping your love life, we'll create your personalized metaphysical
-        profile through questions.
+      <Title textAlign={"center"}>Creation of your spiritual DNA profile</Title>
+      <Text color="bg.800" textAlign={"center"} mb={4}>
+        Your{" "}
+        <Text as="span" color="brand.500" fontWeight={"bold"}>
+          name
+        </Text>{" "}
+        and{" "}
+        <Text as="span" color="brand.500" fontWeight={"bold"}>
+          date of birth
+        </Text>{" "}
+        hold the key to unlocking personalized insights about you and your relationships, all
+        through the simple magic of astrology and numerology.
+      </Text>
+      <Box my={4}>
+        <Image src={astroProfileImg} borderRadius={"full"} height={"260px"} mx="auto" />
+      </Box>
+      <Callout emoji="Significance of numbers">
+        <Box my={8}>
+          <Flex
+            direction="column"
+            w="100%"
+            fontSize={"x-small"}
+            color="brand.500"
+            fontFamily={"serif"}
+          >
+            {numerologyNumbersJson.map((n) => {
+              return (
+                <Flex p={2}>
+                  <Box flex="1">
+                    <Text color="bg.900" fontWeight={"bold"}>
+                      {n.Name}
+                    </Text>
+                  </Box>
+                  <Box flex="2">
+                    <Text>{n["Significance in Relationships"]}</Text>
+                  </Box>
+                </Flex>
+              );
+            })}
+          </Flex>
+        </Box>
       </Callout>
-      <Box
-        height={"200px"}
-        width={"200px"}
-        mx="auto"
-        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
-        borderRadius={"50%"}
-        background={`url(${withPrefix("/images/bg-5.jpeg")}) no-repeat center center / cover`}
-      ></Box>
     </Slide>
   );
 }

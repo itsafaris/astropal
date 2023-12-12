@@ -1,11 +1,4 @@
-import {
-  Box,
-  Image as ChakraImage,
-  ImageProps as ChakraImageProps,
-  Flex,
-  Text,
-  TextProps,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, TextProps } from "@chakra-ui/react";
 import { ComponentProps, PropsWithChildren } from "react";
 import { useSlide } from "./slide";
 import { AnimatePresence, motion } from "framer-motion";
@@ -85,18 +78,5 @@ export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
         </Text>
       </Flex>
     </Flex>
-  );
-}
-
-export function Image(props: ChakraImageProps) {
-  return (
-    <ChakraImage
-      {...props}
-      width={"100%"}
-      maxHeight={300}
-      src={props.src}
-      objectFit={"contain"}
-      borderRadius={"xl"}
-    />
   );
 }

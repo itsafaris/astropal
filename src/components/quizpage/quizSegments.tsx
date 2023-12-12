@@ -37,6 +37,7 @@ import {
   fillerUserCount,
   GoalSlide,
   SocialProofFiller,
+  QuickLoading,
 } from "./allSlides";
 
 export function GoalSegment() {
@@ -56,6 +57,7 @@ export function personalInfoSegment() {
       {birthNameSlide()}
       {colorResonanceSlide()}
       {birthDateSlide()}
+      <QuickLoading />
       {fillerUserCount()}
       {personalityTypeSlide()}
       {birthPlaceSlide()}
