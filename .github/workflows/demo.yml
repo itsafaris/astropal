@@ -2,9 +2,9 @@ name: Build and deploy
 run-name: ${{ github.actor }} - Build and deploy
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   Build:
@@ -19,9 +19,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Netlify Deploy
-        uses: nwtgck/actions-netlify@v2.0.0
+        uses: nwtgck/actions-netlify@v2.1.0
         with:
-          publish-dir: './public'
+          publish-dir: "./public"
           production-branch: main
           deploy-message: "Deploy from GitHub Actions"
           enable-pull-request-comment: false
@@ -29,5 +29,5 @@ jobs:
           overwrites-pull-request-comment: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
-          GATSBY_MIXPANEL_TOKEN: ${{ vars.GATSBY_MIXPANEL_TOKEN }}
+          NETLIFY_SITE_ID: e4e0de27-66af-4516-b67a-a0380234ec66
+          # GATSBY_MIXPANEL_TOKEN: ${{ vars.GATSBY_MIXPANEL_TOKEN }}
