@@ -19,6 +19,10 @@ function sendToGTM(e: TrackingEvent) {
     return;
   }
 
+  if (!(window as any).dataLayer) {
+    return;
+  }
+
   const { event, ...rest } = e;
 
   (window as any).dataLayer.push({
