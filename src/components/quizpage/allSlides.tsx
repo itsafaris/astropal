@@ -16,6 +16,7 @@ import neutralImg from "@images/neutral.png";
 import planetPositionsImg from "@images/planet_positions.png";
 
 import { TestimonialCard } from "@components/testimonial";
+import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { withPrefix } from "gatsby";
@@ -114,8 +115,16 @@ export function genderSlide() {
 export function birthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
-      <Title>Now, tell us your full birth name</Title>
-      <Callout emoji="Tip">If you don't remember it, use your current full name.</Callout>
+      <Title>Now, tell us your name</Title>
+      <Callout emoji="In Pythagorean Numerology:">
+        Destiny number - represents how you express yourself and can indicate your natural talents
+        and abilities, as well as potential career paths.
+        <PythagoreanNumbers width={"100%"} color={"brand.400"} />
+      </Callout>
+      <Callout emoji="Tip">
+        In numerology, it is often recommended to use the birth name for calculations, as it is
+        considered the blueprint of one's life
+      </Callout>
       <Selector />
     </Slide>
   );
