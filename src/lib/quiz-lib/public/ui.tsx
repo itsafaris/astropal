@@ -21,12 +21,8 @@ export function Span(props: PropsWithChildren<TextProps>) {
   return <Text as="span" {...props} />;
 }
 
-export function Subtitle({ children }: PropsWithChildren) {
-  return (
-    <Text textAlign={"center"} color="bg.800" mb={4} fontSize={"sm"}>
-      {children}
-    </Text>
-  );
+export function Subtitle(props: PropsWithChildren<TextProps>) {
+  return <Text textAlign={"center"} color="bg.800" mb={4} fontSize={"sm"} {...props} />;
 }
 
 export function TransitionText({

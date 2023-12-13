@@ -7,7 +7,7 @@ import {
   ContainerPropsOverride,
   TransitionText,
   Span as SpanRaw,
-  Subtitle,
+  Subtitle as SubtitleRaw,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -121,6 +121,10 @@ const numerologyNumbersJson = [
 
 function Span(props: React.ComponentProps<typeof SpanRaw>) {
   return <SpanRaw color="brand.500" fontWeight={"semibold"} {...props} />;
+}
+
+function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
+  return <SubtitleRaw p={3} borderRadius={"2xl"} backgroundColor={"bg.50"} {...props} />;
 }
 
 // Your Goal
@@ -273,14 +277,13 @@ export function fillerUserCount() {
     >
       {({ quizState }) => {
         const { zodiac } = getPersonalInfoFromState(quizState);
-        const countOfProfiles = 35422;
         return (
           <Fragment>
             <Title textAlign={"center"}>Found matching profiles</Title>
             <Text textAlign={"center"} color="bg.900" fontWeight={"bold"}>
               We are currently guiding{" "}
               <Text as="span" color="brand.600">
-                {countOfProfiles.toLocaleString()}
+                {zodiac.countOfProfiles.toLocaleString()}
               </Text>{" "}
               people with similar profiles to yours, reporting an average{" "}
               <Text as="span" color="brand.600">
@@ -617,10 +620,10 @@ export function personalityTypeSlide() {
       ]}
     >
       <Title>Which personality type best describes you?</Title>
-      <Callout emoji="🧠">
+      <Subtitle>
         Selecting your personality type helps identify spiritual and emotional compatibilities,
         fostering deeper and more meaningful relationships.
-      </Callout>
+      </Subtitle>
       <Selector />
     </Slide>
   );
@@ -1402,9 +1405,9 @@ export function YourProfileIntroFiller() {
         Your <Span>name</Span> and <Span>date of birth</Span> hold the key to unlocking personalized
         insights about you.
       </Subtitle>
-      <Box mb={4}>
-        <Image src={astroProfileImg} borderRadius={"full"} height={"180px"} mx="auto" />
-      </Box>
+
+      <Image src={astroProfileImg} mb={4} borderRadius={"full"} height={"180px"} mx="auto" />
+
       <Callout emoji="Significance of numbers">
         <Box my={2}>
           <Flex
