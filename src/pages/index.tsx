@@ -1,16 +1,25 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 
+const HEADING_TITLE = "Personalized astrology report with powerful predictions";
+
 export function Head() {
-  return <SEO />;
+  const { brandName } = useSiteMetadata();
+  return (
+    <SEO
+      title={`${HEADING_TITLE} - ${brandName}`}
+      description="Begin your AstroPal journey and unlock cosmic secrets for love and connection. Take our quiz to reveal personalized astrological and numerological insights for your relationships."
+    />
+  );
 }
 
 export default function IndexPage() {
   return (
     <Box py={16} px={8} maxW="xl" mx="auto">
       <Heading mb={12} as="h1" size="xl" textAlign="center">
-        Personalized astrology report with powerful predictions
+        {HEADING_TITLE}
       </Heading>
       <Text my={8} fontSize="lg" textAlign="center">
         Complete a{" "}
