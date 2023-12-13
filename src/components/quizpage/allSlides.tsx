@@ -760,10 +760,10 @@ export function spiritualInvolvementSlide() {
       ]}
     >
       <Title>To what extent are you engaged with spiritual practices and concepts?</Title>
-      <Callout emoji="✨">
+      <Subtitle>
         Your engagement level with spiritual practices allows us to fine-tune the insights and
         advice to resonate with your spiritual journey.
-      </Callout>
+      </Subtitle>
       <Selector />
     </Slide>
   );
