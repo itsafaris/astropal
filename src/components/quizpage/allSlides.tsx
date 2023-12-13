@@ -14,6 +14,16 @@ import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
 import planetPositionsImg from "@images/planet_positions.png";
 import astroProfileImg from "@images/astro_profile.png";
+import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
+import patternIcon2 from "static/images/patterns/pattern-icon-2.svg";
+import patternIcon3 from "static/images/patterns/pattern-icon-3.svg";
+import patternIcon4 from "static/images/patterns/pattern-icon-4.svg";
+import patternIcon5 from "static/images/patterns/pattern-icon-5.svg";
+import patternIcon6 from "static/images/patterns/pattern-icon-6.svg";
+import patternIcon7 from "static/images/patterns/pattern-icon-7.svg";
+import patternIcon8 from "static/images/patterns/pattern-icon-8.svg";
+import patternIcon9 from "static/images/patterns/pattern-icon-9.svg";
+import patternIcon10 from "static/images/patterns/pattern-icon-10.svg";
 import colorMap from "@images/color_map.png";
 
 import { TestimonialCard } from "@components/testimonial";
@@ -41,59 +51,69 @@ const numerologyNumbersJson = [
     "Significance in Relationships":
       "Reflects life's journey and personal characteristics, influencing relationship style and partner compatibility.",
     "Source of Calculation": "Date of Birth",
+    imageUrl: patternIcon1,
   },
   {
     Name: "Expression Number (Destiny Number)",
     "Significance in Relationships":
       "Indicates talents and expression, key to understanding roles in relationships.",
     "Source of Calculation": "Birth Name",
+    imageUrl: patternIcon2,
   },
   {
     Name: "Soul Urge Number (Heart's Desire Number)",
     "Significance in Relationships": "Reveals deepest desires and values in relationships.",
     "Source of Calculation": "Vowels in Birth Name",
+    imageUrl: patternIcon3,
   },
   {
     Name: "Birthday Number",
     "Significance in Relationships":
       "Highlights specific talents and their role in personal interactions.",
     "Source of Calculation": "Day of Birth",
+    imageUrl: patternIcon4,
   },
   {
     Name: "Personality Number",
     "Significance in Relationships":
       "Affects how one is perceived socially, influencing social and romantic relationships.",
     "Source of Calculation": "Consonants in Birth Name",
+    imageUrl: patternIcon5,
   },
   {
     Name: "Sun Sign",
     "Significance in Relationships":
       "Determines fundamental personality traits and identity, crucial for compatibility.",
     "Source of Calculation": "Date of Birth",
+    imageUrl: patternIcon6,
   },
   {
     Name: "Moon Sign",
     "Significance in Relationships":
       "Reflects emotional inner self and relational emotional needs, essential for emotional connections.",
     "Source of Calculation": "Date and Time of Birth",
+    imageUrl: patternIcon7,
   },
   {
     Name: "Venus Sign",
     "Significance in Relationships":
       "Governs love style and preferences in relationships, vital for romantic interactions.",
     "Source of Calculation": "Date and Time of Birth",
+    imageUrl: patternIcon8,
   },
   {
     Name: "Mars Sign",
     "Significance in Relationships":
       "Influences assertiveness and pursuit of desires, affecting relationship dynamics.",
     "Source of Calculation": "Date and Time of Birth",
+    imageUrl: patternIcon9,
   },
   {
     Name: "Ascendant (Rising Sign)",
     "Significance in Relationships":
       "Represents self-image and initial approach to relationships, impacting first impressions.",
     "Source of Calculation": "Date, Time, and Place of Birth",
+    imageUrl: patternIcon10,
   },
 ];
 
@@ -1384,32 +1404,37 @@ export function YourProfileIntroFiller() {
         <Text as="span" color="brand.500" fontWeight={"bold"}>
           date of birth
         </Text>{" "}
-        hold the key to unlocking personalized insights about you and your relationships, all
-        through the simple magic of astrology and numerology.
+        hold the key to unlocking personalized insights about you.
       </Text>
-      <Box my={4}>
-        <Image src={astroProfileImg} borderRadius={"full"} height={"260px"} mx="auto" />
+      <Box mb={4}>
+        <Image src={astroProfileImg} borderRadius={"full"} height={"180px"} mx="auto" />
       </Box>
       <Callout emoji="Significance of numbers">
-        <Box my={8}>
+        <Box my={2}>
           <Flex
             direction="column"
             w="100%"
-            fontSize={"x-small"}
+            fontSize={"14px"}
             color="brand.500"
+            fontStyle={"italic"}
             fontFamily={"serif"}
           >
             {numerologyNumbersJson.map((n) => {
               return (
-                <Flex p={2}>
-                  <Box flex="1">
-                    <Text color="bg.900" fontWeight={"bold"}>
-                      {n.Name}
-                    </Text>
-                  </Box>
-                  <Box flex="2">
-                    <Text>{n["Significance in Relationships"]}</Text>
-                  </Box>
+                <Flex py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
+                  <Image src={n.imageUrl} height={"22px"} mx="auto" />
+
+                  <Flex flexDirection={"column"} flex={1}>
+                    <Box>
+                      <Text color="bg.900" fontWeight={"bold"}>
+                        {n.Name}
+                      </Text>
+                    </Box>
+
+                    <Box>
+                      <Text>{n["Significance in Relationships"]}</Text>
+                    </Box>
+                  </Flex>
                 </Flex>
               );
             })}
