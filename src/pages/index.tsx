@@ -1,9 +1,9 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Link } from "gatsby";
+import { Link, prefetchPathname } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 
 const HEADING_TITLE = "Personalized astrology report with powerful predictions";
 
@@ -59,9 +59,10 @@ function ImageButton({ children, text }: PropsWithChildren<{ text: string }>) {
         p={4}
         borderRadius={"2xl"}
         overflow={"hidden"}
-        border="1px solid"
-        borderColor={"brand.200"}
-        boxShadow={"0 0 8px 4px rgb(40 86 99 / 20%)"}
+        border="2px solid"
+        borderColor={"brand.100"}
+        bg="bg.150"
+        boxShadow={"0px 5px 16px 4px rgb(99 42 40 / 34%)"}
       >
         {children}
         <Text mt={4} textAlign={"center"} color="brand.400" fontWeight={"semibold"}>
