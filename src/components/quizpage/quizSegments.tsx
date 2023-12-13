@@ -55,8 +55,8 @@ export function personalInfoSegment() {
     <Segment title="Your personality">
       <YourProfileIntroFiller />
       {birthNameSlide()}
-      {colorResonanceSlide()}
       {birthDateSlide()}
+      {colorResonanceSlide()}
       {birthPlaceSlide()}
       <QuickLoading />
       {fillerUserCount()}
