@@ -207,7 +207,7 @@ export function GenderSlide() {
 export function birthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
-      <Title>Tell us your name</Title>
+      <Title>Tell us your full name</Title>
       <Subtitle>
         <Span>Destiny number</Span> - represents how you express yourself and can indicate your
         natural talents and abilities, as well as potential career paths.
