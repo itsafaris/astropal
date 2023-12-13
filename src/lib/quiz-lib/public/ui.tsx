@@ -9,7 +9,7 @@ export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
     <Text fontSize="2xl" lineHeight={1.4} mb={8} fontWeight="semibold" color="bg.900" {...rest}>
       {children}{" "}
       {slide.optional && (
-        <Text as="span" my={2} color="bg.400" fontWeight={"normal"}>
+        <Text as="span" my={2} color="bg.400" fontWeight={"normal"} fontSize={"medium"}>
           (optional)
         </Text>
       )}

@@ -124,7 +124,7 @@ function Span(props: React.ComponentProps<typeof SpanRaw>) {
 }
 
 function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
-  return <SubtitleRaw p={3} borderRadius={"2xl"} backgroundColor={"bg.50"} {...props} />;
+  return <SubtitleRaw p={3} borderRadius={"2xl"} backgroundColor="blackAlpha.400" {...props} />;
 }
 
 // Your Goal
@@ -255,11 +255,11 @@ export function birthDateSlide() {
 export function birthPlaceSlide() {
   return (
     <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
-      <Title>Do you know your birthplace?</Title>
+      <Title>Where were you born?</Title>
       <Subtitle>
         Birthplace determines the exact position of the planets at the time of birth
       </Subtitle>
-      <Image mb={8} src={planetPositionsImg} borderRadius={"xl"} height={"160px"} mx="auto" />
+      <Image mb={8} src={planetPositionsImg} borderRadius={"xl"} height={"130px"} mx="auto" />
       <Selector />
     </Slide>
   );
