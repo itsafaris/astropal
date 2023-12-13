@@ -2,6 +2,15 @@ import { BackgroundProps, ColorProps, ThemeTypings } from "@chakra-ui/styled-sys
 
 export type IOptionInputType = "checkbox" | "radio" | "none";
 
+export type TrackingEvent = {
+  name: string;
+  properties: {
+    [name: string]: any;
+  };
+};
+
+export type TrackingEventCallback = (event: TrackingEvent) => void;
+
 export type QuizErrorEvent = {
   name: "error";
   data: {

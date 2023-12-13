@@ -1,8 +1,10 @@
 import mixpanel from "mixpanel-browser";
 
 type TrackingEvent = {
-  event: string;
-  [prop: string]: any;
+  name: string;
+  properties: {
+    [prop: string]: any;
+  };
 };
 
 export function trackEvent(e: TrackingEvent) {
@@ -23,17 +25,17 @@ function sendToGTM(e: TrackingEvent) {
     return;
   }
 
-  const { event, ...rest } = e;
+  const { name, properties } = e;
 
   (window as any).dataLayer.push({
-    event: event,
-    ...rest,
+    event: name,
+    ...properties,
   });
 }
 
 function trackMixpanel(props: TrackingEvent) {
-  const { event, ...rest } = props;
-  mixpanel.track(props.event, { ...rest });
+  const { name, properties } = props;
+  mixpanel.track(name, { ...properties });
 }
 
 export function initMixpanel(token: string, feVersion: string) {

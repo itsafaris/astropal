@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useQuizActions, useQuizSnapshot } from "../internal/state";
 import { ProgressIndicator } from "./progress";
 import { useQuizConfig } from "./quizProvider";
+import { getSlideProperties } from "../internal/tracking";
 
 const variants = {
   enter: (direction: number) => {
@@ -40,10 +41,17 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
   const snap = useQuizSnapshot();
 
   useEffect(() => {
-    if (snap.currentSlideID) {
-      config.onSlideChange?.({ id: snap.currentSlideID });
+    if (snap.currentSlide) {
+      const slide = snap.currentSlide;
+      config.onSlideChange?.({ id: snap.currentSlide.id });
+      config.onTrackingEvent?.({
+        name: "slide-entered",
+        properties: {
+          ...getSlideProperties(slide),
+        },
+      });
     }
-  }, [snap.currentSlideID]);
+  }, [snap.currentSlide]);
 
   useEffect(() => {
     const root = document.body;
