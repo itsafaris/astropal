@@ -11,6 +11,7 @@
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
       "@data/*": ["src/data/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@martynasj/quiz-lib/*": ["src/lib/quiz-lib/*"],
       "@martynasj/quiz-lib": ["src/lib/quiz-lib/index.ts"]
     },
@@ -21,10 +22,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": [
-    "./src/**/*",
-    "gatsby-node.js",
-    "./gatsby-config.ts",
-    "./plugins/**/*"
-  ]
+  "include": ["./src/**/*", "gatsby-node.js", "./gatsby-config.ts", "./plugins/**/*"]
 }

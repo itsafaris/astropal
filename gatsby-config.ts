@@ -2,6 +2,7 @@ import type { GatsbyConfig } from "gatsby";
 import dotenv from "dotenv";
 
 import pkgjson from "./package.json";
+import { SiteMetadata } from "src/hooks/useSiteMetadata";
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -9,10 +10,12 @@ dotenv.config({
 
 const config: GatsbyConfig = {
   siteMetadata: {
+    brandName: "Astropal",
     title: `Astropal`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://www.theastropal.com`,
     version: pkgjson.version,
-  },
+    description: "Astrological Keys to Relationship Success",
+  } satisfies SiteMetadata,
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen

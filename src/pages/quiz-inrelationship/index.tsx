@@ -14,6 +14,11 @@ import { ShortTextState, DateState } from "@martynasj/quiz-lib";
 import { getService } from "@utils/service";
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
+import { SEO } from "@components/seo";
+
+export const Head = () => {
+  return <SEO />;
+};
 
 export default function QuizInRelationship() {
   return (

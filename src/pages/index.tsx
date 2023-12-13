@@ -1,5 +1,10 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { SEO } from "@components/seo";
 import { Link } from "gatsby";
+
+export function Head() {
+  return <SEO />;
+}
 
 export default function IndexPage() {
   return (
@@ -12,8 +17,8 @@ export default function IndexPage() {
         <Text as="span" color="bra" fontWeight={"bold"}>
           1-minute
         </Text>{" "}
-        quiz to get a personalized prediction. The result is not guaranteed and
-        may vary from case to case.
+        quiz to get a personalized prediction. The result is not guaranteed and may vary from case
+        to case.
       </Text>
       <Text textAlign={"center"} fontWeight={"bold"}>
         What is your relationship status?
