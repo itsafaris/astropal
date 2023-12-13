@@ -3,7 +3,7 @@ import { Segment } from "@martynasj/quiz-lib";
 import {
   valuesAndPrioritiesSlide,
   colorResonanceSlide,
-  genderSlide,
+  GenderSlide,
   birthNameSlide,
   birthDateSlide,
   birthPlaceSlide,
@@ -31,7 +31,7 @@ import {
   spiritualInvolvementSlide,
   partnerEmotionalOpennessSlide,
   partnerPersonalityTypeSlide,
-  yourProfileIntroFiller,
+  YourProfileIntroFiller,
   partnerProfileIntroFiller,
   loadingAfterPartnersInfo,
   fillerUserCount,
@@ -43,8 +43,9 @@ import {
 export function GoalSegment() {
   return (
     <Segment title="Your goal">
+      <GenderSlide />
       <GoalSlide />
-      <SocialProofFiller />
+      {/* <SocialProofFiller /> */}
     </Segment>
   );
 }
@@ -52,15 +53,14 @@ export function GoalSegment() {
 export function personalInfoSegment() {
   return (
     <Segment title="Your personality">
-      {yourProfileIntroFiller()}
-      {genderSlide()}
+      <YourProfileIntroFiller />
       {birthNameSlide()}
       {colorResonanceSlide()}
       {birthDateSlide()}
+      {birthPlaceSlide()}
       <QuickLoading />
       {fillerUserCount()}
       {personalityTypeSlide()}
-      {birthPlaceSlide()}
       {valuesAndPrioritiesSlide()}
       {spiritualInvolvementSlide()}
       <LoadingAfterPersonalInfo />
