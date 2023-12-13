@@ -15,6 +15,7 @@ import neutralImg from "@images/neutral.png";
 import planetPositionsImg from "@images/planet_positions.png";
 import astroProfileImg from "@images/astro_profile.png";
 import colorMap from "@images/color_map.png";
+import birthdayNumerologyImg from "@images/birthday_numerology.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
@@ -182,15 +183,11 @@ export function birthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
       <Title>Now, tell us your name</Title>
-      <Callout emoji="In Pythagorean Numerology:">
-        Destiny number - represents how you express yourself and can indicate your natural talents
-        and abilities, as well as potential career paths.
-        <PythagoreanNumbers width={"100%"} color={"brand.400"} />
-      </Callout>
-      <Callout emoji="Tip">
-        In numerology, it is often recommended to use the birth name for calculations, as it is
-        considered the blueprint of one's life
-      </Callout>
+      <Text color="bg.800">
+        <Span color="brand.500">Destiny number</Span> - represents how you express yourself and can
+        indicate your natural talents and abilities, as well as potential career paths.
+      </Text>
+      <PythagoreanNumbers width={"100%"} height={"120px"} color={"brand.400"} />
       <Selector />
     </Slide>
   );
@@ -199,11 +196,14 @@ export function birthNameSlide() {
 export function birthDateSlide() {
   return (
     <Slide id="birth-date" type="date">
-      <Title>When were you born?</Title>
-      <Callout emoji="Did you know:">
-        Your birth date guides us to tailored astrological and numerological insights for your
-        relationships.
-      </Callout>
+      <Title textAlign={"center"}>When were you born?</Title>
+      <Text textAlign={"center"} color="bg.800" mb={4} fontSize={"sm"}>
+        Your birth date determines the key indicators like{" "}
+        <Span color="brand.500">Life Path Number</Span>
+      </Text>
+      <Box>
+        <Image mb={8} src={birthdayNumerologyImg} borderRadius={"xl"} height={"160px"} mx="auto" />
+      </Box>
       <Selector />
     </Slide>
   );
@@ -1328,7 +1328,7 @@ export function appFeaturesImportanceSlide() {
 
 export function SocialProofFiller() {
   return (
-    <Slide type="filler" id="user-testimonial" quizContainerProps={fillerStyles}>
+    <Slide type="filler" id="user-testimonial">
       <Box
         display="flex"
         flexDirection={"column"}
