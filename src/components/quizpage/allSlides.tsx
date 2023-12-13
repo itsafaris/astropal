@@ -6,7 +6,8 @@ import {
   Title,
   ContainerPropsOverride,
   TransitionText,
-  Span,
+  Span as SpanRaw,
+  Subtitle as SubtitleRaw,
 } from "@martynasj/quiz-lib";
 
 import femaleImg from "@images/female.png";
@@ -118,6 +119,14 @@ const numerologyNumbersJson = [
   },
 ];
 
+function Span(props: React.ComponentProps<typeof SpanRaw>) {
+  return <SpanRaw color="brand.500" fontWeight={"semibold"} {...props} />;
+}
+
+function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
+  return <SubtitleRaw p={3} borderRadius={"2xl"} backgroundColor="blackAlpha.400" {...props} />;
+}
+
 // Your Goal
 
 export function GoalSlide() {
@@ -158,7 +167,7 @@ export function GoalSlide() {
       ]}
     >
       <Title>What are your primary goals regarding relationships?</Title>
-      <Callout emoji="Tip">Knowing your goal will allow us to provide a better advice</Callout>
+      <Subtitle>Knowing your goal will allow us to provide a better advice</Subtitle>
       <Selector />
     </Slide>
   );
@@ -189,11 +198,11 @@ export function GenderSlide() {
       ]}
     >
       <Title>Let's start with your gender</Title>
-      <Callout emoji="Role of gender">
+      <Subtitle>
         Understanding your gender helps us to customize our relationship guidance, taking into
         account how gender-specific experiences and societal dynamics may shape your interactions
         and connections with others.
-      </Callout>
+      </Subtitle>
       <Selector />
     </Slide>
   );
@@ -202,12 +211,12 @@ export function GenderSlide() {
 export function birthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
-      <Title>Now, tell us your name</Title>
-      <Text color="bg.800">
-        <Span color="brand.500">Destiny number</Span> - represents how you express yourself and can
-        indicate your natural talents and abilities, as well as potential career paths.
-      </Text>
-      <PythagoreanNumbers width={"100%"} height={"120px"} color={"brand.400"} />
+      <Title>Tell us your full name</Title>
+      <Subtitle>
+        <Span>Destiny number</Span> - represents how you express yourself and can indicate your
+        natural talents and abilities, as well as potential career paths.
+      </Subtitle>
+      <PythagoreanNumbers mb={8} width={"100%"} height={"120px"} color={"brand.400"} />
       <Selector />
     </Slide>
   );
@@ -216,15 +225,29 @@ export function birthNameSlide() {
 export function birthDateSlide() {
   return (
     <Slide id="birth-date" type="date">
-      <Title textAlign={"center"}>When were you born?</Title>
-      <Text textAlign={"center"} color="bg.800" mb={4} fontSize={"sm"}>
-        Your birth date determines the key indicators like{" "}
-        <Span color="brand.500">Life Path Number</Span>
-      </Text>
-      <Box>
-        <Image mb={8} src={birthdayNumerologyImg} borderRadius={"xl"} height={"160px"} mx="auto" />
-      </Box>
-      <Selector />
+      {({ quizState }) => {
+        const { fullName } = getPersonalInfoFromState(quizState);
+        return (
+          <Fragment>
+            <Title>
+              <Text as="span">{fullName}</Text>
+              {", "}
+              when were you born?
+            </Title>
+            <Subtitle>
+              Your birth date determines the key indicators like <Span>Life Path Number</Span>
+            </Subtitle>
+            <Image
+              mb={8}
+              src={birthdayNumerologyImg}
+              borderRadius={"xl"}
+              height={"160px"}
+              mx="auto"
+            />
+            <Selector />
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }
@@ -232,11 +255,11 @@ export function birthDateSlide() {
 export function birthPlaceSlide() {
   return (
     <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
-      <Title>Do you know your birthplace?</Title>
-      <Callout emoji="In astrology:">
+      <Title>Where were you born?</Title>
+      <Subtitle>
         Birthplace determines the exact position of the planets at the time of birth
-        <Image src={planetPositionsImg} mt={4} />
-      </Callout>
+      </Subtitle>
+      <Image mb={8} src={planetPositionsImg} borderRadius={"xl"} height={"130px"} mx="auto" />
       <Selector />
     </Slide>
   );
@@ -254,14 +277,13 @@ export function fillerUserCount() {
     >
       {({ quizState }) => {
         const { zodiac } = getPersonalInfoFromState(quizState);
-        const countOfProfiles = 35422;
         return (
           <Fragment>
             <Title textAlign={"center"}>Found matching profiles</Title>
             <Text textAlign={"center"} color="bg.900" fontWeight={"bold"}>
               We are currently guiding{" "}
               <Text as="span" color="brand.600">
-                {countOfProfiles.toLocaleString()}
+                {zodiac.countOfProfiles.toLocaleString()}
               </Text>{" "}
               people with similar profiles to yours, reporting an average{" "}
               <Text as="span" color="brand.600">
@@ -387,8 +409,7 @@ export function LoadingAfterPersonalInfo() {
           <Fragment>
             <Title color="white" textAlign={"center"}>
               <Span>
-                Great <Span color="brand.500">{fullName}</Span>!<br /> We are setting up your
-                astrological profile
+                Great <Span>{fullName}</Span>!<br /> We are setting up your astrological profile
               </Span>
             </Title>
             <Selector />
@@ -599,10 +620,10 @@ export function personalityTypeSlide() {
       ]}
     >
       <Title>Which personality type best describes you?</Title>
-      <Callout emoji="🧠">
+      <Subtitle>
         Selecting your personality type helps identify spiritual and emotional compatibilities,
         fostering deeper and more meaningful relationships.
-      </Callout>
+      </Subtitle>
       <Selector />
     </Slide>
   );
@@ -739,10 +760,10 @@ export function spiritualInvolvementSlide() {
       ]}
     >
       <Title>To what extent are you engaged with spiritual practices and concepts?</Title>
-      <Callout emoji="✨">
+      <Subtitle>
         Your engagement level with spiritual practices allows us to fine-tune the insights and
         advice to resonate with your spiritual journey.
-      </Callout>
+      </Subtitle>
       <Selector />
     </Slide>
   );
@@ -805,27 +826,12 @@ export function colorResonanceSlide() {
         },
       ]}
     >
-      {({ quizState }) => {
-        const { fullName } = getPersonalInfoFromState(quizState);
-        return (
-          <Fragment>
-            <Title>
-              <Text as="span" color="brand.500">
-                {fullName}
-              </Text>
-              {", "}
-              which color resonates with you the most?
-            </Title>
-            <Box>
-              <Image src={colorMap} height={"220px"} mb={4} mx={"auto"} />
-            </Box>
-            <Callout emoji="In astrology:">
-              Colors are often associated with planets and signs, carrying symbolic meanings.
-            </Callout>
-            <Selector />
-          </Fragment>
-        );
-      }}
+      <Title>Which color resonates with you the most?</Title>
+      <Subtitle>
+        Colors are often associated with planets and signs, carrying symbolic meanings.
+      </Subtitle>
+      <Image mb={8} src={colorMap} borderRadius={"xl"} height={"160px"} mx="auto" />
+      <Selector />
     </Slide>
   );
 }
@@ -1395,20 +1401,13 @@ export function YourProfileIntroFiller() {
       }}
     >
       <Title textAlign={"center"}>Creation of your spiritual DNA profile</Title>
-      <Text color="bg.800" textAlign={"center"} mb={4}>
-        Your{" "}
-        <Text as="span" color="brand.500" fontWeight={"bold"}>
-          name
-        </Text>{" "}
-        and{" "}
-        <Text as="span" color="brand.500" fontWeight={"bold"}>
-          date of birth
-        </Text>{" "}
-        hold the key to unlocking personalized insights about you.
-      </Text>
-      <Box mb={4}>
-        <Image src={astroProfileImg} borderRadius={"full"} height={"180px"} mx="auto" />
-      </Box>
+      <Subtitle>
+        Your <Span>name</Span> and <Span>date of birth</Span> hold the key to unlocking personalized
+        insights about you.
+      </Subtitle>
+
+      <Image src={astroProfileImg} mb={4} borderRadius={"full"} height={"180px"} mx="auto" />
+
       <Callout emoji="Significance of numbers">
         <Box my={2}>
           <Flex

@@ -9,7 +9,7 @@ export function Title({ children, ...rest }: PropsWithChildren<TextProps>) {
     <Text fontSize="2xl" lineHeight={1.4} mb={8} fontWeight="semibold" color="bg.900" {...rest}>
       {children}{" "}
       {slide.optional && (
-        <Text as="span" my={2} color="bg.300">
+        <Text as="span" my={2} color="bg.400" fontWeight={"normal"} fontSize={"medium"}>
           (optional)
         </Text>
       )}
@@ -21,12 +21,8 @@ export function Span(props: PropsWithChildren<TextProps>) {
   return <Text as="span" {...props} />;
 }
 
-export function Subtitle({ children }: PropsWithChildren) {
-  return (
-    <Text fontSize="xl" fontWeight="medium" color="blackAlpha.700">
-      {children}
-    </Text>
-  );
+export function Subtitle(props: PropsWithChildren<TextProps>) {
+  return <Text textAlign={"center"} color="bg.800" mb={4} fontSize={"sm"} {...props} />;
 }
 
 export function TransitionText({
