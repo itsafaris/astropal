@@ -1,32 +1,10 @@
 import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect } from "react";
 
 import { useQuizActions, useQuizSnapshot } from "../internal/state";
 import { ProgressIndicator } from "./progress";
 import { useQuizConfig } from "./quizProvider";
 import { getSlideProperties } from "../internal/tracking";
-
-const variants = {
-  enter: (direction: number) => {
-    return {
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => {
-    return {
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-};
 
 export type QuizUIProps = {
   children?: React.ReactNode;
@@ -64,27 +42,8 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
       {config.showDebugUI && <DebugUI />}
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
       <ProgressIndicator />
-      <Flex position={"relative"} flexGrow={1} width={"100%"}>
-        <AnimatePresence initial={false} custom={snap.direction}>
-          <motion.div
-            style={{
-              width: "100%",
-              position: "absolute",
-            }}
-            key={snap.currentSlideID}
-            custom={snap.direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+      <Flex position={"relative"} flexGrow={1} width={"100%"} justifyContent={"center"}>
+        {children}
       </Flex>
     </Flex>
   );
