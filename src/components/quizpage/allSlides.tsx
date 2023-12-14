@@ -167,7 +167,9 @@ export function GoalSlide() {
       ]}
     >
       <Title>What are your primary goals regarding relationships?</Title>
-      <Subtitle>Knowing your goal will allow us to provide a better advice</Subtitle>
+      <Subtitle>
+        Knowing your <Span>goal</Span> will allow us to provide more tailored advice to you.
+      </Subtitle>
       <Selector />
     </Slide>
   );
@@ -210,10 +212,10 @@ export function GenderSlide() {
 export function BirthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
-      <Title>Tell us your full name</Title>
+      <Title>What's your full name?</Title>
       <Subtitle>
-        <Span>Destiny number</Span> - represents how you express yourself and can indicate your
-        natural talents and abilities, as well as potential career paths.
+        <Span>Destiny Number</Span> is derived from your full name. It unveils your natural
+        attractions in partnerships.
       </Subtitle>
       <PythagoreanNumbers mb={8} width={"100%"} height={"120px"} color={"brand.400"} />
       <Selector />
@@ -1399,7 +1401,7 @@ export function YourProfileIntroFiller() {
         bgGradient: "radial(bg.400, bg.50)",
       }}
     >
-      <Title textAlign={"center"}>Creation of your spiritual DNA profile</Title>
+      <Title>Creation of your spiritual DNA profile</Title>
       <Subtitle>
         Your <Span>name</Span> and <Span>date of birth</Span> hold the key to unlocking personalized
         insights about you.
