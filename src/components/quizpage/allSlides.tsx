@@ -14,7 +14,9 @@ import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
 import astroProfileImg from "@images/astro_profile.png";
-import housesImg from "@images/houses.png";
+import colorMap from "@images/color_map.png";
+import birthdayNumerologyImg from "@images/birthday_numerology.png";
+
 import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
 import patternIcon2 from "static/images/patterns/pattern-icon-2.svg";
 import patternIcon3 from "static/images/patterns/pattern-icon-3.svg";
@@ -25,8 +27,6 @@ import patternIcon7 from "static/images/patterns/pattern-icon-7.svg";
 import patternIcon8 from "static/images/patterns/pattern-icon-8.svg";
 import patternIcon9 from "static/images/patterns/pattern-icon-9.svg";
 import patternIcon10 from "static/images/patterns/pattern-icon-10.svg";
-import colorMap from "@images/color_map.png";
-import birthdayNumerologyImg from "@images/birthday_numerology.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
@@ -276,33 +276,17 @@ export function BirthPlaceSlide() {
 export function FillerUserCount() {
   const theme = useTheme();
   return (
-    <Slide
-      id="filler-user-count"
-      type="filler"
-      quizContainerProps={{
-        bgGradient: "radial(bg.400, bg.50)",
-      }}
-    >
+    <Slide id="filler-user-count" type="filler">
       {({ quizState }) => {
         const { zodiac } = getPersonalInfoFromState(quizState);
         return (
           <Fragment>
-            <Title textAlign={"center"}>Found matching profiles</Title>
-            <Text textAlign={"center"} color="bg.900" fontWeight={"bold"}>
-              We are currently guiding{" "}
-              <Text as="span" color="brand.600">
-                {zodiac.countOfProfiles.toLocaleString()}
-              </Text>{" "}
-              people with similar profiles to yours, reporting an average{" "}
-              <Text as="span" color="brand.600">
-                2x
-              </Text>{" "}
-              improvement in relationships within just{" "}
-              <Text as="span" color="brand.600">
-                two weeks
-              </Text>{" "}
-              of usage.
-            </Text>
+            <Title textAlign={"center"}>Your profile is ready</Title>
+            <Subtitle textAlign={"center"} color="bg.600">
+              We are currently guiding <Span>{zodiac.countOfProfiles.toLocaleString()}</Span> people
+              with profiles similar to yours, who report an average <Span>2x</Span> improvement in
+              their relationships after just <Span>two weeks</Span> using our service
+            </Subtitle>
 
             <Flex p={8} gap={2} flexDirection={"column"}>
               {zodiac.svgComponent &&
@@ -310,14 +294,15 @@ export function FillerUserCount() {
                   height: 160,
                   width: "100%",
                   fill: theme.colors.bg["200"],
-                  stroke: theme.colors.bg["400"],
+                  stroke: theme.colors.bg["600"],
+                  strokeWidth: 2,
                 })}
               <Text
-                fontSize={"4xl"}
+                fontSize={"3xl"}
                 fontWeight={"semibold"}
                 textAlign={"center"}
                 fontFamily={"cursive"}
-                color="bg.200"
+                color="brand.500"
               >
                 {zodiac.name}
               </Text>
@@ -524,7 +509,7 @@ export function loadingAfterPartnersInfo() {
 
 export function QuickLoading() {
   return (
-    <Slide id="loading-quick" type="loading" duration={1}>
+    <Slide id="loading-quick" type="loading" duration={1} autoProceed>
       {({ state }) => {
         return (
           <Fragment>
@@ -629,8 +614,8 @@ export function PersonalityTypeSlide() {
     >
       <Title>Which personality type best describes you?</Title>
       <Subtitle>
-        Selecting your personality type helps identify spiritual and emotional compatibilities,
-        fostering deeper and more meaningful relationships.
+        We merge astrological insights with your <Span>personal traits</Span> to deliver
+        individualized guidance.
       </Subtitle>
       <Selector />
     </Slide>
@@ -769,8 +754,8 @@ export function SpiritualInvolvementSlide() {
     >
       <Title>To what extent are you engaged with spiritual practices and concepts?</Title>
       <Subtitle>
-        Your engagement level with spiritual practices allows us to fine-tune the insights and
-        advice to resonate with your spiritual journey.
+        Knowing your <Span>engagement level</Span> allows us to fine-tune the insights and advice to
+        resonate with your spiritual journey.
       </Subtitle>
       <Selector />
     </Slide>

@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { ComponentProps, createContext, useContext, useEffect } from "react";
 import { NextButton, SkipButton } from "../internal/ui";
-import { ExtractSlideProps, ISelectorType, SlideProps } from "./types";
+import { ExtractSlideProps, ISelectorType, SlideProps, SlidePropsLoading } from "./types";
 import {
   GetSlideStateType,
   SelectorState,
@@ -60,9 +60,18 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
     if (slideProps.type === "single") {
       return true;
     }
-    if (state?.type === "loading" && !state.isComplete) {
+
+    if (state?.type === "loading") {
+      const s = snap.currentSlide as SlidePropsLoading;
+      if (s.autoProceed) {
+        return true;
+      }
+      if (state.isComplete) {
+        return false;
+      }
       return true;
     }
+
     return false;
   };
 

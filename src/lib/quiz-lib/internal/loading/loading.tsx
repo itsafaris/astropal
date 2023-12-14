@@ -12,7 +12,7 @@ type LoadingSlideComponentProps = {} & SlidePropsLoading;
 
 export function LoadingSlide(props: LoadingSlideComponentProps) {
   const actions = useQuizActions();
-  const slide = useSlide();
+  const slide = useSlide() as SlidePropsLoading;
 
   return (
     <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"}>
@@ -23,6 +23,11 @@ export function LoadingSlide(props: LoadingSlideComponentProps) {
         }}
         onComplete={() => {
           actions.setLoadingStateComplete(slide.id, true);
+          if (slide.autoProceed) {
+            setTimeout(() => {
+              actions.goToNext();
+            }, 1000);
+          }
         }}
       />
     </Flex>
