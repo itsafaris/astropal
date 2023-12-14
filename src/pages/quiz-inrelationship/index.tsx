@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { QuizPageWrapper } from "@components/quizpage/pageWrapper";
 import { QuizUI, useQuizSnapshot } from "@martynasj/quiz-lib";
 import {
-  partnerPersonalInfoSegment,
-  personalInfoSegment,
-  relationshipsNonSingleSegment,
+  PartnerPersonalInfoSegment,
+  PersonalInfoSegment,
+  RelationshipsNonSingleSegment,
   GoalSegment,
 } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
@@ -81,9 +81,9 @@ function Quiz_() {
       }}
     >
       <GoalSegment />
-      {personalInfoSegment()}
-      {partnerPersonalInfoSegment()}
-      {relationshipsNonSingleSegment()}
+      <PersonalInfoSegment />
+      <PartnerPersonalInfoSegment />
+      <RelationshipsNonSingleSegment />
     </QuizUI>
   );
 }

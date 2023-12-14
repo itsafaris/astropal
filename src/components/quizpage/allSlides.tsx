@@ -124,7 +124,7 @@ function Span(props: React.ComponentProps<typeof SpanRaw>) {
 }
 
 function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
-  return <SubtitleRaw p={3} borderRadius={"2xl"} backgroundColor="blackAlpha.400" {...props} />;
+  return <SubtitleRaw {...props} />;
 }
 
 // Your Goal
@@ -199,16 +199,15 @@ export function GenderSlide() {
     >
       <Title>Let's start with your gender</Title>
       <Subtitle>
-        Understanding your gender helps us to customize our relationship guidance, taking into
-        account how gender-specific experiences and societal dynamics may shape your interactions
-        and connections with others.
+        <Span>Gender</Span> is a key characteristic that allows us to provide a fine-tuned
+        relationship guidance.
       </Subtitle>
       <Selector />
     </Slide>
   );
 }
 
-export function birthNameSlide() {
+export function BirthNameSlide() {
   return (
     <Slide id="birth-name" type="short-text" placeholder="Your birth name (or full name)">
       <Title>Tell us your full name</Title>
@@ -222,7 +221,7 @@ export function birthNameSlide() {
   );
 }
 
-export function birthDateSlide() {
+export function BirthDateSlide() {
   return (
     <Slide id="birth-date" type="date">
       {({ quizState }) => {
@@ -252,7 +251,7 @@ export function birthDateSlide() {
   );
 }
 
-export function birthPlaceSlide() {
+export function BirthPlaceSlide() {
   return (
     <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where were you born?</Title>
@@ -265,7 +264,7 @@ export function birthPlaceSlide() {
   );
 }
 
-export function fillerUserCount() {
+export function FillerUserCount() {
   const theme = useTheme();
   return (
     <Slide
@@ -539,7 +538,7 @@ export function QuickLoading() {
 
 // Your Personality
 
-export function valuesAndPrioritiesSlide() {
+export function ValuesAndPrioritiesSlide() {
   return (
     <Slide
       id="values-and-priorities"
@@ -578,7 +577,7 @@ export function valuesAndPrioritiesSlide() {
   );
 }
 
-export function personalityTypeSlide() {
+export function PersonalityTypeSlide() {
   return (
     <Slide
       id="personality-type"
@@ -730,7 +729,7 @@ export function partnerPersonalityTypeSlide() {
 
 // Spiritituality
 
-export function spiritualInvolvementSlide() {
+export function SpiritualInvolvementSlide() {
   return (
     <Slide
       id="spiritual-involvement"
@@ -769,7 +768,7 @@ export function spiritualInvolvementSlide() {
   );
 }
 
-export function colorResonanceSlide() {
+export function ColorResonanceSlide() {
   return (
     <Slide
       id="color-resonance"

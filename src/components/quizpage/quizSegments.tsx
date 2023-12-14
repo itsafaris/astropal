@@ -1,12 +1,12 @@
 import { Segment } from "@martynasj/quiz-lib";
 
 import {
-  valuesAndPrioritiesSlide,
-  colorResonanceSlide,
+  ValuesAndPrioritiesSlide,
+  ColorResonanceSlide,
   GenderSlide,
-  birthNameSlide,
-  birthDateSlide,
-  birthPlaceSlide,
+  BirthNameSlide,
+  BirthDateSlide,
+  BirthPlaceSlide,
   LoadingAfterPersonalInfo,
   partnerGenderSlide,
   partnerBirthNameSlide,
@@ -26,15 +26,15 @@ import {
   potentialPartnerValuesSlide,
   relationshipDealBreakersSlide,
   findingCompatiblePartnerSatisfactionSlide,
-  personalityTypeSlide,
+  PersonalityTypeSlide,
   appFeaturesImportanceSlide,
-  spiritualInvolvementSlide,
+  SpiritualInvolvementSlide,
   partnerEmotionalOpennessSlide,
   partnerPersonalityTypeSlide,
   YourProfileIntroFiller,
   partnerProfileIntroFiller,
   loadingAfterPartnersInfo,
-  fillerUserCount,
+  FillerUserCount,
   GoalSlide,
   SocialProofFiller,
   QuickLoading,
@@ -50,25 +50,25 @@ export function GoalSegment() {
   );
 }
 
-export function personalInfoSegment() {
+export function PersonalInfoSegment() {
   return (
     <Segment title="Your personality">
       <YourProfileIntroFiller />
-      {birthNameSlide()}
-      {birthDateSlide()}
-      {colorResonanceSlide()}
-      {birthPlaceSlide()}
+      <BirthNameSlide />
+      <BirthDateSlide />
+      <ColorResonanceSlide />
+      <BirthPlaceSlide />
       <QuickLoading />
-      {fillerUserCount()}
-      {personalityTypeSlide()}
-      {valuesAndPrioritiesSlide()}
-      {spiritualInvolvementSlide()}
+      <FillerUserCount />
+      <PersonalityTypeSlide />
+      <ValuesAndPrioritiesSlide />
+      <SpiritualInvolvementSlide />
       <LoadingAfterPersonalInfo />
     </Segment>
   );
 }
 
-export function partnerPersonalInfoSegment() {
+export function PartnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's personality">
       {partnerProfileIntroFiller()}
@@ -96,7 +96,7 @@ export function idealPartnerSegment() {
   );
 }
 
-export function relationshipsNonSingleSegment() {
+export function RelationshipsNonSingleSegment() {
   return (
     <Segment title="Relationship satisfaction">
       {feelingsAboutRelationshipSlide()}

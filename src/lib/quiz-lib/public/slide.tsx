@@ -94,7 +94,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       minHeight={"100%"}
       {...containerProps}
     >
-      <Flex w="full" maxW={"440px"} flexDir={"column"} py={4} px={6}>
+      <Flex w="full" maxWidth={"390px"} flexDir={"column"} py={4} px={6}>
         {realChildren}
 
         {!hideNextButton() && (
