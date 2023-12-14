@@ -13,8 +13,8 @@ import {
 import femaleImg from "@images/female.png";
 import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
-import planetPositionsImg from "@images/planet_positions.png";
 import astroProfileImg from "@images/astro_profile.png";
+import housesImg from "@images/houses.png";
 import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
 import patternIcon2 from "static/images/patterns/pattern-icon-2.svg";
 import patternIcon3 from "static/images/patterns/pattern-icon-3.svg";
@@ -258,9 +258,16 @@ export function BirthPlaceSlide() {
     <Slide id="birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where were you born?</Title>
       <Subtitle>
-        Birthplace determines the exact position of the planets at the time of birth
+        The birthplace helps to pinpoint the arrangement of <Span>astrological houses</Span> in
+        one's birth chart
       </Subtitle>
-      <Image mb={8} src={planetPositionsImg} borderRadius={"xl"} height={"130px"} mx="auto" />
+      <Box mb={8}>
+        <StaticImage
+          layout="fullWidth"
+          src={"../../images/houses.png"}
+          alt="12 astrological houses"
+        />
+      </Box>
       <Selector />
     </Slide>
   );
@@ -770,6 +777,20 @@ export function SpiritualInvolvementSlide() {
   );
 }
 
+function CircleDiv(props: React.ComponentProps<typeof Box>) {
+  return (
+    <Box
+      width={"32px"}
+      height={"32px"}
+      borderRadius={"full"}
+      border="1px solid"
+      borderColor={"whiteAlpha.400"}
+      shadow={"lg"}
+      {...props}
+    />
+  );
+}
+
 export function ColorResonanceSlide() {
   return (
     <Slide
@@ -779,57 +800,58 @@ export function ColorResonanceSlide() {
       options={[
         {
           text: "Red",
-          icon: "🔴",
+          icon: <CircleDiv backgroundColor={"red"} />,
         },
         {
           text: "Orange",
-          icon: "🟠",
+          icon: <CircleDiv backgroundColor={"orange"} />,
         },
         {
           text: "Yellow",
-          icon: "🟡",
+          icon: <CircleDiv backgroundColor={"yellow"} />,
         },
         {
           text: "Green",
-          icon: "🟢",
+          icon: <CircleDiv backgroundColor={"green"} />,
         },
         {
           text: "Blue",
-          icon: "🔵",
+          icon: <CircleDiv backgroundColor={"blue"} />,
         },
         {
           text: "Indigo",
-          icon: "🟣",
+          icon: <CircleDiv backgroundColor={"indigo"} />,
         },
         {
           text: "Violet",
-          icon: "🟣",
+          icon: <CircleDiv backgroundColor={"violet"} />,
         },
         {
           text: "Pink",
-          icon: "🌸",
+          icon: <CircleDiv backgroundColor={"pink"} />,
         },
         {
           text: "Gold",
-          icon: "🟡",
+          icon: <CircleDiv backgroundColor={"gold"} />,
         },
         {
           text: "Silver",
-          icon: "⚪",
+          icon: <CircleDiv backgroundColor={"silver"} />,
         },
         {
           text: "White",
-          icon: "⚪",
+          icon: <CircleDiv backgroundColor={"white"} />,
         },
         {
           text: "Black",
-          icon: "⚫",
+          icon: <CircleDiv backgroundColor={"black"} />,
         },
       ]}
     >
       <Title>Which color resonates with you the most?</Title>
       <Subtitle>
-        Colors are often associated with planets and signs, carrying symbolic meanings.
+        Color in astrology reflects <Span>planetary energies</Span> that influence emotional needs,
+        impacting relationship compatibility
       </Subtitle>
       <Image mb={8} src={colorMap} borderRadius={"xl"} height={"160px"} mx="auto" />
       <Selector />
