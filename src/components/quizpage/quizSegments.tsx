@@ -18,10 +18,10 @@ import {
   approachToConflictsSlide as ApproachToConflictsSlide,
   emotionalOpennessSlide as EmotionalOpennessSlide,
   viewOnGrowthSlide as ViewOnGrowthSlide,
-  feelingsAboutRelationshipSlide,
-  relationshipImportanceSlide,
-  relationshipFactorsSlide,
-  conflictResolutionSatisfactionSlide,
+  FeelingsAboutRelationshipSlide,
+  RelationshipImportanceSlide,
+  RelationshipFactorsSlide,
+  ConflictResolutionSatisfactionSlide,
   healthyRelationshipVisionSlide as HealthyRelationshipVisionSlide,
   potentialPartnerValuesSlide as PotentialPartnerValuesSlide,
   relationshipDealBreakersSlide as RelationshipDealBreakersSlide,
@@ -80,6 +80,11 @@ export function PartnerPersonalInfoSegment() {
       <PartnerBirthDateSlide />
       <PartnerTemperamentSlide />
       <PartnerBirthPlaceSlide />
+      <FeelingsAboutRelationshipSlide />
+      <RelationshipImportanceSlide />
+      <RelationshipFactorsSlide />
+      <ConflictResolutionSatisfactionSlide />
+      <AppFeaturesImportanceSlide />
       <LoadingAfterPartnersInfo />
     </Segment>
   );
@@ -99,15 +104,7 @@ export function IdealPartnerSegment() {
 }
 
 export function RelationshipsNonSingleSegment() {
-  return (
-    <Segment title="Relationship satisfaction">
-      {feelingsAboutRelationshipSlide()}
-      {relationshipImportanceSlide()}
-      {relationshipFactorsSlide()}
-      {conflictResolutionSatisfactionSlide()}
-      {AppFeaturesImportanceSlide()}
-    </Segment>
-  );
+  return <Segment title="Relationship satisfaction"></Segment>;
 }
 
 export function RelationshipsSingleSegment() {

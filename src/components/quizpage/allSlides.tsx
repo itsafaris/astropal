@@ -1094,12 +1094,13 @@ export function viewOnGrowthSlide() {
 
 // Relationship questions (non single)
 
-export function feelingsAboutRelationshipSlide() {
+export function FeelingsAboutRelationshipSlide() {
   return (
     <Slide
       id="feelings-about-relationship"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Very happy",
@@ -1129,12 +1130,13 @@ export function feelingsAboutRelationshipSlide() {
   );
 }
 
-export function relationshipImportanceSlide() {
+export function RelationshipImportanceSlide() {
   return (
     <Slide
       id="relationship-importance"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Trust",
@@ -1164,12 +1166,13 @@ export function relationshipImportanceSlide() {
   );
 }
 
-export function relationshipFactorsSlide() {
+export function RelationshipFactorsSlide() {
   return (
     <Slide
       id="relationship-factors"
       type="multi"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Work or career stress",
@@ -1199,12 +1202,13 @@ export function relationshipFactorsSlide() {
   );
 }
 
-export function conflictResolutionSatisfactionSlide() {
+export function ConflictResolutionSatisfactionSlide() {
   return (
     <Slide
       id="conflict-resolution-satisfaction"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Very satisfied",
@@ -1396,6 +1400,7 @@ export function appFeaturesImportanceSlide() {
       id="app-features-importance"
       type="multi"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Daily spiritual advice and tips",
