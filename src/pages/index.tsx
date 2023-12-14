@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
@@ -20,7 +20,13 @@ export function Head() {
 export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
-      <Box py={16} px={8} maxWidth="md" mx="auto">
+      <Box py={6} px={4} maxWidth="md" mx="auto">
+        <Box flexDirection={"row"} alignItems={"center"} display={"flex"} gap={3} mb={5}>
+          <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={50} />
+          <Text fontSize={"xl"} fontWeight={"bold"}>
+            Astropal
+          </Text>
+        </Box>
         <Heading mb={12} as="h1" size="xl" textAlign="center">
           {HEADING_TITLE}
         </Heading>
@@ -29,13 +35,12 @@ export default function IndexPage() {
           <Text as="span" fontWeight={"bold"} color="brand.500">
             1-minute
           </Text>{" "}
-          quiz to get a personalized prediction. The result is not guaranteed and may vary from case
-          to case.
+          quiz to get a personalized prediction.
         </Text>
         <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"}>
           What is your relationship status?
         </Text>
-        <Flex justifyContent="center" mt={8} gap={8}>
+        <Flex justifyContent="center" mt={8} gap={4}>
           <Link to="/quiz-single">
             <ImageButton text="Single">
               <StaticImage src={`../images/single_person.png`} alt="Option - single" />
@@ -59,7 +64,7 @@ function ImageButton({ children, text }: PropsWithChildren<{ text: string }>) {
         p={4}
         borderRadius={"2xl"}
         overflow={"hidden"}
-        border="1px solid"
+        border="2px solid"
         borderColor={"brand.200"}
         boxShadow={"0 0 8px 4px rgb(40 86 99 / 20%)"}
       >
