@@ -373,7 +373,7 @@ export function LoadingAfterPersonalInfo() {
     }
 
     if (progressValue === 100) {
-      return "Profile completed";
+      return "Profile updated";
     }
 
     const index = findIntervalIndex(progressValue, data);
@@ -400,10 +400,8 @@ export function LoadingAfterPersonalInfo() {
         const { fullName } = getPersonalInfoFromState(quizState);
         return (
           <Fragment>
-            <Title color="white" textAlign={"center"}>
-              <Span>
-                Great <Span>{fullName}</Span>!<br /> We are setting up your astrological profile
-              </Span>
+            <Title textAlign={"center"}>
+              Great <Span>{fullName}</Span>!<br /> We are updating your Spiritual DNA Profile
             </Title>
             <Selector />
           </Fragment>
