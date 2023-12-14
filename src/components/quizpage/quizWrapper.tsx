@@ -15,8 +15,8 @@ export function QuizWrapper(props: Omit<QuizProps, "locationApiKey">) {
           //
         }}
         locationApiKey={locationApiKey}
-        onSlideChange={(slide) => {
-          trackEvent({ event: "slide-change", slideID: slide.id });
+        onTrackingEvent={(event) => {
+          trackEvent(event);
         }}
         {...props}
       />

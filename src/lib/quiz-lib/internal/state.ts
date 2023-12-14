@@ -1,7 +1,8 @@
 import { createContext, useContext } from "react";
 import { INTERNAL_Snapshot, proxy, ref, useSnapshot } from "valtio";
-import { ISelectorType, LogicDefinition, SlideProps } from "../public/types";
+import { ISelectorType, LogicDefinition, SlideProps, TrackingEventCallback } from "../public/types";
 import { getPosInBounds } from "./utils";
+import { getSlideProperties } from "./tracking";
 
 // E.g. GetSlideStateType<'multi'>
 export type GetSlideStateType<T extends ISelectorType> = Extract<SelectorState, { type: T }>;
@@ -96,6 +97,7 @@ export function createQuizState(input: {
   // segments: SegmentDescriptor[];
   // slides: SlideProps[];
   onSlideSubmitted?: (slideState: { id: string; state: SelectorState }) => void;
+  onTrackingEvent?: TrackingEventCallback;
 }) {
   // let validationError = validateSegments(input.segments);
   // if (validationError) {
@@ -174,11 +176,12 @@ export function createQuizState(input: {
         return;
       }
 
-      if (!state.currentSlideID) {
-        state.currentSlideID = slide.id;
-      }
       state.slides.push(slide);
       state.slideStateByID[slide.id] = createSlideState(slide.type);
+
+      if (!state.currentSlideID) {
+        actions.goToSlideID(slide.id);
+      }
     },
 
     registerSegment(segment: SegmentDescriptor) {
@@ -210,6 +213,13 @@ export function createQuizState(input: {
         id: currentSlide.id,
         state: currentSlideState,
       });
+      input.onTrackingEvent?.({
+        name: "slide-submitted",
+        properties: {
+          ...getSlideProperties(currentSlide),
+          slideValue: "value" in currentSlideState ? currentSlideState.value : null,
+        },
+      });
 
       if (currentSlide.type === "single" && currentSlide.logic) {
         const slideState = state.currentSlideState as SingleState;
@@ -224,12 +234,21 @@ export function createQuizState(input: {
     },
 
     skipQuestion() {
-      if (!state.currentSlide) {
+      const slide = state.currentSlide;
+      if (!slide) {
         return;
       }
-      if (!state.currentSlide.optional) {
+      if (!slide.optional) {
         throw new Error("only optional question can be skipped");
       }
+
+      input.onTrackingEvent?.({
+        name: "slide-skipped",
+        properties: {
+          ...getSlideProperties(slide),
+        },
+      });
+
       actions.goToNext();
     },
 
@@ -251,9 +270,11 @@ export function createQuizState(input: {
       if (idx >= state.slides.length || idx < 0) {
         return;
       }
-      state.direction = idx < state.currentIdx ? -1 : 1;
-      const slideId = state.slides[idx];
-      state.currentSlideID = slideId.id;
+
+      const direction = idx < state.currentIdx ? -1 : 1;
+      state.direction = direction;
+      const nextSlide = state.slides[idx];
+      state.currentSlideID = nextSlide.id;
     },
 
     toggleRadioOption(selectorID: string, value: SelectorValue) {

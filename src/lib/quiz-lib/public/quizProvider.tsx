@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useRef } from "react";
 import { devtools } from "valtio/utils";
 
 import { QuizCtx, SelectorState, createQuizState } from "../internal/state";
-import { QuizErrorEvent } from "./types";
+import { QuizErrorEvent, TrackingEventCallback } from "./types";
 
 export type QuizProps = {
   children?: React.ReactNode;
@@ -15,6 +15,7 @@ export type QuizConfigType = {
   // return only the id for now to not expose the proxied objects
   onSlideChange?: (newSlide: { id: string }) => void;
   onSlideSubmitted?: (state: { id: string; state: SelectorState }) => void;
+  onTrackingEvent?: TrackingEventCallback;
 };
 
 const QuizConfigCtx = createContext<QuizConfigType>(null as any);
@@ -30,7 +31,7 @@ function getInitialSlideID() {
 
 export function QuizProvider(props: QuizProps) {
   const { children, ...rest } = props;
-  const { locationApiKey, showDebugUI, onErrorEvent, onSlideChange, onSlideSubmitted } = rest;
+  const { onSlideSubmitted, onTrackingEvent } = rest;
 
   const q = useRef(
     (function () {
@@ -39,6 +40,7 @@ export function QuizProvider(props: QuizProps) {
           slideID: getInitialSlideID(),
         },
         onSlideSubmitted,
+        onTrackingEvent,
       });
     })()
   ).current;
@@ -50,15 +52,7 @@ export function QuizProvider(props: QuizProps) {
   }, []);
 
   return (
-    <QuizConfigCtx.Provider
-      value={{
-        locationApiKey,
-        showDebugUI,
-        onErrorEvent,
-        onSlideChange,
-        onSlideSubmitted,
-      }}
-    >
+    <QuizConfigCtx.Provider value={{ ...rest }}>
       <QuizCtx.Provider value={q}>{children}</QuizCtx.Provider>
     </QuizConfigCtx.Provider>
   );

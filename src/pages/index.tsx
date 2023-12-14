@@ -1,9 +1,9 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Link } from "gatsby";
+import { Link, prefetchPathname } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 
 const HEADING_TITLE = "Personalized astrology report with powerful predictions";
 

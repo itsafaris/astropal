@@ -1420,7 +1420,7 @@ export function YourProfileIntroFiller() {
           >
             {numerologyNumbersJson.map((n) => {
               return (
-                <Flex py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
+                <Flex key={n.Name} py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
                   <Image src={n.imageUrl} height={"22px"} mx="auto" />
 
                   <Flex flexDirection={"column"} flex={1}>
