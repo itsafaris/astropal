@@ -6,20 +6,20 @@ import { QuizServiceWrapper } from "./quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
 import { trackEvent } from "@utils/tracking";
 
-export function QuizWrapper(props: Omit<QuizProps, "locationApiKey">) {
+export function QuizWrapper({ children, ...rest }: Omit<QuizProps, "locationApiKey">) {
   return (
-    <QuizServiceWrapper>
-      <QuizProvider
-        showDebugUI={!isProdMode()}
-        onErrorEvent={(_) => {
-          //
-        }}
-        locationApiKey={locationApiKey}
-        onTrackingEvent={(event) => {
-          trackEvent(event);
-        }}
-        {...props}
-      />
-    </QuizServiceWrapper>
+    <QuizProvider
+      showDebugUI={!isProdMode()}
+      onErrorEvent={(_) => {
+        //
+      }}
+      locationApiKey={locationApiKey}
+      onTrackingEvent={(event) => {
+        trackEvent(event);
+      }}
+      {...rest}
+    >
+      <QuizServiceWrapper>{children}</QuizServiceWrapper>
+    </QuizProvider>
   );
 }

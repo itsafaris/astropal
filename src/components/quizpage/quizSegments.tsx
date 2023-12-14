@@ -13,21 +13,21 @@ import {
   PartnerBirthDateSlide,
   PartnerBirthPlaceSlide,
   PartnerTemperamentSlide,
-  mustHaveTraitSlide,
-  sharedLifestyleAspectSlide,
-  approachToConflictsSlide,
-  emotionalOpennessSlide,
-  viewOnGrowthSlide,
+  mustHaveTraitSlide as MustHaveTraitSlide,
+  sharedLifestyleAspectSlide as SharedLifestyleAspectSlide,
+  approachToConflictsSlide as ApproachToConflictsSlide,
+  emotionalOpennessSlide as EmotionalOpennessSlide,
+  viewOnGrowthSlide as ViewOnGrowthSlide,
   feelingsAboutRelationshipSlide,
   relationshipImportanceSlide,
   relationshipFactorsSlide,
   conflictResolutionSatisfactionSlide,
-  healthyRelationshipVisionSlide,
-  potentialPartnerValuesSlide,
-  relationshipDealBreakersSlide,
-  findingCompatiblePartnerSatisfactionSlide,
+  healthyRelationshipVisionSlide as HealthyRelationshipVisionSlide,
+  potentialPartnerValuesSlide as PotentialPartnerValuesSlide,
+  relationshipDealBreakersSlide as RelationshipDealBreakersSlide,
+  findingCompatiblePartnerSatisfactionSlide as FindingCompatiblePartnerSatisfactionSlide,
   PersonalityTypeSlide,
-  appFeaturesImportanceSlide,
+  appFeaturesImportanceSlide as AppFeaturesImportanceSlide,
   SpiritualInvolvementSlide,
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
@@ -36,6 +36,7 @@ import {
   LoadingAfterPartnersInfo,
   FillerUserCount,
   GoalSlide,
+  LoadingAfterIdealPartnersInfo,
   SocialProofFiller,
   QuickLoading,
 } from "./allSlides";
@@ -84,14 +85,15 @@ export function PartnerPersonalInfoSegment() {
   );
 }
 
-export function idealPartnerSegment() {
+export function IdealPartnerSegment() {
   return (
     <Segment title="Ideal Partner">
-      {mustHaveTraitSlide()}
-      {sharedLifestyleAspectSlide()}
-      {approachToConflictsSlide()}
-      {emotionalOpennessSlide()}
-      {viewOnGrowthSlide()}
+      <MustHaveTraitSlide />
+      <SharedLifestyleAspectSlide />
+      <ApproachToConflictsSlide />
+      <EmotionalOpennessSlide />
+      <ViewOnGrowthSlide />
+      <LoadingAfterIdealPartnersInfo />
     </Segment>
   );
 }
@@ -103,19 +105,19 @@ export function RelationshipsNonSingleSegment() {
       {relationshipImportanceSlide()}
       {relationshipFactorsSlide()}
       {conflictResolutionSatisfactionSlide()}
-      {appFeaturesImportanceSlide()}
+      {AppFeaturesImportanceSlide()}
     </Segment>
   );
 }
 
-export function relationshipsSingleSegment() {
+export function RelationshipsSingleSegment() {
   return (
     <Segment title="Relationship expectations">
-      {healthyRelationshipVisionSlide()}
-      {potentialPartnerValuesSlide()}
-      {relationshipDealBreakersSlide()}
-      {findingCompatiblePartnerSatisfactionSlide()}
-      {appFeaturesImportanceSlide()}
+      <HealthyRelationshipVisionSlide />
+      <PotentialPartnerValuesSlide />
+      <RelationshipDealBreakersSlide />
+      <FindingCompatiblePartnerSatisfactionSlide />
+      <AppFeaturesImportanceSlide />
     </Segment>
   );
 }

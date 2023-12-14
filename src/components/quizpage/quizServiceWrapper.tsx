@@ -1,5 +1,10 @@
 import React, { PropsWithChildren } from "react";
 
+import { useQuizSnapshot, ShortTextState, DateState } from "@martynasj/quiz-lib";
+
+import { getService } from "@utils/service";
+import { getPersonalInfoFromState } from "@utils/state";
+
 interface NumerologyData {
   zodiacSign: string;
   destinyNumber: number;
@@ -9,17 +14,57 @@ interface NumerologyData {
 }
 
 const QuizServiceContext = React.createContext<{
-  setNumerologyData: (data: NumerologyData) => void;
   numerologyData?: NumerologyData;
 } | null>(null);
 
 export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
+  const state = useQuizSnapshot();
+
   const [numerologyData, setNumerologyData] = React.useState<NumerologyData | undefined>();
+
+  React.useEffect(() => {
+    async function fetchNumerologyData() {
+      if (!state) {
+        return;
+      }
+
+      const nameState = state.slideStateByID["birth-name"] as ShortTextState;
+      const birthdateState = state.slideStateByID["birth-date"] as DateState;
+
+      if (
+        nameState &&
+        nameState.value &&
+        nameState.confirmed &&
+        birthdateState &&
+        birthdateState.value &&
+        birthdateState.confirmed &&
+        !numerologyData
+      ) {
+        const service = getService({ mock: false });
+        const personalInfo = getPersonalInfoFromState(state.slideStateByID);
+        const numerologyData = await service.getNumerologyData({
+          day: birthdateState.value.day,
+          month: birthdateState.value.month,
+          year: birthdateState.value.year,
+          name: nameState.value,
+        });
+
+        setNumerologyData({
+          zodiacSign: personalInfo.zodiac.name,
+          destinyNumber: numerologyData.destiny_number,
+          favDay: numerologyData.fav_day,
+          favMetal: numerologyData.fav_metal,
+          favStone: numerologyData.fav_stone,
+        });
+      }
+    }
+
+    fetchNumerologyData();
+  }, [state, state.slideStateByID]);
 
   const ctxValue = React.useMemo(() => {
     return {
       numerologyData,
-      setNumerologyData,
     };
   }, [numerologyData]);
 

@@ -521,6 +521,39 @@ export function LoadingAfterPartnersInfo() {
   );
 }
 
+export function LoadingAfterIdealPartnersInfo() {
+  return (
+    <Slide
+      id="updating-ideal-partner-info"
+      type="loading"
+      from={0}
+      to={100}
+      duration={10}
+      quizContainerProps={{
+        bgGradient: "radial(bg.300, bg.50)",
+      }}
+      statusText={({ progress }) => {
+        if (progress === 100) {
+          return "Done";
+        }
+
+        if (progress > 66) {
+          return "Matching both profiles...";
+        }
+
+        if (progress > 33) {
+          return "Calculating possibilities...";
+        }
+
+        return "Updating partners info...";
+      }}
+    >
+      <Title textAlign={"center"}>We are almost done! Generating profile of ideal partner.</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
 export function QuickLoading() {
   return (
     <Slide id="loading-quick" type="loading" duration={1} autoProceed>
