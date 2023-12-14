@@ -8,11 +8,11 @@ import {
   BirthDateSlide,
   BirthPlaceSlide,
   LoadingAfterPersonalInfo,
-  partnerGenderSlide,
-  partnerBirthNameSlide,
-  partnerBirthDateSlide,
-  partnerBirthPlaceSlide,
-  partnerTemperamentSlide,
+  PartnerGenderSlide,
+  PartnerBirthNameSlide,
+  PartnerBirthDateSlide,
+  PartnerBirthPlaceSlide,
+  PartnerTemperamentSlide,
   mustHaveTraitSlide,
   sharedLifestyleAspectSlide,
   approachToConflictsSlide,
@@ -29,11 +29,11 @@ import {
   PersonalityTypeSlide,
   appFeaturesImportanceSlide,
   SpiritualInvolvementSlide,
-  partnerEmotionalOpennessSlide,
-  partnerPersonalityTypeSlide,
+  PartnerEmotionalOpennessSlide,
+  PartnerPersonalityTypeSlide,
   YourProfileIntroFiller,
-  partnerProfileIntroFiller,
-  loadingAfterPartnersInfo,
+  PartnerProfileIntroFiller,
+  LoadingAfterPartnersInfo,
   FillerUserCount,
   GoalSlide,
   SocialProofFiller,
@@ -71,15 +71,15 @@ export function PersonalInfoSegment() {
 export function PartnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's personality">
-      {partnerProfileIntroFiller()}
-      {partnerGenderSlide()}
-      {partnerBirthNameSlide()}
-      {partnerBirthDateSlide()}
-      {partnerBirthPlaceSlide()}
-      {partnerPersonalityTypeSlide()}
-      {partnerEmotionalOpennessSlide()}
-      {partnerTemperamentSlide()}
-      {loadingAfterPartnersInfo()}
+      <PartnerProfileIntroFiller />
+      <PartnerBirthNameSlide />
+      <PartnerPersonalityTypeSlide />
+      <PartnerEmotionalOpennessSlide />
+      <PartnerGenderSlide />
+      <PartnerBirthDateSlide />
+      <PartnerTemperamentSlide />
+      <PartnerBirthPlaceSlide />
+      <LoadingAfterPartnersInfo />
     </Segment>
   );
 }

@@ -4,6 +4,14 @@ import { getZodiacSign } from "@utils/service";
 
 import { toTitleCase } from "@utils/string";
 
+function splitFullName(fullName: string) {
+  const parts = fullName.split(" ");
+  const firstName = parts[0];
+  const lastName = parts.slice(1).join(" ");
+
+  return { firstName, lastName };
+}
+
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const _name = (state["birth-name"] as ShortTextState).value ?? "Anonymous";
   const _birthDate = (state["birth-date"] as DateState).value ?? { year: 1990, month: 1, day: 1 };
@@ -17,9 +25,13 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   ).toISOString();
   const zodiac = getZodiacSign(birthDatetime);
 
+  const _partnerName = (state["partner-birth-name"] as ShortTextState).value ?? "Anonymous";
+  const partnerName = splitFullName(toTitleCase(_partnerName));
+
   return {
     fullName,
     birthDate: _birthDate,
     zodiac,
+    partnerName,
   };
 }

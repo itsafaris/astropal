@@ -1,4 +1,4 @@
-import { Fragment, createElement } from "react";
+import React, { Fragment, createElement } from "react";
 import {
   Callout,
   Selector,
@@ -32,7 +32,6 @@ import { TestimonialCard } from "@components/testimonial";
 import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
-import { withPrefix } from "gatsby";
 
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
@@ -391,6 +390,7 @@ export function LoadingAfterPersonalInfo() {
       from={0}
       to={100}
       duration={10}
+      autoProceed
       quizContainerProps={{
         bgGradient: "radial(bg.300, bg.50)",
       }}
@@ -413,13 +413,14 @@ export function LoadingAfterPersonalInfo() {
 
 // Partner's Info
 
-export function partnerGenderSlide() {
+export function PartnerGenderSlide() {
   return (
     <Slide
       id="partner-gender"
       type="single"
       variant="picture"
       size="small"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Male",
@@ -441,60 +442,75 @@ export function partnerGenderSlide() {
   );
 }
 
-export function partnerBirthNameSlide() {
+export function PartnerBirthNameSlide() {
   return (
-    <Slide id="partner-birth-name" type="short-text" placeholder="Your birth name">
-      <Title>What's your partner's full birth name?</Title>
-      <Callout>
-        A person's name holds a significant information about their personality and life path
-      </Callout>
+    <Slide
+      id="partner-birth-name"
+      type="short-text"
+      placeholder="Partner's full name"
+      quizContainerProps={partnerProfileFillerStyles}
+    >
+      <Title>What's your partner's full name?</Title>
       <Selector />
     </Slide>
   );
 }
 
-export function partnerBirthDateSlide() {
+export function PartnerBirthDateSlide() {
   return (
-    <Slide id="partner-birth-date" type="date">
-      <Title>What's your partner's date of birth?</Title>
-      <Callout>
-        Knowing the day you were born is vital for crafting thorough and precise forecasts as well.
-      </Callout>
-      <Selector />
+    <Slide id="partner-birth-date" type="date" quizContainerProps={partnerProfileFillerStyles}>
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <Fragment>
+            <Title>When is {partnerName.firstName} born?</Title>
+            <Selector />
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }
 
-export function partnerBirthPlaceSlide() {
+export function PartnerBirthPlaceSlide() {
   return (
-    <Slide id="partner-birth-place" type="location" placeholder="Your birthplace" optional>
-      <Title>Where was your partner born?</Title>
-      <Callout>
-        Discovering this place is key to uncovering the fundamental aspects of who you are, your
-        innermost yearnings, and your true aspirations.
-      </Callout>
-      <Selector />
+    <Slide
+      id="partner-birth-place"
+      type="location"
+      placeholder="Your birthplace"
+      quizContainerProps={partnerProfileFillerStyles}
+      optional
+    >
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <Fragment>
+            <Title>Where was {partnerName.firstName} born?</Title>
+            <Selector />
+          </Fragment>
+        );
+      }}
     </Slide>
   );
 }
 
-export function loadingAfterPartnersInfo() {
+export function LoadingAfterPartnersInfo() {
   return (
-    <Slide id="loading-two" type="loading" quizContainerProps={fillerStyles}>
+    <Slide id="loading-two" type="loading" quizContainerProps={partnerProfileFillerStyles}>
       {({ state }) => {
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {`Fine-tuning your profile`}
+              {`Finalising your profile`}
             </Title>
             <TransitionText
-              height={6}
+              height={16}
               textAlign={"center"}
               color="white"
               text={
                 state.isComplete
                   ? `Your profile is now improved`
-                  : "Based on your partner's details, we're fine-tuning your meta profile"
+                  : "Based on your partner's details, we're fine-tuning your personal guidance advisor"
               }
             />
             <Selector />
@@ -622,12 +638,13 @@ export function PersonalityTypeSlide() {
 
 // Partner's personality
 
-export function partnerEmotionalOpennessSlide() {
+export function PartnerEmotionalOpennessSlide() {
   return (
     <Slide
       id="partner-emotional-openness"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Closed off",
@@ -651,18 +668,26 @@ export function partnerEmotionalOpennessSlide() {
         },
       ]}
     >
-      <Title>What level of emotional openness does your current partner exhibit?</Title>
-      <Selector />
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <Title>What level of emotional openness does {partnerName.firstName} exhibit?</Title>
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
 
-export function partnerTemperamentSlide() {
+export function PartnerTemperamentSlide() {
   return (
     <Slide
       id="partner-temperament"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Calm and difficult to irritate",
@@ -674,18 +699,26 @@ export function partnerTemperamentSlide() {
         },
       ]}
     >
-      <Title>Does your partner get angry or irritated easily?</Title>
-      <Selector />
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <Title>Does {partnerName.firstName} get angry or irritated easily?</Title>
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
 
-export function partnerPersonalityTypeSlide() {
+export function PartnerPersonalityTypeSlide() {
   return (
     <Slide
       id="partner-personality-type"
       type="single"
       variant="list"
+      quizContainerProps={partnerProfileFillerStyles}
       options={[
         {
           text: "Practical and dependable",
@@ -713,8 +746,15 @@ export function partnerPersonalityTypeSlide() {
         },
       ]}
     >
-      <Title>Which personality type best describes your partner?</Title>
-      <Selector />
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <Title>Which personality type best describes {partnerName.firstName}?</Title>
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
@@ -1450,22 +1490,28 @@ export function YourProfileIntroFiller() {
   );
 }
 
-export function partnerProfileIntroFiller() {
+const partnerProfileFillerStyles = {
+  bgGradient: "radial(#0c3439, #221139)",
+};
+
+export function PartnerProfileIntroFiller() {
   return (
-    <Slide type="filler" id={"partner-profile"}>
-      <Title>Let us create metaphysical profile of your partner</Title>
-      <Callout>
+    <Slide type="filler" id={"partner-profile"} quizContainerProps={partnerProfileFillerStyles}>
+      <Title>
+        Spiritual DNA
+        <br /> of your Partner
+      </Title>
+      <Subtitle>
+        The final piece needed to craft your personalized guidance is understanding your{" "}
+        <Span>significant other</Span>
+      </Subtitle>
+      {/* <Callout>
         We'll ask a couple of questions about your partner to reveal compatibility insights in your
         relationship.
-      </Callout>
-      <Box
-        height={"200px"}
-        width={"200px"}
-        mx="auto"
-        shadow={"inset 0 0px 70px 0px rgb(0 0 0)"}
-        borderRadius={"50%"}
-        background={`url(${withPrefix("/images/bg-9.jpeg")}) no-repeat center center / cover`}
-      ></Box>
+      </Callout> */}
+      <Box my={4}>
+        <StaticImage alt="picture of a significant other" src="../../images/partner.png" />
+      </Box>
     </Slide>
   );
 }
