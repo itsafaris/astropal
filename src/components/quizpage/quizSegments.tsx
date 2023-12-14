@@ -98,6 +98,11 @@ export function IdealPartnerSegment() {
       <ApproachToConflictsSlide />
       <EmotionalOpennessSlide />
       <ViewOnGrowthSlide />
+      <HealthyRelationshipVisionSlide />
+      <PotentialPartnerValuesSlide />
+      <RelationshipDealBreakersSlide />
+      <FindingCompatiblePartnerSatisfactionSlide />
+      <AppFeaturesImportanceSlide />
       <LoadingAfterIdealPartnersInfo />
     </Segment>
   );
@@ -105,16 +110,4 @@ export function IdealPartnerSegment() {
 
 export function RelationshipsNonSingleSegment() {
   return <Segment title="Relationship satisfaction"></Segment>;
-}
-
-export function RelationshipsSingleSegment() {
-  return (
-    <Segment title="Relationship expectations">
-      <HealthyRelationshipVisionSlide />
-      <PotentialPartnerValuesSlide />
-      <RelationshipDealBreakersSlide />
-      <FindingCompatiblePartnerSatisfactionSlide />
-      <AppFeaturesImportanceSlide />
-    </Segment>
-  );
 }

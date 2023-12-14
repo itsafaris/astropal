@@ -3,7 +3,6 @@ import {
   PersonalInfoSegment,
   GoalSegment,
   IdealPartnerSegment,
-  RelationshipsSingleSegment,
 } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
 
@@ -27,7 +26,6 @@ export default function QuizSingle() {
           <GoalSegment />
           <PersonalInfoSegment />
           <IdealPartnerSegment />
-          <RelationshipsSingleSegment />
         </QuizUI>
       </QuizWrapper>
     </QuizPageWrapper>
