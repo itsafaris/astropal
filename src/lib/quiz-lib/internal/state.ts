@@ -356,6 +356,8 @@ export function isSlideStateValid(state: SelectorState) {
 
 export const QuizCtx = createContext<QuizCtxType>(null as any);
 
+export type QuizSnapshot = ReturnType<typeof useQuizSnapshot>;
+
 export function useQuizSnapshot() {
   return useSnapshot(useContext(QuizCtx).state);
 }
