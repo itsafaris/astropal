@@ -18,23 +18,17 @@ export default function QuizInRelationship() {
   return (
     <QuizPageWrapper>
       <QuizWrapper>
-        <Quiz_ />
+        <QuizUI
+          containerProps={{
+            minH: "100vh",
+          }}
+        >
+          <GoalSegment />
+          <PersonalInfoSegment />
+          <PartnerPersonalInfoSegment />
+          <RelationshipsNonSingleSegment />
+        </QuizUI>
       </QuizWrapper>
     </QuizPageWrapper>
-  );
-}
-
-function Quiz_() {
-  return (
-    <QuizUI
-      containerProps={{
-        minH: "100vh",
-      }}
-    >
-      <GoalSegment />
-      <PersonalInfoSegment />
-      <PartnerPersonalInfoSegment />
-      <RelationshipsNonSingleSegment />
-    </QuizUI>
   );
 }
