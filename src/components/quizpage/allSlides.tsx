@@ -184,12 +184,12 @@ export function GenderSlide() {
       size="small"
       options={[
         {
-          text: "Male",
-          imgUrl: maleImg,
-        },
-        {
           text: "Female",
           imgUrl: femaleImg,
+        },
+        {
+          text: "Male",
+          imgUrl: maleImg,
         },
         {
           text: "Other",
