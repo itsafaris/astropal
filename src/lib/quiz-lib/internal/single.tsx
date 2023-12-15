@@ -1,9 +1,11 @@
 import React, { useCallback } from "react";
-import { Text, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useSlide } from "../public/slide";
 import { SlidePropsSingle } from "../public/types";
 import { CommonSelect } from "./commonSelect";
 import { SelectorValue, SingleState, useQuizActions, useQuizSnapshot } from "./state";
+
+import { MyFormLabel } from "./ui";
 
 export type SingleSelectProps = {} & SlidePropsSingle;
 
@@ -20,12 +22,11 @@ export function SingleSelect(_: SingleSelectProps) {
 
   return (
     <Box>
-      <Text pb={2} fontWeight={"medium"} color="bg.400" fontSize={"sm"}>
-        Choose one
-      </Text>
+      <MyFormLabel>Choose one</MyFormLabel>
+
       <CommonSelect
         handleOptionClick={handleClick}
-        isOptionSelected={(optionID) => selectorState?.value?.formattedValue === optionID}
+        isOptionSelected={(optionID) => selectorState?.value?.id === optionID}
       />
     </Box>
   );

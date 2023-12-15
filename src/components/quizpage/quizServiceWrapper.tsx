@@ -50,7 +50,7 @@ export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
         });
 
         setNumerologyData({
-          zodiacSign: personalInfo.zodiac.name,
+          zodiacSign: personalInfo.yourZodiac.name,
           destinyNumber: numerologyData.destiny_number,
           favDay: numerologyData.fav_day,
           favMetal: numerologyData.fav_metal,
