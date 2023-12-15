@@ -401,7 +401,7 @@ export function LoadingAfterPersonalInfo() {
         return (
           <Fragment>
             <Title textAlign={"center"}>
-              Great <Span>{fullName}</Span>!<br /> We are updating your Spiritual DNA Profile
+              Great <Span>{fullName}</Span>!<br /> We are updating your Spiritual Profile
             </Title>
             <Selector />
           </Fragment>
@@ -1484,13 +1484,16 @@ export function YourProfileIntroFiller() {
         bgGradient: "radial(bg.400, bg.50)",
       }}
     >
-      <Title>Creation of your spiritual DNA profile</Title>
+      <Title>Creation of your Spiritual Profile</Title>
+
       <Subtitle>
         Your <Span>name</Span> and <Span>date of birth</Span> hold the key to unlocking personalized
         insights about you.
       </Subtitle>
 
-      <Image src={astroProfileImg} mb={4} borderRadius={"full"} height={"180px"} mx="auto" />
+      <Box mb={4} width={"180px"} mx={"auto"} borderRadius={"full"} overflow={"hidden"}>
+        <StaticImage alt="picture of a significant you" src="../../images/astro_profile.png" />
+      </Box>
 
       <Callout emoji="Significance of numbers">
         <Box my={2}>
@@ -1535,19 +1538,14 @@ const partnerProfileFillerStyles = {
 export function PartnerProfileIntroFiller() {
   return (
     <Slide type="filler" id={"partner-profile"} quizContainerProps={partnerProfileFillerStyles}>
-      <Title>
-        Spiritual DNA
-        <br /> of your Partner
-      </Title>
+      <Title>Lets create your partner's Spiritual Profile</Title>
+
       <Subtitle>
         The final piece needed to craft your personalized guidance is understanding your{" "}
         <Span>significant other</Span>
       </Subtitle>
-      {/* <Callout>
-        We'll ask a couple of questions about your partner to reveal compatibility insights in your
-        relationship.
-      </Callout> */}
-      <Box my={4}>
+
+      <Box mb={4} width={"180px"} mx={"auto"} borderRadius={"full"} overflow={"hidden"}>
         <StaticImage alt="picture of a significant other" src="../../images/partner.png" />
       </Box>
     </Slide>
