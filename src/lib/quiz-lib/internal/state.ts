@@ -66,7 +66,7 @@ export type BaseSelectorState = {
   confirmed: boolean;
 };
 
-export type SelectorValue = Readonly<{ idx: number; formattedValue: string }>;
+export type SelectorValue = Readonly<{ id: string; idx: number; value: string }>;
 
 export type DateValue = { year: number; month: number; day: number };
 
@@ -290,9 +290,7 @@ export function createQuizState(input: {
       if (!slideState.value) {
         slideState.value = [];
       }
-      const optionIdx = slideState.value.findIndex(
-        (o) => o.formattedValue === value.formattedValue
-      );
+      const optionIdx = slideState.value.findIndex((o) => o.value === value.value);
       if (optionIdx === -1) {
         slideState.value.push(value);
       } else {

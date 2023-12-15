@@ -23,8 +23,9 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
         {slideCtx.options?.map((option, idx) => {
           const optionID = getOptionID(slideCtx, option);
           const optionValue: SelectorValue = {
+            id: optionID,
             idx,
-            formattedValue: optionID,
+            value: option.text,
           };
           return (
             <OptionSimple
@@ -48,10 +49,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
     <Grid templateColumns={`repeat(${columns}, 1fr)`} gap={3}>
       {slideCtx.options?.map((option, idx) => {
         const optionID = getOptionID(slideCtx, option);
-        const optionValue: SelectorValue = {
-          idx,
-          formattedValue: optionID,
-        };
+        const optionValue: SelectorValue = { id: optionID, idx, value: option.text };
         return (
           <OptionWithPicture
             key={optionID}

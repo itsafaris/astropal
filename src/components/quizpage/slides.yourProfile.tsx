@@ -202,11 +202,11 @@ export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
       {({ quizState }) => {
-        const { fullName } = getPersonalInfoFromState(quizState);
+        const { yourName } = getPersonalInfoFromState(quizState);
         return (
           <Fragment>
             <Title>
-              <Text as="span">{fullName}</Text>
+              <Text as="span">{yourName}</Text>
               {", "}
               when were you born?
             </Title>
@@ -245,53 +245,6 @@ export function YourBirthPlaceSlide() {
         </Caption>
       </ImageWithCaptionWrapper>
       <Selector />
-    </Slide>
-  );
-}
-
-export function YourSimilarProfilesSlide() {
-  const theme = useTheme();
-  return (
-    <Slide
-      id="similar-profiles"
-      type="filler"
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-    >
-      {({ quizState }) => {
-        const { zodiac } = getPersonalInfoFromState(quizState);
-        return (
-          <Fragment>
-            <Title textAlign={"center"}>Your profile is ready</Title>
-            <Subtitle textAlign={"center"} color="bg.600">
-              We are currently guiding <Span>{zodiac.countOfProfiles.toLocaleString()}</Span> people
-              with profiles similar to yours, who report an average <Span>2x</Span> improvement in
-              their relationships after just <Span>two weeks</Span> using our service
-            </Subtitle>
-
-            <Flex p={8} gap={2} flexDirection={"column"}>
-              {zodiac.svgComponent &&
-                createElement(zodiac.svgComponent, {
-                  height: 160,
-                  width: "100%",
-                  fill: theme.colors.bg["200"],
-                  stroke: theme.colors.bg["600"],
-                  strokeWidth: 2,
-                })}
-              <Text
-                fontSize={"3xl"}
-                fontWeight={"semibold"}
-                textAlign={"center"}
-                fontFamily={"cursive"}
-                color="brand.500"
-              >
-                {zodiac.name}
-              </Text>
-            </Flex>
-          </Fragment>
-        );
-      }}
     </Slide>
   );
 }
@@ -380,12 +333,12 @@ export function YourProfileSummarySlide() {
       }}
     >
       {({ quizState }) => {
-        const { fullName } = getPersonalInfoFromState(quizState);
+        const { yourName } = getPersonalInfoFromState(quizState);
 
         return (
           <Fragment>
             <Title textAlign={"center"}>
-              Great <Span>{fullName}</Span>!<br /> We are updating your Spiritual Profile
+              Great <Span>{yourName}</Span>!<br /> We are updating your Spiritual Profile
             </Title>
             <Selector />
           </Fragment>
@@ -419,6 +372,56 @@ export function YourProfileSavingSlide() {
               text={state.isComplete ? `Your profile is created` : ""}
             />
             <Selector />
+          </Fragment>
+        );
+      }}
+    </Slide>
+  );
+}
+
+export function YourSimilarProfilesSlide() {
+  const theme = useTheme();
+  return (
+    <Slide
+      id="similar-profiles"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
+      {({ quizState }) => {
+        const { yourZodiac, yourGender } = getPersonalInfoFromState(quizState);
+
+        return (
+          <Fragment>
+            <Title textAlign={"center"}>{`We helped other ${yourZodiac.name} ${
+              !yourGender ? "" : yourGender === "Other" ? "people" : yourGender.toLowerCase() + "s"
+            } like you`}</Title>
+            <Subtitle textAlign={"center"} color="bg.600">
+              We are currently guiding <Span>{yourZodiac.countOfProfiles.toLocaleString()}</Span>{" "}
+              people with profiles similar to yours, who report an average <Span>2x</Span>{" "}
+              improvement in their relationships after just <Span>two weeks</Span> using our service
+            </Subtitle>
+
+            <Flex p={8} gap={2} flexDirection={"column"}>
+              {yourZodiac.svgComponent &&
+                createElement(yourZodiac.svgComponent, {
+                  height: 160,
+                  width: "100%",
+                  fill: theme.colors.bg["200"],
+                  stroke: theme.colors.bg["600"],
+                  strokeWidth: 2,
+                })}
+              <Text
+                fontSize={"3xl"}
+                fontWeight={"semibold"}
+                textAlign={"center"}
+                fontFamily={"cursive"}
+                color="brand.500"
+              >
+                {yourZodiac.name}
+              </Text>
+            </Flex>
           </Fragment>
         );
       }}
@@ -506,12 +509,19 @@ export function YourPersonalityTypeSlide() {
         },
       ]}
     >
-      <Title>Which personality type best describes you?</Title>
-      <Subtitle>
-        We merge astrological insights with your <Span>personal traits</Span> to deliver
-        individualized guidance.
-      </Subtitle>
-      <Selector />
+      {({ quizState }) => {
+        const { yourName } = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <Title>{yourName}, which personality type best describes you?</Title>
+            <Subtitle>
+              We merge astrological insights with your <Span>personal traits</Span> to deliver
+              individualized guidance.
+            </Subtitle>
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
