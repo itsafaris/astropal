@@ -13,6 +13,8 @@ import virgoImg from "@components/zodiacSigns/virgo";
 
 const RAPID_API_KEY = "d666bab423msh3c76e4627e8fc65p1a17d2jsn04a8b2236f8b";
 
+import zodiacCompatibiltyChart from "./zodiacCompatibiltyChart.json";
+
 type ZodiacSignType =
   | "aries"
   | "taurus"
@@ -71,6 +73,19 @@ interface NumerologyData {
   radical_num: string;
   radical_number: number;
   radical_ruler: string;
+}
+
+export function getZodiacCompatibility(
+  sign1: ZodiacSignType,
+  sign2: ZodiacSignType
+): {
+  value: string;
+} {
+  const RANDOM_FALLBACK_NUMBER = "14%";
+  const chart = zodiacCompatibiltyChart as Record<ZodiacSignType, Record<ZodiacSignType, string>>;
+  return {
+    value: chart[sign1][sign2] ?? RANDOM_FALLBACK_NUMBER,
+  };
 }
 
 export function getZodiacSign(birthDate: string): {

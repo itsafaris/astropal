@@ -29,11 +29,23 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     toTitleCase((state["partner-birth-name"] as ShortTextState)?.value ?? "Anonymous")
   );
 
+  const partnerBirthDate = (state["partner-birth-date"] as DateState)?.value ?? {
+    year: 1990,
+    month: 1,
+    day: 1,
+  };
+
+  const partnerZodiac = getZodiacSign(
+    new Date(partnerBirthDate.year, partnerBirthDate.month - 1, partnerBirthDate.day).toISOString()
+  );
+
   return {
     yourName,
     yourGender,
     yourBirthDate,
     yourZodiac,
     partnerName,
+    partnerBirthDate,
+    partnerZodiac,
   };
 }
