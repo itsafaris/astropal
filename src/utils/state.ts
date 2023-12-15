@@ -13,8 +13,12 @@ function splitFullName(fullName: string) {
 }
 
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
-  const _name = (state["birth-name"] as ShortTextState).value ?? "Anonymous";
-  const _birthDate = (state["birth-date"] as DateState).value ?? { year: 1990, month: 1, day: 1 };
+  const _name = (state["your-birth-name"] as ShortTextState).value ?? "Anonymous";
+  const _birthDate = (state["your-birth-date"] as DateState).value ?? {
+    year: 1990,
+    month: 1,
+    day: 1,
+  };
 
   const fullName = toTitleCase(_name);
 
