@@ -1,7 +1,7 @@
-import { Button, Flex, Image, Text, chakra, shouldForwardProp, useTheme } from "@chakra-ui/react";
-
+import { Box, Button, Flex, Text, chakra, shouldForwardProp, useTheme } from "@chakra-ui/react";
 import { isValidMotionProp, motion } from "framer-motion";
-import { ComponentProps } from "react";
+import React, { ComponentProps } from "react";
+
 import { CheckIcon, CheckIconEmpty } from "./icons";
 
 const ChakraButton = chakra(motion.button, {
@@ -55,10 +55,10 @@ export function OptionSimple({ text, icon, selectorIconType, ...rest }: OptionPr
 type OptionPropsPicture = {
   text: string;
   imgHeight: number;
-  imgUrl: string;
+  imgComponent: React.ReactNode;
 } & BaseOptionProps;
 
-export function OptionWithPicture({ imgHeight, text, imgUrl, ...rest }: OptionPropsPicture) {
+export function OptionWithPicture({ imgHeight, text, imgComponent, ...rest }: OptionPropsPicture) {
   return (
     <BaseOption
       display={"flex"}
@@ -69,7 +69,7 @@ export function OptionWithPicture({ imgHeight, text, imgUrl, ...rest }: OptionPr
       width={"full"}
       {...rest}
     >
-      <Image width={"100%"} height={imgHeight} src={imgUrl} objectFit={"contain"} />
+      <Box maxHeight={imgHeight}>{imgComponent}</Box>
       <Text>{text}</Text>
     </BaseOption>
   );

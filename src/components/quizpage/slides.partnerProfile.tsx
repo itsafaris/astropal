@@ -1,9 +1,5 @@
 import React from "react";
-import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
-
-import femaleImg from "@images/female.png";
-import maleImg from "@images/male.png";
-import neutralImg from "@images/neutral.png";
+import { Selector, Slide, Title } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { Box } from "@chakra-ui/react";
@@ -24,16 +20,18 @@ export function PartnerGenderSlide() {
       quizContainerProps={partnerProfileStyles}
       options={[
         {
-          text: "Male",
-          imgUrl: maleImg,
+          text: "Female",
+          imgComponent: <StaticImage alt="image of a female" src="../../images/female.png" />,
         },
         {
-          text: "Female",
-          imgUrl: femaleImg,
+          text: "Male",
+          imgComponent: <StaticImage alt="image of a male" src="../../images/male.png" />,
         },
         {
           text: "Other",
-          imgUrl: neutralImg,
+          imgComponent: (
+            <StaticImage alt="image of a gender neutral" src="../../images/neutral.png" />
+          ),
         },
       ]}
     >

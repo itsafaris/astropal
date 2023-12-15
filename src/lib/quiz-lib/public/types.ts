@@ -61,7 +61,7 @@ export type OptionPropsSimple = {
 } & OptionPropsCommon;
 
 export type OptionPictureProps = {
-  imgUrl: string;
+  imgComponent: React.ReactNode;
 } & OptionPropsCommon;
 
 export type SelectorPropsPicture = {
