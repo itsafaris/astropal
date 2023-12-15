@@ -1,9 +1,6 @@
 import React, { Fragment, createElement } from "react";
 import { Callout, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
 
-import femaleImg from "@images/female.png";
-import maleImg from "@images/male.png";
-import neutralImg from "@images/neutral.png";
 import colorMap from "@images/color_map.png";
 
 import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
@@ -155,15 +152,17 @@ export function YourGenderSlide() {
       options={[
         {
           text: "Female",
-          imgUrl: femaleImg,
+          imgComponent: <StaticImage alt="image of a female" src="../../images/female.png" />,
         },
         {
           text: "Male",
-          imgUrl: maleImg,
+          imgComponent: <StaticImage alt="image of a male" src="../../images/male.png" />,
         },
         {
           text: "Other",
-          imgUrl: neutralImg,
+          imgComponent: (
+            <StaticImage alt="image of a gender neutral" src="../../images/neutral.png" />
+          ),
         },
       ]}
     >

@@ -59,7 +59,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
             onClick={() => handleOptionClick(optionValue)}
             text={option.text}
             imgHeight={imgHeight}
-            imgUrl={option.imgUrl}
+            imgComponent={option.imgComponent}
           />
         );
       })}
