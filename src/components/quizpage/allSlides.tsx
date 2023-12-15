@@ -15,7 +15,6 @@ import maleImg from "@images/male.png";
 import neutralImg from "@images/neutral.png";
 import astroProfileImg from "@images/astro_profile.png";
 import colorMap from "@images/color_map.png";
-import birthdayNumerologyImg from "@images/birthday_numerology.png";
 
 import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
 import patternIcon2 from "static/images/patterns/pattern-icon-2.svg";
@@ -234,16 +233,16 @@ export function BirthDateSlide() {
               {", "}
               when were you born?
             </Title>
-            <Subtitle>
-              Your birth date determines the key indicators like <Span>Life Path Number</Span>
-            </Subtitle>
-            <Image
-              mb={8}
-              src={birthdayNumerologyImg}
-              borderRadius={"xl"}
-              height={"160px"}
-              mx="auto"
-            />
+            <Flex flexDirection={"column"} mx="auto" mb={8}>
+              <StaticImage
+                src={"../../images/birthday_numerology.png"}
+                alt="planet numerology"
+                style={{ height: 180, borderRadius: 12 }}
+              />
+              <Subtitle mb={8} fontSize={"sm"} mt={2}>
+                Your birth date determines the key indicators like <Span>Life Path Number</Span>
+              </Subtitle>
+            </Flex>
             <Selector />
           </Fragment>
         );
@@ -262,9 +261,9 @@ export function BirthPlaceSlide() {
       </Subtitle>
       <Box mb={8}>
         <StaticImage
-          layout="fullWidth"
-          src={"../../images/houses.png"}
-          alt="12 astrological houses"
+          src={"../../images/birth_inception.png"}
+          alt="child birth"
+          style={{ height: "180px", borderRadius: 16 }}
         />
       </Box>
       <Selector />
