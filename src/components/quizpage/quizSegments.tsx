@@ -1,31 +1,33 @@
 import { Segment } from "@martynasj/quiz-lib";
 
 import {
-  PartnerGenderSlide,
-  PartnerBirthNameSlide,
-  PartnerBirthDateSlide,
-  PartnerBirthPlaceSlide,
-  PartnerTemperamentSlide,
   IdealPartnerTraitsSlide,
   IdealPartnerLifestyleAspectsSlide,
   IdealPartnerApproachToConflictsSlide,
   IdealPartnerEmotionalOpennessSlide,
   IdealPartnerViewOnGrowthSlide,
-  PartnerRelationshipFeelingsSlide,
-  PartnerRelationshipImportanceSlide,
-  PartnerRelationshipFactorsSlide,
-  PartnerRelationshipConflictResolutionSlide,
   IdealPartnerRelationshipVisionSlide,
   IdealPartnerRelationshipValuesSlide,
   IdealPartnerRelationshipPastIssuesSlide,
   IdealPartnerRelationshipFindingSatisfactionSlide,
-  YourExpectationsSlide,
+} from "./slides.idealPartnerProfile";
+
+import {
+  PartnerGenderSlide,
+  PartnerBirthNameSlide,
+  PartnerBirthDateSlide,
+  PartnerBirthPlaceSlide,
+  PartnerTemperamentSlide,
+  PartnerRelationshipFeelingsSlide,
+  PartnerRelationshipImportanceSlide,
+  PartnerRelationshipFactorsSlide,
+  PartnerRelationshipConflictResolutionSlide,
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
   PartnerSpiritualProfileIntroFiller,
-  FinalizingProfileSlide,
-  FinalizingIdealPartnerProfileSlide,
-} from "./allSlides";
+} from "./slides.partnerProfile";
+
+import { ExpectationsSlide, FinalizingProfileSlide } from "./slides.shared";
 
 import {
   YourValuesAndPrioritiesSlide,
@@ -38,7 +40,7 @@ import {
   YourPersonalityTypeSlide,
   YourSpiritualInvolvementSlide,
   YourSpiritualProfileIntroSlide,
-  SimilarProfilesSlide,
+  YourSimilarProfilesSlide,
   YourGoalSlide,
   SocialProofFiller,
   YourProfileSavingSlide,
@@ -63,7 +65,7 @@ export function PersonalInfoSegment() {
       <YourColorResonanceSlide />
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />
-      <SimilarProfilesSlide />
+      <YourSimilarProfilesSlide />
       <YourPersonalityTypeSlide />
       <YourValuesAndPrioritiesSlide />
       <YourSpiritualInvolvementSlide />
@@ -87,7 +89,7 @@ export function PartnerPersonalInfoSegment() {
       <PartnerRelationshipImportanceSlide />
       <PartnerRelationshipFactorsSlide />
       <PartnerRelationshipConflictResolutionSlide />
-      <YourExpectationsSlide />
+      <ExpectationsSlide />
       <FinalizingProfileSlide />
     </Segment>
   );
@@ -105,8 +107,8 @@ export function IdealPartnerSegment() {
       <IdealPartnerRelationshipValuesSlide />
       <IdealPartnerRelationshipPastIssuesSlide />
       <IdealPartnerRelationshipFindingSatisfactionSlide />
-      <YourExpectationsSlide />
-      <FinalizingIdealPartnerProfileSlide />
+      <ExpectationsSlide />
+      <FinalizingProfileSlide />
     </Segment>
   );
 }

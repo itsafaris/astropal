@@ -242,7 +242,7 @@ export function YourBirthPlaceSlide() {
   );
 }
 
-export function SimilarProfilesSlide() {
+export function YourSimilarProfilesSlide() {
   const theme = useTheme();
   return (
     <Slide
