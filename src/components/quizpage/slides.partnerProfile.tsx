@@ -367,7 +367,7 @@ export function PartnerSpiritualProfileIntroFiller() {
       id="partner-spiritual-profile-intro"
       quizContainerProps={partnerProfileStyles}
     >
-      <Title>Lets create your partner's Spiritual Profile</Title>
+      <Title>Now, let's create your partner's Spiritual Profile</Title>
 
       <Subtitle>
         The final piece needed to craft your personalized guidance is understanding your{" "}
