@@ -275,7 +275,13 @@ export function YourBirthPlaceSlide() {
 export function SimilarProfilesSlide() {
   const theme = useTheme();
   return (
-    <Slide id="similar-profiles" type="filler">
+    <Slide
+      id="similar-profiles"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
       {({ quizState }) => {
         const { zodiac } = getPersonalInfoFromState(quizState);
         return (
@@ -391,10 +397,10 @@ export function YourProfileSummarySlide() {
       to={100}
       duration={10}
       autoProceed
-      quizContainerProps={{
-        bgGradient: "radial(bg.300, bg.50)",
-      }}
       statusText={({ progress }) => renderNumerologyData(progress)}
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
     >
       {({ quizState }) => {
         const { fullName } = getPersonalInfoFromState(quizState);
@@ -556,7 +562,15 @@ export function FinalizingIdealPartnerProfileSlide() {
 
 export function YourProfileSavingSlide() {
   return (
-    <Slide id="your-profile-saving" type="loading" duration={1} autoProceed>
+    <Slide
+      id="your-profile-saving"
+      type="loading"
+      duration={1}
+      autoProceed
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
       {({ state }) => {
         return (
           <Fragment>
@@ -1477,7 +1491,13 @@ export function SocialProofFiller() {
 
 export function YourSpiritualProfileIntroSlide() {
   return (
-    <Slide type="filler" id={"your-spiritual-profile-intro"}>
+    <Slide
+      type="filler"
+      id={"your-spiritual-profile-intro"}
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
       <Title>Creation of your Spiritual Profile</Title>
 
       <Subtitle>
