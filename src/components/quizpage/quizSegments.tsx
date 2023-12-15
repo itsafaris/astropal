@@ -1,13 +1,6 @@
 import { Segment } from "@martynasj/quiz-lib";
 
 import {
-  YourValuesAndPrioritiesSlide,
-  YourColorResonanceSlide,
-  YourGenderSlide,
-  YourBirthNameSlide,
-  YourBirthDateSlide,
-  YourBirthPlaceSlide,
-  YourProfileSummarySlide,
   PartnerGenderSlide,
   PartnerBirthNameSlide,
   PartnerBirthDateSlide,
@@ -26,20 +19,30 @@ import {
   IdealPartnerRelationshipValuesSlide,
   IdealPartnerRelationshipPastIssuesSlide,
   IdealPartnerRelationshipFindingSatisfactionSlide,
-  YourPersonalityTypeSlide,
   YourExpectationsSlide,
-  YourSpiritualInvolvementSlide,
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
-  YourSpiritualProfileIntroSlide,
   PartnerSpiritualProfileIntroFiller,
   FinalizingProfileSlide,
+  FinalizingIdealPartnerProfileSlide,
+} from "./allSlides";
+
+import {
+  YourValuesAndPrioritiesSlide,
+  YourColorResonanceSlide,
+  YourGenderSlide,
+  YourBirthNameSlide,
+  YourBirthDateSlide,
+  YourBirthPlaceSlide,
+  YourProfileSummarySlide,
+  YourPersonalityTypeSlide,
+  YourSpiritualInvolvementSlide,
+  YourSpiritualProfileIntroSlide,
   SimilarProfilesSlide,
   YourGoalSlide,
-  FinalizingIdealPartnerProfileSlide,
   SocialProofFiller,
   YourProfileSavingSlide,
-} from "./allSlides";
+} from "./slides.yourProfile";
 
 export function GoalSegment() {
   return (
