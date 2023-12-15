@@ -27,7 +27,7 @@ import {
   PartnerSpiritualProfileIntroFiller,
 } from "./slides.partnerProfile";
 
-import { ExpectationsSlide, FinalizingProfileSlide } from "./slides.shared";
+import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
 
 import {
   YourValuesAndPrioritiesSlide,
@@ -91,6 +91,7 @@ export function PartnerPersonalInfoSegment() {
       <PartnerRelationshipConflictResolutionSlide />
       <ExpectationsSlide />
       <FinalizingProfileSlide />
+      <EmailSlide />
     </Segment>
   );
 }
@@ -109,6 +110,7 @@ export function IdealPartnerSegment() {
       <IdealPartnerRelationshipFindingSatisfactionSlide />
       <ExpectationsSlide />
       <FinalizingProfileSlide />
+      <EmailSlide />
     </Segment>
   );
 }

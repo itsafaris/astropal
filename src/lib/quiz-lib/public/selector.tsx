@@ -9,6 +9,7 @@ import { ShortText } from "../internal/shortText";
 import { SingleSelect } from "../internal/single";
 import { useQuizSnapshot } from "../internal/state";
 import { useSlide } from "./slide";
+import { Email } from "../internal/email";
 
 type SelectorProps = {};
 
@@ -65,6 +66,9 @@ export function Selector({}: SelectorProps) {
       }
       case "loading": {
         return <LoadingSlide {...slide} />;
+      }
+      case "email": {
+        return <Email {...slide} />;
       }
     }
   }

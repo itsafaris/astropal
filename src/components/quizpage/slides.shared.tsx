@@ -1,5 +1,6 @@
 import React from "react";
 import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { Caption } from "./components";
 
 export const partnerProfileStyles = {
   bgGradient: "radial(#0c3439, #221139)",
@@ -70,6 +71,30 @@ export function FinalizingProfileSlide() {
           </>
         );
       }}
+    </Slide>
+  );
+}
+
+export function EmailSlide() {
+  return (
+    <Slide
+      id="your-email"
+      type="email"
+      label="Enter your email"
+      placeholder="e.g. lyra@gmail.com"
+      quizContainerProps={partnerProfileStyles}
+    >
+      <Title>What's your email?</Title>
+
+      <Caption>
+        We're thrilled to share that your personalized guidance summary is ready with insights to
+        support you on your journey. To ensure a seamless delivery, we kindly ask for your email
+        address.
+      </Caption>
+
+      <Caption>This will be used solely for sending you the summary – no spam, we promise!</Caption>
+
+      <Selector />
     </Slide>
   );
 }

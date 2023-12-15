@@ -1,13 +1,13 @@
 import { FormControl, Input } from "@chakra-ui/react";
 import { useSlide } from "../public/slide";
-import { SlidePropsShortText } from "../public/types";
+import { SlidePropsEmail } from "../public/types";
 import { ShortTextState, useQuizActions, useQuizSnapshot } from "./state";
 import { commonInputStyles } from "./commonInput";
 import { MyFormLabel } from "./ui";
 
-export type ShortTextProps = {} & SlidePropsShortText;
+export type Email = {} & SlidePropsEmail;
 
-export function ShortText({ placeholder, label }: ShortTextProps) {
+export function Email({ placeholder, label }: Email) {
   const actions = useQuizActions();
   const slide = useSlide();
   const snap = useQuizSnapshot();
@@ -22,8 +22,9 @@ export function ShortText({ placeholder, label }: ShortTextProps) {
         size={"lg"}
         placeholder={placeholder}
         value={state.value ?? ""}
+        type="email"
         onChange={(e) => {
-          actions.setShortTextInputValue(slide.id, e.target.value);
+          actions.setEmailValue(slide.id, e.target.value);
         }}
       />
     </FormControl>

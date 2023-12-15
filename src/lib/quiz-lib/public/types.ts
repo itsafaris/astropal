@@ -30,7 +30,8 @@ export type SlideProps =
   | SlidePropsDate
   | SlidePropsLocation
   | SlidePropsLoading
-  | SlidePropsFiller;
+  | SlidePropsFiller
+  | SlidePropsEmail;
 
 export type ISelectorType = SlideProps["type"];
 
@@ -90,6 +91,12 @@ export type SlidePropsSingle = {
 
 export type SlidePropsShortText = {
   type: "short-text";
+  placeholder?: string;
+  label?: string;
+} & SlidePropsBase;
+
+export type SlidePropsEmail = {
+  type: "email";
   placeholder?: string;
   label?: string;
 } & SlidePropsBase;

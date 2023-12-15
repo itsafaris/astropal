@@ -17,7 +17,8 @@ export type SelectorState =
   | DateState
   | LocationState
   | LoadingState
-  | FillerState;
+  | FillerState
+  | EmailState;
 
 export type MultiState = {
   type: "multi";
@@ -31,6 +32,11 @@ export type SingleState = {
 
 export type ShortTextState = {
   type: "short-text";
+  value?: string;
+} & BaseSelectorState;
+
+export type EmailState = {
+  type: "email";
   value?: string;
 } & BaseSelectorState;
 
@@ -303,6 +309,11 @@ export function createQuizState(input: {
       slideState.value = value;
     },
 
+    setEmailValue(selectorID: string, value: string) {
+      const slideState = state.slideStateByID[selectorID] as EmailState;
+      slideState.value = value;
+    },
+
     setDateValue(selectorID: string, value: DateValue) {
       const slideState = state.slideStateByID[selectorID] as DateState;
       slideState.value = value;
@@ -345,6 +356,16 @@ export function isSlideStateValid(state: SelectorState) {
     }
     case "short-text": {
       return state.value && state.value.trim() !== "";
+    }
+    case "email": {
+      function validateEmail(email: string): boolean {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailRegex.test(email);
+      }
+
+      const value = state.value?.trim();
+
+      return value && validateEmail(value);
     }
     default: {
       return true;
