@@ -33,6 +33,10 @@ import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
+// quizContainerProps={{
+//   bgGradient: "radial(bg.400, bg.50)",
+// }}
+
 const numerologyNumbersJson = [
   {
     Name: "Life Path Number",
@@ -123,7 +127,7 @@ function Caption(props: React.ComponentProps<typeof Text>) {
 
 // Your Goal
 
-export function GoalSlide() {
+export function YourGoalSlide() {
   return (
     <Slide
       id="your-goal"
@@ -171,7 +175,7 @@ export function GoalSlide() {
 
 // Your Info
 
-export function GenderSlide() {
+export function YourGenderSlide() {
   return (
     <Slide
       id="your-gender"
@@ -203,7 +207,7 @@ export function GenderSlide() {
   );
 }
 
-export function BirthNameSlide() {
+export function YourBirthNameSlide() {
   return (
     <Slide id="your-birth-name" type="short-text" placeholder="Your birth name (or full name)">
       <Title>What's your full name?</Title>
@@ -217,7 +221,7 @@ export function BirthNameSlide() {
   );
 }
 
-export function BirthDateSlide() {
+export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
       {({ quizState }) => {
@@ -247,7 +251,7 @@ export function BirthDateSlide() {
   );
 }
 
-export function BirthPlaceSlide() {
+export function YourBirthPlaceSlide() {
   return (
     <Slide id="your-birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where were you born?</Title>
@@ -268,7 +272,7 @@ export function BirthPlaceSlide() {
   );
 }
 
-export function FillerUserCount() {
+export function SimilarProfilesSlide() {
   const theme = useTheme();
   return (
     <Slide id="similar-profiles" type="filler">
@@ -309,7 +313,7 @@ export function FillerUserCount() {
   );
 }
 
-export function LoadingAfterPersonalInfo() {
+export function YourProfileSummarySlide() {
   const { numerologyData } = useQuizServiceWrapper();
 
   const data = numerologyData
@@ -490,7 +494,7 @@ export function PartnerBirthPlaceSlide() {
   );
 }
 
-export function LoadingAfterPartnersInfo() {
+export function FinalizingProfileSlide() {
   return (
     <Slide id="finalizing-profile" type="loading" quizContainerProps={partnerProfileFillerStyles}>
       {({ state }) => {
@@ -517,7 +521,7 @@ export function LoadingAfterPartnersInfo() {
   );
 }
 
-export function LoadingAfterIdealPartnersInfo() {
+export function FinalizingIdealPartnerProfileSlide() {
   return (
     <Slide
       id="finalizing-ideal-partner-profile"
@@ -550,7 +554,7 @@ export function LoadingAfterIdealPartnersInfo() {
   );
 }
 
-export function QuickLoading() {
+export function YourProfileSavingSlide() {
   return (
     <Slide id="your-profile-saving" type="loading" duration={1} autoProceed>
       {({ state }) => {
@@ -575,7 +579,7 @@ export function QuickLoading() {
 
 // Your Personality
 
-export function ValuesAndPrioritiesSlide() {
+export function YourValuesAndPrioritiesSlide() {
   return (
     <Slide
       id="your-values-and-priorities"
@@ -614,7 +618,7 @@ export function ValuesAndPrioritiesSlide() {
   );
 }
 
-export function PersonalityTypeSlide() {
+export function YourPersonalityTypeSlide() {
   return (
     <Slide
       id="your-personality-type"
@@ -790,7 +794,7 @@ export function PartnerPersonalityTypeSlide() {
 
 // Spiritituality
 
-export function SpiritualInvolvementSlide() {
+export function YourSpiritualInvolvementSlide() {
   return (
     <Slide
       id="your-spiritual-involvement"
@@ -843,7 +847,7 @@ function CircleDiv(props: React.ComponentProps<typeof Box>) {
   );
 }
 
-export function ColorResonanceSlide() {
+export function YourColorResonanceSlide() {
   return (
     <Slide
       id="your-color-resonance"
@@ -913,7 +917,7 @@ export function ColorResonanceSlide() {
 
 // Ideal Partner
 
-export function MustHaveTraitSlide() {
+export function IdealPartnerTraitsSlide() {
   return (
     <Slide
       id="ideal-partner-traits"
@@ -952,7 +956,7 @@ export function MustHaveTraitSlide() {
   );
 }
 
-export function SharedLifestyleAspectSlide() {
+export function IdealPartnerLifestyleAspectsSlide() {
   return (
     <Slide
       id="ideal-partner-lifestyle-aspects"
@@ -991,7 +995,7 @@ export function SharedLifestyleAspectSlide() {
   );
 }
 
-export function ApproachToConflictsSlide() {
+export function IdealPartnerApproachToConflictsSlide() {
   return (
     <Slide
       id="ideal-partner-approach-to-conflicts"
@@ -1026,7 +1030,7 @@ export function ApproachToConflictsSlide() {
   );
 }
 
-export function EmotionalOpennessSlide() {
+export function IdealPartnerEmotionalOpennessSlide() {
   return (
     <Slide
       id="ideal-partner-emotional-openness"
@@ -1057,7 +1061,7 @@ export function EmotionalOpennessSlide() {
   );
 }
 
-export function ViewOnGrowthSlide() {
+export function IdealPartnerViewOnGrowthSlide() {
   return (
     <Slide
       id="ideal-partner-view-on-growth"
@@ -1090,7 +1094,7 @@ export function ViewOnGrowthSlide() {
 
 // Relationship questions (non single)
 
-export function FeelingsAboutRelationshipSlide() {
+export function PartnerRelationshipFeelingsSlide() {
   return (
     <Slide
       id="relationship-feelings"
@@ -1126,7 +1130,7 @@ export function FeelingsAboutRelationshipSlide() {
   );
 }
 
-export function RelationshipImportanceSlide() {
+export function PartnerRelationshipImportanceSlide() {
   return (
     <Slide
       id="relationship-importance"
@@ -1162,7 +1166,7 @@ export function RelationshipImportanceSlide() {
   );
 }
 
-export function RelationshipFactorsSlide() {
+export function PartnerRelationshipFactorsSlide() {
   return (
     <Slide
       id="relationship-factors"
@@ -1198,7 +1202,7 @@ export function RelationshipFactorsSlide() {
   );
 }
 
-export function ConflictResolutionSatisfactionSlide() {
+export function PartnerRelationshipConflictResolutionSlide() {
   return (
     <Slide
       id="relationship-conflict-resolution"
@@ -1236,7 +1240,7 @@ export function ConflictResolutionSatisfactionSlide() {
 
 // Relationship questions (single)
 
-export function HealthyRelationshipVisionSlide() {
+export function IdealPartnerRelationshipVisionSlide() {
   return (
     <Slide
       id="relationship-vision"
@@ -1275,7 +1279,7 @@ export function HealthyRelationshipVisionSlide() {
   );
 }
 
-export function PotentialPartnerValuesSlide() {
+export function IdealPartnerRelationshipValuesSlide() {
   return (
     <Slide
       id="relationship-values"
@@ -1314,7 +1318,7 @@ export function PotentialPartnerValuesSlide() {
   );
 }
 
-export function RelationshipDealBreakersSlide() {
+export function IdealPartnerRelationshipPastIssuesSlide() {
   return (
     <Slide
       id="relationship-past-issues"
@@ -1353,7 +1357,7 @@ export function RelationshipDealBreakersSlide() {
   );
 }
 
-export function FindingCompatiblePartnerSatisfactionSlide() {
+export function IdealPartnerRelationshipFindingSatisfactionSlide() {
   return (
     <Slide
       id="relationship-finding-satisfaction"
@@ -1471,15 +1475,9 @@ export function SocialProofFiller() {
   );
 }
 
-export function YourProfileIntroFiller() {
+export function YourSpiritualProfileIntroSlide() {
   return (
-    <Slide
-      type="filler"
-      id={"your-spiritual-profile-intro"}
-      quizContainerProps={{
-        bgGradient: "radial(bg.400, bg.50)",
-      }}
-    >
+    <Slide type="filler" id={"your-spiritual-profile-intro"}>
       <Title>Creation of your Spiritual Profile</Title>
 
       <Subtitle>
@@ -1531,7 +1529,7 @@ const partnerProfileFillerStyles = {
   bgGradient: "radial(#0c3439, #221139)",
 };
 
-export function PartnerProfileIntroFiller() {
+export function PartnerSpiritualProfileIntroFiller() {
   return (
     <Slide
       type="filler"

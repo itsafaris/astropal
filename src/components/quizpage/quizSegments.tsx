@@ -1,51 +1,51 @@
 import { Segment } from "@martynasj/quiz-lib";
 
 import {
-  ValuesAndPrioritiesSlide,
-  ColorResonanceSlide,
-  GenderSlide,
-  BirthNameSlide,
-  BirthDateSlide,
-  BirthPlaceSlide,
-  LoadingAfterPersonalInfo,
+  YourValuesAndPrioritiesSlide,
+  YourColorResonanceSlide,
+  YourGenderSlide,
+  YourBirthNameSlide,
+  YourBirthDateSlide,
+  YourBirthPlaceSlide,
+  YourProfileSummarySlide,
   PartnerGenderSlide,
   PartnerBirthNameSlide,
   PartnerBirthDateSlide,
   PartnerBirthPlaceSlide,
   PartnerTemperamentSlide,
-  MustHaveTraitSlide,
-  SharedLifestyleAspectSlide,
-  ApproachToConflictsSlide,
-  EmotionalOpennessSlide,
-  ViewOnGrowthSlide,
-  FeelingsAboutRelationshipSlide,
-  RelationshipImportanceSlide,
-  RelationshipFactorsSlide,
-  ConflictResolutionSatisfactionSlide,
-  HealthyRelationshipVisionSlide,
-  PotentialPartnerValuesSlide,
-  RelationshipDealBreakersSlide,
-  FindingCompatiblePartnerSatisfactionSlide,
-  PersonalityTypeSlide,
+  IdealPartnerTraitsSlide,
+  IdealPartnerLifestyleAspectsSlide,
+  IdealPartnerApproachToConflictsSlide,
+  IdealPartnerEmotionalOpennessSlide,
+  IdealPartnerViewOnGrowthSlide,
+  PartnerRelationshipFeelingsSlide,
+  PartnerRelationshipImportanceSlide,
+  PartnerRelationshipFactorsSlide,
+  PartnerRelationshipConflictResolutionSlide,
+  IdealPartnerRelationshipVisionSlide,
+  IdealPartnerRelationshipValuesSlide,
+  IdealPartnerRelationshipPastIssuesSlide,
+  IdealPartnerRelationshipFindingSatisfactionSlide,
+  YourPersonalityTypeSlide,
   YourExpectationsSlide,
-  SpiritualInvolvementSlide,
+  YourSpiritualInvolvementSlide,
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
-  YourProfileIntroFiller,
-  PartnerProfileIntroFiller,
-  LoadingAfterPartnersInfo,
-  FillerUserCount,
-  GoalSlide,
-  LoadingAfterIdealPartnersInfo,
+  YourSpiritualProfileIntroSlide,
+  PartnerSpiritualProfileIntroFiller,
+  FinalizingProfileSlide,
+  SimilarProfilesSlide,
+  YourGoalSlide,
+  FinalizingIdealPartnerProfileSlide,
   SocialProofFiller,
-  QuickLoading,
+  YourProfileSavingSlide,
 } from "./allSlides";
 
 export function GoalSegment() {
   return (
     <Segment title="Your goal">
-      <GenderSlide />
-      <GoalSlide />
+      <YourGenderSlide />
+      <YourGoalSlide />
       {/* <SocialProofFiller /> */}
     </Segment>
   );
@@ -54,17 +54,17 @@ export function GoalSegment() {
 export function PersonalInfoSegment() {
   return (
     <Segment title="Your personality">
-      <YourProfileIntroFiller />
-      <BirthNameSlide />
-      <BirthDateSlide />
-      <ColorResonanceSlide />
-      <BirthPlaceSlide />
-      <QuickLoading />
-      <FillerUserCount />
-      <PersonalityTypeSlide />
-      <ValuesAndPrioritiesSlide />
-      <SpiritualInvolvementSlide />
-      <LoadingAfterPersonalInfo />
+      <YourSpiritualProfileIntroSlide />
+      <YourBirthNameSlide />
+      <YourBirthDateSlide />
+      <YourColorResonanceSlide />
+      <YourBirthPlaceSlide />
+      <YourProfileSavingSlide />
+      <SimilarProfilesSlide />
+      <YourPersonalityTypeSlide />
+      <YourValuesAndPrioritiesSlide />
+      <YourSpiritualInvolvementSlide />
+      <YourProfileSummarySlide />
     </Segment>
   );
 }
@@ -72,7 +72,7 @@ export function PersonalInfoSegment() {
 export function PartnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's personality">
-      <PartnerProfileIntroFiller />
+      <PartnerSpiritualProfileIntroFiller />
       <PartnerBirthNameSlide />
       <PartnerPersonalityTypeSlide />
       <PartnerEmotionalOpennessSlide />
@@ -80,12 +80,12 @@ export function PartnerPersonalInfoSegment() {
       <PartnerBirthDateSlide />
       <PartnerTemperamentSlide />
       <PartnerBirthPlaceSlide />
-      <FeelingsAboutRelationshipSlide />
-      <RelationshipImportanceSlide />
-      <RelationshipFactorsSlide />
-      <ConflictResolutionSatisfactionSlide />
+      <PartnerRelationshipFeelingsSlide />
+      <PartnerRelationshipImportanceSlide />
+      <PartnerRelationshipFactorsSlide />
+      <PartnerRelationshipConflictResolutionSlide />
       <YourExpectationsSlide />
-      <LoadingAfterPartnersInfo />
+      <FinalizingProfileSlide />
     </Segment>
   );
 }
@@ -93,17 +93,17 @@ export function PartnerPersonalInfoSegment() {
 export function IdealPartnerSegment() {
   return (
     <Segment title="Ideal Partner">
-      <MustHaveTraitSlide />
-      <SharedLifestyleAspectSlide />
-      <ApproachToConflictsSlide />
-      <EmotionalOpennessSlide />
-      <ViewOnGrowthSlide />
-      <HealthyRelationshipVisionSlide />
-      <PotentialPartnerValuesSlide />
-      <RelationshipDealBreakersSlide />
-      <FindingCompatiblePartnerSatisfactionSlide />
+      <IdealPartnerTraitsSlide />
+      <IdealPartnerLifestyleAspectsSlide />
+      <IdealPartnerApproachToConflictsSlide />
+      <IdealPartnerEmotionalOpennessSlide />
+      <IdealPartnerViewOnGrowthSlide />
+      <IdealPartnerRelationshipVisionSlide />
+      <IdealPartnerRelationshipValuesSlide />
+      <IdealPartnerRelationshipPastIssuesSlide />
+      <IdealPartnerRelationshipFindingSatisfactionSlide />
       <YourExpectationsSlide />
-      <LoadingAfterIdealPartnersInfo />
+      <FinalizingIdealPartnerProfileSlide />
     </Segment>
   );
 }
