@@ -113,6 +113,14 @@ function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
   return <SubtitleRaw {...props} />;
 }
 
+function ImageWithCaptionWrapper(props: React.ComponentProps<typeof Flex>) {
+  return <Flex flexDirection={"column"} mb={8} gap={2} {...props} />;
+}
+
+function Caption(props: React.ComponentProps<typeof Text>) {
+  return <Text fontSize={"sm"} color="bg.600" {...props} />;
+}
+
 // Your Goal
 
 export function GoalSlide() {
@@ -221,16 +229,16 @@ export function BirthDateSlide() {
               {", "}
               when were you born?
             </Title>
-            <Flex flexDirection={"column"} mx="auto" mb={8}>
+            <ImageWithCaptionWrapper>
               <StaticImage
                 src={"../../images/birthday_numerology.png"}
                 alt="planet numerology"
                 style={{ height: 180, borderRadius: 12 }}
               />
-              <Subtitle mb={8} fontSize={"sm"} mt={2}>
+              <Caption>
                 Your birth date determines the key indicators like <Span>Life Path Number</Span>
-              </Subtitle>
-            </Flex>
+              </Caption>
+            </ImageWithCaptionWrapper>
             <Selector />
           </Fragment>
         );
@@ -243,17 +251,18 @@ export function BirthPlaceSlide() {
   return (
     <Slide id="your-birth-place" type="location" placeholder="Your birthplace" optional>
       <Title>Where were you born?</Title>
-      <Subtitle>
-        The birthplace helps to pinpoint the arrangement of <Span>astrological houses</Span> in
-        one's birth chart
-      </Subtitle>
-      <Box mb={8}>
+
+      <ImageWithCaptionWrapper>
         <StaticImage
           src={"../../images/birth_inception.png"}
           alt="child birth"
           style={{ height: "180px", borderRadius: 16 }}
         />
-      </Box>
+        <Caption>
+          The birthplace helps to pinpoint the arrangement of <Span>astrological houses</Span> in
+          one's birth chart
+        </Caption>
+      </ImageWithCaptionWrapper>
       <Selector />
     </Slide>
   );
