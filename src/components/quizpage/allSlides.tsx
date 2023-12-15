@@ -404,6 +404,7 @@ export function YourProfileSummarySlide() {
     >
       {({ quizState }) => {
         const { fullName } = getPersonalInfoFromState(quizState);
+
         return (
           <Fragment>
             <Title textAlign={"center"}>
@@ -507,7 +508,9 @@ export function FinalizingProfileSlide() {
         return (
           <Fragment>
             <Title color="white" textAlign={"center"}>
-              {`Finalising your profile`}
+              {state.isComplete
+                ? "Congratulations! Your guidance advisor is ready"
+                : "Give us a moment to finalize your profile"}
             </Title>
             <TransitionText
               height={16}
@@ -515,8 +518,8 @@ export function FinalizingProfileSlide() {
               color="white"
               text={
                 state.isComplete
-                  ? `Your profile is now improved`
-                  : "Based on your partner's details, we're fine-tuning your personal guidance advisor"
+                  ? `Click next to access your personalized relationship guidance advisor.`
+                  : "Based on your partner's details, we're fine-tuning your personal guidance advisor."
               }
             />
             <Selector />
