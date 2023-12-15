@@ -21,16 +21,28 @@ export function PartnerGenderSlide() {
       options={[
         {
           text: "Female",
-          imgComponent: <StaticImage alt="image of a female" src="../../images/female.png" />,
+          imgComponent: (
+            <StaticImage
+              alt="image of a female"
+              src="../../images/female.png"
+              placeholder="blurred"
+            />
+          ),
         },
         {
           text: "Male",
-          imgComponent: <StaticImage alt="image of a male" src="../../images/male.png" />,
+          imgComponent: (
+            <StaticImage alt="image of a male" src="../../images/male.png" placeholder="blurred" />
+          ),
         },
         {
           text: "Other",
           imgComponent: (
-            <StaticImage alt="image of a gender neutral" src="../../images/neutral.png" />
+            <StaticImage
+              alt="image of a gender neutral"
+              src="../../images/neutral.png"
+              placeholder="blurred"
+            />
           ),
         },
       ]}
