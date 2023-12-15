@@ -76,7 +76,7 @@ export function PartnerBirthPlaceSlide() {
     <Slide
       id="partner-birth-place"
       type="location"
-      placeholder="Your birthplace"
+      placeholder="Start typing to search..."
       quizContainerProps={partnerProfileStyles}
       optional
     >
