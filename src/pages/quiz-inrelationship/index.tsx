@@ -3,7 +3,6 @@ import { QuizUI } from "@martynasj/quiz-lib";
 import {
   PartnerPersonalInfoSegment,
   PersonalInfoSegment,
-  RelationshipsNonSingleSegment,
   GoalSegment,
 } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
@@ -26,7 +25,6 @@ export default function QuizInRelationship() {
           <GoalSegment />
           <PersonalInfoSegment />
           <PartnerPersonalInfoSegment />
-          <RelationshipsNonSingleSegment />
         </QuizUI>
       </QuizWrapper>
     </QuizPageWrapper>

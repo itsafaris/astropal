@@ -53,7 +53,7 @@ export function GoalSegment() {
 
 export function PersonalInfoSegment() {
   return (
-    <Segment title="Your personality">
+    <Segment title="Your spiritual profile">
       <YourSpiritualProfileIntroSlide />
       <YourBirthNameSlide />
       <YourBirthDateSlide />
@@ -71,7 +71,7 @@ export function PersonalInfoSegment() {
 
 export function PartnerPersonalInfoSegment() {
   return (
-    <Segment title="Partner's personality">
+    <Segment title="Partner's spiritual profile">
       <PartnerSpiritualProfileIntroFiller />
       <PartnerBirthNameSlide />
       <PartnerPersonalityTypeSlide />
@@ -92,7 +92,7 @@ export function PartnerPersonalInfoSegment() {
 
 export function IdealPartnerSegment() {
   return (
-    <Segment title="Ideal Partner">
+    <Segment title="Ideal Partner's spiritual profile">
       <IdealPartnerTraitsSlide />
       <IdealPartnerLifestyleAspectsSlide />
       <IdealPartnerApproachToConflictsSlide />
@@ -106,8 +106,4 @@ export function IdealPartnerSegment() {
       <FinalizingIdealPartnerProfileSlide />
     </Segment>
   );
-}
-
-export function RelationshipsNonSingleSegment() {
-  return <Segment title="Relationship satisfaction"></Segment>;
 }
