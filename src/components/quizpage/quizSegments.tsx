@@ -13,21 +13,21 @@ import {
   PartnerBirthDateSlide,
   PartnerBirthPlaceSlide,
   PartnerTemperamentSlide,
-  mustHaveTraitSlide as MustHaveTraitSlide,
-  sharedLifestyleAspectSlide as SharedLifestyleAspectSlide,
-  approachToConflictsSlide as ApproachToConflictsSlide,
-  emotionalOpennessSlide as EmotionalOpennessSlide,
-  viewOnGrowthSlide as ViewOnGrowthSlide,
+  MustHaveTraitSlide,
+  SharedLifestyleAspectSlide,
+  ApproachToConflictsSlide,
+  EmotionalOpennessSlide,
+  ViewOnGrowthSlide,
   FeelingsAboutRelationshipSlide,
   RelationshipImportanceSlide,
   RelationshipFactorsSlide,
   ConflictResolutionSatisfactionSlide,
-  healthyRelationshipVisionSlide as HealthyRelationshipVisionSlide,
-  potentialPartnerValuesSlide as PotentialPartnerValuesSlide,
-  relationshipDealBreakersSlide as RelationshipDealBreakersSlide,
-  findingCompatiblePartnerSatisfactionSlide as FindingCompatiblePartnerSatisfactionSlide,
+  HealthyRelationshipVisionSlide,
+  PotentialPartnerValuesSlide,
+  RelationshipDealBreakersSlide,
+  FindingCompatiblePartnerSatisfactionSlide,
   PersonalityTypeSlide,
-  appFeaturesImportanceSlide as AppFeaturesImportanceSlide,
+  YourExpectationsSlide,
   SpiritualInvolvementSlide,
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
@@ -84,7 +84,7 @@ export function PartnerPersonalInfoSegment() {
       <RelationshipImportanceSlide />
       <RelationshipFactorsSlide />
       <ConflictResolutionSatisfactionSlide />
-      <AppFeaturesImportanceSlide />
+      <YourExpectationsSlide />
       <LoadingAfterPartnersInfo />
     </Segment>
   );
@@ -98,6 +98,11 @@ export function IdealPartnerSegment() {
       <ApproachToConflictsSlide />
       <EmotionalOpennessSlide />
       <ViewOnGrowthSlide />
+      <HealthyRelationshipVisionSlide />
+      <PotentialPartnerValuesSlide />
+      <RelationshipDealBreakersSlide />
+      <FindingCompatiblePartnerSatisfactionSlide />
+      <YourExpectationsSlide />
       <LoadingAfterIdealPartnersInfo />
     </Segment>
   );
@@ -105,16 +110,4 @@ export function IdealPartnerSegment() {
 
 export function RelationshipsNonSingleSegment() {
   return <Segment title="Relationship satisfaction"></Segment>;
-}
-
-export function RelationshipsSingleSegment() {
-  return (
-    <Segment title="Relationship expectations">
-      <HealthyRelationshipVisionSlide />
-      <PotentialPartnerValuesSlide />
-      <RelationshipDealBreakersSlide />
-      <FindingCompatiblePartnerSatisfactionSlide />
-      <AppFeaturesImportanceSlide />
-    </Segment>
-  );
 }
