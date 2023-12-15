@@ -12,7 +12,7 @@ export function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
 }
 
 export function ImageWithCaptionWrapper(props: React.ComponentProps<typeof Flex>) {
-  return <Flex flexDirection={"column"} mb={8} gap={2} {...props} />;
+  return <Flex flexDirection={"column"} mb={12} gap={2} {...props} />;
 }
 
 export function Caption(props: React.ComponentProps<typeof Text>) {

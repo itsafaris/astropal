@@ -187,8 +187,8 @@ export function YourBirthNameSlide() {
     >
       <Title>What's your full name?</Title>
       <ImageWithCaptionWrapper>
-        <PythagoreanNumbers width={"100%"} height={"120px"} color={"brand.400"} />
-        <Caption maxWidth={"75%"} mx="auto">
+        <PythagoreanNumbers width={"100%"} height={"unset"} color={"bg.500"} />
+        <Caption>
           <Span>Destiny Number</Span> is derived from your full name. It unveils your natural
           attractions in partnerships.
         </Caption>
@@ -214,7 +214,7 @@ export function YourBirthDateSlide() {
               <StaticImage
                 src={"../../images/birthday_numerology.png"}
                 alt="planet numerology"
-                style={{ height: 180, borderRadius: 12 }}
+                style={{ borderRadius: 12 }}
               />
               <Caption>
                 Your birth date determines the key indicators like <Span>Life Path Number</Span>
@@ -237,7 +237,7 @@ export function YourBirthPlaceSlide() {
         <StaticImage
           src={"../../images/birth_inception.png"}
           alt="child birth"
-          style={{ height: "180px", borderRadius: 16 }}
+          style={{ height: "180px", borderRadius: 12 }}
         />
         <Caption>
           The birthplace helps to pinpoint the arrangement of <Span>astrological houses</Span> in
