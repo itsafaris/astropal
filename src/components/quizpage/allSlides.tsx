@@ -512,7 +512,7 @@ export function LoadingAfterPartnersInfo() {
 export function LoadingAfterIdealPartnersInfo() {
   return (
     <Slide
-      id="updating-ideal-partner-info"
+      id="finalizing-ideal-partner-profile"
       type="loading"
       from={0}
       to={100}
@@ -908,7 +908,7 @@ export function ColorResonanceSlide() {
 export function MustHaveTraitSlide() {
   return (
     <Slide
-      id="must-have-trait"
+      id="ideal-partner-traits"
       type="single"
       variant="list"
       options={[
@@ -947,7 +947,7 @@ export function MustHaveTraitSlide() {
 export function SharedLifestyleAspectSlide() {
   return (
     <Slide
-      id="shared-lifestyle-aspect"
+      id="ideal-partner-lifestyle-aspects"
       type="single"
       variant="list"
       options={[
@@ -986,7 +986,7 @@ export function SharedLifestyleAspectSlide() {
 export function ApproachToConflictsSlide() {
   return (
     <Slide
-      id="approach-to-conflicts"
+      id="ideal-partner-approach-to-conflicts"
       type="single"
       variant="list"
       options={[
@@ -1021,7 +1021,7 @@ export function ApproachToConflictsSlide() {
 export function EmotionalOpennessSlide() {
   return (
     <Slide
-      id="emotional-openness"
+      id="ideal-partner-emotional-openness"
       type="single"
       variant="list"
       options={[
@@ -1052,7 +1052,7 @@ export function EmotionalOpennessSlide() {
 export function ViewOnGrowthSlide() {
   return (
     <Slide
-      id="view-on-growth"
+      id="ideal-partner-view-on-growth"
       type="single"
       variant="list"
       options={[
@@ -1231,7 +1231,7 @@ export function ConflictResolutionSatisfactionSlide() {
 export function HealthyRelationshipVisionSlide() {
   return (
     <Slide
-      id="healthy-relationship-vision"
+      id="relationship-vision"
       type="multi"
       variant="list"
       options={[
@@ -1270,7 +1270,7 @@ export function HealthyRelationshipVisionSlide() {
 export function PotentialPartnerValuesSlide() {
   return (
     <Slide
-      id="potential-partner-values"
+      id="relationship-values"
       type="multi"
       variant="list"
       options={[
@@ -1309,7 +1309,7 @@ export function PotentialPartnerValuesSlide() {
 export function RelationshipDealBreakersSlide() {
   return (
     <Slide
-      id="relationship-deal-breakers"
+      id="relationship-past-issues"
       type="multi"
       variant="list"
       options={[
@@ -1348,7 +1348,7 @@ export function RelationshipDealBreakersSlide() {
 export function FindingCompatiblePartnerSatisfactionSlide() {
   return (
     <Slide
-      id="finding-compatible-partner-satisfaction"
+      id="relationship-finding-satisfaction"
       type="single"
       variant="list"
       options={[
