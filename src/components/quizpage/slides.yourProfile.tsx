@@ -152,16 +152,28 @@ export function YourGenderSlide() {
       options={[
         {
           text: "Female",
-          imgComponent: <StaticImage alt="image of a female" src="../../images/female.png" />,
+          imgComponent: (
+            <StaticImage
+              alt="image of a female"
+              src="../../images/female.png"
+              placeholder="blurred"
+            />
+          ),
         },
         {
           text: "Male",
-          imgComponent: <StaticImage alt="image of a male" src="../../images/male.png" />,
+          imgComponent: (
+            <StaticImage alt="image of a male" src="../../images/male.png" placeholder="blurred" />
+          ),
         },
         {
           text: "Other",
           imgComponent: (
-            <StaticImage alt="image of a gender neutral" src="../../images/neutral.png" />
+            <StaticImage
+              alt="image of a gender neutral"
+              src="../../images/neutral.png"
+              placeholder="blurred"
+            />
           ),
         },
       ]}
@@ -603,7 +615,12 @@ export function YourSpiritualProfileIntroSlide() {
       </Subtitle>
 
       <Box mb={4} width={"180px"} mx={"auto"} borderRadius={"full"} overflow={"hidden"}>
-        <StaticImage alt="picture of a significant you" src="../../images/astro_profile.png" />
+        <StaticImage
+          alt="picture of a significant you"
+          src="../../images/astro_profile.png"
+          quality={60}
+          placeholder="blurred"
+        />
       </Box>
 
       <Callout emoji="Significance of numbers">

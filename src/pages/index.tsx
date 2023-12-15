@@ -43,12 +43,24 @@ export default function IndexPage() {
         <Flex justifyContent="center" mt={8} gap={4}>
           <Link to="/quiz-single">
             <ImageButton text="Single">
-              <StaticImage src={`../images/single_person.png`} alt="Option - single" />
+              <StaticImage
+                src={`../images/single_person.png`}
+                alt="Option - single"
+                placeholder="none"
+                width={200}
+                height={200}
+              />
             </ImageButton>
           </Link>
           <Link to="/quiz-inrelationship">
             <ImageButton text="In relationship">
-              <StaticImage src={`../images/inrelationship.png`} alt="Option - in relationship" />
+              <StaticImage
+                src={`../images/inrelationship.png`}
+                alt="Option - in relationship"
+                placeholder="none"
+                width={200}
+                height={200}
+              />
             </ImageButton>
           </Link>
         </Flex>
