@@ -1,9 +1,10 @@
-import { Box, Flex, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl, Select } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSlide } from "../public/slide";
 import { SlidePropsDate } from "../public/types";
 import { DateState, DateValue, useQuizActions, useQuizSnapshot } from "./state";
 import { commonInputStyles } from "./commonInput";
+import { MyFormLabel } from "./ui";
 
 const DEFAULT_DATE: DateValue = { year: 1990, month: 1, day: 1 };
 
@@ -48,67 +49,73 @@ export function DatePicker(_: DatePickerProps) {
   return (
     <Flex width={"full"} gap={2}>
       <Box flex={3} width={"full"}>
-        <Text color="bg.500">Day</Text>
-        <Select
-          {...commonInputStyles()}
-          onChange={(e) => {
-            const v = parseInt(e.target.value);
-            actions.setDateValue(slide.id, {
-              ...DEFAULT_DATE,
-              ...state.value,
-              day: v,
-            });
-          }}
-          value={state.value?.day ?? DEFAULT_DATE.day}
-        >
-          {days.map((day) => (
-            <option value={day} key={day}>
-              {day}
-            </option>
-          ))}
-        </Select>
+        <FormControl>
+          <MyFormLabel>Day</MyFormLabel>
+          <Select
+            {...commonInputStyles()}
+            onChange={(e) => {
+              const v = parseInt(e.target.value);
+              actions.setDateValue(slide.id, {
+                ...DEFAULT_DATE,
+                ...state.value,
+                day: v,
+              });
+            }}
+            value={state.value?.day ?? DEFAULT_DATE.day}
+          >
+            {days.map((day) => (
+              <option value={day} key={day}>
+                {day}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
       <Box flex={5} width={"full"}>
-        <Text color="bg.500">Month</Text>
-        <Select
-          {...commonInputStyles()}
-          onChange={(e) => {
-            const v = parseInt(e.target.value);
-            actions.setDateValue(slide.id, {
-              ...DEFAULT_DATE,
-              ...state.value,
-              month: v,
-            });
-          }}
-          value={state.value?.month ?? DEFAULT_DATE.month}
-        >
-          {months.map((month, idx) => (
-            <option value={idx + 1} key={month}>
-              {month}
-            </option>
-          ))}
-        </Select>
+        <FormControl>
+          <MyFormLabel>Month</MyFormLabel>
+          <Select
+            {...commonInputStyles()}
+            onChange={(e) => {
+              const v = parseInt(e.target.value);
+              actions.setDateValue(slide.id, {
+                ...DEFAULT_DATE,
+                ...state.value,
+                month: v,
+              });
+            }}
+            value={state.value?.month ?? DEFAULT_DATE.month}
+          >
+            {months.map((month, idx) => (
+              <option value={idx + 1} key={month}>
+                {month}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
       <Box flex={4} width={"full"}>
-        <Text color="bg.500">Year</Text>
-        <Select
-          {...commonInputStyles()}
-          onChange={(e) => {
-            const v = parseInt(e.target.value);
-            actions.setDateValue(slide.id, {
-              ...DEFAULT_DATE,
-              ...state.value,
-              year: v,
-            });
-          }}
-          value={state.value?.year ?? DEFAULT_DATE.year}
-        >
-          {years.map((year) => (
-            <option value={year} key={year}>
-              {year}
-            </option>
-          ))}
-        </Select>
+        <FormControl>
+          <MyFormLabel>Year</MyFormLabel>
+          <Select
+            {...commonInputStyles()}
+            onChange={(e) => {
+              const v = parseInt(e.target.value);
+              actions.setDateValue(slide.id, {
+                ...DEFAULT_DATE,
+                ...state.value,
+                year: v,
+              });
+            }}
+            value={state.value?.year ?? DEFAULT_DATE.year}
+          >
+            {years.map((year) => (
+              <option value={year} key={year}>
+                {year}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
     </Flex>
   );

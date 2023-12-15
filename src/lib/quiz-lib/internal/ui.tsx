@@ -1,4 +1,4 @@
-import { Button, Box, useTheme } from "@chakra-ui/react";
+import { Button, Box, useTheme, FormLabel } from "@chakra-ui/react";
 import { ComponentProps } from "react";
 import { useQuizActions } from "./state";
 
@@ -45,4 +45,8 @@ export function SkipButton(props: ComponentProps<typeof Button>) {
       Skip this question
     </Button>
   );
+}
+
+export function MyFormLabel(props: ComponentProps<typeof FormLabel>) {
+  return <FormLabel color="bg.800" fontWeight={"semibold"} {...props} />;
 }

@@ -114,7 +114,7 @@ function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
 }
 
 function ImageWithCaptionWrapper(props: React.ComponentProps<typeof Flex>) {
-  return <Flex flexDirection={"column"} mb={8} gap={2} {...props} />;
+  return <Flex flexDirection={"column"} mb={12} gap={2} {...props} />;
 }
 
 function Caption(props: React.ComponentProps<typeof Text>) {
@@ -205,13 +205,20 @@ export function GenderSlide() {
 
 export function BirthNameSlide() {
   return (
-    <Slide id="your-birth-name" type="short-text" placeholder="Your birth name (or full name)">
+    <Slide
+      id="your-birth-name"
+      type="short-text"
+      label="Enter your full name"
+      placeholder="e.g. Lyra Belacqua"
+    >
       <Title>What's your full name?</Title>
-      <Subtitle>
-        <Span>Destiny Number</Span> is derived from your full name. It unveils your natural
-        attractions in partnerships.
-      </Subtitle>
-      <PythagoreanNumbers mb={8} width={"100%"} height={"120px"} color={"brand.400"} />
+      <ImageWithCaptionWrapper>
+        <PythagoreanNumbers width={"100%"} height={"120px"} color={"brand.400"} />
+        <Caption maxWidth={"75%"} mx="auto">
+          <Span>Destiny Number</Span> is derived from your full name. It unveils your natural
+          attractions in partnerships.
+        </Caption>
+      </ImageWithCaptionWrapper>
       <Selector />
     </Slide>
   );

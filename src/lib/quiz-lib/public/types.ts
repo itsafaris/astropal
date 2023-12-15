@@ -91,6 +91,7 @@ export type SlidePropsSingle = {
 export type SlidePropsShortText = {
   type: "short-text";
   placeholder?: string;
+  label?: string;
 } & SlidePropsBase;
 
 export type SlidePropsDate = {

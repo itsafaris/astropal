@@ -1,4 +1,5 @@
 import { AsyncSelect } from "chakra-react-select";
+import { FormControl } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { useQuizConfig } from "../public/quizProvider";
 import { useSlide } from "../public/slide";
@@ -6,6 +7,7 @@ import { SlidePropsLocation } from "../public/types";
 import { LocationState, LocationValue, useQuizActions, useQuizSnapshot } from "./state";
 import { debounce } from "./utils";
 import { commonInputStyles } from "./commonInput";
+import { MyFormLabel } from "./ui";
 
 type SelectOptionType = LocationValue;
 
@@ -81,6 +83,7 @@ export function Location({ placeholder }: LocationProps) {
   const [inputValue, setInputValue] = useState("");
 
   const state = snap.currentSlideState as LocationState;
+  const inputStyles = commonInputStyles();
 
   const loadOptionsDebounced = useCallback(
     debounce((inputValue: string, cb: (options: SelectOptionType[]) => void) => {
@@ -97,41 +100,49 @@ export function Location({ placeholder }: LocationProps) {
   );
 
   return (
-    <AsyncSelect
-      chakraStyles={{
-        container: (provided) => ({
-          ...provided,
-          width: "full",
-        }),
-        control: (provided) => ({
-          ...provided,
-          ...commonInputStyles(),
-        }),
-      }}
-      cacheOptions
-      noOptionsMessage={() => "No locations found"}
-      onChange={(e) => {
-        actions.setLocationValue(slide.id, e ?? undefined);
-      }}
-      onInputChange={(val) => {
-        setInputValue(val);
-      }}
-      onFocus={() => {
-        setInputValue(" "); // empty string doesn't work, so using a single space here
-      }}
-      inputValue={inputValue}
-      isClearable
-      isSearchable
-      blurInputOnSelect
-      getOptionLabel={(o) => o.formattedText}
-      getOptionValue={(o) => o.placeID}
-      value={state.value}
-      openMenuOnClick={false}
-      loadOptions={loadOptionsDebounced}
-      placeholder={placeholder}
-      components={{
-        DropdownIndicator: null,
-      }}
-    />
+    <FormControl>
+      <MyFormLabel>Enter Location</MyFormLabel>
+      <AsyncSelect
+        size={"lg"}
+        chakraStyles={{
+          container: (provided) => ({
+            ...provided,
+            width: "full",
+          }),
+          control: (provided) => ({
+            ...provided,
+            ...inputStyles,
+          }),
+          placeholder: (provided) => ({
+            ...provided,
+            ...inputStyles._placeholder,
+          }),
+        }}
+        cacheOptions
+        noOptionsMessage={() => "No locations found"}
+        onChange={(e) => {
+          actions.setLocationValue(slide.id, e ?? undefined);
+        }}
+        onInputChange={(val) => {
+          setInputValue(val);
+        }}
+        onFocus={() => {
+          setInputValue(" "); // empty string doesn't work, so using a single space here
+        }}
+        inputValue={inputValue}
+        isClearable
+        isSearchable
+        blurInputOnSelect
+        getOptionLabel={(o) => o.formattedText}
+        getOptionValue={(o) => o.placeID}
+        value={state.value}
+        openMenuOnClick={false}
+        loadOptions={loadOptionsDebounced}
+        placeholder={placeholder}
+        components={{
+          DropdownIndicator: null,
+        }}
+      />
+    </FormControl>
   );
 }
