@@ -25,6 +25,7 @@ import {
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
   PartnerSpiritualProfileIntroFiller,
+  PartnerMatchScore,
 } from "./slides.partnerProfile";
 
 import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
@@ -56,6 +57,24 @@ export function GoalSegment() {
   );
 }
 
+// export function PersonalInfoSegment() {
+//   return (
+//     <Segment title="Your spiritual profile">
+//       <YourSpiritualProfileIntroSlide />
+//       <YourBirthNameSlide />
+//       <YourBirthDateSlide />
+//       <YourColorResonanceSlide />
+//       <YourBirthPlaceSlide />
+//       <YourProfileSavingSlide />
+//       <YourSimilarProfilesSlide />
+//       <YourPersonalityTypeSlide />
+//       <YourValuesAndPrioritiesSlide />
+//       <YourSpiritualInvolvementSlide />
+//       <YourProfileSummarySlide />
+//     </Segment>
+//   );
+// }
+
 export function PersonalInfoSegment() {
   return (
     <Segment title="Your spiritual profile">
@@ -64,12 +83,8 @@ export function PersonalInfoSegment() {
       <YourBirthDateSlide />
       <YourColorResonanceSlide />
       <YourBirthPlaceSlide />
-      <YourProfileSavingSlide />
-      <YourSimilarProfilesSlide />
-      <YourPersonalityTypeSlide />
-      <YourValuesAndPrioritiesSlide />
-      <YourSpiritualInvolvementSlide />
       <YourProfileSummarySlide />
+      <YourSimilarProfilesSlide />
     </Segment>
   );
 }
@@ -83,10 +98,11 @@ export function PartnerPersonalInfoSegment() {
       <PartnerEmotionalOpennessSlide />
       <PartnerGenderSlide />
       <PartnerBirthDateSlide />
+      <PartnerMatchScore />
+      <PartnerRelationshipImportanceSlide />
       <PartnerTemperamentSlide />
       <PartnerBirthPlaceSlide />
       <PartnerRelationshipFeelingsSlide />
-      <PartnerRelationshipImportanceSlide />
       <PartnerRelationshipFactorsSlide />
       <PartnerRelationshipConflictResolutionSlide />
       <ExpectationsSlide />

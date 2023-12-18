@@ -2,13 +2,14 @@ import React from "react";
 import { Selector, Slide, Title } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
 import { Span, Subtitle } from "./components";
 
 import { partnerProfileStyles } from "./slides.shared";
+import { PulsatingArrow } from "@components/svg/pulsatingArrow";
 
 export function PartnerGenderSlide() {
   return (
@@ -292,7 +293,7 @@ export function PartnerRelationshipImportanceSlide() {
         },
       ]}
     >
-      <Title>What is the most important thing to you in a relationship?</Title>
+      <Title>Which aspect would you like to improve in the first two weeks?</Title>
       <Selector />
     </Slide>
   );
@@ -387,6 +388,53 @@ export function PartnerSpiritualProfileIntroFiller() {
       <Box mb={4} width={"180px"} mx={"auto"} borderRadius={"full"} overflow={"hidden"}>
         <StaticImage alt="picture of a significant other" src="../../images/partner.png" />
       </Box>
+    </Slide>
+  );
+}
+
+export function PartnerMatchScore() {
+  return (
+    <Slide type="filler" id="partner-matching-score" quizContainerProps={partnerProfileStyles}>
+      {({ quizState }) => {
+        const { partnerName } = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <Title>You and {partnerName.firstName} are a good match!</Title>
+
+            <Text textAlign={"center"} color="bg.900">
+              This is how you match <Span>currently</Span>
+            </Text>
+            <Text color="white" opacity={0.8} textAlign="center" fontSize={90} fontWeight={"bold"}>
+              6.2
+            </Text>
+
+            {/* <Flex gap={8} alignItems={"center"}>
+              <PulsatingArrow height={"80px"} width={"unset"} />
+              <Text color="bg.800" textAlign="center" fontSize={32}>
+                +25%
+              </Text>
+            </Flex> */}
+
+            <Text textAlign={"center"} color="bg.900">
+              You can improve this score by <Span>+12%</Span> in the <Span>next week</Span>{" "}
+              following our simple guidance
+            </Text>
+            {/* <Text color="white" opacity={0.8} textAlign="center" fontSize={90} fontWeight={"bold"}>
+              74%
+            </Text>
+            <Text
+              color="white"
+              opacity={0.8}
+              textAlign="center"
+              fontSize={"lg"}
+              fontWeight={"bold"}
+            >
+              +12%
+            </Text> */}
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
