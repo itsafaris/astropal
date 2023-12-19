@@ -25,6 +25,7 @@ import {
   PartnerEmotionalOpennessSlide,
   PartnerPersonalityTypeSlide,
   PartnerSpiritualProfileIntroFiller,
+  CompatibilityScoreSlide,
   PartnerMatchScore,
 } from "./slides.partnerProfile";
 
@@ -97,7 +98,7 @@ export function PartnerPersonalInfoSegment() {
       <PartnerBirthNameSlide />
       <PartnerBirthDateSlide />
       <PartnerBirthPlaceSlide />
-      <YourProfileSavingSlide />
+      <CompatibilityScoreSlide />
       <PartnerMatchScore />
       <PartnerPersonalityTypeSlide />
       <PartnerEmotionalOpennessSlide />

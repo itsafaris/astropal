@@ -1,5 +1,5 @@
 import React from "react";
-import { Selector, Slide, Title } from "@martynasj/quiz-lib";
+import { Selector, Slide, Title, TransitionText, Callout } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Text } from "@chakra-ui/react";
@@ -438,6 +438,29 @@ export function PartnerMatchScore() {
             >
               +12%
             </Text> */}
+            <Selector />
+          </>
+        );
+      }}
+    </Slide>
+  );
+}
+
+export function CompatibilityScoreSlide() {
+  return (
+    <Slide
+      id="compatibility-score"
+      type="loading"
+      duration={3}
+      autoProceed
+      quizContainerProps={partnerProfileStyles}
+    >
+      {({ state }) => {
+        return (
+          <>
+            <Title color="white" textAlign={"center"}>
+              {`Calculating compatibility score`}
+            </Title>
             <Selector />
           </>
         );
