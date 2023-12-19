@@ -190,18 +190,13 @@ export function YourGenderSlide() {
 
 export function YourBirthNameSlide() {
   return (
-    <Slide
-      id="your-birth-name"
-      type="short-text"
-      label="Enter your full name"
-      placeholder="e.g. Lyra Belacqua"
-    >
-      <Title>What's your full name?</Title>
+    <Slide id="your-birth-name" type="short-text" label="Enter your name" placeholder="e.g. John">
+      <Title>What's your name?</Title>
       <ImageWithCaptionWrapper>
         <PythagoreanNumbers width={"100%"} height={"unset"} color={"bg.500"} />
         <Caption>
-          <Span>Destiny Number</Span> is derived from your full name. It unveils your natural
-          attractions in partnerships.
+          <Span>Destiny Number</Span> is derived from your name. It unveils your natural attractions
+          in partnerships.
         </Caption>
       </ImageWithCaptionWrapper>
       <Selector />
@@ -241,7 +236,7 @@ export function YourBirthDateSlide() {
 
 export function YourBirthPlaceSlide() {
   return (
-    <Slide id="your-birth-place" type="location" placeholder="Your birthplace" optional>
+    <Slide id="your-birth-place" type="location" placeholder="e.g. New York" optional>
       <Title>Where were you born?</Title>
 
       <ImageWithCaptionWrapper>
@@ -714,7 +709,7 @@ export function YourSummaryLoadingSlide() {
       type="loading"
       from={0}
       to={100}
-      duration={10}
+      duration={4}
       autoProceed
       statusText={({ progress }) => {
         const data = [
@@ -746,14 +741,10 @@ export function YourSummaryLoadingSlide() {
         bgGradient: "radial(bg.200, bg.50)",
       }}
     >
-      {({ quizState }) => {
-        const { yourName } = getPersonalInfoFromState(quizState);
-
+      {() => {
         return (
           <>
-            <Title textAlign={"center"}>
-              Great, <Span>{yourName}</Span>!<br /> Let's sum up your answers before we move on
-            </Title>
+            <Title textAlign={"center"}>Calculating your astrological profile</Title>
             <Selector />
           </>
         );

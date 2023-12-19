@@ -1,5 +1,5 @@
 import React from "react";
-import { Selector, Slide, Title, TransitionText, Callout } from "@martynasj/quiz-lib";
+import { Selector, Slide, Title } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Text } from "@chakra-ui/react";
@@ -48,8 +48,16 @@ export function PartnerGenderSlide() {
         },
       ]}
     >
-      <Title>What's your partner's gender?</Title>
-      <Selector />
+      {({ quizState }) => {
+        const { yourName } = getPersonalInfoFromState(quizState);
+
+        return (
+          <>
+            <Title>Let's continue, {yourName}. What's your partner's gender?</Title>
+            <Selector />
+          </>
+        );
+      }}
     </Slide>
   );
 }
@@ -59,10 +67,10 @@ export function PartnerBirthNameSlide() {
     <Slide
       id="partner-birth-name"
       type="short-text"
-      placeholder="Partner's full name"
+      placeholder="e.g. John"
       quizContainerProps={partnerProfileStyles}
     >
-      <Title>What's your partner's full name?</Title>
+      <Title>What's your partner's name?</Title>
       <Selector />
     </Slide>
   );
@@ -75,7 +83,7 @@ export function PartnerBirthDateSlide() {
         const { partnerName } = getPersonalInfoFromState(quizState);
         return (
           <>
-            <Title>When is {partnerName.firstName} born?</Title>
+            <Title>When was {partnerName.firstName} born?</Title>
             <Selector />
           </>
         );
@@ -89,7 +97,7 @@ export function PartnerBirthPlaceSlide() {
     <Slide
       id="partner-birth-place"
       type="location"
-      placeholder="Start typing to search..."
+      placeholder="e.g. New York"
       quizContainerProps={partnerProfileStyles}
       optional
     >
