@@ -182,7 +182,7 @@ export function createQuizState(input: {
         return;
       }
 
-      state.slides.push(slide);
+      state.slides.push(ref(slide));
       state.slideStateByID[slide.id] = createSlideState(slide.type);
 
       if (!state.currentSlideID) {
