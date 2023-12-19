@@ -46,11 +46,16 @@ export type ContainerPropsOverride = {
   };
 };
 
+export type NextButtonProps = {
+  title?: string;
+};
+
 export type SlidePropsBase = {
   id: string;
   optional?: boolean;
   /** When slide becomes active, these props will be applied */
   quizContainerProps?: ContainerPropsOverride;
+  nextButtonProps?: NextButtonProps;
 };
 
 export type OptionPropsCommon = {

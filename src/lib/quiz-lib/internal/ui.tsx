@@ -1,10 +1,15 @@
 import { Button, Box, useTheme, FormLabel } from "@chakra-ui/react";
 import { ComponentProps } from "react";
+
 import { useQuizActions } from "./state";
+import { useSlide } from "../public/slide";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const quiz = useQuizActions();
   const theme = useTheme();
+  const { nextButtonProps } = useSlide();
+
+  const title = nextButtonProps?.title ?? "Next";
 
   return (
     <Box mx={4} mb={4}>
@@ -23,7 +28,7 @@ export function NextButton(props: ComponentProps<typeof Button>) {
         }}
         {...props}
       >
-        Next
+        {title}
       </Button>
     </Box>
   );
