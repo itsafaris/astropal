@@ -1,8 +1,6 @@
 import React from "react";
 import { Selector, Slide, Title } from "@martynasj/quiz-lib";
 
-import { partnerProfileStyles } from "./slides.shared";
-
 export function IdealPartnerTraitsSlide() {
   return (
     <Slide
@@ -35,7 +33,6 @@ export function IdealPartnerTraitsSlide() {
           icon: "🤝",
         },
       ]}
-      quizContainerProps={partnerProfileStyles}
     >
       <Title>What trait is a must-have in your ideal partner?</Title>
       <Selector />
@@ -49,7 +46,6 @@ export function IdealPartnerLifestyleAspectsSlide() {
       id="ideal-partner-lifestyle-aspects"
       type="single"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Health and fitness",
@@ -89,7 +85,6 @@ export function IdealPartnerApproachToConflictsSlide() {
       id="ideal-partner-approach-to-conflicts"
       type="single"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Avoids conflict",
@@ -125,7 +120,6 @@ export function IdealPartnerEmotionalOpennessSlide() {
       id="ideal-partner-emotional-openness"
       type="single"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Reserved",
@@ -157,7 +151,6 @@ export function IdealPartnerViewOnGrowthSlide() {
       id="ideal-partner-view-on-growth"
       type="single"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Prefers routine and stability",
@@ -189,7 +182,6 @@ export function IdealPartnerRelationshipVisionSlide() {
       id="relationship-vision"
       type="multi"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Mutual respect",
@@ -229,7 +221,6 @@ export function IdealPartnerRelationshipValuesSlide() {
       id="relationship-values"
       type="multi"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Honesty and integrity",
@@ -269,7 +260,6 @@ export function IdealPartnerRelationshipPastIssuesSlide() {
       id="relationship-past-issues"
       type="multi"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Lack of trust",
@@ -309,7 +299,6 @@ export function IdealPartnerRelationshipFindingSatisfactionSlide() {
       id="relationship-finding-satisfaction"
       type="single"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Very satisfied",

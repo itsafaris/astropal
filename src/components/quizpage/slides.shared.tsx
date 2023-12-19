@@ -2,17 +2,12 @@ import React from "react";
 import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
 import { Caption } from "./components";
 
-export const partnerProfileStyles = {
-  bgGradient: "radial(#0c3439, #221139)",
-};
-
 export function ExpectationsSlide() {
   return (
     <Slide
       id="your-expectations"
       type="multi"
       variant="list"
-      quizContainerProps={partnerProfileStyles}
       options={[
         {
           text: "Daily spiritual advice and tips",
@@ -48,7 +43,13 @@ export function ExpectationsSlide() {
 
 export function FinalizingProfileSlide() {
   return (
-    <Slide id="finalizing-profile" type="loading" quizContainerProps={partnerProfileStyles}>
+    <Slide
+      id="finalizing-profile"
+      type="loading"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
       {({ state }) => {
         return (
           <>
@@ -77,13 +78,7 @@ export function FinalizingProfileSlide() {
 
 export function EmailSlide() {
   return (
-    <Slide
-      id="your-email"
-      type="email"
-      label="Enter your email"
-      placeholder="e.g. lyra@gmail.com"
-      quizContainerProps={partnerProfileStyles}
-    >
+    <Slide id="your-email" type="email" label="Enter your email" placeholder="e.g. lyra@gmail.com">
       <Title>What's your email?</Title>
 
       <Caption>

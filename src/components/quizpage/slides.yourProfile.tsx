@@ -104,10 +104,6 @@ export function YourGoalSlide() {
       variant="list"
       options={[
         {
-          text: "Find partner",
-          icon: "💑",
-        },
-        {
           text: "Fix relationship problems",
           icon: "🔥",
         },
@@ -116,16 +112,8 @@ export function YourGoalSlide() {
           icon: "💞",
         },
         {
-          text: "End toxic relationship",
-          icon: "💔",
-        },
-        {
-          text: "Get married",
-          icon: "💍",
-        },
-        {
-          text: "Have children",
-          icon: "🍼",
+          text: "Keep the current relationship",
+          icon: "🤗",
         },
         {
           text: "Other",
@@ -218,9 +206,9 @@ export function YourBirthDateSlide() {
             </Title>
             <ImageWithCaptionWrapper>
               <StaticImage
-                src={"../../images/birthday_numerology.png"}
-                alt="planet numerology"
-                style={{ borderRadius: 12 }}
+                src={"../../images/birth_inception.png"}
+                alt="child birth"
+                style={{ height: "180px", borderRadius: 12 }}
               />
               <Caption>
                 Your birth date determines the key indicators like <Span>Life Path Number</Span>

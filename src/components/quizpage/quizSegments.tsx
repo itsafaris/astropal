@@ -28,6 +28,8 @@ import {
   CompatibilityScoreSlide,
   CompatibilityScoreLoadingSlide,
   CompatibilityScoreGoalSlide,
+  CompatibilityScoreGoalLoadingSlide,
+  RelationshipSatisfactionLevelSlide,
 } from "./slides.partnerProfile";
 
 import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
@@ -49,16 +51,6 @@ import {
   YourProfileSavingSlide,
 } from "./slides.yourProfile";
 
-export function GoalSegment() {
-  return (
-    <Segment title="Your goal">
-      <YourGenderSlide />
-      <YourGoalSlide />
-      {/* <SocialProofFiller /> */}
-    </Segment>
-  );
-}
-
 // export function PersonalInfoSegment() {
 //   return (
 //     <Segment title="Your spiritual profile">
@@ -77,34 +69,31 @@ export function GoalSegment() {
 //   );
 // }
 
-export function PersonalInfoSegment() {
-  return (
-    <Segment title="Your spiritual profile">
-      <YourSpiritualProfileIntroSlide />
-      <YourBirthNameSlide />
-      <YourBirthDateSlide />
-      <YourColorResonanceSlide />
-      <YourBirthPlaceSlide />
-      <YourSummaryLoadingSlide />
-      <YourSimilarProfilesSlide />
-    </Segment>
-  );
-}
-
 export function PartnerPersonalInfoSegment() {
   return (
-    <Segment title="Partner's spiritual profile">
+    <Segment title="Progress">
+      <YourGoalSlide />
+      {/* <YourSpiritualProfileIntroSlide /> */}
+      <YourGenderSlide />
+      <YourBirthNameSlide />
+      <YourBirthDateSlide />
+      {/* <YourColorResonanceSlide /> */}
+      {/* <YourBirthPlaceSlide /> */}
+      <YourSummaryLoadingSlide />
+      <YourSimilarProfilesSlide />
       {/* <PartnerSpiritualProfileIntroFiller /> */}
       <PartnerGenderSlide />
       <PartnerBirthNameSlide />
       <PartnerBirthDateSlide />
-      <PartnerBirthPlaceSlide />
+      {/* <PartnerBirthPlaceSlide /> */}
       <CompatibilityScoreLoadingSlide />
       <CompatibilityScoreSlide />
+      <RelationshipSatisfactionLevelSlide />
+      <CompatibilityScoreGoalLoadingSlide />
       <CompatibilityScoreGoalSlide />
+      <PartnerRelationshipImportanceSlide />
       <PartnerPersonalityTypeSlide />
       <PartnerEmotionalOpennessSlide />
-      <PartnerRelationshipImportanceSlide />
       <PartnerTemperamentSlide />
       <PartnerRelationshipFeelingsSlide />
       <PartnerRelationshipFactorsSlide />

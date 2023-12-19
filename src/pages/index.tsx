@@ -1,11 +1,11 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Link, prefetchPathname } from "gatsby";
+import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 
-const HEADING_TITLE = "Personalized astrology report with powerful predictions";
+const HEADING_TITLE = "Personalized astrology relationship guide";
 
 export function Head() {
   const { brandName } = useSiteMetadata();

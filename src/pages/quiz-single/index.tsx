@@ -1,9 +1,5 @@
 import { QuizPageWrapper } from "@components/quizpage/pageWrapper";
-import {
-  PersonalInfoSegment,
-  GoalSegment,
-  IdealPartnerSegment,
-} from "@components/quizpage/quizSegments";
+import { IdealPartnerSegment } from "@components/quizpage/quizSegments";
 import { QuizWrapper } from "@components/quizpage/quizWrapper";
 
 import { SEO } from "@components/seo";
@@ -23,8 +19,6 @@ export default function QuizSingle() {
             minH: "100vh",
           }}
         >
-          <GoalSegment />
-          <PersonalInfoSegment />
           <IdealPartnerSegment />
         </QuizUI>
       </QuizWrapper>
