@@ -606,6 +606,7 @@ export function YourSpiritualProfileIntroSlide() {
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
+      containerProps={{ color: "bg.900" }}
     >
       <Title>Creation of your Spiritual Profile</Title>
 
@@ -623,38 +624,41 @@ export function YourSpiritualProfileIntroSlide() {
         />
       </Box>
 
-      <Callout emoji="Significance of numbers">
-        <Box my={2}>
-          <Flex
-            direction="column"
-            w="100%"
-            fontSize={"14px"}
-            color="brand.500"
-            fontStyle={"italic"}
-            fontFamily={"serif"}
-          >
-            {numerologyNumbersJson.map((n) => {
-              return (
-                <Flex key={n.Name} py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
-                  <Image src={n.imageUrl} height={"22px"} mx="auto" />
+      <Box my={8}>
+        <Text mb={2}>Significance of numbers</Text>
+        <Flex
+          direction="column"
+          w="100%"
+          fontSize={"14px"}
+          color="brand.500"
+          fontStyle={"italic"}
+          fontFamily={"serif"}
+          bg="bg.100"
+          py={2}
+          px={4}
+          borderRadius={"xl"}
+        >
+          {numerologyNumbersJson.map((n) => {
+            return (
+              <Flex key={n.Name} py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
+                <Image src={n.imageUrl} height={"22px"} mx="auto" />
 
-                  <Flex flexDirection={"column"} flex={1}>
-                    <Box>
-                      <Text color="bg.900" fontWeight={"bold"}>
-                        {n.Name}
-                      </Text>
-                    </Box>
+                <Flex flexDirection={"column"} flex={1}>
+                  <Box>
+                    <Text color="bg.900" fontWeight={"bold"}>
+                      {n.Name}
+                    </Text>
+                  </Box>
 
-                    <Box>
-                      <Text>{n["Significance in Relationships"]}</Text>
-                    </Box>
-                  </Flex>
+                  <Box>
+                    <Text>{n["Significance in Relationships"]}</Text>
+                  </Box>
                 </Flex>
-              );
-            })}
-          </Flex>
-        </Box>
-      </Callout>
+              </Flex>
+            );
+          })}
+        </Flex>
+      </Box>
     </Slide>
   );
 }
