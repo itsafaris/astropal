@@ -394,7 +394,12 @@ export function PartnerSpiritualProfileIntroFiller() {
 
 export function PartnerMatchScore() {
   return (
-    <Slide type="filler" id="partner-matching-score" quizContainerProps={partnerProfileStyles}>
+    <Slide
+      type="filler"
+      id="partner-matching-score"
+      quizContainerProps={partnerProfileStyles}
+      nextButtonProps={{ title: "I want to improve it" }}
+    >
       {({ quizState }) => {
         const { partnerName } = getPersonalInfoFromState(quizState);
         return (
