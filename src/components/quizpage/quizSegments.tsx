@@ -39,7 +39,7 @@ import {
   YourBirthNameSlide,
   YourBirthDateSlide,
   YourBirthPlaceSlide,
-  YourProfileSummarySlide,
+  YourSummaryLoadingSlide,
   YourPersonalityTypeSlide,
   YourSpiritualInvolvementSlide,
   YourSpiritualProfileIntroSlide,
@@ -85,7 +85,7 @@ export function PersonalInfoSegment() {
       <YourBirthDateSlide />
       <YourColorResonanceSlide />
       <YourBirthPlaceSlide />
-      <YourProfileSummarySlide />
+      <YourSummaryLoadingSlide />
       <YourSimilarProfilesSlide />
     </Segment>
   );

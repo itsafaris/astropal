@@ -6,21 +6,21 @@ import { getService } from "@utils/service";
 import { getPersonalInfoFromState } from "@utils/state";
 
 interface NumerologyData {
-  zodiacSign: string;
-  destinyNumber: number;
-  favDay: string;
-  favMetal: string;
-  favStone: string;
+  zodiacSign?: string;
+  destinyNumber?: number;
+  favDay?: string;
+  favMetal?: string;
+  favStone?: string;
 }
 
 const QuizServiceContext = React.createContext<{
-  numerologyData?: NumerologyData;
+  numerologyData: NumerologyData;
 } | null>(null);
 
 export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
   const state = useQuizSnapshot();
 
-  const [numerologyData, setNumerologyData] = React.useState<NumerologyData | undefined>();
+  const [numerologyData, setNumerologyData] = React.useState<NumerologyData>({});
 
   React.useEffect(() => {
     async function fetchNumerologyData() {
@@ -28,8 +28,8 @@ export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
         return;
       }
 
-      const nameState = state.slideStateByID["birth-name"] as ShortTextState;
-      const birthdateState = state.slideStateByID["birth-date"] as DateState;
+      const nameState = state.slideStateByID["your-birth-name"] as ShortTextState;
+      const birthdateState = state.slideStateByID["your-birth-date"] as DateState;
 
       if (
         nameState &&
@@ -37,8 +37,7 @@ export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
         nameState.confirmed &&
         birthdateState &&
         birthdateState.value &&
-        birthdateState.confirmed &&
-        !numerologyData
+        birthdateState.confirmed
       ) {
         const service = getService({ mock: false });
         const personalInfo = getPersonalInfoFromState(state.slideStateByID);
@@ -60,7 +59,7 @@ export function QuizServiceWrapper({ children }: PropsWithChildren<{}>) {
     }
 
     fetchNumerologyData();
-  }, [state, state.slideStateByID]);
+  }, [state.currentSlideID, state.slideStateByID]);
 
   const ctxValue = React.useMemo(() => {
     return {

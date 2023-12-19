@@ -663,44 +663,19 @@ export function YourSpiritualProfileIntroSlide() {
   );
 }
 
-export function YourProfileSummarySlide() {
+export function YourSummaryLoadingSlide() {
   const { numerologyData } = useQuizServiceWrapper();
 
-  const data = numerologyData
-    ? [
-        {
-          text: "Zodiac sign",
-          value: numerologyData.zodiacSign,
-        },
-        {
-          text: "Destiny number",
-          value: numerologyData.destinyNumber,
-        },
-        {
-          text: "Lucky day",
-          value: numerologyData.favDay,
-        },
-        {
-          text: "Matching metal",
-          value: numerologyData.favMetal,
-        },
-        {
-          text: "Lucky stone",
-          value: numerologyData.favStone,
-        },
-      ]
-    : [];
-
-  function findIntervalIndex(progressValue: number, count: Array<Record<string, any>>): number {
+  function findIntervalIndex(progressValue: number, data: Array<Record<string, any>>): number {
     if (progressValue < 0 || progressValue > 100) {
       throw new Error("ProgressValue must be between 0 and 100 inclusive.");
     }
 
-    if (count.length === 0) {
+    if (data.length === 0) {
       return -1;
     }
 
-    const intervals = count.length;
+    const intervals = data.length;
     const intervalSize = 100 / intervals;
 
     const progressInInterval = progressValue % intervalSize;
@@ -716,7 +691,7 @@ export function YourProfileSummarySlide() {
     return index;
   }
 
-  function renderNumerologyData(progressValue?: number): string {
+  function renderNumerologyData(progressValue: number, data: Array<Record<string, any>>): string {
     if (progressValue == null) {
       return "";
     }
@@ -735,13 +710,38 @@ export function YourProfileSummarySlide() {
 
   return (
     <Slide
-      id="your-profile-summary"
+      id="your-summary-loading"
       type="loading"
       from={0}
       to={100}
       duration={10}
       autoProceed
-      statusText={({ progress }) => renderNumerologyData(progress)}
+      statusText={({ progress }) => {
+        const data = [
+          {
+            text: "Zodiac sign",
+            value: numerologyData.zodiacSign ?? "",
+          },
+          {
+            text: "Destiny number",
+            value: numerologyData.destinyNumber ?? "",
+          },
+          {
+            text: "Lucky day",
+            value: numerologyData.favDay ?? "",
+          },
+          {
+            text: "Matching metal",
+            value: numerologyData.favMetal ?? "",
+          },
+          {
+            text: "Lucky stone",
+            value: numerologyData.favStone ?? "",
+          },
+        ];
+
+        return renderNumerologyData(progress, data);
+      }}
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
@@ -750,12 +750,12 @@ export function YourProfileSummarySlide() {
         const { yourName } = getPersonalInfoFromState(quizState);
 
         return (
-          <Fragment>
+          <>
             <Title textAlign={"center"}>
               Great, <Span>{yourName}</Span>!<br /> Let's sum up your answers before we move on
             </Title>
             <Selector />
-          </Fragment>
+          </>
         );
       }}
     </Slide>
