@@ -392,11 +392,28 @@ export function PartnerSpiritualProfileIntroFiller() {
   );
 }
 
-export function PartnerMatchScore() {
+export function CompatibilityScoreLoadingSlide() {
+  return (
+    <Slide
+      id="compatibility-score-loading"
+      type="loading"
+      duration={3}
+      autoProceed
+      quizContainerProps={partnerProfileStyles}
+    >
+      <Title color="white" textAlign={"center"}>
+        {`Calculating compatibility score`}
+      </Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function CompatibilityScoreSlide() {
   return (
     <Slide
       type="filler"
-      id="partner-matching-score"
+      id="compatibility-score"
       quizContainerProps={partnerProfileStyles}
       nextButtonProps={{ title: "I want to improve it" }}
     >
@@ -415,29 +432,10 @@ export function PartnerMatchScore() {
               {compatibility.value / 10}
             </Text>
 
-            {/* <Flex gap={8} alignItems={"center"}>
-              <PulsatingArrow height={"80px"} width={"unset"} />
-              <Text color="bg.800" textAlign="center" fontSize={32}>
-                +25%
-              </Text>
-            </Flex> */}
-
             <Text textAlign={"center"} color="bg.900">
               You can improve this score by <Span>+12%</Span> in the <Span>next week</Span>{" "}
               following our simple guidance
             </Text>
-            {/* <Text color="white" opacity={0.8} textAlign="center" fontSize={90} fontWeight={"bold"}>
-              74%
-            </Text>
-            <Text
-              color="white"
-              opacity={0.8}
-              textAlign="center"
-              fontSize={"lg"}
-              fontWeight={"bold"}
-            >
-              +12%
-            </Text> */}
             <Selector />
           </>
         );
@@ -446,25 +444,23 @@ export function PartnerMatchScore() {
   );
 }
 
-export function CompatibilityScoreSlide() {
+export function CompatibilityScoreGoalSlide() {
   return (
-    <Slide
-      id="compatibility-score"
-      type="loading"
-      duration={3}
-      autoProceed
-      quizContainerProps={partnerProfileStyles}
-    >
-      {({ state }) => {
-        return (
-          <>
-            <Title color="white" textAlign={"center"}>
-              {`Calculating compatibility score`}
-            </Title>
-            <Selector />
-          </>
-        );
-      }}
+    <Slide type="filler" id="compatibility-score-goal" quizContainerProps={partnerProfileStyles}>
+      <Title>Hello</Title>
+
+      <Text textAlign={"center"} color="bg.900">
+        You can improve this score by <Span>+12%</Span> in the <Span>next week</Span> following our
+        simple guidance
+      </Text>
+
+      <Box my={7}>
+        <StaticImage
+          alt="compatibility score chart"
+          src="../../images/compatibility-goal-chart.png"
+          placeholder="blurred"
+        />
+      </Box>
     </Slide>
   );
 }

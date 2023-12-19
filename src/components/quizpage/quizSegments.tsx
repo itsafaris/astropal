@@ -26,7 +26,8 @@ import {
   PartnerPersonalityTypeSlide,
   PartnerSpiritualProfileIntroFiller,
   CompatibilityScoreSlide,
-  PartnerMatchScore,
+  CompatibilityScoreLoadingSlide,
+  CompatibilityScoreGoalSlide,
 } from "./slides.partnerProfile";
 
 import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
@@ -98,8 +99,9 @@ export function PartnerPersonalInfoSegment() {
       <PartnerBirthNameSlide />
       <PartnerBirthDateSlide />
       <PartnerBirthPlaceSlide />
+      <CompatibilityScoreLoadingSlide />
       <CompatibilityScoreSlide />
-      <PartnerMatchScore />
+      <CompatibilityScoreGoalSlide />
       <PartnerPersonalityTypeSlide />
       <PartnerEmotionalOpennessSlide />
       <PartnerRelationshipImportanceSlide />
