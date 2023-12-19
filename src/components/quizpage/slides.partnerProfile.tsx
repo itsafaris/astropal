@@ -2,14 +2,14 @@ import React from "react";
 import { Selector, Slide, Title } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
 import { Span, Subtitle } from "./components";
 
 import { partnerProfileStyles } from "./slides.shared";
-import { PulsatingArrow } from "@components/svg/pulsatingArrow";
+import { getZodiacCompatibility } from "@utils/service";
 
 export function PartnerGenderSlide() {
   return (
@@ -396,7 +396,9 @@ export function PartnerMatchScore() {
   return (
     <Slide type="filler" id="partner-matching-score" quizContainerProps={partnerProfileStyles}>
       {({ quizState }) => {
-        const { partnerName } = getPersonalInfoFromState(quizState);
+        const { partnerName, yourZodiac, partnerZodiac } = getPersonalInfoFromState(quizState);
+        const compatibility = getZodiacCompatibility(yourZodiac.name, partnerZodiac.name);
+
         return (
           <>
             <Title>You and {partnerName.firstName} are a good match!</Title>
@@ -405,7 +407,7 @@ export function PartnerMatchScore() {
               This is how you match <Span>currently</Span>
             </Text>
             <Text color="white" opacity={0.8} textAlign="center" fontSize={90} fontWeight={"bold"}>
-              6.2
+              {compatibility.value / 10}
             </Text>
 
             {/* <Flex gap={8} alignItems={"center"}>

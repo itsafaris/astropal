@@ -79,10 +79,10 @@ export function getZodiacCompatibility(
   sign1: ZodiacSignType,
   sign2: ZodiacSignType
 ): {
-  value: string;
+  value: number;
 } {
-  const RANDOM_FALLBACK_NUMBER = "14%";
-  const chart = zodiacCompatibiltyChart as Record<ZodiacSignType, Record<ZodiacSignType, string>>;
+  const RANDOM_FALLBACK_NUMBER = "14";
+  const chart = zodiacCompatibiltyChart as Record<ZodiacSignType, Record<ZodiacSignType, number>>;
   return {
     value: chart[sign1][sign2] ?? RANDOM_FALLBACK_NUMBER,
   };

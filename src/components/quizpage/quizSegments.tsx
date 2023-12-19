@@ -92,16 +92,17 @@ export function PersonalInfoSegment() {
 export function PartnerPersonalInfoSegment() {
   return (
     <Segment title="Partner's spiritual profile">
-      <PartnerSpiritualProfileIntroFiller />
+      {/* <PartnerSpiritualProfileIntroFiller /> */}
+      <PartnerGenderSlide />
       <PartnerBirthNameSlide />
+      <PartnerBirthDateSlide />
+      <PartnerBirthPlaceSlide />
+      <YourProfileSavingSlide />
+      <PartnerMatchScore />
       <PartnerPersonalityTypeSlide />
       <PartnerEmotionalOpennessSlide />
-      <PartnerGenderSlide />
-      <PartnerBirthDateSlide />
-      <PartnerMatchScore />
       <PartnerRelationshipImportanceSlide />
       <PartnerTemperamentSlide />
-      <PartnerBirthPlaceSlide />
       <PartnerRelationshipFeelingsSlide />
       <PartnerRelationshipFactorsSlide />
       <PartnerRelationshipConflictResolutionSlide />
