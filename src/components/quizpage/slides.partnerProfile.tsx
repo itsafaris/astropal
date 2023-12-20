@@ -1,5 +1,5 @@
 import React, { createElement } from "react";
-import { Selector, Slide, Title } from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide, Title } from "@martynasj/quiz-lib";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Flex, Grid, Text, useTheme } from "@chakra-ui/react";
@@ -220,71 +220,165 @@ export function PartnerPersonalityTypeSlide() {
   );
 }
 
-export function PartnerRelationshipFeelingsSlide() {
+export function RelationshipFocusSlide() {
   return (
     <Slide
-      id="relationship-feelings"
+      id="relationship-focus"
       type="single"
       variant="list"
       options={[
-        {
-          text: "Very happy",
-          icon: "😊",
-        },
-        {
-          text: "Somewhat satisfied",
-          icon: "🙂",
-        },
-        {
-          text: "Neutral",
-          icon: "😐",
-        },
-        {
-          text: "Somewhat dissatisfied",
-          icon: "😕",
-        },
-        {
-          text: "Very unhappy",
-          icon: "😞",
-        },
-      ]}
-    >
-      <Title>How do you feel about your relationship?</Title>
-      <Selector />
-    </Slide>
-  );
-}
-
-export function PartnerRelationshipImportanceSlide() {
-  return (
-    <Slide
-      id="relationship-importance"
-      type="single"
-      variant="list"
-      options={[
-        {
-          text: "Trust",
-          icon: "🤝",
-        },
         {
           text: "Communication",
           icon: "💬",
         },
         {
-          text: "Passion",
-          icon: "💓",
+          text: "Intimacy",
+          icon: "❤️",
         },
         {
-          text: "Respect",
-          icon: "🙏",
+          text: "Conflict resolution",
+          icon: "🛠",
         },
         {
-          text: "Shared interests",
-          icon: "🎯",
+          text: "Personal growth",
+          icon: "🌱",
         },
       ]}
     >
-      <Title>Which aspect would you like to improve in the first two weeks?</Title>
+      <Title>Which areas of your relationship would you like to focus on?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function GuidanceActivityPreferenceSlide() {
+  return (
+    <Slide
+      id="guidance-activity-preference"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Self-guided",
+          icon: "🧘",
+        },
+        {
+          text: "Interactive",
+          icon: "🤝",
+        },
+        {
+          text: "A bit of both",
+          icon: "🤝",
+        },
+      ]}
+    >
+      <Title>Do you prefer self-guided activities or interactive sessions with your partner?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function FrequencyOfInsightsSlide() {
+  return (
+    <Slide
+      id="frequency-insights"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Daily",
+          icon: "📅",
+        },
+        {
+          text: "Few times per week",
+          icon: "📆",
+        },
+        {
+          text: "Once a week",
+          icon: "🗓",
+        },
+      ]}
+    >
+      <Title>How often would you like to receive astrological insights?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function TimeOfDayReflectionSlide() {
+  return (
+    <Slide
+      id="time-of-day-reflection"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Morning",
+          icon: "🌅",
+        },
+        {
+          text: "Afternoon",
+          icon: "🌞",
+        },
+        {
+          text: "Evening",
+          icon: "🌜",
+        },
+      ]}
+    >
+      <Title>What time of day do you prefer for reflection and guidance activities?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function GuidanceDetailLevelSlide() {
+  return (
+    <Slide
+      id="guidance-detail-level"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Detailed analysis",
+          icon: "🔍",
+        },
+        {
+          text: "Quick insights",
+          icon: "⚡",
+        },
+      ]}
+    >
+      <Title>Would you like your guidance to be detailed or brief?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function AstrologicalEventAlignmentSlide() {
+  return (
+    <Slide
+      id="astrological-event-alignment"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Very important",
+          icon: "✨",
+        },
+        {
+          text: "Somewhat important",
+          icon: "🌟",
+        },
+        {
+          text: "Not important",
+          icon: "⭐",
+        },
+      ]}
+    >
+      <Title>
+        How important is it for your guidance to align with current astrological events?
+      </Title>
       <Selector />
     </Slide>
   );
@@ -325,11 +419,42 @@ export function RelationshipSatisfactionLevelSlide() {
   );
 }
 
+export function RelationshipDurationSlide() {
+  return (
+    <Slide
+      id="relationship-duration"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Less than 6 months",
+          icon: "🌱",
+        },
+        {
+          text: "6 months to a year",
+          icon: "🍃",
+        },
+        {
+          text: "1-2 years",
+          icon: "🌿",
+        },
+        {
+          text: "More than 2 years",
+          icon: "🌲",
+        },
+      ]}
+    >
+      <Title>How long have you two been in the current relationship?</Title>
+      <Selector />
+    </Slide>
+  );
+}
+
 export function PartnerRelationshipFactorsSlide() {
   return (
     <Slide
       id="relationship-factors"
-      type="multi"
+      type="single"
       variant="list"
       options={[
         {
@@ -354,7 +479,7 @@ export function PartnerRelationshipFactorsSlide() {
         },
       ]}
     >
-      <Title>Are any of these factors currently affecting your relationship?</Title>
+      <Title>What negatively impacts your relationship the most?</Title>
       <Selector />
     </Slide>
   );
@@ -549,15 +674,12 @@ export function CompatibilityScoreGoalSlide() {
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
+      nextButtonProps={{ title: "Create my personalised guide" }}
     >
       <Title>
-        Users report 35% increase in relationship satisfaction using our Astrology Guide
+        Users with profiles similar to yours report a <Span>27%</Span> increase in relationship
+        satisfaction within the <Span>first two weeks</Span> using our Astrology Guide
       </Title>
-
-      <Text textAlign={"center"} color="bg.900">
-        You can improve this score by <Span>+12%</Span> in the <Span>next week</Span> following our
-        simple guidance
-      </Text>
 
       <Box my={7}>
         <StaticImage

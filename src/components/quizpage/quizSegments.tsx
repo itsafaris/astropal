@@ -18,8 +18,7 @@ import {
   PartnerBirthDateSlide,
   PartnerBirthPlaceSlide,
   PartnerTemperamentSlide,
-  PartnerRelationshipFeelingsSlide,
-  PartnerRelationshipImportanceSlide,
+  RelationshipFocusSlide,
   PartnerRelationshipFactorsSlide,
   PartnerRelationshipConflictResolutionSlide,
   PartnerEmotionalOpennessSlide,
@@ -30,6 +29,12 @@ import {
   CompatibilityScoreGoalSlide,
   CompatibilityScoreGoalLoadingSlide,
   RelationshipSatisfactionLevelSlide,
+  RelationshipDurationSlide,
+  FrequencyOfInsightsSlide,
+  TimeOfDayReflectionSlide,
+  GuidanceDetailLevelSlide,
+  GuidanceActivityPreferenceSlide,
+  AstrologicalEventAlignmentSlide,
 } from "./slides.partnerProfile";
 
 import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
@@ -89,15 +94,23 @@ export function PartnerPersonalInfoSegment() {
       <CompatibilityScoreLoadingSlide />
       <CompatibilityScoreSlide />
       <RelationshipSatisfactionLevelSlide />
+      <RelationshipDurationSlide />
+      <PartnerRelationshipFactorsSlide />
       <CompatibilityScoreGoalLoadingSlide />
       <CompatibilityScoreGoalSlide />
-      <PartnerRelationshipImportanceSlide />
-      <PartnerPersonalityTypeSlide />
-      <PartnerEmotionalOpennessSlide />
-      <PartnerTemperamentSlide />
-      <PartnerRelationshipFeelingsSlide />
-      <PartnerRelationshipFactorsSlide />
-      <PartnerRelationshipConflictResolutionSlide />
+    </Segment>
+  );
+}
+
+export function PersonalisedGuideCreationSegment() {
+  return (
+    <Segment title="Your personalised guide">
+      <RelationshipFocusSlide />
+      <FrequencyOfInsightsSlide />
+      <TimeOfDayReflectionSlide />
+      <GuidanceDetailLevelSlide />
+      <GuidanceActivityPreferenceSlide />
+      <AstrologicalEventAlignmentSlide />
       <ExpectationsSlide />
       <FinalizingProfileSlide />
       <EmailSlide />
