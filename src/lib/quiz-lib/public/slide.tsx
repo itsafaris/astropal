@@ -107,13 +107,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
         {realChildren}
 
         {!hideNextButton() && (
-          <Box
-            width={"full"}
-            mt={4}
-            mb={2}
-            position={state.isValid ? "sticky" : "unset"}
-            bottom={8}
-          >
+          <Box width={"full"} mt={4} mb={2} bottom={8}>
             <NextButton />
           </Box>
         )}
