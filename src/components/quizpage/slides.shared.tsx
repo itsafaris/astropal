@@ -81,16 +81,19 @@ export function FinalizingProfileSlide() {
 
 export function EmailSlide() {
   return (
-    <Slide id="your-email" type="email" placeholder="e.g. lyra@gmail.com">
+    <Slide
+      id="your-email"
+      type="email"
+      placeholder="Enter your email"
+      nextButtonProps={{ title: "Submit" }}
+    >
       <Title>We're out of free service slots at the moment</Title>
       <Callout emoji="⚠️ New users limit reached">
         We have reached the capacity of new users limit. You can leave your email below and we will
         send you the invite link once we're ready to onboard new users.
       </Callout>
       <Selector />
-      <Caption mb={8}>
-        Your email will only be used to send you the code to receive your guide.
-      </Caption>
+      <Caption mb={8}>Your email will only be used to send you the invite link.</Caption>
     </Slide>
   );
 }

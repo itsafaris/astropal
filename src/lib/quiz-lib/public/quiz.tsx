@@ -80,7 +80,7 @@ function DebugUI() {
       >
         {quiz.slides.map((s, idx) => {
           return (
-            <option value={s.id}>
+            <option key={s.id} value={s.id}>
               {idx + 1} - {s.id}
             </option>
           );
