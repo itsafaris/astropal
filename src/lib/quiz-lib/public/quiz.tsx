@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FlexProps } from "@chakra-ui/react";
+import { Box, Button, Flex, FlexProps, Grid, Select, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 
 import { useQuizActions, useQuizSnapshot } from "../internal/state";
@@ -53,12 +53,16 @@ function DebugUI() {
   const quiz = useQuizSnapshot();
   const actions = useQuizActions();
   return (
-    <Flex style={{ background: "yellow" }} gap={2} p={1}>
-      <span>debug </span>
-      <span>current idx: {quiz.currentIdx}</span>
-      <span>total: {quiz.slideCount}</span>
+    <Grid
+      style={{ background: "black" }}
+      gap={2}
+      p={1}
+      autoFlow={"column"}
+      autoColumns={"max-content"}
+      color="white"
+    >
+      <Text>total: {quiz.slideCount}</Text>
       <Button
-        variant={"outline"}
         size="xs"
         onClick={() => {
           actions.goToPrev();
@@ -67,7 +71,6 @@ function DebugUI() {
         prev
       </Button>
       <Button
-        variant={"outline"}
         size="xs"
         onClick={() => {
           actions.goToNext();
@@ -75,7 +78,22 @@ function DebugUI() {
       >
         next
       </Button>
-    </Flex>
+      <Select
+        size="xs"
+        onChange={(e) => {
+          actions.goToSlideID(e.target.value);
+        }}
+        value={quiz.currentSlideID}
+      >
+        {quiz.slides.map((s, idx) => {
+          return (
+            <option value={s.id}>
+              {idx + 1} - {s.id}
+            </option>
+          );
+        })}
+      </Select>
+    </Grid>
   );
 }
 
