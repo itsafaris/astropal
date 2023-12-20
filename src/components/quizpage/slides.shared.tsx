@@ -1,5 +1,5 @@
 import React from "react";
-import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
 import { Caption } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box } from "@chakra-ui/react";
@@ -56,10 +56,10 @@ export function FinalizingProfileSlide() {
       {({ state }) => {
         return (
           <>
-            <Title color="white" textAlign={"center"}>
+            <Title color="white" textAlign={"center"} height={20}>
               {state.isComplete
                 ? "Congratulations! Your Astrology Guide is ready"
-                : "Give us a moment to finalize your profile"}
+                : "We're creating your personalised Astrology Guide"}
             </Title>
             {/* <TransitionText
               height={16}
@@ -81,15 +81,16 @@ export function FinalizingProfileSlide() {
 
 export function EmailSlide() {
   return (
-    <Slide id="your-email" type="email" label="Enter your email" placeholder="e.g. lyra@gmail.com">
-      <Title>What's your email?</Title>
-      <Caption>
-        We're thrilled to share that your personalized guidance summary is ready with insights to
-        support you on your journey. To ensure a seamless delivery, we kindly ask for your email
-        address.
-      </Caption>
-      <Caption>This will be used solely for sending you the summary - no spam, we promise!</Caption>
+    <Slide id="your-email" type="email" placeholder="e.g. lyra@gmail.com">
+      <Title>We're out of free service slots at the moment</Title>
+      <Callout emoji="⚠️ New users limit reached">
+        We have reached the capacity of new users limit. You can leave your email below and we will
+        send you the invite link once we're ready to onboard new users.
+      </Callout>
       <Selector />
+      <Caption mb={8}>
+        Your email will only be used to send you the code to receive your guide.
+      </Caption>
     </Slide>
   );
 }
