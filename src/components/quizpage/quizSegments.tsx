@@ -127,7 +127,7 @@ export function PersonalisedGuideCreationSegment() {
 
 export function IdealPartnerSegment() {
   return (
-    <Segment title="Ideal Partner's spiritual profile">
+    <Segment title="Progress">
       <SingleRelationshipYourGoalSlide />
       <YourGenderSlide />
       <YourBirthNameSlide />
