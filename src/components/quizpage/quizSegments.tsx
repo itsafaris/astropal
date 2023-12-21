@@ -37,7 +37,12 @@ import {
   AstrologicalEventAlignmentSlide,
 } from "./slides.partnerProfile";
 
-import { ExpectationsSlide, FinalizingProfileSlide, EmailSlide } from "./slides.shared";
+import {
+  ExpectationsSlide,
+  FinalizingProfileSlide,
+  EmailSlide,
+  ThankYouSlide,
+} from "./slides.shared";
 
 import {
   YourValuesAndPrioritiesSlide,
@@ -114,6 +119,7 @@ export function PersonalisedGuideCreationSegment() {
       <ExpectationsSlide />
       <FinalizingProfileSlide />
       <EmailSlide />
+      <ThankYouSlide />
     </Segment>
   );
 }
@@ -133,6 +139,7 @@ export function IdealPartnerSegment() {
       <ExpectationsSlide />
       <FinalizingProfileSlide />
       <EmailSlide />
+      <ThankYouSlide />
     </Segment>
   );
 }
