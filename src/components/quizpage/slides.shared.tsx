@@ -97,3 +97,12 @@ export function EmailSlide() {
     </Slide>
   );
 }
+
+export function ThankYouSlide() {
+  return (
+    <Slide id="thank-you" type="filler">
+      <Title>Thank you!</Title>
+      <Callout emoji="🎉">We will get in contact with you as soon as possible.</Callout>
+    </Slide>
+  );
+}

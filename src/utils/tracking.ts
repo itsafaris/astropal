@@ -33,6 +33,16 @@ function sendToGTM(e: TrackingEvent) {
   });
 }
 
+export function trackPixel(event: string, properties: Record<string, any>) {
+  if (typeof window === "undefined") {
+    return;
+  }
+  if (!(window as any).fbq) {
+    return;
+  }
+  (window as any).fbq("track", event, properties);
+}
+
 function trackMixpanel(props: TrackingEvent) {
   const { name, properties } = props;
   mixpanel.track(name, { ...properties });

@@ -68,6 +68,13 @@ const config: GatsbyConfig = {
     // },
 
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: "301262778962457",
+      },
+    },
+
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/favicon.png",
