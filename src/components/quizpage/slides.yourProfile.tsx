@@ -130,6 +130,36 @@ export function YourGoalSlide() {
   );
 }
 
+export function SingleRelationshipYourGoalSlide() {
+  return (
+    <Slide
+      id="your-goal-single"
+      type="multi"
+      variant="list"
+      options={[
+        {
+          text: "Find a soulmate",
+          icon: "💞",
+        },
+        {
+          text: "Self improvement",
+          icon: "🤗",
+        },
+        {
+          text: "Other",
+          icon: "",
+        },
+      ]}
+    >
+      <Title>What are your primary goals regarding relationships?</Title>
+      <Subtitle>
+        Knowing your <Span>goal</Span> will allow us to provide more tailored advice to you.
+      </Subtitle>
+      <Selector />
+    </Slide>
+  );
+}
+
 export function YourGenderSlide() {
   return (
     <Slide

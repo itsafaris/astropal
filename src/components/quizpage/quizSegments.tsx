@@ -59,6 +59,7 @@ import {
   YourGoalSlide,
   SocialProofFiller,
   YourProfileSavingSlide,
+  SingleRelationshipYourGoalSlide,
 } from "./slides.yourProfile";
 
 // export function PersonalInfoSegment() {
@@ -127,15 +128,21 @@ export function PersonalisedGuideCreationSegment() {
 export function IdealPartnerSegment() {
   return (
     <Segment title="Ideal Partner's spiritual profile">
+      <SingleRelationshipYourGoalSlide />
+      <YourGenderSlide />
+      <YourBirthNameSlide />
+      <YourBirthDateSlide />
+      <YourSummaryLoadingSlide />
+      <YourSimilarProfilesSlide />
+      <IdealPartnerRelationshipFindingSatisfactionSlide />
       <IdealPartnerTraitsSlide />
       <IdealPartnerLifestyleAspectsSlide />
       <IdealPartnerApproachToConflictsSlide />
-      <IdealPartnerEmotionalOpennessSlide />
-      <IdealPartnerViewOnGrowthSlide />
-      <IdealPartnerRelationshipVisionSlide />
-      <IdealPartnerRelationshipValuesSlide />
+      {/* <IdealPartnerEmotionalOpennessSlide /> */}
+      {/* <IdealPartnerViewOnGrowthSlide /> */}
+      {/* <IdealPartnerRelationshipVisionSlide />
+      <IdealPartnerRelationshipValuesSlide /> */}
       <IdealPartnerRelationshipPastIssuesSlide />
-      <IdealPartnerRelationshipFindingSatisfactionSlide />
       <ExpectationsSlide />
       <FinalizingProfileSlide />
       <EmailSlide />
