@@ -9,6 +9,7 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { Span, Subtitle } from "./components";
 
 import { getZodiacCompatibility } from "@utils/service";
+import { toTitleCase } from "@utils/string";
 
 export function PartnerGenderSlide() {
   return (
@@ -413,7 +414,7 @@ export function RelationshipSatisfactionLevelSlide() {
         },
       ]}
     >
-      <Title>How satisfied are you with your current relationship?</Title>
+      <Title>Satisfaction is the key to healthy relationship. How satisfied are you?</Title>
       <Selector />
     </Slide>
   );
@@ -476,6 +477,10 @@ export function PartnerRelationshipFactorsSlide() {
         {
           text: "Family obligations",
           icon: "👪",
+        },
+        {
+          text: "None of the above",
+          icon: "",
         },
       ]}
     >
@@ -599,20 +604,24 @@ export function CompatibilityScoreSlide() {
 
         return (
           <>
-            <Title>Your astrological profiles</Title>
-            {/* <Title>Here's the how astrologicaly compatible you two are</Title> */}
+            <Title textAlign={"center"}>
+              Your astrological compatibility is {compatibility.value}%. Don't worry if it seems low
+              - we know how to <Span>strengthen</Span> {toTitleCase(yourZodiac.name)} and{" "}
+              {toTitleCase(partnerZodiac.name)} relationship bonds
+            </Title>
 
-            <Grid width={"full"} gridTemplateColumns={"auto 1fr auto"} my={6}>
+            <Grid gridTemplateColumns={"auto 1fr auto"} alignItems={"center"} my={4} gap={4}>
               <Flex gap={2} flexDirection={"column"}>
                 {yourZodiac.svgComponent &&
                   createElement(yourZodiac.svgComponent, {
-                    height: 90,
+                    height: 70,
                     width: "100%",
                     fill: theme.colors.bg["200"],
                     stroke: theme.colors.bg["600"],
+
                     strokeWidth: 2,
                   })}
-                <Text
+                {/* <Text
                   fontSize={"xl"}
                   fontWeight={"semibold"}
                   textAlign={"center"}
@@ -620,30 +629,29 @@ export function CompatibilityScoreSlide() {
                   color="brand.500"
                 >
                   {yourZodiac.name}
-                </Text>
+                </Text> */}
               </Flex>
 
               <Text
-                color="white"
+                color="brand.500"
                 opacity={0.8}
                 textAlign="center"
-                fontSize={70}
+                fontSize={60}
                 fontWeight={"bold"}
               >
-                {compatibility.value}
-                <span style={{ fontSize: 30 }}>%</span>
+                {compatibility.value}%
               </Text>
 
               <Flex gap={2} flexDirection={"column"}>
                 {partnerZodiac.svgComponent &&
                   createElement(partnerZodiac.svgComponent, {
-                    height: 90,
+                    height: 70,
                     width: "100%",
                     fill: theme.colors.bg["200"],
                     stroke: theme.colors.bg["600"],
                     strokeWidth: 2,
                   })}
-                <Text
+                {/* <Text
                   fontSize={"xl"}
                   fontWeight={"semibold"}
                   textAlign={"center"}
@@ -651,13 +659,10 @@ export function CompatibilityScoreSlide() {
                   color="brand.500"
                 >
                   {partnerZodiac.name}
-                </Text>
+                </Text> */}
               </Flex>
             </Grid>
 
-            <Text textAlign={"center"} color="bg.900" fontSize={"xl"}>
-              Dont worry if score seems low
-            </Text>
             <Selector />
           </>
         );

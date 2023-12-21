@@ -28,6 +28,7 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const partnerName = splitFullName(
     toTitleCase((state["partner-birth-name"] as ShortTextState)?.value ?? "Anonymous")
   );
+  const partnerGender = (state["partner-gender"] as SingleState)?.value?.value;
 
   const partnerBirthDate = (state["partner-birth-date"] as DateState)?.value ?? {
     year: 1990,
@@ -46,6 +47,7 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourZodiac,
     partnerName,
     partnerBirthDate,
+    partnerGender,
     partnerZodiac,
   };
 }

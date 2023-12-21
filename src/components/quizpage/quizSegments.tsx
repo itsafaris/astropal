@@ -76,7 +76,7 @@ import {
 
 export function PartnerPersonalInfoSegment() {
   return (
-    <Segment title="Progress">
+    <Segment title="Your relationship">
       <YourGoalSlide />
       {/* <YourSpiritualProfileIntroSlide /> */}
       <YourGenderSlide />
