@@ -269,7 +269,7 @@ export function GuidanceActivityPreferenceSlide() {
         },
         {
           text: "A bit of both",
-          icon: "🤝",
+          icon: "😊",
         },
       ]}
     >
