@@ -4,7 +4,6 @@ import {
   YourBirthNameSlide,
   YourBirthDateSlide,
   YourBirthPlaceSlide,
-  IntroSlide,
   YourProfileSavingSlide,
   YourSimilarProfilesSlide,
 } from "./slides.yourProfile";
@@ -12,8 +11,7 @@ import {
 export function Quiz() {
   return (
     <Segment title="Progress">
-      <IntroSlide />
-      <YourBirthNameSlide />
+      {/* <YourBirthNameSlide /> */}
       <YourBirthDateSlide />
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />

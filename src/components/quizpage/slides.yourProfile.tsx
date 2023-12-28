@@ -193,19 +193,8 @@ export function YourBirthNameSlide() {
 export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
-      {({ quizState }) => {
-        const { yourName } = getPersonalInfoFromState(quizState);
-        return (
-          <Fragment>
-            <Title>
-              <Text as="span">{yourName}</Text>
-              {", "}
-              when were you born?
-            </Title>
-            <Selector />
-          </Fragment>
-        );
-      }}
+      <Title>When were you born?</Title>
+      <Selector />
     </Slide>
   );
 }
@@ -553,36 +542,6 @@ export function SocialProofFiller() {
           ),
         }}
       />
-    </Slide>
-  );
-}
-
-export function IntroSlide() {
-  return (
-    <Slide
-      type="filler"
-      id={"intro"}
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-      containerProps={{ color: "bg.900" }}
-    >
-      <Title>We will ask you a couple of questions</Title>
-
-      <Text mb={2}>
-        To provide you valuabale personalized astrological insights we will ask you following
-        questions:
-      </Text>
-      <Text mb={2}>- Your name</Text>
-      <Text mb={2}>- Your birth date</Text>
-      <Text mb={2}>- Your birth time</Text>
-      <Text mb={2}>- Your birth location</Text>
-
-      <Text mb={2}>
-        The more you tell us better but keep in mind you can skip some of the questions if you dont
-        know answers
-      </Text>
-      <Text mb={2}>We dont store your answers so everything is fully anonymous and safe.</Text>
     </Slide>
   );
 }
