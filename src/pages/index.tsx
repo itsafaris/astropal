@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { PropsWithChildren } from "react";
 
-const HEADING_TITLE = "Personalized astrology relationship guide";
+const HEADING_TITLE = "Your own hyper personalized astrologer";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -27,31 +27,24 @@ export default function IndexPage() {
             Astropal
           </Text>
         </Box>
+
         <Heading mb={12} as="h1" size="xl" textAlign="center">
           {HEADING_TITLE}
         </Heading>
+
         <Text my={8} fontSize="lg" textAlign="center" color="bg.400">
           Complete a{" "}
           <Text as="span" fontWeight={"bold"} color="brand.500">
-            1-minute
+            45-second
           </Text>{" "}
-          quiz to get a personalized prediction.
+          quiz to get a first insight
         </Text>
+
         <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"}>
           What is your relationship status?
         </Text>
+
         <Flex justifyContent="center" mt={8} gap={4}>
-          <Link to="/quiz-single">
-            <ImageButton text="Single">
-              <StaticImage
-                src={`../images/single_person.png`}
-                alt="Option - single"
-                placeholder="none"
-                width={200}
-                height={200}
-              />
-            </ImageButton>
-          </Link>
           <Link to="/quiz-inrelationship">
             <ImageButton text="In relationship">
               <StaticImage

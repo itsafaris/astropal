@@ -130,36 +130,6 @@ export function YourGoalSlide() {
   );
 }
 
-export function SingleRelationshipYourGoalSlide() {
-  return (
-    <Slide
-      id="your-goal-single"
-      type="multi"
-      variant="list"
-      options={[
-        {
-          text: "Find a soulmate",
-          icon: "💞",
-        },
-        {
-          text: "Self improvement",
-          icon: "🤗",
-        },
-        {
-          text: "Other",
-          icon: "",
-        },
-      ]}
-    >
-      <Title>What are your primary goals regarding relationships?</Title>
-      <Subtitle>
-        Knowing your <Span>goal</Span> will allow us to provide more tailored advice to you.
-      </Subtitle>
-      <Selector />
-    </Slide>
-  );
-}
-
 export function YourGenderSlide() {
   return (
     <Slide
@@ -208,15 +178,13 @@ export function YourGenderSlide() {
 
 export function YourBirthNameSlide() {
   return (
-    <Slide id="your-birth-name" type="short-text" label="Enter your name" placeholder="e.g. John">
-      <Title>What's your name?</Title>
-      <ImageWithCaptionWrapper>
-        <PythagoreanNumbers width={"100%"} height={"unset"} color={"bg.500"} />
-        <Caption>
-          <Span>Destiny Number</Span> is derived from your name. It unveils your natural attractions
-          in partnerships.
-        </Caption>
-      </ImageWithCaptionWrapper>
+    <Slide
+      id="your-birth-name"
+      type="short-text"
+      label="Your birth name"
+      placeholder="e.g. John / Jessica"
+    >
+      <Title>What's your birth name?</Title>
       <Selector />
     </Slide>
   );
@@ -234,16 +202,6 @@ export function YourBirthDateSlide() {
               {", "}
               when were you born?
             </Title>
-            <ImageWithCaptionWrapper>
-              <StaticImage
-                src={"../../images/birth_inception.png"}
-                alt="child birth"
-                style={{ height: "180px", borderRadius: 12 }}
-              />
-              <Caption>
-                Your birth date determines the key indicators like <Span>Life Path Number</Span>
-              </Caption>
-            </ImageWithCaptionWrapper>
             <Selector />
           </Fragment>
         );
@@ -256,18 +214,6 @@ export function YourBirthPlaceSlide() {
   return (
     <Slide id="your-birth-place" type="location" placeholder="e.g. New York" optional>
       <Title>Where were you born?</Title>
-
-      <ImageWithCaptionWrapper>
-        <StaticImage
-          src={"../../images/birth_inception.png"}
-          alt="child birth"
-          style={{ height: "180px", borderRadius: 12 }}
-        />
-        <Caption>
-          The birthplace helps to pinpoint the arrangement of <Span>astrological houses</Span> in
-          one's birth chart
-        </Caption>
-      </ImageWithCaptionWrapper>
       <Selector />
     </Slide>
   );
@@ -611,67 +557,32 @@ export function SocialProofFiller() {
   );
 }
 
-export function YourSpiritualProfileIntroSlide() {
+export function IntroSlide() {
   return (
     <Slide
       type="filler"
-      id={"your-spiritual-profile-intro"}
+      id={"intro"}
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
       containerProps={{ color: "bg.900" }}
     >
-      <Title>Creation of your Spiritual Profile</Title>
+      <Title>We will ask you a couple of questions</Title>
 
-      <Subtitle>
-        Your <Span>name</Span> and <Span>date of birth</Span> hold the key to unlocking personalized
-        insights about you.
-      </Subtitle>
+      <Text mb={2}>
+        To provide you valuabale personalized astrological insights we will ask you following
+        questions:
+      </Text>
+      <Text mb={2}>- Your name</Text>
+      <Text mb={2}>- Your birth date</Text>
+      <Text mb={2}>- Your birth time</Text>
+      <Text mb={2}>- Your birth location</Text>
 
-      <Box mb={4} width={"180px"} mx={"auto"} borderRadius={"full"} overflow={"hidden"}>
-        <StaticImage
-          alt="picture of a significant you"
-          src="../../images/astro_profile.png"
-          quality={60}
-          placeholder="blurred"
-        />
-      </Box>
-
-      <Box my={8}>
-        <Text mb={2}>Significance of numbers</Text>
-        <Flex
-          direction="column"
-          w="100%"
-          fontSize={"14px"}
-          color="brand.500"
-          fontStyle={"italic"}
-          fontFamily={"serif"}
-          bg="bg.100"
-          py={2}
-          px={4}
-          borderRadius={"xl"}
-        >
-          {numerologyNumbersJson.map((n) => {
-            return (
-              <Flex key={n.Name} py={2} gap={3} flexDirection={"row"} alignItems={"flex-start"}>
-                <Image src={n.imageUrl} height={"22px"} mx="auto" />
-
-                <Flex flexDirection={"column"} flex={1}>
-                  <Box>
-                    <Text color="bg.900" fontWeight={"bold"}>
-                      {n.Name}
-                    </Text>
-                  </Box>
-
-                  <Box>
-                    <Text>{n["Significance in Relationships"]}</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            );
-          })}
-        </Flex>
-      </Box>
+      <Text mb={2}>
+        The more you tell us better but keep in mind you can skip some of the questions if you dont
+        know answers
+      </Text>
+      <Text mb={2}>We dont store your answers so everything is fully anonymous and safe.</Text>
     </Slide>
   );
 }
