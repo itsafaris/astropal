@@ -4,7 +4,7 @@ import { Box, Button } from "@chakra-ui/react";
 
 export const Head: HeadFC = () => <title>Astropal</title>;
 
-import { getService } from "@utils/service";
+import { getService } from "@services/zodiacService";
 
 const ServiceTestPage: React.FC<PageProps> = () => {
   const service = getService({ mock: true });

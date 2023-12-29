@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 
 import { useQuizSnapshot, ShortTextState, DateState } from "@martynasj/quiz-lib";
 
-import { getService } from "@utils/service";
+import { getService } from "@services/zodiacService";
 import { getPersonalInfoFromState } from "@utils/state";
 
 interface NumerologyData {

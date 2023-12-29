@@ -1,6 +1,6 @@
 import { ShortTextState, QuizQuestionsState, DateState, SingleState } from "@martynasj/quiz-lib";
 
-import { getZodiacSign } from "@utils/service";
+import { getZodiacSign } from "@services/zodiacService";
 
 import { toTitleCase } from "@utils/string";
 

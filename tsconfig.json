@@ -10,6 +10,7 @@
       "@components/*": ["src/components/*"],
       "@images/*": ["src/images/*"],
       "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
       "@data/*": ["src/data/*"],
       "@hooks/*": ["src/hooks/*"],
       "@martynasj/quiz-lib/*": ["src/lib/quiz-lib/*"],

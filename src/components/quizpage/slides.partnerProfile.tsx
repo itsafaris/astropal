@@ -8,7 +8,7 @@ import { getPersonalInfoFromState } from "@utils/state";
 
 import { Span, Subtitle } from "./components";
 
-import { getZodiacCompatibility } from "@utils/service";
+import { getZodiacCompatibility } from "@services/zodiacService";
 import { toTitleCase } from "@utils/string";
 
 export function PartnerGenderSlide() {
