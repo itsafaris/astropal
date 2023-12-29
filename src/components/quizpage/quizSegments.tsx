@@ -60,6 +60,7 @@ import {
   SocialProofFiller,
   YourProfileSavingSlide,
   SingleRelationshipYourGoalSlide,
+  YourBirthTimeSlide,
 } from "./slides.yourProfile";
 
 // export function PersonalInfoSegment() {
@@ -89,7 +90,8 @@ export function PartnerPersonalInfoSegment() {
       <YourBirthNameSlide />
       <YourBirthDateSlide />
       {/* <YourColorResonanceSlide /> */}
-      {/* <YourBirthPlaceSlide /> */}
+      <YourBirthTimeSlide />
+      <YourBirthPlaceSlide />
       <YourSummaryLoadingSlide />
       <YourSimilarProfilesSlide />
       {/* <PartnerSpiritualProfileIntroFiller /> */}

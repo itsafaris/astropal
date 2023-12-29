@@ -10,6 +10,7 @@ type TrackingEvent = {
 export function trackEvent(e: TrackingEvent) {
   if (process.env.NODE_ENV === "development") {
     console.log("[track event]", e);
+    return;
   }
 
   sendToGTM(e);

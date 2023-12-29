@@ -252,6 +252,21 @@ export function YourBirthDateSlide() {
   );
 }
 
+export function YourBirthTimeSlide() {
+  return (
+    <Slide id="your-birth-time" type="time">
+      {({ quizState }) => {
+        return (
+          <Fragment>
+            <Title>Time of birth?</Title>
+            <Selector />
+          </Fragment>
+        );
+      }}
+    </Slide>
+  );
+}
+
 export function YourBirthPlaceSlide() {
   return (
     <Slide id="your-birth-place" type="location" placeholder="e.g. New York" optional>

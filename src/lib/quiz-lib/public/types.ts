@@ -28,6 +28,7 @@ export type SlideProps =
   | SlidePropsSingle
   | SlidePropsShortText
   | SlidePropsDate
+  | SlidePropsTime
   | SlidePropsLocation
   | SlidePropsLoading
   | SlidePropsFiller
@@ -108,6 +109,10 @@ export type SlidePropsEmail = {
 
 export type SlidePropsDate = {
   type: "date";
+} & SlidePropsBase;
+
+export type SlidePropsTime = {
+  type: "time";
 } & SlidePropsBase;
 
 export type SlidePropsLocation = {
