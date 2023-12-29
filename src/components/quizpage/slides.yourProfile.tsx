@@ -259,6 +259,11 @@ export function YourBirthTimeSlide() {
         return (
           <Fragment>
             <Title>Time of birth?</Title>
+            <StaticImage
+              src={"../../images/time.png"}
+              alt="time of birth"
+              style={{ borderRadius: 12 }}
+            />
             <Selector />
           </Fragment>
         );
