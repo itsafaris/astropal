@@ -1,8 +1,9 @@
-import { Button, Box, useTheme, FormLabel } from "@chakra-ui/react";
+import { Button, Box, useTheme, FormLabel, Select } from "@chakra-ui/react";
 import { ComponentProps } from "react";
 
 import { useQuizActions } from "./state";
 import { useSlide } from "../public/slide";
+import { commonInputStyles } from "./commonInput";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const quiz = useQuizActions();
@@ -54,4 +55,8 @@ export function SkipButton(props: ComponentProps<typeof Button>) {
 
 export function MyFormLabel(props: ComponentProps<typeof FormLabel>) {
   return <FormLabel color="bg.800" fontWeight={"semibold"} {...props} />;
+}
+
+export function MySelect(props: ComponentProps<typeof Select>) {
+  return <Select {...commonInputStyles()} {...props}></Select>;
 }

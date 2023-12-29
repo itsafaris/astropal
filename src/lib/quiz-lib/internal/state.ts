@@ -15,6 +15,7 @@ export type SelectorState =
   | SingleState
   | ShortTextState
   | DateState
+  | TimeState
   | LocationState
   | LoadingState
   | FillerState
@@ -57,6 +58,11 @@ export type DateState = {
   value?: DateValue;
 } & BaseSelectorState;
 
+export type TimeState = {
+  type: "time";
+  value?: TimeValue;
+} & BaseSelectorState;
+
 export type LoadingState = {
   type: "loading";
   progressValue?: number;
@@ -75,6 +81,8 @@ export type BaseSelectorState = {
 export type SelectorValue = Readonly<{ id: string; idx: number; value: string }>;
 
 export type DateValue = { year: number; month: number; day: number };
+
+export type TimeValue = { hour: number; minute: number; meridiem: "am" | "pm" };
 
 export type SelectorDescriptor = {
   id: string;
@@ -316,6 +324,11 @@ export function createQuizState(input: {
 
     setDateValue(selectorID: string, value: DateValue) {
       const slideState = state.slideStateByID[selectorID] as DateState;
+      slideState.value = value;
+    },
+
+    setTimeValue(selectorID: string, value: TimeValue) {
+      const slideState = state.slideStateByID[selectorID] as TimeState;
       slideState.value = value;
     },
 

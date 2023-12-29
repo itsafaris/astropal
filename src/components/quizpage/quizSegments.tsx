@@ -1,18 +1,18 @@
 import { Segment } from "@martynasj/quiz-lib";
 
 import {
-  YourBirthNameSlide,
   YourBirthDateSlide,
   YourBirthPlaceSlide,
   YourProfileSavingSlide,
   YourSimilarProfilesSlide,
+  YourBirthTimeSlide,
 } from "./slides.yourProfile";
 
 export function Quiz() {
   return (
     <Segment title="Progress">
-      {/* <YourBirthNameSlide /> */}
       <YourBirthDateSlide />
+      <YourBirthTimeSlide />
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />
       <YourSimilarProfilesSlide />
