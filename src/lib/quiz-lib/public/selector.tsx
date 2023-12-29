@@ -10,6 +10,7 @@ import { SingleSelect } from "../internal/single";
 import { useQuizSnapshot } from "../internal/state";
 import { useSlide } from "./slide";
 import { Email } from "../internal/email";
+import { TimePicker } from "../internal/timepicker";
 
 type SelectorProps = {};
 
@@ -60,6 +61,9 @@ export function Selector({}: SelectorProps) {
       }
       case "date": {
         return <DatePicker {...slide} />;
+      }
+      case "time": {
+        return <TimePicker {...slide} />;
       }
       case "location": {
         return <Location {...slide} />;

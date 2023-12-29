@@ -4,7 +4,7 @@ import { useSlide } from "../public/slide";
 import { SlidePropsDate } from "../public/types";
 import { DateState, DateValue, useQuizActions, useQuizSnapshot } from "./state";
 import { commonInputStyles } from "./commonInput";
-import { MyFormLabel } from "./ui";
+import { MyFormLabel, MySelect } from "./ui";
 
 const DEFAULT_DATE: DateValue = { year: 1990, month: 1, day: 1 };
 
@@ -51,8 +51,7 @@ export function DatePicker(_: DatePickerProps) {
       <Box flex={3} width={"full"}>
         <FormControl>
           <MyFormLabel>Day</MyFormLabel>
-          <Select
-            {...commonInputStyles()}
+          <MySelect
             onChange={(e) => {
               const v = parseInt(e.target.value);
               actions.setDateValue(slide.id, {
@@ -68,14 +67,13 @@ export function DatePicker(_: DatePickerProps) {
                 {day}
               </option>
             ))}
-          </Select>
+          </MySelect>
         </FormControl>
       </Box>
       <Box flex={5} width={"full"}>
         <FormControl>
           <MyFormLabel>Month</MyFormLabel>
-          <Select
-            {...commonInputStyles()}
+          <MySelect
             onChange={(e) => {
               const v = parseInt(e.target.value);
               actions.setDateValue(slide.id, {
@@ -91,14 +89,13 @@ export function DatePicker(_: DatePickerProps) {
                 {month}
               </option>
             ))}
-          </Select>
+          </MySelect>
         </FormControl>
       </Box>
       <Box flex={4} width={"full"}>
         <FormControl>
           <MyFormLabel>Year</MyFormLabel>
-          <Select
-            {...commonInputStyles()}
+          <MySelect
             onChange={(e) => {
               const v = parseInt(e.target.value);
               actions.setDateValue(slide.id, {
@@ -114,7 +111,7 @@ export function DatePicker(_: DatePickerProps) {
                 {year}
               </option>
             ))}
-          </Select>
+          </MySelect>
         </FormControl>
       </Box>
     </Flex>
