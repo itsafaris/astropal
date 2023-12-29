@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  NAME: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -34,7 +31,5 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: e4e0de27-66af-4516-b67a-a0380234ec66
           GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-          GATSBY_ENV: "prod"
+          NODE_ENV: "production"
           # GATSBY_MIXPANEL_TOKEN: ${{ vars.GATSBY_MIXPANEL_TOKEN }}
-      - name: Print env variable
-        run: echo "Hello $NAME"

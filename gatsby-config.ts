@@ -5,7 +5,7 @@ import pkgjson from "./package.json";
 import { SiteMetadata } from "src/hooks/useSiteMetadata";
 
 dotenv.config({
-  path: `.env`,
+  path: `.env.${process.env.NODE_ENV}`,
 });
 
 const config: GatsbyConfig = {
