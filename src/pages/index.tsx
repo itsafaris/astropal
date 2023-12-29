@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
+import { getOpenaiService } from "@services/openaiService";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { PropsWithChildren } from "react";
@@ -43,6 +44,15 @@ export default function IndexPage() {
         <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"}>
           What is your relationship status?
         </Text>
+
+        <button
+          onClick={() => {
+            const openai = getOpenaiService({ mock: false });
+            openai.stream();
+          }}
+        >
+          Try
+        </button>
 
         <Flex justifyContent="center" mt={8} gap={4}>
           <Link to="/quiz-inrelationship">
