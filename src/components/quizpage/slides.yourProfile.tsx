@@ -254,7 +254,7 @@ export function YourBirthDateSlide() {
 
 export function YourBirthTimeSlide() {
   return (
-    <Slide id="your-birth-time" type="time">
+    <Slide id="your-birth-time" type="time" optional>
       {({ quizState }) => {
         return (
           <Fragment>
@@ -262,6 +262,7 @@ export function YourBirthTimeSlide() {
             <StaticImage
               src={"../../images/time.png"}
               alt="time of birth"
+              placeholder="blurred"
               style={{ borderRadius: 12 }}
             />
             <Selector />
