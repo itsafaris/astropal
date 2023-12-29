@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  NAME: ${{ secrets.GATSBY_OPENAI_API_KEY }}
+
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -33,3 +36,5 @@ jobs:
           GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
           GATSBY_ENV: "prod"
           # GATSBY_MIXPANEL_TOKEN: ${{ vars.GATSBY_MIXPANEL_TOKEN }}
+      - name: Print env variable
+        run: echo "Hello $NAME"
