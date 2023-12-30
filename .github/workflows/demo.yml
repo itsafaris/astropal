@@ -8,7 +8,7 @@ on:
 
 env:
   GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-  NODE_ENV: "production"
+  # NODE_ENV: "production"
 
 jobs:
   Build:
