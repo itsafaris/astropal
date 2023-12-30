@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
+  NODE_ENV: "production"
+
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -17,13 +21,7 @@ jobs:
         with:
           node-version: 18.16.0
       - run: npm ci
-        env:
-          GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-          NODE_ENV: "production"
       - run: npm run build
-        env:
-          GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-          NODE_ENV: "production"
       - name: Netlify Deploy
         uses: nwtgck/actions-netlify@v2.1.0
         with:
@@ -36,6 +34,6 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: e4e0de27-66af-4516-b67a-a0380234ec66
-          GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
-          NODE_ENV: "production"
+          # GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
+          # NODE_ENV: "production"
           # GATSBY_MIXPANEL_TOKEN: ${{ vars.GATSBY_MIXPANEL_TOKEN }}
