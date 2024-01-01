@@ -1,5 +1,6 @@
-import React, { Fragment, createElement } from "react";
-import { Callout, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import React, { Fragment, createElement, useEffect, useState } from "react";
+import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { Chart } from "@astrodraw/astrochart";
 
 import colorMap from "@images/color_map.png";
 
@@ -15,14 +16,14 @@ import patternIcon9 from "static/images/patterns/pattern-icon-9.svg";
 import patternIcon10 from "static/images/patterns/pattern-icon-10.svg";
 
 import { TestimonialCard } from "@components/testimonial";
-import PythagoreanNumbers from "@components/svg/pythagoreanNumbers";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
+import { Origin, Horoscope } from "circular-natal-horoscope-js";
 
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
-import { Span, Subtitle, ImageWithCaptionWrapper, Caption } from "./components";
+import { Span, Subtitle } from "./components";
 
 const numerologyNumbersJson = [
   {
@@ -257,6 +258,103 @@ export function YourProfileSavingSlide() {
         );
       }}
     </Slide>
+  );
+}
+
+export function NatalChartPreviewSlide() {
+  return (
+    <Slide
+      id="natal-chart-preview"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+      nextButtonProps={{ title: "Get my first interpretation" }}
+    >
+      <Title>This is your natal chart</Title>
+      <AstroChart />
+    </Slide>
+  );
+}
+
+function AstroChart() {
+  const theme = useTheme();
+  const [origin, setOrigin] = useState<Origin | undefined>(undefined);
+  const [horoscope, setHoroscope] = useState<Horoscope | undefined>(undefined);
+
+  useEffect(() => {
+    const origin = new Origin({
+      year: 1990,
+      month: 1, // 0 = January, 11 = December!
+      date: 11,
+      hour: 10,
+      minute: 0,
+      latitude: 55.0,
+      longitude: 22.0,
+    });
+
+    setOrigin(origin);
+
+    const horoscope = new Horoscope({
+      origin: origin,
+    });
+    setHoroscope(horoscope);
+
+    var chart = new Chart("paper1234", 700, 700, {
+      COLORS_SIGNS: [
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+        "rgba(0,0,0,0.2)",
+        "rgba(0,0,0,0.4)",
+      ],
+      LINE_COLOR: theme.colors.bg[400],
+      CIRCLE_COLOR: theme.colors.bg[500],
+      SIGNS_COLOR: theme.colors.brand[500], // zodiakai
+      POINTS_COLOR: theme.colors.brand[700], // planetos
+      CUSPS_FONT_COLOR: theme.colors.bg[400],
+      SYMBOL_AXIS_FONT_COLOR: theme.colors.bg[600], // As, Ds, Mc, Ic
+      COLOR_BACKGROUND: "rgba(0,0,0,0.2)",
+      CUSPS_STROKE: 1,
+    });
+
+    var data = {
+      planets: {} as Record<string, [number]>,
+      cusps: [] as number[],
+    };
+
+    horoscope.Houses.forEach((h: any) => {
+      const pos = h.ChartPosition as Pos;
+      const degrees = pos.StartPosition.Ecliptic.DecimalDegrees;
+      data.cusps.push(degrees);
+    });
+
+    const a = horoscope.CelestialBodies.all;
+    a.forEach((it: any) => {
+      const pos = it.ChartPosition as ChartPosition;
+      data.planets[it.label] = [pos.Ecliptic.DecimalDegrees];
+    });
+
+    const _ = chart.radix(data);
+    // radix.aspects();
+  }, []);
+
+  return (
+    <div>
+      <div style={{ height: 350, width: 350 }}>
+        <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
+      </div>
+      <Text color="brand.600">{horoscope?.SunSign.label}</Text>
+      <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
+      <Text color="brand.600">Telsiai, Telšių Apskritis, Lithuania</Text>
+    </div>
   );
 }
 
@@ -661,3 +759,33 @@ export function YourSummaryLoadingSlide() {
     </Slide>
   );
 }
+
+type Pos = {
+  StartPosition: ChartPosition;
+  EndPosition: ChartPosition;
+};
+
+type ChartPosition = {
+  horizonDegrees?: number;
+  eclipticDegrees?: number;
+  Horizon: {
+    DecimalDegrees: number;
+    ArcDegrees: {
+      degrees: number;
+      minutes: number;
+      seconds: number;
+    };
+    ArcDegreesFormatted: string;
+    ArcDegreesFormatted30: string;
+  };
+  Ecliptic: {
+    DecimalDegrees: number;
+    ArcDegrees: {
+      degrees: number;
+      minutes: number;
+      seconds: number;
+    };
+    ArcDegreesFormatted: string;
+    ArcDegreesFormatted30: string;
+  };
+};
