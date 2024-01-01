@@ -272,13 +272,14 @@ export function NatalChartPreviewSlide() {
       }}
       nextButtonProps={{ title: "Get my first interpretation" }}
     >
-      <Title>This is your natal chart</Title>
       <AstroChart />
     </Slide>
   );
 }
 
 function AstroChart() {
+  const NATAL_CHART_SIZE = 320;
+
   const theme = useTheme();
   const [origin, setOrigin] = useState<Origin | undefined>(undefined);
   const [horoscope, setHoroscope] = useState<Horoscope | undefined>(undefined);
@@ -301,7 +302,7 @@ function AstroChart() {
     });
     setHoroscope(horoscope);
 
-    var chart = new Chart("paper1234", 700, 700, {
+    var chart = new Chart("paper1234", NATAL_CHART_SIZE * 2, NATAL_CHART_SIZE * 2, {
       COLORS_SIGNS: [
         "rgba(0,0,0,0.2)",
         "rgba(0,0,0,0.4)",
@@ -344,17 +345,40 @@ function AstroChart() {
     });
 
     const _ = chart.radix(data);
+
     // radix.aspects();
   }, []);
 
   return (
     <div>
-      <div style={{ height: 350, width: 350 }}>
+      <div style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}>
         <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
       </div>
-      <Text color="brand.600">{horoscope?.SunSign.label}</Text>
-      <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
-      <Text color="brand.600">Telsiai, Telšių Apskritis, Lithuania</Text>
+      <Box mb={2} textAlign={"center"}>
+        <Text fontSize={"2xl"} my={3} color="brand.700" fontWeight={"bold"}>
+          {horoscope?.SunSign.label}
+        </Text>
+        <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
+        <Text color="brand.600">Telsiai, Telšių Apskritis, Lithuania</Text>
+      </Box>
+
+      <Flex my={6} flexDirection={"column"} alignItems={"center"}>
+        <Box>
+          {horoscope?.CelestialBodies.all.map((it: any) => {
+            const pos = it.ChartPosition as ChartPosition;
+            const relPos = pos.Ecliptic.ArcDegreesFormatted30;
+            const [degrees] = relPos.split(" ");
+            return (
+              <Text color="brand.600" fontSize={"xs"}>
+                {it.label} at{" "}
+                <Span>
+                  {degrees} in {it.Sign.label}
+                </Span>
+              </Text>
+            );
+          })}
+        </Box>
+      </Flex>
     </div>
   );
 }
