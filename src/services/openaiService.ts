@@ -5,7 +5,9 @@ const ORG_ID = "org-sP7lZMPWGsGm3j2vrN1WD05D";
 
 function createPrompt(natalChart: NatalChart, question: string): string {
   return `
-    You are a western astrologer. I am your client. This is a JSON data object of my Natal chart: ${natalChart}.
+    You are a western astrologer. I am your client. This is a JSON data object of my Natal chart: ${JSON.stringify(
+      natalChart
+    )}.
     I will ask you a question. Keep your answer short (no longer than 30 words), don't use astrological terms, draw out only most important aspects.
     My question is: ${question}
   `;

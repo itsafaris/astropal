@@ -1,5 +1,5 @@
 import React, { Fragment, createElement, useEffect, useState } from "react";
-import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { Selector, Slide, Title, TransitionText, useQuizSnapshot } from "@martynasj/quiz-lib";
 import { Chart } from "@astrodraw/astrochart";
 
 import colorMap from "@images/color_map.png";
@@ -25,6 +25,8 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { Span, Subtitle } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
+import { formatTo24Hour } from "@utils/dates";
+import { getOpenaiService } from "@services/openaiService";
 
 const numerologyNumbersJson = [
   {
@@ -383,6 +385,53 @@ function AstroChart() {
   );
 }
 
+export function NatalChartInterpretationSlide() {
+  return (
+    <Slide
+      id="natal-chart-interpretation"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+      nextButtonProps={{ title: "Continue" }}
+    >
+      <NatalChartInterpreter />
+    </Slide>
+  );
+}
+
+function NatalChartInterpreter() {
+  const state = useQuizSnapshot();
+
+  const [interpretation, setInterpretation] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (state.currentSlideID === "natal-chart-interpretation") {
+      const { yourBirthDate, yourBirthTime, yourBirthLocation } = getPersonalInfoFromState(
+        state.slideStateByID
+      );
+
+      const birthTime = formatTo24Hour(yourBirthTime);
+      const natalChart = createNatalChartData({
+        year: yourBirthDate.year,
+        month: yourBirthDate.month,
+        date: yourBirthDate.day,
+        hour: birthTime.hour,
+        minute: birthTime.minute,
+        latitude: Number(yourBirthLocation.lat),
+        longitude: Number(yourBirthLocation.long),
+      });
+
+      const openai = getOpenaiService({ mock: false });
+      openai.stream(natalChart, "Describe my personality", (text) => {
+        setInterpretation(text);
+      });
+    }
+  }, [state.currentSlideID]);
+
+  return <Subtitle>{interpretation}</Subtitle>;
+}
+
 export function YourSimilarProfilesSlide() {
   const theme = useTheme();
   return (
@@ -394,22 +443,7 @@ export function YourSimilarProfilesSlide() {
       }}
     >
       {({ quizState }) => {
-        const { yourZodiac, yourGender, yourBirthDate, yourBirthTime, yourBirthLocation } =
-          getPersonalInfoFromState(quizState);
-
-        if (yourBirthTime && yourBirthLocation) {
-          const natalChart = createNatalChartData({
-            year: yourBirthDate.year,
-            month: yourBirthDate.month,
-            date: yourBirthDate.day,
-            hour: yourBirthTime.hour24format.hour,
-            minute: yourBirthTime.hour24format.minute,
-            latitude: Number(yourBirthLocation.lat),
-            longitude: Number(yourBirthLocation.long),
-          });
-
-          console.log(natalChart);
-        }
+        const { yourZodiac, yourGender } = getPersonalInfoFromState(quizState);
 
         return (
           <Fragment>

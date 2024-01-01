@@ -7,6 +7,7 @@ import {
   YourSimilarProfilesSlide,
   YourBirthTimeSlide,
   NatalChartPreviewSlide,
+  NatalChartInterpretationSlide,
 } from "./slides.yourProfile";
 
 export function Quiz() {
@@ -18,6 +19,7 @@ export function Quiz() {
       <YourProfileSavingSlide />
       {/* <YourSimilarProfilesSlide /> */}
       <NatalChartPreviewSlide />
+      <NatalChartInterpretationSlide />
     </Segment>
   );
 }
