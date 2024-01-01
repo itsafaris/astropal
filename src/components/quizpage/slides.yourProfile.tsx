@@ -11,17 +11,6 @@ import { Chart } from "@astrodraw/astrochart";
 
 import colorMap from "@images/color_map.png";
 
-import patternIcon1 from "static/images/patterns/pattern-icon-1.svg";
-import patternIcon2 from "static/images/patterns/pattern-icon-2.svg";
-import patternIcon3 from "static/images/patterns/pattern-icon-3.svg";
-import patternIcon4 from "static/images/patterns/pattern-icon-4.svg";
-import patternIcon5 from "static/images/patterns/pattern-icon-5.svg";
-import patternIcon6 from "static/images/patterns/pattern-icon-6.svg";
-import patternIcon7 from "static/images/patterns/pattern-icon-7.svg";
-import patternIcon8 from "static/images/patterns/pattern-icon-8.svg";
-import patternIcon9 from "static/images/patterns/pattern-icon-9.svg";
-import patternIcon10 from "static/images/patterns/pattern-icon-10.svg";
-
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
@@ -35,78 +24,6 @@ import { createNatalChartData } from "@utils/natalChart";
 
 import { Time } from "@utils/dates";
 import { getOpenaiService } from "@services/openaiService";
-
-const numerologyNumbersJson = [
-  {
-    Name: "Life Path Number",
-    "Significance in Relationships":
-      "Reflects life's journey and personal characteristics, influencing relationship style and partner compatibility.",
-    "Source of Calculation": "Date of Birth",
-    imageUrl: patternIcon1,
-  },
-  {
-    Name: "Expression Number (Destiny Number)",
-    "Significance in Relationships":
-      "Indicates talents and expression, key to understanding roles in relationships.",
-    "Source of Calculation": "Birth Name",
-    imageUrl: patternIcon2,
-  },
-  {
-    Name: "Soul Urge Number (Heart's Desire Number)",
-    "Significance in Relationships": "Reveals deepest desires and values in relationships.",
-    "Source of Calculation": "Vowels in Birth Name",
-    imageUrl: patternIcon3,
-  },
-  {
-    Name: "Birthday Number",
-    "Significance in Relationships":
-      "Highlights specific talents and their role in personal interactions.",
-    "Source of Calculation": "Day of Birth",
-    imageUrl: patternIcon4,
-  },
-  {
-    Name: "Personality Number",
-    "Significance in Relationships":
-      "Affects how one is perceived socially, influencing social and romantic relationships.",
-    "Source of Calculation": "Consonants in Birth Name",
-    imageUrl: patternIcon5,
-  },
-  {
-    Name: "Sun Sign",
-    "Significance in Relationships":
-      "Determines fundamental personality traits and identity, crucial for compatibility.",
-    "Source of Calculation": "Date of Birth",
-    imageUrl: patternIcon6,
-  },
-  {
-    Name: "Moon Sign",
-    "Significance in Relationships":
-      "Reflects emotional inner self and relational emotional needs, essential for emotional connections.",
-    "Source of Calculation": "Date and Time of Birth",
-    imageUrl: patternIcon7,
-  },
-  {
-    Name: "Venus Sign",
-    "Significance in Relationships":
-      "Governs love style and preferences in relationships, vital for romantic interactions.",
-    "Source of Calculation": "Date and Time of Birth",
-    imageUrl: patternIcon8,
-  },
-  {
-    Name: "Mars Sign",
-    "Significance in Relationships":
-      "Influences assertiveness and pursuit of desires, affecting relationship dynamics.",
-    "Source of Calculation": "Date and Time of Birth",
-    imageUrl: patternIcon9,
-  },
-  {
-    Name: "Ascendant (Rising Sign)",
-    "Significance in Relationships":
-      "Represents self-image and initial approach to relationships, impacting first impressions.",
-    "Source of Calculation": "Date, Time, and Place of Birth",
-    imageUrl: patternIcon10,
-  },
-];
 
 export function YourGoalSlide() {
   return (
@@ -376,7 +293,7 @@ function AstroChart(props: AstroChartProps) {
       data.planets[it.label] = [pos.Ecliptic.DecimalDegrees];
     });
 
-    const _ = chart.radix(data);
+    chart.radix(data);
 
     // radix.aspects();
   }, []);
