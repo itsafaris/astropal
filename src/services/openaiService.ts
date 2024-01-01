@@ -1,9 +1,22 @@
+import { NatalChart } from "@utils/natalChart";
 import OpenAI from "openai";
 
 const ORG_ID = "org-sP7lZMPWGsGm3j2vrN1WD05D";
 
+function createPrompt(natalChart: NatalChart, question: string): string {
+  return `
+    You are a western astrologer. I am your client. This is a JSON data object of my Natal chart: ${natalChart}.
+    I will ask you a question. Keep your answer short (no longer than 30 words), don't use astrological terms, draw out only most important aspects.
+    My question is: ${question}
+  `;
+}
+
 interface Service {
-  stream: (prompt: string, onContent: (content: string) => void) => AbortController["abort"];
+  stream: (
+    natalChart: NatalChart,
+    question: string,
+    onAnswer: (text: string) => void
+  ) => AbortController["abort"];
 }
 
 function createOpenai(): OpenAI {
@@ -15,21 +28,21 @@ function createOpenai(): OpenAI {
 }
 
 const service: Service = {
-  stream: (prompt, onContent) => {
+  stream: (natalChart, question, onAnswer) => {
     const openai = createOpenai();
     const s = openai.beta.chat.completions.stream({
-      model: "gpt-4",
+      model: "gpt-4-1106-preview",
       messages: [
         {
           role: "user",
-          content: prompt,
+          content: createPrompt(natalChart, question),
         },
       ],
       stream: true,
     });
 
     s.on("content", (_delta, snapshot) => {
-      onContent(snapshot);
+      onAnswer(snapshot);
     });
 
     s.on("chatCompletion", () => {
@@ -41,8 +54,8 @@ const service: Service = {
 };
 
 const serviceMock: Service = {
-  stream: (_, onContent) => {
-    onContent("Hello");
+  stream: (_natalChart, _question, onAnswer) => {
+    onAnswer("Hello");
 
     return () => {};
   },
