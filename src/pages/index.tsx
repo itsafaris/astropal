@@ -1,10 +1,11 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { getOpenaiService } from "@services/openaiService";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { PropsWithChildren } from "react";
+import { Origin, Horoscope } from "circular-natal-horoscope-js";
+import { createNatalChartData } from "@utils/natalChart";
 
 const HEADING_TITLE = "Your own hyper personalized astrologer";
 
@@ -47,8 +48,30 @@ export default function IndexPage() {
 
         <button
           onClick={() => {
-            const openai = getOpenaiService({ mock: false });
-            openai.stream();
+            const origin = new Origin({
+              year: 1990,
+              month: 5, // 0 = January, 11 = December!
+              date: 11,
+              hour: 9,
+              minute: 30,
+              latitude: 55.0,
+              longitude: 22.0,
+            });
+
+            const horoscope = new Horoscope({
+              origin: origin,
+              houseSystem: "whole-sign",
+              zodiac: "tropical",
+              aspectPoints: ["bodies", "points", "angles"],
+              aspectWithPoints: ["bodies", "points", "angles"],
+              aspectTypes: ["major", "minor"],
+              customOrbs: {},
+              language: "en",
+            });
+
+            const chart = createNatalChartData(horoscope);
+            console.log(chart);
+            console.log(horoscope);
           }}
         >
           Try
