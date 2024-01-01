@@ -86,7 +86,6 @@ export type TimeValue = {
   hour: number;
   minute: number;
   meridiem: "am" | "pm";
-  hour24format: { hour: number; minute: number };
 };
 
 export type SelectorDescriptor = {

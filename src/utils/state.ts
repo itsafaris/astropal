@@ -10,6 +10,7 @@ import {
 import { getZodiacSign } from "@services/zodiacService";
 
 import { toTitleCase } from "@utils/string";
+import { createTime } from "./dates";
 
 function splitFullName(fullName: string) {
   const parts = fullName.split(" ");
@@ -24,16 +25,28 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourName = toTitleCase((state["your-birth-name"] as ShortTextState)?.value ?? "Anonymous");
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
     year: 1990,
-    month: 1,
-    day: 1,
+    month: 4,
+    day: 15,
   };
 
   const yourZodiac = getZodiacSign(
     new Date(yourBirthDate.year, yourBirthDate.month - 1, yourBirthDate.day).toISOString()
   );
 
-  const yourBirthTime = (state["your-birth-time"] as TimeState)?.value;
-  const yourBirthLocation = (state["your-birth-place"] as LocationState)?.value;
+  const yourBirthTime = createTime(
+    (state["your-birth-time"] as TimeState)?.value ?? {
+      hour: 10,
+      minute: 20,
+      meridiem: "am",
+    }
+  );
+
+  const yourBirthLocation = (state["your-birth-place"] as LocationState)?.value ?? {
+    formattedText: "Unknown loc",
+    placeID: "0",
+    lat: 55,
+    long: 22,
+  };
 
   const partnerName = splitFullName(
     toTitleCase((state["partner-birth-name"] as ShortTextState)?.value ?? "Anonymous")
