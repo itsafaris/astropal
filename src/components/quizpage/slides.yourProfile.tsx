@@ -1,5 +1,12 @@
 import React, { Fragment, createElement, useEffect, useState } from "react";
-import { DateValue, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import {
+  DateValue,
+  Selector,
+  Slide,
+  Title,
+  TransitionText,
+  useQuizSnapshot,
+} from "@martynasj/quiz-lib";
 import { Chart } from "@astrodraw/astrochart";
 
 import colorMap from "@images/color_map.png";
@@ -25,7 +32,9 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { Span, Subtitle } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
+
 import { Time } from "@utils/dates";
+import { getOpenaiService } from "@services/openaiService";
 
 const numerologyNumbersJson = [
   {
@@ -404,6 +413,52 @@ function AstroChart(props: AstroChartProps) {
       </Flex>
     </div>
   );
+}
+
+export function NatalChartInterpretationSlide() {
+  return (
+    <Slide
+      id="natal-chart-interpretation"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+      nextButtonProps={{ title: "Continue" }}
+    >
+      <NatalChartInterpreter />
+    </Slide>
+  );
+}
+
+function NatalChartInterpreter() {
+  const state = useQuizSnapshot();
+
+  const [interpretation, setInterpretation] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (state.currentSlideID === "natal-chart-interpretation") {
+      const { yourBirthDate, yourBirthTime, yourBirthLocation } = getPersonalInfoFromState(
+        state.slideStateByID
+      );
+
+      const natalChart = createNatalChartData({
+        year: yourBirthDate.year,
+        month: yourBirthDate.month,
+        date: yourBirthDate.day,
+        hour: yourBirthTime.time24.hour,
+        minute: yourBirthTime.time24.minute,
+        latitude: yourBirthLocation.lat,
+        longitude: yourBirthLocation.long,
+      });
+
+      const openai = getOpenaiService({ mock: false });
+      openai.stream(natalChart, "Describe my personality", (text) => {
+        setInterpretation(text);
+      });
+    }
+  }, [state.currentSlideID]);
+
+  return <Subtitle>{interpretation}</Subtitle>;
 }
 
 export function YourSimilarProfilesSlide() {
