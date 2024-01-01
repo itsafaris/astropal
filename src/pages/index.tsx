@@ -4,6 +4,8 @@ import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { PropsWithChildren } from "react";
+import { Origin, Horoscope } from "circular-natal-horoscope-js";
+import { createNatalChartData } from "@utils/natalChart";
 
 const HEADING_TITLE = "Your own hyper personalized astrologer";
 
@@ -43,6 +45,37 @@ export default function IndexPage() {
         <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"}>
           What is your relationship status?
         </Text>
+
+        <button
+          onClick={() => {
+            const origin = new Origin({
+              year: 1990,
+              month: 5, // 0 = January, 11 = December!
+              date: 11,
+              hour: 9,
+              minute: 30,
+              latitude: 55.0,
+              longitude: 22.0,
+            });
+
+            const horoscope = new Horoscope({
+              origin: origin,
+              houseSystem: "whole-sign",
+              zodiac: "tropical",
+              aspectPoints: ["bodies", "points", "angles"],
+              aspectWithPoints: ["bodies", "points", "angles"],
+              aspectTypes: ["major", "minor"],
+              customOrbs: {},
+              language: "en",
+            });
+
+            const chart = createNatalChartData(horoscope);
+            console.log(chart);
+            console.log(horoscope);
+          }}
+        >
+          Try
+        </button>
 
         <Flex justifyContent="center" mt={8} gap={4}>
           <Link to="/quiz-inrelationship">
