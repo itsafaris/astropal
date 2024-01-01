@@ -24,6 +24,7 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { Span, Subtitle } from "./components";
+import { createNatalChartData } from "@utils/natalChart";
 
 const numerologyNumbersJson = [
   {
@@ -369,7 +370,22 @@ export function YourSimilarProfilesSlide() {
       }}
     >
       {({ quizState }) => {
-        const { yourZodiac, yourGender } = getPersonalInfoFromState(quizState);
+        const { yourZodiac, yourGender, yourBirthDate, yourBirthTime, yourBirthLocation } =
+          getPersonalInfoFromState(quizState);
+
+        if (yourBirthTime && yourBirthLocation) {
+          const natalChart = createNatalChartData({
+            year: yourBirthDate.year,
+            month: yourBirthDate.month,
+            date: yourBirthDate.day,
+            hour: yourBirthTime.hour24format.hour,
+            minute: yourBirthTime.hour24format.minute,
+            latitude: Number(yourBirthLocation.lat),
+            longitude: Number(yourBirthLocation.long),
+          });
+
+          console.log(natalChart);
+        }
 
         return (
           <Fragment>

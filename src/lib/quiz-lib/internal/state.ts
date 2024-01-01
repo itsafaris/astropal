@@ -82,7 +82,12 @@ export type SelectorValue = Readonly<{ id: string; idx: number; value: string }>
 
 export type DateValue = { year: number; month: number; day: number };
 
-export type TimeValue = { hour: number; minute: number; meridiem: "am" | "pm" };
+export type TimeValue = {
+  hour: number;
+  minute: number;
+  meridiem: "am" | "pm";
+  hour24format: { hour: number; minute: number };
+};
 
 export type SelectorDescriptor = {
   id: string;
