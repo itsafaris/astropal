@@ -49,8 +49,8 @@ export type LocationState = {
 export type LocationValue = Readonly<{
   formattedText: string;
   placeID: string;
-  lat: string;
-  long: string;
+  lat: number;
+  long: number;
 }>;
 
 export type DateState = {

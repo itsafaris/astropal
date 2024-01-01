@@ -1,5 +1,5 @@
 import React, { Fragment, createElement, useEffect, useState } from "react";
-import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { DateValue, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
 import { Chart } from "@astrodraw/astrochart";
 
 import colorMap from "@images/color_map.png";
@@ -25,6 +25,7 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { Span, Subtitle } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
+import { Time } from "@utils/dates";
 
 const numerologyNumbersJson = [
   {
@@ -272,12 +273,34 @@ export function NatalChartPreviewSlide() {
       }}
       nextButtonProps={{ title: "Get my first interpretation" }}
     >
-      <AstroChart />
+      {({ quizState }) => {
+        const { yourBirthDate, yourBirthTime, yourBirthLocation } =
+          getPersonalInfoFromState(quizState);
+
+        return (
+          <AstroChart
+            date={yourBirthDate}
+            time={yourBirthTime}
+            location={{
+              lat: yourBirthLocation.lat,
+              long: yourBirthLocation.long,
+            }}
+          />
+        );
+      }}
     </Slide>
   );
 }
 
-function AstroChart() {
+type AstroChartProps = {
+  date: DateValue;
+  time: Time;
+  location: { lat: number; long: number };
+};
+
+function AstroChart(props: AstroChartProps) {
+  const { date, time, location } = props;
+
   const NATAL_CHART_SIZE = 320;
 
   const theme = useTheme();
@@ -286,13 +309,13 @@ function AstroChart() {
 
   useEffect(() => {
     const origin = new Origin({
-      year: 1990,
-      month: 1, // 0 = January, 11 = December!
-      date: 11,
-      hour: 10,
-      minute: 0,
-      latitude: 55.0,
-      longitude: 22.0,
+      year: date.year,
+      month: date.month - 1, // 0 = January, 11 = December!
+      date: date.day,
+      hour: time.time24.hour,
+      minute: time.time24.minute,
+      latitude: location.lat,
+      longitude: location.long,
     });
 
     setOrigin(origin);
@@ -394,22 +417,7 @@ export function YourSimilarProfilesSlide() {
       }}
     >
       {({ quizState }) => {
-        const { yourZodiac, yourGender, yourBirthDate, yourBirthTime, yourBirthLocation } =
-          getPersonalInfoFromState(quizState);
-
-        if (yourBirthTime && yourBirthLocation) {
-          const natalChart = createNatalChartData({
-            year: yourBirthDate.year,
-            month: yourBirthDate.month,
-            date: yourBirthDate.day,
-            hour: yourBirthTime.hour24format.hour,
-            minute: yourBirthTime.hour24format.minute,
-            latitude: Number(yourBirthLocation.lat),
-            longitude: Number(yourBirthLocation.long),
-          });
-
-          console.log(natalChart);
-        }
+        const { yourZodiac, yourGender } = getPersonalInfoFromState(quizState);
 
         return (
           <Fragment>

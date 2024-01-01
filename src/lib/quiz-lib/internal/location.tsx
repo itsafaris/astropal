@@ -59,8 +59,8 @@ async function fetchOptions(
       return {
         formattedText: formattedLabel,
         placeID: it.place_id,
-        lat: it.lat,
-        long: it.lon,
+        lat: Number(it.lat),
+        long: Number(it.lon),
       };
     });
   } catch (err) {

@@ -9,6 +9,13 @@ export type Time24 = {
   minute: number;
 };
 
+export type Time = {
+  hour: number;
+  minute: number;
+  meridiem: string;
+  time24: Time24;
+};
+
 export function formatTo24Hour(timeObj: { hour: number; meridiem: string; minute: number }): {
   hour: number;
   minute: number;
@@ -24,7 +31,7 @@ export function formatTo24Hour(timeObj: { hour: number; meridiem: string; minute
   return { hour, minute };
 }
 
-export function createTime(input: TimeAmPm) {
+export function createTime(input: TimeAmPm): Time {
   return {
     hour: input.hour,
     minute: input.minute,
