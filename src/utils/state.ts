@@ -1,4 +1,11 @@
-import { ShortTextState, QuizQuestionsState, DateState, SingleState } from "@martynasj/quiz-lib";
+import {
+  ShortTextState,
+  QuizQuestionsState,
+  DateState,
+  SingleState,
+  LocationState,
+  TimeState,
+} from "@martynasj/quiz-lib";
 
 import { getZodiacSign } from "@services/zodiacService";
 
@@ -25,6 +32,9 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     new Date(yourBirthDate.year, yourBirthDate.month - 1, yourBirthDate.day).toISOString()
   );
 
+  const yourBirthTime = (state["your-birth-time"] as TimeState)?.value;
+  const yourBirthLocation = (state["your-birth-place"] as LocationState)?.value;
+
   const partnerName = splitFullName(
     toTitleCase((state["partner-birth-name"] as ShortTextState)?.value ?? "Anonymous")
   );
@@ -44,6 +54,8 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourName,
     yourGender,
     yourBirthDate,
+    yourBirthTime,
+    yourBirthLocation,
     yourZodiac,
     partnerName,
     partnerBirthDate,

@@ -13,6 +13,21 @@ const DEFAULT_TIME = { hour: 12, minute: 0, meridiem: "am" as const };
 
 export type TimePickerProps = {} & SlidePropsTime;
 
+function formatTo24Hour(timeObj: { hour: number; meridiem: string; minute: number }): {
+  hour: number;
+  minute: number;
+} {
+  let { hour, minute, meridiem } = timeObj;
+
+  if (meridiem === "pm" && hour !== 12) {
+    hour += 12;
+  } else if (meridiem === "am" && hour === 12) {
+    hour = 0;
+  }
+
+  return { hour, minute };
+}
+
 export function TimePicker(props: TimePickerProps) {
   const slide = useSlide();
   const snap = useQuizSnapshot();
@@ -24,6 +39,7 @@ export function TimePicker(props: TimePickerProps) {
     if (!state.value) {
       actions.setTimeValue(slide.id, {
         ...DEFAULT_TIME,
+        hour24format: formatTo24Hour(DEFAULT_TIME),
       });
     }
   }, [state.value]);
@@ -36,10 +52,15 @@ export function TimePicker(props: TimePickerProps) {
           value={state.value?.hour ?? 0}
           onChange={(e) => {
             const v = parseInt(e.target.value);
-            actions.setTimeValue(slide.id, {
+            const timeValue = {
               ...DEFAULT_TIME,
               ...state.value,
               hour: v,
+            };
+
+            actions.setTimeValue(slide.id, {
+              ...timeValue,
+              hour24format: formatTo24Hour(timeValue),
             });
           }}
         >
@@ -56,10 +77,15 @@ export function TimePicker(props: TimePickerProps) {
           value={state.value?.minute ?? 0}
           onChange={(e) => {
             const v = parseInt(e.target.value);
-            actions.setTimeValue(slide.id, {
+            const timeValue = {
               ...DEFAULT_TIME,
               ...state.value,
               minute: v,
+            };
+
+            actions.setTimeValue(slide.id, {
+              ...timeValue,
+              hour24format: formatTo24Hour(timeValue),
             });
           }}
         >
@@ -76,10 +102,15 @@ export function TimePicker(props: TimePickerProps) {
           value={state.value?.meridiem ?? "am"}
           onChange={(e) => {
             const v = e.target.value as "am" | "pm";
-            actions.setTimeValue(slide.id, {
+            const timeValue = {
               ...DEFAULT_TIME,
               ...state.value,
               meridiem: v,
+            };
+
+            actions.setTimeValue(slide.id, {
+              ...timeValue,
+              hour24format: formatTo24Hour(timeValue),
             });
           }}
         >
