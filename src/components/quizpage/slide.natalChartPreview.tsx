@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DateValue, LocationValue, Slide } from "@martynasj/quiz-lib";
-import { Chart } from "@astrodraw/astrochart";
+import type { Chart as ChartType } from "@astrodraw/astrochart";
 import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { Origin, Horoscope } from "circular-natal-horoscope-js";
 
@@ -92,6 +92,8 @@ function AstroChart(props: AstroChartProps) {
       origin: origin,
     });
     setHoroscope(horoscope);
+
+    const Chart = require("@astrodraw/astrochart").Chart as typeof ChartType;
 
     var chart = new Chart("paper1234", NATAL_CHART_SIZE * 2, NATAL_CHART_SIZE * 2, {
       COLORS_SIGNS: [

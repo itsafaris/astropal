@@ -1,7 +1,5 @@
 import { NatalChart } from "@utils/natalChart";
-import OpenAI from "openai";
 
-const ORG_ID = "org-aU2Uwbda3KxT1RXXw1i8DILB";
 const GPT_MODEL = "gpt-4-1106-preview";
 
 type ApiError = {
@@ -25,14 +23,6 @@ function createPrompt(natalChart: NatalChart, question: string): string {
 
 type Service = typeof service;
 
-function createOpenai(): OpenAI {
-  return new OpenAI({
-    apiKey: process.env.GATSBY_OPENAI_API_KEY,
-    organization: ORG_ID,
-    dangerouslyAllowBrowser: true,
-  });
-}
-
 const service = {
   async fetchAnswer(natalChart: NatalChart, question: string) {
     const prompt = createPrompt(natalChart, question);
@@ -46,28 +36,25 @@ const service = {
     });
   },
 
-  stream: (natalChart: NatalChart, question: string, onAnswer) => {
-    const openai = createOpenai();
-    const s = openai.beta.chat.completions.stream({
-      model: GPT_MODEL,
-      messages: [
-        {
-          role: "user",
-          content: createPrompt(natalChart, question),
-        },
-      ],
-      stream: true,
-    });
-
-    s.on("content", (_delta, snapshot) => {
-      onAnswer(snapshot);
-    });
-
-    s.on("chatCompletion", () => {
-      s.controller.abort();
-    });
-
-    return s.controller.abort;
+  stream: (natalChart: NatalChart, question: string, onAnswer: (msg: string) => void) => {
+    // const openai = createOpenai();
+    // const s = openai.beta.chat.completions.stream({
+    //   model: GPT_MODEL,
+    //   messages: [
+    //     {
+    //       role: "user",
+    //       content: createPrompt(natalChart, question),
+    //     },
+    //   ],
+    //   stream: true,
+    // });
+    // s.on("content", (_delta, snapshot) => {
+    //   onAnswer(snapshot);
+    // });
+    // s.on("chatCompletion", () => {
+    //   s.controller.abort();
+    // });
+    // return s.controller.abort;
   },
 };
 
