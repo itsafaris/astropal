@@ -4,11 +4,10 @@ import {
   YourBirthDateSlide,
   YourBirthPlaceSlide,
   YourProfileSavingSlide,
-  YourSimilarProfilesSlide,
   YourBirthTimeSlide,
-  NatalChartPreviewSlide,
-  NatalChartInterpretationSlide,
 } from "./slides.yourProfile";
+import { NatalChartPreviewSlide } from "./slide.natalChartPreview";
+import { NatalChartInterpretationSlide } from "./slide.firstInterpretation";
 
 export function Quiz() {
   return (
@@ -17,7 +16,6 @@ export function Quiz() {
       <YourBirthTimeSlide />
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />
-      {/* <YourSimilarProfilesSlide /> */}
       <NatalChartPreviewSlide />
       <NatalChartInterpretationSlide />
     </Segment>
