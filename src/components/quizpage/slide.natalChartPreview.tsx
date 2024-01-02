@@ -5,7 +5,7 @@ import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { Origin, Horoscope } from "circular-natal-horoscope-js";
 
 import { getPersonalInfoFromState } from "@utils/state";
-import { Span } from "./components";
+import { ChatBubble, Span } from "./components";
 import { Time } from "@utils/dates";
 
 type Pos = {
@@ -46,7 +46,7 @@ export function NatalChartPreviewSlide() {
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
-      nextButtonProps={{ title: "Get my first interpretation" }}
+      nextButtonProps={{ title: "Let's go!" }}
     >
       {({ quizState }) => {
         const { yourBirthDate, yourBirthTime, yourBirthLocation } =
@@ -97,18 +97,18 @@ function AstroChart(props: AstroChartProps) {
 
     var chart = new Chart("paper1234", NATAL_CHART_SIZE * 2, NATAL_CHART_SIZE * 2, {
       COLORS_SIGNS: [
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
-        "rgba(0,0,0,0.2)",
-        "rgba(0,0,0,0.4)",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
+        "white",
       ],
       LINE_COLOR: theme.colors.bg[400],
       CIRCLE_COLOR: theme.colors.bg[500],
@@ -116,7 +116,7 @@ function AstroChart(props: AstroChartProps) {
       POINTS_COLOR: theme.colors.brand[700], // planetos
       CUSPS_FONT_COLOR: theme.colors.bg[400],
       SYMBOL_AXIS_FONT_COLOR: theme.colors.bg[600], // As, Ds, Mc, Ic
-      COLOR_BACKGROUND: "rgba(0,0,0,0.2)",
+      COLOR_BACKGROUND: "white" ?? "rgba(0,0,0,0.2)",
       CUSPS_STROKE: 1,
     });
 
@@ -143,19 +143,20 @@ function AstroChart(props: AstroChartProps) {
   }, []);
 
   return (
-    <div>
+    <Box textColor={"white"}>
+      <ChatBubble text="This is your Natal Chart. I will use it as a foundation to base all my predictions" />
       <div style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}>
         <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
       </div>
       <Box mb={2} textAlign={"center"}>
-        <Text fontSize={"2xl"} my={3} color="brand.700" fontWeight={"bold"}>
+        <Text fontSize={"xl"} color="brand.700" fontWeight={"bold"}>
           {horoscope?.SunSign.label}
         </Text>
         <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
         <Text color="brand.600">{location.formattedText}</Text>
       </Box>
 
-      <Flex my={6} flexDirection={"column"} alignItems={"center"}>
+      <Flex display={"none"} my={6} flexDirection={"column"} alignItems={"center"}>
         <Box>
           {horoscope?.CelestialBodies.all.map((it: any) => {
             const pos = it.ChartPosition as ChartPosition;
@@ -172,6 +173,6 @@ function AstroChart(props: AstroChartProps) {
           })}
         </Box>
       </Flex>
-    </div>
+    </Box>
   );
 }

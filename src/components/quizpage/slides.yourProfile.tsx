@@ -10,7 +10,7 @@ import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
-import { Span, Subtitle } from "./components";
+import { ChatBubble, Question, Span, Subtitle } from "./components";
 
 export function YourGoalSlide() {
   return (
@@ -109,7 +109,7 @@ export function YourBirthNameSlide() {
 export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
-      <Title>When were you born?</Title>
+      <ChatBubble text="What is your date of birth?" />
       <Selector />
     </Slide>
   );
@@ -117,17 +117,22 @@ export function YourBirthDateSlide() {
 
 export function YourBirthTimeSlide() {
   return (
-    <Slide id="your-birth-time" type="time" optional>
+    <Slide id="your-birth-time" type="time">
       {({ quizState }) => {
         return (
           <Fragment>
-            <Title>Time of birth?</Title>
-            <StaticImage
-              src={"../../images/time.png"}
-              alt="time of birth"
-              placeholder="blurred"
-              style={{ borderRadius: 12 }}
-            />
+            <ChatBubble text="What is the exact time you were born?" />
+            <Flex justifyContent={"center"} my={4}>
+              <StaticImage
+                src={"../../images/time.png"}
+                alt="time of birth"
+                placeholder="blurred"
+                style={{ borderRadius: 12 }}
+                height={120}
+                width={120}
+                layout="fixed"
+              />
+            </Flex>
             <Selector />
           </Fragment>
         );
@@ -138,8 +143,8 @@ export function YourBirthTimeSlide() {
 
 export function YourBirthPlaceSlide() {
   return (
-    <Slide id="your-birth-place" type="location" placeholder="e.g. New York" optional>
-      <Title>Where were you born?</Title>
+    <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
+      <ChatBubble text="Where were you born?" />
       <Selector />
     </Slide>
   );
@@ -150,8 +155,8 @@ export function YourProfileSavingSlide() {
     <Slide
       id="your-profile-saving"
       type="loading"
-      duration={1}
-      autoProceed
+      duration={4}
+      // autoProceed
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
@@ -159,19 +164,37 @@ export function YourProfileSavingSlide() {
       {({ state }) => {
         return (
           <Fragment>
-            <Title color="white" textAlign={"center"}>
-              {`Updating your Spiritual Profile`}
-            </Title>
-            <TransitionText
-              height={6}
-              textAlign={"center"}
-              color="white"
-              text={state.isComplete ? `Done!` : "Loading..."}
-            />
+            <ChatBubble text="Give me a moment. I am creating your natal chart..." />
             <Selector />
           </Fragment>
         );
       }}
+    </Slide>
+  );
+}
+
+export function FirstQuestionTrial() {
+  return (
+    <Slide id="first-question-trial" type="filler">
+      <ChatBubble text="Now let's try to answer one question based on your Natal Chart." />
+      <Text my={6} color="whiteAlpha.400" textAlign={"center"} maxWidth={"70%"} mx="auto">
+        Click the example question below to get a personalised answer
+      </Text>
+      <Question text="What am I as a person?" />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function AstrologerIsReadySlide() {
+  return (
+    <Slide
+      id="astrologer-ready"
+      type="filler"
+      nextButtonProps={{ title: "Start using your astrologer" }}
+    >
+      <Title>Congratulations! Your astrologer is now ready</Title>
+      <Selector />
     </Slide>
   );
 }

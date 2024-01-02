@@ -90,7 +90,7 @@ async function fetchCompletion(input: {
 
 const serviceMock: Service = {
   fetchAnswer: async () => {
-    return "hello, this is a mocked advice";
+    return "THIS IS A MOCKED ANSWER: You're a passionate leader, adventurous at heart, caring, practical-minded, and you value security and personal growth. Sometimes, you experience internal conflicts about freedom versus responsibility.";
   },
 
   stream: (_natalChart, _question, onAnswer) => {

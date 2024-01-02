@@ -41,7 +41,7 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
       <QuizBg />
       {config.showDebugUI && <DebugUI />}
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
-      <ProgressIndicator />
+      {/* <ProgressIndicator /> */}
       <Flex position={"relative"} flexGrow={1} width={"100%"} justifyContent={"center"}>
         {children}
       </Flex>

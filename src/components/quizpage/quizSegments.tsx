@@ -5,9 +5,14 @@ import {
   YourBirthPlaceSlide,
   YourProfileSavingSlide,
   YourBirthTimeSlide,
+  FirstQuestionTrial,
+  AstrologerIsReadySlide,
+  YourColorResonanceSlide,
 } from "./slides.yourProfile";
 import { NatalChartPreviewSlide } from "./slide.natalChartPreview";
 import { NatalChartInterpretationSlide } from "./slide.firstInterpretation";
+import { AstrologerSlide } from "./slide.astrologer";
+import { AnswerToAnyQuestionSlide } from "./slide.answerToAnyQuestion";
 
 export function Quiz() {
   return (
@@ -17,7 +22,12 @@ export function Quiz() {
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />
       <NatalChartPreviewSlide />
+      <FirstQuestionTrial />
       <NatalChartInterpretationSlide />
+      <AstrologerIsReadySlide />
+      <AstrologerSlide />
+      <AnswerToAnyQuestionSlide />
+      <YourColorResonanceSlide />
     </Segment>
   );
 }
