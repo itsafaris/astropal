@@ -8,6 +8,36 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { Span } from "./components";
 import { Time } from "@utils/dates";
 
+type Pos = {
+  StartPosition: ChartPosition;
+  EndPosition: ChartPosition;
+};
+
+type ChartPosition = {
+  horizonDegrees?: number;
+  eclipticDegrees?: number;
+  Horizon: {
+    DecimalDegrees: number;
+    ArcDegrees: {
+      degrees: number;
+      minutes: number;
+      seconds: number;
+    };
+    ArcDegreesFormatted: string;
+    ArcDegreesFormatted30: string;
+  };
+  Ecliptic: {
+    DecimalDegrees: number;
+    ArcDegrees: {
+      degrees: number;
+      minutes: number;
+      seconds: number;
+    };
+    ArcDegreesFormatted: string;
+    ArcDegreesFormatted30: string;
+  };
+};
+
 export function NatalChartPreviewSlide() {
   return (
     <Slide
