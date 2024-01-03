@@ -46,34 +46,41 @@ export function ChatBubble(props: {
   instant?: boolean;
   onFinishedTyping?: () => void;
 }) {
-  const [visibleText, setVisibleText] = useState(props.instant ? props.text : "");
+  const speed = 120;
+
+  const [words, setWords] = useState<string[]>([]);
+  const [nextWord, setNextWord] = useState("");
 
   useEffect(() => {
     if (props.instant) {
-      setVisibleText(props.text);
+      setWords(props.text.split(" "));
       return;
     }
 
-    const letters = props.text.split("");
+    const words = props.text.split(" ");
 
     let idx = 0;
     const it = setInterval(() => {
-      const nextLetter = letters[idx];
-      setVisibleText((t) => {
-        return t + nextLetter;
-      });
+      const nextLetter = words[idx];
+
+      setNextWord(nextLetter);
+      setTimeout(() => {
+        setWords((w) => [...w, nextLetter]);
+        setNextWord("");
+      }, speed / 2);
 
       idx++;
-      if (idx === letters.length) {
+      if (idx === words.length) {
         setTimeout(() => {
           props.onFinishedTyping?.();
         }, 300);
         clearInterval(it);
       }
-    }, 30);
+    }, speed);
 
     return () => {
-      setVisibleText("");
+      setWords([]);
+      setNextWord("");
       clearInterval(it);
     };
   }, [props.text, props.instant]);
@@ -91,13 +98,20 @@ export function ChatBubble(props: {
       </Flex>
       <Text
         fontWeight="bold"
-        textAlign={"center"}
+        textAlign={"start"}
+        width={"full"}
         fontSize={"xl"}
         p={2}
         borderRadius={"xl"}
         whiteSpace={"pre-wrap"}
       >
-        {visibleText}
+        {words.join(" ")}
+        {words.length !== 0 && (
+          <Text as="span" color="whiteAlpha.200">
+            {" "}
+            {nextWord}
+          </Text>
+        )}
       </Text>
     </Flex>
   );
