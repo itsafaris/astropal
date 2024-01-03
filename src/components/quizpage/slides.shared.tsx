@@ -1,8 +1,6 @@
 import React from "react";
-import { Callout, Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide, Title } from "@martynasj/quiz-lib";
 import { Caption } from "./components";
-import { StaticImage } from "gatsby-plugin-image";
-import { Box } from "@chakra-ui/react";
 
 export function ExpectationsSlide() {
   return (
@@ -87,10 +85,10 @@ export function EmailSlide() {
       placeholder="Enter your email"
       nextButtonProps={{ title: "Submit" }}
     >
-      <Title>We're out of free service slots at the moment</Title>
+      <Title>Service is at highest capacity</Title>
       <Callout emoji="⚠️ New users limit reached">
-        We have reached the capacity of new users limit. You can leave your email below and we will
-        send you the invite link once we're ready to onboard new users.
+        Due to the high number of new users, we are limiting access to our service at the moment.
+        Your astrologer is however saved and will be ready to use, once we send you an invite
       </Callout>
       <Selector />
       <Caption mb={8}>Your email will only be used to send you the invite link.</Caption>

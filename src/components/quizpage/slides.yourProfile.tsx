@@ -1,17 +1,16 @@
-import React, { Fragment, createElement, useEffect, useState } from "react";
-import { Selector, Slide, Title, TransitionText, useQuiz } from "@martynasj/quiz-lib";
+import React, { Fragment, createElement, useState } from "react";
+import { Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
 
 import colorMap from "@images/color_map.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
-import { ArrowDownIcon } from "@chakra-ui/icons";
 
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
-import { ChatBubble, NextButton, Question, Span, Subtitle } from "./components";
+import { ChatBubble, NextButton, Span, Subtitle } from "./components";
 
 export function YourGoalSlide() {
   return (
@@ -243,29 +242,112 @@ export function YourProfileSavingSlide() {
   );
 }
 
-export function FirstQuestionTrial() {
+export function IntroToSecondPart() {
   const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
 
   return (
-    <Slide id="first-question-trial" type="filler">
+    <Slide id="intro-to-second-part" type="filler">
       <ChatBubble
-        text="Now let's try to answer one question based on your Natal Chart."
+        text={`In order to deliver you the best advice possible, let's do a few more questions`}
         instant={showInput}
-        onFinishedTyping={() => setShowInput(true)}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+
+      <Text color="bg.900" fontSize={"lg"} fontWeight={"bold"} textAlign={"center"} mb={6}>
+        After this, you will be able to:
+      </Text>
+      <Flex flexDirection={"column"} gap={1} color="bg.700" mx={6} alignItems={"center"} mb={12}>
+        <Text>+ Ask questions about any topic</Text>
+        <Text>+ Receive super accurate reading</Text>
+        <Text>+ Future predictions</Text>
+      </Flex>
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            submitQuestion();
+          }}
+        >
+          Continue
+        </NextButton>
+      )}
+    </Slide>
+  );
+}
+
+export function IntroToFinetuningPart() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="intro-to-finetuning" type="filler">
+      <ChatBubble
+        text="To make my answers even more personalised for you, let's answer a few more questions"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
       />
       {showInput && (
-        <>
-          <Flex mb={6} flexDirection={"column"} gap={3} alignItems={"center"}>
-            <Text color="whiteAlpha.600" textAlign={"center"} maxWidth={"70%"} mx="auto">
-              Click the example question below to get a personalised answer
-            </Text>
-            <ArrowDownIcon color="whiteAlpha.600" fontSize={"3xl"} />
-          </Flex>
-          <Question text="What am I as a person?" onClick={() => submitQuestion()} />
-          <Selector />
-        </>
+        <NextButton
+          onClick={() => {
+            submitQuestion();
+          }}
+        >
+          Continue
+        </NextButton>
       )}
+    </Slide>
+  );
+}
+
+export function SatisfactionScoreSlide() {
+  const [showInput, setShowInput] = useState(false);
+
+  return (
+    <Slide
+      id="statisfaction-score"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Not satisfied" },
+        { text: "Somewhat satisfied" },
+        { text: "Very satisfied" },
+        { text: "Super. I want more" },
+      ]}
+    >
+      <ChatBubble
+        text="How satisfied were you with my answers?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
+    </Slide>
+  );
+}
+
+export function AsnwerLongevity() {
+  const [showInput, setShowInput] = useState(false);
+
+  return (
+    <Slide
+      id="answer-longevity"
+      type="single"
+      variant="list"
+      options={[{ text: "More brief" }, { text: "Just like it was" }, { text: "More detailed" }]}
+    >
+      <ChatBubble
+        text="How would you like my answers to be?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
     </Slide>
   );
 }
@@ -334,6 +416,8 @@ export function YourSimilarProfilesSlide() {
 }
 
 export function YourValuesAndPrioritiesSlide() {
+  const [showInput, setShowInput] = useState(false);
+
   return (
     <Slide
       id="your-values-and-priorities"
@@ -366,13 +450,21 @@ export function YourValuesAndPrioritiesSlide() {
         },
       ]}
     >
-      <Title>What is most important to you?</Title>
-      <Selector />
+      <ChatBubble
+        text="What is most important to you?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
     </Slide>
   );
 }
 
 export function YourPersonalityTypeSlide() {
+  const [showInput, setShowInput] = useState(false);
+
   return (
     <Slide
       id="your-personality-type"
@@ -413,24 +505,21 @@ export function YourPersonalityTypeSlide() {
         },
       ]}
     >
-      {({ quizState }) => {
-        const { yourName } = getPersonalInfoFromState(quizState);
-        return (
-          <>
-            <Title>{yourName}, which personality type best describes you?</Title>
-            <Subtitle>
-              We merge astrological insights with your <Span>personal traits</Span> to deliver
-              individualized guidance.
-            </Subtitle>
-            <Selector />
-          </>
-        );
-      }}
+      <ChatBubble
+        text="Which personality type best describes you?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
     </Slide>
   );
 }
 
 export function YourSpiritualInvolvementSlide() {
+  const [showInput, setShowInput] = useState(false);
+
   return (
     <Slide
       id="your-spiritual-involvement"
@@ -459,12 +548,46 @@ export function YourSpiritualInvolvementSlide() {
         },
       ]}
     >
-      <Title>To what extent are you engaged with spiritual practices and concepts?</Title>
-      <Subtitle>
-        Knowing your <Span>engagement level</Span> allows us to fine-tune the insights and advice to
-        resonate with your spiritual journey.
-      </Subtitle>
-      <Selector />
+      <ChatBubble
+        text="To what extent are you engaged with spiritual practices and concepts?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
+    </Slide>
+  );
+}
+
+export function FinilisingAstrologerSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide
+      id="finilising-astrologer"
+      type="loading"
+      duration={4}
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+      onLoadingCompleted={() => {
+        setShowNext(true);
+      }}
+    >
+      <ChatBubble
+        text="Thank you! I am now memorising details about you"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
+      {showNext && (
+        <NextButton onClick={() => submitQuestion()}>Start using my astrologer</NextButton>
+      )}
     </Slide>
   );
 }

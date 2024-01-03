@@ -69,7 +69,7 @@ export function ChatBubble(props: {
         }, 300);
         clearInterval(it);
       }
-    }, 45);
+    }, 30);
 
     return () => {
       setVisibleText("");
@@ -99,12 +99,13 @@ export function ChatBubble(props: {
 export function Question(props: { text: string } & ComponentProps<typeof Text>) {
   return (
     <Text
-      border="1px solid"
+      border="2px solid"
       borderColor={"bg.500"}
       color="white"
       fontSize={"sm"}
       backgroundColor={"bg.200"}
       p={2}
+      px={4}
       borderRadius={"xl"}
       {...props}
     >

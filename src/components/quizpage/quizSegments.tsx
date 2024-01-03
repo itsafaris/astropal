@@ -5,14 +5,18 @@ import {
   YourBirthPlaceSlide,
   YourProfileSavingSlide,
   YourBirthTimeSlide,
-  FirstQuestionTrial,
-  AstrologerIsReadySlide,
-  YourColorResonanceSlide,
+  IntroToSecondPart,
+  SatisfactionScoreSlide,
+  AsnwerLongevity,
+  IntroToFinetuningPart,
+  YourPersonalityTypeSlide,
+  YourValuesAndPrioritiesSlide,
+  YourSpiritualInvolvementSlide,
+  FinilisingAstrologerSlide,
 } from "./slides.yourProfile";
 import { NatalChartPreviewSlide } from "./slide.natalChartPreview";
-import { NatalChartInterpretationSlide } from "./slide.firstInterpretation";
-import { AstrologerSlide } from "./slide.astrologer";
-import { AnswerToAnyQuestionSlide } from "./slide.answerToAnyQuestion";
+import { FirstQuestionTrial } from "./slide.firstTrialQuestion";
+import { EmailSlide } from "./slides.shared";
 
 export function Quiz() {
   return (
@@ -23,11 +27,15 @@ export function Quiz() {
       <YourProfileSavingSlide />
       <NatalChartPreviewSlide />
       <FirstQuestionTrial />
-      <NatalChartInterpretationSlide />
-      <AstrologerIsReadySlide />
-      <AstrologerSlide />
-      <AnswerToAnyQuestionSlide />
-      <YourColorResonanceSlide />
+      <IntroToSecondPart />
+      <AsnwerLongevity />
+      <SatisfactionScoreSlide />
+      <IntroToFinetuningPart />
+      <YourPersonalityTypeSlide />
+      <YourValuesAndPrioritiesSlide />
+      <YourSpiritualInvolvementSlide />
+      <FinilisingAstrologerSlide />
+      <EmailSlide />
     </Segment>
   );
 }
