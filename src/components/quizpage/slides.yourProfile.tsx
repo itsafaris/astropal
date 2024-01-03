@@ -214,8 +214,8 @@ export function YourBirthPlaceSlide() {
 
 export function YourProfileSavingSlide() {
   const [showInput, setShowInput] = useState(false);
-  const [showNext, setShowNext] = useState(false);
-  const { submitQuestion } = useQuiz();
+  // const [showNext, setShowNext] = useState(false);
+  // const { submitQuestion } = useQuiz();
 
   return (
     <Slide
@@ -225,9 +225,10 @@ export function YourProfileSavingSlide() {
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
-      onLoadingCompleted={() => {
-        setShowNext(true);
-      }}
+      // onLoadingCompleted={() => {
+      //   setShowNext(true);
+      // }}
+      autoProceed
     >
       <ChatBubble
         text="Give me a moment. I am creating your natal chart..."
@@ -237,7 +238,7 @@ export function YourProfileSavingSlide() {
         }}
       />
       {showInput && <Selector />}
-      {showNext && <NextButton onClick={() => submitQuestion()}>Let's see it</NextButton>}
+      {/* {showNext && <NextButton onClick={() => submitQuestion()}>Let's see it</NextButton>} */}
     </Slide>
   );
 }
