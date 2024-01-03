@@ -1,27 +1,12 @@
-import React, { useState } from "react";
-import { Slide, Title, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
+import React from "react";
+import { useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
-import { ChatBubble, NextButton, Subtitle } from "./components";
+import { ChatBubble } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
 import { getOpenaiService, isApiError } from "@services/openaiService";
-import { Box, Text } from "@chakra-ui/react";
-
-export function NatalChartInterpretationSlide() {
-  return (
-    <Slide
-      id="natal-chart-interpretation"
-      type="filler"
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-      nextButtonProps={{ title: "I am ready" }}
-    >
-      {/* <NatalChartInterpreter /> */}
-    </Slide>
-  );
-}
+import { Box } from "@chakra-ui/react";
 
 export function NatalChartInterpreter(props: { question: string; onFinishedAnswer?: () => void }) {
   const state = useQuizSnapshot();
@@ -44,7 +29,7 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
         longitude: yourBirthLocation.long,
       });
 
-      const openai = getOpenaiService({ mock: true });
+      const openai = getOpenaiService();
 
       try {
         const answer = await openai.fetchAnswer(natalChart, props.question);

@@ -1,3 +1,4 @@
+import { isProdMode } from "@utils/isProdMode";
 import { NatalChart } from "@utils/natalChart";
 
 const GPT_MODEL = "gpt-4-1106-preview";
@@ -100,6 +101,7 @@ const serviceMock: Service = {
   },
 };
 
-export function getOpenaiService({ mock = false }: { mock: boolean }) {
-  return mock ? serviceMock : service;
+export function getOpenaiService() {
+  const useMock = !isProdMode();
+  return useMock ? serviceMock : service;
 }

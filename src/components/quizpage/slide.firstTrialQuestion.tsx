@@ -4,7 +4,7 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { ArrowDownIcon } from "@chakra-ui/icons";
 
 import { ChatBubble, NextButton, Question } from "./components";
-import { NatalChartInterpreter } from "./slide.firstInterpretation";
+import { NatalChartInterpreter } from "./interpreter";
 
 const predefinedQuestions = [
   "What are my strengths and weaknesses?",
