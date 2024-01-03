@@ -2,7 +2,8 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
-import orbGif from "@images/orb_animated.gif";
+import orbGif from "@images/gif-6.gif";
+// import orbGif from "@images/orb_animated.gif";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -79,8 +80,14 @@ export function ChatBubble(props: {
 
   return (
     <Flex my={2} mb={16} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
-      <Flex>
-        <img height={50} width={50} src={orbGif} />
+      <Flex
+        borderRadius={"full"}
+        overflow={"hidden"}
+        height={"60px"}
+        width={"60px"}
+        boxShadow={"0 0 20px 0 black"}
+      >
+        <img src={orbGif} />
       </Flex>
       <Text
         fontWeight="bold"
