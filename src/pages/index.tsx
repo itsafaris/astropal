@@ -22,9 +22,9 @@ export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
       <Box py={6} px={4} maxWidth="md" mx="auto">
-        <Box flexDirection={"row"} alignItems={"center"} display={"flex"} gap={3} mb={5}>
-          <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={50} />
-          <Text fontSize={"xl"} fontWeight={"bold"}>
+        <Box flexDirection={"row"} alignItems={"center"} display={"flex"} gap={3} mb={8}>
+          <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={35} />
+          <Text fontSize={"md"} fontWeight={"semibold"}>
             Astropal
           </Text>
         </Box>
@@ -44,17 +44,17 @@ export default function IndexPage() {
             {HEADING_TITLE}
           </Heading>
 
-          <Text fontSize="md" textAlign="center" color="bg.700">
+          <Text fontSize="md" textAlign="center" color="bg.700" my={3}>
             Complete a{" "}
             <Text as="span" fontWeight={"bold"} color="brand.500">
               1-minute
             </Text>{" "}
-            quiz to get a first insight
+            quiz <br /> to get a first insight
           </Text>
 
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Link to="/onboarding">
-              <NextButton>Create astrologer</NextButton>
+              <NextButton>Let's start</NextButton>
             </Link>
           </Flex>
         </Flex>
