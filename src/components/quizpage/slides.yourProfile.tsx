@@ -1,16 +1,17 @@
-import React, { Fragment, createElement } from "react";
-import { Selector, Slide, Title, TransitionText } from "@martynasj/quiz-lib";
+import React, { Fragment, createElement, useEffect, useState } from "react";
+import { Selector, Slide, Title, TransitionText, useQuiz } from "@martynasj/quiz-lib";
 
 import colorMap from "@images/color_map.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
-import { ChatBubble, Question, Span, Subtitle } from "./components";
+import { ChatBubble, NextButton, Question, Span, Subtitle } from "./components";
 
 export function YourGoalSlide() {
   return (
@@ -107,33 +108,75 @@ export function YourBirthNameSlide() {
 }
 
 export function YourBirthDateSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
   return (
     <Slide id="your-birth-date" type="date">
-      <ChatBubble text="What is your date of birth?" />
-      <Selector />
+      <ChatBubble
+        text={"What is your date of birth?"}
+        instant={showInput}
+        onFinishedTyping={() => {
+          setTimeout(() => {
+            setShowInput(true);
+          }, 300);
+        }}
+      />
+      {showInput && <Selector />}
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            submitQuestion();
+          }}
+        >
+          Next
+        </NextButton>
+      )}
     </Slide>
   );
 }
 
 export function YourBirthTimeSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
   return (
     <Slide id="your-birth-time" type="time">
       {({ quizState }) => {
         return (
           <Fragment>
-            <ChatBubble text="What is the exact time you were born?" />
-            <Flex justifyContent={"center"} my={4}>
-              <StaticImage
-                src={"../../images/time.png"}
-                alt="time of birth"
-                placeholder="blurred"
-                style={{ borderRadius: 12 }}
-                height={120}
-                width={120}
-                layout="fixed"
-              />
-            </Flex>
-            <Selector />
+            <ChatBubble
+              instant={showInput}
+              text="What is the exact time you were born?"
+              onFinishedTyping={() => {
+                setShowInput(true);
+              }}
+            />
+            {showInput && (
+              <>
+                {/* <Flex justifyContent={"center"} my={4}>
+                  <StaticImage
+                    src={"../../images/time.png"}
+                    alt="time of birth"
+                    placeholder="blurred"
+                    style={{ borderRadius: 12 }}
+                    height={120}
+                    width={120}
+                    layout="fixed"
+                  />
+                </Flex> */}
+                <Selector />
+              </>
+            )}
+            {showInput && (
+              <NextButton
+                onClick={() => {
+                  submitQuestion();
+                }}
+              >
+                Next
+              </NextButton>
+            )}
           </Fragment>
         );
       }}
@@ -142,46 +185,87 @@ export function YourBirthTimeSlide() {
 }
 
 export function YourBirthPlaceSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
   return (
     <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
-      <ChatBubble text="Where were you born?" />
-      <Selector />
+      <ChatBubble
+        text="Where were you born?"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && (
+        <>
+          <Selector />
+          <NextButton
+            onClick={() => {
+              submitQuestion();
+            }}
+          >
+            Next
+          </NextButton>
+        </>
+      )}
     </Slide>
   );
 }
 
 export function YourProfileSavingSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const { submitQuestion } = useQuiz();
+
   return (
     <Slide
       id="your-profile-saving"
       type="loading"
       duration={4}
-      // autoProceed
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
-    >
-      {({ state }) => {
-        return (
-          <Fragment>
-            <ChatBubble text="Give me a moment. I am creating your natal chart..." />
-            <Selector />
-          </Fragment>
-        );
+      onLoadingCompleted={() => {
+        setShowNext(true);
       }}
+    >
+      <ChatBubble
+        text="Give me a moment. I am creating your natal chart..."
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
+      {showNext && <NextButton onClick={() => submitQuestion()}>Let's see it</NextButton>}
     </Slide>
   );
 }
 
 export function FirstQuestionTrial() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
   return (
     <Slide id="first-question-trial" type="filler">
-      <ChatBubble text="Now let's try to answer one question based on your Natal Chart." />
-      <Text my={6} color="whiteAlpha.400" textAlign={"center"} maxWidth={"70%"} mx="auto">
-        Click the example question below to get a personalised answer
-      </Text>
-      <Question text="What am I as a person?" />
-      <Selector />
+      <ChatBubble
+        text="Now let's try to answer one question based on your Natal Chart."
+        instant={showInput}
+        onFinishedTyping={() => setShowInput(true)}
+      />
+      {showInput && (
+        <>
+          <Flex mb={6} flexDirection={"column"} gap={3} alignItems={"center"}>
+            <Text color="whiteAlpha.600" textAlign={"center"} maxWidth={"70%"} mx="auto">
+              Click the example question below to get a personalised answer
+            </Text>
+            <ArrowDownIcon color="whiteAlpha.600" fontSize={"3xl"} />
+          </Flex>
+          <Question text="What am I as a person?" onClick={() => submitQuestion()} />
+          <Selector />
+        </>
+      )}
     </Slide>
   );
 }

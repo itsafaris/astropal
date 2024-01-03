@@ -22,6 +22,7 @@ export function LoadingSlide(props: LoadingSlideComponentProps) {
           actions.setLoadingStateProgress(slide.id, value);
         }}
         onComplete={() => {
+          props.onLoadingCompleted?.();
           actions.setLoadingStateComplete(slide.id, true);
           if (slide.autoProceed) {
             setTimeout(() => {

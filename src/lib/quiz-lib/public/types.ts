@@ -131,6 +131,7 @@ export type SlidePropsLoading = {
   completedText?: React.ReactNode;
   statusText?: string | ((s: { progress: number }) => string);
   autoProceed?: boolean;
+  onLoadingCompleted?: () => void;
 } & SlidePropsBase;
 
 export type SlidePropsFiller = {

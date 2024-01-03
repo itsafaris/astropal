@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { DateValue, LocationValue, Slide } from "@martynasj/quiz-lib";
+import { DateValue, LocationValue, Slide, useQuiz } from "@martynasj/quiz-lib";
 import type { Chart as ChartType } from "@astrodraw/astrochart";
 import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
 import { Origin, Horoscope } from "circular-natal-horoscope-js";
 
 import { getPersonalInfoFromState } from "@utils/state";
-import { ChatBubble, Span } from "./components";
+import { ChatBubble, NextButton, Span } from "./components";
 import { Time } from "@utils/dates";
 
 type Pos = {
@@ -68,6 +68,8 @@ type AstroChartProps = {
 
 function AstroChart(props: AstroChartProps) {
   const { date, time, location } = props;
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
 
   const NATAL_CHART_SIZE = 320;
 
@@ -76,6 +78,10 @@ function AstroChart(props: AstroChartProps) {
   const [horoscope, setHoroscope] = useState<Horoscope | undefined>(undefined);
 
   useEffect(() => {
+    if (!showInput) {
+      return;
+    }
+
     const origin = new Origin({
       year: date.year,
       month: date.month - 1, // 0 = January, 11 = December!
@@ -140,39 +146,52 @@ function AstroChart(props: AstroChartProps) {
     const radix = chart.radix(data);
 
     radix.aspects();
-  }, []);
+  }, [showInput]);
 
   return (
     <Box textColor={"white"}>
-      <ChatBubble text="This is your Natal Chart. I will use it as a foundation to base all my predictions" />
-      <div style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}>
-        <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
-      </div>
-      <Box mb={2} textAlign={"center"}>
-        <Text fontSize={"xl"} color="brand.700" fontWeight={"bold"}>
-          {horoscope?.SunSign.label}
-        </Text>
-        <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
-        <Text color="brand.600">{location.formattedText}</Text>
-      </Box>
+      <ChatBubble
+        text="This is your Natal Chart. I will use it as a foundation to base all my predictions"
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && (
+        <div>
+          <div style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}>
+            <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
+          </div>
+          <Box mb={2} textAlign={"center"}>
+            <Text fontSize={"xl"} color="brand.700" fontWeight={"bold"}>
+              {horoscope?.SunSign.label}
+            </Text>
+            <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
+            <Text color="brand.600">{location.formattedText}</Text>
+          </Box>
 
-      <Flex display={"none"} my={6} flexDirection={"column"} alignItems={"center"}>
-        <Box>
-          {horoscope?.CelestialBodies.all.map((it: any) => {
-            const pos = it.ChartPosition as ChartPosition;
-            const relPos = pos.Ecliptic.ArcDegreesFormatted30;
-            const [degrees] = relPos.split(" ");
-            return (
-              <Text color="brand.600" fontSize={"xs"}>
-                {it.label} at{" "}
-                <Span>
-                  {degrees} in {it.Sign.label}
-                </Span>
-              </Text>
-            );
-          })}
-        </Box>
-      </Flex>
+          <Flex display={"none"} my={6} flexDirection={"column"} alignItems={"center"}>
+            <Box>
+              {horoscope?.CelestialBodies.all.map((it: any) => {
+                const pos = it.ChartPosition as ChartPosition;
+                const relPos = pos.Ecliptic.ArcDegreesFormatted30;
+                const [degrees] = relPos.split(" ");
+                return (
+                  <Text color="brand.600" fontSize={"xs"}>
+                    {it.label} at{" "}
+                    <Span>
+                      {degrees} in {it.Sign.label}
+                    </Span>
+                  </Text>
+                );
+              })}
+            </Box>
+          </Flex>
+
+          <NextButton my={6} onClick={() => submitQuestion()}>
+            Next
+          </NextButton>
+        </div>
+      )}
     </Box>
   );
 }

@@ -1,7 +1,28 @@
-import React from "react";
+import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
-import { Text, Flex, Box } from "@chakra-ui/react";
+import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
+import orbGif from "@images/orb_animated.gif";
+
+export function NextButton(props: ComponentProps<typeof Button>) {
+  const theme = useTheme();
+  return (
+    <Box mx={4} mb={4}>
+      <Button
+        px={6}
+        py={4}
+        variant={"solid"}
+        backgroundColor="brand.600"
+        _hover={{
+          backgroundColor: "brand.500",
+        }}
+        width={"full"}
+        boxShadow={`0 0 0 6px ${theme.colors.brand["800"]}`}
+        {...props}
+      />
+    </Box>
+  );
+}
 
 export function Span(props: React.ComponentProps<typeof SpanRaw>) {
   return <SpanRaw color="brand.500" fontWeight={"semibold"} {...props} />;
@@ -19,27 +40,63 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
   return <Text fontSize={"sm"} color="bg.600" {...props} />;
 }
 
-export function ChatBubble(props: { text: string }) {
+export function ChatBubble(props: {
+  text: string;
+  instant?: boolean;
+  onFinishedTyping?: () => void;
+}) {
+  const [visibleText, setVisibleText] = useState(props.instant ? props.text : "");
+
+  useEffect(() => {
+    if (props.instant) {
+      setVisibleText(props.text);
+      return;
+    }
+
+    const letters = props.text.split("");
+
+    let idx = 0;
+    const it = setInterval(() => {
+      const nextLetter = letters[idx];
+      setVisibleText((t) => {
+        return t + nextLetter;
+      });
+
+      idx++;
+      if (idx === letters.length) {
+        setTimeout(() => {
+          props.onFinishedTyping?.();
+        }, 300);
+        clearInterval(it);
+      }
+    }, 45);
+
+    return () => {
+      setVisibleText("");
+      clearInterval(it);
+    };
+  }, [props.text, props.instant]);
+
   return (
-    <Flex my={2} mb={4} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
+    <Flex my={2} mb={16} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
       <Flex>
-        <Box width={10} height={10} borderRadius={"full"} backgroundColor={"white"}></Box>
+        <img height={50} width={50} src={orbGif} />
       </Flex>
       <Text
         fontWeight="bold"
         textAlign={"center"}
-        backgroundColor={"black"}
+        fontSize={"xl"}
         p={2}
         borderRadius={"xl"}
         whiteSpace={"pre-wrap"}
       >
-        {props.text}
+        {visibleText}
       </Text>
     </Flex>
   );
 }
 
-export function Question(props: { text: string }) {
+export function Question(props: { text: string } & ComponentProps<typeof Text>) {
   return (
     <Text
       border="1px solid"
@@ -49,6 +106,7 @@ export function Question(props: { text: string }) {
       backgroundColor={"bg.200"}
       p={2}
       borderRadius={"xl"}
+      {...props}
     >
       {props.text}
     </Text>
