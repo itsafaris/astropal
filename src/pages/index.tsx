@@ -1,11 +1,12 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
+import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { PropsWithChildren } from "react";
 
-const HEADING_TITLE = "Your own hyper personalized astrologer";
+const HEADING_TITLE = "Your Own Hyper Personalized Astrologer";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -28,34 +29,34 @@ export default function IndexPage() {
           </Text>
         </Box>
 
-        <Heading mb={12} as="h1" size="xl" textAlign="center">
-          {HEADING_TITLE}
-        </Heading>
+        <Flex flexDirection={"column"} gap={7}>
+          <Flex flexDirection={"row"} justifyContent={"center"}>
+            <StaticImage
+              src={`../images/partner.png`}
+              alt="Option - in relationship"
+              placeholder="none"
+              width={170}
+              height={170}
+            />
+          </Flex>
 
-        <Text my={8} fontSize="lg" textAlign="center" color="bg.400">
-          Complete a{" "}
-          <Text as="span" fontWeight={"bold"} color="brand.500">
-            45-second
-          </Text>{" "}
-          quiz to get a first insight
-        </Text>
+          <Heading as="h1" size="2xl" textAlign="center" color="white">
+            {HEADING_TITLE}
+          </Heading>
 
-        <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"}>
-          What is your relationship status?
-        </Text>
+          <Text fontSize="md" textAlign="center" color="bg.700">
+            Complete a{" "}
+            <Text as="span" fontWeight={"bold"} color="brand.500">
+              1-minute
+            </Text>{" "}
+            quiz to get a first insight
+          </Text>
 
-        <Flex justifyContent="center" mt={8} gap={4}>
-          <Link to="/quiz-inrelationship">
-            <ImageButton text="In relationship">
-              <StaticImage
-                src={`../images/inrelationship.png`}
-                alt="Option - in relationship"
-                placeholder="none"
-                width={200}
-                height={200}
-              />
-            </ImageButton>
-          </Link>
+          <Flex flexDirection={"row"} justifyContent={"center"}>
+            <Link to="/onboarding">
+              <NextButton>Create astrologer</NextButton>
+            </Link>
+          </Flex>
         </Flex>
       </Box>
     </Box>
