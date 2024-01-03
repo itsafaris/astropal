@@ -79,7 +79,7 @@ export function createNatalChartData(input: {
   horoscope.CelestialBodies.all.forEach((it) => {
     planets[it.key as string] = {
       sign: it.Sign.key,
-      house: it.House.id,
+      house: it.House?.id, // sometimes a fixed star does not belong to a house if it's outside our solar system
     };
   });
 
