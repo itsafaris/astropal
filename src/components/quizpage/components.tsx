@@ -2,8 +2,8 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
-import orbGif from "@images/gif-6.gif";
-// import orbGif from "@images/orb_animated.gif";
+
+import orbGif from "@images/orb_animated_2.gif";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
