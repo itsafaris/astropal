@@ -256,22 +256,31 @@ export function IntroToSecondPart() {
         }}
       />
 
-      <Text color="bg.900" fontSize={"lg"} fontWeight={"bold"} textAlign={"center"} mb={6}>
-        After this, you will be able to:
-      </Text>
-      <Flex flexDirection={"column"} gap={1} color="bg.700" mx={6} alignItems={"center"} mb={12}>
-        <Text>+ Ask questions about any topic</Text>
-        <Text>+ Receive super accurate reading</Text>
-        <Text>+ Future predictions</Text>
-      </Flex>
       {showInput && (
-        <NextButton
-          onClick={() => {
-            submitQuestion();
-          }}
-        >
-          Continue
-        </NextButton>
+        <>
+          <Text color="bg.900" fontSize={"lg"} fontWeight={"bold"} textAlign={"center"} mb={6}>
+            After this, you will be able to:
+          </Text>
+          <Flex
+            flexDirection={"column"}
+            gap={1}
+            color="bg.700"
+            mx={6}
+            alignItems={"center"}
+            mb={12}
+          >
+            <Text>+ Ask questions about any topic</Text>
+            <Text>+ Receive super accurate reading</Text>
+            <Text>+ Future predictions</Text>
+          </Flex>
+          <NextButton
+            onClick={() => {
+              submitQuestion();
+            }}
+          >
+            Continue
+          </NextButton>
+        </>
       )}
     </Slide>
   );
@@ -312,10 +321,10 @@ export function SatisfactionScoreSlide() {
       type="single"
       variant="list"
       options={[
-        { text: "Not satisfied" },
-        { text: "Somewhat satisfied" },
-        { text: "Very satisfied" },
-        { text: "Super. I want more" },
+        { text: "Not satisfied", icon: "😕" },
+        { text: "Somewhat satisfied", icon: "🙂" },
+        { text: "Very satisfied", icon: "😊" },
+        { text: "Super. I want more", icon: "🌟" },
       ]}
     >
       <ChatBubble
@@ -338,7 +347,11 @@ export function AsnwerLongevity() {
       id="answer-longevity"
       type="single"
       variant="list"
-      options={[{ text: "More brief" }, { text: "Just like it was" }, { text: "More detailed" }]}
+      options={[
+        { text: "More brief", icon: "📄" },
+        { text: " Just like it was", icon: "🫳" },
+        { text: "More detailed", icon: "🔍" },
+      ]}
     >
       <ChatBubble
         text="How would you like my answers to be?"

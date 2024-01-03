@@ -16,7 +16,7 @@ import {
 } from "./slides.yourProfile";
 import { NatalChartPreviewSlide } from "./slide.natalChartPreview";
 import { FirstQuestionTrial } from "./slide.firstTrialQuestion";
-import { EmailSlide } from "./slides.shared";
+import { EmailSlide, ThankYouSlide } from "./slides.shared";
 
 export function Quiz() {
   return (
@@ -30,12 +30,13 @@ export function Quiz() {
       <IntroToSecondPart />
       <AsnwerLongevity />
       <SatisfactionScoreSlide />
-      <IntroToFinetuningPart />
+      {/* <IntroToFinetuningPart /> */}
       <YourPersonalityTypeSlide />
       <YourValuesAndPrioritiesSlide />
       <YourSpiritualInvolvementSlide />
       <FinilisingAstrologerSlide />
       <EmailSlide />
+      <ThankYouSlide />
     </Segment>
   );
 }

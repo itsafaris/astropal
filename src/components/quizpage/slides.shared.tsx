@@ -1,6 +1,6 @@
 import React from "react";
-import { Callout, Selector, Slide, Title } from "@martynasj/quiz-lib";
-import { Caption } from "./components";
+import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
+import { Caption, NextButton } from "./components";
 
 export function ExpectationsSlide() {
   return (
@@ -78,6 +78,7 @@ export function FinalizingProfileSlide() {
 }
 
 export function EmailSlide() {
+  const { submitQuestion } = useQuiz();
   return (
     <Slide
       id="your-email"
@@ -92,6 +93,13 @@ export function EmailSlide() {
       </Callout>
       <Selector />
       <Caption mb={8}>Your email will only be used to send you the invite link.</Caption>
+      <NextButton
+        onClick={() => {
+          submitQuestion();
+        }}
+      >
+        Submit
+      </NextButton>
     </Slide>
   );
 }
@@ -100,7 +108,7 @@ export function ThankYouSlide() {
   return (
     <Slide id="thank-you" type="filler">
       <Title>Thank you!</Title>
-      <Callout emoji="🎉">We will get in contact with you as soon as possible.</Callout>
+      <Callout emoji="🎉">We will send you the invitation link as soon as possible</Callout>
     </Slide>
   );
 }
