@@ -5,13 +5,11 @@ import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 
-const HEADING_TITLE = "Find Your Life's Answers With a Personalized Astrologer";
-
 export function Head() {
   const { brandName } = useSiteMetadata();
   return (
     <SEO
-      title={`${HEADING_TITLE} - ${brandName}`}
+      title={`Find Your Life's Answers With a Personalized Astrologer - ${brandName}`}
       description="Begin your AstroPal journey and unlock cosmic secrets for love and connection. Take our quiz to reveal personalized astrological and numerological insights for your relationships."
     />
   );
@@ -33,8 +31,8 @@ export default function IndexPage() {
             <Flex
               borderRadius={"full"}
               overflow={"hidden"}
-              height={"190px"}
-              width={"190px"}
+              height={"160px"}
+              width={"160px"}
               boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
               position={"relative"}
             >
@@ -42,8 +40,8 @@ export default function IndexPage() {
                 src={`../images/partner-3.png`}
                 alt="Option - in relationship"
                 placeholder="none"
-                width={180}
-                height={180}
+                width={150}
+                height={150}
                 layout="fixed"
                 style={{
                   position: "absolute",
@@ -51,21 +49,23 @@ export default function IndexPage() {
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
+                  border: `1px solid #e4b382`,
+                  borderRadius: "50%",
                 }}
               />
 
               <StaticImage
-                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 0 }}
                 alt=""
                 src="../images/astro-avatar.png"
-                width={190}
-                height={190}
+                width={170}
+                height={170}
               />
             </Flex>
           </Flex>
 
           <Heading as="h1" size="xl" textAlign="center" color="white">
-            {HEADING_TITLE}
+            Find Your Life's <br /> Answers With a <br /> Personalized <br /> Astrologer
           </Heading>
 
           <Text fontSize="md" textAlign="center" color="bg.700">

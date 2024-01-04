@@ -48,25 +48,25 @@ export function ChatBubble(props: {} & TypewriterTextProps) {
       <Flex
         borderRadius={"full"}
         overflow={"hidden"}
-        height={"60px"}
-        width={"60px"}
+        height={"50px"}
+        width={"50px"}
         boxShadow={"inset 0 0 50px 0 #ffc90014, 0 0 50px 0 #ffc90014"}
         position={"relative"}
       >
         <Flex
           borderRadius={"full"}
           overflow={"hidden"}
-          height={"60px"}
-          width={"60px"}
+          height={"50px"}
+          width={"50px"}
           position={"absolute"}
           zIndex={-1}
           boxShadow={"0 0 20px 0 black"}
-          opacity={0.9}
+          opacity={0.4}
         >
           <img src={orbGif} />
         </Flex>
 
-        <StaticImage style={{ opacity: 1 }} alt="" src="../../images/astro-avatar.png" />
+        <StaticImage style={{ opacity: 0.6 }} alt="" src="../../images/astro-avatar.png" />
       </Flex>
 
       <TypewriterText {...props} />
