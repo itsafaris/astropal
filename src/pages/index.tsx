@@ -31,18 +31,56 @@ export default function IndexPage() {
 
         <Flex flexDirection={"column"} gap={7}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
-            <StaticImage
-              src={`../images/partner.png`}
-              alt="Option - in relationship"
-              placeholder="none"
-              width={170}
-              height={170}
-            />
+            <Flex
+              borderRadius={"full"}
+              overflow={"hidden"}
+              height={"190px"}
+              width={"190px"}
+              boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
+              position={"relative"}
+            >
+              <StaticImage
+                src={`../images/partner.png`}
+                alt="Option - in relationship"
+                placeholder="none"
+                width={160}
+                height={160}
+                layout="fixed"
+                style={{
+                  position: "absolute",
+                  zIndex: 1,
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+
+              <StaticImage
+                style={{ opacity: 0.5, position: "absolute", top: 0, left: 0, zIndex: 0 }}
+                alt=""
+                src="../images/astro-avatar.png"
+                width={190}
+                height={190}
+              />
+            </Flex>
           </Flex>
 
           <Heading as="h1" size="2xl" textAlign="center" color="white">
             {HEADING_TITLE}
           </Heading>
+
+          <Flex
+            flexDirection={"column"}
+            gap={1}
+            color="bg.700"
+            mx={6}
+            alignItems={"center"}
+            mb={12}
+          >
+            <Text fontSize={"sm"}>Horoscopes</Text>
+            <Text fontSize={"sm"}>Future predictions</Text>
+            <Text fontSize={"sm"}>Personal guidance</Text>
+          </Flex>
 
           <Text fontSize="md" textAlign="center" color="bg.700" my={3}>
             Complete a{" "}
