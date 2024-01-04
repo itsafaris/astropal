@@ -12,6 +12,7 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { ChatBubble, NextButton, Span, Subtitle } from "./components";
+import { NatalChartInterpreter } from "./interpreter";
 
 export function YourGoalSlide() {
   return (
@@ -319,6 +320,42 @@ export function IntroToSecondPart() {
   );
 }
 
+export function DescribeYourNatalChart() {
+  const [showInput, setShowInput] = useState(false);
+  const [showAdvice, setShowAdvice] = useState(false);
+  const quiz = useQuiz();
+
+  return (
+    <Slide id="personality-description" type="filler">
+      <ChatBubble
+        text={`Let's see what your natal chart tells about you as a person.`}
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowAdvice(true);
+        }}
+      />
+      {showAdvice && (
+        <NatalChartInterpreter
+          question="What is my personality like? (do not mention any planets or signs, only tell very briefly about my personality)"
+          onFinishedAnswer={() => {
+            setShowInput(true);
+          }}
+        />
+      )}
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            quiz.submitQuestion();
+          }}
+          my={8}
+        >
+          Continue
+        </NextButton>
+      )}
+    </Slide>
+  );
+}
+
 export function IntroToFinetuningPart() {
   const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
@@ -385,7 +422,7 @@ export function SatisfactionScoreSlide() {
       ]}
     >
       <ChatBubble
-        text={`I'm glad I was able to answer your first questions 🤭\n\nHow satisfied were you with my answers?`}
+        text={`I'm glad I was able to answer some questions for you 🤭\n\nHow satisfied were you with my answers?`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);

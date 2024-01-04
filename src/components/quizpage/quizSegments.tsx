@@ -14,6 +14,7 @@ import {
   YourSpiritualInvolvementSlide,
   FinilisingAstrologerSlide,
   IntroSlide,
+  DescribeYourNatalChart,
 } from "./slides.yourProfile";
 import { NatalChartPreviewSlide } from "./slide.natalChartPreview";
 import { FirstQuestionTrial } from "./slide.firstTrialQuestion";
@@ -28,6 +29,7 @@ export function Quiz() {
       <YourBirthPlaceSlide />
       <YourProfileSavingSlide />
       <NatalChartPreviewSlide />
+      <DescribeYourNatalChart />
       <FirstQuestionTrial />
       {/* <IntroToSecondPart /> */}
       <SatisfactionScoreSlide />

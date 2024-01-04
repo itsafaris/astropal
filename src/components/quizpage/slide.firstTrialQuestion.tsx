@@ -62,7 +62,7 @@ export function FirstQuestionTrial() {
       ) : (
         <>
           <ChatBubble
-            text="Time to put this to the test. Let's try answering some of the questions below."
+            text="Now, let's try answering some more specific questions about your life"
             instant={showInput}
             onFinishedTyping={() => setShowInput(true)}
           />
