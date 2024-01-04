@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateValue, LocationValue, Slide, useQuiz } from "@martynasj/quiz-lib";
 import type { Chart as ChartType } from "@astrodraw/astrochart";
 import { Text, Box, useTheme, Flex } from "@chakra-ui/react";
@@ -71,7 +71,7 @@ function AstroChart(props: AstroChartProps) {
   const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
 
-  const NATAL_CHART_SIZE = 320;
+  const NATAL_CHART_SIZE = 260;
 
   const theme = useTheme();
   const [origin, setOrigin] = useState<Origin | undefined>(undefined);
@@ -116,12 +116,12 @@ function AstroChart(props: AstroChartProps) {
         "white",
         "white",
       ],
-      LINE_COLOR: theme.colors.bg[400],
-      CIRCLE_COLOR: theme.colors.bg[500],
-      SIGNS_COLOR: theme.colors.brand[500], // zodiakai
-      POINTS_COLOR: theme.colors.brand[700], // planetos
+      LINE_COLOR: theme.colors.bg[300],
+      CIRCLE_COLOR: theme.colors.bg[300],
+      SIGNS_COLOR: theme.colors.brand[400], // zodiakai
+      POINTS_COLOR: theme.colors.brand[200], // planetos
       CUSPS_FONT_COLOR: theme.colors.bg[400],
-      SYMBOL_AXIS_FONT_COLOR: theme.colors.bg[600], // As, Ds, Mc, Ic
+      SYMBOL_AXIS_FONT_COLOR: theme.colors.brand[400], // As, Ds, Mc, Ic
       COLOR_BACKGROUND: "white" ?? "rgba(0,0,0,0.2)",
       CUSPS_STROKE: 1,
     });
@@ -151,23 +151,50 @@ function AstroChart(props: AstroChartProps) {
   return (
     <Box textColor={"white"}>
       <ChatBubble
-        text="This is your Natal Chart. I will use it as a foundation to base all my predictions"
+        text={`Here it is, your Natal Chart!\n\nWe can now use it as our foundation going forward.`}
         onFinishedTyping={() => {
           setShowInput(true);
         }}
       />
       {showInput && (
-        <div>
-          <div style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}>
-            <div id="paper1234" style={{ transform: "scale(0.5)", transformOrigin: "0 0" }}></div>
-          </div>
-          <Box mb={2} textAlign={"center"}>
-            <Text fontSize={"xl"} color="brand.700" fontWeight={"bold"}>
-              {horoscope?.SunSign.label}
-            </Text>
-            <Text color="brand.600">{new Date(origin?.localTimeFormatted).toLocaleString()}</Text>
-            <Text color="brand.600">{location.formattedText}</Text>
-          </Box>
+        <>
+          <Flex
+            flexDir={"column"}
+            border="1px solid"
+            borderColor={"brand.700"}
+            borderRadius={"xl"}
+            backgroundColor={"brand.900"}
+            py={6}
+          >
+            <Flex
+              justifyContent={"center"}
+              style={{ height: NATAL_CHART_SIZE, width: NATAL_CHART_SIZE }}
+              mx="auto"
+              position={"relative"}
+            >
+              <div
+                id="paper1234"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  transform: "scale(0.5)",
+                  transformOrigin: "0 0",
+                }}
+              ></div>
+            </Flex>
+            <Box mb={2} textAlign={"center"}>
+              <Text fontSize={"lg"} color="brand.300" fontWeight={"bold"}>
+                {horoscope?.SunSign.label}
+              </Text>
+              <Text fontSize={"sm"} color="brand.300">
+                {new Date(origin?.localTimeFormatted).toLocaleString()}
+              </Text>
+              <Text fontSize={"sm"} color="brand.300">
+                {location.formattedText}
+              </Text>
+            </Box>
+          </Flex>
 
           <Flex display={"none"} my={6} flexDirection={"column"} alignItems={"center"}>
             <Box>
@@ -190,7 +217,7 @@ function AstroChart(props: AstroChartProps) {
           <NextButton my={6} onClick={() => submitQuestion()}>
             Next
           </NextButton>
-        </div>
+        </>
       )}
     </Box>
   );

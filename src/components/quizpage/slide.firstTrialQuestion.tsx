@@ -51,7 +51,7 @@ export function FirstQuestionTrial() {
       ) : (
         <>
           <ChatBubble
-            text="Now I can answer questions based on your Natal Chart"
+            text="Time to put this to the test. Let's try answering some of the questions below."
             instant={showInput}
             onFinishedTyping={() => setShowInput(true)}
           />

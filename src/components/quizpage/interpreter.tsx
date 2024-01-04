@@ -52,8 +52,8 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
       <ChatBubble
         text={
           interpretation
-            ? `${props.question}\n
-        ${interpretation}`
+            ? `${props.question}\n\n${interpretation}
+        `
             : "Analysing your Natal Chart..."
         }
         onFinishedTyping={() => {

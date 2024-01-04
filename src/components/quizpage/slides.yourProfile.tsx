@@ -1,11 +1,12 @@
 import React, { Fragment, createElement, useState } from "react";
-import { Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
+import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
+import { CheckIcon } from "@chakra-ui/icons";
 
 import colorMap from "@images/color_map.png";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
-import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
@@ -106,6 +107,40 @@ export function YourBirthNameSlide() {
   );
 }
 
+export function IntroSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="intro" type="filler">
+      <ChatBubble
+        text={`👋 Hey, nice to meet you!\n\nIn order to provide you with astrological insights, we need to create your Natal Chart first.`}
+        instant={showInput}
+        onFinishedTyping={() => {
+          setTimeout(() => {
+            setShowInput(true);
+          }, 300);
+        }}
+      />
+      {showInput && (
+        <>
+          <Callout emoji="What is a Natal Chart?">
+            It is a unique, astrology-based map of the universe as it was at the exact moment you
+            were born, guiding you in understanding your personality and life's journey
+          </Callout>
+          <NextButton
+            onClick={() => {
+              submitQuestion();
+            }}
+          >
+            Let's do it
+          </NextButton>
+        </>
+      )}
+    </Slide>
+  );
+}
+
 export function YourBirthDateSlide() {
   const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
@@ -113,7 +148,7 @@ export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
       <ChatBubble
-        text={"What is your date of birth?"}
+        text={"Let's start with your date of birth."}
         instant={showInput}
         onFinishedTyping={() => {
           setTimeout(() => {
@@ -153,17 +188,10 @@ export function YourBirthTimeSlide() {
             />
             {showInput && (
               <>
-                {/* <Flex justifyContent={"center"} my={4}>
-                  <StaticImage
-                    src={"../../images/time.png"}
-                    alt="time of birth"
-                    placeholder="blurred"
-                    style={{ borderRadius: 12 }}
-                    height={120}
-                    width={120}
-                    layout="fixed"
-                  />
-                </Flex> */}
+                <Callout emoji="Tip">
+                  If you don't know the exact time, select just the approximate hour. You will
+                  always be able to adjust it later
+                </Callout>
                 <Selector />
               </>
             )}
@@ -198,6 +226,10 @@ export function YourBirthPlaceSlide() {
       />
       {showInput && (
         <>
+          <Callout emoji="Tip">
+            If you don't know the exact location, enter a major city near your location. You will be
+            able to change it later if needed.
+          </Callout>
           <Selector />
           <NextButton
             onClick={() => {
@@ -231,7 +263,7 @@ export function YourProfileSavingSlide() {
       autoProceed
     >
       <ChatBubble
-        text="Give me a moment. I am creating your natal chart..."
+        text="That's it! Now give me a moment to put all this information together to create your Natal Chart"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
@@ -250,7 +282,7 @@ export function IntroToSecondPart() {
   return (
     <Slide id="intro-to-second-part" type="filler">
       <ChatBubble
-        text={`In order to deliver you the best advice possible, let's do a few more questions`}
+        text={`I'm glad to have helped you answer your first questions. How did you `}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
@@ -292,22 +324,46 @@ export function IntroToFinetuningPart() {
   const { submitQuestion } = useQuiz();
 
   return (
-    <Slide id="intro-to-finetuning" type="filler">
+    <Slide id="intro-to-finetuning-part" type="filler">
       <ChatBubble
-        text="To make my answers even more personalised for you, let's answer a few more questions"
+        text={`In order to deliver you the best advice possible, I will ask you a few more questions. This time - about your personality.`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
         }}
       />
+
       {showInput && (
-        <NextButton
-          onClick={() => {
-            submitQuestion();
-          }}
-        >
-          Continue
-        </NextButton>
+        <>
+          <Text color="bg.900" fontSize={"lg"} fontWeight={"bold"} textAlign={"center"} mb={6}>
+            After this, I will act as a hyper personalised astrologer to help you:
+          </Text>
+          <Flex
+            flexDirection={"column"}
+            gap={1}
+            color="bg.700"
+            mx={6}
+            alignItems={"center"}
+            mb={12}
+          >
+            <Text>
+              <CheckIcon /> Answer any question about any area of your life
+            </Text>
+            <Text>
+              <CheckIcon /> Provide analysis based on current astrological events
+            </Text>
+            <Text>
+              <CheckIcon /> Deliver insights into the short term and long term future
+            </Text>
+          </Flex>
+          <NextButton
+            onClick={() => {
+              submitQuestion();
+            }}
+          >
+            Continue
+          </NextButton>
+        </>
       )}
     </Slide>
   );
@@ -329,7 +385,7 @@ export function SatisfactionScoreSlide() {
       ]}
     >
       <ChatBubble
-        text="How satisfied were you with my answers?"
+        text={`I'm glad I was able to answer your first questions 🤭\n\nHow satisfied were you with my answers?`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
@@ -349,13 +405,13 @@ export function AsnwerLongevity() {
       type="single"
       variant="list"
       options={[
-        { text: "More brief", icon: "📄" },
-        { text: " Just like it was", icon: "🫳" },
-        { text: "More detailed", icon: "🔍" },
+        { text: "Shorter and to-the-point", icon: "💬" },
+        { text: "Just as they are now", icon: "👌" },
+        { text: "More detailed and elaborate", icon: "📝" },
       ]}
     >
       <ChatBubble
-        text="How would you like my answers to be?"
+        text="Ok. How do you prefer my responses to your questions?"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);

@@ -8,7 +8,7 @@ import orbGif from "@images/orb_animated_2.gif";
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
   return (
-    <Box mx={4} mb={4}>
+    <Box mx={4} my={4}>
       <Button
         px={6}
         py={4}
@@ -86,7 +86,7 @@ export function ChatBubble(props: {
   }, [props.text, props.instant]);
 
   return (
-    <Flex my={2} mb={16} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
+    <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
       <Flex
         borderRadius={"full"}
         overflow={"hidden"}
