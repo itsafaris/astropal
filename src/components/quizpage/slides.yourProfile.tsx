@@ -1,9 +1,10 @@
 import React, { Fragment, createElement, useState } from "react";
 import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
 import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
-import { CheckIcon } from "@chakra-ui/icons";
+import { ArrowDownIcon, CheckIcon } from "@chakra-ui/icons";
 
 import colorMap from "@images/color_map.png";
+import orbGif from "@images/orb_animated_2.gif";
 
 import { TestimonialCard } from "@components/testimonial";
 import { StaticImage } from "gatsby-plugin-image";
@@ -669,8 +670,6 @@ export function YourSpiritualInvolvementSlide() {
 
 export function FinilisingAstrologerSlide() {
   const [showInput, setShowInput] = useState(false);
-  const [showNext, setShowNext] = useState(false);
-  const { submitQuestion } = useQuiz();
 
   return (
     <Slide
@@ -680,9 +679,7 @@ export function FinilisingAstrologerSlide() {
       quizContainerProps={{
         bgGradient: "radial(bg.200, bg.50)",
       }}
-      onLoadingCompleted={() => {
-        setShowNext(true);
-      }}
+      autoProceed
     >
       <ChatBubble
         text="Thank you! I am now memorising details about you"
@@ -692,9 +689,97 @@ export function FinilisingAstrologerSlide() {
         }}
       />
       {showInput && <Selector />}
-      {showNext && (
-        <NextButton onClick={() => submitQuestion()}>Start using my astrologer</NextButton>
-      )}
+    </Slide>
+  );
+}
+
+export function AstrologerReadySlide() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide
+      id="astrologer-ready"
+      type="filler"
+      quizContainerProps={{
+        bgGradient: "radial(bg.200, bg.50)",
+      }}
+    >
+      {({ quizState }) => {
+        const { yourZodiac } = getPersonalInfoFromState(quizState);
+        const theme = useTheme();
+
+        return (
+          <Flex flexDirection={"column"} alignItems={"center"}>
+            <Flex my={8} flexDirection={"row"} justifyContent={"center"}>
+              <Flex
+                borderRadius={"full"}
+                overflow={"hidden"}
+                height={"250px"}
+                width={"250px"}
+                boxShadow={"inset 0 0 50px 0 #ffc90014, 0 0 50px 0 #ffc90014"}
+                position={"relative"}
+              >
+                <Flex
+                  flexDirection={"column"}
+                  position={"absolute"}
+                  zIndex={10}
+                  top="50%"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
+                >
+                  {yourZodiac.svgComponent &&
+                    createElement(yourZodiac.svgComponent, {
+                      height: 150,
+                      width: 150,
+                      stroke: "#f2bf79",
+                      fill: theme.colors.bg["100"],
+                      strokeWidth: 4,
+                    })}
+                </Flex>
+
+                <Flex
+                  borderRadius={"full"}
+                  overflow={"hidden"}
+                  height={"250px"}
+                  width={"250px"}
+                  position={"absolute"}
+                  zIndex={-1}
+                  boxShadow={"0 0 20px 0 black"}
+                  opacity={0.4}
+                >
+                  <img src={orbGif} />
+                </Flex>
+
+                <StaticImage style={{ opacity: 0.99 }} alt="" src="../../images/astro-avatar.png" />
+              </Flex>
+            </Flex>
+
+            <Text
+              fontWeight="bold"
+              textAlign={"center"}
+              width={"full"}
+              fontSize={"2xl"}
+              color="white"
+            >
+              Your Personal <br /> Astrologer Is Ready
+            </Text>
+
+            <Text
+              my={2}
+              textAlign={"center"}
+              width={"full"}
+              fontSize={"md"}
+              color={"whiteAlpha.600"}
+            >
+              Know more about yourself.
+            </Text>
+
+            <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
+
+            <NextButton onClick={() => submitQuestion()}>Start using my astrologer</NextButton>
+          </Flex>
+        );
+      }}
     </Slide>
   );
 }
