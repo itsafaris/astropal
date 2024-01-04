@@ -44,6 +44,13 @@ const config: GatsbyConfig = {
     },
 
     {
+      resolve: "@sentry/gatsby",
+      options: {
+        dsn: process.env.GATSBY_SENTRY_DSN,
+      },
+    },
+
+    {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
         /**
