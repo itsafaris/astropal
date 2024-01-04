@@ -1,12 +1,11 @@
-import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { PropsWithChildren } from "react";
 
-const HEADING_TITLE = "Your Own Hyper Personalized Astrologer";
+const HEADING_TITLE = "Find Your Life's Answers With a Personalized Astrologer";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -29,7 +28,7 @@ export default function IndexPage() {
           </Text>
         </Box>
 
-        <Flex flexDirection={"column"} gap={7}>
+        <Flex flexDirection={"column"} gap={6}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Flex
               borderRadius={"full"}
@@ -40,11 +39,11 @@ export default function IndexPage() {
               position={"relative"}
             >
               <StaticImage
-                src={`../images/partner.png`}
+                src={`../images/partner-3.png`}
                 alt="Option - in relationship"
                 placeholder="none"
-                width={160}
-                height={160}
+                width={180}
+                height={180}
                 layout="fixed"
                 style={{
                   position: "absolute",
@@ -56,7 +55,7 @@ export default function IndexPage() {
               />
 
               <StaticImage
-                style={{ opacity: 0.5, position: "absolute", top: 0, left: 0, zIndex: 0 }}
+                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 1 }}
                 alt=""
                 src="../images/astro-avatar.png"
                 width={190}
@@ -65,24 +64,11 @@ export default function IndexPage() {
             </Flex>
           </Flex>
 
-          <Heading as="h1" size="2xl" textAlign="center" color="white">
+          <Heading as="h1" size="xl" textAlign="center" color="white">
             {HEADING_TITLE}
           </Heading>
 
-          <Flex
-            flexDirection={"column"}
-            gap={1}
-            color="bg.700"
-            mx={6}
-            alignItems={"center"}
-            mb={12}
-          >
-            <Text fontSize={"sm"}>Horoscopes</Text>
-            <Text fontSize={"sm"}>Future predictions</Text>
-            <Text fontSize={"sm"}>Personal guidance</Text>
-          </Flex>
-
-          <Text fontSize="md" textAlign="center" color="bg.700" my={3}>
+          <Text fontSize="md" textAlign="center" color="bg.700">
             Complete a{" "}
             <Text as="span" fontWeight={"bold"} color="brand.500">
               1-minute
@@ -96,26 +82,6 @@ export default function IndexPage() {
             </Link>
           </Flex>
         </Flex>
-      </Box>
-    </Box>
-  );
-}
-
-function ImageButton({ children, text }: PropsWithChildren<{ text: string }>) {
-  return (
-    <Box>
-      <Box
-        p={4}
-        borderRadius={"2xl"}
-        overflow={"hidden"}
-        border="2px solid"
-        borderColor={"brand.200"}
-        boxShadow={"0 0 8px 4px rgb(40 86 99 / 20%)"}
-      >
-        {children}
-        <Text mt={4} textAlign={"center"} color="brand.400" fontWeight={"semibold"}>
-          {text}
-        </Text>
       </Box>
     </Box>
   );
