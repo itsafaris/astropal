@@ -83,15 +83,15 @@ export function createNatalChartData(input: {
     };
   });
 
-  // @ts-ignore
-  const aspects: NatalChart["aspects"] = {};
+  // // @ts-ignore
+  // const aspects: NatalChart["aspects"] = {};
 
-  for (let type in horoscope.Aspects.types) {
-    // @ts-ignore
-    const aspect = horoscope.Aspects.types[type];
-    // @ts-ignore
-    aspects[type] = aspect.map((it) => ({ planet1: it.point1Key, planet2: it.point2Key }));
-  }
+  // for (let type in horoscope.Aspects.types) {
+  //   // @ts-ignore
+  //   const aspect = horoscope.Aspects.types[type];
+  //   // @ts-ignore
+  //   aspects[type] = aspect.map((it) => ({ planet1: it.point1Key, planet2: it.point2Key }));
+  // }
 
   // @ts-ignore
   return {
@@ -114,7 +114,7 @@ export function createNatalChartData(input: {
     moonSign: horoscope.CelestialBodies.moon.Sign.key,
     risingSign: horoscope.Ascendant.Sign.key,
     planets: planets,
-    aspects: aspects,
+    // aspects: aspects,
     retrogrades: horoscope.CelestialBodies.all
       // @ts-ignore
       .filter((it) => Boolean(it.isRetrograde))
