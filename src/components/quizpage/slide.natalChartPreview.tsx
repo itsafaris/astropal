@@ -71,7 +71,7 @@ function AstroChart(props: AstroChartProps) {
   const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
 
-  const NATAL_CHART_SIZE = 260;
+  const NATAL_CHART_SIZE = 240;
 
   const theme = useTheme();
   const [origin, setOrigin] = useState<Origin | undefined>(undefined);
@@ -164,7 +164,7 @@ function AstroChart(props: AstroChartProps) {
             borderColor={"brand.700"}
             borderRadius={"xl"}
             backgroundColor={"brand.900"}
-            py={6}
+            py={2}
           >
             <Flex
               justifyContent={"center"}
@@ -214,7 +214,7 @@ function AstroChart(props: AstroChartProps) {
             </Box>
           </Flex>
 
-          <NextButton my={6} onClick={() => submitQuestion()}>
+          <NextButton my={3} onClick={() => submitQuestion()}>
             Next
           </NextButton>
         </>

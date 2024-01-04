@@ -5,7 +5,6 @@ import {
   YourBirthPlaceSlide,
   YourProfileSavingSlide,
   YourBirthTimeSlide,
-  IntroToSecondPart,
   SatisfactionScoreSlide,
   AsnwerLongevity,
   IntroToFinetuningPart,
@@ -32,7 +31,6 @@ export function Quiz() {
       <NatalChartPreviewSlide />
       <DescribeYourNatalChart />
       <FirstQuestionTrial />
-      {/* <IntroToSecondPart /> */}
       <SatisfactionScoreSlide />
       <AsnwerLongevity />
       <IntroToFinetuningPart />

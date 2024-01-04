@@ -127,8 +127,8 @@ export function IntroSlide() {
       {showInput && (
         <>
           <Callout emoji="What is a Natal Chart?">
-            It is a unique, astrology-based map of the universe as it was at the exact moment you
-            were born, guiding you in understanding your personality and life's journey
+            It's a personalized astrology map based on your birth moment, helping you understand
+            your personality and life journey.
           </Callout>
           <NextButton
             onClick={() => {
@@ -183,7 +183,7 @@ export function YourBirthTimeSlide() {
           <Fragment>
             <ChatBubble
               instant={showInput}
-              text="What is the exact time you were born?"
+              text="What is the time you were born?"
               onFinishedTyping={() => {
                 setShowInput(true);
               }}
@@ -248,22 +248,9 @@ export function YourBirthPlaceSlide() {
 
 export function YourProfileSavingSlide() {
   const [showInput, setShowInput] = useState(false);
-  // const [showNext, setShowNext] = useState(false);
-  // const { submitQuestion } = useQuiz();
 
   return (
-    <Slide
-      id="your-profile-saving"
-      type="loading"
-      duration={4}
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-      // onLoadingCompleted={() => {
-      //   setShowNext(true);
-      // }}
-      autoProceed
-    >
+    <Slide id="your-profile-saving" type="loading" duration={4} autoProceed>
       <ChatBubble
         text="That's it! Now give me a moment to put all this information together to create your Natal Chart"
         instant={showInput}
@@ -272,7 +259,6 @@ export function YourProfileSavingSlide() {
         }}
       />
       {showInput && <Selector />}
-      {/* {showNext && <NextButton onClick={() => submitQuestion()}>Let's see it</NextButton>} */}
     </Slide>
   );
 }
@@ -476,13 +462,7 @@ export function AstrologerIsReadySlide() {
 export function YourSimilarProfilesSlide() {
   const theme = useTheme();
   return (
-    <Slide
-      id="similar-profiles"
-      type="filler"
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-    >
+    <Slide id="similar-profiles" type="filler">
       {({ quizState }) => {
         const { yourZodiac, yourGender } = getPersonalInfoFromState(quizState);
 
@@ -525,11 +505,12 @@ export function YourSimilarProfilesSlide() {
 
 export function YourValuesAndPrioritiesSlide() {
   const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
 
   return (
     <Slide
       id="your-values-and-priorities"
-      type="single"
+      type="multi"
       variant="list"
       options={[
         {
@@ -566,17 +547,19 @@ export function YourValuesAndPrioritiesSlide() {
         }}
       />
       {showInput && <Selector />}
+      {showInput && <NextButton onClick={() => submitQuestion()}>Continue</NextButton>}
     </Slide>
   );
 }
 
 export function YourPersonalityTypeSlide() {
   const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
 
   return (
     <Slide
       id="your-personality-type"
-      type="single"
+      type="multi"
       variant="list"
       options={[
         {
@@ -621,6 +604,8 @@ export function YourPersonalityTypeSlide() {
         }}
       />
       {showInput && <Selector />}
+
+      {showInput && <NextButton onClick={() => submitQuestion()}>Continue</NextButton>}
     </Slide>
   );
 }
@@ -672,15 +657,7 @@ export function FinilisingAstrologerSlide() {
   const [showInput, setShowInput] = useState(false);
 
   return (
-    <Slide
-      id="finilising-astrologer"
-      type="loading"
-      duration={4}
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-      autoProceed
-    >
+    <Slide id="finilising-astrologer" type="loading" duration={4} autoProceed>
       <ChatBubble
         text="Thank you! I am now memorising details about you"
         instant={showInput}
@@ -697,13 +674,7 @@ export function AstrologerReadySlide() {
   const { submitQuestion } = useQuiz();
 
   return (
-    <Slide
-      id="astrologer-ready"
-      type="filler"
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
-      }}
-    >
+    <Slide id="astrologer-ready" type="filler">
       {({ quizState }) => {
         const { yourZodiac } = getPersonalInfoFromState(quizState);
         const theme = useTheme();
@@ -983,9 +954,6 @@ export function YourSummaryLoadingSlide() {
         ];
 
         return renderNumerologyData(progress, data);
-      }}
-      quizContainerProps={{
-        bgGradient: "radial(bg.200, bg.50)",
       }}
     >
       {() => {
