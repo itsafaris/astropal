@@ -687,7 +687,7 @@ export function AstrologerReadySlide() {
                 overflow={"hidden"}
                 height={"250px"}
                 width={"250px"}
-                boxShadow={"inset 0 0 50px 0 #ffc90014, 0 0 50px 0 #ffc90014"}
+                boxShadow={"inset 0 0 50px 0 #d2890052, 0 0 50px 0 #d289006e"}
                 position={"relative"}
               >
                 <Flex
@@ -721,7 +721,7 @@ export function AstrologerReadySlide() {
                   <img src={orbGif} />
                 </Flex>
 
-                <StaticImage style={{ opacity: 0.99 }} alt="" src="../../images/astro-avatar.png" />
+                <StaticImage style={{ opacity: 1 }} alt="" src="../../images/astro-avatar.png" />
               </Flex>
             </Flex>
 

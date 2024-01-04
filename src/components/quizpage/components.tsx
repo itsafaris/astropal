@@ -4,6 +4,7 @@ import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
 
 import orbGif from "@images/orb_animated_2.gif";
+import { StaticImage } from "gatsby-plugin-image";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -49,10 +50,25 @@ export function ChatBubble(props: {} & TypewriterTextProps) {
         overflow={"hidden"}
         height={"60px"}
         width={"60px"}
-        boxShadow={"0 0 20px 0 black"}
+        boxShadow={"inset 0 0 50px 0 #ffc90014, 0 0 50px 0 #ffc90014"}
+        position={"relative"}
       >
-        <img src={orbGif} />
+        <Flex
+          borderRadius={"full"}
+          overflow={"hidden"}
+          height={"60px"}
+          width={"60px"}
+          position={"absolute"}
+          zIndex={-1}
+          boxShadow={"0 0 20px 0 black"}
+          opacity={0.9}
+        >
+          <img src={orbGif} />
+        </Flex>
+
+        <StaticImage style={{ opacity: 1 }} alt="" src="../../images/astro-avatar.png" />
       </Flex>
+
       <TypewriterText {...props} />
     </Flex>
   );
