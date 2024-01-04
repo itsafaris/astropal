@@ -17,19 +17,30 @@ export function FirstQuestionTrial() {
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [finishedAnswer, setFinishedAnswer] = useState(false);
+  const [finishedTypingQuestion, setFinishedTypingQuestion] = useState(false);
   const { submitQuestion } = useQuiz();
 
   return (
     <Slide id="first-question-trial" type="filler">
       {selectedQuestion ? (
         <>
-          <NatalChartInterpreter
-            question={selectedQuestion}
-            onFinishedAnswer={() => {
-              setFinishedAnswer(true);
-              setAnsweredQuestions((q) => [...q, selectedQuestion]);
+          <ChatBubble
+            text={selectedQuestion}
+            onFinishedTyping={() => {
+              setFinishedTypingQuestion(true);
             }}
           />
+
+          {finishedTypingQuestion && (
+            <NatalChartInterpreter
+              question={selectedQuestion}
+              onFinishedAnswer={() => {
+                setFinishedAnswer(true);
+                setAnsweredQuestions((q) => [...q, selectedQuestion]);
+              }}
+            />
+          )}
+
           {finishedAnswer && (
             <>
               <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
@@ -70,7 +81,10 @@ export function FirstQuestionTrial() {
                       key={q}
                       text={q}
                       opacity={answeredQuestions.includes(q) ? 0.5 : 1}
-                      onClick={() => setSelectedQuestion(q)}
+                      onClick={() => {
+                        setSelectedQuestion(q);
+                        setFinishedTypingQuestion(false);
+                      }}
                     />
                   );
                 })}

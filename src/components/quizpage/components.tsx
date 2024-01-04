@@ -41,23 +41,47 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
   return <Text fontSize={"sm"} color="bg.600" {...props} />;
 }
 
-export function ChatBubble(props: {
+export function ChatBubble(props: {} & TypewriterTextProps) {
+  return (
+    <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={3}>
+      <Flex
+        borderRadius={"full"}
+        overflow={"hidden"}
+        height={"60px"}
+        width={"60px"}
+        boxShadow={"0 0 20px 0 black"}
+      >
+        <img src={orbGif} />
+      </Flex>
+      <TypewriterText {...props} />
+    </Flex>
+  );
+}
+
+export type TypewriterTextProps = {
   text: string;
   instant?: boolean;
   onFinishedTyping?: () => void;
-}) {
+} & ComponentProps<typeof Text>;
+
+export function TypewriterText(props: TypewriterTextProps) {
+  const { text, instant, onFinishedTyping, ...rest } = props;
+
   const speed = 120;
 
   const [words, setWords] = useState<string[]>([]);
   const [nextWord, setNextWord] = useState("");
 
   useEffect(() => {
-    if (props.instant) {
-      setWords(props.text.split(" "));
-      return;
+    if (instant) {
+      setWords(text.split(" "));
+      return () => {
+        setWords([]);
+        setNextWord("");
+      };
     }
 
-    const words = props.text.split(" ");
+    const words = text.split(" ");
 
     let idx = 0;
     const it = setInterval(() => {
@@ -72,7 +96,7 @@ export function ChatBubble(props: {
       idx++;
       if (idx === words.length) {
         setTimeout(() => {
-          props.onFinishedTyping?.();
+          onFinishedTyping?.();
         }, 300);
         clearInterval(it);
       }
@@ -83,37 +107,28 @@ export function ChatBubble(props: {
       setNextWord("");
       clearInterval(it);
     };
-  }, [props.text, props.instant]);
+  }, [text, instant]);
 
   return (
-    <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={3} color="white">
-      <Flex
-        borderRadius={"full"}
-        overflow={"hidden"}
-        height={"60px"}
-        width={"60px"}
-        boxShadow={"0 0 20px 0 black"}
-      >
-        <img src={orbGif} />
-      </Flex>
-      <Text
-        fontWeight="bold"
-        textAlign={"start"}
-        width={"full"}
-        fontSize={"xl"}
-        p={2}
-        borderRadius={"xl"}
-        whiteSpace={"pre-wrap"}
-      >
-        {words.join(" ")}
-        {words.length !== 0 && (
-          <Text as="span" color="whiteAlpha.200">
-            {" "}
-            {nextWord}
-          </Text>
-        )}
-      </Text>
-    </Flex>
+    <Text
+      fontWeight="bold"
+      textAlign={"start"}
+      width={"full"}
+      fontSize={"xl"}
+      p={2}
+      borderRadius={"xl"}
+      whiteSpace={"pre-wrap"}
+      color="white"
+      {...rest}
+    >
+      {words.join(" ")}
+      {words.length !== 0 && (
+        <Text as="span" color="whiteAlpha.200">
+          {" "}
+          {nextWord}
+        </Text>
+      )}
+    </Text>
   );
 }
 

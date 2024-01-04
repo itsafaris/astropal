@@ -3,7 +3,7 @@ import { useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
-import { ChatBubble } from "./components";
+import { ChatBubble, TypewriterText } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
 import { getOpenaiService, isApiError } from "@services/openaiService";
 import { Box } from "@chakra-ui/react";
@@ -49,13 +49,8 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
 
   return (
     <Box>
-      <ChatBubble
-        text={
-          interpretation
-            ? `${props.question}\n\n${interpretation}
-        `
-            : "Analysing your Natal Chart..."
-        }
+      <TypewriterText
+        text={interpretation || "Analysing your Natal Chart..."}
         onFinishedTyping={() => {
           if (interpretation) {
             props.onFinishedAnswer?.();
