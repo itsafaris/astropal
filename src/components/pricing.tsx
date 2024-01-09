@@ -1,9 +1,9 @@
 import React from "react";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import { Flex, Button, Text, Box } from "@chakra-ui/react";
 
 export function PricingSection() {
   return (
-    <Flex flexDirection={"column"} alignItems={"center"} gap={3}>
+    <Flex flexDirection={"column"} alignItems={"center"}>
       <PricingCard
         title={"6 month plan"}
         billingText={"Billed every 6 months"}
@@ -13,6 +13,9 @@ export function PricingSection() {
         previousPrice={1.11}
         buttonText={"Claim my plan (save 75%)"}
       />
+
+      <DealRibbon2 />
+
       <PricingCard
         title={"3 month plan"}
         billingText={"Billed every 3 months"}
@@ -55,11 +58,17 @@ function PricingCard({
       flexDirection={"column"}
       alignItems={"center"}
       gap={3}
-      p={4}
+      p={3}
       borderRadius={10}
-      backgroundColor={"white"}
+      backgroundColor="whiteAlpha.100"
       width={"100%"}
+      position="relative"
+      overflow="hidden"
+      border={`2px solid`}
+      borderColor="brand.500"
+      mt={4}
     >
+      <DealRibbon color={tagColor} text={tagText} />
       <Flex
         flexDirection={"row"}
         alignItems={"center"}
@@ -68,56 +77,91 @@ function PricingCard({
         gap={3}
       >
         <Flex flexDirection={"column"} alignItems={"flex-start"} gap={0} alignSelf={"flex-end"}>
-          <Tag color={tagColor} text={tagText} />
-
-          <Text fontSize={"2xl"} fontWeight={"bold"} color="black">
+          <Text fontSize={"2xl"} fontWeight={"bold"} color="bg.900" lineHeight={"normal"}>
             {title}
           </Text>
 
-          <Text fontSize={"small"} color="grey">
+          <Text fontSize={"small"} color="bg.600" lineHeight={"normal"}>
             {billingText}
           </Text>
         </Flex>
 
-        <Flex flexDirection={"column"} alignItems={"center"}>
-          <Text color="red" textDecoration={"line-through"} fontWeight={"semibold"}>
+        <Flex flexDirection={"column"} alignItems={"flex-end"}>
+          <Text color="bg.600" textDecoration={"line-through"} lineHeight={"normal"}>
             ${previousPrice}
           </Text>
 
-          <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"} color="black">
+          <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"} color="bg.900">
             ${currentPrice}
           </Text>
 
-          <Text fontSize={"small"} fontWeight={"semibold"} color="black">
+          <Text fontSize={"md"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
             per day
           </Text>
         </Flex>
       </Flex>
 
-      <Button width={"full"} colorScheme="blue">
+      <Button
+        variant={"solid"}
+        backgroundColor="brand.600"
+        _hover={{
+          backgroundColor: "brand.500",
+        }}
+        width={"full"}
+      >
         {buttonText}
       </Button>
     </Flex>
   );
 }
 
-function Tag(props: { color?: string; text?: string }) {
-  const { text, color = "black" } = props;
-
+function DealRibbon({ color = "#fd5556", text }: { color?: string; text?: string }) {
   if (!text) {
     return null;
   }
 
   return (
     <Text
-      fontSize={"small"}
-      fontWeight={"semibold"}
-      color={color}
-      px={2}
-      borderRadius={4}
-      border={`2px solid ${color}`}
+      color="white"
+      backgroundColor={color}
+      width={"300px"}
+      textAlign={"center"}
+      pt={10}
+      pb={1}
+      position="absolute"
+      top={"0px"}
+      left={"45px"}
+      fontWeight={"bold"}
+      borderRadius={3}
+      transform={"translate(-50%, -50%) rotate(-12deg)"}
+      fontSize="small"
     >
       {text}
     </Text>
+  );
+}
+
+function DealRibbon2() {
+  return (
+    <Flex flexDirection={"column"} alignItems={"center"}>
+      <Box
+        width={0}
+        height={0}
+        borderLeft={"20px solid transparent"}
+        borderRight={"20px solid transparent"}
+        borderBottom={"12px solid green"}
+      />
+      <Text
+        px={5}
+        py={2}
+        backgroundColor={"green"}
+        color="white"
+        fontWeight={"bold"}
+        fontSize={"small"}
+        borderRadius={3}
+      >
+        Important! Biggest savings with this option.
+      </Text>
+    </Flex>
   );
 }
