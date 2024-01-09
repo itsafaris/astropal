@@ -3,14 +3,7 @@ import { Flex, Button, Text } from "@chakra-ui/react";
 
 export function PricingSection() {
   return (
-    <Flex
-      flexDirection={"column"}
-      alignItems={"center"}
-      backgroundColor={"#112521"}
-      height={"100vh"}
-      p={5}
-      gap={3}
-    >
+    <Flex flexDirection={"column"} alignItems={"center"} gap={3}>
       <PricingCard
         title={"6 month plan"}
         billingText={"Billed every 6 months"}
@@ -77,7 +70,7 @@ function PricingCard({
         <Flex flexDirection={"column"} alignItems={"flex-start"} gap={0} alignSelf={"flex-end"}>
           <Tag color={tagColor} text={tagText} />
 
-          <Text fontSize={"2xl"} fontWeight={"bold"}>
+          <Text fontSize={"2xl"} fontWeight={"bold"} color="black">
             {title}
           </Text>
 
@@ -91,11 +84,11 @@ function PricingCard({
             ${previousPrice}
           </Text>
 
-          <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"}>
+          <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"} color="black">
             ${currentPrice}
           </Text>
 
-          <Text fontSize={"small"} fontWeight={"semibold"}>
+          <Text fontSize={"small"} fontWeight={"semibold"} color="black">
             per day
           </Text>
         </Flex>

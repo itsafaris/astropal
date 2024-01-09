@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Container, Text, Stack, Heading, Button, Icon, Card, Flex } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { Link } from "gatsby";
 
 type Testimonial = {
   name: string;
@@ -475,7 +476,9 @@ function HeroSection() {
         </Flex>
 
         <Stack spacing={4} mt={8}>
-          <Button bg="brand.600">Get my astrologer</Button>
+          <Link to="/pricing">
+            <Button bg="brand.600">Get my astrologer</Button>
+          </Link>
           {/* <Stack direction={"row"}>
               <AppStoreLogo />
               <PlayStoreLogo />
