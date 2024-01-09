@@ -453,6 +453,14 @@ function HeroSection() {
         <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
 
         <Box position="relative">
+          <Box
+            position={"absolute"}
+            height="100%"
+            width="80%"
+            top="6%"
+            left="10%"
+            boxShadow={`0 0 80px 1px #2f7281`}
+          ></Box>
           <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
           <Box position={"absolute"} top="40%" width="100%" px={16}>
             <Text fontSize={"xl"} textAlign={"center"}>
@@ -473,6 +481,8 @@ function HeroSection() {
         py={6}
         color="black"
         borderRadius={"xl"}
+        zIndex={1}
+        position={"relative"}
       >
         <Text fontSize={"xl"} fontWeight={"bold"} mb={4}>
           Your astrologer is:
