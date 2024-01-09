@@ -3,6 +3,7 @@ import { Box, Container, Text, Stack, Heading, Button, Icon, Card, Flex } from "
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { Link } from "gatsby";
+import { orderBy, take } from "lodash";
 
 type Testimonial = {
   name: string;
@@ -57,47 +58,47 @@ const testimonials: Testimonial[] = [
 
 const exampleQuestions = [
   {
-    group: "💼 Career 💼",
+    group: "Career  💼",
     color: "teal",
     questions: [
-      { text: "What job aligns with my astrological strengths?" },
-      { text: "Is this the right time for a career change?" },
-      { text: "How can I deal with office politics according to my sign?" },
-      { text: "What should I focus on for professional development?" },
-      { text: "When's the best time to ask for a promotion?" },
+      { text: "What job aligns with my astrological strengths?", when: 1 },
+      { text: "Is this the right time for a career change?", when: 3 },
+      { text: "How can I deal with office politics according to my sign?", when: 12 },
+      { text: "What should I focus on for professional development?", when: 18 },
+      { text: "When's the best time to ask for a promotion?", when: 24 },
     ],
   },
   {
-    group: "💖 Love 💖",
+    group: "Love  💖",
     color: "red",
     questions: [
-      { text: "What signs am I most compatible with for a romantic relationship?" },
-      { text: "How can I enhance the connection with my current partner?" },
-      { text: "When will I find love?" },
-      { text: "What should I do to prepare for a significant relationship?" },
-      { text: "How can I use astrology to overcome challenges in my love life?" },
+      { text: "What signs am I most compatible with for a romantic relationship?", when: 2 },
+      { text: "How can I enhance the connection with my current partner?", when: 8 },
+      { text: "When will I find love?", when: 11 },
+      { text: "What should I do to prepare for a significant relationship?", when: 14 },
+      { text: "How can I use astrology to overcome challenges in my love life?", when: 15 },
     ],
   },
   {
-    group: "💸 Finances 💸",
+    group: "Finances  💸",
     color: "orange",
     questions: [
-      { text: "What's the outlook on my financial prosperity this year?" },
-      { text: "When is a good time to make a significant investment?" },
-      { text: "How can I improve my financial stability through astrology?" },
-      { text: "Is this a good year to buy or sell property?" },
-      { text: "What should I be cautious about financially in the coming months?" },
+      { text: "What's the outlook on my financial prosperity this year?", when: 1 },
+      { text: "When is a good time to make a significant investment?", when: 2 },
+      { text: "How can I improve my financial stability through astrology?", when: 6 },
+      { text: "Is this a good year to buy or sell property?", when: 8 },
+      { text: "What should I be cautious about financially in the coming months?", when: 11 },
     ],
   },
   {
-    group: "🌱 Personal Growth 🌱",
+    group: "Personal Growth  🌱",
     color: "green",
     questions: [
-      { text: "How can I use astrology to enhance my personal development?" },
-      { text: "Which habits should I develop for spiritual growth?" },
-      { text: "What are my hidden talents and how can I nurture them?" },
-      { text: "How can I find motivation based on my astrological chart?" },
-      { text: "What self-care practices are most beneficial for my sign?" },
+      { text: "How can I use astrology to enhance my personal development?", when: 1 },
+      { text: "Which habits should I develop for spiritual growth?", when: 3 },
+      { text: "What are my hidden talents and how can I nurture them?", when: 4 },
+      { text: "How can I find motivation based on my astrological chart?", when: 8 },
+      { text: "What self-care practices are most beneficial for my sign?", when: 10 },
     ],
   },
 ];
@@ -109,7 +110,6 @@ export default function SummaryPage() {
         <HeroSection />
         <AreasOfLifeGuidance />
         <ExampleQuestionsSection />
-        <QuestionsWeHaveAnswered />
         <SimilarUsersLikeYouSection />
         <TestimonialsSection />
         <ComparisonWithRegularAstrologerSection />
@@ -119,55 +119,121 @@ export default function SummaryPage() {
 }
 
 function ExampleQuestionsSection() {
+  const mixedQuestionGroups = take(
+    orderBy(
+      exampleQuestions.flatMap((g) => {
+        return g.questions.map((q) => {
+          return {
+            text: q.text,
+            when: q.when,
+            color: g.color,
+            group: g.group,
+          };
+        });
+      }),
+      "when"
+    ),
+    8
+  );
+
   return (
-    <Box id="example-questions-section" as="section" my={12}>
-      <Text fontSize={"xl"} fontWeight={"bold"} mb={4} textAlign={"center"}>
-        Here are some most recent questions our users asked
-      </Text>
+    <Box id="example-questions-section" as="section" my={20}>
+      <Heading fontSize={"2xl"} mb={8} mx={4} textAlign={"center"}>
+        Our user's are asking questions every minute
+      </Heading>
+      <QuestionsWeHaveAnswered />
+
       <Stack spacing={4}>
-        {exampleQuestions.map((g) => {
-          const bg = `${g.color}.50`;
+        {mixedQuestionGroups.map((q, idx) => {
+          const gap = idx % 2 === 0 ? "48px" : "96px";
           return (
-            <Box
-              key={g.group}
-              borderRadius={"xl"}
-              bg={bg}
-              border="2px solid"
-              borderColor={`${g.color}.500`}
-              pl={6}
-              pr={4}
-              py={3}
-              color="black"
-            >
-              <Text
-                fontSize={"lg"}
-                textAlign={"center"}
-                fontWeight={"bold"}
-                mb={4}
-                color={`${g.color}.800`}
-              >
-                {g.group}
-              </Text>
-              <Stack spacing={"1px"}>
-                {g.questions.map((q) => {
-                  return (
-                    <Stack key={q.text} bg={bg} spacing={0} py={2}>
-                      <Text fontSize={"sm"} fontWeight={"semibold"}>
-                        {q.text}
-                      </Text>
-                      <Text fontSize={"xs"} color={`${g.color}.500`}>
-                        2h ago by{" "}
-                        <Text as="span" fontWeight={"bold"}>
-                          Aries Male
-                        </Text>
-                      </Text>
-                    </Stack>
-                  );
-                })}
+            <Flex key={q.text} position={"relative"} gap={2}>
+              <Box
+                visibility={"hidden"}
+                height={"2px"}
+                width={gap}
+                bg="bg.400"
+                ml={-4}
+                mt={"10px"}
+              ></Box>
+              <Stack>
+                <Stack direction={"row"} alignItems={"center"}>
+                  <Text fontWeight={"semibold"} color={`${q.color}.400`} fontSize={"sm"}>
+                    {q.group}
+                  </Text>
+                  <Text fontSize={"xs"}>
+                    Asked{" "}
+                    <Text as="span" fontWeight={"bold"}>
+                      {q.when} min ago
+                    </Text>{" "}
+                  </Text>
+                </Stack>
+                <Stack bg={"white"} py={2} px={4} borderRadius={"xl"}>
+                  {/* <Badge>{g.group}</Badge> */}
+                  <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
+                    → {q.text}
+                  </Text>
+                </Stack>
               </Stack>
-            </Box>
+            </Flex>
           );
         })}
+
+        <Box display={"none"}>
+          {exampleQuestions.map((g) => {
+            const bg = `${g.color}.50`;
+            return (
+              <Box
+                key={g.group}
+                borderRadius={"xl"}
+                // bg={bg}
+                // border="2px solid"
+                // borderColor={`${g.color}.500`}
+                // pl={6}
+                // pr={4}
+                py={3}
+                color="black"
+              >
+                <Text
+                  fontSize={"lg"}
+                  textAlign={"center"}
+                  fontWeight={"bold"}
+                  mb={4}
+                  color={`${g.color}.100`}
+                  whiteSpace={"pre"}
+                >
+                  {g.group}
+                </Text>
+
+                <Stack spacing={0} direction={"row"} position={"relative"} alignItems={"stretch"}>
+                  <Box width={"2px"} bg="bg.400"></Box>
+                  <Stack spacing={4}>
+                    {g.questions.map((q, idx) => {
+                      const gap = idx % 2 === 0 ? "24px" : "48px";
+                      return (
+                        <Flex key={q.text} position={"relative"}>
+                          <Box height={"2px"} width={gap} bg="bg.400" mt={4}></Box>
+                          <Stack bg={"white"} py={2} px={4} borderRadius={"xl"}>
+                            {/* <Badge>{g.group}</Badge> */}
+                            <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
+                              → {q.text}
+                            </Text>
+                            <Text fontSize={"xs"} color={`${g.color}.500`}>
+                              Asked{" "}
+                              <Text as="span" fontWeight={"bold"}>
+                                {q.when} min ago
+                              </Text>{" "}
+                            </Text>
+                          </Stack>
+                        </Flex>
+                      );
+                    })}
+                  </Stack>
+                </Stack>
+              </Box>
+            );
+          })}
+        </Box>
       </Stack>
     </Box>
   );
@@ -175,24 +241,22 @@ function ExampleQuestionsSection() {
 
 function QuestionsWeHaveAnswered() {
   return (
-    <Box my={8}>
-      <Text fontSize={{ base: "md" }} fontWeight={"bold"}>
-        We have already answered
-      </Text>
+    <Stack my={8} spacing={2} justifyContent={"center"} alignItems={"center"}>
       <HappyCustomersCounter />
-      <Text fontSize={{ base: "md" }} fontWeight={"bold"}>
-        questions to our users
+      <Text fontSize={{ base: "xs" }} fontWeight={"bold"}>
+        Questions answered today
       </Text>
-    </Box>
+    </Stack>
   );
 }
 
 function AreasOfLifeGuidance() {
   return (
-    <Box id="guidance-section" my={12}>
-      <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"} mb={8}>
-        Get instant guidance in these areas of your life
-      </Text>
+    <Box id="guidance-section" my={20}>
+      <Heading textAlign={"center"} fontWeight={"bold"} mb={8} mx={8} fontSize={"2xl"}>
+        Bring clarity into every
+        <br /> area of your life
+      </Heading>
       <Stack spacing={6}>
         <Feature2
           title="Uncertain Decisions"
@@ -533,20 +597,20 @@ const Feature2 = ({ title, text, emoji }: { title: string; text: string; emoji?:
   );
 };
 
-const HappyCustomersCounter = ({ initialCount = 1642305, incrementRate = 1 }) => {
+const HappyCustomersCounter = ({ initialCount = 12305, incrementRate = 1 }) => {
   const [count, setCount] = useState(initialCount);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCount((prevCount) => prevCount + getRandomIncrement(1, 9));
-    }, 1000);
+      setCount((prevCount) => prevCount + getRandomIncrement(1, 4));
+    }, 1500);
 
     return () => clearInterval(intervalId);
   }, [incrementRate]);
 
   return (
     <Box textAlign="center">
-      <Text fontSize={"3xl"} fontWeight={"black"} color="brand.600">
+      <Text fontSize={"2xl"} lineHeight={"80%"} fontWeight={"black"} color="brand.600">
         {count.toLocaleString()}
       </Text>
     </Box>
