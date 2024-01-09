@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { Link } from "gatsby";
 import { orderBy, take } from "lodash";
+import { TopNavigation } from "@components/topnavigation";
 
 type Testimonial = {
   name: string;
@@ -107,6 +108,7 @@ export default function SummaryPage() {
   return (
     <Box py={4} bg="bg.100" color="bg.900">
       <Container>
+        <TopNavigation />
         <HeroSection />
         <AreasOfLifeGuidance />
         <ExampleQuestionsSection />
@@ -440,7 +442,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
 function HeroSection() {
   return (
-    <Box id="hero-section" as="section" pt={16}>
+    <Box id="hero-section" as="section">
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"2xl"} color="white">
           Your Personal <br /> Astrologer Is Created
