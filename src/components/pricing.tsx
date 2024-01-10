@@ -1,6 +1,8 @@
 import React from "react";
 import { Flex, Button, Text, Box } from "@chakra-ui/react";
 
+import { pricingPlans } from "@utils/pricingPlans";
+
 export function PricingSection() {
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
@@ -9,8 +11,8 @@ export function PricingSection() {
         billingText={"Billed every 6 months"}
         tagText={"Best value"}
         tagColor={"green.400"}
-        currentPrice={0.28}
-        previousPrice={1.11}
+        currentPrice={pricingPlans["6month"].daily}
+        previousPrice={pricingPlans["6month"].dailyBefore}
         buttonText={"Claim my plan (save 75%)"}
         buttonColor="#04a804"
         buttonHoverColor="#038b03"
@@ -25,15 +27,15 @@ export function PricingSection() {
         billingText={"Billed every 3 months"}
         tagText={"Most popular"}
         tagColor={"brand.700"}
-        currentPrice={0.43}
-        previousPrice={1.25}
+        currentPrice={pricingPlans["3month"].daily}
+        previousPrice={pricingPlans["3month"].dailyBefore}
         buttonText={"Claim my plan (save 65%)"}
       />
       <PricingCard
         title={"1 month plan"}
         billingText={"Billed every month"}
-        currentPrice={0.99}
-        previousPrice={1.99}
+        currentPrice={pricingPlans["1month"].daily}
+        previousPrice={pricingPlans["1month"].dailyBefore}
         buttonText={"Claim my plan (save 50%)"}
       />
     </Flex>
