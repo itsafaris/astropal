@@ -106,7 +106,7 @@ const exampleQuestions = [
 
 export default function SummaryPage() {
   return (
-    <Box py={4} bg="bg.100" color="bg.900">
+    <Box py={4} pb={24} bg="bg.100" color="bg.900">
       <Container>
         <TopNavigation />
         <HeroSection />
@@ -171,7 +171,6 @@ function ExampleQuestionsSection() {
                   </Text>
                 </Stack>
                 <Stack bg={"white"} py={2} px={4} borderRadius={"xl"}>
-                  {/* <Badge>{g.group}</Badge> */}
                   <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
                     → {q.text}
                   </Text>
@@ -183,19 +182,8 @@ function ExampleQuestionsSection() {
 
         <Box display={"none"}>
           {exampleQuestions.map((g) => {
-            const bg = `${g.color}.50`;
             return (
-              <Box
-                key={g.group}
-                borderRadius={"xl"}
-                // bg={bg}
-                // border="2px solid"
-                // borderColor={`${g.color}.500`}
-                // pl={6}
-                // pr={4}
-                py={3}
-                color="black"
-              >
+              <Box key={g.group} borderRadius={"xl"} py={3} color="black">
                 <Text
                   fontSize={"lg"}
                   textAlign={"center"}
@@ -328,78 +316,43 @@ function TestimonialsSection() {
 
 function ComparisonWithRegularAstrologerSection() {
   return (
-    <Box id="comparison-with-regular-astrologer-section" as="section">
-      <Heading>This is how it compares with a regular astrologer</Heading>
-
-      <Stack>
-        <Text fontWeight={"bold"}>Astropal Astrologer</Text>
-        <Stack spacing={4} rounded={"xl"}>
-          <Feature
-            title="24/7 Availability"
-            text="Access personalised insights any time, no waiting for appointments."
-            isBenefit
-          />
-          <Feature
-            title="Hyper-Personalized Readings"
-            text="Insights based on your natal chart, tailored to your life's questions."
-            isBenefit
-          />
-          <Feature
-            title="At-Home Privacy"
-            text="Receive guidance in the privacy and comfort of your own space."
-            isBenefit
-          />
-          <Feature
-            title="Unlimited Access"
-            text="A cost-effective subscription model for all your astrological needs."
-            isBenefit
-          />
-          <Feature
-            title="Learning & Development"
-            text="A rich library of content for continuous astrological learning."
-            isBenefit
-          />
-          <Feature
-            title="Data-Driven Insights"
-            text="Uses AI and analytics for precise, informed readings."
-            isBenefit
-          />
-          <Feature
-            title="Real-Time Astronomical Data"
-            text="Integrates the latest events from sources like NASA for current and precise advice."
-            isBenefit
-          />
+    <Box id="comparison-with-regular-astrologer-section" as="section" px={2}>
+      <Heading mb={8} textAlign={"center"}>
+        10x better than your regular astrologer
+      </Heading>
+      <Stack spacing={8}>
+        <Stack>
+          <Stack direction={"row"} alignItems={"center"}>
+            <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={35} width={35} />
+            <Text fontSize={"md"} fontWeight={"bold"} color="brand.600">
+              Our Astrologer
+            </Text>
+          </Stack>
+          <Stack spacing={1}>
+            <ComparisonItem title="Communicates like a real person" isBenefit />
+            <ComparisonItem title="Instant access, no need to schedule in advance" isBenefit />
+            <ComparisonItem title="At-Home Privacy and comfort" isBenefit />
+            <ComparisonItem title="100% Hyper-Personalized Readings" isBenefit />
+            <ComparisonItem title="Uses accurate Real-Time Astronomical Data" isBenefit />
+            <ComparisonItem title="Does not make mistakes, 100% accurate" isBenefit />
+            <ComparisonItem title="Super cheap sessions" isBenefit />
+          </Stack>
         </Stack>
-      </Stack>
 
-      <Stack>
-        <Text fontWeight={"bold"}>Regular Astrologer</Text>
-        <Stack spacing={4} p={6} rounded={"xl"}>
-          <Feature
-            title="Appointment-Based"
-            text="Limited to the astrologer's schedule and availability."
-          />
-          <Feature
-            title="General Advice"
-            text="Often one-size-fits-all, lacking personal relevance."
-          />
-          <Feature
-            title="Face-to-Face Sessions"
-            text="Requires sharing personal issues in person."
-          />
-          <Feature
-            title="Per-Session Charges"
-            text="Can become costly with multiple visits or questions."
-          />
-          <Feature title="One-Off Readings" text="May not support ongoing personal growth." />
-          <Feature
-            title="Traditional Interpretation"
-            text="Relies on the astrologer's individual methodology."
-          />
-          <Feature
-            title="Static Predictions"
-            text="May not use up-to-the-minute celestial data in readings."
-          />
+        <Stack>
+          <Text fontSize={"md"} fontWeight={"bold"} color="brand.600" whiteSpace={"pre-wrap"}>
+            👩‍💼 {"   "}Regular Astrologer
+          </Text>
+          <Stack spacing={1}>
+            <ComparisonItem title="Communicates like a real person" isBenefit />
+            <ComparisonItem title="Busy, you need to fit their schedule" />
+            <ComparisonItem title="Requires sharing personal issues in person." />
+            <ComparisonItem title="Often one-size-fits-all advice" />
+            <ComparisonItem title="May not use up-to-the-minute celestial data in readings." />
+            <ComparisonItem title="Prone to make mistakes" />
+
+            <ComparisonItem title="Very expensive, pay by the hour" />
+          </Stack>
         </Stack>
       </Stack>
     </Box>
@@ -455,6 +408,14 @@ function HeroSection() {
         <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
 
         <Box position="relative">
+          <Box
+            position={"absolute"}
+            height="100%"
+            width="80%"
+            top="6%"
+            left="10%"
+            boxShadow={`0 0 80px 1px #2f7281`}
+          ></Box>
           <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
           <Box position={"absolute"} top="40%" width="100%" px={16}>
             <Text fontSize={"xl"} textAlign={"center"}>
@@ -475,6 +436,8 @@ function HeroSection() {
         py={6}
         color="black"
         borderRadius={"xl"}
+        zIndex={1}
+        position={"relative"}
       >
         <Text fontSize={"xl"} fontWeight={"bold"} mb={4}>
           Your astrologer is:
@@ -566,23 +529,14 @@ function HeroSection() {
   );
 }
 
-const Feature = ({
-  title,
-  text,
-  isBenefit,
-}: {
-  title: string;
-  text: string;
-  isBenefit?: boolean;
-}) => {
+const ComparisonItem = ({ title, isBenefit }: { title: string; isBenefit?: boolean }) => {
   return (
-    <Stack direction={"row"} bg="green.800" align={"center"} px={4} py={2} borderRadius={"xl"}>
-      <Icon as={isBenefit ? CheckIcon : CloseIcon} color={isBenefit ? "bg.500" : "bg.400"} />
+    <Stack direction={"row"} align={"center"} borderRadius={"xl"}>
+      <Icon as={isBenefit ? CheckIcon : CloseIcon} color={isBenefit ? "green.500" : "red.400"} />
       <Box>
-        <Text fontWeight={"bold"} color={isBenefit ? "white" : "bg.500"}>
+        <Text fontSize={"sm"} color={isBenefit ? "white" : "bg.500"}>
           {title}
         </Text>
-        <Text color={isBenefit ? "bg.800" : "bg.500"}>{text}</Text>
       </Box>
     </Stack>
   );
