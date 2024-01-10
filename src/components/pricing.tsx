@@ -8,10 +8,14 @@ export function PricingSection() {
         title={"6 month plan"}
         billingText={"Billed every 6 months"}
         tagText={"Best value"}
-        tagColor={"green"}
+        tagColor={"green.400"}
         currentPrice={0.28}
         previousPrice={1.11}
         buttonText={"Claim my plan (save 75%)"}
+        buttonColor="#04a804"
+        buttonHoverColor="#038b03"
+        borderColor="green.400"
+        buttonTextColor="white"
       />
 
       <DealRibbon2 />
@@ -20,10 +24,10 @@ export function PricingSection() {
         title={"3 month plan"}
         billingText={"Billed every 3 months"}
         tagText={"Most popular"}
-        tagColor={"purple"}
-        currentPrice={0.41}
+        tagColor={"brand.700"}
+        currentPrice={0.43}
         previousPrice={1.25}
-        buttonText={"Claim my plan (save 67%)"}
+        buttonText={"Claim my plan (save 65%)"}
       />
       <PricingCard
         title={"1 month plan"}
@@ -44,6 +48,10 @@ function PricingCard({
   currentPrice,
   previousPrice,
   buttonText,
+  buttonColor,
+  buttonHoverColor,
+  borderColor,
+  buttonTextColor,
 }: {
   title: string;
   billingText: string;
@@ -52,6 +60,10 @@ function PricingCard({
   currentPrice: number;
   previousPrice: number;
   buttonText: string;
+  buttonTextColor?: string;
+  buttonColor?: string;
+  buttonHoverColor?: string;
+  borderColor?: string;
 }) {
   return (
     <Flex
@@ -65,7 +77,7 @@ function PricingCard({
       position="relative"
       overflow="hidden"
       border={`2px solid`}
-      borderColor="brand.500"
+      borderColor={borderColor ?? "brand.500"}
       mt={4}
     >
       <DealRibbon color={tagColor} text={tagText} />
@@ -103,11 +115,12 @@ function PricingCard({
 
       <Button
         variant={"solid"}
-        backgroundColor="brand.600"
+        backgroundColor={buttonColor ?? "brand.700"}
         _hover={{
-          backgroundColor: "brand.500",
+          backgroundColor: buttonHoverColor ?? "brand.600",
         }}
         width={"full"}
+        color={buttonTextColor}
       >
         {buttonText}
       </Button>
@@ -122,7 +135,7 @@ function DealRibbon({ color = "#fd5556", text }: { color?: string; text?: string
 
   return (
     <Text
-      color="white"
+      color="bg.100"
       backgroundColor={color}
       width={"300px"}
       textAlign={"center"}
@@ -142,6 +155,8 @@ function DealRibbon({ color = "#fd5556", text }: { color?: string; text?: string
 }
 
 function DealRibbon2() {
+  const color = "green.400";
+
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
       <Box
@@ -149,18 +164,19 @@ function DealRibbon2() {
         height={0}
         borderLeft={"20px solid transparent"}
         borderRight={"20px solid transparent"}
-        borderBottom={"12px solid green"}
+        borderBottom={`12px solid`}
+        borderBottomColor={color}
       />
       <Text
         px={5}
-        py={2}
-        backgroundColor={"green"}
-        color="white"
+        py={1}
+        backgroundColor={color}
+        color="bg.100"
         fontWeight={"bold"}
         fontSize={"small"}
-        borderRadius={3}
+        borderRadius={100}
       >
-        Important! Biggest savings with this option.
+        Biggest savings with this option!
       </Text>
     </Flex>
   );
