@@ -488,7 +488,7 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
     <Box id="hero-section" as="section">
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"3xl"} color="white">
-          {quizState?.firstName}, Your Personal <br /> Astrologer Is Created
+          {quizState?.firstName}, <br /> Your Personal <br /> Astrologer Is Created
         </Text>
 
         <Text my={2} textAlign={"center"} width={"full"} fontSize={"md"} color={"whiteAlpha.600"}>
@@ -536,23 +536,27 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
         <Grid gridTemplateColumns={"1fr 1fr 1fr"} gap={4}>
           <Flex direction={"column"} gap={2}>
             <Box
-              bg="bg.800"
-              height={"120px"}
+              bg="bg.600"
+              height={"130px"}
               p={4}
               fontSize={"2xl"}
               fontWeight={"bold"}
               color="bg.300"
               borderRadius={6}
             >
-              <Text fontWeight={"bold"}>24/7</Text>
-              <Text fontSize={"sm"}>Use any time</Text>
+              <Text fontWeight={"bold"} color="white">
+                24/7
+              </Text>
+              <Text fontSize={"sm"} color="bg.200">
+                Use any time
+              </Text>
             </Box>
           </Flex>
 
           <Flex direction={"column"} gap={2}>
             <Box
-              bg="bg.800"
-              height={"120px"}
+              bg="bg.600"
+              height={"130px"}
               p={4}
               fontSize={"2xl"}
               fontWeight={"bold"}
@@ -565,14 +569,16 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
                 alt=""
                 src="../images/infinite-icon.svg"
               />
-              <Text fontSize={"sm"}>Ask any question</Text>
+              <Text fontSize={"sm"} color="bg.200">
+                Ask any question
+              </Text>
             </Box>
           </Flex>
 
           <Flex direction={"column"} gap={2}>
             <Box
-              bg="bg.800"
-              height={"120px"}
+              bg="bg.600"
+              height={"130px"}
               p={4}
               fontSize={"2xl"}
               fontWeight={"bold"}
@@ -585,7 +591,9 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
                 alt=""
                 src="../images/chat-icon.svg"
               />
-              <Text fontSize={"sm"}>Get answers instantly</Text>
+              <Text fontSize={"sm"} color="bg.200">
+                Get answers instantly
+              </Text>
             </Box>
           </Flex>
         </Grid>
