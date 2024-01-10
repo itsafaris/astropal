@@ -140,7 +140,7 @@ function ExampleQuestionsSection() {
 
   return (
     <Box id="example-questions-section" as="section" my={20}>
-      <Heading fontSize={"3xl"} mb={8} mx={4} textAlign={"center"}>
+      <Heading fontSize={"3xl"} mb={10} mx={4} textAlign={"center"} color="white">
         Our user's are asking questions every minute
       </Heading>
       <QuestionsWeHaveAnswered />
@@ -170,7 +170,7 @@ function ExampleQuestionsSection() {
                     </Text>{" "}
                   </Text>
                 </Stack>
-                <Stack bg={"bg.800"} py={2} px={4} borderRadius={"xl"}>
+                <Stack bg={"bg.900"} py={2} px={4} borderRadius={"xl"}>
                   <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
                     → {q.text}
                   </Text>
@@ -255,7 +255,14 @@ function QuestionsWeHaveAnswered() {
 function AreasOfLifeGuidance() {
   return (
     <Box id="guidance-section" my={20}>
-      <Heading textAlign={"center"} fontWeight={"bold"} mb={8} mx={8} fontSize={"3xl"}>
+      <Heading
+        textAlign={"center"}
+        fontWeight={"bold"}
+        mb={12}
+        mx={8}
+        fontSize={"3xl"}
+        color="white"
+      >
         Bring clarity <br /> into every area of your life
       </Heading>
       <Stack spacing={4}>
@@ -335,7 +342,7 @@ function SimilarUsersLikeYouSection() {
 function TestimonialsSection() {
   return (
     <Box id="testimonials-section" as="section" my={12}>
-      <Heading textAlign={"center"} fontSize={"3xl"} my={6}>
+      <Heading textAlign={"center"} fontSize={"3xl"} mb={10} color="white">
         Hear it <br /> from our users
       </Heading>
       <Stack>
@@ -350,7 +357,7 @@ function TestimonialsSection() {
 function ComparisonWithRegularAstrologerSection() {
   return (
     <Box id="comparison-with-regular-astrologer-section" as="section" px={2}>
-      <Heading mb={8} textAlign={"center"}>
+      <Heading mb={10} textAlign={"center"} color="white">
         10x better than your regular astrologer
       </Heading>
       <Stack spacing={8}>
