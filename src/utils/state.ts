@@ -12,6 +12,11 @@ import { getZodiacSign } from "@services/zodiacService";
 import { toTitleCase } from "@utils/string";
 import { createTime } from "./dates";
 
+// IMPORTANT: change this if structure changes, to invalidate local storage
+export const STATE_VERSION = 1;
+
+export type QuizStateParsed = ReturnType<typeof getPersonalInfoFromState>;
+
 function splitFullName(fullName: string) {
   const parts = fullName.split(" ");
   const firstName = parts[0];
@@ -22,7 +27,9 @@ function splitFullName(fullName: string) {
 
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value;
-  const yourName = toTitleCase((state["your-birth-name"] as ShortTextState)?.value ?? "Anonymous");
+  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
+  const { firstName, lastName } = splitFullName(fullname);
+
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
     year: 1990,
     month: 4,
@@ -48,31 +55,15 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     long: 22,
   };
 
-  const partnerName = splitFullName(
-    toTitleCase((state["partner-birth-name"] as ShortTextState)?.value ?? "Anonymous")
-  );
-  const partnerGender = (state["partner-gender"] as SingleState)?.value?.value;
-
-  const partnerBirthDate = (state["partner-birth-date"] as DateState)?.value ?? {
-    year: 1990,
-    month: 1,
-    day: 1,
-  };
-
-  const partnerZodiac = getZodiacSign(
-    new Date(partnerBirthDate.year, partnerBirthDate.month - 1, partnerBirthDate.day).toISOString()
-  );
-
   return {
-    yourName,
+    version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
+    fullname,
+    firstName,
+    lastName,
     yourGender,
     yourBirthDate,
     yourBirthTime,
     yourBirthLocation,
     yourZodiac,
-    partnerName,
-    partnerBirthDate,
-    partnerGender,
-    partnerZodiac,
   };
 }
