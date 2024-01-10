@@ -230,6 +230,11 @@ function ExampleQuestionsSection() {
         <Heading fontSize={"xl"} textAlign={"center"} mb={2}>
           You can ask any question you can think of, our astrologer will answer instantly
         </Heading>
+        <StaticImage
+          height={120}
+          src="../images/astrologer.png"
+          alt="Astrologer, sitting and thinking"
+        />
         <CTALinkToPricing id="comparison-section-cta" />
       </Stack>
     </Box>
@@ -292,24 +297,26 @@ function AreasOfLifeGuidance() {
 
 function SimilarUsersLikeYouSection() {
   return (
-    <Heading
-      fontWeight={"semibold"}
-      fontSize={{ base: "xl" }}
-      bg="teal.800"
-      p={8}
-      color="brand.700"
-      borderRadius={"xl"}
-    >
-      On average,{" "}
-      <Text as="span" color="green.400">
-        93%
-      </Text>{" "}
-      of our users report feeling positive effects and greater clarity in their lives within just{" "}
-      <Text as="span" color="green.400">
-        14 days
-      </Text>{" "}
-      of consulting our astrologer.
-    </Heading>
+    <Box p={2} bg="teal.800" borderRadius={"xl"}>
+      <Heading px={4} py={4} fontWeight={"semibold"} fontSize={{ base: "xl" }} color="brand.700">
+        On average,{" "}
+        <Text as="span" color="green.400">
+          93%
+        </Text>{" "}
+        of our users report feeling less self-doubt and greater clarity in their lives within just{" "}
+        <Text as="span" color="green.400">
+          14 days
+        </Text>{" "}
+        of consulting our astrologer.
+      </Heading>
+
+      <Box mt={4} overflow={"hidden"}>
+        <StaticImage
+          alt="Clarity increase when using astrologer guidance chart"
+          src="../images/clarity_chart.png"
+        />
+      </Box>
+    </Box>
   );
 }
 
