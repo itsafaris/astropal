@@ -12,21 +12,43 @@ export default function PricingPage() {
       <Container flexDirection={"column"} display={"flex"} gap={5}>
         <TopNavigation />
 
-        <Heading fontSize={"3xl"} mx={4} textAlign={"center"}>
-          Unlock Long-Awaited Answers To Your Burning Questions
-        </Heading>
-
         <Flex
-          my={4}
-          mx="auto"
-          borderRadius={"full"}
-          overflow={"hidden"}
-          height={"200px"}
-          width={"200px"}
-          boxShadow={"inset 0 0 50px 0 #d2890052, 0 0 50px 0 #d289006e"}
+          width={"full"}
           position={"relative"}
+          overflow={"hidden"}
+          borderRadius={16}
+          mb={4}
+          zIndex={0}
+          minH={350}
         >
-          <StaticImage alt="" src="../images/astro-avatar.png" />
+          <Flex
+            width={"100%"}
+            position={"absolute"}
+            zIndex={1}
+            top={0}
+            flexDirection={"column"}
+            alignItems={"center"}
+            gap={4}
+          >
+            <Heading fontSize={"3xl"} textAlign={"center"} maxW={400} mx="auto">
+              Unlock Long-Awaited Answers To Your Burning Questions
+            </Heading>
+
+            <Flex
+              my={4}
+              mx="auto"
+              borderRadius={"full"}
+              overflow={"hidden"}
+              height={"130px"}
+              width={"130px"}
+              boxShadow={"inset 0 0 50px 0 #d2890052, 0 0 50px 0 #d289006e"}
+              opacity={0.8}
+            >
+              <StaticImage alt="" src="../images/astro-avatar.png" />
+            </Flex>
+          </Flex>
+
+          <StaticImage alt="" src="../images/pricing-hero.png" layout="constrained" />
         </Flex>
 
         <Heading fontSize={"3xl"} textAlign={"center"}>
