@@ -12,7 +12,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { getPersonalInfoFromState } from "@utils/state";
 import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
-import { ChatBubble, NextButton, Span, Subtitle } from "./components";
+import { Caption, ChatBubble, NextButton, Span, Subtitle } from "./components";
 import { NatalChartInterpreter } from "./interpreter";
 
 export function YourGoalSlide() {
@@ -983,6 +983,42 @@ export function YourSummaryLoadingSlide() {
           </>
         );
       }}
+    </Slide>
+  );
+}
+
+export function EmailSlide() {
+  const { submitQuestion } = useQuiz();
+  return (
+    <Slide
+      id="your-email"
+      type="email"
+      placeholder="Enter your email"
+      nextButtonProps={{ title: "Submit" }}
+    >
+      <Title>Service is at highest capacity</Title>
+      <Callout emoji="⚠️ New users limit reached">
+        Due to the high number of new users, we are limiting access to our service at the moment.
+        Your astrologer is however saved and will be ready to use, once we send you an invite
+      </Callout>
+      <Selector />
+      <Caption mb={8}>Your email will only be used to send you the invite link.</Caption>
+      <NextButton
+        onClick={() => {
+          submitQuestion();
+        }}
+      >
+        Submit
+      </NextButton>
+    </Slide>
+  );
+}
+
+export function ThankYouSlide() {
+  return (
+    <Slide id="thank-you" type="filler">
+      <Title>Thank you!</Title>
+      <Callout emoji="🎉">We will send you the invitation link as soon as possible</Callout>
     </Slide>
   );
 }

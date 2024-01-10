@@ -1,26 +1,94 @@
-import { QuizPageWrapper } from "@components/quizpage/pageWrapper";
-import { QuizUI } from "@martynasj/quiz-lib";
-import { Quiz } from "@components/quizpage/quizSegments";
-import { QuizWrapper } from "@components/quizpage/quizWrapper";
+import { QuizUI, Segment, QuizProvider } from "@martynasj/quiz-lib";
 
+import {
+  YourBirthDateSlide,
+  YourBirthPlaceSlide,
+  YourProfileSavingSlide,
+  YourBirthTimeSlide,
+  SatisfactionScoreSlide,
+  AsnwerLongevity,
+  IntroToFinetuningPart,
+  YourPersonalityTypeSlide,
+  YourValuesAndPrioritiesSlide,
+  YourSpiritualInvolvementSlide,
+  FinilisingAstrologerSlide,
+  IntroSlide,
+  DescribeYourNatalChart,
+  AstrologerReadySlide,
+  NameSlide,
+  EmailSlide,
+  ThankYouSlide,
+} from "@components/quizpage/slides.simple";
+import { NatalChartPreviewSlide } from "@components/quizpage/slide.natalChartPreview";
+import { FirstQuestionTrial } from "@components/quizpage/slide.firstTrialQuestion";
+import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
+import { isProdMode } from "@utils/isProdMode";
+import { trackEvent, trackPixel } from "@utils/tracking";
 import { SEO } from "@components/seo";
+import { useEffect, useState } from "react";
+
+const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
 export const Head = () => {
   return <SEO />;
 };
 
-export default function QuizInRelationship() {
+export default function OnboardingQuiz() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <QuizPageWrapper>
-      <QuizWrapper>
+    <QuizProvider
+      showDebugUI={!isProdMode()}
+      onErrorEvent={(_) => {
+        //
+      }}
+      locationApiKey={locationApiKey}
+      onTrackingEvent={(event) => {
+        trackEvent(event);
+      }}
+      onSlideSubmitted={(state) => {
+        if (state.id === "your-email") {
+          trackPixel("Purchase", { currency: "USD", value: 30.0 });
+        }
+      }}
+    >
+      <QuizServiceWrapper>
         <QuizUI
           containerProps={{
             minH: "100vh",
           }}
         >
-          <Quiz />
+          <Segment title="Progress">
+            <IntroSlide />
+            <YourBirthDateSlide />
+            <YourBirthTimeSlide />
+            <YourBirthPlaceSlide />
+            <YourProfileSavingSlide />
+            <NatalChartPreviewSlide />
+            <DescribeYourNatalChart />
+            <FirstQuestionTrial />
+            <SatisfactionScoreSlide />
+            <AsnwerLongevity />
+            <IntroToFinetuningPart />
+            <YourPersonalityTypeSlide />
+            <YourValuesAndPrioritiesSlide />
+            <YourSpiritualInvolvementSlide />
+            <NameSlide />
+            <FinilisingAstrologerSlide />
+            <AstrologerReadySlide />
+            <EmailSlide />
+            <ThankYouSlide />
+          </Segment>
         </QuizUI>
-      </QuizWrapper>
-    </QuizPageWrapper>
+      </QuizServiceWrapper>
+    </QuizProvider>
   );
 }
