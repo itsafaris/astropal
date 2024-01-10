@@ -140,7 +140,7 @@ function ExampleQuestionsSection() {
 
   return (
     <Box id="example-questions-section" as="section" my={20}>
-      <Heading fontSize={"2xl"} mb={8} mx={4} textAlign={"center"}>
+      <Heading fontSize={"3xl"} mb={8} mx={4} textAlign={"center"}>
         Our user's are asking questions every minute
       </Heading>
       <QuestionsWeHaveAnswered />
@@ -170,7 +170,7 @@ function ExampleQuestionsSection() {
                     </Text>{" "}
                   </Text>
                 </Stack>
-                <Stack bg={"white"} py={2} px={4} borderRadius={"xl"}>
+                <Stack bg={"bg.800"} py={2} px={4} borderRadius={"xl"}>
                   <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
                     → {q.text}
                   </Text>
@@ -255,36 +255,40 @@ function QuestionsWeHaveAnswered() {
 function AreasOfLifeGuidance() {
   return (
     <Box id="guidance-section" my={20}>
-      <Heading textAlign={"center"} fontWeight={"bold"} mb={8} mx={8} fontSize={"2xl"}>
-        Bring clarity into every
-        <br /> area of your life
+      <Heading textAlign={"center"} fontWeight={"bold"} mb={8} mx={8} fontSize={"3xl"}>
+        Bring clarity <br /> into every area of your life
       </Heading>
-      <Stack spacing={6}>
+      <Stack spacing={4}>
         <Feature2
           title="Uncertain Decisions"
           text="Find your way with star-mapped guidance for life's crossroads."
           emoji="🤔"
         />
+        <Separator />
         <Feature2
           title="Identity Quest"
           text="Reveal your cosmic identity and destiny through the stars."
           emoji="🌟"
         />
+        <Separator />
         <Feature2
           title="Missed Opportunities"
           text="Capture your golden moments with timely cosmic alerts."
           emoji="⏳"
         />
+        <Separator />
         <Feature2
           title="Relationship Struggles"
           text="Forge stronger bonds with the universe's love insights."
           emoji="💞"
         />
+        <Separator />
         <Feature2
           title="Financial Uncertainty"
           text="Chart a prosperous course with celestial financial advice."
           emoji="💰"
         />
+        <Separator />
         <Feature2
           title="Inaccessibility to Guidance"
           text="Instant, anywhere wisdom from your pocket astrologer."
@@ -295,10 +299,18 @@ function AreasOfLifeGuidance() {
   );
 }
 
+function Separator() {
+  return (
+    <Flex width={"full"} alignItems={"center"} flexDirection={"column"}>
+      <Box height={"10px"} width="10px" backgroundColor={"bg.200"} borderRadius={"full"} />
+    </Flex>
+  );
+}
+
 function SimilarUsersLikeYouSection() {
   return (
     <Box p={2} bg="teal.800" borderRadius={"xl"}>
-      <Heading px={4} py={4} fontWeight={"semibold"} fontSize={{ base: "xl" }} color="brand.700">
+      <Heading px={4} py={4} fontWeight={"semibold"} fontSize={{ base: "2xl" }} color="brand.700">
         On average,{" "}
         <Text as="span" color="green.400">
           93%
@@ -323,8 +335,8 @@ function SimilarUsersLikeYouSection() {
 function TestimonialsSection() {
   return (
     <Box id="testimonials-section" as="section" my={12}>
-      <Heading textAlign={"center"} fontSize={"xl"} my={6}>
-        Hear it from our users
+      <Heading textAlign={"center"} fontSize={"3xl"} my={6}>
+        Hear it <br /> from our users
       </Heading>
       <Stack>
         {testimonials.map((testimonial) => {
@@ -421,7 +433,7 @@ function HeroSection() {
   return (
     <Box id="hero-section" as="section">
       <Flex flexDirection={"column"} alignItems={"center"}>
-        <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"2xl"} color="white">
+        <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"3xl"} color="white">
           Your Personal <br /> Astrologer Is Created
         </Text>
 
@@ -455,7 +467,7 @@ function HeroSection() {
       <Stack
         id="white-card-with-benefits"
         textAlign={"center"}
-        bg="white"
+        bg="bg.900"
         px={6}
         py={6}
         color="black"
@@ -549,7 +561,7 @@ const ComparisonItem = ({ title, isBenefit }: { title: string; isBenefit?: boole
 
 const Feature2 = ({ title, text, emoji }: { title: string; text: string; emoji?: string }) => {
   return (
-    <Stack direction={"column"} px={8}>
+    <Stack direction={"column"} px={6} gap={4}>
       <Text fontWeight={"bold"} color={"white"}>
         {emoji} {title}
       </Text>
