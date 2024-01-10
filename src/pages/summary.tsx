@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ComponentProps, useEffect, useState } from "react";
 import { Box, Container, Text, Stack, Heading, Button, Icon, Card, Flex } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
@@ -225,6 +225,13 @@ function ExampleQuestionsSection() {
           })}
         </Box>
       </Stack>
+
+      <Stack alignItems={"center"} my={16} px={6}>
+        <Heading fontSize={"xl"} textAlign={"center"} mb={2}>
+          You can ask any question you can think of, our astrologer will answer instantly
+        </Heading>
+        <CTALinkToPricing id="comparison-section-cta" />
+      </Stack>
     </Box>
   );
 }
@@ -293,8 +300,15 @@ function SimilarUsersLikeYouSection() {
       color="brand.700"
       borderRadius={"xl"}
     >
-      Our users with a similar Astrological Profile as yours report a high satisfaction rate after
-      just 2 weeks of using our astrologer.
+      On average,{" "}
+      <Text as="span" color="green.400">
+        93%
+      </Text>{" "}
+      of our users report feeling positive effects and greater clarity in their lives within just{" "}
+      <Text as="span" color="green.400">
+        14 days
+      </Text>{" "}
+      of consulting our astrologer.
     </Heading>
   );
 }
@@ -355,6 +369,9 @@ function ComparisonWithRegularAstrologerSection() {
           </Stack>
         </Stack>
       </Stack>
+      <Flex justifyContent={"center"}>
+        <CTALinkToPricing id="comparison-section-cta" my={8} />
+      </Flex>
     </Box>
   );
 }
@@ -504,26 +521,7 @@ function HeroSection() {
           </Flex>
         </Flex>
 
-        <Stack spacing={4} mt={8}>
-          <Link to="/pricing">
-            <Button bg="brand.600">Get my astrologer</Button>
-          </Link>
-          {/* <Stack direction={"row"}>
-              <AppStoreLogo />
-              <PlayStoreLogo />
-            </Stack> */}
-        </Stack>
-
-        {/* <Stack mt={4}>
-            <Stack direction={"row"} color="gold" justifyContent={"center"}>
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-            </Stack>
-            <Text>4.72 user rating</Text>
-          </Stack> */}
+        <CTALinkToPricing />
       </Stack>
     </Box>
   );
@@ -572,6 +570,22 @@ const HappyCustomersCounter = ({ initialCount = 12305, incrementRate = 1 }) => {
     </Box>
   );
 };
+
+function CTALinkToPricing(props: ComponentProps<typeof Button>) {
+  return (
+    <Link to="/pricing">
+      <Button
+        bg="orange.500"
+        color="white"
+        border="3px solid"
+        borderColor={"orange.400"}
+        {...props}
+      >
+        Get my astrologer
+      </Button>
+    </Link>
+  );
+}
 
 function getRandomIncrement(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
