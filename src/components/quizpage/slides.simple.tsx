@@ -14,6 +14,7 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 
 import { Caption, ChatBubble, NextButton, Span, Subtitle } from "./components";
 import { NatalChartInterpreter } from "./interpreter";
+import { navigate } from "gatsby";
 
 export function YourGoalSlide() {
   return (
@@ -676,7 +677,14 @@ export function FinilisingAstrologerSlide() {
   const [showInput, setShowInput] = useState(false);
 
   return (
-    <Slide id="finilising-astrologer" type="loading" duration={4} autoProceed>
+    <Slide
+      id="finilising-astrologer"
+      type="loading"
+      duration={4}
+      onLoadingCompleted={() => {
+        navigate("/summary");
+      }}
+    >
       <ChatBubble
         text="Thank you! I am now memorising details about you"
         instant={showInput}

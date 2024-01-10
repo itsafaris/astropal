@@ -1,10 +1,13 @@
 import React, { ComponentProps, useEffect, useState } from "react";
 import { Box, Container, Text, Stack, Heading, Button, Icon, Card, Flex } from "@chakra-ui/react";
+import { Link, PageProps } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import { Link } from "gatsby";
 import { orderBy, take } from "lodash";
+
 import { TopNavigation } from "@components/topnavigation";
+import { loadQuizState } from "@utils/localStorage";
+import { QuizStateParsed } from "@utils/state";
 
 type Testimonial = {
   name: string;
@@ -104,12 +107,19 @@ const exampleQuestions = [
   },
 ];
 
-export default function SummaryPage() {
+export default function SummaryPage({ location }: PageProps) {
+  const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
+
+  useEffect(() => {
+    const q = loadQuizState();
+    setQuizState(q);
+  }, []);
+
   return (
     <Box py={4} pb={24} bg="bg.100" color="bg.900">
       <Container>
         <TopNavigation />
-        <HeroSection />
+        <HeroSection quizState={quizState} />
         <AreasOfLifeGuidance />
         <ExampleQuestionsSection />
         <SimilarUsersLikeYouSection />
@@ -417,12 +427,12 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   );
 };
 
-function HeroSection() {
+function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
     <Box id="hero-section" as="section">
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"2xl"} color="white">
-          Your Personal <br /> Astrologer Is Created
+          {quizState?.firstName}, Your Personal <br /> Astrologer Is Created
         </Text>
 
         <Text my={2} textAlign={"center"} width={"full"} fontSize={"md"} color={"whiteAlpha.600"}>
@@ -445,7 +455,7 @@ function HeroSection() {
             <Text fontSize={"xl"} textAlign={"center"}>
               Hi,{" "}
               <Text as="span" color="brand.500">
-                Marty!
+                {quizState?.firstName}!
               </Text>
             </Text>
             <Text textAlign={"center"}>What would you like to ask?</Text>
