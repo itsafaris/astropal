@@ -9,26 +9,15 @@ import {
   Input,
   FormControl,
   FormLabel,
-  FormHelperText,
-  useSteps,
-  Stepper,
-  Step,
-  StepIndicator,
-  StepStatus,
-  StepIcon,
-  StepNumber,
-  Grid,
-  StepSeparator,
+  Heading,
 } from "@chakra-ui/react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { PageProps, navigate } from "gatsby";
 import React, { useState } from "react";
-import { AiOutlineSafety, AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineSafety } from "react-icons/ai";
 import { trackEvent, trackPixel } from "@utils/tracking";
 import { PricingPlanType, getPlanByID } from "@utils/pricingPlans";
-
-const steps = [{ title: "Email" }, { title: "Payment" }, { title: "Download App" }];
 
 export interface ICheckoutPageProps {}
 
@@ -36,13 +25,6 @@ export default function CheckoutPage(props: PageProps) {
   const params = new URLSearchParams(props.location.search);
   const pricingPlanID = params.get("pricingPlanID");
   const pricingPlan = pricingPlanID ? getPlanByID(pricingPlanID) : undefined;
-
-  const { activeStep, setActiveStep } = useSteps({
-    index: 0,
-    count: steps.length,
-  });
-
-  const [emailInputValue, setEmailInput] = useState("");
 
   const [stripe] = useState(
     loadStripe(
@@ -59,137 +41,41 @@ export default function CheckoutPage(props: PageProps) {
     return `cannot find pricing plan with id ${pricingPlanID}`;
   }
 
-  function handleEmailSubmit() {
-    // validation is performed prior to running this function by the browser
-    setActiveStep(1);
-    trackEvent({ name: "email-submitted", properties: { email: emailInputValue } });
-  }
-
   return (
-    <Box py={12} bg="bg.100" color="white" minHeight={"100vh"}>
+    <Box py={2} bg="bg.100" color="white" minHeight={"100vh"}>
+      <Heading textAlign={"center"} fontSize={"2xl"} my={6}>
+        Order Summary
+      </Heading>
       <Container maxWidth={"4xl"}>
-        <StepsIndicator activeStep={activeStep} />
-
-        <Box display={activeStep === 0 ? "block" : "none"}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleEmailSubmit();
-            }}
-          >
-            <FormControl my={12}>
-              <FormLabel>
-                We will send your{" "}
-                <Text as="span" fontWeight={"bold"} color="orange.500">
-                  unique code
-                </Text>{" "}
-                to access your astrologer
-              </FormLabel>
-              <Input
-                isRequired
-                type="email"
-                value={emailInputValue}
-                placeholder="superhero@user.com"
-                onChange={(e) => setEmailInput(e.target.value)}
-              />
-
-              <FormHelperText color="bg.500">
-                We will only use this email to deliver you the code. It will not be used to send you
-                any marketing emails
-              </FormHelperText>
-            </FormControl>
-            <Button type="submit" colorScheme="green">
-              Next
-            </Button>
-          </form>
-        </Box>
-
-        <Box display={activeStep === 1 ? "block" : "none"}>
-          <Elements
-            stripe={stripe}
-            options={{
-              mode: "payment",
-              amount: 1234,
-              currency: "usd",
-            }}
-          >
-            <CheckoutForm
-              pricingPlan={pricingPlan}
-              onBack={() => {
-                setActiveStep(0);
-              }}
-            />
-          </Elements>
-        </Box>
+        <Elements
+          stripe={stripe}
+          options={{
+            mode: "payment",
+            amount: 1234,
+            currency: "usd",
+          }}
+        >
+          <CheckoutForm pricingPlan={pricingPlan} />
+        </Elements>
       </Container>
     </Box>
   );
 }
 
-function StepsIndicator({ activeStep }: { activeStep: number }) {
-  return (
-    <Flex flexDirection="column">
-      <Stepper index={activeStep} colorScheme="green">
-        {steps.map((step, index) => (
-          <Step key={index}>
-            <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
-            </StepIndicator>
-
-            <Box flexShrink="0">
-              <Text
-                display={{
-                  base: "none",
-                  md: "block",
-                }}
-                fontSize={"md"}
-              >
-                {step.title}
-              </Text>
-            </Box>
-
-            <StepSeparator />
-          </Step>
-        ))}
-      </Stepper>
-
-      <Grid
-        mt={2}
-        display={{
-          base: "grid",
-          md: "none",
-        }}
-        gridAutoColumns="minmax(0, 1fr)"
-        gridAutoFlow="column"
-      >
-        {steps.map((step, index) => (
-          <Text
-            key={index}
-            fontSize={"xs"}
-            flexGrow={1}
-            textAlign={index === 0 ? "start" : index === steps.length - 1 ? "end" : "center"}
-          >
-            {step.title}
-          </Text>
-        ))}
-      </Grid>
-    </Flex>
-  );
-}
-
-function CheckoutForm({ onBack, pricingPlan }: { onBack: () => void; pricingPlan: PromptPack }) {
+function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   const stripe = useStripe();
   const elements = useElements();
+  const [email, setEmail] = useState("");
 
   const [_, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (!email) {
+      return;
+    }
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -211,8 +97,8 @@ function CheckoutForm({ onBack, pricingPlan }: { onBack: () => void; pricingPlan
     trackEvent({
       name: "purchase",
       properties: {
-        promptPackID: pricingPlan.id,
-        pricePayed: pricingPlan.priceDiscounted ?? pricingPlan.price,
+        promptPackID: pricingPlan.durationInMonths,
+        pricePayed: pricingPlan.price,
         currency: "USD",
       },
     });
@@ -225,12 +111,11 @@ function CheckoutForm({ onBack, pricingPlan }: { onBack: () => void; pricingPlan
   return (
     <Flex
       as="form"
-      my={12}
       direction={"column"}
       bg="bg.900"
       p={4}
       borderRadius={"xl"}
-      onSubmit={handleSubmit}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <PromptPackPreview promptPack={pricingPlan} mb={6} />
 
@@ -243,25 +128,34 @@ function CheckoutForm({ onBack, pricingPlan }: { onBack: () => void; pricingPlan
         }}
       />
 
-      <Flex alignItems={"center"} gap={4}>
-        <Button
-          onClick={() => {
-            onBack();
+      <FormControl my={3}>
+        <FormLabel color="black" mb={1}>
+          Email
+        </FormLabel>
+        <Input
+          size="lg"
+          backgroundColor={"white"}
+          value={email}
+          placeholder="e.g. janedoe@jd.com"
+          onChange={(e) => {
+            setEmail(e.target.value);
           }}
-          leftIcon={<AiOutlineArrowLeft />}
-        >
-          Back
-        </Button>
-        <Button
-          my={6}
-          type="submit"
-          isDisabled={isLoading || !stripe || !elements}
-          isLoading={isLoading}
-          colorScheme="green"
-        >
-          Pay Now
-        </Button>
-      </Flex>
+        />
+        <Text color="black" fontSize={"xs"}>
+          We will send you instruction on how to start using your astrologer
+        </Text>
+      </FormControl>
+
+      <Button
+        my={6}
+        size="lg"
+        type="submit"
+        isDisabled={isLoading || !stripe || !elements}
+        isLoading={isLoading}
+        colorScheme="green"
+      >
+        Pay Now
+      </Button>
 
       <Box textAlign={"center"} mt={8} mb={4}>
         <a href="https://stripe.com" target="_blank" rel="noopener">
@@ -272,7 +166,7 @@ function CheckoutForm({ onBack, pricingPlan }: { onBack: () => void; pricingPlan
         </a>
       </Box>
 
-      <Flex flexDirection="row" alignItems="center" justifyContent={"center"} gap={2}>
+      <Flex flexDirection="row" alignItems="center" justifyContent={"center"} gap={2} mb={4}>
         <AiOutlineSafety size={22} color="green" />
         <Text color="bg.200" fontSize={"sm"}>
           14 days money back guarantee
