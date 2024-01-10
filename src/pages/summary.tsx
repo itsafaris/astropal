@@ -1,5 +1,16 @@
 import React, { ComponentProps, useEffect, useState } from "react";
-import { Box, Container, Text, Stack, Heading, Button, Icon, Card, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Text,
+  Stack,
+  Heading,
+  Button,
+  Icon,
+  Flex,
+  Grid,
+  useTheme,
+} from "@chakra-ui/react";
 import { Link, PageProps } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon, ArrowDownIcon } from "@chakra-ui/icons";
@@ -241,7 +252,6 @@ function ExampleQuestionsSection() {
                         <Flex key={q.text} position={"relative"}>
                           <Box height={"2px"} width={gap} bg="bg.400" mt={4}></Box>
                           <Stack bg={"white"} py={2} px={4} borderRadius={"xl"}>
-                            {/* <Badge>{g.group}</Badge> */}
                             <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
                               → {q.text}
                             </Text>
@@ -265,7 +275,7 @@ function ExampleQuestionsSection() {
 
       <Stack alignItems={"center"} my={16} px={6}>
         <Heading fontSize={"xl"} textAlign={"center"} mb={2}>
-          You can ask any question you can think of, our astrologer will answer instantly
+          You can ask any question you can think of, your personal astrologer will answer instantly
         </Heading>
         <StaticImage
           height={120}
@@ -363,7 +373,7 @@ function SimilarUsersLikeYouSection() {
         <Text as="span" color="green.400">
           14 days
         </Text>{" "}
-        of consulting our astrologer.
+        of consulting personalized astrologer.
       </Heading>
 
       <Box mt={4} overflow={"hidden"}>
@@ -402,7 +412,7 @@ function ComparisonWithRegularAstrologerSection() {
           <Stack direction={"row"} alignItems={"center"}>
             <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={35} width={35} />
             <Text fontSize={"md"} fontWeight={"bold"} color="brand.600">
-              Our Astrologer
+              Your Personalized Astrologer
             </Text>
           </Stack>
           <Stack spacing={1}>
@@ -495,8 +505,10 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             top="6%"
             left="10%"
             boxShadow={`0 0 80px 1px #2f7281`}
-          ></Box>
+          />
+
           <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
+
           <Box position={"absolute"} top="40%" width="100%" px={16}>
             <Text fontSize={"xl"} textAlign={"center"}>
               Hi,{" "}
@@ -508,6 +520,7 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
           </Box>
         </Box>
       </Flex>
+
       <Stack
         id="white-card-with-benefits"
         textAlign={"center"}
@@ -518,71 +531,86 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
         borderRadius={"xl"}
         zIndex={1}
         position={"relative"}
+        spacing={6}
       >
-        <Text fontSize={"xl"} fontWeight={"bold"} mb={4}>
-          Your astrologer is:
+        <Grid gridTemplateColumns={"1fr 1fr 1fr"} gap={4}>
+          <Flex direction={"column"} gap={2}>
+            <Box
+              bg="bg.800"
+              height={"120px"}
+              p={4}
+              fontSize={"2xl"}
+              fontWeight={"bold"}
+              color="bg.300"
+              borderRadius={6}
+            >
+              <Text fontWeight={"bold"}>24/7</Text>
+              <Text fontSize={"sm"}>Use any time</Text>
+            </Box>
+          </Flex>
+
+          <Flex direction={"column"} gap={2}>
+            <Box
+              bg="bg.800"
+              height={"120px"}
+              p={4}
+              fontSize={"2xl"}
+              fontWeight={"bold"}
+              color="bg.300"
+              borderRadius={6}
+            >
+              <StaticImage
+                style={{ marginTop: 5 }}
+                height={20}
+                alt=""
+                src="../images/infinite-icon.svg"
+              />
+              <Text fontSize={"sm"}>Ask any question</Text>
+            </Box>
+          </Flex>
+
+          <Flex direction={"column"} gap={2}>
+            <Box
+              bg="bg.800"
+              height={"120px"}
+              p={4}
+              fontSize={"2xl"}
+              fontWeight={"bold"}
+              color="bg.300"
+              borderRadius={6}
+            >
+              <StaticImage
+                style={{ marginTop: 2 }}
+                height={28}
+                alt=""
+                src="../images/chat-icon.svg"
+              />
+              <Text fontSize={"sm"}>Get answers instantly</Text>
+            </Box>
+          </Flex>
+        </Grid>
+
+        <Text display="none" fontSize={"xl"} fontWeight={"bold"} mb={4}>
+          Your astrologer:
         </Text>
-        <Stack textAlign={"left"} spacing={4}>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            🌟 Trained on your Birth Chart
+
+        <Stack display="none" textAlign={"left"} spacing={3} alignItems={"center"}>
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            ✨ Trained on your Birth Chart ✨
           </Text>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            ⚡ Always available instantly
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            ⭐ Aligned with cosmic events ⭐
           </Text>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            🌌 Aligned with current cosmic events
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            🌟 Provides in depth analysis 🌟
           </Text>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            🔍 Capable of providing in depth analysis
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            💫 Creates personalized insights 💫
           </Text>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            📅 Deliver daily insights tailored for your profile
-          </Text>
-          <Text fontSize={"sm"} fontWeight={"semibold"}>
-            🎓 Learns about you and get's better with time
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            🤩 Learns about you 🤩
           </Text>
         </Stack>
-        <Flex display={"none"} direction={"row"} gap={4}>
-          <Flex direction={"column"} gap={2}>
-            <Card
-              bg="bg.900"
-              height={"120px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-            >
-              <Text>24/7</Text>
-              <Text fontSize={"sm"}>Availability</Text>
-            </Card>
-          </Flex>
-          <Flex direction={"column"} gap={2}>
-            <Card
-              bg="bg.900"
-              height={"120px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-            >
-              <Text>10</Text>
-              <Text fontSize={"sm"}>questions / day</Text>
-            </Card>
-          </Flex>
-          <Flex direction={"column"} gap={2}>
-            <Card
-              bg="bg.900"
-              height={"120px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-            >
-              <Text>30</Text>
-              <Text fontSize={"sm"}>seconds</Text>
-            </Card>
-          </Flex>
-        </Flex>
 
         <CTALinkToPricing />
       </Stack>
@@ -635,13 +663,16 @@ const HappyCustomersCounter = ({ initialCount = 12305, incrementRate = 1 }) => {
 };
 
 function CTALinkToPricing(props: ComponentProps<typeof Button>) {
+  const theme = useTheme();
+
   return (
     <Link to="/pricing">
       <Button
         bg="orange.500"
         color="white"
-        border="3px solid"
-        borderColor={"orange.400"}
+        px={6}
+        py={4}
+        boxShadow={`0 0 0 6px ${theme.colors.orange["400"]}`}
         {...props}
       >
         Get my astrologer
