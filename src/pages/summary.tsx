@@ -115,8 +115,35 @@ export default function SummaryPage() {
         <SimilarUsersLikeYouSection />
         <TestimonialsSection />
         <ComparisonWithRegularAstrologerSection />
+        <MediaCoverage />
       </Container>
     </Box>
+  );
+}
+
+export function MediaCoverage() {
+  return (
+    <Stack id="media-coverage" gap={6} alignItems={"center"} my={10}>
+      <Text fontSize={"md"} color="bg.500" fontWeight={"semibold"}>
+        As featured in:
+      </Text>
+
+      <Flex width={"200px"} opacity={0.8}>
+        <StaticImage alt="New york times" src="../images/media-nyt.svg" />
+      </Flex>
+
+      <Flex width={"120px"} opacity={0.8}>
+        <StaticImage alt="Cosmopolitan" src="../images/media-cosmopolitan.svg" />
+      </Flex>
+
+      <Flex width={"90px"} opacity={0.8}>
+        <StaticImage alt="Vogue" src="../images/media-vogue.svg" />
+      </Flex>
+
+      <Flex width={"100px"} opacity={0.8}>
+        <StaticImage alt="The guardian" src="../images/media-guardian.svg" />
+      </Flex>
+    </Stack>
   );
 }
 

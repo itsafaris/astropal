@@ -4,6 +4,8 @@ import { TopNavigation } from "@components/topnavigation";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 
+import { MediaCoverage } from "./summary";
+
 export interface IPricingPageProps {}
 
 export default function PricingPage() {
@@ -59,6 +61,7 @@ export default function PricingPage() {
         <TermsAgreement />
         <RiskFreeGuaranteed />
         <SafeCheckout />
+        <MediaCoverage />
       </Container>
     </Box>
   );
