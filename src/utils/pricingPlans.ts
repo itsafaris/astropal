@@ -1,4 +1,5 @@
 export type PricingPlanType = {
+  id: string;
   price: number;
   priceBefore: number;
   daily: number;
@@ -8,6 +9,7 @@ export type PricingPlanType = {
 
 export const pricingPlans = {
   "6month": {
+    id: "6month",
     price: 49.99,
     priceBefore: 199.99,
     daily: 0.28,
@@ -15,6 +17,7 @@ export const pricingPlans = {
     durationInMonths: 6,
   },
   "3month": {
+    id: "3month",
     price: 39.99,
     priceBefore: 116.99,
     daily: 0.43,
@@ -22,6 +25,7 @@ export const pricingPlans = {
     durationInMonths: 3,
   },
   "1month": {
+    id: "1month",
     price: 29.99,
     priceBefore: 59.99,
     daily: 0.99,
