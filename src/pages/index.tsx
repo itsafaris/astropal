@@ -4,6 +4,7 @@ import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
+import { TopNavigation } from "@components/topnavigation";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -19,12 +20,7 @@ export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
       <Box py={6} px={4} maxWidth="md" mx="auto">
-        <Box flexDirection={"row"} alignItems={"center"} display={"flex"} gap={3} mb={8}>
-          <StaticImage src={`../images/favicon.png`} alt="Astropal logo" height={35} />
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            Astropal
-          </Text>
-        </Box>
+        <TopNavigation />
 
         <Flex flexDirection={"column"} gap={6}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
