@@ -653,6 +653,25 @@ export function YourSpiritualInvolvementSlide() {
   );
 }
 
+export function NameSlide() {
+  const [showInput, setShowInput] = useState(false);
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="name-slide" type="short-text" label="Your full name" placeholder="e.g. Jane Doe">
+      <ChatBubble
+        text="Before saving your profile, let me know how should I call you"
+        instant={showInput}
+        onFinishedTyping={() => {
+          setShowInput(true);
+        }}
+      />
+      {showInput && <Selector />}
+      {showInput && <NextButton onClick={() => submitQuestion()}>Continue</NextButton>}
+    </Slide>
+  );
+}
+
 export function FinilisingAstrologerSlide() {
   const [showInput, setShowInput] = useState(false);
 
