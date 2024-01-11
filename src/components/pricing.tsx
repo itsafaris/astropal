@@ -8,7 +8,6 @@ export function PricingSection() {
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
       <PricingCard
-        title={"6 month plan"}
         billingText={"Billed every 6 months"}
         tagText={"Best value"}
         tagColor={"green.400"}
@@ -23,7 +22,6 @@ export function PricingSection() {
       <DealRibbon2 />
 
       <PricingCard
-        title={"3 month plan"}
         billingText={"Billed every 3 months"}
         tagText={"Most popular"}
         tagColor={"brand.700"}
@@ -32,7 +30,6 @@ export function PricingSection() {
       />
 
       <PricingCard
-        title={"1 month plan"}
         billingText={"Billed every month"}
         buttonText={"Claim my plan (save 50%)"}
         pricingPlan={pricingPlans["1month"]}
@@ -42,7 +39,6 @@ export function PricingSection() {
 }
 
 function PricingCard({
-  title,
   billingText,
   tagText,
   tagColor,
@@ -53,7 +49,6 @@ function PricingCard({
   buttonTextColor,
   pricingPlan,
 }: {
-  title: string;
   billingText: string;
   tagText?: string;
   tagColor?: string;
@@ -89,7 +84,7 @@ function PricingCard({
       >
         <Flex flexDirection={"column"} alignItems={"flex-start"} gap={0} alignSelf={"flex-end"}>
           <Text fontSize={"2xl"} fontWeight={"bold"} color="bg.900" lineHeight={"normal"}>
-            {title}
+            {pricingPlan.title}
           </Text>
 
           <Text fontSize={"small"} color="bg.600" lineHeight={"normal"}>
