@@ -551,12 +551,12 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             mb={2}
             textAlign={"center"}
             width={"full"}
-            fontSize={"md"}
+            fontSize={"sm"}
             color={"whiteAlpha.600"}
           >
-            Scroll to find out
+            Or scroll to find out more
           </Text>
-          <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
+          <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"2xl"} />
 
           <Box position="relative" overflow={"hidden"}>
             <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
