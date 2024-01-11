@@ -12,12 +12,14 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, StripeElements } from "@stripe/stripe-js";
 import { PageProps, navigate } from "gatsby";
 import React, { useState } from "react";
 import { AiOutlineSafety } from "react-icons/ai";
 import { trackEvent, trackPixel } from "@utils/tracking";
 import { PricingPlanType, getPlanByID } from "@utils/pricingPlans";
+import { validateEmail } from "@utils/email";
+import { TopNavigation } from "@components/topnavigation";
 
 export interface ICheckoutPageProps {}
 
@@ -42,11 +44,14 @@ export default function CheckoutPage(props: PageProps) {
   }
 
   return (
-    <Box py={2} bg="bg.100" color="white" minHeight={"100vh"}>
-      <Heading textAlign={"center"} fontSize={"2xl"} my={6}>
-        Order Summary
-      </Heading>
-      <Container maxWidth={"4xl"}>
+    <Box py={4} bg="bg.100" color="bg.900" minHeight={"100vh"}>
+      <Container flexDirection={"column"} display={"flex"} gap={5}>
+        <TopNavigation />
+
+        <Heading textAlign={"center"} fontSize={"2xl"}>
+          Order Summary
+        </Heading>
+
         <Elements
           stripe={stripe}
           options={{
@@ -62,20 +67,42 @@ export default function CheckoutPage(props: PageProps) {
   );
 }
 
+interface FormSubmitResult {
+  elementsError?: { message?: string };
+  emailError?: { message?: string };
+}
+
+async function validateAndSubmit(input: {
+  elements: StripeElements;
+  email: string;
+}): Promise<FormSubmitResult> {
+  const { error: paymentDetailsError } = await input.elements.submit();
+  const isEmailValid = validateEmail(input.email);
+
+  const result: FormSubmitResult = {};
+
+  if (paymentDetailsError) {
+    result.elementsError = { message: paymentDetailsError.message };
+  }
+
+  if (!isEmailValid) {
+    result.emailError = { message: "Invalid email address" };
+  }
+
+  return result;
+}
+
 function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   const stripe = useStripe();
   const elements = useElements();
   const [email, setEmail] = useState("");
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
 
   const [_, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
-    if (!email) {
-      return;
-    }
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -85,15 +112,20 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
 
     setIsLoading(true);
 
-    // Trigger form validation and wallet collection
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      setMessage(submitError.message ?? "");
+    const { elementsError, emailError } = await validateAndSubmit({ elements, email });
+    if (elementsError || emailError) {
+      setMessage((elementsError || emailError)?.message ?? "");
       setIsLoading(false);
+
+      if (emailError) {
+        setIsEmailInvalid(true);
+      }
+
       return;
     }
 
     await new Promise((res) => setTimeout(res, 2000));
+
     trackEvent({
       name: "purchase",
       properties: {
@@ -102,6 +134,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
         currency: "USD",
       },
     });
+
     trackPixel("Purchase", { currency: "USD", value: 30 });
     navigate(`/checkout-error`);
 
@@ -117,7 +150,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
       borderRadius={"xl"}
       onSubmit={(e) => handleSubmit(e)}
     >
-      <PromptPackPreview promptPack={pricingPlan} mb={6} />
+      <PlanPreview pricingPlan={pricingPlan} mb={6} />
 
       <PaymentElement
         options={{
@@ -128,8 +161,8 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
         }}
       />
 
-      <FormControl my={3}>
-        <FormLabel color="black" mb={1}>
+      <FormControl my={3} isInvalid={isEmailInvalid}>
+        <FormLabel color="black" mb={1} fontSize={"sm"} fontWeight={"normal"}>
           Email
         </FormLabel>
         <Input
@@ -137,7 +170,9 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
           backgroundColor={"white"}
           value={email}
           placeholder="e.g. janedoe@jd.com"
+          color="black"
           onChange={(e) => {
+            setIsEmailInvalid(false);
             setEmail(e.target.value);
           }}
         />
@@ -176,35 +211,41 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   );
 }
 
-function PromptPackPreview({ promptPack, ...rest }: { promptPack: PricingPlanType } & StackProps) {
-  const discountPerc = 100 - Math.round((promptPack.price / promptPack.priceBefore) * 100);
-  const discountAbs = promptPack.priceBefore - promptPack.price;
+function PlanPreview({ pricingPlan, ...rest }: { pricingPlan: PricingPlanType } & StackProps) {
+  const discountPerc = 100 - Math.round((pricingPlan.price / pricingPlan.priceBefore) * 100);
+  const discountAbs = Math.round(pricingPlan.priceBefore - pricingPlan.price);
 
   return (
     <Stack color="black" {...rest}>
       <Flex direction={"row"} gap={4} alignItems={"end"}>
-        <Text flex={5}>Personal Astrologer</Text>
+        <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
+          {pricingPlan.title}
+        </Text>
         <Text fontWeight={"bold"} flex={2} textAlign={"right"}>
-          ${promptPack.priceBefore}
+          ${pricingPlan.priceBefore}
         </Text>
       </Flex>
       <Flex direction={"row"} gap={4} alignItems={"end"}>
-        <Text flex={5}>Discount ({discountPerc}%)</Text>
+        <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
+          Discount ({discountPerc}%)
+        </Text>
         <Text fontWeight={"bold"} flex={2} color="red.500" textAlign={"right"}>
           - ${discountAbs}
         </Text>
       </Flex>
 
+      <Box height={"1px"} backgroundColor="bg.800" width={"full"} />
+
       <Stack direction={"row"} alignItems={"start"} justifyContent={"space-between"}>
         <Text fontWeight={"bold"}>Total:</Text>
         <Stack spacing={0}>
           <Text fontWeight={"bold"} fontSize={"2xl"} textAlign={"right"}>
-            {promptPack.price}
+            ${pricingPlan.price}
           </Text>
           <Text fontSize={"xs"}>
-            {promptPack.durationInMonths === 1
+            {pricingPlan.durationInMonths === 1
               ? "Billed every month"
-              : `Billed every ${promptPack.durationInMonths} months`}
+              : `Billed every ${pricingPlan.durationInMonths} months`}
           </Text>
         </Stack>
       </Stack>
