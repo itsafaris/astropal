@@ -14,12 +14,14 @@ import {
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe, StripeElements } from "@stripe/stripe-js";
 import { PageProps, navigate } from "gatsby";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSafety } from "react-icons/ai";
 import { trackEvent, trackPixel } from "@utils/tracking";
 import { PricingPlanType, getPlanByID } from "@utils/pricingPlans";
 import { validateEmail } from "@utils/email";
 import { TopNavigation } from "@components/topnavigation";
+import { loadQuizState } from "@utils/localStorage";
+import { QuizStateParsed } from "@utils/state";
 
 export interface ICheckoutPageProps {}
 
@@ -101,6 +103,13 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   const [_, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
+
+  useEffect(() => {
+    const q = loadQuizState();
+    setQuizState(q);
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -129,13 +138,15 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
     trackEvent({
       name: "purchase",
       properties: {
-        promptPackID: pricingPlan.durationInMonths,
+        promptPackID: pricingPlan.id,
         pricePayed: pricingPlan.price,
         currency: "USD",
+        email,
+        profile: quizState,
       },
     });
 
-    trackPixel("Purchase", { currency: "USD", value: 30 });
+    trackPixel("Purchase", { currency: "USD", value: pricingPlan.price });
     navigate(`/checkout-error`);
 
     setIsLoading(false);

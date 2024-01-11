@@ -3,6 +3,7 @@ import { Flex, Button, Text, Box } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
+import { trackEvent } from "@utils/tracking";
 
 export function PricingSection() {
   return (
@@ -107,7 +108,13 @@ function PricingCard({
         </Flex>
       </Flex>
 
-      <Link to={`/checkout?pricingPlanID=${pricingPlan.id}`} style={{ width: "100%" }}>
+      <Link
+        to={`/checkout?pricingPlanID=${pricingPlan.id}`}
+        style={{ width: "100%" }}
+        onClick={() => {
+          trackEvent({ name: "chose-pricing-plan", properties: { ...pricingPlan } });
+        }}
+      >
         <Button
           variant={"solid"}
           backgroundColor={buttonColor ?? "brand.700"}
