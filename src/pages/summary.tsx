@@ -8,7 +8,6 @@ import {
   Button,
   Icon,
   Flex,
-  Grid,
   useTheme,
 } from "@chakra-ui/react";
 import { Link, PageProps } from "gatsby";
@@ -19,6 +18,7 @@ import { orderBy, take } from "lodash";
 import { TopNavigation } from "@components/topnavigation";
 import { loadQuizState } from "@utils/localStorage";
 import { QuizStateParsed } from "@utils/state";
+import { BoltIcon, InfinityIcon, MoonIcon } from "@components/svg/icons";
 
 type Testimonial = {
   name: string;
@@ -526,10 +526,19 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             {quizState?.firstName}, <br /> Your Personal <br /> Astrologer Is Ready
           </Text>
 
-          <Stack my={10} alignItems={"start"}>
-            <Text fontWeight={"semibold"}>∞ Unlimited questions to ask</Text>
-            <Text fontWeight={"semibold"}>⚡ Instant answers and guidance</Text>
-            <Text fontWeight={"semibold"}>♈ Daily horoscopes and inights</Text>
+          <Stack my={10} alignItems={"start"} color="brand.700">
+            <Text fontWeight={"semibold"}>
+              <InfinityIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Ask unlimited questions
+            </Text>
+            <Text fontWeight={"semibold"}>
+              <BoltIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Get Instant answers
+            </Text>
+            <Text fontWeight={"semibold"}>
+              <MoonIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Receive daily horoscopes
+            </Text>
           </Stack>
 
           <CTALinkToPricing />
