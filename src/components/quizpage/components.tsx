@@ -1,7 +1,7 @@
 import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
-import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
+import { Text, Flex, Box, Button, useTheme, Stack } from "@chakra-ui/react";
 
 import orbGif from "@images/orb_animated_2.gif";
 import { StaticImage } from "gatsby-plugin-image";
@@ -148,21 +148,35 @@ export function TypewriterText(props: TypewriterTextProps) {
   );
 }
 
-export function Question(props: { text: string } & ComponentProps<typeof Text>) {
+export function Question({
+  text,
+  questionTheme,
+  themecolor,
+  ...rest
+}: { text: string; questionTheme: string; themecolor: string } & ComponentProps<typeof Text>) {
   return (
-    <Text
-      border="2px solid"
-      borderColor={"bg.500"}
-      color="white"
-      fontSize={"sm"}
-      backgroundColor={"bg.200"}
-      p={2}
-      px={4}
-      borderRadius={"xl"}
-      cursor={"pointer"}
-      {...props}
-    >
-      {props.text}
-    </Text>
+    <Stack spacing={1}>
+      <Text fontSize={"xs"} color={`${themecolor}.500`}>
+        {questionTheme}
+      </Text>
+      <Text
+        as={Button}
+        border="2px solid"
+        borderColor={"bg.500"}
+        color="white"
+        fontSize={"sm"}
+        backgroundColor={"bg.200"}
+        _hover={{
+          bg: "bg.300",
+        }}
+        p={2}
+        px={4}
+        borderRadius={"xl"}
+        cursor={"pointer"}
+        {...rest}
+      >
+        {text}
+      </Text>
+    </Stack>
   );
 }
