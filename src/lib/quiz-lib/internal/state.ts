@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { INTERNAL_Snapshot, proxy, ref, useSnapshot } from "valtio";
 import { ISelectorType, LogicDefinition, SlideProps, TrackingEventCallback } from "../public/types";
-import { getPosInBounds } from "./utils";
+import { getPosInBounds, validateEmail } from "./utils";
 import { getSlideProperties } from "./tracking";
 
 // E.g. GetSlideStateType<'multi'>
@@ -375,14 +375,7 @@ export function isSlideStateValid(state: SelectorState) {
       return state.value && state.value.trim() !== "";
     }
     case "email": {
-      function validateEmail(email: string): boolean {
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailRegex.test(email);
-      }
-
-      const value = state.value?.trim();
-
-      return value && validateEmail(value);
+      return state.value && validateEmail(state.value);
     }
     default: {
       return true;
