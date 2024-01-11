@@ -1,7 +1,8 @@
 import React from "react";
 import { Flex, Button, Text, Box } from "@chakra-ui/react";
+import { Link } from "gatsby";
 
-import { pricingPlans } from "@utils/pricingPlans";
+import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 
 export function PricingSection() {
   return (
@@ -11,13 +12,12 @@ export function PricingSection() {
         billingText={"Billed every 6 months"}
         tagText={"Best value"}
         tagColor={"green.400"}
-        currentPrice={pricingPlans["6month"].daily}
-        previousPrice={pricingPlans["6month"].dailyBefore}
         buttonText={"Claim my plan (save 75%)"}
         buttonColor="#04a804"
         buttonHoverColor="#038b03"
         borderColor="green.400"
         buttonTextColor="white"
+        pricingPlan={pricingPlans["6month"]}
       />
 
       <DealRibbon2 />
@@ -27,16 +27,15 @@ export function PricingSection() {
         billingText={"Billed every 3 months"}
         tagText={"Most popular"}
         tagColor={"brand.700"}
-        currentPrice={pricingPlans["3month"].daily}
-        previousPrice={pricingPlans["3month"].dailyBefore}
         buttonText={"Claim my plan (save 65%)"}
+        pricingPlan={pricingPlans["3month"]}
       />
+
       <PricingCard
         title={"1 month plan"}
         billingText={"Billed every month"}
-        currentPrice={pricingPlans["1month"].daily}
-        previousPrice={pricingPlans["1month"].dailyBefore}
         buttonText={"Claim my plan (save 50%)"}
+        pricingPlan={pricingPlans["1month"]}
       />
     </Flex>
   );
@@ -47,25 +46,23 @@ function PricingCard({
   billingText,
   tagText,
   tagColor,
-  currentPrice,
-  previousPrice,
   buttonText,
   buttonColor,
   buttonHoverColor,
   borderColor,
   buttonTextColor,
+  pricingPlan,
 }: {
   title: string;
   billingText: string;
   tagText?: string;
   tagColor?: string;
-  currentPrice: number;
-  previousPrice: number;
   buttonText: string;
   buttonTextColor?: string;
   buttonColor?: string;
   buttonHoverColor?: string;
   borderColor?: string;
+  pricingPlan: PricingPlanType;
 }) {
   return (
     <Flex
@@ -102,11 +99,11 @@ function PricingCard({
 
         <Flex flexDirection={"column"} alignItems={"flex-end"}>
           <Text color="bg.600" textDecoration={"line-through"} lineHeight={"normal"}>
-            ${previousPrice}
+            ${pricingPlan.dailyBefore}
           </Text>
 
           <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"} color="bg.900">
-            ${currentPrice}
+            ${pricingPlan.daily}
           </Text>
 
           <Text fontSize={"md"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
@@ -115,17 +112,19 @@ function PricingCard({
         </Flex>
       </Flex>
 
-      <Button
-        variant={"solid"}
-        backgroundColor={buttonColor ?? "brand.700"}
-        _hover={{
-          backgroundColor: buttonHoverColor ?? "brand.600",
-        }}
-        width={"full"}
-        color={buttonTextColor}
-      >
-        {buttonText}
-      </Button>
+      <Link to={`/checkout?pricingPlanID=${pricingPlan.id}`} style={{ width: "100%" }}>
+        <Button
+          variant={"solid"}
+          backgroundColor={buttonColor ?? "brand.700"}
+          _hover={{
+            backgroundColor: buttonHoverColor ?? "brand.600",
+          }}
+          width={"full"}
+          color={buttonTextColor}
+        >
+          {buttonText}
+        </Button>
+      </Link>
     </Flex>
   );
 }

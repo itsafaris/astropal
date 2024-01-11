@@ -618,6 +618,9 @@ function CTALinkToPricing(props: ComponentProps<typeof Button>) {
         bg="orange.500"
         color="white"
         boxShadow={`0 0 0 6px ${theme.colors.orange["400"]}`}
+        _hover={{
+          backgroundColor: "orange.600",
+        }}
         {...props}
       >
         Get my astrologer
