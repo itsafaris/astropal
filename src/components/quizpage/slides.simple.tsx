@@ -1,7 +1,7 @@
 import React, { Fragment, createElement, useState } from "react";
 import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
 import { Text, Box, useTheme, Flex, Image, Stack } from "@chakra-ui/react";
-import { ArrowDownIcon, MoonIcon } from "@chakra-ui/icons";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 
 import colorMap from "@images/color_map.png";
 import orbGif from "@images/orb_animated_2.gif";
@@ -15,7 +15,7 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 import { Caption, ChatBubble, NextButton, Span, Subtitle } from "./components";
 import { NatalChartInterpreter } from "./interpreter";
 import { navigate } from "gatsby";
-import { BoltIcon, InfinityIcon } from "@components/svg/icons";
+import { BoltIcon, InfinityIcon, MoonIcon } from "@components/svg/icons";
 
 export function YourGoalSlide() {
   return (
@@ -667,7 +667,7 @@ export function NameSlide() {
   const { submitQuestion } = useQuiz();
 
   return (
-    <Slide id="name-slide" type="short-text" label="Your full name" placeholder="e.g. Jane Doe">
+    <Slide id="name-slide" type="short-text" label="Your name" placeholder="e.g. Jane">
       <ChatBubble
         text="Before saving your profile, let me know how should I call you"
         instant={showInput}
