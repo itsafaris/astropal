@@ -148,7 +148,7 @@ export function MediaCoverage() {
   return (
     <Stack id="media-coverage" gap={6} alignItems={"center"} my={10}>
       <Text fontSize={"md"} color="bg.500" fontWeight={"semibold"}>
-        As featured in:
+        Technology used is featured in:
       </Text>
 
       <Flex width={"200px"} opacity={0.8}>
