@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Button, Text, Box } from "@chakra-ui/react";
+import { Flex, Button, Text, Box, Badge } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
@@ -24,7 +24,6 @@ export function PricingSection() {
 
       <PricingCard
         billingText={"Billed every 3 months"}
-        tagText={"Most popular"}
         tagColor={"brand.700"}
         buttonText={"Claim my plan (save 65%)"}
         pricingPlan={pricingPlans["3month"]}
@@ -70,12 +69,13 @@ function PricingCard({
       backgroundColor="whiteAlpha.100"
       width={"100%"}
       position="relative"
-      overflow="hidden"
       border={`2px solid`}
       borderColor={borderColor ?? "brand.500"}
       mt={4}
     >
-      <DealRibbon color={tagColor} text={tagText} />
+      <Badge position={"absolute"} top={-2} left={-2} colorScheme="pink">
+        {tagText}
+      </Badge>
       <Flex
         flexDirection={"row"}
         alignItems={"center"}
@@ -131,34 +131,8 @@ function PricingCard({
   );
 }
 
-function DealRibbon({ color = "#fd5556", text }: { color?: string; text?: string }) {
-  if (!text) {
-    return null;
-  }
-
-  return (
-    <Text
-      color="bg.100"
-      backgroundColor={color}
-      width={"300px"}
-      textAlign={"center"}
-      pt={10}
-      pb={1}
-      position="absolute"
-      top={"0px"}
-      left={"45px"}
-      fontWeight={"bold"}
-      borderRadius={3}
-      transform={"translate(-50%, -50%) rotate(-12deg)"}
-      fontSize="small"
-    >
-      {text}
-    </Text>
-  );
-}
-
 function DealRibbon2() {
-  const color = "green.400";
+  const color = "pink.100";
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
@@ -174,7 +148,7 @@ function DealRibbon2() {
         px={5}
         py={1}
         backgroundColor={color}
-        color="bg.100"
+        color="pink.800"
         fontWeight={"bold"}
         fontSize={"small"}
         borderRadius={100}
