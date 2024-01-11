@@ -7,7 +7,7 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "npm run clean && gatsby develop --host 0.0.0.0",
+    "develop": "npm run clean && gatsby develop --host 0.0.0.0 --https",
     "start": "npm run develop",
     "build": "npm run clean && gatsby build",
     "serve": "gatsby serve",
