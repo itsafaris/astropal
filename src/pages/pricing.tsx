@@ -4,8 +4,6 @@ import { TopNavigation } from "@components/topnavigation";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 
-import woman from "@images/calm-woman-2.png";
-
 import { MediaCoverage } from "./summary";
 
 export interface IPricingPageProps {}
@@ -26,11 +24,13 @@ export default function PricingPage() {
           mx={"auto"}
           borderRadius={10}
           overflow={"hidden"}
-          background={`url("${woman}")`}
-          backgroundSize={"cover"}
-          backgroundPosition={"0px -50px"}
           position={"relative"}
         >
+          <StaticImage
+            src="../images/calm-woman-2.png"
+            alt=""
+            style={{ position: "relative", top: "-20%" }}
+          />
           <Box
             height={100}
             width={"full"}
