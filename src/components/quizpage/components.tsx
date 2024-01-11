@@ -159,6 +159,7 @@ export function Question(props: { text: string } & ComponentProps<typeof Text>) 
       p={2}
       px={4}
       borderRadius={"xl"}
+      cursor={"pointer"}
       {...props}
     >
       {props.text}
