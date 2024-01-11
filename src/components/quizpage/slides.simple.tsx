@@ -1,7 +1,7 @@
 import React, { Fragment, createElement, useState } from "react";
 import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
-import { Text, Box, useTheme, Flex, Image } from "@chakra-ui/react";
-import { ArrowDownIcon, CheckIcon } from "@chakra-ui/icons";
+import { Text, Box, useTheme, Flex, Image, Stack } from "@chakra-ui/react";
+import { ArrowDownIcon, MoonIcon } from "@chakra-ui/icons";
 
 import colorMap from "@images/color_map.png";
 import orbGif from "@images/orb_animated_2.gif";
@@ -15,6 +15,7 @@ import { useQuizServiceWrapper } from "./quizServiceWrapper";
 import { Caption, ChatBubble, NextButton, Span, Subtitle } from "./components";
 import { NatalChartInterpreter } from "./interpreter";
 import { navigate } from "gatsby";
+import { BoltIcon, InfinityIcon } from "@components/svg/icons";
 
 export function YourGoalSlide() {
   return (
@@ -351,7 +352,7 @@ export function IntroToFinetuningPart() {
   return (
     <Slide id="intro-to-finetuning-part" type="filler">
       <ChatBubble
-        text={`In order to deliver you the best advice possible, I will ask you a few more questions. This time - about your personality.`}
+        text={`In order to deliver you the best advice possible, I will ask you a few more questions. This time - about your personality 🧘‍♂️.`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
@@ -360,27 +361,34 @@ export function IntroToFinetuningPart() {
 
       {showInput && (
         <>
-          <Text color="bg.900" fontSize={"lg"} fontWeight={"bold"} textAlign={"center"} mb={6}>
-            After this, I will act as a hyper personalised astrologer to help you:
-          </Text>
-          <Flex
-            flexDirection={"column"}
-            gap={1}
-            color="bg.700"
-            mx={6}
-            alignItems={"center"}
-            mb={12}
+          <Text
+            color="brand.700"
+            fontSize={"xl"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            maxW={200}
+            mx="auto"
           >
-            <Text>
-              <CheckIcon /> Answer any question about any area of your life
+            Knowing you better will allow me to:
+          </Text>
+
+          <Stack my={10} alignItems={"start"} color="brand.700">
+            <Text fontWeight={"semibold"} fontSize="md">
+              <InfinityIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Answer all the questions you have
             </Text>
-            <Text>
-              <CheckIcon /> Provide analysis based on current astrological events
+
+            <Text fontWeight={"semibold"} fontSize="md">
+              <BoltIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Deliver accurate astrological insights
             </Text>
-            <Text>
-              <CheckIcon /> Deliver insights into the short term and long term future
+
+            <Text fontWeight={"semibold"} fontSize="md">
+              <MoonIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Prepare a plan for the spiritual grow
             </Text>
-          </Flex>
+          </Stack>
+
           <NextButton
             onClick={() => {
               submitQuestion();
