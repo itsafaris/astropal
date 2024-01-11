@@ -1,4 +1,5 @@
-import mixpanel from "mixpanel-browser";
+import { posthog } from "posthog-js";
+import { isProdMode } from "./isProdMode";
 
 type TrackingEvent = {
   name: string;
@@ -8,13 +9,8 @@ type TrackingEvent = {
 };
 
 export function trackEvent(e: TrackingEvent) {
-  if (process.env.NODE_ENV === "development") {
-    console.log("[track event]", e);
-    return;
-  }
-
   sendToGTM(e);
-  trackMixpanel(e);
+  trackPosthog(e);
 }
 
 function sendToGTM(e: TrackingEvent) {
@@ -23,6 +19,10 @@ function sendToGTM(e: TrackingEvent) {
   }
 
   if (!(window as any).dataLayer) {
+    return;
+  }
+
+  if (!isProdMode()) {
     return;
   }
 
@@ -44,18 +44,24 @@ export function trackPixel(event: string, properties: Record<string, any>) {
   (window as any).fbq("track", event, properties);
 }
 
-function trackMixpanel(props: TrackingEvent) {
-  const { name, properties } = props;
-  mixpanel.track(name, { ...properties });
+function trackPosthog(props: TrackingEvent) {
+  posthog.capture(props.name, props.properties);
 }
 
-export function initMixpanel(token: string, feVersion: string) {
-  mixpanel.init(token, {
-    debug: true,
-    persistence: "localStorage",
+export function initPosthog(token: string, apiHost: string, feVersion: string) {
+  posthog.init(token, {
+    api_host: apiHost,
+    capture_pageview: false,
+    autocapture: false,
+    debug: !isProdMode(),
   });
 
-  mixpanel.register({
+  posthog.register({
     frontend_version: feVersion,
   });
+
+  // Do not track in dev mode
+  if (!isProdMode()) {
+    posthog.opt_out_capturing();
+  }
 }
