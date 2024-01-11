@@ -315,12 +315,14 @@ function AreasOfLifeGuidance() {
         Life's uncertainties shouldn't overshadow your journey
       </Heading>
 
-      <Box borderRadius={"xl"} overflow={"hidden"} backgroundColor={"bg.150"} pb={12}>
-        <StaticImage
-          style={{ height: "200px" }}
-          alt="A person facing uncertainty in their life"
-          src="../images/uncertain_life.png"
-        />
+      <Box borderRadius={"xl"} overflow={"hidden"} backgroundColor={"bg.150"} pt={6} pb={12}>
+        <Box borderRadius={"50%"} height={150} width={150} overflow={"hidden"} mx="auto">
+          <StaticImage
+            alt="A person facing uncertainty in their life"
+            src="../images/person-in-doubt.png"
+          />
+        </Box>
+
         <Stack mt={8} spacing={4}>
           <Feature2
             title="Uncertain Decisions"

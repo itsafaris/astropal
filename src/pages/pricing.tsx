@@ -4,6 +4,8 @@ import { TopNavigation } from "@components/topnavigation";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 
+import woman from "@images/calm-woman-2.png";
+
 import { MediaCoverage } from "./summary";
 
 export interface IPricingPageProps {}
@@ -14,44 +16,30 @@ export default function PricingPage() {
       <Container flexDirection={"column"} display={"flex"} gap={5}>
         <TopNavigation />
 
-        <Flex
+        <Heading fontSize={"3xl"} textAlign={"center"} maxW={400} mx="auto">
+          Unlock Long-Awaited Answers To Your Burning Questions
+        </Heading>
+
+        <Box
+          height={[180, 300]}
           width={"full"}
-          position={"relative"}
+          mx={"auto"}
+          borderRadius={10}
           overflow={"hidden"}
-          borderRadius={16}
-          mb={4}
-          zIndex={0}
-          minH={350}
+          background={`url("${woman}")`}
+          backgroundSize={"cover"}
+          backgroundPosition={"0px -50px"}
+          position={"relative"}
         >
-          <Flex
-            width={"100%"}
+          <Box
+            height={100}
+            width={"full"}
             position={"absolute"}
-            zIndex={1}
             top={0}
-            flexDirection={"column"}
-            alignItems={"center"}
-            gap={4}
-          >
-            <Heading fontSize={"3xl"} textAlign={"center"} maxW={400} mx="auto">
-              Unlock Long-Awaited Answers To Your Burning Questions
-            </Heading>
-
-            <Flex
-              my={4}
-              mx="auto"
-              borderRadius={"full"}
-              overflow={"hidden"}
-              height={"130px"}
-              width={"130px"}
-              boxShadow={"inset 0 0 50px 0 #d2890052, 0 0 50px 0 #d289006e"}
-              opacity={0.8}
-            >
-              <StaticImage alt="" src="../images/astro-avatar.png" />
-            </Flex>
-          </Flex>
-
-          <StaticImage alt="" src="../images/pricing-hero.png" layout="constrained" />
-        </Flex>
+            left={0}
+            bgGradient="linear(to-b, bg.100, blackAlpha.100)"
+          />
+        </Box>
 
         <Heading fontSize={"3xl"} textAlign={"center"}>
           Choose your plan
