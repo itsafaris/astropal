@@ -688,7 +688,7 @@ export function FinilisingAstrologerSlide() {
     <Slide
       id="finilising-astrologer"
       type="loading"
-      duration={4}
+      duration={6}
       onLoadingCompleted={() => {
         navigate("/summary");
       }}
