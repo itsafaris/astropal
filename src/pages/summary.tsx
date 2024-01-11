@@ -127,10 +127,12 @@ export default function SummaryPage({ location }: PageProps) {
   }, []);
 
   return (
-    <Box py={4} pb={24} bg="bg.100" color="bg.900">
+    <Box py={4} pb={24} bgGradient="linear(to-b, bg.50, bg.100)" color="bg.900">
       <Container>
         <TopNavigation />
-        <HeroSection quizState={quizState} />
+      </Container>
+      <HeroSection quizState={quizState} />
+      <Container>
         <AreasOfLifeGuidance />
         <ExampleQuestionsSection />
         <SimilarUsersLikeYouSection />
@@ -307,48 +309,56 @@ function AreasOfLifeGuidance() {
         fontWeight={"bold"}
         mb={12}
         mx={8}
-        fontSize={"3xl"}
+        fontSize={"2xl"}
         color="white"
       >
-        Bring clarity <br /> into every area of your life
+        Life's uncertainties shouldn't overshadow your journey
       </Heading>
-      <Stack spacing={4}>
-        <Feature2
-          title="Uncertain Decisions"
-          text="Find your way with star-mapped guidance for life's crossroads."
-          emoji="🤔"
+
+      <Box borderRadius={"xl"} overflow={"hidden"} backgroundColor={"bg.150"} pb={12}>
+        <StaticImage
+          style={{ height: "200px" }}
+          alt="A person facing uncertainty in their life"
+          src="../images/uncertain_life.png"
         />
-        <Separator />
-        <Feature2
-          title="Identity Quest"
-          text="Reveal your cosmic identity and destiny through the stars."
-          emoji="🌟"
-        />
-        <Separator />
-        <Feature2
-          title="Missed Opportunities"
-          text="Capture your golden moments with timely cosmic alerts."
-          emoji="⏳"
-        />
-        <Separator />
-        <Feature2
-          title="Relationship Struggles"
-          text="Forge stronger bonds with the universe's love insights."
-          emoji="💞"
-        />
-        <Separator />
-        <Feature2
-          title="Financial Uncertainty"
-          text="Chart a prosperous course with celestial financial advice."
-          emoji="💰"
-        />
-        <Separator />
-        <Feature2
-          title="Inaccessibility to Guidance"
-          text="Instant, anywhere wisdom from your pocket astrologer."
-          emoji="🚀"
-        />
-      </Stack>
+        <Stack mt={8} spacing={4}>
+          <Feature2
+            title="Uncertain Decisions"
+            text="Find your way with star-mapped guidance for life's crossroads."
+            emoji="🤔"
+          />
+          <Separator />
+          <Feature2
+            title="Identity Quest"
+            text="Reveal your cosmic identity and destiny through the stars."
+            emoji="🌟"
+          />
+          <Separator />
+          <Feature2
+            title="Missed Opportunities"
+            text="Capture your golden moments with timely cosmic alerts."
+            emoji="⏳"
+          />
+          <Separator />
+          <Feature2
+            title="Relationship Struggles"
+            text="Forge stronger bonds with the universe's love insights."
+            emoji="💞"
+          />
+          <Separator />
+          <Feature2
+            title="Financial Uncertainty"
+            text="Chart a prosperous course with celestial financial advice."
+            emoji="💰"
+          />
+          <Separator />
+          <Feature2
+            title="Inaccessibility to Guidance"
+            text="Instant, anywhere wisdom from your pocket astrologer."
+            emoji="🚀"
+          />
+        </Stack>
+      </Box>
     </Box>
   );
 }
@@ -485,143 +495,72 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
 function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
-    <Box id="hero-section" as="section">
-      <Flex flexDirection={"column"} alignItems={"center"}>
-        <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"3xl"} color="white">
-          {quizState?.firstName}, <br /> Your Personal <br /> Astrologer Is Created
-        </Text>
-
-        <Text my={2} textAlign={"center"} width={"full"} fontSize={"md"} color={"whiteAlpha.600"}>
-          Scroll to find out
-        </Text>
-
-        <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
-
-        <Box position="relative">
-          <Box
-            position={"absolute"}
-            height="100%"
-            width="80%"
-            top="6%"
-            left="10%"
-            boxShadow={`0 0 80px 1px #2f7281`}
-          />
-
-          <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
-
-          <Box position={"absolute"} top="40%" width="100%" px={16}>
-            <Text fontSize={"xl"} textAlign={"center"}>
-              Hi,{" "}
-              <Text as="span" color="brand.500">
-                {quizState?.firstName}!
-              </Text>
-            </Text>
-            <Text textAlign={"center"}>What would you like to ask?</Text>
-          </Box>
-        </Box>
-      </Flex>
-
-      <Stack
-        id="white-card-with-benefits"
-        textAlign={"center"}
-        bg="bg.900"
-        px={6}
-        py={6}
-        color="black"
-        borderRadius={"xl"}
+    <Box id="hero-section" as="section" position={"relative"}>
+      <Box
+        position={"absolute"}
+        height="550px"
+        width="100%"
+        bottom="0"
+        left="0"
+        bgGradient="linear(to-t, bg.300, blackAlpha.100)"
+      />
+      <Box
+        position={"absolute"}
+        height="60px"
+        width="100%"
+        bottom="0"
+        left="0"
+        opacity={0.3}
+        bgGradient="linear(to-t, orange.600, blackAlpha.100)"
         zIndex={1}
-        position={"relative"}
-        spacing={6}
-      >
-        <Grid gridTemplateColumns={"1fr 1fr 1fr"} gap={4}>
-          <Flex direction={"column"} gap={2}>
-            <Box
-              bg="bg.600"
-              height={"130px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-              borderRadius={6}
-            >
-              <Text fontWeight={"bold"} color="white">
-                24/7
+      />
+      <Container>
+        <Flex flexDirection={"column"} alignItems={"center"} position={"relative"}>
+          <Text
+            fontWeight="bold"
+            textAlign={"center"}
+            width={"full"}
+            fontSize={"3xl"}
+            color="white"
+          >
+            {quizState?.firstName}, <br /> Your Personal <br /> Astrologer Is Ready
+          </Text>
+
+          <Stack my={10} alignItems={"start"}>
+            <Text fontWeight={"semibold"}>∞ Unlimited questions to ask</Text>
+            <Text fontWeight={"semibold"}>⚡ Instant answers and guidance</Text>
+            <Text fontWeight={"semibold"}>♈ Daily horoscopes and inights</Text>
+          </Stack>
+
+          <CTALinkToPricing />
+
+          <Text
+            mt={8}
+            mb={2}
+            textAlign={"center"}
+            width={"full"}
+            fontSize={"md"}
+            color={"whiteAlpha.600"}
+          >
+            Scroll to find out
+          </Text>
+          <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
+
+          <Box position="relative" overflow={"hidden"}>
+            <StaticImage alt="Astropal UI preview" src="../images/phone_ui.png" />
+
+            <Box position={"absolute"} top="40%" width="100%" px={16}>
+              <Text fontSize={"xl"} textAlign={"center"}>
+                Hi,{" "}
+                <Text as="span" color="brand.500">
+                  {quizState?.firstName}!
+                </Text>
               </Text>
-              <Text fontSize={"sm"} color="bg.200">
-                Use any time
-              </Text>
+              <Text textAlign={"center"}>What would you like to ask?</Text>
             </Box>
-          </Flex>
-
-          <Flex direction={"column"} gap={2}>
-            <Box
-              bg="bg.600"
-              height={"130px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-              borderRadius={6}
-            >
-              <StaticImage
-                style={{ marginTop: 5 }}
-                height={20}
-                alt=""
-                src="../images/infinite-icon.svg"
-              />
-              <Text fontSize={"sm"} color="bg.200">
-                Ask any question
-              </Text>
-            </Box>
-          </Flex>
-
-          <Flex direction={"column"} gap={2}>
-            <Box
-              bg="bg.600"
-              height={"130px"}
-              p={4}
-              fontSize={"2xl"}
-              fontWeight={"bold"}
-              color="bg.300"
-              borderRadius={6}
-            >
-              <StaticImage
-                style={{ marginTop: 2 }}
-                height={28}
-                alt=""
-                src="../images/chat-icon.svg"
-              />
-              <Text fontSize={"sm"} color="bg.200">
-                Get answers instantly
-              </Text>
-            </Box>
-          </Flex>
-        </Grid>
-
-        <Text display="none" fontSize={"xl"} fontWeight={"bold"} mb={4}>
-          Your astrologer:
-        </Text>
-
-        <Stack display="none" textAlign={"left"} spacing={3} alignItems={"center"}>
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            ✨ Trained on your Birth Chart ✨
-          </Text>
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            ⭐ Aligned with cosmic events ⭐
-          </Text>
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            🌟 Provides in depth analysis 🌟
-          </Text>
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            💫 Creates personalized insights 💫
-          </Text>
-          <Text fontSize={"md"} fontWeight={"semibold"}>
-            🤩 Learns about you 🤩
-          </Text>
-        </Stack>
-
-        <CTALinkToPricing />
-      </Stack>
+          </Box>
+        </Flex>
+      </Container>
     </Box>
   );
 }
@@ -678,8 +617,6 @@ function CTALinkToPricing(props: ComponentProps<typeof Button>) {
       <Button
         bg="orange.500"
         color="white"
-        px={6}
-        py={4}
         boxShadow={`0 0 0 6px ${theme.colors.orange["400"]}`}
         _hover={{
           backgroundColor: "orange.600",
