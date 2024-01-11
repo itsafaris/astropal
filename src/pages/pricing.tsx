@@ -44,6 +44,7 @@ export default function PricingPage() {
         <Heading fontSize={"3xl"} textAlign={"center"}>
           Choose your plan
         </Heading>
+        <Text textAlign={"center"}>To start using your astrologer right now</Text>
 
         <PricingSection />
         <TermsAgreement />

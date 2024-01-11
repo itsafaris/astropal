@@ -148,7 +148,7 @@ export function MediaCoverage() {
   return (
     <Stack id="media-coverage" gap={6} alignItems={"center"} my={10}>
       <Text fontSize={"md"} color="bg.500" fontWeight={"semibold"}>
-        As featured in:
+        Technology used is featured in:
       </Text>
 
       <Flex width={"200px"} opacity={0.8}>
@@ -326,38 +326,32 @@ function AreasOfLifeGuidance() {
         <Stack mt={8} spacing={4}>
           <Feature2
             title="Uncertain Decisions"
-            text="Find your way with star-mapped guidance for life's crossroads."
+            text="Stop second-guessing your next big life change. Our astrologer offers the assurance you need."
             emoji="🤔"
           />
           <Separator />
           <Feature2
             title="Identity Quest"
-            text="Reveal your cosmic identity and destiny through the stars."
+            text="Feeling lost in the crowd? We will help you pinpoint your unique strengths and path."
             emoji="🌟"
           />
           <Separator />
           <Feature2
             title="Missed Opportunities"
-            text="Capture your golden moments with timely cosmic alerts."
+            text="Worried you're overlooking life's 'what ifs'? Our insights will help you catch the right waves."
             emoji="⏳"
           />
           <Separator />
           <Feature2
             title="Relationship Struggles"
-            text="Forge stronger bonds with the universe's love insights."
+            text="Tired of the guessing game in relationships? Gain understanding to foster deeper connections."
             emoji="💞"
           />
           <Separator />
           <Feature2
             title="Financial Uncertainty"
-            text="Chart a prosperous course with celestial financial advice."
+            text="Confused about money matters? Let the stars align your financial decisions toward stability."
             emoji="💰"
-          />
-          <Separator />
-          <Feature2
-            title="Inaccessibility to Guidance"
-            text="Instant, anywhere wisdom from your pocket astrologer."
-            emoji="🚀"
           />
         </Stack>
       </Box>
@@ -368,7 +362,7 @@ function AreasOfLifeGuidance() {
 function Separator() {
   return (
     <Flex width={"full"} alignItems={"center"} flexDirection={"column"}>
-      <Box height={"10px"} width="10px" backgroundColor={"bg.200"} borderRadius={"full"} />
+      <Box height={"2px"} width="80%" backgroundColor={"bg.200"} borderRadius={"full"} />
     </Flex>
   );
 }
