@@ -73,9 +73,11 @@ function PricingCard({
       borderColor={borderColor ?? "brand.500"}
       mt={4}
     >
-      <Badge position={"absolute"} top={-2} left={-2} colorScheme="pink">
-        {tagText}
-      </Badge>
+      {tagText && (
+        <Badge position={"absolute"} top={-2} left={-2} colorScheme="pink" p={1} px={2}>
+          {tagText}
+        </Badge>
+      )}
       <Flex
         flexDirection={"row"}
         alignItems={"center"}

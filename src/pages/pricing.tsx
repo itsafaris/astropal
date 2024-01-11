@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { PricingSection } from "@components/pricing";
 import { TopNavigation } from "@components/topnavigation";
 import { StaticImage } from "gatsby-plugin-image";
@@ -41,10 +41,12 @@ export default function PricingPage() {
           />
         </Box>
 
-        <Heading fontSize={"3xl"} textAlign={"center"}>
-          Choose your plan
-        </Heading>
-        <Text textAlign={"center"}>To start using your astrologer right now</Text>
+        <Stack>
+          <Heading fontSize={"3xl"} textAlign={"center"}>
+            Choose your plan
+          </Heading>
+          <Text textAlign={"center"}>To start using your astrologer right now</Text>
+        </Stack>
 
         <PricingSection />
         <TermsAgreement />
