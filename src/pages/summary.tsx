@@ -511,7 +511,7 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
         bottom="0"
         left="0"
         opacity={0.3}
-        bgGradient="linear(to-t, orange.600, blackAlpha.100)"
+        bgGradient="linear(to-t, bg.600, blackAlpha.100)"
         zIndex={1}
       />
       <Container>
@@ -523,7 +523,10 @@ function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             fontSize={"3xl"}
             color="white"
           >
-            {quizState?.firstName}, <br /> Your Personal <br /> Astrologer Is Ready
+            <Text as="span" color="teal.500">
+              {quizState?.firstName}
+            </Text>
+            , <br /> Your Personal <br /> Astrologer Is Ready
           </Text>
 
           <Stack my={10} alignItems={"start"} color="brand.700">
