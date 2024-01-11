@@ -7,9 +7,21 @@ import { ChatBubble, NextButton, Question } from "./components";
 import { NatalChartInterpreter } from "./interpreter";
 
 const predefinedQuestions = [
-  "What are my strengths and weaknesses?",
-  "How can I achieve success in my career?",
-  "What are my challenges in relationships?",
+  {
+    text: "What are my strengths and weaknesses?",
+    theme: "Personal Growth  🌱",
+    color: "green",
+  },
+  {
+    text: "How can I achieve success in my career?",
+    theme: "Career  💼",
+    color: "teal",
+  },
+  {
+    text: "What are my challenges in relationships?",
+    theme: "Love  💖",
+    color: "red",
+  },
 ];
 
 export function FirstQuestionTrial() {
@@ -78,11 +90,13 @@ export function FirstQuestionTrial() {
                 {predefinedQuestions.map((q) => {
                   return (
                     <Question
-                      key={q}
-                      text={q}
-                      opacity={answeredQuestions.includes(q) ? 0.5 : 1}
+                      key={q.text}
+                      text={q.text}
+                      questionTheme={q.theme}
+                      themecolor={q.color}
+                      opacity={answeredQuestions.includes(q.text) ? 0.5 : 1}
                       onClick={() => {
-                        setSelectedQuestion(q);
+                        setSelectedQuestion(q.text);
                         setFinishedTypingQuestion(false);
                       }}
                     />
