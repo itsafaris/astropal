@@ -8,7 +8,6 @@ import {
   Button,
   Icon,
   Flex,
-  Grid,
   useTheme,
 } from "@chakra-ui/react";
 import { Link, PageProps } from "gatsby";
@@ -46,7 +45,7 @@ const testimonials: Testimonial[] = [
     commentAge: "4d",
   },
   {
-    name: "John Carter",
+    name: "Jennifer Miller",
     quote:
       "Astropal's numerology reading was a game-changer for my personal growth. I've found a new sense of purpose.",
     question: "Will I find a meaningful relationship soon?",

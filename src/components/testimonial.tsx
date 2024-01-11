@@ -7,11 +7,7 @@ type ITestimonial = {
   imgComponent: React.ReactNode;
 };
 
-export function TestimonialCard({
-  testimonial,
-}: {
-  testimonial: ITestimonial;
-}) {
+export function TestimonialCard({ testimonial }: { testimonial: ITestimonial }) {
   return (
     <Box
       display="flex"
@@ -21,7 +17,18 @@ export function TestimonialCard({
       width="100%"
       color="white"
     >
-      <Rating value={testimonial.rating} />
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        borderRadius={"50%"}
+        overflow={"hidden"}
+        height={150}
+        width={150}
+      >
+        {testimonial.imgComponent}
+      </Box>
+
       <Box display="flex" flexDirection="row" gap={4}>
         <Text
           height={"100%"}
@@ -33,12 +40,7 @@ export function TestimonialCard({
         >
           “
         </Text>
-        <Text
-          fontSize="medium"
-          fontStyle="italic"
-          fontWeight="light"
-          color="inherit"
-        >
+        <Text fontSize="medium" fontStyle="italic" fontWeight="light" color="inherit">
           {testimonial.text}
         </Text>
         <Text
@@ -53,37 +55,11 @@ export function TestimonialCard({
         </Text>
       </Box>
 
-      <Box
-        width="full"
-        display="flex"
-        alignItems="center"
-        gap="4"
-        flexDirection={"column"}
-      >
-        <Box display="flex" flexDirection="column" alignItems="start" gap="1">
-          <Text
-            fontWeight="semibold"
-            width={"full"}
-            textAlign={"center"}
-            color="inherit"
-          >
-            {testimonial.authorName}
-          </Text>
-        </Box>
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          borderRadius={"50%"}
-          overflow={"hidden"}
-          height={150}
-          width={150}
-        >
-          {testimonial.imgComponent}
-        </Box>
+      <Text fontWeight="semibold" width={"full"} textAlign={"center"} color="inherit">
+        {testimonial.authorName}
+      </Text>
 
-        {/* <Rating value={testimonial.rating} /> */}
-      </Box>
+      <Rating value={testimonial.rating} />
     </Box>
   );
 }
@@ -98,22 +74,10 @@ export function Rating({ value }: { value: number }) {
   return (
     <Box display="flex" alignItems="center" gap="1" height="4">
       {[...Array(fullCount)].map((_, idx) => (
-        <StarIcon
-          key={idx}
-          boxSize={5}
-          color="orange"
-          stroke="4"
-          fill="orange"
-        />
+        <StarIcon key={idx} boxSize={4} color="orange" stroke="4" fill="orange" />
       ))}
       {[...Array(emptyCount)].map((_, idx) => (
-        <StarIcon
-          key={idx}
-          boxSize={5}
-          color="#cbcbcb"
-          stroke="4"
-          fill="#cbcbcb"
-        />
+        <StarIcon key={idx} boxSize={4} color="#cbcbcb" stroke="4" fill="#cbcbcb" />
       ))}
     </Box>
   );
