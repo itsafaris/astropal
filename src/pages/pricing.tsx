@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { PricingSection } from "@components/pricing";
-import { TopNavigation } from "@components/topnavigation";
+
+import { SpecialOfferBanner } from "@components/specialOfferBanner";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 
@@ -10,10 +11,9 @@ export interface IPricingPageProps {}
 
 export default function PricingPage() {
   return (
-    <Box py={4} bg="bg.100" color="bg.900">
-      <Container flexDirection={"column"} display={"flex"} gap={5}>
-        <TopNavigation />
-
+    <Box pb={4} bg="bg.100" color="bg.900">
+      <SpecialOfferBanner />
+      <Container pt={6} flexDirection={"column"} display={"flex"} gap={5}>
         <Heading fontSize={"3xl"} textAlign={"center"} maxW={400} mx="auto">
           Unlock Long-Awaited Answers To Your Burning Questions
         </Heading>

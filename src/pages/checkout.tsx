@@ -179,6 +179,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
         <Input
           size="lg"
           backgroundColor={"white"}
+          type="email"
           value={email}
           placeholder="e.g. janedoe@jd.com"
           color="black"
