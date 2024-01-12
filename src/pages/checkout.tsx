@@ -32,7 +32,7 @@ export default function CheckoutPage(props: PageProps) {
 
   const [stripe] = useState(
     loadStripe(
-      "pk_test_51NyYKxHNcUWCpQhl6DalgAazW5OGGWbRp1kpYr4Bkhbc7r6BnhoOQIFbLBwSBIHHY8bb6ggQLTG07MdaLfgix0uG00zPDg5bF6"
+      "pk_test_51OXhWrBgg62DxbyKMo0dMQmSM2j83tzEiGp9yZuWFIBIATRdsaA3XtPz4mQ9gHbrZXBAbSJtChMQirdp8TQh8OQR00hDaUAppF"
     )
   );
 
