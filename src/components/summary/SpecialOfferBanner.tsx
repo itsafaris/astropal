@@ -1,8 +1,8 @@
-import { Button, Flex, Stack, Text, useBreakpoint } from "@chakra-ui/react";
+import { Flex, Stack, Text, useBreakpoint } from "@chakra-ui/react";
 
 import { Timer } from "@components/timer";
 
-export function SpecialOfferBanner({ showTimer = true }: { showTimer?: boolean }) {
+export function SpecialOfferBanner() {
   const breakpoint = useBreakpoint();
 
   return (

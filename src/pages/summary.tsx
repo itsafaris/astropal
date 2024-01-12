@@ -24,7 +24,13 @@ export default function SummaryPage({}: PageProps) {
   }, []);
 
   return (
-    <Box py={4} pb={24} bgGradient="linear(to-b, bg.50, bg.100)" color="bg.900">
+    <Box
+      py={4}
+      pb={24}
+      bgGradient="linear(to-b, bg.50, bg.100)"
+      color="bg.900"
+      scrollBehavior={"smooth"}
+    >
       <Container>
         <TopNavigation />
       </Container>

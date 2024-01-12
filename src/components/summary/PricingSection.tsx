@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Stack, Text, Badge, Button } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
-import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
+import { SpecialOfferBanner } from "./SpecialOfferBanner";
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
@@ -10,8 +10,8 @@ export interface IPricingPageProps {}
 
 export function PricingSection() {
   return (
-    <Box id="pricing-section" as="section" my={20}>
-      <Stack mb={4}>
+    <Box id="pricing-section" as="section" py={6}>
+      <Stack mb={8}>
         <Heading fontSize={"3xl"} textAlign={"center"}>
           Choose your plan
         </Heading>

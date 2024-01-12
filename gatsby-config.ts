@@ -92,6 +92,8 @@ const config: GatsbyConfig = {
         icon: "src/images/favicon.png",
       },
     },
+
+    "gatsby-plugin-anchor-links",
   ],
 };
 
