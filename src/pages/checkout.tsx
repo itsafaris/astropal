@@ -78,17 +78,17 @@ async function validateAndSubmit(input: {
   elements: StripeElements;
   email: string;
 }): Promise<FormSubmitResult> {
-  const { error: paymentDetailsError } = await input.elements.submit();
-  const isEmailValid = validateEmail(input.email);
-
   const result: FormSubmitResult = {};
+
+  const isEmailValid = validateEmail(input.email);
+  if (!isEmailValid) {
+    result.emailError = { message: "Invalid email address" };
+  }
+
+  const { error: paymentDetailsError } = await input.elements.submit();
 
   if (paymentDetailsError) {
     result.elementsError = { message: paymentDetailsError.message };
-  }
-
-  if (!isEmailValid) {
-    result.emailError = { message: "Invalid email address" };
   }
 
   return result;

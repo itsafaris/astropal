@@ -12,7 +12,8 @@
     "build": "npm run clean && gatsby build && npx tsx copyDomainOwnerhship.ts",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "tunnel": "ngrok http --domain=tidy-sensibly-wasp.ngrok-free.app https://localhost:8000"
   },
   "dependencies": {
     "@astrodraw/astrochart": "^3.0.2",
