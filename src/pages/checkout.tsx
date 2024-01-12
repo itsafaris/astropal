@@ -83,6 +83,9 @@ async function validateAndSubmit(input: {
   const isEmailValid = validateEmail(input.email);
   if (!isEmailValid) {
     result.emailError = { message: "Invalid email address" };
+    // need to return email only validation early, otherwise
+    // calling elements.submit get's into a weird state after submission
+    return result;
   }
 
   const { error: paymentDetailsError } = await input.elements.submit();
