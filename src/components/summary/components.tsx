@@ -6,7 +6,7 @@ export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
 
   return (
-    <AnchorLink to="/summary#pricing-section" title="Pricing plans" stripHash>
+    <AnchorLink to="/summary#special-offer" title="Pricing plans" stripHash>
       <Button
         bg="orange.500"
         color="white"

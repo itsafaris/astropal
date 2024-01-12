@@ -1,7 +1,6 @@
-import { Box, Flex, Heading, Stack, Text, Badge, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Text, Button, TextProps } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
-import { SpecialOfferBanner } from "./SpecialOfferBanner";
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
@@ -10,17 +9,14 @@ export interface IPricingPageProps {}
 
 export function PricingSection() {
   return (
-    <Box id="pricing-section" as="section" py={6}>
+    <Box id="pricing-section" as="section" py={8}>
       <Stack mb={8}>
-        <Heading fontSize={"3xl"} textAlign={"center"}>
+        <Heading fontSize={"3xl"} textAlign={"center"} color="white">
           Choose your plan
         </Heading>
-
-        <Text textAlign={"center"}>To start using your astrologer right now</Text>
       </Stack>
 
       <Stack spacing={4}>
-        <SpecialOfferBanner />
         <PricingPlans />
         <TermsAgreement />
         <RiskFreeGuaranteed />
@@ -107,7 +103,6 @@ export function PricingPlans() {
         buttonText={"Claim my plan (save 75%)"}
         buttonColor="#04a804"
         buttonHoverColor="#038b03"
-        borderColor="green.400"
         buttonTextColor="white"
         pricingPlan={pricingPlans["6month"]}
       />
@@ -133,7 +128,6 @@ export function PricingPlans() {
 function PricingPlanItem({
   billingText,
   tagText,
-  tagColor,
   buttonText,
   buttonColor,
   buttonHoverColor,
@@ -155,21 +149,22 @@ function PricingPlanItem({
     <Flex
       flexDirection={"column"}
       alignItems={"center"}
-      gap={3}
+      gap={2}
       p={3}
       borderRadius={10}
       backgroundColor="whiteAlpha.100"
       width={"100%"}
       position="relative"
-      border={`2px solid`}
+      border={`1px solid`}
       borderColor={borderColor ?? "brand.500"}
-      mt={4}
+      mt={3}
     >
       {tagText && (
-        <Badge position={"absolute"} top={-2} left={-2} colorScheme="pink" p={1} px={2}>
+        <Badge position={"absolute"} top={0} left={3} transform={"translateY(-50%)"}>
           {tagText}
         </Badge>
       )}
+
       <Flex
         flexDirection={"row"}
         alignItems={"center"}
@@ -177,8 +172,8 @@ function PricingPlanItem({
         width={"100%"}
         gap={3}
       >
-        <Flex flexDirection={"column"} alignItems={"flex-start"} gap={0} alignSelf={"flex-end"}>
-          <Text fontSize={"2xl"} fontWeight={"bold"} color="bg.900" lineHeight={"normal"}>
+        <Flex flexDirection={"column"} alignItems={"flex-start"} gap={1}>
+          <Text fontSize={"xl"} fontWeight={"bold"} color="bg.900" lineHeight={"normal"}>
             {pricingPlan.title}
           </Text>
 
@@ -188,7 +183,12 @@ function PricingPlanItem({
         </Flex>
 
         <Flex flexDirection={"column"} alignItems={"flex-end"}>
-          <Text color="bg.600" textDecoration={"line-through"} lineHeight={"normal"}>
+          <Text
+            color="bg.900"
+            textDecoration={"line-through"}
+            lineHeight={"normal"}
+            fontSize={"md"}
+          >
             ${pricingPlan.dailyBefore}
           </Text>
 
@@ -196,7 +196,7 @@ function PricingPlanItem({
             ${pricingPlan.daily}
           </Text>
 
-          <Text fontSize={"md"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
+          <Text fontSize={"sm"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
             per day
           </Text>
         </Flex>
@@ -217,6 +217,7 @@ function PricingPlanItem({
           }}
           width={"full"}
           color={buttonTextColor}
+          fontWeight={"semibold"}
         >
           {buttonText}
         </Button>
@@ -225,22 +226,40 @@ function PricingPlanItem({
   );
 }
 
+function Badge({ ...rest }: TextProps) {
+  return (
+    <Text
+      py={"2px"}
+      px={"10px"}
+      backgroundColor="pink.100"
+      color="pink.800"
+      fontWeight={"bold"}
+      fontSize={"small"}
+      borderRadius={"5px"}
+      {...rest}
+    >
+      Best value
+    </Text>
+  );
+}
+
 function DealRibbon() {
   const color = "pink.100";
 
   return (
-    <Flex flexDirection={"column"} alignItems={"center"}>
+    <Flex flexDirection={"column"} alignItems={"center"} mt={"-8px"} zIndex={1}>
       <Box
         width={0}
         height={0}
         borderLeft={"20px solid transparent"}
         borderRight={"20px solid transparent"}
-        borderBottom={`12px solid`}
+        borderBottom={`14px solid`}
         borderBottomColor={color}
+        ml={100}
       />
       <Text
         px={5}
-        py={1}
+        py={"3px"}
         backgroundColor={color}
         color="pink.800"
         fontWeight={"bold"}

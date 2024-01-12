@@ -6,7 +6,7 @@ import { CTALinkToPricing } from "./components";
 
 export function AstrologerComparisonSection() {
   return (
-    <Box id="comparison-with-regular-astrologer-section" as="section" px={2}>
+    <Box id="comparison-with-regular-astrologer-section" as="section" px={2} my={10}>
       <Heading mb={10} textAlign={"center"} color="white">
         10x better than your regular astrologer
       </Heading>

@@ -14,6 +14,7 @@ import { SimilarUsersLikeYouSection } from "@components/summary/SimilarUsersLike
 import { TestimonialsSection } from "@components/summary/TestimonialsSection";
 import { HeroSection } from "@components/summary/HeroSection";
 import { PricingSection } from "@components/summary/PricingSection";
+import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -42,9 +43,14 @@ export default function SummaryPage({}: PageProps) {
         <ExampleQuestionsSection />
         <SimilarUsersLikeYouSection />
         <TestimonialsSection />
+        <MediaCoverageSection />
+      </Container>
+
+      <SpecialOfferBanner />
+
+      <Container>
         <PricingSection />
         <AstrologerComparisonSection />
-        <MediaCoverageSection />
       </Container>
     </Box>
   );
