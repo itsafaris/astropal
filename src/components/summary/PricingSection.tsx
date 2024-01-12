@@ -102,6 +102,7 @@ export function PricingPlans() {
         tagColor={"green.400"}
         buttonText={"Claim my plan (save 75%)"}
         buttonColor="#04a804"
+        borderColor="#04a804"
         buttonHoverColor="#038b03"
         buttonTextColor="white"
         pricingPlan={pricingPlans["6month"]}
@@ -152,11 +153,11 @@ function PricingPlanItem({
       gap={2}
       p={3}
       borderRadius={10}
-      backgroundColor="whiteAlpha.100"
+      backgroundColor="bg.200"
       width={"100%"}
       position="relative"
-      border={`1px solid`}
-      borderColor={borderColor ?? "brand.500"}
+      border={`2px solid`}
+      borderColor={borderColor ?? "bg.400"}
       mt={3}
     >
       {tagText && (
