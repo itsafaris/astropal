@@ -6,19 +6,23 @@ import {
   Text,
   StackProps,
   Box,
-  Input,
-  FormControl,
-  FormLabel,
   Heading,
+  Divider,
+  AbsoluteCenter,
 } from "@chakra-ui/react";
-import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { loadStripe, StripeElements } from "@stripe/stripe-js";
+import {
+  Elements,
+  PaymentElement,
+  ExpressCheckoutElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { loadStripe, Stripe, StripeElements } from "@stripe/stripe-js";
 import { PageProps, navigate } from "gatsby";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSafety } from "react-icons/ai";
 import { trackEvent, trackPixel } from "@utils/tracking";
 import { PricingPlanType, getPlanByID } from "@utils/pricingPlans";
-import { validateEmail } from "@utils/email";
 import { TopNavigation } from "@components/topnavigation";
 import { loadQuizState } from "@utils/localStorage";
 import { QuizStateParsed } from "@utils/state";
@@ -26,44 +30,63 @@ import { QuizStateParsed } from "@utils/state";
 export interface ICheckoutPageProps {}
 
 export default function CheckoutPage(props: PageProps) {
-  const params = new URLSearchParams(props.location.search);
-  const pricingPlanID = params.get("pricingPlanID");
-  const pricingPlan = pricingPlanID ? getPlanByID(pricingPlanID) : undefined;
+  const [isMounted, setIsMounted] = useState(false);
+  const [stripe, setStripe] = useState<Stripe>();
+  const [pricingPlan, setPricingPlan] = useState<PricingPlanType>();
 
-  const [stripe] = useState(
+  useEffect(() => {
     loadStripe(
       "pk_test_51OXhWrBgg62DxbyKMo0dMQmSM2j83tzEiGp9yZuWFIBIATRdsaA3XtPz4mQ9gHbrZXBAbSJtChMQirdp8TQh8OQR00hDaUAppF"
-    )
-  );
+    ).then((s) => {
+      if (s) {
+        setStripe(s);
+      }
+    });
+  }, []);
 
-  // TODO: render a nicer screen
-  if (!pricingPlanID) {
-    return "url query param `pricingPlanID` not specified";
-  }
+  useEffect(() => {
+    setIsMounted(true);
 
-  if (!pricingPlan) {
-    return `cannot find pricing plan with id ${pricingPlanID}`;
-  }
+    const params = new URLSearchParams(props.location.search);
+    const pricingPlanID = params.get("pricingPlanID");
+    const pricingPlan = pricingPlanID ? getPlanByID(pricingPlanID) : undefined;
+    setPricingPlan(pricingPlan);
+  }, []);
 
   return (
     <Box py={4} bg="bg.100" color="bg.900" minHeight={"100vh"}>
       <Container flexDirection={"column"} display={"flex"} gap={5}>
         <TopNavigation />
 
-        <Heading textAlign={"center"} fontSize={"2xl"}>
-          Order Summary
-        </Heading>
+        {isMounted && !pricingPlan ? (
+          <>No pricing plan found</>
+        ) : (
+          <>
+            <Heading textAlign={"center"} fontSize={"2xl"}>
+              Order Summary
+            </Heading>
 
-        <Elements
-          stripe={stripe}
-          options={{
-            mode: "payment",
-            amount: 1234,
-            currency: "usd",
-          }}
-        >
-          <CheckoutForm pricingPlan={pricingPlan} />
-        </Elements>
+            {stripe && (
+              <Elements
+                stripe={stripe}
+                options={{
+                  appearance: {
+                    theme: "stripe",
+                    variables: {
+                      tabLogoColor: "green",
+                      tabLogoSelectedColor: "red",
+                    },
+                  },
+                  mode: "payment",
+                  amount: 2999,
+                  currency: "usd",
+                }}
+              >
+                <CheckoutForm pricingPlan={pricingPlan!} />
+              </Elements>
+            )}
+          </>
+        )}
       </Container>
     </Box>
   );
@@ -74,19 +97,8 @@ interface FormSubmitResult {
   emailError?: { message?: string };
 }
 
-async function validateAndSubmit(input: {
-  elements: StripeElements;
-  email: string;
-}): Promise<FormSubmitResult> {
+async function validateAndSubmit(input: { elements: StripeElements }): Promise<FormSubmitResult> {
   const result: FormSubmitResult = {};
-
-  const isEmailValid = validateEmail(input.email);
-  if (!isEmailValid) {
-    result.emailError = { message: "Invalid email address" };
-    // need to return email only validation early, otherwise
-    // calling elements.submit get's into a weird state after submission
-    return result;
-  }
 
   const { error: paymentDetailsError } = await input.elements.submit();
 
@@ -100,8 +112,9 @@ async function validateAndSubmit(input: {
 function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   const stripe = useStripe();
   const elements = useElements();
-  const [email, setEmail] = useState("");
-  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
+
+  const [expressCheckoutReady, setExpressCheckoutReady] = useState(false);
+  const [cardCheckoutReady, setCardCheckoutReady] = useState(false);
 
   const [_, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,7 +126,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
     setQuizState(q);
   }, []);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleCardPaymentSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -122,98 +135,107 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
       return;
     }
 
-    setIsLoading(true);
-
-    const { elementsError, emailError } = await validateAndSubmit({ elements, email });
-    if (elementsError || emailError) {
-      setMessage((elementsError || emailError)?.message ?? "");
+    const { elementsError } = await validateAndSubmit({ elements });
+    if (elementsError) {
+      setMessage(elementsError?.message ?? "");
       setIsLoading(false);
-
-      if (emailError) {
-        setIsEmailInvalid(true);
-      }
-
       return;
     }
 
-    await new Promise((res) => setTimeout(res, 2000));
+    setIsLoading(true);
+    await new Promise((r) => setTimeout(r, 1500));
+    setIsLoading(false);
+    handlePaymentSuccess("card");
+  }
 
+  function handlePaymentSuccess(paymentType: string) {
     trackEvent({
       name: "purchase",
       properties: {
         promptPackID: pricingPlan.id,
         pricePayed: pricingPlan.price,
         currency: "USD",
-        email,
+        paymentType: paymentType,
         profile: quizState,
       },
     });
-
     trackPixel("Purchase", { currency: "USD", value: pricingPlan.price });
     navigate(`/checkout-error`);
-
-    setIsLoading(false);
   }
 
   return (
     <Flex
-      as="form"
       direction={"column"}
       bg="bg.900"
       p={4}
       borderRadius={"xl"}
-      onSubmit={(e) => handleSubmit(e)}
+      opacity={isLoading ? 0.6 : undefined}
+      onSubmit={(e) => handleCardPaymentSubmit(e)}
     >
-      <PlanPreview pricingPlan={pricingPlan} mb={6} />
+      <PlanPreview pricingPlan={pricingPlan} />
 
-      <PaymentElement
-        options={{
-          readOnly: isLoading,
-          layout: {
-            type: "tabs",
-          },
-        }}
-      />
+      <Box width={"full"} display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
+        <Text textAlign={"center"} my={4} fontWeight={"semibold"} color="bg.300">
+          Select a secure payment
+        </Text>
 
-      <FormControl my={3} isInvalid={isEmailInvalid}>
-        <FormLabel color="black" mb={1} fontSize={"sm"} fontWeight={"normal"}>
-          Email
-        </FormLabel>
-        <Input
-          size="lg"
-          backgroundColor={"white"}
-          type="email"
-          value={email}
-          placeholder="e.g. janedoe@jd.com"
-          color="black"
-          onChange={(e) => {
-            setIsEmailInvalid(false);
-            setEmail(e.target.value);
+        <ExpressCheckoutElement
+          options={{
+            wallets: { applePay: "always", googlePay: "always" },
+            layout: { maxColumns: 1, maxRows: 5 },
+          }}
+          onClick={async (e) => {
+            setIsLoading(true);
+            await new Promise((r) => setTimeout(r, 1500));
+            setIsLoading(false);
+            handlePaymentSuccess(e.expressPaymentType);
+          }}
+          onReady={() => {
+            setExpressCheckoutReady(true);
+          }}
+          onConfirm={() => {
+            // do nothing
+            // it's enough for us to test "click" handler for now
           }}
         />
-        <Text color="black" fontSize={"xs"}>
-          We will send you instruction on how to start using your astrologer
-        </Text>
-      </FormControl>
 
-      <Button
-        my={6}
-        size="lg"
-        type="submit"
-        isDisabled={isLoading || !stripe || !elements}
-        isLoading={isLoading}
-        colorScheme="green"
-      >
-        Pay Now
-      </Button>
+        <Box width={"full"} my={8} position={"relative"} opacity={0.5}>
+          <Divider borderColor={"black"} width={"full"} />
+          <AbsoluteCenter bg="bg.900" px="4" color="black" fontSize={"sm"}>
+            Or pay using card
+          </AbsoluteCenter>
+        </Box>
+
+        <Box as="form" onSubmit={handleCardPaymentSubmit}>
+          <PaymentElement
+            options={{
+              readOnly: isLoading,
+              layout: {
+                type: "tabs",
+              },
+            }}
+            onReady={() => {
+              setCardCheckoutReady(true);
+            }}
+          />
+          <Button
+            my={6}
+            type="submit"
+            isDisabled={isLoading || !stripe || !elements}
+            isLoading={isLoading}
+            colorScheme="twitter"
+            width={"full"}
+          >
+            Pay Now with Card
+          </Button>
+        </Box>
+      </Box>
 
       <Box textAlign={"center"} mt={8} mb={4}>
-        <a href="https://stripe.com" target="_blank" rel="noopener">
-          <Text as="span" color="gray.500">
-            Safe checkout powered by{" "}
-            <StripeLogo style={{ display: "inline", verticalAlign: "middle" }} height={19} />
-          </Text>
-        </a>
+        <Text as="span" color="gray.500">
+          Safe checkout powered by{" "}
+          <StripeLogo style={{ display: "inline", verticalAlign: "middle" }} height={19} />
+        </Text>
       </Box>
 
       <Flex flexDirection="row" alignItems="center" justifyContent={"center"} gap={2} mb={4}>
@@ -249,7 +271,7 @@ function PlanPreview({ pricingPlan, ...rest }: { pricingPlan: PricingPlanType } 
         </Text>
       </Flex>
 
-      <Box height={"1px"} backgroundColor="bg.800" width={"full"} />
+      <Box height={"1px"} backgroundColor="blackAlpha.300" width={"full"} />
 
       <Stack direction={"row"} alignItems={"start"} justifyContent={"space-between"}>
         <Text fontWeight={"bold"}>Total:</Text>
