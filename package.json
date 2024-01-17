@@ -67,5 +67,8 @@
     "gatsby-plugin-tsconfig-paths": "^1.0.6",
     "tsx": "^4.7.0",
     "typescript": "^5.0.2"
+  },
+  "optionalDependencies": {
+    "@parcel/watcher-linux-x64-glibc": "^2.4.0"
   }
 }
