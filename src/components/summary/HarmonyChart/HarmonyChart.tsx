@@ -2,23 +2,67 @@ import React from "react";
 import { Box, BoxProps, Text } from "@chakra-ui/react";
 import { ChartItemFillSVG, ChartGridInnerSVG, ChartGridOuterSVG, ChartItemStrokeSVG } from "./svg";
 
+export const COLORS = ["#FEA301", "#FFBC01", "#FFF500", "#ADFF00", "#2BFF00"];
+
 interface Item {
   id: string;
   title: string;
   value: number;
 }
 
+interface EnhancedItem extends Item {
+  color: string;
+}
+
 export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: number } & BoxProps) {
-  const highestValueItem = findHighestValue(items);
   const gridSize = size;
   const itemBottomOffset = -10;
   const maxItemSize = (size - itemBottomOffset) / 2;
 
+  const [score, setScore] = React.useState<number | null>(null);
+  const [scoreColor, setScoreColor] = React.useState<string | null>(null);
+  const [enhancedItems, setEnhancedItems] = React.useState<EnhancedItem[]>([]);
+
+  React.useEffect(() => {
+    setScore(calcScore(items));
+    setScoreColor(calcScoreColor(items));
+    setEnhancedItems(
+      items.map((it) => ({
+        ...it,
+        color: calcColor(it.value),
+      }))
+    );
+  }, [items]);
+
   return (
     <Box position={"relative"} height={0} width={0} {...rest}>
+      {scoreColor && (
+        <>
+          <Box
+            height={1}
+            width={1}
+            borderRadius={"50%"}
+            position={"absolute"}
+            zIndex={0}
+            boxShadow={`0px 0px 150px 100px ${scoreColor}`}
+            opacity={0.7}
+          />
+
+          <Box
+            height={1}
+            width={1}
+            borderRadius={"50%"}
+            position={"absolute"}
+            zIndex={0}
+            boxShadow={`0px 0px 75px 50px #00a8ff`}
+            opacity={0.7}
+          />
+        </>
+      )}
+
       <ItemRenderer
         opacity={1}
-        items={items.map((it) => ({ ...it, value: highestValueItem.value }))}
+        items={enhancedItems.map((it) => ({ ...it, value: 5 }))}
         strokeEnabled={true}
         fillEnabled={false}
         maxItemSize={maxItemSize}
@@ -30,7 +74,7 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
 
       <ItemRenderer
         opacity={0.05}
-        items={items.map((it) => ({ ...it, value: highestValueItem.value }))}
+        items={enhancedItems.map((it) => ({ ...it, value: 5 }))}
         strokeEnabled={true}
         fillEnabled={false}
         maxItemSize={maxItemSize}
@@ -48,11 +92,10 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
         zIndex={0}
       />
 
-      {Array.from(Array(highestValueItem.value).keys()).map((_, idx) => {
+      {Array.from(Array(5).keys()).map((_, idx) => {
         return (
-          <>
+          <React.Fragment key={idx}>
             <ChartGridOuter
-              key={idx}
               opacity={0.05}
               position={"absolute"}
               transform={`translate(-50%, -50%)`}
@@ -60,7 +103,6 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
               zIndex={0}
             />
             <ChartGridOuter
-              key={idx}
               opacity={0.05}
               position={"absolute"}
               transform={`translate(-50%, -50%)`}
@@ -68,7 +110,6 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
               zIndex={0}
             />
             <ChartGridOuter
-              key={idx}
               opacity={0.05}
               position={"absolute"}
               transform={`translate(-50%, -50%)`}
@@ -76,7 +117,6 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
               zIndex={0}
             />
             <ChartGridOuter
-              key={idx}
               opacity={0.05}
               position={"absolute"}
               transform={`translate(-50%, -50%)`}
@@ -84,19 +124,18 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
               zIndex={0}
             />
             <ChartGridOuter
-              key={idx}
               opacity={0.05}
               position={"absolute"}
               transform={`translate(-50%, -50%)`}
               size={100}
               zIndex={0}
             />
-          </>
+          </React.Fragment>
         );
       })}
 
       <ItemRenderer
-        items={items}
+        items={enhancedItems}
         strokeEnabled={true}
         fillEnabled={true}
         maxItemSize={maxItemSize}
@@ -116,18 +155,20 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
         boxShadow={"0px 0px 20px 20px white"}
       />
 
-      <Text
-        position={"absolute"}
-        color="black"
-        fontSize={"50px"}
-        fontWeight={"bold"}
-        zIndex={20}
-        top={0}
-        left={0}
-        transform={"translate(-50%, -50%)"}
-      >
-        89
-      </Text>
+      {score && (
+        <Text
+          position={"absolute"}
+          color={"black"}
+          fontSize={"60px"}
+          fontWeight={"thin"}
+          zIndex={20}
+          top={0}
+          left={0}
+          transform={"translate(-50%, -50%)"}
+        >
+          {score}
+        </Text>
+      )}
     </Box>
   );
 }
@@ -142,13 +183,14 @@ function ItemRenderer({
   bottomOffset,
   ...rest
 }: {
-  items: Item[];
+  items: EnhancedItem[];
   maxItemSize: number;
   bottomOffset?: number;
   strokeEnabled?: boolean;
   fillEnabled?: boolean;
   showTitle: boolean;
   showStroke?: boolean;
+  titleColor?: string;
 } & BoxProps) {
   return items.map((it, idx, all) => {
     const size = calcItemSize(it, items, maxItemSize);
@@ -162,16 +204,15 @@ function ItemRenderer({
       transformOrigin: `50% calc(100% - 10px)`,
       rotation,
     };
-    const fillColor = calcItemColor(it);
 
     return (
-      <Box position={"relative"} height={0} width={0} {...rest}>
+      <Box key={it.id} position={"relative"} height={0} width={0} {...rest}>
         {fillEnabled && (
           <ChartItemFill
             opacity={0.4}
             key={`${it.id}-fill`}
             zIndex={Math.round((1 / it.value) * 10)}
-            fillColor={fillColor}
+            fillColor={"white"}
             {...commonProps}
           />
         )}
@@ -179,6 +220,7 @@ function ItemRenderer({
           <ChartItemStroke
             showStroke={showStroke}
             showTitle={showTitle}
+            titleColor={it.color}
             key={`${it.id}-stroke`}
             zIndex={Math.round((1 / it.value) * 10)}
             {...commonProps}
@@ -217,8 +259,9 @@ function ChartItemStroke({
   rotation,
   showTitle,
   showStroke = true,
+  titleColor,
   ...rest
-}: ChartItemProps & { showTitle: boolean; showStroke?: boolean }) {
+}: ChartItemProps & { showTitle: boolean; showStroke?: boolean; titleColor?: string }) {
   const sizeString = `${size}px`;
 
   return (
@@ -245,6 +288,7 @@ function ChartItemStroke({
           textAlign={"center"}
           position={"absolute"}
           lineHeight={"normal"}
+          color={titleColor || "white"}
           top={-10}
           left={"50%"}
           transform={`translate(-50%, -50%) rotate(${-rotation}deg)`}
@@ -271,25 +315,34 @@ function calcItemRotation(totalItemCount: number, itemIdx: number): number {
 }
 
 function calcItemSize(item: Item, allItems: Item[], maxSize: number): number {
-  const MAX_VALUE = findHighestValue(allItems).value;
-
   const fixedPartRatio = 0.2;
   const fixedPart = maxSize * fixedPartRatio;
 
-  const dynamicPartRatio = (1 / MAX_VALUE) * item.value;
+  const dynamicPartRatio = (1 / 5) * item.value;
   const dynamicPart = (maxSize - fixedPart) * dynamicPartRatio;
 
   return Math.round(fixedPart + dynamicPart);
 }
 
-function calcItemColor(item: Item): string {
-  const colors = ["white", "white", "white", "white", "white"];
-  // const colors = ["green", "green", "green", "green", "green"];
-  // const colors = ["#CF6AFF", "#9968E8", "#3A78B1", "#33AF73", "#01FE1D"];
+function calcScoreColor(items: Item[]): string {
+  const currentAverageValue = calcAverage(items);
 
-  return colors[item.value - 1];
+  return calcColor(Math.round(currentAverageValue));
 }
 
-function findHighestValue(items: Item[]): Item {
-  return items.reduce((max, it) => (it.value > max.value ? it : max));
+function calcColor(value: number): string {
+  return COLORS[value - 1];
+}
+
+function calcScore(items: Item[]): number {
+  const MAX_SCORE = 91;
+  const MIN_SCORE = 10;
+  const delta = MAX_SCORE - MIN_SCORE;
+  const currentAverageValue = calcAverage(items);
+
+  return Math.round(MIN_SCORE + delta * ((1 / 5) * currentAverageValue));
+}
+
+function calcAverage(items: Item[]): number {
+  return items.reduce((val, it) => val + it.value, 0) / items.length;
 }

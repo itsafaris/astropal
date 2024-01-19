@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Heading, Flex, Grid, Stack, Container } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
 import { getZodiacSign } from "@services/zodiacService";
-import { HarmonyChart } from "./HarmonyChart/HarmonyChart";
+import { HarmonyChart, COLORS } from "./HarmonyChart/HarmonyChart";
 
 import { NatalChart } from "../NatalChart";
 import { toTitleCase } from "@utils/string";
@@ -59,16 +59,6 @@ export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
 
         <Flex flexDirection={"column"} gap={3} p={4} borderRadius={"xl"}>
           <Flex width={"full"} height={500} justifyContent={"center"} alignItems={"center"} p={4}>
-            <Box
-              height={1}
-              width={1}
-              borderRadius={"50%"}
-              position={"absolute"}
-              zIndex={0}
-              boxShadow={"0px 0px 150px 100px #00ffa7"}
-              opacity={0.7}
-            />
-
             <HarmonyChart
               size={300}
               items={[
@@ -105,6 +95,29 @@ export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
               ]}
             />
           </Flex>
+
+          <Grid
+            mx="auto"
+            my={3}
+            alignItems={"center"}
+            gap={2}
+            gridTemplateColumns={"auto 1fr auto"}
+            maxWidth={300}
+            width={"100%"}
+          >
+            <Text fontWeight={"bold"} color="whiteAlpha.700">
+              Low
+            </Text>
+            <Box
+              height={"10px"}
+              width={"full"}
+              borderRadius={6}
+              bgGradient={`linear(to-r, ${COLORS[0]}, ${COLORS[COLORS.length - 1]})`}
+            />
+            <Text fontWeight={"bold"} color="whiteAlpha.700">
+              High
+            </Text>
+          </Grid>
 
           <Flex
             flexDirection={"column"}

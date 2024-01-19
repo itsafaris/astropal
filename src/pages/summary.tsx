@@ -15,7 +15,7 @@ import { TestimonialsSection } from "@components/summary/TestimonialsSection";
 import { PricingSection } from "@components/summary/PricingSection";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 import { HeroSection2 } from "@components/summary/HeroSection2";
-import { HeroSection3 } from "@components/summary/AstrologicalProfile";
+import { HeroSection3 } from "@components/summary/HeroSection3";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -34,7 +34,7 @@ export default function SummaryPage({}: PageProps) {
       </Box>
 
       <HeroSection3 quizState={quizState} />
-      <HeroSection2 quizState={quizState} />
+      {/* <HeroSection2 quizState={quizState} />
 
       <Container>
         <AreasOfGuidanceSection />
@@ -49,7 +49,7 @@ export default function SummaryPage({}: PageProps) {
       <Container>
         <PricingSection />
         <AstrologerComparisonSection />
-      </Container>
+      </Container> */}
     </Box>
   );
 }

@@ -25,8 +25,8 @@ export function ChartItemFillSVG({
       />
       <defs>
         <linearGradient id={id} x1="90" y1="0" x2="90" y2="180" gradientUnits="userSpaceOnUse">
-          <stop stopColor={color} stopOpacity="1" />
-          <stop offset="0.5" stopColor="white" stopOpacity="0.5" />
+          <stop stopColor={color} stopOpacity="0.8" />
+          <stop offset="0.5" stopColor="white" stopOpacity="0.3" />
         </linearGradient>
       </defs>
     </svg>
