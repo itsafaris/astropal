@@ -12,9 +12,10 @@ import { ExampleQuestionsSection } from "@components/summary/ExampleQuestionsSec
 import { MediaCoverageSection } from "@components/summary/MediaCoverageSection";
 import { SimilarUsersLikeYouSection } from "@components/summary/SimilarUsersLikeYouSection";
 import { TestimonialsSection } from "@components/summary/TestimonialsSection";
-import { HeroSection } from "@components/summary/HeroSection";
 import { PricingSection } from "@components/summary/PricingSection";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
+import { HeroSection2 } from "@components/summary/HeroSection2";
+import { AstrologicalProfileSection } from "@components/summary/AstrologicalProfile";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -25,18 +26,14 @@ export default function SummaryPage({}: PageProps) {
   }, []);
 
   return (
-    <Box
-      py={4}
-      pb={24}
-      bgGradient="linear(to-b, bg.50, bg.100)"
-      color="bg.900"
-      scrollBehavior={"smooth"}
-    >
+    <Box py={4} pb={24} backgroundColor="bg.50" color="bg.900" scrollBehavior={"smooth"}>
       <Container>
         <TopNavigation />
       </Container>
 
-      <HeroSection quizState={quizState} />
+      <HeroSection2 quizState={quizState} />
+
+      <AstrologicalProfileSection quizState={quizState} />
 
       <Container>
         <AreasOfGuidanceSection />

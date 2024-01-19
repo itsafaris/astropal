@@ -16,6 +16,7 @@ import {
   DescribeYourNatalChart,
   NameSlide,
   SocialProofFiller,
+  AstrologerReadySlide,
 } from "@components/quizpage/slides.simple";
 import { NatalChartPreviewSlide } from "@components/quizpage/slide.natalChartPreview";
 import { FirstQuestionTrial } from "@components/quizpage/slide.firstTrialQuestion";
@@ -85,6 +86,7 @@ export default function OnboardingQuiz() {
             <YourSpiritualInvolvementSlide />
             <NameSlide />
             <FinilisingAstrologerSlide />
+            <AstrologerReadySlide />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>

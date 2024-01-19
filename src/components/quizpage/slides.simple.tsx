@@ -682,7 +682,9 @@ export function NameSlide() {
 }
 
 export function FinilisingAstrologerSlide() {
-  const [showInput, setShowInput] = useState(false);
+  const [navigationEnabled, setNavigationEnabled] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const { submitQuestion } = useQuiz();
 
   return (
     <Slide
@@ -690,28 +692,28 @@ export function FinilisingAstrologerSlide() {
       type="loading"
       duration={6}
       onLoadingCompleted={() => {
-        navigate("/summary");
+        setNavigationEnabled(true);
       }}
     >
       <ChatBubble
-        text="Thank you! I am now memorising details about you"
-        instant={showInput}
+        text="Thank you! Let me finalize your profile"
+        instant={showLoading}
         onFinishedTyping={() => {
-          setShowInput(true);
+          setShowLoading(true);
         }}
       />
-      {showInput && <Selector />}
+
+      {showLoading && <Selector />}
+      {navigationEnabled && <NextButton onClick={() => submitQuestion()}>Continue</NextButton>}
     </Slide>
   );
 }
 
 export function AstrologerReadySlide() {
-  const { submitQuestion } = useQuiz();
-
   return (
     <Slide id="astrologer-ready" type="filler">
       {({ quizState }) => {
-        const { yourZodiac } = getPersonalInfoFromState(quizState);
+        const { yourZodiac, firstName } = getPersonalInfoFromState(quizState);
         const theme = useTheme();
 
         return (
@@ -767,7 +769,8 @@ export function AstrologerReadySlide() {
               fontSize={"2xl"}
               color="white"
             >
-              Your Personal <br /> Astrologer Is Ready
+              {firstName}, <br />
+              Your Astrological Profile <br /> Is Ready
             </Text>
 
             <Text
@@ -782,7 +785,7 @@ export function AstrologerReadySlide() {
 
             <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"3xl"} />
 
-            <NextButton onClick={() => submitQuestion()}>Start using my astrologer</NextButton>
+            <NextButton onClick={() => navigate("/summary")}>Show me results</NextButton>
           </Flex>
         );
       }}
