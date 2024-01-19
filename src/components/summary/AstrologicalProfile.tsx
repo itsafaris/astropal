@@ -9,7 +9,7 @@ import { toTitleCase } from "@utils/string";
 
 import { CTALinkToPricing } from "./components";
 
-export function AstrologicalProfileSection({ quizState }: { quizState?: QuizStateParsed }) {
+export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
   const state = React.useMemo(() => {
     const res = quizState;
     if (!res) {
@@ -32,40 +32,32 @@ export function AstrologicalProfileSection({ quizState }: { quizState?: QuizStat
   }
 
   return (
-    <Box id="astrological-profile-section" my={20} bgGradient="linear(to-t, bg.50, #350956)">
+    <Box py={12} id="astrological-profile-section" bgGradient="linear(to-t, #170d28, bg.50)">
       <Container>
-        <Heading
-          textAlign={"center"}
-          fontWeight={"bold"}
-          mb={12}
-          mx={8}
-          fontSize={"2xl"}
-          color="white"
-        >
+        <Heading textAlign={"center"} fontWeight={"bold"} mx={8} fontSize={"3xl"} color="white">
           Your Astrological Profile Is Ready
         </Heading>
 
-        <Flex flexDirection={"column"} gap={3} p={4} borderRadius={"xl"}>
-          <Heading
-            px={4}
-            py={4}
-            fontWeight={"semibold"}
-            fontSize={{ base: "xl" }}
-            color="brand.700"
-            textAlign={"center"}
-          >
-            On average,{" "}
-            <Text as="span" color="green.400">
-              93%
-            </Text>{" "}
-            of our users report feeling less self-doubt and greater clarity in their lives within
-            just{" "}
-            <Text as="span" color="green.400">
-              14 days
-            </Text>{" "}
-            of consulting personalized astrologer.
-          </Heading>
+        <Heading
+          px={4}
+          py={4}
+          fontWeight={"semibold"}
+          fontSize={{ base: "xl" }}
+          color="brand.700"
+          textAlign={"center"}
+        >
+          On average,{" "}
+          <Text as="span" color="green.400">
+            93%
+          </Text>{" "}
+          of our users report feeling less self-doubt and greater clarity in their lives within just{" "}
+          <Text as="span" color="green.400">
+            14 days
+          </Text>{" "}
+          of consulting personalized astrologer.
+        </Heading>
 
+        <Flex flexDirection={"column"} gap={3} p={4} borderRadius={"xl"}>
           <Flex width={"full"} height={500} justifyContent={"center"} alignItems={"center"} p={4}>
             <Box
               height={1}
@@ -258,7 +250,7 @@ export function AstrologicalProfileSection({ quizState }: { quizState?: QuizStat
             <Box
               width={"full"}
               height={200}
-              bgGradient="linear(to-t, bg.50 20%, transparent)"
+              bgGradient="linear(to-t, #170d28 20%, transparent)"
               position={"absolute"}
               bottom={0}
               left={0}
@@ -266,7 +258,10 @@ export function AstrologicalProfileSection({ quizState }: { quizState?: QuizStat
             />
           </Flex>
         </Flex>
-        <CTALinkToPricing />
+
+        <Flex flexDirection={"row"} justifyContent={"center"}>
+          <CTALinkToPricing />
+        </Flex>
       </Container>
     </Box>
   );
