@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Heading, Flex, Grid, Stack, Container } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
 import { getZodiacSign } from "@services/zodiacService";
-import { HarmonyChart, COLORS } from "./HarmonyChart/HarmonyChart";
+import { HarmonyChart, COLORS } from "../HarmonyChart/HarmonyChart";
 
 import { NatalChart } from "../NatalChart";
 import { toTitleCase } from "@utils/string";

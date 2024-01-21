@@ -27,6 +27,7 @@ import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
 import { getPersonalInfoFromState } from "@utils/state";
+import { LifeSatisfactionScoreSlide } from "@components/quizpage/slide.lifeSatisfactionScore";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -86,6 +87,7 @@ export default function OnboardingQuiz() {
             <YourSpiritualInvolvementSlide />
             <NameSlide />
             <FinilisingAstrologerSlide />
+            <LifeSatisfactionScoreSlide />
             <AstrologerReadySlide />
           </Segment>
         </QuizUI>

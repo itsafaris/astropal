@@ -25,8 +25,8 @@ export function ChartItemFillSVG({
       />
       <defs>
         <linearGradient id={id} x1="90" y1="0" x2="90" y2="180" gradientUnits="userSpaceOnUse">
-          <stop stopColor={color} stopOpacity="0.8" />
-          <stop offset="0.5" stopColor="white" stopOpacity="0.3" />
+          <stop stopColor={color} stopOpacity="1" />
+          <stop offset="0.5" stopColor={color} stopOpacity="1" />
         </linearGradient>
       </defs>
     </svg>
@@ -36,9 +36,13 @@ export function ChartItemFillSVG({
 export function ChartItemStrokeSVG({
   width = `180px`,
   height = `180px`,
+  color = "white",
+  strokeWidth = 1,
 }: {
   width?: string;
   height?: string;
+  color?: string;
+  strokeWidth?: number;
 }) {
   return (
     <svg
@@ -49,8 +53,9 @@ export function ChartItemStrokeSVG({
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M163.649 117.512C160.02 143.886 147.756 159.358 133.365 168.253C118.952 177.162 102.36 179.5 90.0662 179.5C77.8382 179.5 61.2128 177.162 46.7497 168.253C32.3095 159.357 19.98 143.885 16.3509 117.512C13.4043 96.0997 18.4365 75.3906 26.4341 57.9707C34.4328 40.5487 45.3827 26.4498 54.2223 18.2702C58.0666 14.7129 63.7474 10.2621 70.1191 6.70375C76.4986 3.14098 83.5224 0.5 90.0662 0.5C96.6096 0.5 103.6 3.14071 109.946 6.70321C116.285 10.2614 121.933 14.7121 125.778 18.2702C134.617 26.4498 145.567 40.5487 153.566 57.9707C161.564 75.3906 166.596 96.0997 163.649 117.512Z"
-        stroke="white"
+        d="M164.095 117.574C160.448 144.077 148.11 159.668 133.602 168.636C119.092 177.605 102.407 179.95 90.0662 179.95C77.7911 179.95 61.0733 177.605 46.5137 168.636C31.9563 159.668 19.5521 144.077 15.9051 117.574C12.9437 96.0535 18.0027 75.2568 26.0252 57.783C34.0477 40.3089 45.0322 26.1611 53.9166 17.9399C57.7823 14.3629 63.4915 9.88961 69.8996 6.31086C76.3085 2.73168 83.4116 0.05 90.0662 0.05C96.7207 0.05 103.791 2.73165 110.166 6.31081C116.541 9.88953 122.218 14.3628 126.083 17.9399C134.968 26.1611 145.952 40.3089 153.975 57.783C161.997 75.2568 167.056 96.0535 164.095 117.574Z"
+        stroke={color}
+        strokeWidth={`${strokeWidth}px`}
       />
     </svg>
   );
@@ -67,14 +72,14 @@ export function ChartGridInnerSVG({
     <svg
       width={width}
       height={height}
-      viewBox="0 0 435 500"
+      viewBox="0 0 477 453"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M217.506 0V500M434.013 125L1 375M434.013 375L1 125"
+        d="M238.764 0V250M476.528 172.746L238.764 250M385.71 452.254L238.764 250M91.8178 452.254L238.764 250M1 172.746L238.764 250"
         stroke="white"
-        strokeWidth="0.5"
+        stroke-width="0.5"
       />
     </svg>
   );
@@ -91,14 +96,14 @@ export function ChartGridOuterSVG({
     <svg
       width={width}
       height={height}
-      viewBox="0 0 434 500"
+      viewBox="0 0 476 453"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M0.25 125.144L216.506 0.288675L432.763 125.144V374.856L216.506 499.711L0.25 374.856V125.144Z"
+        d="M0.529733 172.841L238 0.309014L475.47 172.841L430.117 312.423L384.765 452.004H91.2353L45.8825 312.423L0.529733 172.841Z"
         stroke="white"
-        strokeWidth="0.5"
+        stroke-width="0.5"
       />
     </svg>
   );

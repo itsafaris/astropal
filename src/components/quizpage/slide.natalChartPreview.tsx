@@ -76,7 +76,7 @@ function AstroChart(props: NatalChartProps) {
             )}
           </Flex>
 
-          <Flex display={"none"} my={6} flexDirection={"column"} alignItems={"center"}>
+          <Flex display={"n"} my={6} flexDirection={"column"} alignItems={"center"}>
             <Box>
               {data?.horoscope.CelestialBodies.all.map((it: any) => {
                 const pos = it.ChartPosition as ChartPosition;

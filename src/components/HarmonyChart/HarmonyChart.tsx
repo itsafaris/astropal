@@ -2,7 +2,8 @@ import React from "react";
 import { Box, BoxProps, Text } from "@chakra-ui/react";
 import { ChartItemFillSVG, ChartGridInnerSVG, ChartGridOuterSVG, ChartItemStrokeSVG } from "./svg";
 
-export const COLORS = ["#FEA301", "#FFBC01", "#FFF500", "#ADFF00", "#2BFF00"];
+// export const COLORS = ["red", "#FEA301", "#FFBC01", "#FFF500", "#ADFF00", "#2BFF00"];
+export const COLORS = ["red", "#FEA301", "#FFF500", "#ADFF00", "#2BFF00"];
 
 interface Item {
   id: string;
@@ -39,16 +40,16 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
       {scoreColor && (
         <>
           <Box
-            height={1}
-            width={1}
+            height={0.01}
+            width={0.01}
             borderRadius={"50%"}
             position={"absolute"}
             zIndex={0}
-            boxShadow={`0px 0px 150px 100px ${scoreColor}`}
-            opacity={0.7}
+            boxShadow={`0px 0px 50px 50px ${scoreColor}`}
+            opacity={0.5}
           />
 
-          <Box
+          {/* <Box
             height={1}
             width={1}
             borderRadius={"50%"}
@@ -56,10 +57,23 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
             zIndex={0}
             boxShadow={`0px 0px 75px 50px #00a8ff`}
             opacity={0.7}
+          /> */}
+
+          <Box
+            height={1}
+            width={1}
+            borderRadius={"50%"}
+            backgroundColor={"white"}
+            position={"absolute"}
+            transform={"translate(-50%, -50%)"}
+            zIndex={2}
+            boxShadow={"0px 0px 20px 20px white"}
+            opacity={0.6}
           />
         </>
       )}
 
+      {/* Titles */}
       <ItemRenderer
         opacity={1}
         items={enhancedItems.map((it) => ({ ...it, value: 5 }))}
@@ -82,85 +96,90 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
         zIndex={0}
         showTitle={false}
         showStroke={true}
+        titleColor="white"
+      />
+
+      {/* Fill */}
+      {/* <ItemRenderer
+        items={enhancedItems}
+        strokeEnabled={false}
+        fillEnabled={true}
+        maxItemSize={maxItemSize}
+        bottomOffset={itemBottomOffset}
+        zIndex={0}
+        showTitle={false}
+        opacity={0.2}
+        // fillColor={scoreColor ?? undefined}
+      /> */}
+
+      {/* Stroke */}
+      <ItemRenderer
+        items={enhancedItems}
+        strokeEnabled={true}
+        fillEnabled={false}
+        maxItemSize={maxItemSize}
+        bottomOffset={itemBottomOffset}
+        zIndex={0}
+        showTitle={false}
+        // strokeColor={scoreColor ?? undefined}
       />
 
       <ChartGridInner
-        opacity={0.3}
+        opacity={0.6}
         position={"absolute"}
-        transform={`translate(-50%, -50%)`}
-        size={gridSize}
+        transform={`translate(-50%, calc(-50% - 14px))`}
+        size={275}
         zIndex={0}
       />
 
       {Array.from(Array(5).keys()).map((_, idx) => {
         return (
           <React.Fragment key={idx}>
-            <ChartGridOuter
+            {/* <ChartGridOuter
+              opacity={0.03}
+              position={"absolute"}
+              transform={`translate(-50%, calc(-50% - 14px))`}
+              size={275}
+              zIndex={0}
+            /> */}
+            {/* <ChartGridOuter
               opacity={0.05}
               position={"absolute"}
-              transform={`translate(-50%, -50%)`}
-              size={300}
+              transform={`translate(-50%, calc(-50% - 14px))`}
+              size={225}
               zIndex={0}
             />
             <ChartGridOuter
               opacity={0.05}
               position={"absolute"}
-              transform={`translate(-50%, -50%)`}
-              size={250}
+              transform={`translate(-50%, calc(-50% - 14px))`}
+              size={175}
               zIndex={0}
             />
             <ChartGridOuter
               opacity={0.05}
               position={"absolute"}
-              transform={`translate(-50%, -50%)`}
-              size={200}
+              transform={`translate(-50%, calc(-50% - 14px))`}
+              size={125}
               zIndex={0}
             />
             <ChartGridOuter
               opacity={0.05}
               position={"absolute"}
-              transform={`translate(-50%, -50%)`}
-              size={150}
+              transform={`translate(-50%, calc(-50% - 14px))`}
+              size={75}
               zIndex={0}
-            />
-            <ChartGridOuter
-              opacity={0.05}
-              position={"absolute"}
-              transform={`translate(-50%, -50%)`}
-              size={100}
-              zIndex={0}
-            />
+            /> */}
           </React.Fragment>
         );
       })}
 
-      <ItemRenderer
-        items={enhancedItems}
-        strokeEnabled={true}
-        fillEnabled={true}
-        maxItemSize={maxItemSize}
-        bottomOffset={itemBottomOffset}
-        zIndex={1}
-        showTitle={false}
-      />
-
-      <Box
-        height={1}
-        width={1}
-        borderRadius={"50%"}
-        backgroundColor={"white"}
-        position={"absolute"}
-        transform={"translate(-50%, -50%)"}
-        zIndex={2}
-        boxShadow={"0px 0px 20px 20px white"}
-      />
-
-      {score && (
+      {/* {score && (
         <Text
           position={"absolute"}
           color={"black"}
           fontSize={"60px"}
-          fontWeight={"thin"}
+          fontWeight={"semibold"}
           zIndex={20}
           top={0}
           left={0}
@@ -168,7 +187,7 @@ export function HarmonyChart({ items, size, ...rest }: { items: Item[]; size: nu
         >
           {score}
         </Text>
-      )}
+      )} */}
     </Box>
   );
 }
@@ -181,6 +200,9 @@ function ItemRenderer({
   showTitle,
   showStroke = true,
   bottomOffset,
+  titleColor,
+  fillColor = "white",
+  strokeColor = "white",
   ...rest
 }: {
   items: EnhancedItem[];
@@ -191,6 +213,8 @@ function ItemRenderer({
   showTitle: boolean;
   showStroke?: boolean;
   titleColor?: string;
+  fillColor?: string;
+  strokeColor?: string;
 } & BoxProps) {
   return items.map((it, idx, all) => {
     const size = calcItemSize(it, items, maxItemSize);
@@ -209,10 +233,10 @@ function ItemRenderer({
       <Box key={it.id} position={"relative"} height={0} width={0} {...rest}>
         {fillEnabled && (
           <ChartItemFill
-            opacity={0.4}
+            opacity={1}
             key={`${it.id}-fill`}
             zIndex={Math.round((1 / it.value) * 10)}
-            fillColor={"white"}
+            fillColor={fillColor}
             {...commonProps}
           />
         )}
@@ -220,9 +244,9 @@ function ItemRenderer({
           <ChartItemStroke
             showStroke={showStroke}
             showTitle={showTitle}
-            titleColor={it.color}
+            titleColor={titleColor || it.color}
+            strokeColor={strokeColor}
             key={`${it.id}-stroke`}
-            zIndex={Math.round((1 / it.value) * 10)}
             {...commonProps}
           />
         )}
@@ -232,21 +256,17 @@ function ItemRenderer({
 }
 
 function ChartGridInner({ size, ...rest }: BoxProps & { size: number }) {
-  const sizeString = `${size}px`;
-
   return (
-    <Box height={sizeString} width={sizeString} {...rest}>
-      <ChartGridInnerSVG height={sizeString} width={sizeString} />
+    <Box height={`${size}px`} width={`${size * 1.05}px`} {...rest}>
+      <ChartGridInnerSVG height={`${size}px`} width={`${size * 1.05}px`} />
     </Box>
   );
 }
 
 function ChartGridOuter({ size, ...rest }: BoxProps & { size: number }) {
-  const sizeString = `${size}px`;
-
   return (
-    <Box height={sizeString} width={sizeString} {...rest}>
-      <ChartGridOuterSVG height={sizeString} width={sizeString} />
+    <Box height={`${size}px`} width={`${size * 1.05}px`} {...rest}>
+      <ChartGridOuterSVG height={`${size}px`} width={`${size * 1.05}px`} />
     </Box>
   );
 }
@@ -260,13 +280,42 @@ function ChartItemStroke({
   showTitle,
   showStroke = true,
   titleColor,
+  strokeColor = "white",
   ...rest
-}: ChartItemProps & { showTitle: boolean; showStroke?: boolean; titleColor?: string }) {
+}: ChartItemProps & {
+  showTitle: boolean;
+  showStroke?: boolean;
+  titleColor?: string;
+  strokeColor?: string;
+}) {
   const sizeString = `${size}px`;
+
+  function transformNumber(input: number): number {
+    if (input < 1 || input > 5) {
+      throw new Error("Input must be a number between 1 and 5");
+    }
+
+    const mapping: { [key: number]: number } = {
+      1: 5,
+      2: 3,
+      3: 2.3,
+      4: 2,
+      5: 1.4,
+    };
+
+    return mapping[input];
+  }
 
   return (
     <Box position="relative" height={sizeString} width={sizeString} {...rest}>
-      {showStroke && <ChartItemStrokeSVG height={sizeString} width={sizeString} />}
+      {showStroke && (
+        <ChartItemStrokeSVG
+          height={sizeString}
+          width={sizeString}
+          strokeWidth={transformNumber(item.value)}
+          color={strokeColor}
+        />
+      )}
 
       {showStroke && (
         <Box
