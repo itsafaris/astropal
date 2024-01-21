@@ -3,9 +3,6 @@ import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme, Stack } from "@chakra-ui/react";
 
-import orbGif from "@images/orb_animated_2.gif";
-import { StaticImage } from "gatsby-plugin-image";
-
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
   return (
@@ -44,30 +41,14 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
 
 export function ChatBubble(props: {} & TypewriterTextProps) {
   return (
-    <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={3}>
-      <Flex
-        borderRadius={"full"}
-        overflow={"hidden"}
-        height={"50px"}
-        width={"50px"}
-        boxShadow={"inset 0 0 50px 0 #ffc90014, 0 0 50px 0 #ffc90014"}
-        position={"relative"}
-      >
-        <Flex
-          borderRadius={"full"}
-          overflow={"hidden"}
-          height={"50px"}
-          width={"50px"}
-          position={"absolute"}
-          zIndex={-1}
-          boxShadow={"0 0 20px 0 black"}
-          opacity={0.4}
-        >
-          <img src={orbGif} />
-        </Flex>
-
-        <StaticImage style={{ opacity: 0.6 }} alt="" src="../../images/astro-avatar.png" />
-      </Flex>
+    <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={4}>
+      <Box
+        height={"30px"}
+        width={"30px"}
+        borderRadius={"50%"}
+        backgroundColor={"#cdfdff"}
+        boxShadow={"0px 0px 50px 0px #00abff, 0px 0px 10px 0px #0ab2ff"}
+      />
 
       <TypewriterText {...props} />
     </Flex>
@@ -83,7 +64,7 @@ export type TypewriterTextProps = {
 export function TypewriterText(props: TypewriterTextProps) {
   const { text, instant, onFinishedTyping, ...rest } = props;
 
-  const speed = 120;
+  const speed = 60;
 
   const [words, setWords] = useState<string[]>([]);
   const [nextWord, setNextWord] = useState("");
@@ -127,12 +108,10 @@ export function TypewriterText(props: TypewriterTextProps) {
 
   return (
     <Text
-      fontWeight="bold"
+      fontWeight="semibold"
       textAlign={"start"}
       width={"full"}
       fontSize={"xl"}
-      p={2}
-      borderRadius={"xl"}
       whiteSpace={"pre-wrap"}
       color="white"
       {...rest}

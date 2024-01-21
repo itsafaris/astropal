@@ -1,36 +1,12 @@
-import React from "react";
-import { Box, Text, Heading, Flex, Grid, Stack, Container } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Grid, Container } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
-import { getZodiacSign } from "@services/zodiacService";
+
 import { HarmonyChart, COLORS } from "./HarmonyChart/HarmonyChart";
 
-import { NatalChart } from "../NatalChart";
-import { toTitleCase } from "@utils/string";
-
 import { CTALinkToPricing } from "./components";
+import { AstrologicalProfile } from "../AstrologicalProfile";
 
 export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
-  const state = React.useMemo(() => {
-    const res = quizState;
-    if (!res) {
-      return;
-    }
-
-    res.yourZodiac = getZodiacSign(
-      new Date(
-        res.yourBirthDate.year,
-        res.yourBirthDate.month - 1,
-        res.yourBirthDate.day
-      ).toISOString()
-    );
-
-    return res;
-  }, [quizState]);
-
-  if (!state) {
-    return null;
-  }
-
   return (
     <Box py={12} id="astrological-profile-section" bgGradient="linear(to-t, #170d28, bg.50)">
       <Container>
@@ -57,7 +33,7 @@ export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
           of consulting personalized astrologer.
         </Heading>
 
-        <Flex flexDirection={"column"} gap={3} p={4} borderRadius={"xl"}>
+        <Flex flexDirection={"column"} gap={3} borderRadius={"xl"}>
           <Flex width={"full"} height={500} justifyContent={"center"} alignItems={"center"} p={4}>
             <HarmonyChart
               size={300}
@@ -119,157 +95,7 @@ export function HeroSection3({ quizState }: { quizState?: QuizStateParsed }) {
             </Text>
           </Grid>
 
-          <Flex
-            flexDirection={"column"}
-            gap={3}
-            backgroundColor={"whiteAlpha.100"}
-            p={3}
-            borderRadius={"xl"}
-            position={"relative"}
-            overflow={"hidden"}
-            fontStyle="italic"
-            fontFamily={"serif"}
-            fontWeight={"bold"}
-            color="whiteAlpha.600"
-          >
-            <Stack spacing={1} mx="auto" width={"100%"} p={4} borderRadius={"xl"}>
-              <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Text fontSize={"3xl"} fontWeight={"semibold"}>
-                  Name:
-                </Text>
-                <Text fontSize={"3xl"} fontWeight={"semibold"} color="white">
-                  {state.firstName}
-                </Text>
-              </Flex>
-
-              <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Text fontWeight={"semibold"}>Birth date:</Text>
-                <Text color="white">
-                  {" "}
-                  {state.yourBirthDate.day}-{state.yourBirthDate.month}-{state.yourBirthDate.year}
-                </Text>
-              </Flex>
-
-              <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Text fontWeight={"semibold"}>Birth time:</Text>
-                <Text color="white">
-                  {state.yourBirthTime.time24.hour}:{state.yourBirthTime.time24.minute}
-                </Text>
-              </Flex>
-
-              <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Text fontWeight={"semibold"}>Birth location:</Text>
-                <Text color="white">{state.yourBirthLocation.formattedText}</Text>
-              </Flex>
-            </Stack>
-
-            <Grid gap={3} alignItems={"center"} gridTemplateColumns={"1fr 1fr"}>
-              <Flex
-                p={4}
-                borderRadius={"xl"}
-                backgroundColor={"whiteAlpha.100"}
-                height={"full"}
-                width={"full"}
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                gap={4}
-              >
-                <Text fontWeight={"semibold"} fontSize={"lg"}>
-                  Zodiac:
-                </Text>
-
-                <Flex
-                  flexDirection={"column"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={1}
-                  height={"full"}
-                  width={"full"}
-                >
-                  {React.createElement(state.yourZodiac.svgComponent, {
-                    height: 100,
-                    width: "100%",
-                    fill: "transparent",
-                    stroke: "white",
-                    strokeWidth: 5,
-                  })}
-
-                  <Text
-                    fontWeight={"semibold"}
-                    fontFamily={"serif"}
-                    fontSize={"3xl"}
-                    fontStyle={"italic"}
-                    color="white"
-                  >
-                    {toTitleCase(state.yourZodiac.name)}
-                  </Text>
-                </Flex>
-              </Flex>
-
-              <Flex
-                p={4}
-                borderRadius={"xl"}
-                backgroundColor={"whiteAlpha.100"}
-                height={"full"}
-                width={"full"}
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                gap={4}
-              >
-                <Text fontWeight={"semibold"} fontSize={"lg"}>
-                  Natal chart:
-                </Text>
-
-                <Flex
-                  flexDirection={"column"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={1}
-                  height={"full"}
-                  width={"full"}
-                >
-                  <NatalChart
-                    date={state.yourBirthDate}
-                    time={state.yourBirthTime}
-                    location={state.yourBirthLocation}
-                    size={200}
-                  />
-                </Flex>
-              </Flex>
-            </Grid>
-
-            <Flex
-              p={4}
-              height={"full"}
-              width={"full"}
-              flexDirection={"column"}
-              alignItems={"flex-start"}
-              gap={4}
-              position={"relative"}
-            >
-              <Text fontWeight={"bold"} fontSize={"lg"}>
-                Description:
-              </Text>
-
-              <Text>
-                Your astrological profile is a cosmic snapshot of the positions of celestial bodies
-                at the moment of your birth, unveiling the unique energies that shape your
-                personality and life path. The sun sign represents your core identity, the moon
-                reflects your emotional instincts, and the rising sign signifies your outward
-                demeanor.
-              </Text>
-            </Flex>
-
-            <Box
-              width={"full"}
-              height={200}
-              bgGradient="linear(to-t, #170d28 20%, transparent)"
-              position={"absolute"}
-              bottom={0}
-              left={0}
-              zIndex={1}
-            />
-          </Flex>
+          <AstrologicalProfile quizState={quizState} />
         </Flex>
 
         <Flex flexDirection={"row"} justifyContent={"center"}>
