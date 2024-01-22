@@ -3,10 +3,12 @@ import { useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
-import { ChatBubble, TypewriterText } from "./components";
+import { TypewriterText } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
 import { getOpenaiService, isApiError } from "@services/openaiService";
-import { Box } from "@chakra-ui/react";
+import { Flex, Fade } from "@chakra-ui/react";
+
+import { Orb } from "@components/Orb";
 
 export function NatalChartInterpreter(props: { question: string; onFinishedAnswer?: () => void }) {
   const state = useQuizSnapshot();
@@ -48,15 +50,30 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
   }, [props.question]);
 
   return (
-    <Box>
-      <TypewriterText
-        text={interpretation || "Analysing your Natal Chart..."}
-        onFinishedTyping={() => {
-          if (interpretation) {
-            props.onFinishedAnswer?.();
-          }
-        }}
-      />
-    </Box>
+    <Flex width={"full"} justifyContent={"center"} alignItems={"center"} flexDirection={"column"}>
+      <Fade
+        in={!Boolean(interpretation)}
+        unmountOnExit={true}
+        transition={{ enter: { duration: 1 }, exit: { duration: 0.4 } }}
+      >
+        <Orb size={150} enableAnimation />
+      </Fade>
+
+      <Fade in={Boolean(interpretation)} transition={{ enter: { duration: 1, delay: 0.4 } }}>
+        <TypewriterText
+          fontSize={"xl"}
+          fontStyle={"italic"}
+          fontWeight={"bold"}
+          color="white"
+          fontFamily={"serif"}
+          text={interpretation || "Analysing your Natal Chart..."}
+          onFinishedTyping={() => {
+            if (interpretation) {
+              props.onFinishedAnswer?.();
+            }
+          }}
+        />
+      </Fade>
+    </Flex>
   );
 }

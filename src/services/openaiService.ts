@@ -112,9 +112,16 @@ async function fetchCompletion(input: {
 }
 
 const serviceMock: Service = {
-  fetchAnswer: async (natalChart, question) => {
-    const prompt = createPrompt(natalChart, question);
-    return "THIS IS A MOCKED ANSWER: You're a passionate leader, adventurous at heart, caring, practical-minded, and you value security and personal growth. Sometimes, you experience internal conflicts about freedom versus responsibility.";
+  fetchAnswer: async () => {
+    return new Promise((res) => {
+      setTimeout(
+        () =>
+          res(
+            "THIS IS A MOCKED ANSWER: You're a passionate leader, adventurous at heart, caring, practical-minded, and you value security and personal growth. Sometimes, you experience internal conflicts about freedom versus responsibility."
+          ),
+        2000
+      );
+    });
   },
 
   stream: (_natalChart, _question, onAnswer) => {

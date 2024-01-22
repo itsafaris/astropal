@@ -2,6 +2,7 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme, Stack } from "@chakra-ui/react";
+import { Orb } from "@components/Orb";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -42,13 +43,7 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
 export function ChatBubble(props: {} & TypewriterTextProps) {
   return (
     <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={4}>
-      <Box
-        height={"30px"}
-        width={"30px"}
-        borderRadius={"50%"}
-        backgroundColor={"#cdfdff"}
-        boxShadow={"0px 0px 50px 0px #00abff, 0px 0px 10px 0px #0ab2ff"}
-      />
+      <Orb />
 
       <TypewriterText {...props} />
     </Flex>
