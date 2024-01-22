@@ -323,6 +323,7 @@ export function DescribeYourNatalChart() {
           setShowAdvice(true);
         }}
       />
+
       {showAdvice && (
         <NatalChartInterpreter
           question="What is my personality like? (do not mention any planets or signs, only tell very briefly about my personality)"
@@ -331,6 +332,7 @@ export function DescribeYourNatalChart() {
           }}
         />
       )}
+
       {showInput && (
         <NextButton
           onClick={() => {

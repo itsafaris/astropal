@@ -19,7 +19,7 @@ const predefinedQuestions = [
   },
   {
     text: "What are my challenges in relationships?",
-    theme: "Love  💖",
+    theme: "Relationships  💖",
     color: "red",
   },
 ];
@@ -55,7 +55,9 @@ export function FirstQuestionTrial() {
 
           {finishedAnswer && (
             <>
-              <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
+              <NextButton mt={8} onClick={() => submitQuestion()}>
+                Continue
+              </NextButton>
               {answeredQuestions.length < predefinedQuestions.length && (
                 <Button
                   variant="text"
@@ -80,13 +82,20 @@ export function FirstQuestionTrial() {
           />
           {showInput && (
             <>
-              <Flex mb={6} flexDirection={"column"} gap={3} alignItems={"center"}>
-                <Text color="whiteAlpha.600" textAlign={"center"} maxWidth={"70%"} mx="auto">
+              <Flex mb={4} flexDirection={"column"} gap={1} alignItems={"center"}>
+                <Text
+                  color="whiteAlpha.600"
+                  textAlign={"center"}
+                  maxWidth={"70%"}
+                  mx="auto"
+                  lineHeight={"normal"}
+                >
                   Click on a question that you would like to have answered.
                 </Text>
-                <ArrowDownIcon color="whiteAlpha.600" fontSize={"3xl"} />
+                <ArrowDownIcon color="whiteAlpha.600" fontSize={"2xl"} />
               </Flex>
-              <Flex flexDirection={"column"} gap={3} alignItems={"center"}>
+
+              <Flex flexDirection={"column"} gap={2} alignItems={"center"}>
                 {predefinedQuestions.map((q) => {
                   return (
                     <Question
