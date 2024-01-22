@@ -16,6 +16,8 @@ export type Time = {
   time24: Time24;
 };
 
+export type DateValue = { year: number; month: number; day: number };
+
 export function formatTo24Hour(timeObj: { hour: number; meridiem: string; minute: number }): {
   hour: number;
   minute: number;
@@ -38,4 +40,12 @@ export function createTime(input: TimeAmPm): Time {
     meridiem: input.meridiem,
     time24: formatTo24Hour(input),
   };
+}
+
+export function getReadableDate(date: DateValue): string {
+  return `${date.day}/${date.month}/${date.year}`;
+}
+
+export function getReadableTime(time: Time): string {
+  return `${time.hour}:${time.minute} ${time.meridiem}`;
 }

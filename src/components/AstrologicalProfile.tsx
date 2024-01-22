@@ -35,6 +35,7 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
       flexDirection={"column"}
       backgroundColor={"white"}
       p={2}
+      pb={0}
       position={"relative"}
       fontStyle="italic"
       fontFamily={"serif"}
