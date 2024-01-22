@@ -1,12 +1,14 @@
 import React from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Flex, Text, useTheme } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
 import { getZodiacSign } from "@services/zodiacService";
 
 import { NatalChart } from "./NatalChart";
+import { getReadableDate, getReadableTime } from "@utils/dates";
 import { toTitleCase } from "@utils/string";
 
 export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed }) {
+  const theme = useTheme();
   const state = React.useMemo(() => {
     const res = quizState;
     if (!res) {
@@ -32,108 +34,64 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
     <Flex
       flexDirection={"column"}
       backgroundColor={"white"}
-      px={6}
-      py={4}
+      p={2}
       position={"relative"}
       fontStyle="italic"
       fontFamily={"serif"}
       color="black"
+      borderTopRadius={"xl"}
     >
-      <Box
-        position={"absolute"}
-        height={100}
-        width={100}
-        borderRadius={"50%"}
-        top={100}
-        left="50%"
-        transform={"translate(-50%, -50%)"}
-        boxShadow={`0px 0px 500px 150px #89d1ff45`}
-        zIndex={-1}
-      />
+      <Flex
+        flexDirection={"column"}
+        borderTopRadius={"lg"}
+        border={`1px solid ${theme.colors.bg[700]}`}
+        p={3}
+      >
+        <NatalChart
+          date={state.yourBirthDate}
+          time={state.yourBirthTime}
+          location={state.yourBirthLocation}
+          size={250}
+        />
 
-      <Flex height={"full"} width={"full"} flexDirection={"column"} alignItems={"flex-start"}>
-        <Flex
-          flexDirection={"column"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          gap={1}
-          height={"full"}
-          width={"full"}
-        >
-          <NatalChart
-            date={state.yourBirthDate}
-            time={state.yourBirthTime}
-            location={state.yourBirthLocation}
-            size={250}
-            // onComplete={setData}
-          />
-        </Flex>
-      </Flex>
-
-      <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-        <Text fontSize={"2xl"} fontWeight={"bold"}>
-          Zodiac:
-        </Text>
-
-        <Flex flexDirection={"row"} alignItems={"center"} gap={3}>
-          {React.createElement(state.yourZodiac.svgComponent, {
-            height: 22,
-            width: "100%",
-            fill: "transparent",
-            stroke: "black",
-            strokeWidth: 8,
-          })}
-
-          <Text fontSize={"2xl"} color="black" fontWeight={"bold"}>
-            {toTitleCase(state.yourZodiac.name)}
+        <Box mb={4} textAlign={"center"} color="black" fontWeight={"bold"}>
+          <Text fontSize={"3xl"}>{toTitleCase(state.yourZodiac.name)}</Text>
+          <Text fontSize={"md"} textTransform={"uppercase"}>
+            {getReadableDate(state.yourBirthDate)}
+            {", "} {getReadableTime(state.yourBirthTime)}
           </Text>
-        </Flex>
-      </Flex>
+          <Text fontSize={"md"}>{state.yourBirthLocation.formattedText}</Text>
+        </Box>
 
-      <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-        <Text>Birth date:</Text>
-
-        <Text color="black" fontWeight={"semibold"}>
-          {" "}
-          {state.yourBirthDate.day}-{state.yourBirthDate.month}-{state.yourBirthDate.year}
-        </Text>
-      </Flex>
-
-      <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-        <Text>Birth time:</Text>
-
-        <Text color="black" fontWeight={"semibold"}>
-          {state.yourBirthTime.time24.hour}:{state.yourBirthTime.time24.minute}
-        </Text>
-      </Flex>
-
-      <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-        <Text>Birth location:</Text>
-
-        <Text color="black" textAlign={"right"} fontWeight={"semibold"}>
-          {state.yourBirthLocation.formattedText}
-        </Text>
-      </Flex>
-
-      <Flex mt={3} flexDirection={"column"} alignItems={"flex-start"} gap={1}>
-        <Text>Description:</Text>
-
-        <Text color="black">
+        <Text height={110} overflow={"hidden"} color="black">
           Your astrological profile is a cosmic snapshot of the positions of celestial bodies at the
           moment of your birth, unveiling the unique energies that shape your personality and life
-          path
+          path. The sun sign represents your core identity, the moon reflects your emotional
+          instincts, and the rising sign signifies your outward demeanor.
         </Text>
-      </Flex>
 
-      <Box
-        width={"full"}
-        height={200}
-        bgGradient="linear(to-t, bg.50 0%, transparent)"
-        position={"absolute"}
-        bottom={0}
-        left={0}
-        zIndex={1}
-      />
+        <Box
+          width={"full"}
+          height={110}
+          bgGradient="linear(to-t, bg.50 15%, transparent)"
+          position={"absolute"}
+          bottom={0}
+          left={0}
+          zIndex={1}
+        />
+
+        <Box
+          position={"absolute"}
+          height={100}
+          width={100}
+          borderRadius={"50%"}
+          top={100}
+          left="50%"
+          transform={"translate(-50%, -50%)"}
+          boxShadow={`0px 0px 100px 80px #89d1ff45`}
+          zIndex={-1}
+        />
+      </Flex>
     </Flex>
   );
 }
