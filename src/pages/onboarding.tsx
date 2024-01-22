@@ -27,6 +27,8 @@ import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
 import { getPersonalInfoFromState } from "@utils/state";
+import { LifeSatisfactionSlide } from "@components/quizpage/slide.lifeSatisfaction";
+import { LifeSatisfactionScoreSlide } from "@components/quizpage/slide.lifeSatisfactionScore";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -77,14 +79,16 @@ export default function OnboardingQuiz() {
             <NatalChartPreviewSlide />
             <DescribeYourNatalChart />
             <FirstQuestionTrial />
-            <SatisfactionScoreSlide />
+            {/* <SatisfactionScoreSlide />
             <AsnwerLongevity />
             <SocialProofFiller />
-            <IntroToFinetuningPart />
-            <YourPersonalityTypeSlide />
+            <IntroToFinetuningPart /> */}
+            <LifeSatisfactionSlide />
+            <LifeSatisfactionScoreSlide />
+            {/* <YourPersonalityTypeSlide />
             <YourValuesAndPrioritiesSlide />
-            <YourSpiritualInvolvementSlide />
-            <NameSlide />
+            <YourSpiritualInvolvementSlide /> */}
+            {/* <NameSlide /> */}
             <FinilisingAstrologerSlide />
             <AstrologerReadySlide />
           </Segment>

@@ -387,7 +387,7 @@ export function IntroToFinetuningPart() {
 
             <Text fontWeight={"semibold"} fontSize="md">
               <MoonIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
-              Prepare a plan for the spiritual grow
+              Prepare a plan for the spiritual growth
             </Text>
           </Stack>
 

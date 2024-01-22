@@ -56,7 +56,7 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
         unmountOnExit={true}
         transition={{ enter: { duration: 1 }, exit: { duration: 0.4 } }}
       >
-        <Orb size={150} enableAnimation />
+        <Orb size={200} enableAnimation />
       </Fade>
 
       <Fade in={Boolean(interpretation)} transition={{ enter: { duration: 1, delay: 0.4 } }}>

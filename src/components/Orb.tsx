@@ -26,7 +26,6 @@ export function Orb({
       height={sizeString}
       width={sizeString}
       borderRadius={"50%"}
-      // backgroundColor={"#cdfdff"}
       border={"3px solid #cdfdff"}
       boxShadow={
         "inset 0px 0px 10px 5px #00abff, 0px 0px 50px 0px #00abff, 0px 0px 10px 0px #0ab2ff"
