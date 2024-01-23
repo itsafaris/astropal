@@ -79,10 +79,10 @@ export default function OnboardingQuiz() {
             <NatalChartPreviewSlide />
             <DescribeYourNatalChart />
             <FirstQuestionTrial />
-            {/* <SatisfactionScoreSlide />
+            <SatisfactionScoreSlide />
             <AsnwerLongevity />
             <SocialProofFiller />
-            <IntroToFinetuningPart /> */}
+            <IntroToFinetuningPart />
             <LifeSatisfactionSlide />
             <LifeSatisfactionScoreSlide />
             {/* <YourPersonalityTypeSlide />
