@@ -1,64 +1,107 @@
-import { Box, Container, Text, Flex, Heading } from "@chakra-ui/react";
-
-import { StaticImage } from "gatsby-plugin-image";
-import { ArrowDownIcon } from "@chakra-ui/icons";
-
+import { Box, Text, Heading, Flex, Grid, Container } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
 
+import { HarmonyChart, COLORS } from "./HarmonyChart/HarmonyChart";
+
 import { CTALinkToPricing } from "./components";
+import { AstrologicalProfile } from "../AstrologicalProfile";
 
 export function HeroSection2({ quizState }: { quizState?: QuizStateParsed }) {
   return (
-    <Box id="hero-section" as="section">
+    <Box py={12} id="astrological-profile-section" bgGradient="linear(to-t, #170d28, bg.50)">
       <Container>
-        <Flex flexDirection={"column"} alignItems={"center"} gap={8}>
-          <Text
-            fontWeight="bold"
-            textAlign={"center"}
-            width={"full"}
-            fontSize={"3xl"}
-            color="white"
-          >
-            Lets Use Your Profile To Maximize The Harmony In Your Life.
-          </Text>
+        <Heading textAlign={"center"} fontWeight={"bold"} mx={8} fontSize={"3xl"} color="white">
+          Your Astrological Profile Is Ready
+        </Heading>
 
-          <ProgressChart />
+        <Heading
+          px={4}
+          py={4}
+          fontWeight={"semibold"}
+          fontSize={{ base: "xl" }}
+          color="brand.700"
+          textAlign={"center"}
+        >
+          On average,{" "}
+          <Text as="span" color="green.400">
+            93%
+          </Text>{" "}
+          of our users report feeling less self-doubt and greater clarity in their lives within just{" "}
+          <Text as="span" color="green.400">
+            14 days
+          </Text>{" "}
+          of consulting personalized astrologer.
+        </Heading>
 
-          <Flex flexDirection={"column"} alignItems={"center"} gap={3}>
-            <Text textAlign={"center"} width={"full"} fontSize={"md"} fontWeight={"bold"}>
-              Scroll down to find out
-            </Text>
-            <ArrowDownIcon fontSize={"3xl"} />
+        <Flex flexDirection={"column"} gap={3} borderRadius={"xl"}>
+          <Flex width={"full"} height={500} justifyContent={"center"} alignItems={"center"} p={4}>
+            <HarmonyChart
+              size={300}
+              items={[
+                {
+                  id: "a",
+                  title: "Personal growth",
+                  value: 1,
+                },
+                {
+                  id: "b",
+                  title: "Career",
+                  value: 5,
+                },
+                {
+                  id: "c",
+                  title: "Timing",
+                  value: 3,
+                },
+                {
+                  id: "d",
+                  title: "Emotional well-being",
+                  value: 2,
+                },
+                {
+                  id: "e",
+                  title: "Relationship",
+                  value: 3,
+                },
+                {
+                  id: "f",
+                  title: "Something",
+                  value: 3,
+                },
+              ]}
+            />
           </Flex>
 
+          <Grid
+            mx="auto"
+            my={3}
+            alignItems={"center"}
+            gap={2}
+            gridTemplateColumns={"auto 1fr auto"}
+            maxWidth={300}
+            width={"100%"}
+          >
+            <Text fontWeight={"bold"} color="whiteAlpha.700">
+              Low
+            </Text>
+            <Box
+              height={"10px"}
+              width={"full"}
+              borderRadius={6}
+              bgGradient={`linear(to-r, ${COLORS[0]}, ${COLORS[COLORS.length - 1]})`}
+            />
+            <Text fontWeight={"bold"} color="whiteAlpha.700">
+              High
+            </Text>
+          </Grid>
+
+          <AstrologicalProfile quizState={quizState} />
+        </Flex>
+
+        <Flex flexDirection={"row"} justifyContent={"center"}>
           <CTALinkToPricing />
         </Flex>
       </Container>
-    </Box>
-  );
-}
-
-export function ProgressChart() {
-  return (
-    <Box p={2} bg="teal.800" borderRadius={"xl"}>
-      <Heading px={4} py={4} fontWeight={"semibold"} fontSize={{ base: "lg" }} color="brand.700">
-        On average,{" "}
-        <Text as="span" color="green.400">
-          93%
-        </Text>{" "}
-        of our users report feeling less self-doubt and greater clarity in their lives within just{" "}
-        <Text as="span" color="green.400">
-          21 days
-        </Text>{" "}
-        using Astropal.
-      </Heading>
-
-      <Box mt={4} overflow={"hidden"}>
-        <StaticImage
-          alt="Clarity increase when using astrologer guidance chart"
-          src="../../images/clarity_chart.png"
-        />
-      </Box>
     </Box>
   );
 }

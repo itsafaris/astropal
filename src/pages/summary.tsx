@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 import { PageProps } from "gatsby";
 
 import { TopNavigation } from "@components/topnavigation";
@@ -15,7 +15,6 @@ import { TestimonialsSection } from "@components/summary/TestimonialsSection";
 import { PricingSection } from "@components/summary/PricingSection";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 import { HeroSection2 } from "@components/summary/HeroSection2";
-import { HeroSection3 } from "@components/summary/HeroSection3";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -33,13 +32,61 @@ export default function SummaryPage({}: PageProps) {
         </Container>
       </Box>
 
-      <HeroSection3 quizState={quizState} />
-      {/* <HeroSection2 quizState={quizState} />
+      {/* <HeroSection2 quizState={quizState} /> */}
+
+      <Container
+        border={"1px solid white"}
+        height={500}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text textAlign={"center"} fontSize={"3xl"} color="white">
+          Highly personalized title with a BIG promise
+        </Text>
+      </Container>
+
+      <Container
+        border={"1px solid white"}
+        height={500}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text textAlign={"center"} fontSize={"3xl"} color="white">
+          Chart showing self-discovery progress when you follow the guide
+        </Text>
+      </Container>
+
+      <Container
+        border={"1px solid white"}
+        height={500}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text textAlign={"center"} fontSize={"3xl"} color="white">
+          No more issues if you follow the guide
+        </Text>
+      </Container>
+
+      <Container
+        border={"1px solid white"}
+        height={500}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text textAlign={"center"} fontSize={"3xl"} color="white">
+          App features explained. Next to each feature show a perfect example of an insight, chat
+          and etc
+        </Text>
+      </Container>
 
       <Container>
-        <AreasOfGuidanceSection />
-        <ExampleQuestionsSection />
-        <SimilarUsersLikeYouSection />
+        {/* <AreasOfGuidanceSection /> */}
+        {/* <ExampleQuestionsSection /> */}
+        {/* <SimilarUsersLikeYouSection /> */}
         <TestimonialsSection />
         <MediaCoverageSection />
       </Container>
@@ -49,7 +96,19 @@ export default function SummaryPage({}: PageProps) {
       <Container>
         <PricingSection />
         <AstrologerComparisonSection />
-      </Container> */}
+      </Container>
+
+      <Container
+        border={"1px solid white"}
+        height={500}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text textAlign={"center"} fontSize={"3xl"} color="white">
+          Final CTA
+        </Text>
+      </Container>
     </Box>
   );
 }
