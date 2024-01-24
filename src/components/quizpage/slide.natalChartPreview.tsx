@@ -18,7 +18,7 @@ export function NatalChartPreviewSlide() {
         return (
           <Box textColor={"white"}>
             <ChatBubble
-              text={`Here is a preview of your Astrological Profile! We will use it as our foundation going forward.`}
+              text={`Here is a preview of your Natal Chart! We will use it as our foundation going forward.`}
               onFinishedTyping={() => {
                 setShowInput(true);
               }}

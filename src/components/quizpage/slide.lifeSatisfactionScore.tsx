@@ -1,23 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Slide, useQuiz } from "@martynasj/quiz-lib";
-import {
-  Button,
-  Flex,
-  Grid,
-  chakra,
-  shouldForwardProp,
-  Text,
-  Stack,
-  Box,
-  Fade,
-} from "@chakra-ui/react";
+import { Box, Fade } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { ChatBubble, NextButton } from "./components";
-import { Orb } from "@components/Orb";
+import { ChatBubble } from "./components";
+import { Orb2 } from "@components/Orb";
 
 export function LifeSatisfactionScoreSlide() {
   const [showInput, setShowInput] = React.useState(false);
-  const { submitQuestion } = useQuiz();
 
   return (
     <Slide id="life-satisfaction-score" type="filler">
@@ -93,7 +82,14 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
 
   return (
     <Box position={"relative"}>
-      <Orb size={200} position={"absolute"} zIndex={0} left={"11px"} top={"11px"} enableAnimation />
+      <Orb2
+        size={200}
+        position={"absolute"}
+        zIndex={0}
+        left={"11px"}
+        top={"11px"}
+        enableAnimation
+      />
       <SpinnerCircleSvg
         svgContainerProps={{ width: "222px", height: "222px" }}
         value={loadingValue}

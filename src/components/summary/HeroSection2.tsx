@@ -1,7 +1,7 @@
 import { Box, Text, Heading, Flex, Grid, Container } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
 
-import { HarmonyChart, COLORS } from "./HarmonyChart/HarmonyChart";
+import { HarmonyChart, COLORS } from "../HarmonyChart/HarmonyChart";
 
 import { CTALinkToPricing } from "./components";
 import { AstrologicalProfile } from "../AstrologicalProfile";

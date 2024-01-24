@@ -6,15 +6,11 @@ import { TopNavigation } from "@components/topnavigation";
 import { loadQuizState } from "@utils/localStorage";
 import { QuizStateParsed } from "@utils/state";
 
-import { AreasOfGuidanceSection } from "@components/summary/AreasOfGuidanceSection";
 import { AstrologerComparisonSection } from "@components/summary/AstrologerComparisonSection";
-import { ExampleQuestionsSection } from "@components/summary/ExampleQuestionsSection";
 import { MediaCoverageSection } from "@components/summary/MediaCoverageSection";
-import { SimilarUsersLikeYouSection } from "@components/summary/SimilarUsersLikeYouSection";
 import { TestimonialsSection } from "@components/summary/TestimonialsSection";
 import { PricingSection } from "@components/summary/PricingSection";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
-import { HeroSection2 } from "@components/summary/HeroSection2";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -25,7 +21,7 @@ export default function SummaryPage({}: PageProps) {
   }, []);
 
   return (
-    <Box pb={24} backgroundColor="#170d28" color="bg.900" scrollBehavior={"smooth"}>
+    <Box pb={24} backgroundColor="bg.50" color="bg.900" scrollBehavior={"smooth"}>
       <Box backgroundColor="bg.50">
         <Container>
           <TopNavigation />
