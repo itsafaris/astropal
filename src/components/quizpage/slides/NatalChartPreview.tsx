@@ -4,9 +4,9 @@ import { Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Box } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
-import { ChatBubble, NextButton } from "./components";
+import { ChatBubble, NextButton } from "../components";
 
-import { AstrologicalProfile } from "../AstrologicalProfile";
+import { AstrologicalProfile } from "../../AstrologicalProfile";
 
 export function NatalChartPreviewSlide() {
   const [showInput, setShowInput] = React.useState(false);

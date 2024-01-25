@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
@@ -10,7 +10,7 @@ export function Head() {
   const { brandName } = useSiteMetadata();
   return (
     <SEO
-      title={`Find Your Life's Answers With a Personalized Astrologer - ${brandName}`}
+      title={`Get a personalized self-discovery guide based on astrology - ${brandName}`}
       description="Begin your AstroPal journey and unlock cosmic secrets for love and connection. Take our quiz to reveal personalized astrological and numerological insights for your relationships."
     />
   );
@@ -19,9 +19,11 @@ export function Head() {
 export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
-      <Box py={6} px={4} maxWidth="md" mx="auto">
+      <Container>
         <TopNavigation />
+      </Container>
 
+      <Container>
         <Flex flexDirection={"column"} gap={6}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Flex
@@ -60,8 +62,8 @@ export default function IndexPage() {
             </Flex>
           </Flex>
 
-          <Heading as="h1" size="xl" textAlign="center" color="white">
-            Find Your Life's <br /> Answers With a <br /> Personalized <br /> Astrologer
+          <Heading as="h1" size="xl" textAlign="center" color="white" maxWidth={400} mx="auto">
+            Get a Personalized Self-Discovery Guide Based On Astrology
           </Heading>
 
           <Text fontSize="md" textAlign="center" color="bg.700">
@@ -78,7 +80,7 @@ export default function IndexPage() {
             </Link>
           </Flex>
         </Flex>
-      </Box>
+      </Container>
     </Box>
   );
 }
