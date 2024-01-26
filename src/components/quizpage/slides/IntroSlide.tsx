@@ -1,7 +1,9 @@
 import React from "react";
-import { Callout, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Slide, useQuiz } from "@martynasj/quiz-lib";
 
 import { ChatBubble, NextButton } from "../components";
+import { Flex, Stack, Text } from "@chakra-ui/react";
+import { StaticImage } from "gatsby-plugin-image";
 
 export function IntroSlide() {
   const [showInput, setShowInput] = React.useState(false);
@@ -10,7 +12,7 @@ export function IntroSlide() {
   return (
     <Slide id="intro" type="filler">
       <ChatBubble
-        text={`👋 Hey, nice to meet you!\n\nIn order to provide you with astrological insights, we need to create your Natal Chart first.`}
+        text={`Hey, there! 👋 We have helped more than 31000 souls to explore and understand themselves better so we can help you too. By the end of the quiz you will have:`}
         instant={showInput}
         onFinishedTyping={() => {
           setTimeout(() => {
@@ -20,16 +22,46 @@ export function IntroSlide() {
       />
       {showInput && (
         <>
-          <Callout emoji="What is a Natal Chart?">
-            It's a personalized astrology map based on your birth moment, helping you understand
-            your personality and life journey.
-          </Callout>
+          <Stack textAlign={"center"} color="white" fontSize={"lg"}>
+            <Text>
+              1. Created full{" "}
+              <Text as="span" color="brand.600" fontWeight={"bold"}>
+                Astrological Profile
+              </Text>
+            </Text>
+            <Text>
+              2. Identified{" "}
+              <Text as="span" color="brand.600" fontWeight={"bold"}>
+                Life Challenges
+              </Text>
+            </Text>
+            <Text>
+              3. Crafted{" "}
+              <Text as="span" color="brand.600" fontWeight={"bold"}>
+                Self-Discovery Guide
+              </Text>
+            </Text>
+          </Stack>
+
+          <Flex
+            my={5}
+            height={100}
+            width={100}
+            borderRadius={"50%"}
+            overflow={"hidden"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            mx={"auto"}
+          >
+            <StaticImage alt="" src="../../../images/calm-woman-2.png" />
+          </Flex>
+
           <NextButton
             onClick={() => {
               submitQuestion();
             }}
           >
-            Let's do it
+            Continue
           </NextButton>
         </>
       )}
