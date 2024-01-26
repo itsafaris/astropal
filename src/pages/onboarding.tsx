@@ -83,7 +83,7 @@ export default function OnboardingQuiz() {
             {/* <SatisfactionScoreSlide /> */}
             <AsnwerLongevity />
             <FinetuningSavingSlide />
-            <SocialProofFiller />
+            {/* <SocialProofFiller /> */}
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
             <RelationshipScore />
