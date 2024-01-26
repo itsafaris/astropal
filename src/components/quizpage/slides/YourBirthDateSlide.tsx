@@ -25,7 +25,7 @@ export function YourBirthDateSlide() {
             submitQuestion();
           }}
         >
-          Next
+          Continue
         </NextButton>
       )}
     </Slide>

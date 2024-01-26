@@ -31,7 +31,7 @@ export function YourBirthTimeSlide() {
             submitQuestion();
           }}
         >
-          Next
+          Continue
         </NextButton>
       )}
     </Slide>

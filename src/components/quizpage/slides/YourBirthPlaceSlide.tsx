@@ -28,7 +28,7 @@ export function YourBirthPlaceSlide() {
               submitQuestion();
             }}
           >
-            Next
+            Continue
           </NextButton>
         </>
       )}
