@@ -14,11 +14,11 @@ export function AsnwerLongevity() {
       options={[
         { text: "Shorter and to-the-point", icon: "💬" },
         { text: "Just as they are now", icon: "👌" },
-        { text: "More detailed and elaborate", icon: "📝" },
+        { text: "Longer and detailed", icon: "📝" },
       ]}
     >
       <ChatBubble
-        text="Ok. How do you prefer my responses to your questions?"
+        text="Before we continue, how you'd like our insights delivered as we move forward? We want to make sure it's just right for you!"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
