@@ -12,7 +12,7 @@ export function IntroToFinetuningPart() {
   return (
     <Slide id="intro-to-finetuning-part" type="filler">
       <ChatBubble
-        text={`In order to deliver you the best advice possible, I will ask you a few more questions. This time - about your personality 🧘‍♂️.`}
+        text={`To prepare your Self-Discovery guide, we need to identify the Life Challenges you face. Shall we begin? 🌿`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
@@ -21,31 +21,23 @@ export function IntroToFinetuningPart() {
 
       {showInput && (
         <>
-          <Text
-            color="brand.700"
-            fontSize={"xl"}
-            fontWeight={"bold"}
-            textAlign={"center"}
-            maxW={200}
-            mx="auto"
-          >
-            Knowing you better will allow me to:
-          </Text>
-
-          <Stack my={10} alignItems={"start"} color="brand.700">
-            <Text fontWeight={"semibold"} fontSize="md">
-              <InfinityIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
-              Answer all the questions you have
+          <Stack mb={6} alignItems={"center"} color="teal.400">
+            <Text fontWeight={"semibold"} fontSize="lg">
+              <BoltIcon color="brand.500" height={"20px"} width={"20px"} mr={1} />
+              Get daily astrological insights
+              <BoltIcon color="brand.500" height={"20px"} width={"20px"} ml={1} />
             </Text>
 
-            <Text fontWeight={"semibold"} fontSize="md">
-              <BoltIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
-              Deliver accurate astrological insights
+            <Text fontWeight={"semibold"} fontSize="lg">
+              <InfinityIcon color="brand.500" height={"20px"} width={"20px"} mr={2} />
+              Ask any questions
+              <InfinityIcon color="brand.500" height={"20px"} width={"20px"} ml={2} />
             </Text>
 
-            <Text fontWeight={"semibold"} fontSize="md">
-              <MoonIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
-              Prepare a plan for the spiritual growth
+            <Text fontWeight={"semibold"} fontSize="lg">
+              <MoonIcon color="brand.500" height={"20px"} width={"20px"} mr={1} />
+              Track your spiritual growth
+              <MoonIcon color="brand.500" height={"20px"} width={"20px"} ml={1} />
             </Text>
           </Stack>
 
