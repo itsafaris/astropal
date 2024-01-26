@@ -12,14 +12,14 @@ export function PersonalGrowthScore() {
       type="single"
       variant="list"
       options={[
-        { text: "Not satisfied", icon: "😕" },
-        { text: "Somewhat satisfied", icon: "🙂" },
-        { text: "Very satisfied", icon: "😊" },
-        { text: "Super. I want more", icon: "🌟" },
+        { text: "Struggling", icon: "🍃" },
+        { text: "Finding my way", icon: "🌱" },
+        { text: "Growing steadily", icon: "🍀" },
+        { text: "Embracing continuous improvement", icon: "🌳" },
       ]}
     >
       <ChatBubble
-        text={`How satisfied are you with your personal growth? 🌱`}
+        text={`How satisfied are you with your personal growth?`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
