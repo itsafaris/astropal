@@ -10,9 +10,9 @@ export function SavingWithTestimonialSlide() {
   const [showInput, setShowInput] = React.useState(false);
 
   return (
-    <Slide id="preference-saving" type="loading" duration={5} autoProceed={true}>
+    <Slide id="preference-saving" type="loading" duration={7} autoProceed={true}>
       <ChatBubble
-        text="Saving your preferences"
+        text="Take a moment as we put the finishing touches on your Self-Discovery guide just for you! 🙏"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);

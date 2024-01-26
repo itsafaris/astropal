@@ -82,7 +82,6 @@ export default function OnboardingQuiz() {
             <FirstQuestionTrial />
             {/* <SatisfactionScoreSlide /> */}
             <AsnwerLongevity />
-            <SavingWithTestimonialSlide />
             {/* <SocialProofFiller /> */}
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
@@ -90,10 +89,11 @@ export default function OnboardingQuiz() {
             <CareerScore />
             <YourSpiritualInvolvementSlide />
             <SelfDiscoveryReadiness />
+            <SavingWithTestimonialSlide />
             {/* <YourPersonalityTypeSlide />
             <YourValuesAndPrioritiesSlide />
             <NameSlide /> */}
-            <FinilisingAstrologerSlide />
+            {/* <FinilisingAstrologerSlide /> */}
             <AstrologerReadySlide />
           </Segment>
         </QuizUI>
