@@ -26,7 +26,7 @@ export function CreatingSelfDiscoveryGuideSlide() {
           testimonial={{
             name: "Michelle Richards",
             quote:
-              "Relationship advices were spot-on. My partner and I have never been closer. Thank you",
+              "Our marriage got a major upgrade thanks to the guide – turning challenges into growth moments!",
             question: "Is it a good time to invest my savings?",
             avatar: <StaticImage alt="Astropal user image" src="../../../images/user2.png" />,
             commentAge: "4d",

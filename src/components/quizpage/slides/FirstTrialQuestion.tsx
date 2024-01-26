@@ -60,10 +60,11 @@ export function FirstQuestionTrial() {
       ) : (
         <>
           <ChatBubble
-            text="Want some more? 🤔 Here are some questions that people usually care about the most"
+            text="Here are some questions that people usually care about the most. Try asking them yourself 🕊️"
             instant={showInput}
             onFinishedTyping={() => setShowInput(true)}
           />
+
           {showInput && (
             <>
               <Flex flexDirection={"column"} gap={3} alignItems={"center"}>
