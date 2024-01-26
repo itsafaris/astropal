@@ -20,7 +20,7 @@ export function FirstQuestionTrial() {
       {selectedQuestion ? (
         <>
           <ChatBubble
-            text={selectedQuestion}
+            text={`"${selectedQuestion}"`}
             onFinishedTyping={() => {
               setFinishedTypingQuestion(true);
             }}
@@ -60,7 +60,7 @@ export function FirstQuestionTrial() {
       ) : (
         <>
           <ChatBubble
-            text="Should we try something more specific? Here are some questions that people usually care about the most"
+            text="Want some more? 🤔 Here are some questions that people usually care about the most"
             instant={showInput}
             onFinishedTyping={() => setShowInput(true)}
           />
