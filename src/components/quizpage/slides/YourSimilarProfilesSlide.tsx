@@ -1,13 +1,6 @@
-import React, { Fragment, createElement, useState } from "react";
-import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
-import { Text, Box, useTheme, Flex, Image, Stack } from "@chakra-ui/react";
-import { ArrowDownIcon } from "@chakra-ui/icons";
-
-import colorMap from "@images/color_map.png";
-import orbGif from "@images/orb_animated_2.gif";
-
-import { TestimonialCard } from "@components/testimonial";
-import { StaticImage } from "gatsby-plugin-image";
+import React, { Fragment, createElement } from "react";
+import { Slide, Title } from "@martynasj/quiz-lib";
+import { Text, useTheme, Flex } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
 
