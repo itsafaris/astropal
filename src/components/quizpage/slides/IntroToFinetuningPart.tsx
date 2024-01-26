@@ -21,10 +21,10 @@ export function IntroToFinetuningPart() {
 
       {showInput && (
         <>
-          <Stack mb={6} alignItems={"center"} color="teal.400">
+          <Stack mb={6} alignItems={"center"} color="teal.300">
             <Text fontWeight={"semibold"} fontSize="lg">
               <BoltIcon color="brand.500" height={"20px"} width={"20px"} mr={1} />
-              Get daily astrological insights
+              Get astrological insights daily
               <BoltIcon color="brand.500" height={"20px"} width={"20px"} ml={1} />
             </Text>
 
@@ -46,7 +46,7 @@ export function IntroToFinetuningPart() {
               submitQuestion();
             }}
           >
-            Continue
+            Let's begin
           </NextButton>
         </>
       )}

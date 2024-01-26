@@ -12,24 +12,18 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { SelfDiscoveryReadiness } from "@components/quizpage/slides/SelfDiscoveryReadiness";
 import { IntroSlide } from "@components/quizpage/slides/IntroSlide";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
-import { SatisfactionScoreSlide } from "@components/quizpage/slides/SatisfactionScoreSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
 import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
 import { YourProfileSavingSlide } from "@components/quizpage/slides/YourProfileSavingSlide";
 import { DescribeYourNatalChart } from "@components/quizpage/slides/DescribeYourNatalChart";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
-import { SocialProofFiller } from "@components/quizpage/slides/SocialProofFiller";
 import { IntroToFinetuningPart } from "@components/quizpage/slides/IntroToFinetuningPart";
-import { FinilisingAstrologerSlide } from "@components/quizpage/slides/FinilisingAstrologerSlide";
-import { AstrologerReadySlide } from "@components/quizpage/slides/AstrologerReadySlide";
-import { YourPersonalityTypeSlide } from "@components/quizpage/slides/YourPersonalityTypeSlide";
-import { YourValuesAndPrioritiesSlide } from "@components/quizpage/slides/YourValuesAndPrioritiesSlide";
 import { YourSpiritualInvolvementSlide } from "@components/quizpage/slides/YourSpiritualInvolvementSlide";
-import { NameSlide } from "@components/quizpage/slides/NameSlide";
 import { PersonalGrowthScore } from "@components/quizpage/slides/PersonalGrowthScore";
 import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore";
 import { CareerScore } from "@components/quizpage/slides/CareerScore";
-import { SavingWithTestimonialSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
+import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
+import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -80,21 +74,15 @@ export default function OnboardingQuiz() {
             <NatalChartPreviewSlide />
             <DescribeYourNatalChart />
             <FirstQuestionTrial />
-            {/* <SatisfactionScoreSlide /> */}
             <AsnwerLongevity />
-            {/* <SocialProofFiller /> */}
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
             <RelationshipScore />
             <CareerScore />
             <YourSpiritualInvolvementSlide />
             <SelfDiscoveryReadiness />
-            <SavingWithTestimonialSlide />
-            {/* <YourPersonalityTypeSlide />
-            <YourValuesAndPrioritiesSlide />
-            <NameSlide /> */}
-            {/* <FinilisingAstrologerSlide /> */}
-            <AstrologerReadySlide />
+            <CreatingSelfDiscoveryGuideSlide />
+            <EmailSlide />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>

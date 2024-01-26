@@ -1,30 +1,40 @@
-import { Callout, Selector, Slide, Title, useQuiz } from "@martynasj/quiz-lib";
+import React from "react";
 
-import { Caption, NextButton } from "../components";
+import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+
+import { Caption, ChatBubble, NextButton } from "../components";
+import { useState } from "react";
 
 export function EmailSlide() {
+  const [showInput, setShowInput] = useState(false);
   const { submitQuestion } = useQuiz();
   return (
-    <Slide
-      id="your-email"
-      type="email"
-      placeholder="Enter your email"
-      nextButtonProps={{ title: "Submit" }}
-    >
-      <Title>Service is at highest capacity</Title>
-      <Callout emoji="⚠️ New users limit reached">
-        Due to the high number of new users, we are limiting access to our service at the moment.
-        Your astrologer is however saved and will be ready to use, once we send you an invite
-      </Callout>
-      <Selector />
-      <Caption mb={8}>Your email will only be used to send you the invite link.</Caption>
-      <NextButton
-        onClick={() => {
-          submitQuestion();
+    <Slide id="your-email" type="email" placeholder="Enter your email">
+      <ChatBubble
+        text={`Your Self-Discovery guide is ready! Let us know where we should be sending it ✉️`}
+        onFinishedTyping={() => {
+          setShowInput(true);
         }}
-      >
-        Submit
-      </NextButton>
+      />
+
+      {showInput && (
+        <>
+          <Selector />
+
+          <Caption mb={5}>
+            We'll only use your email to send you the guide. It's all about keeping it simple and
+            friendly ❣️
+          </Caption>
+
+          <NextButton
+            onClick={() => {
+              submitQuestion();
+            }}
+          >
+            Continue
+          </NextButton>
+        </>
+      )}
     </Slide>
   );
 }
