@@ -52,6 +52,8 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
   return (
     <Box>
       <TypewriterText
+        fontStyle={"italic"}
+        fontWeight={"normal"}
         text={interpretation || "Analysing your Natal Chart..."}
         onFinishedTyping={() => {
           if (interpretation) {

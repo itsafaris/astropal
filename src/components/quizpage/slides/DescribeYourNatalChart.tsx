@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Slide, useQuiz } from "@martynasj/quiz-lib";
 
 import { ChatBubble, NextButton } from "../components";
