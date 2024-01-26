@@ -12,7 +12,7 @@ export function DescribeYourNatalChart() {
   return (
     <Slide id="personality-description" type="filler">
       <ChatBubble
-        text={`When your Self-Discovery guide is ready, you will receive insights every day. Let's get our first one now 🧘‍♂️`}
+        text={`Let's see what we can tell you about your personality 🧘‍♂️`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowAdvice(true);

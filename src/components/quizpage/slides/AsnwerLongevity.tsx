@@ -18,7 +18,7 @@ export function AsnwerLongevity() {
       ]}
     >
       <ChatBubble
-        text="Before we continue, how you'd like our insights delivered as we move forward? We want to make sure it's just right for you!"
+        text="With the Self-Discovery guide you will get such insights daily! How would you like them to be presented?"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
