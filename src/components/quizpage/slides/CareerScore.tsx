@@ -12,14 +12,14 @@ export function CareerScore() {
       type="single"
       variant="list"
       options={[
-        { text: "Not satisfied", icon: "😕" },
-        { text: "Somewhat satisfied", icon: "🙂" },
-        { text: "Very satisfied", icon: "😊" },
-        { text: "Super. I want more", icon: "🌟" },
+        { text: "Regretful and unfulfilled", icon: "😕" },
+        { text: "Indifferent", icon: "🙂" },
+        { text: "Pleased with the career choice", icon: "😊" },
+        { text: "Enthusiastic and passionate", icon: "🌟" },
       ]}
     >
       <ChatBubble
-        text={`How satisfied are you with your career? 💼`}
+        text={`How happy are you with the choice of your career?`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
