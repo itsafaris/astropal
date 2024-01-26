@@ -12,14 +12,14 @@ export function RelationshipScore() {
       type="single"
       variant="list"
       options={[
-        { text: "Not satisfied", icon: "😕" },
-        { text: "Somewhat satisfied", icon: "🙂" },
-        { text: "Very satisfied", icon: "😊" },
-        { text: "Super. I want more", icon: "🌟" },
+        { text: "Lacking intimacy", icon: "💔" },
+        { text: "Finding balance", icon: "❤️‍🩹" },
+        { text: "Emotionally enriched", icon: "❤️" },
+        { text: "Flourishing in relationships", icon: "💗" },
       ]}
     >
       <ChatBubble
-        text={`How satisfied are you with your relationships? 💖`}
+        text={`To what extent do you feel fulfilled in terms of relationships?`}
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
