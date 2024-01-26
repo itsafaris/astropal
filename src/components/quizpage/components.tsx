@@ -58,7 +58,7 @@ export type TypewriterTextProps = {
 export function TypewriterText(props: TypewriterTextProps) {
   const { text, instant, onFinishedTyping, ...rest } = props;
 
-  const speed = 60;
+  const speed = 80;
 
   const [words, setWords] = useState<string[]>([]);
   const [nextWord, setNextWord] = useState("");
