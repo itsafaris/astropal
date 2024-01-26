@@ -14,28 +14,24 @@ export function YourSpiritualInvolvementSlide() {
       options={[
         {
           text: "I'm new to spirituality",
-          icon: "🌱",
+          icon: "🌑",
         },
         {
           text: "I have a casual interest",
-          icon: "🔍",
+          icon: "🌒",
         },
         {
           text: "I actively practice and study",
-          icon: "📚",
+          icon: "🌔",
         },
         {
-          text: "I consider myself deeply committed",
-          icon: "🧘‍♂️",
-        },
-        {
-          text: "Spirituality is a core part of my life",
-          icon: "✨",
+          text: "Deeply committed",
+          icon: "🌕",
         },
       ]}
     >
       <ChatBubble
-        text="To what extent are you engaged with spiritual practices and concepts?"
+        text="To what degree are you engaged with spiritual practices and concepts?"
         instant={showInput}
         onFinishedTyping={() => {
           setShowInput(true);
