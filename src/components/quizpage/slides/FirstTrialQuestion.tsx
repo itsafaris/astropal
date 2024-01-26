@@ -28,7 +28,7 @@ export function FirstQuestionTrial() {
 
           {finishedTypingQuestion && (
             <NatalChartInterpreter
-              question={selectedQuestion}
+              question={`${selectedQuestion} (do not mention any planets or signs)`}
               onFinishedAnswer={() => {
                 setFinishedAnswer(true);
                 setAnsweredQuestions((q) => [...q, selectedQuestion]);
