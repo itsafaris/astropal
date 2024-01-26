@@ -64,11 +64,11 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
           <Text fontSize={"md"}>{state.yourBirthLocation.formattedText}</Text>
         </Box>
 
-        <Text height={110} overflow={"hidden"} color="black">
-          Your Natal Chart is a cosmic snapshot of the positions of celestial bodies at the moment
-          of your birth, unveiling the unique energies that shape your personality and life path.
-          The sun sign represents your core identity, the moon reflects your emotional instincts,
-          and the rising sign signifies your outward demeanor.
+        <Text height={110} overflow={"hidden"} color="black" lineHeight={"normal"}>
+          Your Astrological profile is a cosmic snapshot of the positions of celestial bodies at the
+          moment of your birth, unveiling the unique energies that shape your personality and life
+          path. The sun sign represents your core identity, the moon reflects your emotional
+          instincts, and the rising sign signifies your outward demeanor.
         </Text>
 
         <Box

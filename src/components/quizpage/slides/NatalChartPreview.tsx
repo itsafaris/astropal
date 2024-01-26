@@ -13,12 +13,12 @@ export function NatalChartPreviewSlide() {
   const { submitQuestion } = useQuiz();
 
   return (
-    <Slide id="natal-chart-preview" type="filler" nextButtonProps={{ title: "Let's go!" }}>
+    <Slide id="natal-chart-preview" type="filler">
       {({ quizState }) => {
         return (
           <Box textColor={"white"}>
             <ChatBubble
-              text={`Here is a preview of your Natal Chart! We will use it as our foundation going forward.`}
+              text={`Your Astrological Profile is ready ✨ Below you see a tiny part of it – full profile awaits you at the end`}
               onFinishedTyping={() => {
                 setShowInput(true);
               }}
@@ -29,7 +29,7 @@ export function NatalChartPreviewSlide() {
                 <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
 
                 <NextButton mt={6} mb={3} onClick={() => submitQuestion()}>
-                  Next
+                  Continue
                 </NextButton>
               </>
             )}
