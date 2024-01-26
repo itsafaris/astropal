@@ -10,7 +10,7 @@ export function YourBirthDateSlide() {
   return (
     <Slide id="your-birth-date" type="date">
       <ChatBubble
-        text={"Let's start with your date of birth."}
+        text={"Let's start with your Astrological Profile. What is the date you were born?"}
         instant={showInput}
         onFinishedTyping={() => {
           setTimeout(() => {
