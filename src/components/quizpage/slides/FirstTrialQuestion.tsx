@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { ArrowDownIcon } from "@chakra-ui/icons";
 
-import { ChatBubble, NextButton, Question } from "../components";
+import { ChatBubble, NextButton } from "../components";
 import { NatalChartInterpreter } from "../interpreter";
 
 import { astrologyThemes } from "@utils/astrologyThemes";
@@ -42,6 +41,7 @@ export function FirstQuestionTrial() {
               <NextButton mt={8} onClick={() => submitQuestion()}>
                 Continue
               </NextButton>
+
               {answeredQuestions.length < astrologyThemes.length && (
                 <Button
                   variant="text"
@@ -60,35 +60,29 @@ export function FirstQuestionTrial() {
       ) : (
         <>
           <ChatBubble
-            text="Now, let's try answering some more specific questions about your life"
+            text="Should we try something more specific? Here are some questions that people usually care about the most"
             instant={showInput}
             onFinishedTyping={() => setShowInput(true)}
           />
           {showInput && (
             <>
-              <Flex mb={4} flexDirection={"column"} gap={1} alignItems={"center"}>
-                <Text
-                  color="whiteAlpha.600"
-                  textAlign={"center"}
-                  maxWidth={"70%"}
-                  mx="auto"
-                  lineHeight={"normal"}
-                >
-                  Click on a question that you would like to have answered.
-                </Text>
-                <ArrowDownIcon color="whiteAlpha.600" fontSize={"2xl"} />
-              </Flex>
-
-              <Flex flexDirection={"column"} gap={2} alignItems={"center"}>
+              <Flex flexDirection={"column"} gap={3} alignItems={"center"}>
                 {astrologyThemes.map((q) => {
+                  const wasSelected = answeredQuestions.includes(q.questionExample);
+
                   return (
                     <Question
                       key={q.id}
                       text={q.questionExample}
                       questionTheme={q.title}
                       themecolor={q.color}
-                      opacity={answeredQuestions.includes(q.questionExample) ? 0.5 : 1}
+                      opacity={wasSelected ? 0.5 : 1}
+                      cursor={wasSelected ? "default" : "cursor"}
                       onClick={() => {
+                        if (wasSelected) {
+                          return;
+                        }
+
                         setSelectedQuestion(q.questionExample);
                         setFinishedTypingQuestion(false);
                       }}
@@ -102,5 +96,43 @@ export function FirstQuestionTrial() {
         </>
       )}
     </Slide>
+  );
+}
+
+export function Question({
+  text,
+  questionTheme,
+  themecolor,
+  ...rest
+}: { text: string; questionTheme: string; themecolor: string } & React.ComponentProps<
+  typeof Flex
+>) {
+  return (
+    <Flex
+      justifyContent={"center"}
+      as="button"
+      backgroundColor={"bg.200"}
+      p={2}
+      px={4}
+      borderRadius={"md"}
+      cursor={"pointer"}
+      width="full"
+      {...rest}
+    >
+      <Flex flexDirection="column" gap={1}>
+        <Text
+          fontSize={"sm"}
+          fontWeight={"semibold"}
+          lineHeight={"normal"}
+          color={`${themecolor}.500`}
+        >
+          {questionTheme}
+        </Text>
+
+        <Text color="white" fontSize={"md"} fontWeight={"semibold"} lineHeight={"normal"}>
+          {text}
+        </Text>
+      </Flex>
+    </Flex>
   );
 }

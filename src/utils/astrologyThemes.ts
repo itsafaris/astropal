@@ -16,7 +16,7 @@ export const astrologyThemes: AstrologyTheme[] = [
     id: "career",
     questionExample: "How can I achieve success in my career?",
     title: "Career  💼",
-    color: "teal",
+    color: "yellow",
   },
   {
     id: "relationships",

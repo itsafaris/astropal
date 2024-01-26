@@ -2,7 +2,6 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
-import { Orb } from "@components/Orb";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -119,40 +118,5 @@ export function TypewriterText(props: TypewriterTextProps) {
         </Text>
       )}
     </Text>
-  );
-}
-
-export function Question({
-  text,
-  questionTheme,
-  themecolor,
-  ...rest
-}: { text: string; questionTheme: string; themecolor: string } & ComponentProps<typeof Flex>) {
-  return (
-    <Flex
-      justifyContent={"center"}
-      as="button"
-      border="2px solid"
-      borderColor={"bg.500"}
-      backgroundColor={"bg.200"}
-      _hover={{
-        bg: "bg.300",
-      }}
-      p={2}
-      px={4}
-      borderRadius={"xl"}
-      cursor={"pointer"}
-      width="full"
-      {...rest}
-    >
-      <Flex flexDirection="column" color="white">
-        <Text fontSize={"sm"} fontWeight={"semibold"} color={`${themecolor}.500`}>
-          {questionTheme}
-        </Text>
-        <Text fontSize={"sm"} fontWeight={"semibold"}>
-          {text}
-        </Text>
-      </Flex>
-    </Flex>
   );
 }
