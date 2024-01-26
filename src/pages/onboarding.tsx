@@ -80,7 +80,7 @@ export default function OnboardingQuiz() {
             <DescribeYourNatalChart />
             <FirstQuestionTrial />
             <SatisfactionScoreSlide />
-            <AsnwerLongevity />
+            {/* <AsnwerLongevity /> */}
             <SocialProofFiller />
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
