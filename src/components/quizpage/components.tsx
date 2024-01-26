@@ -43,7 +43,7 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
 export function ChatBubble(props: {} & TypewriterTextProps) {
   return (
     <Flex my={2} mb={8} flexDirection={"column"} alignItems={"center"} gap={4}>
-      <Orb />
+      {/* <Orb /> */}
 
       <TypewriterText {...props} />
     </Flex>
@@ -109,7 +109,6 @@ export function TypewriterText(props: TypewriterTextProps) {
       fontSize={"xl"}
       whiteSpace={"pre-wrap"}
       color="white"
-      p={2}
       {...rest}
     >
       {words.join(" ")}
