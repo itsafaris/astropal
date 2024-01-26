@@ -6,11 +6,11 @@ import { Flex, Text } from "@chakra-ui/react";
 import { TestimonialCard } from "@components/TestimonialCard";
 import { StaticImage } from "gatsby-plugin-image";
 
-export function FinetuningSavingSlide() {
+export function SavingWithTestimonialSlide() {
   const [showInput, setShowInput] = React.useState(false);
 
   return (
-    <Slide id="finetuning-saving" type="loading" duration={5} autoProceed={true}>
+    <Slide id="preference-saving" type="loading" duration={5} autoProceed={true}>
       <ChatBubble
         text="Saving your preferences"
         instant={showInput}

@@ -29,7 +29,7 @@ import { NameSlide } from "@components/quizpage/slides/NameSlide";
 import { PersonalGrowthScore } from "@components/quizpage/slides/PersonalGrowthScore";
 import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore";
 import { CareerScore } from "@components/quizpage/slides/CareerScore";
-import { FinetuningSavingSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
+import { SavingWithTestimonialSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -82,7 +82,7 @@ export default function OnboardingQuiz() {
             <FirstQuestionTrial />
             {/* <SatisfactionScoreSlide /> */}
             <AsnwerLongevity />
-            <FinetuningSavingSlide />
+            <SavingWithTestimonialSlide />
             {/* <SocialProofFiller /> */}
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
