@@ -63,7 +63,7 @@ export default function IndexPage() {
           </Flex>
 
           <Heading as="h1" size="xl" textAlign="center" color="white" maxWidth={400} mx="auto">
-            Get a Personalized Self-Discovery Guide Based On Astrology
+            Get a Personalized <br /> Self-Discovery Guide Based On Astrology
           </Heading>
 
           <Text fontSize="md" textAlign="center" color="bg.700">
