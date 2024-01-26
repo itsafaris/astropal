@@ -119,7 +119,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
   return (
     <Flex position={"relative"}>
       <SpinnerCircleSvg
-        svgContainerProps={{ width: "300px", height: "300px" }}
+        svgContainerProps={{ width: "250px", height: "250px" }}
         value={loadingValue}
       />
       <Flex
@@ -134,11 +134,17 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         transform={"translateX(-50%)"}
         left="50%"
       >
-        <Text fontWeight={"bold"} color="white" fontSize={"2xl"}>
+        <Text fontWeight={"semibold"} color="white" fontSize={"2xl"} lineHeight={"normal"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
 
-        <Text height={8} textAlign={"center"} color="bg.900" fontSize={"sm"} fontWeight={"bold"}>
+        <Text
+          textAlign={"center"}
+          color="bg.900"
+          fontSize={"sm"}
+          fontWeight={"semibold"}
+          lineHeight={"normal"}
+        >
           {getStatusText()}
         </Text>
       </Flex>
@@ -195,7 +201,7 @@ function SpinnerCircleSvg({
           <feGaussianBlur stdDeviation="17 20" x="0%" y="0%" in="SourceGraphic" result="blur" />
         </filter>
       </defs>
-      <g strokeWidth={30} stroke="url(#a)" fill="none" rotate={90}>
+      <g strokeWidth={20} stroke="url(#a)" fill="none" rotate={90}>
         <motion.circle r={318} cx={400} cy={400} filter="url(#b)" />
         <motion.circle
           r={318}
