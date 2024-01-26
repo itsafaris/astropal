@@ -10,7 +10,7 @@ export function FinetuningSavingSlide() {
   const [showInput, setShowInput] = React.useState(false);
 
   return (
-    <Slide id="finetuning-saving" type="loading" duration={5} autoProceed={false}>
+    <Slide id="finetuning-saving" type="loading" duration={5} autoProceed={true}>
       <ChatBubble
         text="Saving your preferences"
         instant={showInput}
