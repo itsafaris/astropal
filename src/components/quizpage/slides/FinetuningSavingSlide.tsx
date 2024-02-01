@@ -4,13 +4,18 @@ import { Selector, Slide } from "@martynasj/quiz-lib";
 import { Flex, Text } from "@chakra-ui/react";
 import { TestimonialCard } from "@components/TestimonialCard";
 import { StaticImage } from "gatsby-plugin-image";
+import { SlideHeading, SpanJust } from "../components";
 
 export function CreatingSelfDiscoveryGuideSlide() {
   return (
-    <Slide id="creating-self-discovery-guide" type="loading" duration={8} autoProceed={true}>
-      <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"center"} color={"white"} mb={4}>
-        Creating Your Personalized <br /> Self-Discovery Guide
-      </Text>
+    <Slide id="finalizing-personalized-astrologer" type="loading" duration={8} autoProceed={true}>
+      <SlideHeading
+        text={
+          <SpanJust>
+            Finalizing Your Personalized <br /> Astrologer
+          </SpanJust>
+        }
+      />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Selector />

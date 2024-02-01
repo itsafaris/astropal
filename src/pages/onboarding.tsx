@@ -100,8 +100,8 @@ export default function OnboardingQuiz() {
             <PersonalGrowthScore />
             <RelationshipScore />
             <CareerScore />
-            <SavingYourPreferences />
             <AstrologerAdviceRecap />
+            <SavingYourPreferences />
             <YourGuidanceIsReady />
 
             <AsnwerLongevity />

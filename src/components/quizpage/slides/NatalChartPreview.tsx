@@ -19,8 +19,8 @@ export function NatalChartPreviewSlide() {
             <SlideHeading
               text={
                 <SpanJust>
-                  Your <Span>Birth Chart</Span> is now ready! It contains a snapshot of the sky data
-                  at the time you were born
+                  Here is your <Span>Birth Chart</Span>. It contains a snapshot of the sky data at
+                  the time you were born
                 </SpanJust>
               }
             />

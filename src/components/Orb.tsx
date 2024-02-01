@@ -6,9 +6,9 @@ const boxShadow = (color: string = "#0ab2ff") =>
   `inset 0px 0px 10px 5px ${color}, 0px 0px 50px 0px ${color}, 0px 0px 10px 0px ${color}`;
 
 const animationKeyframes = (color: string = "#0ab2ff") => keyframes`
-  0% { box-shadow: ${boxShadow(color)}, 0px 0px 10px 0px #a2e0ffb3; }
+  0% { box-shadow: ${boxShadow(color)}, 0px 0px 0px 0px #a2e0ffb3; }
   50% { box-shadow: ${boxShadow(color)}, 0px 0px 50px 0px #a2e0ffb3; }
-  100% { box-shadow: ${boxShadow(color)}, 0px 0px 10px 0px #a2e0ffb3; }
+  100% { box-shadow: ${boxShadow(color)}, 0px 0px 0px 0px #a2e0ffb3; }
 `;
 
 const animation = (color: string = "#0ab2ff") =>
@@ -27,7 +27,6 @@ export function Orb2({
       height={sizeString}
       width={sizeString}
       borderRadius={"50%"}
-      border={"3px solid "}
       borderColor={colorTheme}
       boxShadow={boxShadow(colorTheme)}
       animation={enableAnimation ? animation(colorTheme) : undefined}

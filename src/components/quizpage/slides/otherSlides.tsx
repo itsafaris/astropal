@@ -22,23 +22,27 @@ export function AstrologerCreationStart() {
 
   return (
     <Slide id="astrologer-creation-start" type="filler">
-      <SlideHeading text="Let's now train our astrologer on your Birth Chart" />
-      <Box height={"140px"}>
-        <Box
-          transform={"rotateY(10deg) skew(-21deg,-8deg) scale(0.3)"}
-          transformOrigin={"top center"}
-        >
-          <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
-        </Box>
-      </Box>
-      <Box>
-        <Text my={-6} fontSize={60} color="green.300" textAlign={"center"}>
-          ↓
-        </Text>
-      </Box>
+      <SlideHeading text="Now let's train the astrologer using your Birth Chart" />
 
-      <Flex mt={8} mb={16} justifyContent={"center"}>
-        {astrologer.image}
+      <Flex flexDirection={"column"} alignItems={"center"} gap={3}>
+        <Box height={"110px"} ml={"40px"}>
+          <Box
+            transform={"rotateY(0deg) skew(-20deg,0deg) scale(0.25)"}
+            transformOrigin={"top center"}
+          >
+            <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
+          </Box>
+        </Box>
+
+        <Box>
+          <Text fontSize={40} color="white" textAlign={"center"} lineHeight={1}>
+            ↓
+          </Text>
+        </Box>
+
+        <Flex mb={5} justifyContent={"center"} height={100} width={100}>
+          {astrologer.image}
+        </Flex>
       </Flex>
 
       <NextButton
@@ -109,7 +113,7 @@ export function NameYourAstrologer() {
         };
       })}
     >
-      <SlideHeading text="Choose your astrologer" />
+      <SlideHeading text="Choose how you want your personalized astrologer to look like" />
       <Selector />
 
       <NextButton
@@ -156,13 +160,13 @@ export function AstrologerImpression() {
   const { submitQuestion } = useQuiz();
   return (
     <Slide id="astrologer-impression" type="filler">
-      <SlideHeading text="Your astrologer is already quite capable 👏👏 Let's make it even more personalised to you!" />
+      <SlideHeading text="Your astrologer is already quite capable 👏👏 Let's make it even more personalized to you!" />
       <NextButton
         onClick={() => {
           submitQuestion();
         }}
       >
-        Personalise Your Astrologer
+        Personalize Your Astrologer
       </NextButton>
     </Slide>
   );
@@ -205,7 +209,7 @@ export function DailyHoroscope() {
       <SlideHeading
         text={
           <SpanJust>
-            When would you like to receive your personalised{" "}
+            When would you like to receive your personalized{" "}
             <Span color="blue.400">daily horoscope</Span>?
           </SpanJust>
         }
@@ -259,7 +263,7 @@ export function SavingYourPreferences() {
       }}
     >
       <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"center"} color={"white"} mb={4}>
-        Personalising your astrologer
+        Personalizing your astrologer
       </Text>
       <Selector />
       {loadingCompleted && (
@@ -283,7 +287,7 @@ export function YourGuidanceIsReady() {
       <SlideHeading
         text={
           <SpanJust>
-            Your astrologer is now ready to provide you a <Span>personalised life guidance</Span>
+            Your astrologer is now ready to provide you a <Span>personalized life guidance</Span>
           </SpanJust>
         }
       />
