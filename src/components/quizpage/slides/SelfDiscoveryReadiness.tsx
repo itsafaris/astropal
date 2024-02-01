@@ -1,54 +1,43 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Slide, useQuiz } from "@martynasj/quiz-lib";
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { motion } from "framer-motion";
 import { Box, Flex, FlexProps, Text } from "@chakra-ui/react";
 
 export function SelfDiscoveryReadiness() {
-  const [showImage, setShowImage] = React.useState(false);
   const [showNext, setShowNext] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
   const { submitQuestion } = useQuiz();
 
   return (
     <Slide id="self-discovery-readiness" type="filler">
-      <ChatBubble
+      <SlideHeading
         text={`Based on your responses, let us assess your readiness for Self-Discovery ✨`}
-        onFinishedTyping={() => {
-          setShowImage(true);
-        }}
       />
 
-      {showImage && (
-        <>
-          <Flex position={"relative"}>
-            <StaticImage alt="" src="../../../images/readiness.jpg" />
+      <Flex position={"relative"}>
+        <StaticImage alt="" src="../../../images/readiness.jpg" />
 
-            <ReadinessChart
-              onComplete={() => setShowResult(true)}
-              position={"absolute"}
-              top={"40%"}
-              left={"50%"}
-              transform={"translate(-50%, -50%)"}
-            />
-          </Flex>
-        </>
-      )}
+        <ReadinessChart
+          onComplete={() => setShowResult(true)}
+          position={"absolute"}
+          top={"40%"}
+          left={"50%"}
+          transform={"translate(-50%, -50%)"}
+        />
+      </Flex>
 
       {showResult && (
         <Box mt={6}>
-          <ChatBubble
+          <SlideHeading
             text={`You are fully ready! Let's create your Self-Discovery guide and get started`}
-            onFinishedTyping={() => {
-              setShowNext(true);
-            }}
           />
         </Box>
       )}
 
-      {showNext && (
+      {showResult && (
         <NextButton mb={3} onClick={() => submitQuestion()}>
           Create my Self-Discovery guide
         </NextButton>

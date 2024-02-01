@@ -35,16 +35,15 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
       flexDirection={"column"}
       backgroundColor={"white"}
       p={2}
-      pb={0}
       position={"relative"}
       fontStyle="italic"
       fontFamily={"serif"}
       color="black"
-      borderTopRadius={"xl"}
+      borderRadius={"xl"}
     >
       <Flex
         flexDirection={"column"}
-        borderTopRadius={"lg"}
+        borderRadius={"lg"}
         border={`1px solid ${theme.colors.bg[700]}`}
         p={3}
       >
@@ -63,35 +62,6 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
           </Text>
           <Text fontSize={"md"}>{state.yourBirthLocation.formattedText}</Text>
         </Box>
-
-        <Text height={110} overflow={"hidden"} color="black" lineHeight={"normal"}>
-          Your Astrological profile is a cosmic snapshot of the positions of celestial bodies at the
-          moment of your birth, unveiling the unique energies that shape your personality and life
-          path. The sun sign represents your core identity, the moon reflects your emotional
-          instincts, and the rising sign signifies your outward demeanor.
-        </Text>
-
-        <Box
-          width={"full"}
-          height={110}
-          bgGradient="linear(to-t, bg.50 15%, transparent)"
-          position={"absolute"}
-          bottom={0}
-          left={0}
-          zIndex={1}
-        />
-
-        <Box
-          position={"absolute"}
-          height={100}
-          width={100}
-          borderRadius={"50%"}
-          top={100}
-          left="50%"
-          transform={"translate(-50%, -50%)"}
-          boxShadow={`0px 0px 100px 80px #89d1ff45`}
-          zIndex={-1}
-        />
       </Flex>
     </Flex>
   );

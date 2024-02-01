@@ -24,6 +24,19 @@ import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore
 import { CareerScore } from "@components/quizpage/slides/CareerScore";
 import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
+import {
+  AstrologerCreationStart,
+  AstrologerHello,
+  AstrologerImpression,
+  AstrologerThemePreferences,
+  DailyHoroscope,
+  NameYourAstrologer,
+  ReadyToMeetAstrologer,
+  NotificationReceiver,
+  WhyNatalChart,
+  TrainingAstrologerSlide,
+  SavingYourPreferences,
+} from "@components/quizpage/slides/otherSlides";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -72,15 +85,27 @@ export default function OnboardingQuiz() {
             <YourBirthPlaceSlide />
             <YourProfileSavingSlide />
             <NatalChartPreviewSlide />
+            <WhyNatalChart />
+            <AstrologerCreationStart />
+            <TrainingAstrologerSlide />
+            <NameYourAstrologer />
+            {/* <CreatingAstrologerSlide /> */}
+            {/* <ReadyToMeetAstrologer /> */}
+            <AstrologerHello />
             <DescribeYourNatalChart />
             <FirstQuestionTrial />
+            <AstrologerImpression />
             <AsnwerLongevity />
+            <AstrologerThemePreferences />
+            <DailyHoroscope />
+            <NotificationReceiver />
+            <SavingYourPreferences />
             <IntroToFinetuningPart />
             <PersonalGrowthScore />
             <RelationshipScore />
             <CareerScore />
             <YourSpiritualInvolvementSlide />
-            <SelfDiscoveryReadiness />
+            {/* <SelfDiscoveryReadiness /> */}
             <CreatingSelfDiscoveryGuideSlide />
             <EmailSlide />
           </Segment>

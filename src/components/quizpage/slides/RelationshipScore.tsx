@@ -1,11 +1,8 @@
-import React, { useState } from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { ChatBubble } from "../components";
+import { SlideHeading } from "../components";
 
 export function RelationshipScore() {
-  const [showInput, setShowInput] = useState(false);
-
   return (
     <Slide
       id="relationship-score"
@@ -18,15 +15,9 @@ export function RelationshipScore() {
         { text: "Flourishing in relationships", icon: "💗" },
       ]}
     >
-      <ChatBubble
-        text={`To what extent do you feel fulfilled in terms of relationships?`}
-        instant={showInput}
-        onFinishedTyping={() => {
-          setShowInput(true);
-        }}
-      />
+      <SlideHeading text={`To what extent do you feel fulfilled in terms of relationships?`} />
 
-      {showInput && <Selector />}
+      <Selector />
     </Slide>
   );
 }

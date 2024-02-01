@@ -2,39 +2,31 @@ import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Button, Flex, Text } from "@chakra-ui/react";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 import { NatalChartInterpreter } from "../interpreter";
 
 import { astrologyThemes } from "@utils/astrologyThemes";
 
 export function FirstQuestionTrial() {
-  const [showInput, setShowInput] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [finishedAnswer, setFinishedAnswer] = useState(false);
-  const [finishedTypingQuestion, setFinishedTypingQuestion] = useState(false);
+
   const { submitQuestion } = useQuiz();
 
   return (
     <Slide id="first-question-trial" type="filler">
       {selectedQuestion ? (
         <>
-          <ChatBubble
-            text={`"${selectedQuestion}"`}
-            onFinishedTyping={() => {
-              setFinishedTypingQuestion(true);
+          <SlideHeading text={`"${selectedQuestion}"`} />
+
+          <NatalChartInterpreter
+            question={`${selectedQuestion} (do not mention any planets or signs)`}
+            onFinishedAnswer={() => {
+              setFinishedAnswer(true);
+              setAnsweredQuestions((q) => [...q, selectedQuestion]);
             }}
           />
-
-          {finishedTypingQuestion && (
-            <NatalChartInterpreter
-              question={`${selectedQuestion} (do not mention any planets or signs)`}
-              onFinishedAnswer={() => {
-                setFinishedAnswer(true);
-                setAnsweredQuestions((q) => [...q, selectedQuestion]);
-              }}
-            />
-          )}
 
           {finishedAnswer && (
             <>
@@ -59,41 +51,34 @@ export function FirstQuestionTrial() {
         </>
       ) : (
         <>
-          <ChatBubble
-            text="Here are some questions that people usually care about the most. Try asking them yourself 🕊️"
-            instant={showInput}
-            onFinishedTyping={() => setShowInput(true)}
-          />
+          <SlideHeading text="Here are some questions that people usually care about the most. Try asking them yourself 🕊️" />
 
-          {showInput && (
-            <>
-              <Flex flexDirection={"column"} gap={3} alignItems={"center"}>
-                {astrologyThemes.map((q) => {
-                  const wasSelected = answeredQuestions.includes(q.questionExample);
+          <>
+            <Flex flexDirection={"column"} gap={3} alignItems={"center"}>
+              {astrologyThemes.map((q) => {
+                const wasSelected = answeredQuestions.includes(q.questionExample);
 
-                  return (
-                    <Question
-                      key={q.id}
-                      text={q.questionExample}
-                      questionTheme={q.title}
-                      themecolor={q.color}
-                      opacity={wasSelected ? 0.5 : 1}
-                      cursor={wasSelected ? "default" : "cursor"}
-                      onClick={() => {
-                        if (wasSelected) {
-                          return;
-                        }
+                return (
+                  <Question
+                    key={q.id}
+                    text={q.questionExample}
+                    questionTheme={q.title}
+                    themecolor={q.color}
+                    opacity={wasSelected ? 0.5 : 1}
+                    cursor={wasSelected ? "default" : "cursor"}
+                    onClick={() => {
+                      if (wasSelected) {
+                        return;
+                      }
 
-                        setSelectedQuestion(q.questionExample);
-                        setFinishedTypingQuestion(false);
-                      }}
-                    />
-                  );
-                })}
-                <Selector />
-              </Flex>
-            </>
-          )}
+                      setSelectedQuestion(q.questionExample);
+                    }}
+                  />
+                );
+              })}
+              <Selector />
+            </Flex>
+          </>
         </>
       )}
     </Slide>

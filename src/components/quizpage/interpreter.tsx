@@ -1,12 +1,11 @@
 import React from "react";
 import { useQuizSnapshot } from "@martynasj/quiz-lib";
-
+import { Flex, Fade, Box, Text, Stack } from "@chakra-ui/react";
 import { getPersonalInfoFromState } from "@utils/state";
 
-import { TypewriterText } from "./components";
+import { ChatMessage, TypewriterText } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
 import { getOpenaiService, isApiError } from "@services/openaiService";
-import { Flex, Fade, Box } from "@chakra-ui/react";
 
 import { Orb2 } from "@components/Orb";
 
@@ -50,18 +49,16 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
   }, [props.question]);
 
   return (
-    <Box>
-      <TypewriterText
-        fontStyle={"italic"}
-        fontWeight={"normal"}
-        text={interpretation || "Analysing your Astrological Profile..."}
-        onFinishedTyping={() => {
-          if (interpretation) {
-            props.onFinishedAnswer?.();
-          }
-        }}
-      />
-    </Box>
+    <ChatMessage
+      avatarIcon="🧙‍♂️"
+      avatarName="Starlyn"
+      messageText={interpretation || "Analysing your Astrological Profile..."}
+      onFinishedTyping={() => {
+        if (interpretation) {
+          props.onFinishedAnswer?.();
+        }
+      }}
+    ></ChatMessage>
   );
 }
 

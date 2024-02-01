@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { ChatBubble } from "../components";
+import { SlideHeading } from "../components";
 
 export function SatisfactionScoreSlide() {
   const [showInput, setShowInput] = useState(false);
@@ -18,7 +18,7 @@ export function SatisfactionScoreSlide() {
         { text: "Super. I want more", icon: "🌟" },
       ]}
     >
-      <ChatBubble
+      <SlideHeading
         text={`I'm glad I was able to answer some questions for you 🤭\n\nHow satisfied were you with my answers?`}
         instant={showInput}
         onFinishedTyping={() => {

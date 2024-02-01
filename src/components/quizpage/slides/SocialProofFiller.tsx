@@ -4,7 +4,7 @@ import { Slide, useQuiz } from "@martynasj/quiz-lib";
 import { StaticImage } from "gatsby-plugin-image";
 import { StarIcon } from "@chakra-ui/icons";
 import { Box, Text } from "@chakra-ui/react";
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function SocialProofFiller() {
   const [showInput, setShowInput] = useState(false);
@@ -12,7 +12,7 @@ export function SocialProofFiller() {
 
   return (
     <Slide type="filler" id="user-testimonial">
-      <ChatBubble
+      <SlideHeading
         text="Thank you for your feedback 😊. Here's what people like you are saying after using a personalized astrologer"
         instant={showInput}
         onFinishedTyping={() => {

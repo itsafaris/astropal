@@ -1,11 +1,8 @@
-import React, { useState } from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { ChatBubble } from "../components";
+import { SlideHeading } from "../components";
 
 export function CareerScore() {
-  const [showInput, setShowInput] = useState(false);
-
   return (
     <Slide
       id="career-score"
@@ -18,14 +15,8 @@ export function CareerScore() {
         { text: "Enthusiastic and passionate", icon: "🌟" },
       ]}
     >
-      <ChatBubble
-        text={`How happy are you with the choice of your career?`}
-        instant={showInput}
-        onFinishedTyping={() => {
-          setShowInput(true);
-        }}
-      />
-      {showInput && <Selector />}
+      <SlideHeading text={`How happy are you with the choice of your career?`} />
+      <Selector />
     </Slide>
   );
 }

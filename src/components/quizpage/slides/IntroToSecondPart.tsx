@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Text, Flex } from "@chakra-ui/react";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function IntroToSecondPart() {
   const [showInput, setShowInput] = useState(false);
@@ -10,7 +10,7 @@ export function IntroToSecondPart() {
 
   return (
     <Slide id="intro-to-second-part" type="filler">
-      <ChatBubble
+      <SlideHeading
         text={`I'm glad to have helped you answer your first questions. How did you `}
         instant={showInput}
         onFinishedTyping={() => {

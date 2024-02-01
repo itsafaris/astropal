@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function FinilisingAstrologerSlide() {
   const [navigationEnabled, setNavigationEnabled] = useState(false);
@@ -17,7 +17,7 @@ export function FinilisingAstrologerSlide() {
         setNavigationEnabled(true);
       }}
     >
-      <ChatBubble
+      <SlideHeading
         text="Thank you! Let me finalize your profile"
         instant={showLoading}
         onFinishedTyping={() => {

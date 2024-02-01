@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function YourValuesAndPrioritiesSlide() {
   const [showInput, setShowInput] = useState(false);
@@ -39,7 +39,7 @@ export function YourValuesAndPrioritiesSlide() {
         },
       ]}
     >
-      <ChatBubble
+      <SlideHeading
         text="What is most important to you?"
         instant={showInput}
         onFinishedTyping={() => {

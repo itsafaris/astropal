@@ -1,21 +1,32 @@
-import { useState } from "react";
-import { Selector, Slide } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
-import { ChatBubble } from "../components";
+import { NextButton, SlideHeading } from "../components";
+import { useState } from "react";
 
 export function YourProfileSavingSlide() {
-  const [showInput, setShowInput] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const { submitQuestion } = useQuiz();
 
   return (
-    <Slide id="your-profile-saving" type="loading" duration={5} autoProceed>
-      <ChatBubble
-        text="Take a brief pause while we collect the celestial insights 😌"
-        instant={showInput}
-        onFinishedTyping={() => {
-          setShowInput(true);
-        }}
-      />
-      {showInput && <Selector />}
+    <Slide
+      id="your-profile-saving"
+      type="loading"
+      duration={5}
+      onLoadingCompleted={() => {
+        setShowNext(true);
+      }}
+    >
+      <SlideHeading text="Take a brief pause while we collect the celestial insights 😌" />
+      <Selector />
+      {showNext && (
+        <NextButton
+          onClick={() => {
+            submitQuestion();
+          }}
+        >
+          Continue
+        </NextButton>
+      )}
     </Slide>
   );
 }

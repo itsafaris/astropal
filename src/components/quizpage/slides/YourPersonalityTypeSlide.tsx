@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function YourPersonalityTypeSlide() {
   const [showInput, setShowInput] = useState(false);
@@ -47,7 +47,7 @@ export function YourPersonalityTypeSlide() {
         },
       ]}
     >
-      <ChatBubble
+      <SlideHeading
         text="Which personality type best describes you?"
         instant={showInput}
         onFinishedTyping={() => {

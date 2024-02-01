@@ -1,11 +1,8 @@
-import React, { useState } from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { ChatBubble } from "../components";
+import { SlideHeading } from "../components";
 
 export function YourSpiritualInvolvementSlide() {
-  const [showInput, setShowInput] = useState(false);
-
   return (
     <Slide
       id="your-spiritual-involvement"
@@ -30,14 +27,8 @@ export function YourSpiritualInvolvementSlide() {
         },
       ]}
     >
-      <ChatBubble
-        text="To what degree are you engaged with spiritual practices and concepts?"
-        instant={showInput}
-        onFinishedTyping={() => {
-          setShowInput(true);
-        }}
-      />
-      {showInput && <Selector />}
+      <SlideHeading text="To what degree are you engaged with spiritual practices and concepts?" />
+      <Selector />
     </Slide>
   );
 }

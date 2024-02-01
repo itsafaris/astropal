@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton } from "../components";
 
 export function NameSlide() {
   const [showInput, setShowInput] = useState(false);
@@ -9,7 +9,7 @@ export function NameSlide() {
 
   return (
     <Slide id="name-slide" type="short-text" label="Your name" placeholder="e.g. Jane">
-      <ChatBubble
+      <SlideHeading
         text="Before saving your profile, let me know how should I call you"
         instant={showInput}
         onFinishedTyping={() => {

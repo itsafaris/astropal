@@ -4,12 +4,11 @@ import { Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Box } from "@chakra-ui/react";
 
 import { getPersonalInfoFromState } from "@utils/state";
-import { ChatBubble, NextButton } from "../components";
+import { SlideHeading, NextButton, SpanJust, Span } from "../components";
 
 import { AstrologicalProfile } from "../../AstrologicalProfile";
 
 export function NatalChartPreviewSlide() {
-  const [showInput, setShowInput] = React.useState(false);
   const { submitQuestion } = useQuiz();
 
   return (
@@ -17,22 +16,20 @@ export function NatalChartPreviewSlide() {
       {({ quizState }) => {
         return (
           <Box textColor={"white"}>
-            <ChatBubble
-              text={`Your Astrological Profile is ready! Below you see a tiny part of it – full profile awaits you at the end ✨`}
-              onFinishedTyping={() => {
-                setShowInput(true);
-              }}
+            <SlideHeading
+              text={
+                <SpanJust>
+                  Your <Span>Birth Chart</Span> is now ready! It contains a snapshot of the sky data
+                  at the time you were born
+                </SpanJust>
+              }
             />
 
-            {showInput && (
-              <>
-                <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
+            <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
 
-                <NextButton mt={6} mb={3} onClick={() => submitQuestion()}>
-                  Continue
-                </NextButton>
-              </>
-            )}
+            <NextButton mt={6} mb={3} onClick={() => submitQuestion()}>
+              Continue
+            </NextButton>
           </Box>
         );
       }}
