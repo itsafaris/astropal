@@ -93,6 +93,7 @@ export function getZodiacSign(birthDate: string): {
   imgUrl?: string;
   svgComponent: typeof aquariusImg;
   countOfProfiles: number;
+  emoji: string;
 } {
   const date = new Date(birthDate);
   const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript Date object
@@ -103,72 +104,84 @@ export function getZodiacSign(birthDate: string): {
         name: "aries",
         svgComponent: ariesImg,
         countOfProfiles: 35422,
+        emoji: "♈️",
       };
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
         name: "taurus",
         svgComponent: taurusImg,
         countOfProfiles: 27814,
+        emoji: "♉️",
       };
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
         name: "gemini",
         svgComponent: geminiImg,
         countOfProfiles: 38472,
+        emoji: "♊️",
       };
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
         name: "cancer",
         svgComponent: cancerImg,
         countOfProfiles: 28921,
+        emoji: "♋",
       };
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
         name: "leo",
         svgComponent: leoImg,
         countOfProfiles: 27162,
+        emoji: "♌",
       };
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
         name: "virgo",
         svgComponent: virgoImg,
         countOfProfiles: 36412,
+        emoji: "♍",
       };
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
         name: "libra",
         svgComponent: libraImg,
         countOfProfiles: 31901,
+        emoji: "♎",
       };
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
         name: "scorpio",
         svgComponent: scorpioImg,
         countOfProfiles: 30982,
+        emoji: "♏",
       };
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
         name: "sagittarius",
         svgComponent: sagittariusImg,
         countOfProfiles: 38141,
+        emoji: "♐",
       };
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
         name: "capricorn",
         svgComponent: capricornImg,
         countOfProfiles: 25132,
+        emoji: "♑",
       };
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
         name: "aquarius",
         svgComponent: aquariusImg,
         countOfProfiles: 37319,
+        emoji: "♒",
       };
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
         name: "pisces",
         svgComponent: piscesImg,
         countOfProfiles: 33784,
+        emoji: "♓",
       };
     default:
       throw new Error("Failed to compute Zodiac sign");
