@@ -1,6 +1,6 @@
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { SlideHeading } from "../components";
+import { SlideHeading, Span, SpanJust } from "../components";
 
 export function CareerScore() {
   return (
@@ -15,7 +15,13 @@ export function CareerScore() {
         { text: "Enthusiastic and passionate", icon: "🌟" },
       ]}
     >
-      <SlideHeading text={`How happy are you with the choice of your career?`} />
+      <SlideHeading
+        text={
+          <SpanJust>
+            How happy are you with the choice of your <Span>💼 career</Span>?
+          </SpanJust>
+        }
+      />
       <Selector />
     </Slide>
   );

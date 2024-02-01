@@ -45,7 +45,7 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
 
 export function CustomerMessage(props: { text: string } & ComponentProps<typeof Text>) {
   return (
-    <Text fontSize={"lg"} fontWeight={"semibold"} color="bg.900" {...props}>
+    <Text mb={8} fontSize={"lg"} fontWeight={"semibold"} color="bg.900" {...props}>
       "{props.text}"
     </Text>
   );

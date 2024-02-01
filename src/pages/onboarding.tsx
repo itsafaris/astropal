@@ -1,7 +1,7 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { NatalChartPreviewSlide } from "@components/quizpage/slides/NatalChartPreview";
-import { FirstQuestionTrial } from "@components/quizpage/slides/FirstTrialQuestion";
+
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
 import { trackEvent, trackPixel } from "@utils/tracking";
@@ -9,15 +9,13 @@ import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
 import { getPersonalInfoFromState } from "@utils/state";
-import { SelfDiscoveryReadiness } from "@components/quizpage/slides/SelfDiscoveryReadiness";
 import { IntroSlide } from "@components/quizpage/slides/IntroSlide";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
 import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
 import { YourProfileSavingSlide } from "@components/quizpage/slides/YourProfileSavingSlide";
-import { DescribeYourNatalChart } from "@components/quizpage/slides/DescribeYourNatalChart";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
-import { IntroToFinetuningPart } from "@components/quizpage/slides/IntroToFinetuningPart";
+
 import { YourSpiritualInvolvementSlide } from "@components/quizpage/slides/YourSpiritualInvolvementSlide";
 import { PersonalGrowthScore } from "@components/quizpage/slides/PersonalGrowthScore";
 import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore";
@@ -31,12 +29,15 @@ import {
   AstrologerThemePreferences,
   DailyHoroscope,
   NameYourAstrologer,
-  ReadyToMeetAstrologer,
   NotificationReceiver,
   WhyNatalChart,
   TrainingAstrologerSlide,
   SavingYourPreferences,
   YourGuidanceIsReady,
+  AstrologerAdviceRelationships,
+  AstrologerAdviceCareer,
+  AstrologerAdvicePersonality,
+  AstrologerAdviceRecap,
 } from "@components/quizpage/slides/otherSlides";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
@@ -87,29 +88,30 @@ export default function OnboardingQuiz() {
             <YourProfileSavingSlide />
             <NatalChartPreviewSlide />
             <WhyNatalChart />
+
             <AstrologerCreationStart />
             <TrainingAstrologerSlide />
             <NameYourAstrologer />
-            {/* <CreatingAstrologerSlide /> */}
-            {/* <ReadyToMeetAstrologer /> */}
             <AstrologerHello />
-            <DescribeYourNatalChart />
-            <FirstQuestionTrial />
+            <AstrologerAdvicePersonality />
+            <AstrologerAdviceRelationships />
+            <AstrologerAdviceCareer />
+            <AstrologerAdviceRecap />
             <AstrologerImpression />
+
+            <PersonalGrowthScore />
+            <RelationshipScore />
+            <CareerScore />
+            <SavingYourPreferences />
+            <YourGuidanceIsReady />
+
             <AsnwerLongevity />
             <AstrologerThemePreferences />
             <DailyHoroscope />
             <NotificationReceiver />
-            <SavingYourPreferences />
-            <IntroToFinetuningPart />
-            <PersonalGrowthScore />
-            <RelationshipScore />
-            <CareerScore />
-            <YourSpiritualInvolvementSlide />
-            {/* <SelfDiscoveryReadiness /> */}
+            {/* <YourSpiritualInvolvementSlide /> */}
             <CreatingSelfDiscoveryGuideSlide />
             <EmailSlide />
-            <YourGuidanceIsReady />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>
