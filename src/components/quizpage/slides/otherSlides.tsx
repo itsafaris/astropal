@@ -314,7 +314,7 @@ export function AstrologerAdvicePersonality() {
       <CustomerMessage text="Tell me about my personality" />
 
       <NatalChartInterpreter
-        question="What is my personality like? (do not mention any planets or signs, only tell very briefly about my personality)"
+        prompt="What is my personality like? Provide a short list of my strenghts and weaknesses"
         onFinishedAnswer={() => {
           setShowInput(true);
         }}
@@ -343,7 +343,13 @@ export function AstrologerAdviceCareer() {
       <CustomerMessage text="What are my career prospects?" />
 
       <NatalChartInterpreter
-        question="What are my career prospects? (do not mention any planets or signs, only tell very briefly about my personality)"
+        prompt={`Describe my career. Structure your response in these sections. Section titles should be as follows:
+        - Short summary of what generic career and professional choices are good for me (do not include the section title).
+        - Careers that fit you
+        - Career choices to avoid
+        
+         Only respond with what is asked for. Do not add any other text to your response beyong the sections that are asked for.
+        `}
         onFinishedAnswer={() => {
           setShowInput(true);
         }}
@@ -372,7 +378,14 @@ export function AstrologerAdviceRelationships() {
       <CustomerMessage text="Tell me about my relationships" />
 
       <NatalChartInterpreter
-        question="What are my relationship strengths and struggles? (do not mention any planets or signs, only tell very briefly about my personality)"
+        prompt={`Describe me what am I in a relationships? Structure your response in these sections:
+        - Short summary (do not include section title)
+        - Zodiac signs that I match well with (include section title). Every list item should have an emoji representing this zodiac sign. Include a few word description summarising the match with this sign.
+        - A list of zodiac signs that I should avoid (include section title).
+        - A short list of my weaknesses in relationships.
+        
+         Only respond with what is asked for. Do not add any other text to your response beyong the sections that are asked for.
+        `}
         onFinishedAnswer={() => {
           setShowInput(true);
         }}
@@ -399,7 +412,7 @@ export function AstrologerAdviceRecap() {
   return (
     <Slide id="advice-recap" type="filler">
       <NatalChartInterpreter
-        question="What are my career prospects? (do not mention any planets or signs, only tell very briefly about my personality)"
+        prompt="What are my career prospects? (do not mention any planets or signs, only tell very briefly about my personality)"
         onFinishedAnswer={() => {
           setShowInput(true);
         }}
