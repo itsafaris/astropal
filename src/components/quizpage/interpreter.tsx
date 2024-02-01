@@ -7,7 +7,7 @@ import { ChatMessage } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
 import { getOpenaiService, isApiError } from "@services/openaiService";
 
-export function NatalChartInterpreter(props: { question: string; onFinishedAnswer?: () => void }) {
+export function NatalChartInterpreter(props: { prompt: string; onFinishedAnswer?: () => void }) {
   const state = useQuizSnapshot();
 
   const [interpretation, setInterpretation] = React.useState<string>("");
@@ -31,7 +31,7 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
       const openai = getOpenaiService();
 
       try {
-        const answer = await openai.fetchAnswer(natalChart, props.question);
+        const answer = await openai.fetchAnswer(natalChart, props.prompt);
         setInterpretation(answer);
       } catch (err) {
         if (isApiError(err)) {
@@ -44,7 +44,7 @@ export function NatalChartInterpreter(props: { question: string; onFinishedAnswe
     return () => {
       setInterpretation("");
     };
-  }, [props.question]);
+  }, [props.prompt]);
 
   return (
     <ChatMessage

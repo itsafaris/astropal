@@ -1,12 +1,12 @@
 import { isProdMode } from "@utils/isProdMode";
 import { NatalChart } from "@utils/natalChart";
 
-const GPT_MODEL_4 = "gpt-4-1106-preview";
+const GPT_MODEL_4 = "gpt-4-turbo-preview";
 const GPT_MODEL_3 = "gpt-3.5-turbo-1106";
 
-const MODEL_TO_USE = GPT_MODEL_3;
+const MODEL_TO_USE = GPT_MODEL_4;
 
-const USE_MOCKED_SERVICE = !isProdMode();
+const USE_MOCKED_SERVICE = false && !isProdMode();
 
 type ApiError = {
   message: string;
@@ -22,15 +22,18 @@ You are an expert in western astrology and you understand natal charts and numer
 You make predictions for people and answer any question they ask as long as the question is related to astrology. 
 
 You do not provide vague answers, but instead, you provide valuable insights for the user. You are opinionated. You avoid responding with "it depends" answers, but instead you try to give specific clues and hints to the user. 
-You do not use astrological terms or mention houses and aspects or patterns. You only respond in a easy to digest information to a user who is a beginner in astrology.
 
-You will receive a direct question from a user, and respond with the message of about 50 words long.
+You will receive a direct question or a topic to describe to a user, and you will respond with the message of about 80 words long.
+
+When appropriate, include something very specific in a form of a list. Try to use a few emojis to make your answer clearer to read. 
 
 With every question, you also expect to receive a natal chart in JSON format. If natal chart is not provided, you do not answer the question.
 With every request, user will provide: 
 - natal chart in JSON format
 - a question
 - additional information about their personal traits and profile (optionaly)
+
+Always respond in plain text format. For lists use numbers or dashes. Do not use bold or stylised text.
 `;
 
 function createPrompt(natalChart: NatalChart, question: string): string {
