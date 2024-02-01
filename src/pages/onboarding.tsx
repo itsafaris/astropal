@@ -95,13 +95,13 @@ export default function OnboardingQuiz() {
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />
             <AstrologerAdviceCareer />
-            <AstrologerAdviceRecap />
             <AstrologerImpression />
 
             <PersonalGrowthScore />
             <RelationshipScore />
             <CareerScore />
             <SavingYourPreferences />
+            <AstrologerAdviceRecap />
             <YourGuidanceIsReady />
 
             <AsnwerLongevity />
