@@ -1,33 +1,36 @@
-import { Box, BoxProps, Flex, keyframes } from "@chakra-ui/react";
+import { Flex, FlexProps, keyframes } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 import orbGif from "@images/orb_animated_2.gif";
 
-const boxShadow =
-  "inset 0px 0px 10px 5px #00abff, 0px 0px 50px 0px #00abff, 0px 0px 10px 0px #0ab2ff";
+const boxShadow = (color: string = "#0ab2ff") =>
+  `inset 0px 0px 10px 5px ${color}, 0px 0px 50px 0px ${color}, 0px 0px 10px 0px ${color}`;
 
-const animationKeyframes = keyframes`
-  0% { box-shadow: ${boxShadow}, 0px 0px 10px 0px #a2e0ffb3; }
-  50% { box-shadow: ${boxShadow}, 0px 0px 50px 0px #a2e0ffb3; }
-  100% { box-shadow: ${boxShadow}, 0px 0px 10px 0px #a2e0ffb3; }
+const animationKeyframes = (color: string = "#0ab2ff") => keyframes`
+  0% { box-shadow: ${boxShadow(color)}, 0px 0px 10px 0px #a2e0ffb3; }
+  50% { box-shadow: ${boxShadow(color)}, 0px 0px 50px 0px #a2e0ffb3; }
+  100% { box-shadow: ${boxShadow(color)}, 0px 0px 10px 0px #a2e0ffb3; }
 `;
 
-const animation = `${animationKeyframes} 2s ease-in-out  infinite`;
+const animation = (color: string = "#0ab2ff") =>
+  `${animationKeyframes(color)} 2s ease-in-out  infinite`;
 
 export function Orb2({
+  colorTheme = "#0ab2ff",
   size = 30,
   enableAnimation = false,
   ...rest
-}: { size?: number; enableAnimation?: boolean } & BoxProps) {
+}: { colorTheme?: string; size?: number; enableAnimation?: boolean } & FlexProps) {
   const sizeString = `${size}px`;
 
   return (
-    <Box
+    <Flex
       height={sizeString}
       width={sizeString}
       borderRadius={"50%"}
-      border={"3px solid #cdfdff"}
-      boxShadow={boxShadow}
-      animation={enableAnimation ? animation : undefined}
+      border={"3px solid "}
+      borderColor={colorTheme}
+      boxShadow={boxShadow(colorTheme)}
+      animation={enableAnimation ? animation(colorTheme) : undefined}
       {...rest}
     />
   );

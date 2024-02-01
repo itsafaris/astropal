@@ -58,6 +58,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
             text={option.text}
             imgHeight={imgHeight}
             imgComponent={option.imgComponent}
+            hideText={slideCtx.hideText}
           />
         );
       })}

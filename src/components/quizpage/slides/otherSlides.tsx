@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 import {
@@ -12,31 +12,35 @@ import {
 } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 import { NatalChartInterpreter } from "../interpreter";
-
-export function WhyNatalChart() {
-  const { submitQuestion } = useQuiz();
-
-  return (
-    <Slide id="why-natal-chart" type="filler">
-      <SlideHeading text="Astrologers use a birth chart to interpret an individual's personality, potential, and life path based on celestial positions at their time of birth." />
-      <SlideHeading text="It is the most important aspect of personal astrology." />
-      <NextButton
-        onClick={() => {
-          submitQuestion();
-        }}
-      >
-        Continue
-      </NextButton>
-    </Slide>
-  );
-}
+import { AstrologicalProfile } from "@components/AstrologicalProfile";
+import { astrologers, getPersonalInfoFromState } from "@utils/state";
 
 export function AstrologerCreationStart() {
   const { submitQuestion } = useQuiz();
+  const { quizState } = useQuizState();
+  const { astrologer } = getPersonalInfoFromState(quizState);
 
   return (
     <Slide id="astrologer-creation-start" type="filler">
       <SlideHeading text="Let's now train our astrologer on your Birth Chart" />
+      <Box height={"140px"}>
+        <Box
+          transform={"rotateY(10deg) skew(-21deg,-8deg) scale(0.3)"}
+          transformOrigin={"top center"}
+        >
+          <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
+        </Box>
+      </Box>
+      <Box>
+        <Text my={-6} fontSize={60} color="green.300" textAlign={"center"}>
+          ↓
+        </Text>
+      </Box>
+
+      <Flex mt={8} mb={16} justifyContent={"center"}>
+        {astrologer.image}
+      </Flex>
+
       <NextButton
         onClick={() => {
           submitQuestion();
@@ -93,18 +97,19 @@ export function NameYourAstrologer() {
 
   return (
     <Slide
-      id="name-astrologer"
+      id="choose-astrologer"
       type="single"
-      variant={"list"}
-      options={[
-        { text: "Starlyn", icon: "🧙‍♂️" },
-        { text: "AstroMax", icon: "🧞‍♂️" },
-        { text: "Moonique", icon: "🧛‍♀️" },
-        { text: "Solara", icon: "🧝‍♀️" },
-        { text: "Zenith", icon: "🧚‍♂️" },
-      ]}
+      variant={"picture"}
+      size="medium"
+      hideText
+      options={Object.entries(astrologers).map(([key, value]) => {
+        return {
+          text: key,
+          imgComponent: value.image,
+        };
+      })}
     >
-      <SlideHeading text="How would you like your astrologer to look like?" />
+      <SlideHeading text="Choose your astrologer" />
       <Selector />
 
       <NextButton

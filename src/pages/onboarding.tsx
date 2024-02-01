@@ -30,7 +30,6 @@ import {
   DailyHoroscope,
   NameYourAstrologer,
   NotificationReceiver,
-  WhyNatalChart,
   TrainingAstrologerSlide,
   SavingYourPreferences,
   YourGuidanceIsReady,
@@ -87,11 +86,11 @@ export default function OnboardingQuiz() {
             <YourBirthPlaceSlide />
             <YourProfileSavingSlide />
             <NatalChartPreviewSlide />
-            <WhyNatalChart />
 
+            <NameYourAstrologer />
             <AstrologerCreationStart />
             <TrainingAstrologerSlide />
-            <NameYourAstrologer />
+
             <AstrologerHello />
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />
