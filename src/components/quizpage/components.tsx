@@ -1,7 +1,9 @@
 import React, { ComponentProps, useEffect, useState } from "react";
-import { Span as SpanRaw, Subtitle as SubtitleRaw } from "@martynasj/quiz-lib";
+import { Span as SpanRaw, Subtitle as SubtitleRaw, useQuizState } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
+import { getPersonalInfoFromState } from "@utils/state";
+import { Orb2 } from "@components/Orb";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -45,7 +47,7 @@ export function Caption(props: React.ComponentProps<typeof Text>) {
 
 export function CustomerMessage(props: { text: string } & ComponentProps<typeof Text>) {
   return (
-    <Text fontSize={"lg"} fontWeight={"semibold"} color="bg.900" {...props}>
+    <Text mb={8} fontSize={"lg"} fontWeight={"semibold"} color="bg.900" {...props}>
       "{props.text}"
     </Text>
   );
@@ -75,36 +77,38 @@ export function ChatMessage({
   bubleProps,
   ...rest
 }: ChatMessageProps & ComponentProps<typeof Box>) {
+  const { quizState } = useQuizState();
+  const { astrologer } = getPersonalInfoFromState(quizState);
+
   return (
-    <Flex direction={"column"} alignItems={"stretch"} {...rest}>
-      <Flex mb={3} alignItems={"center"}>
-        <Flex
-          width={"30px"}
-          height={"30px"}
-          bg="white"
-          mr={2}
-          borderRadius={"full"}
-          border="2px solid"
-          borderColor={"orange.400"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          fontSize={"xl"}
-        >
-          {avatarIcon}
-        </Flex>
-        <Text color="white" fontWeight={"semibold"}>
-          {avatarName}
-        </Text>
+    <Flex direction={"column"} alignItems={"stretch"} my={12} {...rest}>
+      <Flex mb={2} mx={"auto"} alignItems={"center"}>
+        <Orb2 enableAnimation size={64} p={2} colorTheme="#b2f5ea">
+          {astrologer.image}
+        </Orb2>
       </Flex>
 
       <Box
         p={3}
         px={4}
         borderRadius={"lg"}
-        background={"teal.100"}
-        border="1px solid"
-        borderColor={"blue.600"}
+        bgGradient={"linear(to-b, teal.200, teal.100)"}
         color="black"
+        position={"relative"}
+        mt={4}
+        _before={{
+          content: `""`,
+          position: "absolute",
+          top: "-9px",
+          left: "50%",
+          width: "0",
+          height: "0",
+          borderLeft: "30px solid transparent",
+          borderRight: "30px solid transparent",
+          borderBottom: "10px solid",
+          borderBottomColor: "teal.200",
+          marginLeft: "-30px",
+        }}
         {...bubleProps}
       >
         <TypewriterText

@@ -1,4 +1,4 @@
-import { useQuizActions } from "../internal/state";
+import { useQuizActions, useQuizSnapshot } from "../internal/state";
 
 export function useQuiz() {
   const actions = useQuizActions();
@@ -6,5 +6,12 @@ export function useQuiz() {
     submitQuestion() {
       actions.submitQuestion();
     },
+  };
+}
+
+export function useQuizState() {
+  const snap = useQuizSnapshot();
+  return {
+    quizState: snap.slideStateByID,
   };
 }

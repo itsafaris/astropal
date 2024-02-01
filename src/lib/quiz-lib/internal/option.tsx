@@ -54,11 +54,18 @@ export function OptionSimple({ text, icon, selectorIconType, ...rest }: OptionPr
 
 type OptionPropsPicture = {
   text: string;
+  hideText?: boolean;
   imgHeight: number;
   imgComponent: React.ReactNode;
 } & BaseOptionProps;
 
-export function OptionWithPicture({ imgHeight, text, imgComponent, ...rest }: OptionPropsPicture) {
+export function OptionWithPicture({
+  imgHeight,
+  text,
+  imgComponent,
+  hideText,
+  ...rest
+}: OptionPropsPicture) {
   return (
     <BaseOption
       display={"flex"}
@@ -70,7 +77,7 @@ export function OptionWithPicture({ imgHeight, text, imgComponent, ...rest }: Op
       {...rest}
     >
       <Box maxHeight={imgHeight}>{imgComponent}</Box>
-      <Text>{text}</Text>
+      {!hideText && <Text>{text}</Text>}
     </BaseOption>
   );
 }

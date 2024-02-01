@@ -1,34 +1,46 @@
 import React, { useState } from "react";
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-import { SlideHeading, ChatMessage, NextButton, Span, SpanJust } from "../components";
+import {
+  SlideHeading,
+  ChatMessage,
+  NextButton,
+  Span,
+  SpanJust,
+  CustomerMessage,
+} from "../components";
 import { StaticImage } from "gatsby-plugin-image";
-
-export function WhyNatalChart() {
-  const { submitQuestion } = useQuiz();
-
-  return (
-    <Slide id="why-natal-chart" type="filler">
-      <SlideHeading text="Astrologers use a birth chart to interpret an individual's personality, potential, and life path based on celestial positions at their time of birth." />
-      <SlideHeading text="It is the most important aspect of personal astrology." />
-      <NextButton
-        onClick={() => {
-          submitQuestion();
-        }}
-      >
-        Continue
-      </NextButton>
-    </Slide>
-  );
-}
+import { NatalChartInterpreter } from "../interpreter";
+import { AstrologicalProfile } from "@components/AstrologicalProfile";
+import { astrologers, getPersonalInfoFromState } from "@utils/state";
 
 export function AstrologerCreationStart() {
   const { submitQuestion } = useQuiz();
+  const { quizState } = useQuizState();
+  const { astrologer } = getPersonalInfoFromState(quizState);
 
   return (
     <Slide id="astrologer-creation-start" type="filler">
       <SlideHeading text="Let's now train our astrologer on your Birth Chart" />
+      <Box height={"140px"}>
+        <Box
+          transform={"rotateY(10deg) skew(-21deg,-8deg) scale(0.3)"}
+          transformOrigin={"top center"}
+        >
+          <AstrologicalProfile quizState={getPersonalInfoFromState(quizState)} />
+        </Box>
+      </Box>
+      <Box>
+        <Text my={-6} fontSize={60} color="green.300" textAlign={"center"}>
+          ↓
+        </Text>
+      </Box>
+
+      <Flex mt={8} mb={16} justifyContent={"center"}>
+        {astrologer.image}
+      </Flex>
+
       <NextButton
         onClick={() => {
           submitQuestion();
@@ -85,18 +97,19 @@ export function NameYourAstrologer() {
 
   return (
     <Slide
-      id="name-astrologer"
+      id="choose-astrologer"
       type="single"
-      variant={"list"}
-      options={[
-        { text: "Starlyn", icon: "🧙‍♂️" },
-        { text: "AstroMax", icon: "🧞‍♂️" },
-        { text: "Moonique", icon: "🧛‍♀️" },
-        { text: "Solara", icon: "🧝‍♀️" },
-        { text: "Zenith", icon: "🧚‍♂️" },
-      ]}
+      variant={"picture"}
+      size="medium"
+      hideText
+      options={Object.entries(astrologers).map(([key, value]) => {
+        return {
+          text: key,
+          imgComponent: value.image,
+        };
+      })}
     >
-      <SlideHeading text="How would you like your astrologer to look like?" />
+      <SlideHeading text="Choose your astrologer" />
       <Selector />
 
       <NextButton
@@ -105,42 +118,6 @@ export function NameYourAstrologer() {
         }}
       >
         Continue
-      </NextButton>
-    </Slide>
-  );
-}
-
-export function ReadyToMeetAstrologer() {
-  const { submitQuestion } = useQuiz();
-
-  return (
-    <Slide id="ready-to-meet-astrologer" type="filler">
-      <SlideHeading text="Your astrologer Starlyn is ready to meet you." />
-      <Box color="white">
-        <Text fontWeight={"bold"} color="green.200">
-          1. Answer your questions
-        </Text>
-        <Text fontWeight={"bold"} color="green.200">
-          2. Send you daily horoscope
-        </Text>
-        <Text fontWeight={"bold"} color="green.200">
-          3. Guide you to self-grow
-        </Text>
-        <Text fontWeight={"bold"} color="green.200">
-          ...
-        </Text>
-        <Text fontWeight={"bold"} color="green.200">
-          And many more
-        </Text>
-      </Box>
-
-      <NextButton
-        mt={8}
-        onClick={() => {
-          submitQuestion();
-        }}
-      >
-        I am ready
       </NextButton>
     </Slide>
   );
@@ -168,7 +145,7 @@ export function AstrologerHello() {
             submitQuestion();
           }}
         >
-          I want to hear something about myself
+          Tell me about my personality
         </NextButton>
       )}
     </Slide>
@@ -179,13 +156,13 @@ export function AstrologerImpression() {
   const { submitQuestion } = useQuiz();
   return (
     <Slide id="astrologer-impression" type="filler">
-      <SlideHeading text="This is just a few examples of what your astrologer can do. We can make it even better for you!" />
+      <SlideHeading text="Your astrologer is already quite capable 👏👏 Let's make it even more personalised to you!" />
       <NextButton
         onClick={() => {
           submitQuestion();
         }}
       >
-        Continue
+        Personalise Your Astrologer
       </NextButton>
     </Slide>
   );
@@ -320,6 +297,120 @@ export function YourGuidanceIsReady() {
       <NextButton mt={8} onClick={() => submitQuestion()}>
         Continue
       </NextButton>
+    </Slide>
+  );
+}
+
+export function AstrologerAdvicePersonality() {
+  const [showInput, setShowInput] = useState(false);
+  const quiz = useQuiz();
+
+  return (
+    <Slide id="personality-description" type="filler">
+      <CustomerMessage text="Tell me about my personality" />
+
+      <NatalChartInterpreter
+        question="What is my personality like? (do not mention any planets or signs, only tell very briefly about my personality)"
+        onFinishedAnswer={() => {
+          setShowInput(true);
+        }}
+      />
+
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            quiz.submitQuestion();
+          }}
+          my={8}
+        >
+          Tell me about my relationships
+        </NextButton>
+      )}
+    </Slide>
+  );
+}
+
+export function AstrologerAdviceCareer() {
+  const [showInput, setShowInput] = useState(false);
+  const quiz = useQuiz();
+
+  return (
+    <Slide id="advice-career" type="filler">
+      <CustomerMessage text="What are my career prospects?" />
+
+      <NatalChartInterpreter
+        question="What are my career prospects? (do not mention any planets or signs, only tell very briefly about my personality)"
+        onFinishedAnswer={() => {
+          setShowInput(true);
+        }}
+      />
+
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            quiz.submitQuestion();
+          }}
+          my={8}
+        >
+          Continue
+        </NextButton>
+      )}
+    </Slide>
+  );
+}
+
+export function AstrologerAdviceRelationships() {
+  const [showInput, setShowInput] = useState(false);
+  const quiz = useQuiz();
+
+  return (
+    <Slide id="advice-relationships" type="filler">
+      <CustomerMessage text="Tell me about my relationships" />
+
+      <NatalChartInterpreter
+        question="What are my relationship strengths and struggles? (do not mention any planets or signs, only tell very briefly about my personality)"
+        onFinishedAnswer={() => {
+          setShowInput(true);
+        }}
+      />
+
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            quiz.submitQuestion();
+          }}
+          my={8}
+        >
+          Tell me about my career
+        </NextButton>
+      )}
+    </Slide>
+  );
+}
+
+export function AstrologerAdviceRecap() {
+  const [showInput, setShowInput] = useState(false);
+  const quiz = useQuiz();
+
+  return (
+    <Slide id="advice-recap" type="filler">
+      <NatalChartInterpreter
+        question="What are my career prospects? (do not mention any planets or signs, only tell very briefly about my personality)"
+        onFinishedAnswer={() => {
+          setShowInput(true);
+        }}
+      />
+
+      {showInput && (
+        <NextButton
+          onClick={() => {
+            quiz.submitQuestion();
+          }}
+          my={8}
+        >
+          Continue
+        </NextButton>
+      )}
     </Slide>
   );
 }

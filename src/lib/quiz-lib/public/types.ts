@@ -74,6 +74,7 @@ export type OptionPictureProps = {
 export type SelectorPropsPicture = {
   variant: "picture";
   size?: "small" | "medium";
+  hideText?: boolean;
   options?: OptionPictureProps[];
 };
 

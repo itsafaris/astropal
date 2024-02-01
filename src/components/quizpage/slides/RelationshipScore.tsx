@@ -16,7 +16,6 @@ export function RelationshipScore() {
       ]}
     >
       <SlideHeading text={`To what extent do you feel fulfilled in terms of relationships?`} />
-
       <Selector />
     </Slide>
   );

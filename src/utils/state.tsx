@@ -11,11 +11,51 @@ import { getZodiacSign } from "@services/zodiacService";
 
 import { toTitleCase } from "@utils/string";
 import { createTime } from "./dates";
+import { StaticImage } from "gatsby-plugin-image";
 
 // IMPORTANT: change this if structure changes, to invalidate local storage
 export const STATE_VERSION = 1;
 
 export type QuizStateParsed = ReturnType<typeof getPersonalInfoFromState>;
+
+export const astrologers = {
+  astrologer1: {
+    image: (
+      <StaticImage
+        alt="image of astropal astrologer"
+        src={"../images/patterns/pattern-icon-1.svg"}
+      />
+    ),
+  },
+  astrologer2: {
+    image: (
+      <StaticImage
+        alt="image of astropal astrologer"
+        src={"../images/patterns/pattern-icon-2.svg"}
+      />
+    ),
+  },
+  astrologer3: {
+    image: (
+      <StaticImage
+        alt="image of astropal astrologer"
+        src={"../images/patterns/pattern-icon-3.svg"}
+      />
+    ),
+  },
+  astrologer4: {
+    image: (
+      <StaticImage
+        alt="image of astropal astrologer"
+        src={"../images/patterns/pattern-icon-4.svg"}
+      />
+    ),
+  },
+};
+
+export function getAstrologer(id: keyof typeof astrologers) {
+  return astrologers[id];
+}
 
 function splitFullName(fullName: string) {
   const parts = fullName.split(" ");
@@ -55,6 +95,9 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     long: 22,
   };
 
+  const astrologerID = (state["choose-astrologer"] as SingleState)?.value?.value;
+  const astrologer = astrologerID ? getAstrologer(astrologerID as any) : astrologers.astrologer1;
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -65,5 +108,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourBirthTime,
     yourBirthLocation,
     yourZodiac,
+    astrologer,
   };
 }
