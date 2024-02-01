@@ -3,6 +3,7 @@ import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 import { SlideHeading, ChatMessage, NextButton, Span, SpanJust } from "../components";
+import { StaticImage } from "gatsby-plugin-image";
 
 export function WhyNatalChart() {
   const { submitQuestion } = useQuiz();
@@ -293,6 +294,32 @@ export function SavingYourPreferences() {
           Continue
         </NextButton>
       )}
+    </Slide>
+  );
+}
+
+export function YourGuidanceIsReady() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="guidance-ready" type="filler">
+      <SlideHeading
+        text={
+          <SpanJust>
+            Your astrologer is now ready to provide you a <Span>personalised life guidance</Span>
+          </SpanJust>
+        }
+      />
+      <Box mt={4} overflow={"hidden"}>
+        <StaticImage
+          alt="Clarity increase when using astrologer guidance chart"
+          src="../../../images/clarity_chart.png"
+        />
+      </Box>
+
+      <NextButton mt={8} onClick={() => submitQuestion()}>
+        Continue
+      </NextButton>
     </Slide>
   );
 }

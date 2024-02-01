@@ -36,6 +36,7 @@ import {
   WhyNatalChart,
   TrainingAstrologerSlide,
   SavingYourPreferences,
+  YourGuidanceIsReady,
 } from "@components/quizpage/slides/otherSlides";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
@@ -108,6 +109,7 @@ export default function OnboardingQuiz() {
             {/* <SelfDiscoveryReadiness /> */}
             <CreatingSelfDiscoveryGuideSlide />
             <EmailSlide />
+            <YourGuidanceIsReady />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>
