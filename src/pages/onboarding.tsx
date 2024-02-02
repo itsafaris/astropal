@@ -31,6 +31,12 @@ import {
   AstrologerAdviceCareer,
   AstrologerAdvicePersonality,
 } from "@components/quizpage/slides/otherSlides";
+import {
+  AdviceSeekingFrequency,
+  DecisionChallengeAgreement,
+  DecisionMakingStruggles,
+  LifeChangeTiming,
+} from "@components/quizpage/questions";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -73,6 +79,10 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
+            <DecisionMakingStruggles />
+            <AdviceSeekingFrequency />
+            <DecisionChallengeAgreement />
+            <LifeChangeTiming />
             {/* <IntroSlide /> */}
             <YourBirthDateSlide />
             <YourBirthTimeSlide />

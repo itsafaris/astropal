@@ -33,8 +33,8 @@ export function Span(props: React.ComponentProps<typeof SpanRaw>) {
   return <SpanRaw color="orange.400" fontWeight={"semibold"} {...props} />;
 }
 
-export function Subtitle(props: React.ComponentProps<typeof SubtitleRaw>) {
-  return <SubtitleRaw {...props} />;
+export function Subtitle(props: React.ComponentProps<typeof Text>) {
+  return <Text color="bg.800" fontSize={"lg"} fontWeight={"semibold"} mb={8} {...props} />;
 }
 
 export function ImageWithCaptionWrapper(props: React.ComponentProps<typeof Flex>) {
