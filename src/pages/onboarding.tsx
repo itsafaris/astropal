@@ -77,7 +77,7 @@ export default function OnboardingQuiz() {
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            <YourProfileSavingSlide />
+            {/* <YourProfileSavingSlide /> */}
             {/* <NatalChartPreviewSlide /> */}
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />

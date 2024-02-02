@@ -3,7 +3,6 @@ import { Span as SpanRaw, Subtitle as SubtitleRaw, useQuizState } from "@martyna
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
 import { getPersonalInfoFromState } from "@utils/state";
-import { Orb2 } from "@components/Orb";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
@@ -62,67 +61,31 @@ export function SlideHeading(props: { text: React.ReactNode } & ComponentProps<t
 }
 
 type ChatMessageProps = {
-  avatarName: string;
-  avatarIcon: string;
   messageText: string;
-  bubleProps?: ComponentProps<typeof Box>;
   onFinishedTyping?: () => void;
 };
 
 export function ChatMessage({
-  avatarIcon,
-  avatarName,
   messageText,
   onFinishedTyping,
-  bubleProps,
   ...rest
 }: ChatMessageProps & ComponentProps<typeof Box>) {
   const { quizState } = useQuizState();
-  const { astrologer } = getPersonalInfoFromState(quizState);
 
   return (
-    <Flex direction={"column"} alignItems={"stretch"} my={12} {...rest}>
-      <Flex mb={2} mx={"auto"} alignItems={"center"}>
-        <Orb2 enableAnimation size={64} p={2} colorTheme="#b2f5ea">
-          {astrologer.image}
-        </Orb2>
-      </Flex>
-
-      <Box
-        p={3}
-        px={4}
-        borderRadius={"lg"}
-        bgGradient={"linear(to-b, teal.200, teal.100)"}
-        color="black"
-        position={"relative"}
-        mt={4}
-        _before={{
-          content: `""`,
-          position: "absolute",
-          top: "-9px",
-          left: "50%",
-          width: "0",
-          height: "0",
-          borderLeft: "30px solid transparent",
-          borderRight: "30px solid transparent",
-          borderBottom: "10px solid",
-          borderBottomColor: "teal.200",
-          marginLeft: "-30px",
-        }}
-        {...bubleProps}
-      >
-        <TypewriterText
-          fontWeight={"medium"}
-          fontSize={"md"}
-          text={messageText ?? "Typing..."}
-          onFinishedTyping={() => {
-            if (messageText) {
-              onFinishedTyping?.();
-            }
-          }}
-        />
-      </Box>
-    </Flex>
+    <TypewriterText
+      color="white"
+      fontWeight={"medium"}
+      fontSize={"md"}
+      text={messageText ?? "Typing..."}
+      instant
+      onFinishedTyping={() => {
+        if (messageText) {
+          onFinishedTyping?.();
+        }
+      }}
+      {...rest}
+    />
   );
 }
 
@@ -142,18 +105,20 @@ export function TypewriterText(props: TypewriterTextProps) {
 
   useEffect(() => {
     if (instant) {
-      setWords(text.split(" "));
+      const nextWords = text.length === 0 ? [] : text.split(" ");
+      setWords(nextWords);
+
       return () => {
         setWords([]);
         setNextWord("");
       };
     }
 
-    const words = text.split(" ");
+    const nextWords = text.split(" ");
 
     let idx = 0;
     const it = setInterval(() => {
-      const nextLetter = words[idx];
+      const nextLetter = nextWords[idx];
 
       setNextWord(nextLetter);
       setTimeout(() => {
@@ -162,7 +127,7 @@ export function TypewriterText(props: TypewriterTextProps) {
       }, speed / 2);
 
       idx++;
-      if (idx === words.length) {
+      if (idx === nextWords.length) {
         setTimeout(() => {
           onFinishedTyping?.();
         }, 300);
@@ -177,6 +142,10 @@ export function TypewriterText(props: TypewriterTextProps) {
     };
   }, [text, instant]);
 
+  if (words.length === 0) {
+    return null;
+  }
+
   return (
     <Text
       fontWeight="semibold"
@@ -186,13 +155,14 @@ export function TypewriterText(props: TypewriterTextProps) {
       whiteSpace={"pre-wrap"}
       {...rest}
     >
-      {words.join(" ")}
+      "{words.join(" ")}
       {words.length !== 0 && (
         <Text as="span" color="whiteAlpha.200">
           {" "}
           {nextWord}
         </Text>
       )}
+      "
     </Text>
   );
 }

@@ -6,7 +6,7 @@ const GPT_MODEL_3 = "gpt-3.5-turbo-1106";
 
 const MODEL_TO_USE = GPT_MODEL_4;
 
-const USE_MOCKED_SERVICE = false && !isProdMode();
+const USE_MOCKED_SERVICE = true && !isProdMode();
 
 type ApiError = {
   message: string;

@@ -154,9 +154,10 @@ export function AstrologerAdvicePersonality() {
 
   return (
     <Slide id="personality-description" type="filler">
-      <CustomerMessage text="Tell me about my personality" />
+      <SlideHeading text="   Tell me about my personality" />
 
       <NatalChartInterpreter
+        title="Your personality"
         prompt="What is my personality like? Provide a short list of my strenghts and weaknesses"
         onFinishedAnswer={() => {
           setShowInput(true);
@@ -170,7 +171,7 @@ export function AstrologerAdvicePersonality() {
           }}
           my={8}
         >
-          Tell me about my relationships
+          Continue
         </NextButton>
       )}
     </Slide>
@@ -183,9 +184,10 @@ export function AstrologerAdviceCareer() {
 
   return (
     <Slide id="advice-career" type="filler">
-      <CustomerMessage text="What are my career prospects?" />
+      <SlideHeading text="What are my career prospects?" />
 
       <NatalChartInterpreter
+        title="Your career"
         prompt={`Describe my career. Structure your response in these sections. Section titles should be as follows:
         - Short summary of what generic career and professional choices are good for me (do not include the section title).
         - Careers that fit you
@@ -218,9 +220,10 @@ export function AstrologerAdviceRelationships() {
 
   return (
     <Slide id="advice-relationships" type="filler">
-      <CustomerMessage text="Tell me about my relationships" />
+      <SlideHeading text="Tell me about my relationships" />
 
       <NatalChartInterpreter
+        title="Your relationships"
         prompt={`Describe me what am I in a relationships? Structure your response in these sections:
         - Short summary (do not include section title)
         - Zodiac signs that I match well with (include section title). Every list item should have an emoji representing this zodiac sign. Include a few word description summarising the match with this sign.
@@ -241,7 +244,7 @@ export function AstrologerAdviceRelationships() {
           }}
           my={8}
         >
-          Tell me about my career
+          Continue
         </NextButton>
       )}
     </Slide>
