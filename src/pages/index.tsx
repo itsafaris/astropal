@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text, TextProps } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
@@ -16,10 +16,6 @@ export function Head() {
   );
 }
 
-function Span(props: TextProps) {
-  return <Text as="span" color="brand.600" fontWeight={"bold"} {...props} />;
-}
-
 export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
@@ -28,82 +24,69 @@ export default function IndexPage() {
       </Container>
 
       <Container>
-        <Flex flexDirection={"column"}>
-          <Text
+        <Flex flexDirection={"column"} gap={6}>
+          <Flex flexDirection={"row"} justifyContent={"center"}>
+            <Flex
+              borderRadius={"full"}
+              overflow={"hidden"}
+              height={"160px"}
+              width={"160px"}
+              boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
+              position={"relative"}
+            >
+              <StaticImage
+                src={`../images/partner-3.png`}
+                alt="Option - in relationship"
+                placeholder="none"
+                width={150}
+                height={150}
+                layout="fixed"
+                style={{
+                  position: "absolute",
+                  zIndex: 1,
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  border: `1px solid #e4b382`,
+                  borderRadius: "50%",
+                }}
+              />
+
+              <StaticImage
+                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 0 }}
+                alt=""
+                src="../images/astro-avatar.png"
+                width={170}
+                height={170}
+              />
+            </Flex>
+          </Flex>
+
+          <Heading
             as="h1"
-            fontSize={{ base: "2xl", md: "3xl" }}
-            lineHeight={{ base: 1.4, md: 1.4 }}
-            fontWeight={"bold"}
-            textAlign="left"
+            fontSize={{
+              base: "28px",
+              md: "32px",
+            }}
+            textAlign="center"
             color="white"
-            mb={6}
+            maxWidth={400}
+            mx="auto"
           >
-            "Hello, I'm Sarah, and I got to know myself better following{" "}
-            <Span>Astropal's astrological insights</Span>"
+            Get To Know Yourself Through a Personalized <br /> Astrology Insights
+          </Heading>
+
+          <Text fontSize="lg" textAlign="center" color="bg.700">
+            Complete a{" "}
+            <Text as="span" fontWeight={"bold"} color="brand.500">
+              1-minute
+            </Text>{" "}
+            quiz <br /> to get a first insight
           </Text>
 
-          <Text
-            fontSize={{ base: "md", md: "lg" }}
-            textAlign="left"
-            color="whiteAlpha.700"
-            fontWeight={"normal"}
-            mb={6}
-          >
-            "At 43, grappling with <Span color="whiteAlpha.800">self-doubt</Span> and{" "}
-            <Span color="whiteAlpha.800">seeking direction</Span>, traditional methods fell short
-            until Astropal entered my life."
-          </Text>
-
-          <Flex height={{ base: 220, md: 330 }} width={"full"} mb={6} justifyContent={"center"}>
-            <StaticImage src={`../images/testimonial-one.jpeg`} alt="" layout="constrained" />
-          </Flex>
-
-          <Text fontSize="md" textAlign="center" color="white" fontWeight={"semibold"} mb={3}>
-            Complete a 1-minute quiz to get your first insight
-          </Text>
-
-          <Flex flexDirection={"row"} justifyContent={"center"} mb={4}>
+          <Flex flexDirection={"row"} justifyContent={"center"}>
             <Link to="/onboarding">
-              <NextButton>Get your first insight now</NextButton>
-            </Link>
-          </Flex>
-
-          <Text
-            fontSize={{ base: "md", md: "lg" }}
-            textAlign="left"
-            color="whiteAlpha.700"
-            fontWeight={"normal"}
-            mb={6}
-          >
-            "The depth of personalization provided by Astropal's personalized astrologer is
-            unparalleled. It goes beyond generic horoscopes, offering a profound exploration of my
-            individual strengths, weaknesses, and potential pathways.
-          </Text>
-
-          <Text
-            fontSize={{ base: "md", md: "lg" }}
-            textAlign="left"
-            color="whiteAlpha.700"
-            fontWeight={"normal"}
-            mb={6}
-          >
-            The daily personalized insights have become my guiding light, helping me navigate life's
-            twists and turns with newfound confidence."
-          </Text>
-
-          <Box height={"1px"} width={"full"} backgroundColor={"whiteAlpha.400"} />
-
-          <Text fontSize="2xl" textAlign="center" color="white" fontWeight={"semibold"} my={6}>
-            Start your self-discovery journey now
-          </Text>
-
-          <Text fontSize="md" textAlign="center" color="white" fontWeight={"semibold"} mb={3}>
-            Complete a 1-minute quiz to get your first insight
-          </Text>
-
-          <Flex flexDirection={"row"} justifyContent={"center"} mb={20}>
-            <Link to="/onboarding">
-              <NextButton>Get your first insight now</NextButton>
+              <NextButton>Get my first insight</NextButton>
             </Link>
           </Flex>
         </Flex>
