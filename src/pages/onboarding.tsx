@@ -16,27 +16,20 @@ import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceS
 import { YourProfileSavingSlide } from "@components/quizpage/slides/YourProfileSavingSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 
-import { YourSpiritualInvolvementSlide } from "@components/quizpage/slides/YourSpiritualInvolvementSlide";
 import { PersonalGrowthScore } from "@components/quizpage/slides/PersonalGrowthScore";
 import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore";
 import { CareerScore } from "@components/quizpage/slides/CareerScore";
 import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
 import {
-  AstrologerCreationStart,
-  AstrologerHello,
-  AstrologerImpression,
   AstrologerThemePreferences,
   DailyHoroscope,
-  NameYourAstrologer,
   NotificationReceiver,
-  TrainingAstrologerSlide,
   SavingYourPreferences,
   YourGuidanceIsReady,
   AstrologerAdviceRelationships,
   AstrologerAdviceCareer,
   AstrologerAdvicePersonality,
-  AstrologerAdviceRecap,
 } from "@components/quizpage/slides/otherSlides";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
@@ -85,31 +78,20 @@ export default function OnboardingQuiz() {
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
             <YourProfileSavingSlide />
-            <NatalChartPreviewSlide />
-
-            <NameYourAstrologer />
-            <AstrologerCreationStart />
-            <TrainingAstrologerSlide />
-
-            <AstrologerHello />
+            {/* <NatalChartPreviewSlide /> */}
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />
             <AstrologerAdviceCareer />
-            <AstrologerImpression />
-
-            <PersonalGrowthScore />
-            <RelationshipScore />
-            <CareerScore />
-            <AstrologerAdviceRecap />
-            <SavingYourPreferences />
-            <YourGuidanceIsReady />
-
-            <AsnwerLongevity />
-            <AstrologerThemePreferences />
-            <DailyHoroscope />
-            <NotificationReceiver />
-            {/* <YourSpiritualInvolvementSlide /> */}
-            <CreatingSelfDiscoveryGuideSlide />
+            {/* <PersonalGrowthScore /> */}
+            {/* <RelationshipScore /> */}
+            {/* <CareerScore /> */}
+            {/* <SavingYourPreferences /> */}
+            {/* <YourGuidanceIsReady /> */}
+            {/* <AsnwerLongevity /> */}
+            {/* <AstrologerThemePreferences /> */}
+            {/* <DailyHoroscope /> */}
+            {/* <NotificationReceiver /> */}
+            {/* <CreatingSelfDiscoveryGuideSlide /> */}
             <EmailSlide />
           </Segment>
         </QuizUI>
