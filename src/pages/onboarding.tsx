@@ -73,7 +73,7 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
-            <IntroSlide />
+            {/* <IntroSlide /> */}
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
