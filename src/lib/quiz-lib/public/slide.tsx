@@ -106,11 +106,11 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       <Flex w="100vw" maxWidth={"390px"} flexDir={"column"} py={4} px={6}>
         {realChildren}
 
-        {!hideNextButton() && (
+        {/* {!hideNextButton() && (
           <Box width={"full"} mt={4} mb={2} bottom={8}>
             <NextButton />
           </Box>
-        )}
+        )} */}
         {showSkipButton && <SkipButton mt={2} />}
       </Flex>
     </Flex>

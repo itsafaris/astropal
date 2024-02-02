@@ -1,5 +1,10 @@
 import React, { ComponentProps, useEffect, useState } from "react";
-import { Span as SpanRaw, Subtitle as SubtitleRaw, useQuizState } from "@martynasj/quiz-lib";
+import {
+  Span as SpanRaw,
+  Subtitle as SubtitleRaw,
+  useQuiz,
+  useQuizState,
+} from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
 import { getPersonalInfoFromState } from "@utils/state";
@@ -7,6 +12,7 @@ import { Orb2 } from "@components/Orb";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
+  const { submitQuestion } = useQuiz();
   return (
     <Box mx={4} my={4}>
       <Button
@@ -19,6 +25,7 @@ export function NextButton(props: ComponentProps<typeof Button>) {
         }}
         width={"full"}
         boxShadow={`0 0 0 6px ${theme.colors.brand["800"]}`}
+        onClick={() => submitQuestion()}
         {...props}
       />
     </Box>
@@ -53,10 +60,10 @@ export function CustomerMessage(props: { text: string } & ComponentProps<typeof 
   );
 }
 
-export function SlideHeading(props: { text: React.ReactNode } & ComponentProps<typeof Text>) {
+export function SlideHeading(props: { text?: React.ReactNode } & ComponentProps<typeof Text>) {
   return (
     <Text my={2} mb={8} color="white" {...props} fontSize={"xl"}>
-      {props.text}
+      {props.text ?? props.children}
     </Text>
   );
 }

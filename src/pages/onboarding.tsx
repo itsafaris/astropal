@@ -35,6 +35,9 @@ import {
   AdviceSeekingFrequency,
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
+  FillerPeopleInControl,
+  HyperPersonalisedInsights,
+  InsightVsHoroscopeComparison,
   LifeChangeTiming,
 } from "@components/quizpage/questions";
 
@@ -83,11 +86,17 @@ export default function OnboardingQuiz() {
             <AdviceSeekingFrequency />
             <DecisionChallengeAgreement />
             <LifeChangeTiming />
-            {/* <IntroSlide /> */}
+            <FillerPeopleInControl />
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
             <YourProfileSavingSlide />
+
+            <HyperPersonalisedInsights />
+            <InsightVsHoroscopeComparison />
+
+            {/* <IntroSlide /> */}
+
             {/* <NatalChartPreviewSlide /> */}
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />
