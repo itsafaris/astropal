@@ -87,16 +87,12 @@ export default function OnboardingQuiz() {
             <DecisionChallengeAgreement />
             <LifeChangeTiming />
             <FillerPeopleInControl />
+            <HyperPersonalisedInsights />
+            <InsightVsHoroscopeComparison />
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            <YourProfileSavingSlide />
-
-            <HyperPersonalisedInsights />
-            <InsightVsHoroscopeComparison />
-
-            {/* <IntroSlide /> */}
-
+            {/* <YourProfileSavingSlide /> */}
             {/* <NatalChartPreviewSlide /> */}
             <AstrologerAdvicePersonality />
             <AstrologerAdviceRelationships />
