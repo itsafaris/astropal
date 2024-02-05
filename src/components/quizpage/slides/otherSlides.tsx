@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
 import { Box, Fade, Flex, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
-import { useInterpreter } from "../interpreter";
-import { LoadingSlide } from "@martynasj/quiz-lib/internal/loading";
+import { Interpreter } from "../interpreter";
 import { LoadingPulse } from "../LoadingPulse";
 
 export function AstrologerThemePreferences() {
@@ -143,22 +142,48 @@ export function YourGuidanceIsReady() {
 
 export function PersonalityDescriptionSlide() {
   const quiz = useQuiz();
+  const quizSnapshot = useQuizSnapshot();
+  const slideID = "personality-description";
+
+  const [interpretation, setInterpretation] = useState<string | null>(null);
   const [showInterpretation, setShowInterpretation] = useState<boolean>(false);
-  const { interpretation, error } = useInterpreter(
-    "What is my personality like? Provide a short list of my strenghts and weaknesses"
-  );
+  const [startInterpreting, setStartInterpreting] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (quizSnapshot.currentSlideID === slideID) {
+      setStartInterpreting(true);
+    } else {
+      setInterpretation(null);
+      setShowInterpretation(false);
+      setStartInterpreting(false);
+    }
+  }, [quizSnapshot.currentSlideID]);
 
   return (
-    <Slide id="personality-description" type="filler">
-      <SlideHeading text="Tell me about my personality" />
+    <Slide id={slideID} type="filler">
+      <SlideHeading text="Take a brief pause while we collect the celestial insights 😌" />
+
+      {startInterpreting && (
+        <Interpreter
+          prompt={
+            "What is my personality like? Provide a short list of my strenghts and weaknesses"
+          }
+          onComplete={(val) => setInterpretation(val)}
+          onError={() => {}}
+        />
+      )}
 
       {!showInterpretation && (
         <>
-          <LoadingSlide id="loading-interpretation" type="loading" />
           <LoadingPulse isLoading={!Boolean(interpretation)} />
 
           {interpretation && (
-            <NextButton onClick={() => setShowInterpretation(true)} my={8}>
+            <NextButton
+              onClick={() => {
+                setShowInterpretation(true);
+              }}
+              my={8}
+            >
               Continue
             </NextButton>
           )}
