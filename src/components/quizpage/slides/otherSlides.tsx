@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Selector, Slide, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
-import { Box, Fade, Flex, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Box, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
-import { Interpreter } from "../interpreter";
-import { LoadingPulse } from "../LoadingPulse";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -136,95 +134,6 @@ export function YourGuidanceIsReady() {
       <NextButton mt={8} onClick={() => submitQuestion()}>
         Continue
       </NextButton>
-    </Slide>
-  );
-}
-
-export function PersonalityDescriptionSlide() {
-  const quiz = useQuiz();
-  const quizSnapshot = useQuizSnapshot();
-  const slideID = "personality-description";
-
-  const [interpretation, setInterpretation] = useState<string | null>(null);
-  const [showInterpretation, setShowInterpretation] = useState<boolean>(false);
-  const [startInterpreting, setStartInterpreting] = useState<boolean>(false);
-
-  React.useEffect(() => {
-    if (quizSnapshot.currentSlideID === slideID) {
-      setStartInterpreting(true);
-    } else {
-      setInterpretation(null);
-      setShowInterpretation(false);
-      setStartInterpreting(false);
-    }
-  }, [quizSnapshot.currentSlideID]);
-
-  return (
-    <Slide id={slideID} type="filler">
-      <SlideHeading text="Take a brief pause while we prepare your Astrological Profile 😌" />
-
-      {startInterpreting && (
-        <Interpreter
-          prompt={
-            "What is my personality like? Provide a short list of my strenghts and weaknesses"
-          }
-          onComplete={(val) => setInterpretation(val)}
-          onError={() => {}}
-        />
-      )}
-
-      {!showInterpretation && (
-        <>
-          <LoadingPulse isLoading={!Boolean(interpretation)} my={4} />
-
-          {interpretation && (
-            <NextButton
-              onClick={() => {
-                setShowInterpretation(true);
-              }}
-              my={8}
-            >
-              Continue
-            </NextButton>
-          )}
-        </>
-      )}
-
-      {showInterpretation && (
-        <>
-          <Flex
-            flexDirection={"column"}
-            backgroundColor={"white"}
-            px={5}
-            py={7}
-            position={"relative"}
-            color="black"
-            borderRadius={"lg"}
-          >
-            <Text
-              textAlign={"center"}
-              fontStyle="italic"
-              fontSize={"2xl"}
-              color={"brand.300"}
-              mb={5}
-              fontWeight={"bold"}
-            >
-              Your personality
-            </Text>
-
-            <Text>{interpretation}</Text>
-          </Flex>
-
-          <NextButton
-            onClick={() => {
-              quiz.submitQuestion();
-            }}
-            my={8}
-          >
-            Continue
-          </NextButton>
-        </>
-      )}
     </Slide>
   );
 }

@@ -16,7 +16,7 @@ export function NextButton(props: ComponentProps<typeof Button>) {
         backgroundColor: "brand.500",
       }}
       width={"full"}
-      boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}`}
+      boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}, 0px 5px 30px 0px black`}
       borderRadius={8}
       onClick={() => submitQuestion()}
       {...props}
