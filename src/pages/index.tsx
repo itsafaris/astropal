@@ -1,10 +1,11 @@
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
-import { NextButton } from "@components/quizpage/components";
+
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+
 import { TopNavigation } from "@components/topnavigation";
+import { BookCover } from "@components/book/book";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -24,70 +25,45 @@ export default function IndexPage() {
       </Container>
 
       <Container>
+        <Heading as="h1" textAlign="center" mx="auto" fontSize={"2xl"} px={12} mb={4}>
+          Understand your life with a personalised Birth Chart Book.
+        </Heading>
+
+        <Box as="ul" pl={4}>
+          <Text>✅ Control your career choices</Text>
+          <Text>✅ Improve your love life</Text>
+          <Text>✅ Choose ideal partners</Text>
+          <Text>✅ Tackle life decisions with peace of mind</Text>
+          <Text>✅ Understand life hints</Text>
+          <Text>✅ Do not miss life opportunities</Text>
+        </Box>
+
+        <Flex justifyContent={"center"} my={8}>
+          <BookCover width={"260px"} height="100%" />
+        </Flex>
+
+        <Heading
+          as="h1"
+          textAlign="center"
+          color="orange.400"
+          mx="auto"
+          fontSize={"xl"}
+          px={12}
+          my={4}
+        >
+          30+ pages of unique content based on your Birth Chart
+        </Heading>
+
         <Flex flexDirection={"column"} gap={6}>
-          <Flex flexDirection={"row"} justifyContent={"center"}>
-            <Flex
-              borderRadius={"full"}
-              overflow={"hidden"}
-              height={"160px"}
-              width={"160px"}
-              boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
-              position={"relative"}
-            >
-              <StaticImage
-                src={`../images/partner-3.png`}
-                alt="Option - in relationship"
-                placeholder="none"
-                width={150}
-                height={150}
-                layout="fixed"
-                style={{
-                  position: "absolute",
-                  zIndex: 1,
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  border: `1px solid #e4b382`,
-                  borderRadius: "50%",
-                }}
-              />
-
-              <StaticImage
-                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 0 }}
-                alt=""
-                src="../images/astro-avatar.png"
-                width={170}
-                height={170}
-              />
-            </Flex>
-          </Flex>
-
-          <Heading
-            as="h1"
-            fontSize={{
-              base: "28px",
-              md: "32px",
-            }}
-            textAlign="center"
-            color="white"
-            maxWidth={400}
-            mx="auto"
-          >
-            Get To Know Yourself Through a Personalized <br /> Astrology Insights
-          </Heading>
-
           <Text fontSize="lg" textAlign="center" color="bg.700">
-            Complete a{" "}
-            <Text as="span" fontWeight={"bold"} color="brand.500">
-              1-minute
-            </Text>{" "}
-            quiz <br /> to get a first insight
+            Choose your gender
           </Text>
 
-          <Flex flexDirection={"row"} justifyContent={"center"}>
+          <Flex flexDirection={"row"} justifyContent={"center"} mb={12} gap={3}>
             <Link to="/onboarding">
-              <NextButton>Get my first insight</NextButton>
+              <Button colorScheme="teal">Male</Button>
             </Link>
+            <Button colorScheme="orange">Female</Button>
           </Flex>
         </Flex>
       </Container>
