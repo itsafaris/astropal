@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text, Button } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Button, useTheme } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
@@ -21,9 +21,11 @@ export function Head() {
 // const headline = "Never Miss an Oportunity With a Personalized Astrology Insights";
 // const headline = "A Cosmic Compass: Personalized Astrological Guidance";
 // const headline = "Navigate Life's Choices With Personalized Astrology Insights";
-const headline = "Navigate Success With Personalized Astrology Insights";
+// const headline = "Navigate Success With Personalized Astrology Insights";
 
 export default function IndexPage() {
+  const theme = useTheme();
+
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
       <Container>
@@ -122,13 +124,14 @@ export default function IndexPage() {
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Link to="/onboarding">
               <Button
-                backgroundColor={"brand.500"}
+                backgroundColor={"brand.600"}
                 py={6}
                 px={8}
                 color="brand.50"
                 fontSize={"lg"}
+                boxShadow={`0 0 0 6px ${theme.colors.brand["800"]}`}
                 _hover={{
-                  backgroundColor: "brand.400",
+                  backgroundColor: "brand.500",
                 }}
               >
                 Get my first insight

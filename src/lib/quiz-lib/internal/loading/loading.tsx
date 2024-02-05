@@ -135,11 +135,11 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         transform={"translateX(-50%)"}
         left="50%"
       >
-        <Text fontWeight={"semibold"} color="#dfbe9d" fontSize={"2xl"}>
+        <Text fontWeight={"semibold"} color="brand.900" fontSize={"2xl"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
 
-        <Text textAlign={"center"} color="#dfbe9d" fontSize={"md"} fontWeight={"semibold"}>
+        <Text textAlign={"center"} color="brand.900" fontSize={"md"} fontWeight={"semibold"}>
           {getStatusText()}
         </Text>
       </Flex>

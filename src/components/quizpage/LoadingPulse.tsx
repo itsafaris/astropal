@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, keyframes } from "@chakra-ui/react";
+import { Flex, FlexProps, Text, keyframes } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const DEFAULT_COLOR = "#dfbe9d96";
@@ -11,9 +11,9 @@ const ANIMATION_KEYFRAMES_CSS = keyframes`
 `;
 const ANIMATION_CSS = `${ANIMATION_KEYFRAMES_CSS} 1.65s ease-in-out  infinite`;
 
-export function LoadingPulse({ isLoading = false }: { isLoading?: boolean }) {
+export function LoadingPulse({ isLoading = false, ...rest }: { isLoading?: boolean } & FlexProps) {
   return (
-    <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"}>
+    <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"} {...rest}>
       <Flex
         position={"relative"}
         animation={isLoading ? ANIMATION_CSS : undefined}
@@ -34,7 +34,7 @@ export function LoadingPulse({ isLoading = false }: { isLoading?: boolean }) {
           transform={"translateX(-50%)"}
           left="50%"
         >
-          <Text textAlign={"center"} color="#dfbe9d" fontSize={"lg"} fontWeight={"semibold"}>
+          <Text textAlign={"center"} color="brand.900" fontSize={"xl"} fontWeight={"semibold"}>
             {isLoading ? "Loading..." : "Done"}
           </Text>
         </Flex>
@@ -59,11 +59,11 @@ function SpinnerCircleSvg({
 
     if (isLoading) {
       int = setInterval(() => {
-        setDashoffset((val) => val + 10);
-      }, 20);
+        setDashoffset((val) => val - 15);
+        setDasharray(DEFAULT_DASHARRAY);
+      }, 10);
     } else {
       setDashoffset(0);
-      setDasharray(DEFAULT_DASHARRAY);
     }
 
     return () => {

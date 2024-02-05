@@ -161,7 +161,7 @@ export function PersonalityDescriptionSlide() {
 
   return (
     <Slide id={slideID} type="filler">
-      <SlideHeading text="Take a brief pause while we collect the celestial insights 😌" />
+      <SlideHeading text="Take a brief pause while we prepare your Astrological Profile 😌" />
 
       {startInterpreting && (
         <Interpreter
@@ -175,7 +175,7 @@ export function PersonalityDescriptionSlide() {
 
       {!showInterpretation && (
         <>
-          <LoadingPulse isLoading={!Boolean(interpretation)} />
+          <LoadingPulse isLoading={!Boolean(interpretation)} my={4} />
 
           {interpretation && (
             <NextButton

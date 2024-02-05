@@ -8,11 +8,9 @@ export function YourBirthPlaceSlide() {
 
   return (
     <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
-      <SlideHeading text="Where were you born?" />
+      <SlideHeading text="What city were you born in?" />
 
-      <Callout emoji="Tip">
-        If you don't know the exact location, enter a major city near your location
-      </Callout>
+      <Callout>💡 If you're unsure of the exact location, enter a nearby major city.</Callout>
       <Selector />
       <NextButton
         onClick={() => {

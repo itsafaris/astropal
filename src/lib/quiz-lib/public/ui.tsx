@@ -50,24 +50,30 @@ export function TransitionText({
   );
 }
 
-export function Callout(props: PropsWithChildren<{ emoji?: string }>) {
-  const { emoji = "Did you know:", children } = props;
+export function Callout(props: PropsWithChildren<{ title?: string }>) {
+  const { title, children } = props;
   return (
     <Flex
       px={4}
-      py={4}
+      py={2}
       mb={8}
       gap={1}
-      borderRadius={"2xl"}
-      borderStyle={"solid"}
-      borderWidth={1}
-      borderColor={"bg.200"}
+      borderRadius={"xl"}
       flexDirection="column"
-      backgroundColor={"bg.50"}
+      backgroundColor={"bg.100"}
     >
-      <Box flexShrink={0} borderRadius={"full"} color="bg.900" fontWeight={"bold"} fontSize={"sm"}>
-        {emoji}
-      </Box>
+      {title && (
+        <Box
+          flexShrink={0}
+          borderRadius={"full"}
+          color="bg.900"
+          fontWeight={"bold"}
+          fontSize={"sm"}
+        >
+          {title}
+        </Box>
+      )}
+
       <Flex borderRadius={"md"}>
         <Text fontSize="sm" color="bg.600">
           {children}

@@ -81,16 +81,16 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
-            <AdviceSeekingFrequency />
-            <FillerPeopleInControl />
-            <FillerToBirthChart />
-
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
             {/* <YourProfileSavingSlide /> */}
             {/* <NatalChartPreviewSlide /> */}
             <PersonalityDescriptionSlide />
+
+            <AdviceSeekingFrequency />
+            <FillerPeopleInControl />
+            <FillerToBirthChart />
 
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />

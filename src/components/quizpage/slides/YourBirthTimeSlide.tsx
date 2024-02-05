@@ -10,9 +10,7 @@ export function YourBirthTimeSlide() {
     <Slide id="your-birth-time" type="time">
       <SlideHeading text="What is the time you were born?" />
 
-      <Callout emoji="Tip">
-        If you don't know the exact time, select just the approximate hour
-      </Callout>
+      <Callout>💡 If you're unsure about the time, pick the closest hour.</Callout>
       <Selector />
 
       <NextButton

@@ -7,22 +7,20 @@ export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
   const { submitQuestion } = useQuiz();
   return (
-    <Box my={4}>
-      <Button
-        px={8}
-        py={6}
-        variant={"solid"}
-        backgroundColor="brand.600"
-        _hover={{
-          backgroundColor: "brand.500",
-        }}
-        width={"full"}
-        boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}`}
-        borderRadius={8}
-        onClick={() => submitQuestion()}
-        {...props}
-      />
-    </Box>
+    <Button
+      px={8}
+      py={6}
+      variant={"solid"}
+      backgroundColor="brand.600"
+      _hover={{
+        backgroundColor: "brand.500",
+      }}
+      width={"full"}
+      boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}`}
+      borderRadius={8}
+      onClick={() => submitQuestion()}
+      {...props}
+    />
   );
 }
 
