@@ -60,10 +60,12 @@ export default function IndexPage() {
           </Text>
 
           <Flex flexDirection={"row"} justifyContent={"center"} mb={12} gap={3}>
-            <Link to="/onboarding">
+            <Link to="/onboarding?gender=male">
               <Button colorScheme="teal">Male</Button>
             </Link>
-            <Button colorScheme="orange">Female</Button>
+            <Link to="/onboarding?gender=female">
+              <Button colorScheme="orange">Female</Button>
+            </Link>
           </Flex>
         </Flex>
       </Container>

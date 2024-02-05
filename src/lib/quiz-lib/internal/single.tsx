@@ -23,7 +23,6 @@ export function SingleSelect(_: SingleSelectProps) {
   return (
     <Box>
       <MyFormLabel>Choose one</MyFormLabel>
-
       <CommonSelect
         handleOptionClick={handleClick}
         isOptionSelected={(optionID) => selectorState?.value?.id === optionID}

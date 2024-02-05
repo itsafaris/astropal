@@ -17,27 +17,7 @@ export function DecisionMakingStruggles() {
         { text: "Health and Well-being", icon: "🍏" },
       ]}
     >
-      <SlideHeading text={"What areas of your life do you find it hardest to make decisions in?"} />
-      <Selector />
-    </Slide>
-  );
-}
-
-export function AdviceSeekingFrequency() {
-  return (
-    <Slide
-      id="advice-seeking-frequency"
-      type="single"
-      variant="list"
-      options={[
-        { text: "Multiple times a day", icon: "🔍" },
-        { text: "Once a day", icon: "📅" },
-        { text: "A few times a week", icon: "🗓️" },
-        { text: "Occasionally", icon: "🤷" },
-        { text: "Rarely", icon: "🚫" },
-      ]}
-    >
-      <SlideHeading text={"How often do you find yourself seeking advice?"} />
+      <SlideHeading text={"Which area of your life is the hardest to make decisions in?"} />
       <Selector />
     </Slide>
   );
@@ -71,19 +51,92 @@ export function LifeChangeTiming() {
       type="single"
       variant="list"
       options={[
-        { text: "Always", icon: "🌟" },
-        { text: "Often", icon: "✨" },
-        { text: "Sometimes", icon: "🤔" },
-        { text: "Rarely", icon: "😕" },
-        { text: "Never", icon: "🚫" },
+        { text: "Completely Confident", icon: "🌟" },
+        { text: "Somewhat Confident", icon: "⚖️" },
+        { text: "Unsure", icon: "❓" },
       ]}
     >
       <SlideHeading
         text={
-          "When making a big change in your life, do you feel that you know the right moment to do it?"
+          "When making a big change in your life, how confident do you feel about your decisions?"
         }
       />
       <Selector />
+    </Slide>
+  );
+}
+
+export function AstrologyExperienceLevel() {
+  return (
+    <Slide
+      id="astrology-experience-level"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Expert - I live by the stars", icon: "🌟" },
+        { text: "Knowledgeable - I know my way around a birth chart", icon: "🔭" },
+        { text: "Beginner - I'm curious but still learning", icon: "📚" },
+        { text: "Novice - What's a Mercury Retrograde?", icon: "❓" },
+        { text: "Skeptic - I'm here for the fun of it", icon: "😄" },
+      ]}
+    >
+      <SlideHeading text={"How would you describe your experience level with astrology?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function DetailLevelPreference() {
+  return (
+    <Slide
+      id="detail-level-preference"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Surface-Level Summary", icon: "🌊" },
+        { text: "Key Insights and Highlights", icon: "💡" },
+        { text: "In-Depth Analysis with Examples", icon: "🔍" },
+        { text: "Comprehensive Exploration of All Aspects", icon: "📚" },
+        { text: "Customized Deep Dive on Selected Topics", icon: "🎯" },
+      ]}
+    >
+      <SlideHeading text={"How detailed do you want your birth chart book to be?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function IncludeRealLifeExamples() {
+  return (
+    <Slide
+      id="include-real-life-examples"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Yes, include real life examples", icon: "🌟" },
+        { text: "No, stick to theoretical knowledge", icon: "📚" },
+        { text: "Mix of both, but with a focus on real life situations", icon: "🔄" },
+      ]}
+    >
+      <SlideHeading
+        text={"Do you want some real life situations as examples to be included in the chapters?"}
+      />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function FillerBookIsBasedOnNatalChart() {
+  return (
+    <Slide id="filler-people-in-control" type="filler">
+      <SlideHeading>82% of people feel out of control in similar ways like you.</SlideHeading>
+      <Box bg="white" borderRadius={"xl"}>
+        <StaticImage
+          alt="chart showing how many people are in control with their lives"
+          src="../../images/lost_in_life_chart.png"
+        />
+      </Box>
+      <NextButton mt={8}>Continue</NextButton>
     </Slide>
   );
 }

@@ -61,7 +61,7 @@ export function CustomerMessage(props: { text: string } & ComponentProps<typeof 
 
 export function SlideHeading(props: { text?: React.ReactNode } & ComponentProps<typeof Text>) {
   return (
-    <Text my={2} mb={8} color="white" {...props} fontSize={"xl"}>
+    <Text my={2} mb={8} {...props} fontSize={"xl"}>
       {props.text ?? props.children}
     </Text>
   );

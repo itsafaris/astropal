@@ -25,18 +25,24 @@ import {
   AstrologerThemePreferences,
   DailyHoroscope,
   NotificationReceiver,
-  SavingYourPreferences,
+  Loading_CreatingBirthChart,
   YourGuidanceIsReady,
   AstrologerAdviceRelationships,
   AstrologerAdviceCareer,
   AstrologerAdvicePersonality,
+  Filler_BirthChartInterpretation,
+  Loading_SavingInterpretationPreferences,
+  Filler_WhyPersonalDetails,
+  Filler_BookStructure,
 } from "@components/quizpage/slides/otherSlides";
 import {
-  AdviceSeekingFrequency,
+  AstrologyExperienceLevel,
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
+  DetailLevelPreference,
   FillerPeopleInControl,
   HyperPersonalisedInsights,
+  IncludeRealLifeExamples,
   InsightVsHoroscopeComparison,
   LifeChangeTiming,
 } from "@components/quizpage/questions";
@@ -52,6 +58,9 @@ export default function OnboardingQuiz() {
 
   useEffect(() => {
     setMounted(true);
+    const p = new URLSearchParams(window.location.search);
+    const gender = p.get("gender");
+    console.log(gender);
   }, []);
 
   if (!mounted) {
@@ -82,31 +91,23 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
-            <DecisionMakingStruggles />
-            <AdviceSeekingFrequency />
-            <DecisionChallengeAgreement />
-            <LifeChangeTiming />
-            <FillerPeopleInControl />
-            <HyperPersonalisedInsights />
-            <InsightVsHoroscopeComparison />
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            {/* <YourProfileSavingSlide /> */}
-            {/* <NatalChartPreviewSlide /> */}
-            <AstrologerAdvicePersonality />
-            <AstrologerAdviceRelationships />
-            <AstrologerAdviceCareer />
-            {/* <PersonalGrowthScore /> */}
-            {/* <RelationshipScore /> */}
-            {/* <CareerScore /> */}
-            {/* <SavingYourPreferences /> */}
-            {/* <YourGuidanceIsReady /> */}
-            {/* <AsnwerLongevity /> */}
-            {/* <AstrologerThemePreferences /> */}
-            {/* <DailyHoroscope /> */}
-            {/* <NotificationReceiver /> */}
-            {/* <CreatingSelfDiscoveryGuideSlide /> */}
+            <Loading_CreatingBirthChart />
+            <NatalChartPreviewSlide />
+            <Filler_BirthChartInterpretation />
+            <AstrologyExperienceLevel />
+            <DetailLevelPreference />
+            <IncludeRealLifeExamples />
+            <AstrologerThemePreferences />
+            <Loading_SavingInterpretationPreferences />
+            <Filler_BookStructure />
+
+            <Filler_WhyPersonalDetails />
+            <DecisionMakingStruggles />
+            <DecisionChallengeAgreement />
+            <LifeChangeTiming />
             <EmailSlide />
           </Segment>
         </QuizUI>

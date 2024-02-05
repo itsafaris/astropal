@@ -14,6 +14,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { NatalChartInterpreter } from "../interpreter";
 import { AstrologicalProfile } from "@components/AstrologicalProfile";
 import { astrologers, getPersonalInfoFromState } from "@utils/state";
+import { bookToc } from "@utils/book";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -30,7 +31,7 @@ export function AstrologerThemePreferences() {
         { text: "Self understanding", icon: "🧘" },
       ]}
     >
-      <SlideHeading text="What are the themes you want your astrologer to be most trained on?" />
+      <SlideHeading text="Select which of the chapters should be included in your book?" />
       <Selector />
       <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
@@ -86,13 +87,12 @@ export function NotificationReceiver() {
   );
 }
 
-export function SavingYourPreferences() {
+export function Loading_CreatingBirthChart() {
   const [loadingCompleted, setLoadingCompleted] = useState(false);
-  const { submitQuestion } = useQuiz();
 
   return (
     <Slide
-      id="saving-preferences"
+      id="loading-creating-birthchart"
       type="loading"
       duration={4}
       statusText={({ progress }) => {
@@ -105,19 +105,134 @@ export function SavingYourPreferences() {
         setLoadingCompleted(true);
       }}
     >
-      <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"center"} color={"white"} mb={4}>
-        Personalizing your astrologer
-      </Text>
+      <SlideHeading>
+        We're now calculating your <Span>Birth Chart</Span> - a snapshot of the sky at the time and
+        place you were born.
+      </SlideHeading>
       <Selector />
-      {loadingCompleted && (
-        <NextButton
-          onClick={() => {
-            submitQuestion();
-          }}
-        >
-          Continue
-        </NextButton>
-      )}
+      {loadingCompleted && <NextButton>Continue</NextButton>}
+    </Slide>
+  );
+}
+
+export function Loading_SavingInterpretationPreferences() {
+  const [loadingCompleted, setLoadingCompleted] = useState(false);
+
+  return (
+    <Slide
+      id="loading-saving-interpretatation-preferences"
+      type="loading"
+      duration={4}
+      statusText={({ progress }) => {
+        if (progress < 100) {
+          return "Loading...";
+        }
+        return "Completed";
+      }}
+      onLoadingCompleted={() => {
+        setLoadingCompleted(true);
+      }}
+    >
+      <SlideHeading>Creating a template of your book</SlideHeading>
+      <Selector />
+      {loadingCompleted && <NextButton>Continue</NextButton>}
+    </Slide>
+  );
+}
+
+export function Filler_BirthChartInterpretation() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="filler-birth-chart-interpretation" type="filler">
+      <SlideHeading>
+        <Span>The book of life</Span> is based on the planets and celestial bodies of your birth
+        chart. They all encode a part of the story about you.
+      </SlideHeading>
+
+      <NextButton mt={8} onClick={() => submitQuestion()}>
+        Personalise interpretation
+      </NextButton>
+
+      <Box
+        position={"absolute"}
+        left={"50%"}
+        transform={"translateX(-50%)"}
+        width={"70%"}
+        mt={4}
+        borderRadius={"xl"}
+        bottom="0"
+        overflow={"hidden"}
+      >
+        <StaticImage
+          alt="Clarity increase when using astrologer guidance chart"
+          src="../../../images/book1.png"
+        />
+      </Box>
+    </Slide>
+  );
+}
+
+export function Filler_BookStructure() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="filler-book-structure" type="filler">
+      <SlideHeading text={<SpanJust>This is how your personal book will be structured</SpanJust>} />
+
+      <Box
+        bg="white"
+        mx="auto"
+        px={4}
+        py={8}
+        boxShadow={"4px 4px 9px 0px #cebeaf"}
+        borderRadius={"md"}
+        width={"300px"}
+      >
+        <Text textAlign={"center"} mb={4}>
+          Table of Contents
+        </Text>
+        <Box ml={8} as="ol">
+          {bookToc.chapters.map((chapter) => {
+            return (
+              <Text as="li" key={chapter.title} fontSize={"2xs"} fontFamily={"monospace"}>
+                {chapter.title}
+              </Text>
+            );
+          })}
+        </Box>
+      </Box>
+
+      <NextButton mt={8} onClick={() => submitQuestion()}>
+        Personalise interpretation
+      </NextButton>
+    </Slide>
+  );
+}
+
+export function Filler_WhyPersonalDetails() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="filler-personal-details" type="filler">
+      <SlideHeading
+        text={
+          <SpanJust>
+            To make the interpretation more personal, we just need a few more details to know you
+            better.
+          </SpanJust>
+        }
+      />
+      <Box mt={4} overflow={"hidden"}>
+        <StaticImage
+          alt="Clarity increase when using astrologer guidance chart"
+          src="../../../images/clarity_chart.png"
+        />
+      </Box>
+
+      <NextButton mt={8} onClick={() => submitQuestion()}>
+        Personalise interpretation
+      </NextButton>
     </Slide>
   );
 }

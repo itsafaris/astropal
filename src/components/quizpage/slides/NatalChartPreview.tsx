@@ -15,12 +15,11 @@ export function NatalChartPreviewSlide() {
     <Slide id="natal-chart-preview" type="filler">
       {({ quizState }) => {
         return (
-          <Box textColor={"white"}>
+          <Box>
             <SlideHeading
               text={
                 <SpanJust>
-                  Here is your <Span>Birth Chart</Span>. It contains a snapshot of the sky data at
-                  the time you were born
+                  Your <Span>Birth Chart</Span> is like a fingerprint. No two are exactly alike.
                 </SpanJust>
               }
             />

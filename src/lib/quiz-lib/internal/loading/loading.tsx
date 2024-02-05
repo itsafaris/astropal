@@ -134,7 +134,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         transform={"translateX(-50%)"}
         left="50%"
       >
-        <Text fontWeight={"semibold"} color="white" fontSize={"2xl"}>
+        <Text fontWeight={"semibold"} color="bg.900" fontSize={"2xl"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
 
@@ -157,6 +157,9 @@ function SpinnerCircleSvg({
   const FULL_DASH_ARRAY = 1998; // this value is hardcoded, it depends on the radius of SVG (2*PI*r)
   const val = FULL_DASH_ARRAY - FULL_DASH_ARRAY * (value / 100);
 
+  const color1 = "orange";
+  const color2 = "red";
+
   return (
     <svg
       {...svgContainerProps}
@@ -168,8 +171,8 @@ function SpinnerCircleSvg({
     >
       <defs>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
-          <stop stopColor="#5fb0a1" offset="0%" />
-          <stop stopColor="white" offset="100%" />
+          <stop stopColor={color2} offset="0%" />
+          <stop stopColor={color1} offset="100%" />
         </linearGradient>
         <filter
           id="b"
