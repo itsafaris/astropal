@@ -48,6 +48,30 @@ export interface NatalChart {
   //   progressions: Array<{ planet: string; sign: string; house: number }>;
 }
 
+export function createHoroscopeData(input: {
+  year: number;
+  month: number;
+  date: number;
+  hour: number;
+  minute: number;
+  latitude: number;
+  longitude: number;
+}) {
+  return new Horoscope({
+    origin: new Origin({
+      ...input,
+      month: input.month - 1, // 0 = January, 11 = December!
+    }),
+    houseSystem: "whole-sign",
+    zodiac: "tropical",
+    aspectPoints: ["bodies", "points", "angles"],
+    aspectWithPoints: ["bodies", "points", "angles"],
+    aspectTypes: ["major", "minor"],
+    customOrbs: {},
+    language: "en",
+  });
+}
+
 export function createNatalChartData(input: {
   year: number;
   month: number;
@@ -57,22 +81,7 @@ export function createNatalChartData(input: {
   latitude: number;
   longitude: number;
 }): NatalChart {
-  const origin = new Origin({
-    ...input,
-    month: input.month - 1, // 0 = January, 11 = December!
-  });
-
-  const horoscope = new Horoscope({
-    origin: origin,
-    houseSystem: "whole-sign",
-    zodiac: "tropical",
-    aspectPoints: ["bodies", "points", "angles"],
-    aspectWithPoints: ["bodies", "points", "angles"],
-    aspectTypes: ["major", "minor"],
-    customOrbs: {},
-    language: "en",
-  });
-
+  const horoscope = createHoroscopeData(input);
   const planets: NatalChart["planets"] = {};
 
   // @ts-ignore

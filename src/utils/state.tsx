@@ -12,6 +12,7 @@ import { getZodiacSign } from "@services/zodiacService";
 import { toTitleCase } from "@utils/string";
 import { createTime } from "./dates";
 import { StaticImage } from "gatsby-plugin-image";
+import { createHoroscopeData } from "./natalChart";
 
 // IMPORTANT: change this if structure changes, to invalidate local storage
 export const STATE_VERSION = 1;
@@ -97,6 +98,15 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
 
   const astrologerID = (state["choose-astrologer"] as SingleState)?.value?.value;
   const astrologer = astrologerID ? getAstrologer(astrologerID as any) : astrologers.astrologer1;
+  const horoscope = createHoroscopeData({
+    year: yourBirthDate.year,
+    month: yourBirthDate.month,
+    date: yourBirthDate.day,
+    hour: yourBirthTime.time24.hour,
+    minute: yourBirthTime.time24.minute,
+    latitude: yourBirthLocation.lat,
+    longitude: yourBirthLocation.long,
+  });
 
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
@@ -109,5 +119,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourBirthLocation,
     yourZodiac,
     astrologer,
+    horoscope,
   };
 }

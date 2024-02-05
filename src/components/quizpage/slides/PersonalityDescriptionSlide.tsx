@@ -1,6 +1,6 @@
-import React, { createElement, useState } from "react";
+import React, { useState } from "react";
 import { QuizQuestionsState, Slide, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, SpanJust, Span } from "../components";
 import { Interpreter } from "../interpreter";
@@ -97,38 +97,7 @@ function ResultsSlide({
         }
       />
 
-      <Flex
-        flexDirection={"column"}
-        backgroundColor={"white"}
-        px={5}
-        py={7}
-        position={"relative"}
-        color="black"
-        borderRadius={"lg"}
-      >
-        <Text
-          textAlign={"center"}
-          fontStyle="italic"
-          fontSize={"2xl"}
-          color={"brand.300"}
-          mb={5}
-          fontWeight={"bold"}
-        >
-          Your personality
-        </Text>
-
-        <Text>{interpretation}</Text>
-      </Flex>
-
-      {createElement(info.yourZodiac.svgComponent, {
-        height: 150,
-        width: 150,
-        stroke: "#f2bf79",
-        fill: "red",
-        strokeWidth: 4,
-      })}
-
-      <AstrologicalProfile quizState={info} />
+      <AstrologicalProfile quizState={info} interpretation={interpretation} />
 
       <NextButton
         position={"fixed"}
