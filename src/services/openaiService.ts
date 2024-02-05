@@ -4,7 +4,7 @@ import { NatalChart } from "@utils/natalChart";
 const GPT_MODEL_4 = "gpt-4-turbo-preview";
 const GPT_MODEL_3 = "gpt-3.5-turbo-1106";
 
-const MODEL_TO_USE = GPT_MODEL_4;
+const MODEL_TO_USE = GPT_MODEL_3;
 
 const USE_MOCKED_SERVICE = !isProdMode();
 

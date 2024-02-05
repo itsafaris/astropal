@@ -47,5 +47,7 @@ export function getReadableDate(date: DateValue): string {
 }
 
 export function getReadableTime(time: Time): string {
-  return `${time.hour}:${time.minute} ${time.meridiem}`;
+  return `${time.hour === 0 ? "00" : time.hour}:${time.minute === 0 ? "00" : time.minute} ${
+    time.meridiem
+  }`;
 }
