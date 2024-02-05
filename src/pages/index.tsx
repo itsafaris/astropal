@@ -15,6 +15,14 @@ export function Head() {
   );
 }
 
+// const headline = "Unlock Your Full Potential Through a Personalized Astrology Insights"
+// const headline = "Personalized Astrology Insights To Unlock Your Full Potential"
+// const headline = "Never Miss an Oportunity With a Personalized Astrology Insights"
+// const headline = "Never Miss an Oportunity With a Personalized Astrology Insights";
+// const headline = "A Cosmic Compass: Personalized Astrological Guidance";
+// const headline = "Navigate Life's Choices With Personalized Astrology Insights";
+const headline = "Navigate Success With Personalized Astrology Insights";
+
 export default function IndexPage() {
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
@@ -23,7 +31,7 @@ export default function IndexPage() {
       </Container>
 
       <Container>
-        <Flex flexDirection={"column"} gap={6}>
+        <Flex flexDirection={"column"} gap={8}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Flex
               borderRadius={"full"}
@@ -64,28 +72,67 @@ export default function IndexPage() {
           <Heading
             as="h1"
             fontSize={{
-              base: "28px",
+              base: "32px",
               md: "32px",
             }}
+            lineHeight={1.3}
             textAlign="center"
             color="white"
             maxWidth={400}
             mx="auto"
           >
-            Get To Know Yourself Through a Personalized <br /> Astrology Insights
+            Navigate Success <br /> With{" "}
+            <Text as="span" color="brand.600">
+              Personalized
+            </Text>
+            <br /> Astrology{" "}
+            <Text as="span" color="brand.600">
+              Insights
+            </Text>
           </Heading>
 
-          <Text fontSize="lg" textAlign="center" color="bg.700">
-            Complete a{" "}
-            <Text as="span" fontWeight={"bold"} color="brand.500">
-              1-minute
-            </Text>{" "}
-            quiz <br /> to get a first insight
-          </Text>
+          <Flex flexDirection={"column"} fontWeight={"thin"} color="brand.800">
+            <Text fontSize="lg" textAlign="center">
+              - Never Miss an{" "}
+              <Text as="span" fontWeight={"bold"}>
+                Opportunity
+              </Text>
+            </Text>
+
+            <Text fontSize="lg" textAlign="center">
+              - Make{" "}
+              <Text as="span" fontWeight={"bold"}>
+                Decisions
+              </Text>{" "}
+              with Confidence
+            </Text>
+
+            <Text fontSize="lg" textAlign="center">
+              - Tailored Uniquely for{" "}
+              <Text as="span" fontWeight={"bold"}>
+                You
+              </Text>
+            </Text>
+          </Flex>
+
+          {/* <Text fontSize="md" textAlign="center" color="bg.700">
+            Complete a 1-minute quiz <br /> to get a first insight
+          </Text> */}
 
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Link to="/onboarding">
-              <Button>Get my first insight</Button>
+              <Button
+                backgroundColor={"brand.500"}
+                py={6}
+                px={8}
+                color="brand.50"
+                fontSize={"lg"}
+                _hover={{
+                  backgroundColor: "brand.400",
+                }}
+              >
+                Get my first insight
+              </Button>
             </Link>
           </Flex>
         </Flex>
