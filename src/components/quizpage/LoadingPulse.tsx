@@ -92,7 +92,7 @@ function SpinnerCircleSvg({
         </linearGradient>
       </defs>
 
-      <g strokeWidth={isLoading ? 20 : 40} stroke="url(#pulse)" fill="none" rotate={90}>
+      <g strokeWidth={40} stroke="url(#pulse)" fill="none" rotate={90}>
         <motion.circle
           r={"50%"}
           cx={"50%"}

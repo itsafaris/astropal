@@ -1,29 +1,24 @@
 import React, { ComponentProps, useEffect, useState } from "react";
-import {
-  Span as SpanRaw,
-  Subtitle as SubtitleRaw,
-  useQuiz,
-  useQuizState,
-} from "@martynasj/quiz-lib";
+import { Span as SpanRaw, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 
 import { Text, Flex, Box, Button, useTheme } from "@chakra-ui/react";
-import { getPersonalInfoFromState } from "@utils/state";
 
 export function NextButton(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
   const { submitQuestion } = useQuiz();
   return (
-    <Box mx={4} my={4}>
+    <Box my={4}>
       <Button
-        px={6}
-        py={4}
+        px={8}
+        py={6}
         variant={"solid"}
         backgroundColor="brand.600"
         _hover={{
           backgroundColor: "brand.500",
         }}
         width={"full"}
-        boxShadow={`0 0 0 6px ${theme.colors.brand["800"]}`}
+        boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}`}
+        borderRadius={8}
         onClick={() => submitQuestion()}
         {...props}
       />

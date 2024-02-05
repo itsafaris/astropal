@@ -192,39 +192,37 @@ export function PersonalityDescriptionSlide() {
 
       {showInterpretation && (
         <>
-          <Fade in={Boolean(interpretation)} transition={{ enter: { duration: 0.3, delay: 0.5 } }}>
-            <Flex
-              flexDirection={"column"}
-              backgroundColor={"white"}
-              px={5}
-              py={7}
-              position={"relative"}
-              color="black"
-              borderRadius={"lg"}
+          <Flex
+            flexDirection={"column"}
+            backgroundColor={"white"}
+            px={5}
+            py={7}
+            position={"relative"}
+            color="black"
+            borderRadius={"lg"}
+          >
+            <Text
+              textAlign={"center"}
+              fontStyle="italic"
+              fontSize={"2xl"}
+              color={"brand.300"}
+              mb={5}
+              fontWeight={"bold"}
             >
-              <Text
-                textAlign={"center"}
-                fontStyle="italic"
-                fontSize={"2xl"}
-                color={"brand.300"}
-                mb={5}
-                fontWeight={"bold"}
-              >
-                Your personality
-              </Text>
+              Your personality
+            </Text>
 
-              <Text>{interpretation}</Text>
-            </Flex>
+            <Text>{interpretation}</Text>
+          </Flex>
 
-            <NextButton
-              onClick={() => {
-                quiz.submitQuestion();
-              }}
-              my={8}
-            >
-              Continue
-            </NextButton>
-          </Fade>
+          <NextButton
+            onClick={() => {
+              quiz.submitQuestion();
+            }}
+            my={8}
+          >
+            Continue
+          </NextButton>
         </>
       )}
     </Slide>
