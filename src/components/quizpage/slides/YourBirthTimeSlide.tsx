@@ -11,8 +11,7 @@ export function YourBirthTimeSlide() {
       <SlideHeading text="What is the time you were born?" />
 
       <Callout emoji="Tip">
-        If you don't know the exact time, select just the approximate hour. You will always be able
-        to adjust it later
+        If you don't know the exact time, select just the approximate hour
       </Callout>
       <Selector />
 

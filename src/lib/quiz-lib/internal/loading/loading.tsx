@@ -8,6 +8,9 @@ import { useQuizActions } from "../state";
 import { randomInt } from "../utils";
 import { useSlide } from "../..";
 
+const DEFAULT_COLOR = "#dfbe9d96";
+const BOX_SHADOW_CSS = `0px 0px 50px 0px ${DEFAULT_COLOR}, 0px 0px 10px 0px ${DEFAULT_COLOR}`;
+
 type LoadingSlideComponentProps = {} & SlidePropsLoading;
 
 export function LoadingSlide(props: LoadingSlideComponentProps) {
@@ -117,11 +120,9 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
   }
 
   return (
-    <Flex position={"relative"}>
-      <SpinnerCircleSvg
-        svgContainerProps={{ width: "260px", height: "260px" }}
-        value={loadingValue}
-      />
+    <Flex position={"relative"} boxShadow={BOX_SHADOW_CSS} borderRadius={"50%"}>
+      <SpinnerCircleSvg value={loadingValue} />
+
       <Flex
         display={"flex"}
         direction={"column"}
@@ -134,11 +135,11 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         transform={"translateX(-50%)"}
         left="50%"
       >
-        <Text fontWeight={"semibold"} color="white" fontSize={"2xl"}>
+        <Text fontWeight={"semibold"} color="#dfbe9d" fontSize={"2xl"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
 
-        <Text textAlign={"center"} color="bg.900" fontSize={"md"} fontWeight={"semibold"}>
+        <Text textAlign={"center"} color="#dfbe9d" fontSize={"md"} fontWeight={"semibold"}>
           {getStatusText()}
         </Text>
       </Flex>
@@ -148,59 +149,39 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
 
 function SpinnerCircleSvg({
   value = 100,
-  svgContainerProps,
+  size = 200,
 }: {
+  size?: number;
   value?: number; // 0 - 1
   duration?: number; // in seconds
-  svgContainerProps?: React.SVGProps<SVGSVGElement>;
 }) {
-  const FULL_DASH_ARRAY = 1998; // this value is hardcoded, it depends on the radius of SVG (2*PI*r)
+  const FULL_DASH_ARRAY = 1571;
   const val = FULL_DASH_ARRAY - FULL_DASH_ARRAY * (value / 100);
 
   return (
     <svg
-      {...svgContainerProps}
+      width={`${size}px`}
+      height={`${size}px`}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 800 800"
+      viewBox="0 0 500 500"
       style={{
         transform: "rotate(90deg)",
+        boxShadow: `inset 0px 0px 20px 10px ${DEFAULT_COLOR}`,
+        borderRadius: "50%",
       }}
     >
       <defs>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
-          <stop stopColor="#5fb0a1" offset="0%" />
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="loading-spinner-1">
+          <stop stopColor="#dfbe9d" offset="0%" />
           <stop stopColor="white" offset="100%" />
         </linearGradient>
-        <filter
-          id="b"
-          x="-100%"
-          y="-100%"
-          width="400%"
-          height="400%"
-          filterUnits="objectBoundingBox"
-          primitiveUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
-        >
-          <feGaussianBlur stdDeviation="25 25" x="0%" y="0%" in="SourceGraphic" result="blur" />
-        </filter>
-        <filter
-          x="-100%"
-          y="-100%"
-          width="400%"
-          height="400%"
-          filterUnits="objectBoundingBox"
-          primitiveUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
-        >
-          <feGaussianBlur stdDeviation="17 20" x="0%" y="0%" in="SourceGraphic" result="blur" />
-        </filter>
       </defs>
-      <g strokeWidth={40} stroke="url(#a)" fill="none" rotate={90}>
-        <motion.circle r={318} cx={400} cy={400} filter="url(#b)" opacity={0.5} />
+
+      <g strokeWidth={40} stroke="url(#loading-spinner-1)" fill="none">
         <motion.circle
-          r={318}
-          cx={400}
-          cy={400}
+          r={"50%"}
+          cx={"50%"}
+          cy={"50%"}
           strokeDasharray={FULL_DASH_ARRAY}
           strokeDashoffset={val}
         />

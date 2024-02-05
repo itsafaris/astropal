@@ -9,14 +9,13 @@ import { getOpenaiService, isApiError } from "@services/openaiService";
 import { Box, Fade, Flex, Text } from "@chakra-ui/react";
 import { Orb } from "@components/Orb";
 
-export function NatalChartInterpreter(props: {
-  title?: string;
-  prompt: string;
-  onFinishedAnswer?: () => void;
-}) {
+export function useInterpreter(prompt: string): {
+  error: boolean;
+  interpretation: string | null;
+} {
   const state = useQuizSnapshot();
-
-  const [interpretation, setInterpretation] = React.useState<string>("");
+  const [interpretation, setInterpretation] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     (async function () {
@@ -37,28 +36,39 @@ export function NatalChartInterpreter(props: {
       const openai = getOpenaiService();
 
       try {
-        const answer = await openai.fetchAnswer(natalChart, props.prompt);
+        const answer = await openai.fetchAnswer(natalChart, prompt);
         setInterpretation(answer);
       } catch (err) {
         if (isApiError(err)) {
-          setInterpretation(err.message);
+          setError(true);
         }
+
         throw err;
       }
     })();
 
     return () => {
-      setInterpretation("");
+      setError(false);
+      setInterpretation(null);
     };
-  }, [props.prompt]);
+  }, [prompt]);
 
-  React.useEffect(() => {
-    if (interpretation) {
-      setTimeout(() => {
-        props.onFinishedAnswer?.();
-      }, 800);
-    }
-  }, [interpretation]);
+  return {
+    interpretation,
+    error,
+  };
+}
+
+export function NatalChartInterpreter(props: {
+  title?: string;
+  prompt: string;
+  onFinishedAnswer?: () => void;
+}) {
+  const { interpretation } = useInterpreter(props.prompt);
+
+  if (!interpretation) {
+    return null;
+  }
 
   return (
     <Flex flexDirection={"column"} alignItems={"center"} position={"relative"}>
@@ -111,11 +121,6 @@ export function NatalChartInterpreter(props: {
             textAlign={"center"}
             color={"brand.300"}
             messageText={interpretation}
-            onFinishedTyping={() => {
-              // if (interpretation) {
-              //   props.onFinishedAnswer?.();
-              // }
-            }}
           />
         </Flex>
       </Fade>

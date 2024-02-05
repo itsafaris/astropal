@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Fade, Flex, Text } from "@chakra-ui/react";
 
-import {
-  SlideHeading,
-  ChatMessage,
-  NextButton,
-  Span,
-  SpanJust,
-  CustomerMessage,
-} from "../components";
+import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
-import { NatalChartInterpreter } from "../interpreter";
-import { AstrologicalProfile } from "@components/AstrologicalProfile";
-import { astrologers, getPersonalInfoFromState } from "@utils/state";
+import { useInterpreter } from "../interpreter";
+import { LoadingSlide } from "@martynasj/quiz-lib/internal/loading";
+import { LoadingPulse } from "../LoadingPulse";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -148,104 +141,66 @@ export function YourGuidanceIsReady() {
   );
 }
 
-export function AstrologerAdvicePersonality() {
-  const [showInput, setShowInput] = useState(false);
+export function PersonalityDescriptionSlide() {
   const quiz = useQuiz();
+  const [showInterpretation, setShowInterpretation] = useState<boolean>(false);
+  const { interpretation, error } = useInterpreter(
+    "What is my personality like? Provide a short list of my strenghts and weaknesses"
+  );
 
   return (
     <Slide id="personality-description" type="filler">
-      <SlideHeading text="   Tell me about my personality" />
+      <SlideHeading text="Tell me about my personality" />
 
-      <NatalChartInterpreter
-        title="Your personality"
-        prompt="What is my personality like? Provide a short list of my strenghts and weaknesses"
-        onFinishedAnswer={() => {
-          setShowInput(true);
-        }}
-      />
+      {!showInterpretation && (
+        <>
+          <LoadingSlide id="loading-interpretation" type="loading" />
+          <LoadingPulse isLoading={!Boolean(interpretation)} />
 
-      {showInput && (
-        <NextButton
-          onClick={() => {
-            quiz.submitQuestion();
-          }}
-          my={8}
-        >
-          Continue
-        </NextButton>
+          {interpretation && (
+            <NextButton onClick={() => setShowInterpretation(true)} my={8}>
+              Continue
+            </NextButton>
+          )}
+        </>
       )}
-    </Slide>
-  );
-}
 
-export function AstrologerAdviceCareer() {
-  const [showInput, setShowInput] = useState(false);
-  const quiz = useQuiz();
+      {showInterpretation && (
+        <>
+          <Fade in={Boolean(interpretation)} transition={{ enter: { duration: 0.3, delay: 0.5 } }}>
+            <Flex
+              flexDirection={"column"}
+              backgroundColor={"white"}
+              px={5}
+              py={7}
+              position={"relative"}
+              color="black"
+              borderRadius={"lg"}
+            >
+              <Text
+                textAlign={"center"}
+                fontStyle="italic"
+                fontSize={"2xl"}
+                color={"brand.300"}
+                mb={5}
+                fontWeight={"bold"}
+              >
+                Your personality
+              </Text>
 
-  return (
-    <Slide id="advice-career" type="filler">
-      <SlideHeading text="What are my career prospects?" />
+              <Text>{interpretation}</Text>
+            </Flex>
 
-      <NatalChartInterpreter
-        title="Your career"
-        prompt={`Describe my career. Structure your response in these sections. Section titles should be as follows:
-        - Short summary of what generic career and professional choices are good for me (do not include the section title).
-        - Careers that fit you
-        - Career choices to avoid
-        
-         Only respond with what is asked for. Do not add any other text to your response beyong the sections that are asked for.
-        `}
-        onFinishedAnswer={() => {
-          setShowInput(true);
-        }}
-      />
-
-      {showInput && (
-        <NextButton
-          onClick={() => {
-            quiz.submitQuestion();
-          }}
-          my={8}
-        >
-          Continue
-        </NextButton>
-      )}
-    </Slide>
-  );
-}
-
-export function AstrologerAdviceRelationships() {
-  const [showInput, setShowInput] = useState(false);
-  const quiz = useQuiz();
-
-  return (
-    <Slide id="advice-relationships" type="filler">
-      <SlideHeading text="Tell me about my relationships" />
-
-      <NatalChartInterpreter
-        title="Your relationships"
-        prompt={`Describe me what am I in a relationships? Structure your response in these sections:
-        - Short summary (do not include section title)
-        - Zodiac signs that I match well with (include section title). Every list item should have an emoji representing this zodiac sign. Include a few word description summarising the match with this sign.
-        - A list of zodiac signs that I should avoid (include section title).
-        - A short list of my weaknesses in relationships.
-        
-         Only respond with what is asked for. Do not add any other text to your response beyong the sections that are asked for.
-        `}
-        onFinishedAnswer={() => {
-          setShowInput(true);
-        }}
-      />
-
-      {showInput && (
-        <NextButton
-          onClick={() => {
-            quiz.submitQuestion();
-          }}
-          my={8}
-        >
-          Continue
-        </NextButton>
+            <NextButton
+              onClick={() => {
+                quiz.submitQuestion();
+              }}
+              my={8}
+            >
+              Continue
+            </NextButton>
+          </Fade>
+        </>
       )}
     </Slide>
   );

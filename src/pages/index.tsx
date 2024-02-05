@@ -1,6 +1,5 @@
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Button } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
-import { NextButton } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
@@ -86,7 +85,7 @@ export default function IndexPage() {
 
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Link to="/onboarding">
-              <NextButton>Get my first insight</NextButton>
+              <Button>Get my first insight</Button>
             </Link>
           </Flex>
         </Flex>

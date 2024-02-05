@@ -27,15 +27,14 @@ import {
   NotificationReceiver,
   SavingYourPreferences,
   YourGuidanceIsReady,
-  AstrologerAdviceRelationships,
-  AstrologerAdviceCareer,
-  AstrologerAdvicePersonality,
+  PersonalityDescriptionSlide,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AdviceSeekingFrequency,
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
   FillerPeopleInControl,
+  FillerToBirthChart,
   HyperPersonalisedInsights,
   InsightVsHoroscopeComparison,
   LifeChangeTiming,
@@ -82,31 +81,34 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
-            <DecisionMakingStruggles />
             <AdviceSeekingFrequency />
-            <DecisionChallengeAgreement />
-            <LifeChangeTiming />
             <FillerPeopleInControl />
-            <HyperPersonalisedInsights />
-            <InsightVsHoroscopeComparison />
+            <FillerToBirthChart />
+
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            {/* <YourProfileSavingSlide /> */}
+            <YourProfileSavingSlide />
             {/* <NatalChartPreviewSlide /> */}
-            <AstrologerAdvicePersonality />
-            <AstrologerAdviceRelationships />
-            <AstrologerAdviceCareer />
+            <PersonalityDescriptionSlide />
+
+            <DecisionMakingStruggles />
+            <DecisionChallengeAgreement />
+            <LifeChangeTiming />
+
             {/* <PersonalGrowthScore /> */}
             {/* <RelationshipScore /> */}
             {/* <CareerScore /> */}
-            {/* <SavingYourPreferences /> */}
+
             {/* <YourGuidanceIsReady /> */}
             {/* <AsnwerLongevity /> */}
             {/* <AstrologerThemePreferences /> */}
             {/* <DailyHoroscope /> */}
             {/* <NotificationReceiver /> */}
-            {/* <CreatingSelfDiscoveryGuideSlide /> */}
+
+            <HyperPersonalisedInsights />
+            <InsightVsHoroscopeComparison />
+            <CreatingSelfDiscoveryGuideSlide />
             <EmailSlide />
           </Segment>
         </QuizUI>

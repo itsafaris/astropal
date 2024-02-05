@@ -11,8 +11,7 @@ export function YourBirthPlaceSlide() {
       <SlideHeading text="Where were you born?" />
 
       <Callout emoji="Tip">
-        If you don't know the exact location, enter a major city near your location. You will be
-        able to change it later if needed.
+        If you don't know the exact location, enter a major city near your location
       </Callout>
       <Selector />
       <NextButton

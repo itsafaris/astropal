@@ -105,6 +105,18 @@ export function FillerPeopleInControl() {
   );
 }
 
+export function FillerToBirthChart() {
+  return (
+    <Slide id="intro-birth-chart" type="filler">
+      <SlideHeading>
+        To overcome the problem we have a solution. But first lets find out who you are
+      </SlideHeading>
+
+      <NextButton mt={8}>Continue</NextButton>
+    </Slide>
+  );
+}
+
 export function HyperPersonalisedInsights() {
   return (
     <Slide id="personalised-insights-intro" type="filler">
