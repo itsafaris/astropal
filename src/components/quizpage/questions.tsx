@@ -150,15 +150,12 @@ export function HyperPersonalisedInsights() {
         return (
           <>
             <SlideHeading>
-              <Text as="span" fontWeight={"bold"}>
-                9 out of 10 {toTitleCase(info.yourZodiac.pluralName)} under{" "}
-                {roundAgeUp(info.yourAge)}
-              </Text>{" "}
-              say they're better at{" "}
+              9 out of 10 {toTitleCase(info.yourZodiac.pluralName)} under {roundAgeUp(info.yourAge)}{" "}
+              say{" "}
               <Text as="span" fontStyle={"italic"} color="#63dc94">
                 "knowing when and what decisions to make"
               </Text>{" "}
-              with personalized Astropal insights
+              became easier with personalized Astropal insights
             </SlideHeading>
 
             <Flex

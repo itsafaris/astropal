@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { QuizQuestionsState, Slide, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
-import { SlideHeading, NextButton, SpanJust, Span } from "../components";
+import { SlideHeading, NextButton } from "../components";
 import { Interpreter } from "../interpreter";
 import { LoadingPulse } from "../LoadingPulse";
 import { AstrologicalProfile, Interpretation } from "@components/AstrologicalProfile";
@@ -78,7 +78,10 @@ export function PersonalityDescriptionSlide() {
 function LoadingSlide({ isLoading, onNextClick }: { isLoading: boolean; onNextClick: () => void }) {
   return (
     <>
-      <SlideHeading text="Please wait as we prepare your Astrological Profile 😌" />
+      <SlideHeading
+        textAlign={"center"}
+        text="Please wait as we prepare your Astrological Profile 😌"
+      />
 
       <LoadingPulse isLoading={isLoading} my={4} />
 
@@ -103,14 +106,13 @@ function ResultsSlide({
 
   return (
     <Flex flexDirection={"column"} position={"relative"} width={"full"}>
-      <SlideHeading
-        text={
-          <SpanJust>
-            Here is brief preview of your <Span>Astrological Profile</Span>. It contains a snapshot
-            of the sky data at the time you were born
-          </SpanJust>
-        }
-      />
+      <SlideHeading>
+        Here is brief preview of your{" "}
+        <Text as="span" color="brand.600">
+          Astrological Profile
+        </Text>
+        . It contains a snapshot of the sky data at the time you were born
+      </SlideHeading>
 
       <AstrologicalProfile quizState={info} interpretation={interpretation} />
 

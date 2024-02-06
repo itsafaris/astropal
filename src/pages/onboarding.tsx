@@ -25,9 +25,11 @@ import { PersonalityDescriptionSlide } from "@components/quizpage/slides/Persona
 import { SavingProfileSlide } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import {
+  AskingQuestionsDirectly,
   AstrologerThemePreferences,
   DailyHoroscope,
 } from "@components/quizpage/slides/otherSlides";
+import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -87,9 +89,10 @@ export default function OnboardingQuiz() {
             <DailyHoroscope />
             <AsnwerLongevity />
             <InsightVsHoroscopeComparison />
-            {/* <NotificationReceiver /> */}
+            <AskingQuestionsDirectly />
+            <FinalizingProfileSlide />
 
-            {/* <EmailSlide /> */}
+            <EmailSlide />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>

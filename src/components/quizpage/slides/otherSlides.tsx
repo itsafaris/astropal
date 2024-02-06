@@ -25,6 +25,30 @@ export function AstrologerThemePreferences() {
   );
 }
 
+export function AskingQuestionsDirectly() {
+  return (
+    <Slide
+      id="asking-questions-directly"
+      type="single"
+      variant="list"
+      options={[
+        { text: "I would love to", icon: "❤️" },
+        { text: "Not sure yet", icon: "🤔" },
+        { text: "No", icon: "🙅‍♂️" },
+      ]}
+    >
+      <SlideHeading>
+        Would you like to be able to ask questions and{" "}
+        <Text as="span" color="brand.600">
+          receive insights whenever something worries
+        </Text>{" "}
+        you?
+      </SlideHeading>
+      <Selector />
+    </Slide>
+  );
+}
+
 export function DailyHoroscope() {
   return (
     <Slide
