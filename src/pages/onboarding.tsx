@@ -19,22 +19,13 @@ import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import { PersonalGrowthScore } from "@components/quizpage/slides/PersonalGrowthScore";
 import { RelationshipScore } from "@components/quizpage/slides/RelationshipScore";
 import { CareerScore } from "@components/quizpage/slides/CareerScore";
-import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
+import { Loading_CreatingBook } from "@components/quizpage/slides/FinetuningSavingSlide";
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
 import {
-  AstrologerThemePreferences,
-  BookTone,
-  NotificationReceiver,
   Loading_CreatingBirthChart,
-  YourGuidanceIsReady,
-  AstrologerAdviceRelationships,
-  AstrologerAdviceCareer,
-  AstrologerAdvicePersonality,
-  Filler_BirthChartInterpretation,
-  Loading_SavingInterpretationPreferences,
-  Filler_WhyPersonalDetails,
   Filler_BookStructure,
   Filler_IntroToPersonality,
+  Loading_CreatingBlueprint,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AstrologyExperienceLevel,
@@ -101,7 +92,6 @@ export default function OnboardingQuiz() {
             <YourBirthPlaceSlide />
             <Loading_CreatingBirthChart />
             <Filler_NatalChartPreviewSlide />
-            {/* <Filler_BirthChartInterpretation /> */}
             <Filler_IntroToPersonality />
             <SelfUnderstanding />
             <DefineSuccess />
@@ -110,16 +100,10 @@ export default function OnboardingQuiz() {
             <LifeChangeTiming />
             <AstrologyExperienceLevel />
             <TopPersonalGoal />
-            <Loading_SavingInterpretationPreferences />
+            <Loading_CreatingBlueprint />
             <Filler_BookStructure />
             <NameOnTheBook />
-
-            {/* <BookTone /> */}
-            {/* <DetailLevelPreference /> */}
-            {/* <IncludeRealLifeExamples /> */}
-            {/* <AstrologerThemePreferences /> */}
-
-            <Filler_WhyPersonalDetails />
+            <Loading_CreatingBook />
             <EmailSlide />
           </Segment>
         </QuizUI>

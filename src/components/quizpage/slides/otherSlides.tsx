@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Card, Flex, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 import { NatalChartInterpreter } from "../interpreter";
 
 import { bookToc } from "@utils/book";
-import { TestimonialCard } from "./SocialProofFiller";
+
+import { SquaredStar } from "@components/svg/icons";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -95,36 +96,37 @@ export function Loading_CreatingBirthChart() {
   );
 }
 
-export function Loading_SavingInterpretationPreferences() {
-  const [loadingCompleted, setLoadingCompleted] = useState(false);
-
+export function Loading_CreatingBlueprint() {
   return (
     <Slide
-      id="loading-saving-interpretatation-preferences"
+      id="loading-creating-blueprint"
       type="loading"
-      duration={4}
+      duration={8}
       statusText={({ progress }) => {
         if (progress < 100) {
-          return "Loading...";
+          return "Generating a blueprint...";
         }
         return "Completed";
       }}
-      onLoadingCompleted={() => {
-        setLoadingCompleted(true);
-      }}
     >
-      <SlideHeading>Creating a template of your book</SlideHeading>
       <Selector />
-      <TestimonialCard
-        testimonial={{
-          authorName: "alma",
-          rating: 4,
-          text: "The book has become my personal bible. ",
-          imgComponent: (
-            <StaticImage alt="testimonial form a user" src="../../../images/user1.png" />
-          ),
-        }}
-      />
+      <Text textAlign={"center"} fontSize={"lg"} fontWeight={"bold"} color="bg.500" mb={4}>
+        Here is what media
+        <br /> says about us
+      </Text>
+      <Card p={4} my={4}>
+        <Flex gap={1} mb={2}>
+          <SquaredStar />
+          <SquaredStar />
+          <SquaredStar />
+          <SquaredStar />
+          <SquaredStar />
+        </Flex>
+        <Text fontWeight={"semibold"}>
+          The ultimate gift of self-discovery: Perfect for anyone seeking deeper self-awareness or a
+          meaningful, personalized gift that speaks to the soul.
+        </Text>
+      </Card>
     </Slide>
   );
 }
@@ -192,7 +194,10 @@ export function Filler_BookStructure() {
 
   return (
     <Slide id="filler-book-structure" type="filler">
-      <SlideHeading text={<SpanJust>This is how your personal book will be structured</SpanJust>} />
+      <SlideHeading>
+        Your book will contain <Span>60-80 pages of hyper-personalised content</Span>. Here's a
+        sneak peek:
+      </SlideHeading>
 
       <Box
         bg="white"
@@ -215,33 +220,6 @@ export function Filler_BookStructure() {
             );
           })}
         </Box>
-      </Box>
-
-      <NextButton mt={8} onClick={() => submitQuestion()}>
-        Personalise interpretation
-      </NextButton>
-    </Slide>
-  );
-}
-
-export function Filler_WhyPersonalDetails() {
-  const { submitQuestion } = useQuiz();
-
-  return (
-    <Slide id="filler-personal-details" type="filler">
-      <SlideHeading
-        text={
-          <SpanJust>
-            To make the interpretation more personal, we just need a few more details to know you
-            better.
-          </SpanJust>
-        }
-      />
-      <Box mt={4} overflow={"hidden"}>
-        <StaticImage
-          alt="Clarity increase when using astrologer guidance chart"
-          src="../../../images/clarity_chart.png"
-        />
       </Box>
 
       <NextButton mt={8} onClick={() => submitQuestion()}>

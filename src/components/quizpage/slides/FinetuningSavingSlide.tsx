@@ -1,30 +1,26 @@
-import React from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
 import { Flex, Text } from "@chakra-ui/react";
 import { TestimonialCard } from "@components/TestimonialCard";
 import { StaticImage } from "gatsby-plugin-image";
-import { SlideHeading, SpanJust } from "../components";
 
-export function CreatingSelfDiscoveryGuideSlide() {
+export function Loading_CreatingBook() {
   return (
-    <Slide id="finalizing-personalized-astrologer" type="loading" duration={8} autoProceed={true}>
-      <SlideHeading
-        text={
-          <SpanJust>
-            Finalizing Your Personalized <br /> Astrologer
-          </SpanJust>
-        }
-      />
-
+    <Slide
+      id="loading-creating-book"
+      type="loading"
+      duration={16}
+      statusText={"Generating pages"}
+      autoProceed={false}
+    >
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Selector />
 
-        <Text textAlign={"center"} color="teal.300" fontSize={"3xl"} fontWeight={"black"}>
-          31,000+ people
+        <Text textAlign={"center"} color="red.500" fontSize={"3xl"} fontWeight={"black"}>
+          310,000+ people
         </Text>
-        <Text textAlign={"center"} color="white" fontWeight={"bold"} fontSize={"lg"} mb={5}>
-          have chosen Astropal
+        <Text textAlign={"center"} fontWeight={"bold"} fontSize={"lg"} mb={5}>
+          have read their personal book
         </Text>
 
         <TestimonialCard

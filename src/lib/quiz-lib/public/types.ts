@@ -56,6 +56,7 @@ export type SlidePropsBase = {
   optional?: boolean;
   /** When slide becomes active, these props will be applied */
   quizContainerProps?: ContainerPropsOverride;
+  hideNextButton?: boolean;
   nextButtonProps?: NextButtonProps;
 };
 

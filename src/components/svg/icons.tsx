@@ -47,3 +47,39 @@ export function MoonIcon(props: ComponentProps<typeof Icon>) {
     </Icon>
   );
 }
+
+export function SquaredStar(props: ComponentProps<typeof Icon>) {
+  return (
+    <Icon viewBox="0 0 131 130" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <rect
+        x={1.5741}
+        y={1.01904}
+        width={127.958}
+        height={127.958}
+        rx={7}
+        fill="url(#paint0_linear_166_129)"
+        stroke="#30AC61"
+        strokeWidth={2}
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M65.553 14.998l12.41 38.199 40.163-.002L85.632 76.8l12.413 38.197-32.492-23.61-32.492 23.61 12.414-38.197L12.98 53.195l40.164.002 12.41-38.199z"
+        fill="#fff"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_166_129"
+          x1={36.6699}
+          y1={44.7906}
+          x2={116.861}
+          y2={126.341}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#06D389" />
+          <stop offset={1} stopColor="#0ABD7D" />
+        </linearGradient>
+      </defs>
+    </Icon>
+  );
+}

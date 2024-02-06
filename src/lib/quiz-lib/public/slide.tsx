@@ -52,11 +52,15 @@ export function Slide<T extends ISelectorType>(props: SlideComponentProps<T>) {
 }
 
 function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
-  const { children, containerProps, ...slideProps } = props;
+  const { children, containerProps, hideNextButton, ...slideProps } = props;
   const snap = useQuizSnapshot();
   const state = snap.currentSlideState;
 
-  let hideNextButton = () => {
+  let shouldHideNextButton = () => {
+    if (hideNextButton) {
+      return true;
+    }
+
     if (slideProps.type === "filler") {
       return true;
     }
@@ -118,7 +122,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       >
         {realChildren}
 
-        {!hideNextButton() && (
+        {!shouldHideNextButton() && (
           <Box width={"full"} mt={4} mb={2} bottom={8}>
             <NextButton />
           </Box>
