@@ -1,4 +1,4 @@
-import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
+import { QuizUI, Segment, QuizProvider, useQuizSnapshot, useQuizState } from "@martynasj/quiz-lib";
 
 import { Filler_NatalChartPreviewSlide } from "@components/quizpage/slides/NatalChartPreview";
 
@@ -42,6 +42,7 @@ import {
   SelfUnderstanding,
   TopPersonalGoal,
 } from "@components/quizpage/questions";
+import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -54,9 +55,6 @@ export default function OnboardingQuiz() {
 
   useEffect(() => {
     setMounted(true);
-    const p = new URLSearchParams(window.location.search);
-    const gender = p.get("gender");
-    console.log(gender);
   }, []);
 
   if (!mounted) {
@@ -73,11 +71,6 @@ export default function OnboardingQuiz() {
       onTrackingEvent={(event) => {
         trackEvent(event);
       }}
-      onSlideSubmitted={(state) => {
-        if (state.id === "your-email") {
-          trackPixel("Purchase", { currency: "USD", value: 30.0 });
-        }
-      }}
     >
       <QuizStateSaver />
       <QuizServiceWrapper>
@@ -87,6 +80,7 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
+            <YourGenderSlide />
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
@@ -113,12 +107,12 @@ export default function OnboardingQuiz() {
 }
 
 function QuizStateSaver() {
-  const q = useQuizSnapshot();
+  const { quizState } = useQuizState();
 
   useEffect(() => {
-    const quizState = getPersonalInfoFromState(q.slideStateByID);
-    saveQuizState(quizState);
-  }, [q.slideStateByID]);
+    const q = getPersonalInfoFromState(quizState);
+    saveQuizState(q);
+  }, [quizState]);
 
   return null;
 }
