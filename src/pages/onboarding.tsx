@@ -1,6 +1,6 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
 
-import { NatalChartPreviewSlide } from "@components/quizpage/slides/NatalChartPreview";
+import { Filler_NatalChartPreviewSlide } from "@components/quizpage/slides/NatalChartPreview";
 
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
@@ -23,7 +23,7 @@ import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/Fin
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
 import {
   AstrologerThemePreferences,
-  DailyHoroscope,
+  BookTone,
   NotificationReceiver,
   Loading_CreatingBirthChart,
   YourGuidanceIsReady,
@@ -34,17 +34,22 @@ import {
   Loading_SavingInterpretationPreferences,
   Filler_WhyPersonalDetails,
   Filler_BookStructure,
+  Filler_IntroToPersonality,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AstrologyExperienceLevel,
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
+  DefineSuccess,
   DetailLevelPreference,
   FillerPeopleInControl,
   HyperPersonalisedInsights,
   IncludeRealLifeExamples,
   InsightVsHoroscopeComparison,
   LifeChangeTiming,
+  NameOnTheBook,
+  SelfUnderstanding,
+  TopPersonalGoal,
 } from "@components/quizpage/questions";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
@@ -95,19 +100,26 @@ export default function OnboardingQuiz() {
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
             <Loading_CreatingBirthChart />
-            <NatalChartPreviewSlide />
-            <Filler_BirthChartInterpretation />
-            <AstrologyExperienceLevel />
-            <DetailLevelPreference />
-            <IncludeRealLifeExamples />
-            <AstrologerThemePreferences />
-            <Loading_SavingInterpretationPreferences />
-            <Filler_BookStructure />
-
-            <Filler_WhyPersonalDetails />
+            <Filler_NatalChartPreviewSlide />
+            {/* <Filler_BirthChartInterpretation /> */}
+            <Filler_IntroToPersonality />
+            <SelfUnderstanding />
+            <DefineSuccess />
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />
             <LifeChangeTiming />
+            <AstrologyExperienceLevel />
+            <TopPersonalGoal />
+            <Loading_SavingInterpretationPreferences />
+            <Filler_BookStructure />
+            <NameOnTheBook />
+
+            {/* <BookTone /> */}
+            {/* <DetailLevelPreference /> */}
+            {/* <IncludeRealLifeExamples /> */}
+            {/* <AstrologerThemePreferences /> */}
+
+            <Filler_WhyPersonalDetails />
             <EmailSlide />
           </Segment>
         </QuizUI>

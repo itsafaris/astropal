@@ -1,28 +1,14 @@
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { SlideHeading, NextButton, SpanJust, Span } from "../components";
+import { SlideHeading, Span } from "../components";
 
 export function YourBirthDateSlide() {
-  const { submitQuestion } = useQuiz();
-
   return (
     <Slide id="your-birth-date" type="date">
-      <SlideHeading
-        text={
-          <SpanJust>
-            Let's start with your <Span>Birth Chart</Span>. What is the date you were born?
-          </SpanJust>
-        }
-      />
+      <SlideHeading>
+        🗓️ What is the <Span>date</Span> you were born?
+      </SlideHeading>
       <Selector />
-
-      <NextButton
-        onClick={() => {
-          submitQuestion();
-        }}
-      >
-        Continue
-      </NextButton>
     </Slide>
   );
 }

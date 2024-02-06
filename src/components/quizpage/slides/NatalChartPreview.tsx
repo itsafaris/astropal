@@ -8,7 +8,7 @@ import { SlideHeading, NextButton, SpanJust, Span } from "../components";
 
 import { AstrologicalProfile } from "../../AstrologicalProfile";
 
-export function NatalChartPreviewSlide() {
+export function Filler_NatalChartPreviewSlide() {
   const { submitQuestion } = useQuiz();
 
   return (
@@ -19,7 +19,8 @@ export function NatalChartPreviewSlide() {
             <SlideHeading
               text={
                 <SpanJust>
-                  Your <Span>Birth Chart</Span> is like a fingerprint. No two are exactly alike.
+                  This is your Birth Chart! It is your astrological fingerprint and it is a{" "}
+                  <Span>foundation for your book</Span>.
                 </SpanJust>
               }
             />

@@ -1,20 +1,13 @@
 import React, { useState } from "react";
-import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Box, Text } from "@chakra-ui/react";
 
-import {
-  SlideHeading,
-  ChatMessage,
-  NextButton,
-  Span,
-  SpanJust,
-  CustomerMessage,
-} from "../components";
+import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 import { NatalChartInterpreter } from "../interpreter";
-import { AstrologicalProfile } from "@components/AstrologicalProfile";
-import { astrologers, getPersonalInfoFromState } from "@utils/state";
+
 import { bookToc } from "@utils/book";
+import { TestimonialCard } from "./SocialProofFiller";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -38,26 +31,19 @@ export function AstrologerThemePreferences() {
   );
 }
 
-export function DailyHoroscope() {
+export function BookTone() {
   return (
     <Slide
-      id="daily-horoscope"
+      id="book-tone"
       type="single"
       variant="list"
       options={[
-        { text: "Morning", icon: "🌅" },
-        { text: "Afternoon", icon: "☀️" },
-        { text: "Evening", icon: "🌃" },
+        { text: "Friendly and easy to read", icon: "🌅" },
+        { text: "Balanced", icon: "☀️" },
+        { text: "Scientific", icon: "🌃" },
       ]}
     >
-      <SlideHeading
-        text={
-          <SpanJust>
-            When would you like to receive your personalized{" "}
-            <Span color="blue.400">daily horoscope</Span>?
-          </SpanJust>
-        }
-      />
+      <SlideHeading>How do you want your book to be written?</SlideHeading>
       <Selector />
     </Slide>
   );
@@ -88,21 +74,16 @@ export function NotificationReceiver() {
 }
 
 export function Loading_CreatingBirthChart() {
-  const [loadingCompleted, setLoadingCompleted] = useState(false);
-
   return (
     <Slide
       id="loading-creating-birthchart"
       type="loading"
-      duration={4}
+      duration={8}
       statusText={({ progress }) => {
         if (progress < 100) {
-          return "Memorising...";
+          return "Calculating chart...";
         }
         return "Completed";
-      }}
-      onLoadingCompleted={() => {
-        setLoadingCompleted(true);
       }}
     >
       <SlideHeading>
@@ -110,7 +91,6 @@ export function Loading_CreatingBirthChart() {
         place you were born.
       </SlideHeading>
       <Selector />
-      {loadingCompleted && <NextButton>Continue</NextButton>}
     </Slide>
   );
 }
@@ -135,7 +115,16 @@ export function Loading_SavingInterpretationPreferences() {
     >
       <SlideHeading>Creating a template of your book</SlideHeading>
       <Selector />
-      {loadingCompleted && <NextButton>Continue</NextButton>}
+      <TestimonialCard
+        testimonial={{
+          authorName: "alma",
+          rating: 4,
+          text: "The book has become my personal bible. ",
+          imgComponent: (
+            <StaticImage alt="testimonial form a user" src="../../../images/user1.png" />
+          ),
+        }}
+      />
     </Slide>
   );
 }
@@ -146,8 +135,9 @@ export function Filler_BirthChartInterpretation() {
   return (
     <Slide id="filler-birth-chart-interpretation" type="filler">
       <SlideHeading>
-        <Span>The book of life</Span> is based on the planets and celestial bodies of your birth
-        chart. They all encode a part of the story about you.
+        <Span color="purple.600">The Book of You</Span> is created from your{" "}
+        <Span>Birth Chart</Span>. It is an easy to read interpretation of the information encoded in
+        the chart
       </SlideHeading>
 
       <NextButton mt={8} onClick={() => submitQuestion()}>
@@ -169,6 +159,30 @@ export function Filler_BirthChartInterpretation() {
           src="../../../images/book1.png"
         />
       </Box>
+    </Slide>
+  );
+}
+
+export function Filler_IntroToPersonality() {
+  const { submitQuestion } = useQuiz();
+
+  return (
+    <Slide id="filler-personality" type="filler">
+      <SlideHeading>
+        80% of the book is based on your Birth Chart. The rest{" "}
+        <Span color="black">20% comes from your personality</Span>.
+      </SlideHeading>
+
+      <Box width={"70%"} mx="auto" mt={4} borderRadius={"xl"} bottom="0" overflow={"hidden"}>
+        <StaticImage
+          alt="Clarity increase when using astrologer guidance chart"
+          src="../../../images/iceberg.png"
+        />
+      </Box>
+
+      <NextButton mt={8} onClick={() => submitQuestion()}>
+        Continue
+      </NextButton>
     </Slide>
   );
 }

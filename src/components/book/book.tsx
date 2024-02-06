@@ -4,8 +4,9 @@ import * as React from "react";
 export function BookCover(props: React.ComponentProps<typeof Icon>) {
   return (
     <Icon
-      width={1808}
-      height={2463}
+      // width={1808}
+      height={300}
+      width={"100%"}
       viewBox="0 0 1808 2463"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,14 @@
-import { Selector, Slide } from "@martynasj/quiz-lib";
+import { Callout, Selector, Slide } from "@martynasj/quiz-lib";
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span, SpanJust, Subtitle } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
+import { BookCover } from "@components/book/book";
 
 export function DecisionMakingStruggles() {
   return (
     <Slide
       id="decision-making-struggles"
-      type="single"
+      type="multi"
       variant="list"
       options={[
         { text: "Career and Work", icon: "🏢" },
@@ -73,14 +74,91 @@ export function AstrologyExperienceLevel() {
       type="single"
       variant="list"
       options={[
-        { text: "Expert - I live by the stars", icon: "🌟" },
-        { text: "Knowledgeable - I know my way around a birth chart", icon: "🔭" },
-        { text: "Beginner - I'm curious but still learning", icon: "📚" },
-        { text: "Novice - What's a Mercury Retrograde?", icon: "❓" },
-        { text: "Skeptic - I'm here for the fun of it", icon: "😄" },
+        { text: "Expert", icon: "🌟" },
+        { text: "Knowledgeable (I know a few terms)", icon: "🔭" },
+        { text: "Beginner - (Just starting now)", icon: "🍃" },
+        { text: "I have 0 knowledge", icon: "0️⃣" },
       ]}
     >
       <SlideHeading text={"How would you describe your experience level with astrology?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function DefineSuccess() {
+  return (
+    <Slide
+      id="define-success"
+      type="multi"
+      variant="list"
+      options={[
+        { text: "Achieving Personal Goals", icon: "🎯" },
+        { text: "Professional Achievements and Milestones", icon: "🏆" },
+        { text: "Continuous Growth and Learning", icon: "🌱" },
+        { text: "Maintaining Personal Well-being", icon: "💆" },
+        { text: "Making a Positive Impact on Others", icon: "❤️" },
+        { text: "Finding a Balance Between Work and Life", icon: "⚖️" },
+      ]}
+    >
+      <SlideHeading text={"Which of the following means success to you?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function SelfUnderstanding() {
+  return (
+    <Slide
+      id="self-understanding"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Not well at all", icon: "1️⃣" },
+        { text: "Somewhat understand", icon: "2️⃣" },
+        { text: "Moderately understand", icon: "3️⃣" },
+        { text: "Very well", icon: "4️⃣" },
+        { text: "Extremely well", icon: "5️⃣" },
+      ]}
+    >
+      <SlideHeading text={"How well do you think you understand yourself?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function TopPersonalGoal() {
+  return (
+    <Slide
+      id="top-personal-goal"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Advance in My Career", icon: "🚀" },
+        { text: "Improve Personal Health and Fitness", icon: "🏋️" },
+        { text: "Achieve Financial Stability", icon: "💰" },
+        { text: "Cultivate Meaningful Relationships", icon: "❤️" },
+        { text: "Pursue Further Education or Training", icon: "📚" },
+        { text: "Travel and Explore New Cultures", icon: "🌍" },
+        { text: "Invest in a Personal Hobby or Skill", icon: "🎨" },
+        { text: "Contribute to Social Causes", icon: "👐" },
+        { text: "Achieve a Work-Life Balance", icon: "⚖️" },
+      ]}
+    >
+      <SlideHeading text={"What is your main personal goal for the next year?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
+export function NameOnTheBook() {
+  return (
+    <Slide id="name-on-book" type="short-text" optional>
+      <SlideHeading>
+        What is your name?{" "}
+        <Span color="bg.700">(it will be displayed on the cover of the book)</Span>
+      </SlideHeading>
+      {/* <BookCover my={8} /> */}
       <Selector />
     </Slide>
   );

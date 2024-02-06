@@ -65,7 +65,8 @@ export function TestimonialCard({ testimonial }: { testimonial: ITestimonial }) 
       alignItems="center"
       gap="4"
       width="100%"
-      color="white"
+      bg="white"
+      p={4}
     >
       <Box
         display={"flex"}
@@ -109,7 +110,7 @@ export function TestimonialCard({ testimonial }: { testimonial: ITestimonial }) 
         {testimonial.authorName}
       </Text>
 
-      <Rating value={testimonial.rating} />
+      {/* <Rating value={testimonial.rating} /> */}
     </Box>
   );
 }

@@ -1,11 +1,6 @@
 export const bookToc = {
   chapters: [
     {
-      title: "Introduction to Astrology",
-      description:
-        "An essential primer on astrology basics and the significance of your personalized birth chart.",
-    },
-    {
       title: "Your Birth Chart Explained",
       description:
         "An essential primer on astrology basics and the significance of your personalized birth chart.",

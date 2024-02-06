@@ -57,6 +57,10 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
   const state = snap.currentSlideState;
 
   let hideNextButton = () => {
+    if (slideProps.type === "filler") {
+      return true;
+    }
+
     if (slideProps.type === "single") {
       return true;
     }
@@ -114,11 +118,11 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       >
         {realChildren}
 
-        {/* {!hideNextButton() && (
+        {!hideNextButton() && (
           <Box width={"full"} mt={4} mb={2} bottom={8}>
             <NextButton />
           </Box>
-        )} */}
+        )}
         {showSkipButton && <SkipButton mt={2} />}
       </Flex>
     </Flex>
