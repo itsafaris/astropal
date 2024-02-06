@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Box, Card, Flex, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span, SpanJust } from "../components";
@@ -9,6 +9,7 @@ import { NatalChartInterpreter } from "../interpreter";
 import { bookToc } from "@utils/book";
 
 import { SquaredStar } from "@components/svg/icons";
+import { getPersonalInfoFromState } from "@utils/state";
 
 export function AstrologerThemePreferences() {
   const { submitQuestion } = useQuiz();
@@ -209,14 +210,30 @@ export function Filler_BookStructure() {
         width={"300px"}
       >
         <Text textAlign={"center"} mb={4}>
-          Table of Contents
+          Chapters
         </Text>
-        <Box ml={8} as="ol">
+        <Box>
           {bookToc.chapters.map((chapter) => {
             return (
-              <Text as="li" key={chapter.title} fontSize={"2xs"} fontFamily={"monospace"}>
-                {chapter.title}
-              </Text>
+              <Box key={chapter.title} mb={2}>
+                <Text key={chapter.title} fontSize={"2xs"} fontFamily={"monospace"}>
+                  {chapter.title}
+                </Text>
+                <Box ml={4}>
+                  {chapter.chapters?.map((subchapter) => {
+                    return (
+                      <Text
+                        key={subchapter.title}
+                        fontSize={"2xs"}
+                        fontFamily={"monospace"}
+                        fontWeight={"semibold"}
+                      >
+                        {subchapter.title}
+                      </Text>
+                    );
+                  })}
+                </Box>
+              </Box>
             );
           })}
         </Box>
@@ -225,6 +242,22 @@ export function Filler_BookStructure() {
       <NextButton mt={8} onClick={() => submitQuestion()}>
         Personalise interpretation
       </NextButton>
+    </Slide>
+  );
+}
+
+export function Filler_BookBlueprintSummary() {
+  const { quizState } = useQuizState();
+  const pinfo = getPersonalInfoFromState(quizState);
+  console.log(pinfo);
+
+  return (
+    <Slide id="filler-book-blueprint-summary" type="filler">
+      <SlideHeading>
+        Your book will contain <Span>60-80 pages of hyper-personalised content</Span>. Here's a
+        sneak peek:
+      </SlideHeading>
+      <NextButton mt={8}>Personalise interpretation</NextButton>
     </Slide>
   );
 }
