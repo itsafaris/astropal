@@ -44,7 +44,7 @@ export function OptionSimple({ text, icon, selectorIconType, ...rest }: OptionPr
           {typeof icon === "string" ? <Text fontSize={"3xl"}>{icon}</Text> : icon}
         </Flex>
       )}
-      <Text textAlign={"start"} flexGrow={1} my={3} ml={4} mr={2}>
+      <Text textAlign={"start"} flexGrow={1} my={3} ml={3} mr={2}>
         {text}
       </Text>
       <OptionInput type={selectorIconType} isSelected={rest.isSelected} />

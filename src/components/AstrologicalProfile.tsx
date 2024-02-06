@@ -7,12 +7,18 @@ import { ChartPosition, NatalChart } from "./NatalChart";
 import { getReadableDate, getReadableTime } from "@utils/dates";
 import { toTitleCase } from "@utils/string";
 
+export interface Interpretation {
+  about: string;
+  strengths: string[];
+  weaknesses: string[];
+}
+
 export function AstrologicalProfile({
   quizState,
   interpretation,
 }: {
   quizState?: QuizStateParsed;
-  interpretation: string;
+  interpretation: Interpretation;
 }) {
   const theme = useTheme();
   const state = React.useMemo(() => {
@@ -51,7 +57,7 @@ export function AstrologicalProfile({
       <Flex
         flexDirection={"column"}
         borderRadius={"lg"}
-        border={`1px solid ${theme.colors.gray[400]}`}
+        border={`1px solid ${theme.colors.gray[300]}`}
         px={5}
         py={7}
         gap={7}
@@ -60,19 +66,19 @@ export function AstrologicalProfile({
           <Flex
             padding="30px"
             borderRadius="50%"
-            height={"170px"}
-            width={"170px"}
+            height={"140px"}
+            width={"140px"}
             backgroundColor="gray.100"
             justifyContent={"center"}
             alignItems={"center"}
             mx="auto"
           >
             {createElement(state.yourZodiac.svgComponent, {
-              height: 100,
-              width: 100,
+              height: 80,
+              width: 80,
               stroke: "black",
               fill: "white",
-              strokeWidth: 2,
+              strokeWidth: 3,
             })}
           </Flex>
 
@@ -90,7 +96,29 @@ export function AstrologicalProfile({
 
         <Stack spacing={5}>
           <Title>Your personality</Title>
-          <Text>{interpretation}</Text>
+          <Text>{interpretation.about}</Text>
+        </Stack>
+
+        <Divider />
+
+        <Stack spacing={5}>
+          <Title>Your strenghts</Title>
+          <Stack spacing={0} alignItems={"center"}>
+            {interpretation.strengths.map((it) => {
+              return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
+            })}
+          </Stack>
+        </Stack>
+
+        <Divider />
+
+        <Stack spacing={5}>
+          <Title>Your weaknesses</Title>
+          <Stack spacing={0} alignItems={"center"}>
+            {interpretation.weaknesses.map((it) => {
+              return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
+            })}
+          </Stack>
         </Stack>
 
         <Divider />
@@ -110,8 +138,9 @@ export function AstrologicalProfile({
         <Divider />
 
         <Stack spacing={5}>
-          <Title lineHeight={1.3}>
-            Positions of celestial <br /> bodies
+          <Title lineHeight={1.4}>
+            Positions of celestial <br />
+            bodies
           </Title>
 
           <Flex flexDirection={"column"} alignItems={"center"}>
@@ -138,7 +167,7 @@ export function AstrologicalProfile({
 }
 
 function Divider() {
-  return <Box height={"1px"} width={"80px"} mx="auto" backgroundColor={"gray.300"} />;
+  return <Box height={"1px"} width={"80%"} mx="auto" backgroundColor={"gray.200"} />;
 }
 
 function Title(props: TextProps) {
@@ -151,5 +180,14 @@ function Title(props: TextProps) {
       lineHeight={1}
       {...props}
     />
+  );
+}
+
+function ListItem({ children, ...rest }: TextProps) {
+  return (
+    <Flex flexDirection={"row"} alignItems={"center"} gap={2}>
+      <Box height={"4px"} width={"4px"} borderRadius={"50%"} backgroundColor={"black"} />
+      <Text {...rest}>{children}</Text>
+    </Flex>
   );
 }

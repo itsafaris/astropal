@@ -1,24 +1,26 @@
-import { Selector, Slide } from "@martynasj/quiz-lib";
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
-import { NextButton, SlideHeading, Span, SpanJust, Subtitle } from "./components";
+import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Box, Stack, Text } from "@chakra-ui/react";
+import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 
 export function DecisionMakingStruggles() {
+  const { submitQuestion } = useQuiz();
   return (
     <Slide
       id="decision-making-struggles"
-      type="single"
+      type="multi"
       variant="list"
       options={[
-        { text: "Career and Work", icon: "🏢" },
         { text: "Relationships and Love", icon: "❤️" },
+        { text: "Career and Work", icon: "🏢" },
         { text: "Financial Management", icon: "💰" },
-        { text: "Personal Growth and Self-Improvement", icon: "🌱" },
+        { text: "Personal Growth", icon: "🌱" },
         { text: "Health and Well-being", icon: "🍏" },
       ]}
     >
-      <SlideHeading text={"What areas of your life do you find it hardest to make decisions in?"} />
+      <SlideHeading text={"What areas of your life do you struggle with the most?"} />
       <Selector />
+      <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
   );
 }
@@ -30,11 +32,11 @@ export function AdviceSeekingFrequency() {
       type="single"
       variant="list"
       options={[
-        { text: "Multiple times a day", icon: "🔍" },
-        { text: "Once a day", icon: "📅" },
-        { text: "A few times a week", icon: "🗓️" },
-        { text: "Occasionally", icon: "🤷" },
-        { text: "Rarely", icon: "🚫" },
+        { text: "Always", icon: "😩" },
+        { text: "Sometimes", icon: "😟" },
+        { text: "Occasionally", icon: "🤔" },
+        { text: "Rarely", icon: "😐" },
+        { text: "Never", icon: "😌" },
       ]}
     >
       <SlideHeading text={"How often do you find yourself seeking advice?"} />
@@ -57,8 +59,17 @@ export function DecisionChallengeAgreement() {
         { text: "Strongly disagree", icon: "👎" },
       ]}
     >
-      <SlideHeading text={"Do you agree with the statement:"} />
-      <Subtitle>"I often find it challenging to make a decision"</Subtitle>
+      <SlideHeading
+        text={
+          <Text>
+            Do you agree with the statement: <br />{" "}
+            <Text as="span" color="brand.700" fontStyle="italic">
+              "I often doubt decisions before making them"
+            </Text>
+          </Text>
+        }
+      />
+
       <Selector />
     </Slide>
   );
@@ -71,18 +82,12 @@ export function LifeChangeTiming() {
       type="single"
       variant="list"
       options={[
-        { text: "Always", icon: "🌟" },
-        { text: "Often", icon: "✨" },
-        { text: "Sometimes", icon: "🤔" },
-        { text: "Rarely", icon: "😕" },
-        { text: "Never", icon: "🚫" },
+        { text: "Yes", icon: "🙋" },
+        { text: "No", icon: "🙅" },
+        { text: "I don't know", icon: "🤷" },
       ]}
     >
-      <SlideHeading
-        text={
-          "When making a big change in your life, do you feel that you know the right moment to do it?"
-        }
-      />
+      <SlideHeading text={"Do you feel like you're missing out on opportunities in your life?"} />
       <Selector />
     </Slide>
   );

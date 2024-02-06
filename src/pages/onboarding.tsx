@@ -73,8 +73,7 @@ export default function OnboardingQuiz() {
             <PersonalityDescriptionSlide />
 
             <AdviceSeekingFrequency />
-            <FillerPeopleInControl />
-            <FillerToBirthChart />
+            {/* <FillerPeopleInControl /> */}
 
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />
@@ -90,10 +89,10 @@ export default function OnboardingQuiz() {
             {/* <DailyHoroscope /> */}
             {/* <NotificationReceiver /> */}
 
-            <HyperPersonalisedInsights />
-            <InsightVsHoroscopeComparison />
-            <CreatingSelfDiscoveryGuideSlide />
-            <EmailSlide />
+            {/* <HyperPersonalisedInsights /> */}
+            {/* <InsightVsHoroscopeComparison /> */}
+            {/* <CreatingSelfDiscoveryGuideSlide /> */}
+            {/* <EmailSlide /> */}
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>

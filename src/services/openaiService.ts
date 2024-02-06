@@ -120,7 +120,7 @@ const serviceMock: Service = {
       setTimeout(
         () =>
           res(
-            "THIS IS A MOCKED ANSWER: You're a passionate leader, adventurous at heart, caring, practical-minded, and you value security and personal growth. Sometimes, you experience internal conflicts about freedom versus responsibility."
+            '{\n  "about": "THIS IS A MOCKED ANSWER: You are an adventurous and independent individual with a nurturing and empathetic side. You possess a blend of enthusiasm, intuition, and emotional depth.",\n  "strengths": ["Enthusiastic nature", "Independent spirit", "Empathetic mindset"],\n  "weaknesses": ["Impulsive tendencies", "Tactlessness at times", "Overly emotional reactions"]\n}'
           ),
         2000
       );

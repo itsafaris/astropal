@@ -5,14 +5,14 @@ import { Flex } from "@chakra-ui/react";
 import { SlideHeading, NextButton, SpanJust, Span } from "../components";
 import { Interpreter } from "../interpreter";
 import { LoadingPulse } from "../LoadingPulse";
-import { AstrologicalProfile } from "@components/AstrologicalProfile";
+import { AstrologicalProfile, Interpretation } from "@components/AstrologicalProfile";
 import { getPersonalInfoFromState } from "@utils/state";
 
 export function PersonalityDescriptionSlide() {
   const quizSnapshot = useQuizSnapshot();
   const slideID = "personality-description";
 
-  const [interpretation, setInterpretation] = useState<string | null>(null);
+  const [interpretation, setInterpretation] = useState<Interpretation | null>(null);
   const [showResultsSlide, setShowResultsSlide] = useState<boolean>(false);
   const [startInterpreting, setStartInterpreting] = useState<boolean>(false);
 
@@ -33,10 +33,25 @@ export function PersonalityDescriptionSlide() {
           <>
             {startInterpreting && (
               <Interpreter
-                prompt={
-                  "What is my personality like? Provide a short list of my strenghts and weaknesses"
-                }
-                onComplete={(val) => setInterpretation(val)}
+                prompt={`
+                    What is my personality like?
+                    Answer should be short and include a description of personality as well as strenghts and weaknesses.
+                    Answer should not reference celestial bodies.
+                    Strenghts and weaknesses should returned as lists with 3 items.
+                    Each item should be 2-3 word long.
+                    Answer should be formatted as JSON:
+                    {
+                      about: string;
+                      strengths: string[];
+                      weaknesses: string[];
+                    }.
+                  `}
+                onComplete={(val) => {
+                  try {
+                    const json = JSON.parse(val);
+                    setInterpretation(json);
+                  } catch {}
+                }}
                 onError={() => {}}
               />
             )}
@@ -63,7 +78,7 @@ export function PersonalityDescriptionSlide() {
 function LoadingSlide({ isLoading, onNextClick }: { isLoading: boolean; onNextClick: () => void }) {
   return (
     <>
-      <SlideHeading text="Take a brief pause while we prepare your Astrological Profile 😌" />
+      <SlideHeading text="Please wait as we prepare your Astrological Profile 😌" />
 
       <LoadingPulse isLoading={isLoading} my={4} />
 
@@ -80,7 +95,7 @@ function ResultsSlide({
   interpretation,
   quizState,
 }: {
-  interpretation: string;
+  interpretation: Interpretation;
   quizState: QuizQuestionsState;
 }) {
   const quiz = useQuiz();
