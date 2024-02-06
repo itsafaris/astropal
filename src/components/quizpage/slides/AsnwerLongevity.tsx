@@ -1,6 +1,7 @@
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
 import { SlideHeading } from "../components";
+import { Text } from "@chakra-ui/react";
 
 export function AsnwerLongevity() {
   return (
@@ -9,12 +10,18 @@ export function AsnwerLongevity() {
       type="single"
       variant="list"
       options={[
-        { text: "Shorter and to-the-point", icon: "💬" },
+        { text: "Short and to-the-point", icon: "💬" },
         { text: "Balanced", icon: "👌" },
-        { text: "Longer and detailed", icon: "📝" },
+        { text: "Long and detailed", icon: "📝" },
       ]}
     >
-      <SlideHeading text="How would you like your astrologer to respond?" />
+      <SlideHeading>
+        How would you like your{" "}
+        <Text as="span" color="brand.600">
+          Astrology Insights
+        </Text>{" "}
+        to be present?
+      </SlideHeading>
       <Selector />
     </Slide>
   );

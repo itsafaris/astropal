@@ -6,23 +6,21 @@ import { SlideHeading, NextButton, Span, SpanJust } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 
 export function AstrologerThemePreferences() {
-  const { submitQuestion } = useQuiz();
   return (
     <Slide
       id="astrologer-theme-preferences"
-      type="multi"
+      type="single"
       variant="list"
       options={[
+        { text: "Love & Relationships", icon: "💞" },
         { text: "Career", icon: "💼" },
         { text: "Finances", icon: "💰" },
-        { text: "Love & Relationships", icon: "💞" },
         { text: "Personal Growth", icon: "🍀" },
         { text: "Self understanding", icon: "🧘" },
       ]}
     >
-      <SlideHeading text="What are the themes you want your astrologer to be most trained on?" />
+      <SlideHeading text="Which area you want focus on improving first?" />
       <Selector />
-      <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
   );
 }
@@ -39,14 +37,13 @@ export function DailyHoroscope() {
         { text: "Evening", icon: "🌃" },
       ]}
     >
-      <SlideHeading
-        text={
-          <SpanJust>
-            When would you like to receive your personalized{" "}
-            <Span color="blue.400">daily horoscope</Span>?
-          </SpanJust>
-        }
-      />
+      <SlideHeading>
+        What time would you like to receive your{" "}
+        <Text as="span" color="brand.600">
+          Astrology Insights
+        </Text>
+        ?
+      </SlideHeading>
       <Selector />
     </Slide>
   );

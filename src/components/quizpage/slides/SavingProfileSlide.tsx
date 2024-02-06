@@ -56,23 +56,29 @@ export function SavingProfileSlide() {
       />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
-        <Box mt={5}>
+        <Box my={5}>
           <Selector />
         </Box>
 
-        {showInput && (
-          <NextButton mb={5} mt={3}>
-            Continue
-          </NextButton>
-        )}
+        {showInput && <NextButton mb={5}>Continue</NextButton>}
 
-        <Text textAlign={"center"} color="brand.700" fontWeight={"semibold"} fontSize={"lg"} mb={5}>
-          See what others say about Astropal:
-        </Text>
+        <Box
+          p={4}
+          pb={0}
+          bg="white"
+          width={"full"}
+          borderTopLeftRadius={8}
+          borderTopRightRadius={8}
+        >
+          <Text textAlign={"center"} color="bg.100" fontWeight={"semibold"} fontSize={"md"}>
+            See what others say
+          </Text>
+        </Box>
 
         <Box
           color="black"
-          boxShadow={"lg"}
+          borderBottomLeftRadius={8}
+          borderBottomRightRadius={8}
           p={4}
           bg="white"
           position={"relative"}

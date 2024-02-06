@@ -17,13 +17,17 @@ import {
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
   FillerPeopleInControl,
-  FillerToBirthChart,
   HyperPersonalisedInsights,
   InsightVsHoroscopeComparison,
   LifeChangeTiming,
 } from "@components/quizpage/questions";
 import { PersonalityDescriptionSlide } from "@components/quizpage/slides/PersonalityDescriptionSlide";
 import { SavingProfileSlide } from "@components/quizpage/slides/SavingProfileSlide";
+import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
+import {
+  AstrologerThemePreferences,
+  DailyHoroscope,
+} from "@components/quizpage/slides/otherSlides";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -74,19 +78,17 @@ export default function OnboardingQuiz() {
             <DecisionMakingStruggles />
             <AdviceSeekingFrequency />
             <FillerPeopleInControl />
-
             <LifeChangeTiming />
             <DecisionChallengeAgreement />
             <HyperPersonalisedInsights />
-
             <SavingProfileSlide />
 
-            {/* <AsnwerLongevity /> */}
-            {/* <AstrologerThemePreferences /> */}
-            {/* <DailyHoroscope /> */}
+            <AstrologerThemePreferences />
+            <DailyHoroscope />
+            <AsnwerLongevity />
+            <InsightVsHoroscopeComparison />
             {/* <NotificationReceiver /> */}
 
-            {/* <InsightVsHoroscopeComparison /> */}
             {/* <EmailSlide /> */}
           </Segment>
         </QuizUI>
