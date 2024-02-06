@@ -83,7 +83,7 @@ export default function IndexPage() {
             maxWidth={400}
             mx="auto"
           >
-            Navigate Success <br /> With{" "}
+            Navigate Success <br /> With a{" "}
             <Text as="span" color="brand.600">
               Personalized
             </Text>

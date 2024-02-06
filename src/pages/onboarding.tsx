@@ -23,6 +23,7 @@ import {
   LifeChangeTiming,
 } from "@components/quizpage/questions";
 import { PersonalityDescriptionSlide } from "@components/quizpage/slides/PersonalityDescriptionSlide";
+import { SavingProfileSlide } from "@components/quizpage/slides/SavingProfileSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -68,30 +69,24 @@ export default function OnboardingQuiz() {
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            {/* <YourProfileSavingSlide /> */}
-            {/* <NatalChartPreviewSlide /> */}
             <PersonalityDescriptionSlide />
 
-            <AdviceSeekingFrequency />
-            {/* <FillerPeopleInControl /> */}
-
             <DecisionMakingStruggles />
-            <DecisionChallengeAgreement />
+            <AdviceSeekingFrequency />
+            <FillerPeopleInControl />
+
             <LifeChangeTiming />
+            <DecisionChallengeAgreement />
+            <HyperPersonalisedInsights />
 
-            {/* <PersonalGrowthScore /> */}
-            {/* <RelationshipScore /> */}
-            {/* <CareerScore /> */}
+            <SavingProfileSlide />
 
-            {/* <YourGuidanceIsReady /> */}
             {/* <AsnwerLongevity /> */}
             {/* <AstrologerThemePreferences /> */}
             {/* <DailyHoroscope /> */}
             {/* <NotificationReceiver /> */}
 
-            {/* <HyperPersonalisedInsights /> */}
             {/* <InsightVsHoroscopeComparison /> */}
-            {/* <CreatingSelfDiscoveryGuideSlide /> */}
             {/* <EmailSlide /> */}
           </Segment>
         </QuizUI>

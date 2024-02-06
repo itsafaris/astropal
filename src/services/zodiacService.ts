@@ -90,6 +90,7 @@ export function getZodiacCompatibility(
 
 export function getZodiacSign(birthDate: string): {
   name: ZodiacSignType;
+  pluralName: string;
   imgUrl?: string;
   svgComponent: typeof aquariusImg;
   countOfProfiles: number;
@@ -102,6 +103,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 3 && date.getDate() >= 21) || (month === 4 && date.getDate() <= 19):
       return {
         name: "aries",
+        pluralName: "aries",
         svgComponent: ariesImg,
         countOfProfiles: 35422,
         emoji: "♈️",
@@ -109,6 +111,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
         name: "taurus",
+        pluralName: "tauruses",
         svgComponent: taurusImg,
         countOfProfiles: 27814,
         emoji: "♉️",
@@ -116,6 +119,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
         name: "gemini",
+        pluralName: "geminis",
         svgComponent: geminiImg,
         countOfProfiles: 38472,
         emoji: "♊️",
@@ -123,6 +127,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
         name: "cancer",
+        pluralName: "cancers",
         svgComponent: cancerImg,
         countOfProfiles: 28921,
         emoji: "♋",
@@ -130,6 +135,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
         name: "leo",
+        pluralName: "leos",
         svgComponent: leoImg,
         countOfProfiles: 27162,
         emoji: "♌",
@@ -137,6 +143,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
         name: "virgo",
+        pluralName: "virgos",
         svgComponent: virgoImg,
         countOfProfiles: 36412,
         emoji: "♍",
@@ -144,6 +151,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
         name: "libra",
+        pluralName: "libras",
         svgComponent: libraImg,
         countOfProfiles: 31901,
         emoji: "♎",
@@ -151,6 +159,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
         name: "scorpio",
+        pluralName: "scorpios",
         svgComponent: scorpioImg,
         countOfProfiles: 30982,
         emoji: "♏",
@@ -158,6 +167,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
         name: "sagittarius",
+        pluralName: "sagittarii",
         svgComponent: sagittariusImg,
         countOfProfiles: 38141,
         emoji: "♐",
@@ -165,6 +175,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
         name: "capricorn",
+        pluralName: "capricorns",
         svgComponent: capricornImg,
         countOfProfiles: 25132,
         emoji: "♑",
@@ -172,6 +183,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
         name: "aquarius",
+        pluralName: "aquarii",
         svgComponent: aquariusImg,
         countOfProfiles: 37319,
         emoji: "♒",
@@ -179,6 +191,7 @@ export function getZodiacSign(birthDate: string): {
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
         name: "pisces",
+        pluralName: "pisces",
         svgComponent: piscesImg,
         countOfProfiles: 33784,
         emoji: "♓",

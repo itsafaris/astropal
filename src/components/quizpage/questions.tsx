@@ -1,7 +1,10 @@
+import React from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
-import { Box, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
+import { getPersonalInfoFromState } from "@utils/state";
+import { toTitleCase } from "@utils/string";
 
 export function DecisionMakingStruggles() {
   const { submitQuestion } = useQuiz();
@@ -16,6 +19,7 @@ export function DecisionMakingStruggles() {
         { text: "Financial Management", icon: "💰" },
         { text: "Personal Growth", icon: "🌱" },
         { text: "Health and Well-being", icon: "🍏" },
+        { text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
       <SlideHeading text={"What areas of your life do you struggle with the most?"} />
@@ -61,10 +65,10 @@ export function DecisionChallengeAgreement() {
     >
       <SlideHeading
         text={
-          <Text>
+          <Text as="span">
             Do you agree with the statement: <br />{" "}
-            <Text as="span" color="brand.700" fontStyle="italic">
-              "I often doubt decisions before making them"
+            <Text as="span" color="bg.700" fontStyle="italic">
+              "I often struggle to make decisions when opportunities arise"
             </Text>
           </Text>
         }
@@ -96,14 +100,25 @@ export function LifeChangeTiming() {
 export function FillerPeopleInControl() {
   return (
     <Slide id="filler-people-in-control" type="filler">
-      <SlideHeading>82% of people feel out of control in similar ways like you.</SlideHeading>
+      <SlideHeading>
+        <Text as="span" color="#f65874" fontWeight={"semibold"}>
+          86% of people feel lost in their lives
+        </Text>{" "}
+        or struggle to find help. Astropal offers guidance, helping you navigate life's challenges
+        with ease
+      </SlideHeading>
 
-      <Box bg="white" borderRadius={"xl"}>
+      <Flex justifyContent={"center"} alignItems={"center"} bg="bg.100" borderRadius={"xl"} py={7}>
         <StaticImage
-          alt="chart showing how many people are in control with their lives"
-          src="../../images/lost_in_life_chart.png"
+          alt="chart showing how many people feel lost in their lives"
+          src="../../images/confidence_chart.png"
+          layout="fullWidth"
+          style={{
+            width: "280px",
+            marginLeft: "-15px",
+          }}
         />
-      </Box>
+      </Flex>
 
       <NextButton mt={8}>Continue</NextButton>
     </Slide>
@@ -125,18 +140,49 @@ export function FillerToBirthChart() {
 export function HyperPersonalisedInsights() {
   return (
     <Slide id="personalised-insights-intro" type="filler">
-      <SlideHeading>
-        <Span>Hyper personalised insights</Span> enables to regain this clarity
-      </SlideHeading>
+      {({ quizState }) => {
+        const info = getPersonalInfoFromState(quizState);
 
-      <Box bg="white" borderRadius={"xl"}>
-        <StaticImage
-          alt="chart showing how many people are in control with their lives"
-          src="../../images/personalised_astro_benefits.png"
-        />
-      </Box>
+        function roundAgeUp(age: number): number {
+          return Math.ceil(age / 10) * 10;
+        }
 
-      <NextButton mt={8}>Get yours</NextButton>
+        return (
+          <>
+            <SlideHeading>
+              <Text as="span" fontWeight={"bold"}>
+                9 out of 10 {toTitleCase(info.yourZodiac.pluralName)} under{" "}
+                {roundAgeUp(info.yourAge)}
+              </Text>{" "}
+              say they're better at{" "}
+              <Text as="span" fontStyle={"italic"} color="#63dc94">
+                "knowing when and what decisions to make"
+              </Text>{" "}
+              with personalized Astropal insights
+            </SlideHeading>
+
+            <Flex
+              justifyContent={"center"}
+              alignItems={"center"}
+              bg="bg.100"
+              borderRadius={"xl"}
+              py={7}
+            >
+              <StaticImage
+                alt="chart showing how your self-esteem will increase over time"
+                src="../../images/personalised_astro_benefits.png"
+                layout="fullWidth"
+                style={{
+                  width: "280px",
+                  marginLeft: "-15px",
+                }}
+              />
+            </Flex>
+
+            <NextButton mt={8}>Continue</NextButton>
+          </>
+        );
+      }}
     </Slide>
   );
 }

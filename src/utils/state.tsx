@@ -66,6 +66,16 @@ function splitFullName(fullName: string) {
   return { firstName, lastName };
 }
 
+function calculateAge(birthdate: string, currentDate: string): number {
+  const birthDateObj = new Date(birthdate);
+  const currentDateObj = new Date(currentDate);
+
+  const ageDiffMs = currentDateObj.getTime() - birthDateObj.getTime();
+  const ageDate = new Date(ageDiffMs);
+
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value;
   const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
@@ -108,12 +118,18 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     longitude: yourBirthLocation.long,
   });
 
+  const yourAge = calculateAge(
+    `${yourBirthDate.year}-${yourBirthDate.month}-${yourBirthDate.day}`,
+    new Date().toISOString()
+  );
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
     firstName,
     lastName,
     yourGender,
+    yourAge,
     yourBirthDate,
     yourBirthTime,
     yourBirthLocation,
