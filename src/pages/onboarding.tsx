@@ -26,6 +26,7 @@ import {
   Filler_BookStructure,
   Filler_IntroToPersonality,
   Loading_CreatingBlueprint,
+  Filler_BookBlueprintSummary,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AstrologyExperienceLevel,
@@ -92,9 +93,10 @@ export default function OnboardingQuiz() {
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />
             <LifeChangeTiming />
-            <AstrologyExperienceLevel />
+            {/* <AstrologyExperienceLevel /> */}
             <TopPersonalGoal />
             <Loading_CreatingBlueprint />
+            <Filler_BookBlueprintSummary />
             <Filler_BookStructure />
             <NameOnTheBook />
             <Loading_CreatingBook />

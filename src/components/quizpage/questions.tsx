@@ -8,7 +8,7 @@ export function DecisionMakingStruggles() {
   return (
     <Slide
       id="decision-making-struggles"
-      type="multi"
+      type="single"
       variant="list"
       options={[
         { text: "Career and Work", icon: "🏢" },
