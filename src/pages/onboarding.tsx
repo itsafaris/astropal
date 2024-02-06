@@ -27,6 +27,7 @@ import {
   Filler_IntroToPersonality,
   Loading_CreatingBlueprint,
   Filler_BookBlueprintSummary,
+  Filler_FactOnMissedOpportunities,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AstrologyExperienceLevel,
@@ -89,11 +90,10 @@ export default function OnboardingQuiz() {
             <Filler_NatalChartPreviewSlide />
             <Filler_IntroToPersonality />
             <SelfUnderstanding />
-            <DefineSuccess />
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />
-            <LifeChangeTiming />
-            {/* <AstrologyExperienceLevel /> */}
+            {/* <LifeChangeTiming /> */}
+            <Filler_FactOnMissedOpportunities />
             <TopPersonalGoal />
             <Loading_CreatingBlueprint />
             <Filler_BookBlueprintSummary />

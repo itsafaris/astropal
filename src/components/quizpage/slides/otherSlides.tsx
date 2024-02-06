@@ -191,13 +191,11 @@ export function Filler_IntroToPersonality() {
 }
 
 export function Filler_BookStructure() {
-  const { submitQuestion } = useQuiz();
-
   return (
     <Slide id="filler-book-structure" type="filler">
       <SlideHeading>
-        Your book will contain <Span>60-80 pages of hyper-personalised content</Span>. Here's a
-        sneak peek:
+        Your book will contain <Span>78 pages of hyper-personalised content</Span>. Here's a sneak
+        peek:
       </SlideHeading>
 
       <Box
@@ -239,9 +237,23 @@ export function Filler_BookStructure() {
         </Box>
       </Box>
 
-      <NextButton mt={8} onClick={() => submitQuestion()}>
-        Personalise interpretation
-      </NextButton>
+      <NextButton mt={8}>Continue</NextButton>
+    </Slide>
+  );
+}
+
+export function Filler_FactOnMissedOpportunities() {
+  return (
+    <Slide id="filler-missed-opportunities" type="filler">
+      <SlideHeading>
+        Did you know that <Span>86%</Span> of people admit to having missed significant
+        opportunities in their lives due to being hesitant to take action?
+      </SlideHeading>
+      <StaticImage
+        alt="unused opportunities by people"
+        src="../../../images/confidence_chart.png"
+      />
+      <NextButton mt={8}>Continue</NextButton>
     </Slide>
   );
 }
@@ -249,15 +261,20 @@ export function Filler_BookStructure() {
 export function Filler_BookBlueprintSummary() {
   const { quizState } = useQuizState();
   const pinfo = getPersonalInfoFromState(quizState);
-  console.log(pinfo);
 
   return (
     <Slide id="filler-book-blueprint-summary" type="filler">
       <SlideHeading>
-        Your book will contain <Span>60-80 pages of hyper-personalised content</Span>. Here's a
-        sneak peek:
+        You will have full guidance on reaching your goals with confidence.
       </SlideHeading>
-      <NextButton mt={8}>Personalise interpretation</NextButton>
+      <Text fontSize={"xs"}>Reaching your goal:</Text>
+      <Text fontWeight={"bold"} color="green.600">
+        {pinfo.goal}
+      </Text>
+      <Box my={4} overflow={"hidden"} borderRadius={"lg"} bg="white" p={4}>
+        <StaticImage alt="road to reaching a goal" src="../../../images/reaching_goal.png" />
+      </Box>
+      <NextButton mt={8}>Continue</NextButton>
     </Slide>
   );
 }

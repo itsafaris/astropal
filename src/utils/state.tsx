@@ -55,6 +55,8 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     long: 22,
   };
 
+  const goal = (state["top-personal-goal"] as SingleState)?.value?.value ?? "Find ideal partner";
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -65,5 +67,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourBirthTime,
     yourBirthLocation,
     yourZodiac,
+    goal,
   };
 }

@@ -39,8 +39,9 @@ export function YourGenderSlide() {
         <br /> to self-discovery
       </SlideHeading>
       <Text textAlign={"center"} mb={12}>
-        A perfect blend of <Span color="purple.700">Astrology</Span> and your{" "}
-        <Span color="orange.500">Personality</Span>
+        A perfect blend of
+        <br /> <Span color="purple.700">Astrology</Span> and your{" "}
+        <Span color="purple.700">Personality</Span>
       </Text>
       <Selector />
     </Slide>

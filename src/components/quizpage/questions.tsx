@@ -31,15 +31,14 @@ export function DecisionChallengeAgreement() {
       type="single"
       variant="list"
       options={[
-        { text: "Strongly agree", icon: "👍" },
+        { text: "Strongly agree", icon: "🙌" },
         { text: "Agree", icon: "👍" },
         { text: "Neutral", icon: "😐" },
         { text: "Disagree", icon: "👎" },
-        { text: "Strongly disagree", icon: "👎" },
+        { text: "Strongly disagree", icon: "🙅" },
       ]}
     >
-      <SlideHeading text={"Do you agree with the statement:"} />
-      <Subtitle>"I often find it challenging to make a decision"</Subtitle>
+      <Subtitle>"I often struggle to make decisions when opportunities arise"</Subtitle>
       <Selector />
     </Slide>
   );
@@ -153,13 +152,13 @@ export function TopPersonalGoal() {
 
 export function NameOnTheBook() {
   return (
-    <Slide id="name-on-book" type="short-text" optional>
+    <Slide id="name-on-book" type="short-text" placeholder="E.g John Doe" hideNextButton>
       <SlideHeading>
         What is your name?{" "}
         <Span color="bg.700">(it will be displayed on the cover of the book)</Span>
       </SlideHeading>
-      {/* <BookCover my={8} /> */}
       <Selector />
+      <NextButton>Generate My Guide</NextButton>
     </Slide>
   );
 }
