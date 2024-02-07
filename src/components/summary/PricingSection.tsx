@@ -7,10 +7,11 @@ import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
 import { Span } from "@components/quizpage/components";
 import { BookCover } from "@components/book/bookCover";
+import { QuizStateParsed } from "@utils/state";
 
 export interface IPricingPageProps {}
 
-export function PricingSection() {
+export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
     <Box id="pricing-section" as="section" py={8}>
       <Stack spacing={4}>
@@ -18,11 +19,13 @@ export function PricingSection() {
           Your Self-Discovery Guide is Ready!
         </Text>
 
-        <BookCover
-          title="Self-Discovery Bible"
-          author={"John Doe"}
-          subtitle={"based on Astrology"}
-        />
+        <Flex justifyContent={"center"}>
+          <BookCover
+            height={300}
+            author={quizState?.fullname ?? "John Doe"}
+            birthDate={quizState?.localeDate ?? ""}
+          />
+        </Flex>
 
         <Stack fontWeight={"semibold"} pl={4} fontSize={"sm"}>
           <Text>✅ 92 pages of in-depth birth chart analysis</Text>

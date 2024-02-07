@@ -36,9 +36,13 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     day: 15,
   };
 
-  const yourZodiac = getZodiacSign(
-    new Date(yourBirthDate.year, yourBirthDate.month - 1, yourBirthDate.day).toISOString()
-  );
+  const dateValue = new Date(yourBirthDate.year, yourBirthDate.month - 1, yourBirthDate.day);
+
+  const localeDate = dateValue.toLocaleDateString();
+
+  const yourZodiac = getZodiacSign(dateValue.toISOString());
+
+  const struggleArea = (state["decision-making-struggles"] as SingleState)?.value?.value;
 
   const yourBirthTime = createTime(
     (state["your-birth-time"] as TimeState)?.value ?? {
@@ -64,9 +68,12 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     lastName,
     yourGender,
     yourBirthDate,
+    localeDate,
+    dateValue,
     yourBirthTime,
     yourBirthLocation,
     yourZodiac,
     goal,
+    struggleArea,
   };
 }

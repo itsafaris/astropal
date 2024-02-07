@@ -1,8 +1,17 @@
-import { Callout, Selector, Slide } from "@martynasj/quiz-lib";
+import React from "react";
+import {
+  Callout,
+  Selector,
+  ShortTextState,
+  Slide,
+  useQuizState,
+  useSlideState,
+} from "@martynasj/quiz-lib";
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span, SpanJust, Subtitle } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
-import { BookCover } from "@components/book/book";
+import { BookCover } from "@components/book/bookCover";
+import { getPersonalInfoFromState } from "@utils/state";
 
 export function DecisionMakingStruggles() {
   return (
@@ -11,11 +20,11 @@ export function DecisionMakingStruggles() {
       type="single"
       variant="list"
       options={[
-        { text: "Career and Work", icon: "🏢" },
-        { text: "Relationships and Love", icon: "❤️" },
-        { text: "Financial Management", icon: "💰" },
-        { text: "Personal Growth and Self-Improvement", icon: "🌱" },
-        { text: "Health and Well-being", icon: "🍏" },
+        { text: "Career", icon: "🏢" },
+        { text: "Relationships", icon: "❤️" },
+        { text: "Finances", icon: "💰" },
+        { text: "Personal Growth", icon: "🌱" },
+        { text: "Health", icon: "🍏" },
       ]}
     >
       <SlideHeading text={"Which area of your life is the hardest to make decisions in?"} />
@@ -177,14 +186,25 @@ export function TopPersonalGoal() {
 }
 
 export function NameOnTheBook() {
+  const s = useSlideState<ShortTextState>();
   return (
     <Slide id="name-on-book" type="short-text" placeholder="E.g John Doe" hideNextButton>
-      <SlideHeading>
-        What is your name?{" "}
-        <Span color="bg.700">(it will be displayed on the cover of the book)</Span>
-      </SlideHeading>
-      <Selector />
-      <NextButton>Create My Guide</NextButton>
+      {({ quizState }) => {
+        const p = getPersonalInfoFromState(quizState);
+        return (
+          <>
+            <SlideHeading>
+              What is your name?{" "}
+              <Span color="bg.700">(it will be displayed on the cover of the book)</Span>
+            </SlideHeading>
+            <Selector />
+            <Flex justifyContent={"center"}>
+              <BookCover height={300} author={s?.value ?? "John Doe"} birthDate={p.dateValue} />
+            </Flex>
+            <NextButton>Create My Guide</NextButton>
+          </>
+        );
+      }}
     </Slide>
   );
 }

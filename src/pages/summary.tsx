@@ -64,7 +64,7 @@ export default function SummaryPage({}: PageProps) {
               <Span fontWeight={"regular"} color="blackAlpha.600">
                 Focus Area:
               </Span>{" "}
-              <Span textTransform={"capitalize"}>{quizState?.goal}</Span>
+              <Span textTransform={"capitalize"}>{quizState?.struggleArea}</Span>
             </Text>
           </Box>
 
@@ -157,7 +157,7 @@ export default function SummaryPage({}: PageProps) {
           </Flex>
         </Card>
 
-        <Text my={4} textAlign={"center"} width={"full"} fontSize={"xl"} mb={4}>
+        {/* <Text my={4} textAlign={"center"} width={"full"} fontSize={"xl"} mb={4}>
           Your personal Self-Discovery guide is based on the{" "}
           <Span>most detailed astrological reading of your birth chart</Span>
         </Text>
@@ -179,11 +179,11 @@ export default function SummaryPage({}: PageProps) {
               House
             </Text>
           </Card>
-        </Flex>
+        </Flex> */}
 
-        <PricingSection />
+        <PricingSection quizState={quizState} />
 
-        <Box id="section-other-users" my={8}>
+        {/* <Box id="section-other-users" my={8}>
           <Text textAlign={"center"} mb={4} fontSize={"xl"} fontWeight={"semibold"}>
             Data from our similar users
           </Text>
@@ -216,9 +216,9 @@ export default function SummaryPage({}: PageProps) {
               </Flex>
             </Stack>
           </Card>
-        </Box>
+        </Box> */}
 
-        <Box as="ul" pl={4} my={12}>
+        {/* <Box as="ul" pl={4} my={12}>
           <Heading textAlign={"center"} mb={4}>
             What you get
           </Heading>
@@ -230,7 +230,7 @@ export default function SummaryPage({}: PageProps) {
             <Text>✅ Understand life hints</Text>
             <Text>✅ Do not miss life opportunities</Text>
           </Stack>
-        </Box>
+        </Box> */}
       </Container>
 
       {/* <Container>

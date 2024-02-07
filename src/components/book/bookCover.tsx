@@ -1,43 +1,70 @@
 import React from "react";
-import { Box, Text, VStack, Heading } from "@chakra-ui/react";
+import { Box, Text, VStack, Stack, Flex } from "@chakra-ui/react";
 
-export const BookCover = ({ title, author, subtitle }) => {
+import { GenericNatalChart } from "@components/svg/genericNatalChart";
+
+export const BookCover = ({
+  height = 400,
+  author,
+  birthDate,
+}: {
+  height?: number;
+  author: string;
+  birthDate?: string;
+}) => {
+  const width = height * 0.75;
+
   return (
-    <Box
+    <Flex
       maxW="sm"
-      borderWidth="1px"
-      borderRadius="lg"
+      borderRadius={height * 0.01}
       overflow="hidden"
-      p={5}
-      bg="gray.100"
-      boxShadow="2xl"
+      bg="#16111d"
+      boxShadow={"6px 7px 9px 1px #0000004f"}
       position="relative"
-      _before={{
-        content: '""',
-        position: "absolute",
-        top: "5px",
-        bottom: "5px",
-        left: "5px",
-        right: "5px",
-        bg: "white",
-        transform: "rotate(2deg)",
-        zIndex: -1,
-        borderRadius: "lg",
-      }}
+      height={height}
+      width={width}
+      fontSize={`${height * 0.05}px`}
+      color="whiteAlpha.800"
     >
-      <VStack align="flex-start">
-        <Heading as="h3" size="lg" lineHeight="tight" noOfLines={2} mb={2}>
-          {title}
-        </Heading>
-        {subtitle && (
-          <Text fontSize="sm" color="gray.500" noOfLines={1} mb={4}>
-            {subtitle}
+      <Box height={"100%"} bg="whiteAlpha.400" width={"5%"}></Box>
+      <Box height={"100%"} bg="whiteAlpha.200" width={"2%"}></Box>
+      <VStack
+        flex={1}
+        bgGradient={"linear(to-r, whiteAlpha.400, whiteAlpha.100)"}
+        p={5}
+        align="center"
+        justifyContent={"space-around"}
+        height={"100%"}
+      >
+        <Box>
+          <Text
+            fontSize={"0.8em"}
+            fontWeight={"bold"}
+            lineHeight="tight"
+            textAlign={"center"}
+            noOfLines={1}
+          >
+            Self-Discovery Guide
           </Text>
-        )}
-        <Text fontSize="md" fontWeight="bold">
-          by {author}
-        </Text>
+          <Text
+            fontSize={"0.8em"}
+            lineHeight="tight"
+            textAlign={"center"}
+            noOfLines={1}
+            color="whiteAlpha.600"
+          >
+            Through Astrology
+          </Text>
+        </Box>
+        <GenericNatalChart boxSize={height * 0.4} />
+        <Stack textAlign={"center"} spacing={"0.5em"}>
+          <Text fontSize="0.9em" noOfLines={1}>
+            {author}
+          </Text>
+          <Text fontSize="0.8em">{birthDate}</Text>
+        </Stack>
       </VStack>
-    </Box>
+    </Flex>
   );
 };
