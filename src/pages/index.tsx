@@ -83,30 +83,35 @@ export default function IndexPage() {
             maxWidth={400}
             mx="auto"
           >
-            Decide Wisely <br /> With{" "}
+            Decide Your Life <br /> With{" "}
             <Text as="span" color="brand.600">
-              Personalized Astrology Insights
+              Personalized{" "}
+            </Text>{" "}
+            Astrology{" "}
+            <Text as="span" color="brand.600">
+              Insights
             </Text>
           </Heading>
 
           <Flex flexDirection={"column"} fontWeight={"thin"} color="brand.800">
             <Text fontSize="lg" textAlign="center">
-              - Know Your{" "}
-              <Text as="span" fontWeight={"semibold"}>
+              - Time your{" "}
+              <Text as="span" fontWeight={"medium"}>
                 Opportunities
               </Text>
             </Text>
 
             <Text fontSize="lg" textAlign="center">
-              - Make Right{" "}
-              <Text as="span" fontWeight={"semibold"}>
+              - Make{" "}
+              <Text as="span" fontWeight={"medium"}>
                 Decisions
               </Text>{" "}
+              with confidence
             </Text>
 
             <Text fontSize="lg" textAlign="center">
               - Tailored Uniquely for{" "}
-              <Text as="span" fontWeight={"semibold"}>
+              <Text as="span" fontWeight={"medium"}>
                 You
               </Text>
             </Text>
