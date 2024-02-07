@@ -45,10 +45,6 @@ export default function SummaryPage({}: PageProps) {
       color="bg.900"
       scrollBehavior={"smooth"}
     >
-      {/* <Container>
-        <TopNavigation />
-      </Container> */}
-
       <Container>
         <Card p={4}>
           <Box mb={6}>
@@ -162,9 +158,7 @@ export default function SummaryPage({}: PageProps) {
           </Card>
         </Flex>
 
-        <Button colorScheme="orange" width={"full"}>
-          Get My Guide
-        </Button>
+        <PricingSection />
 
         <Box id="section-other-users" my={8}>
           <Text textAlign={"center"} mb={4} fontSize={"xl"} fontWeight={"semibold"}>

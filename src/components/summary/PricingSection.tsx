@@ -1,26 +1,61 @@
-import { Box, Flex, Heading, Stack, Text, Button, TextProps } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Text, Button, TextProps, Card } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
+import { ComponentProps, useState } from "react";
+import { Span } from "@components/quizpage/components";
+import { BookCover } from "@components/book/bookCover";
 
 export interface IPricingPageProps {}
 
 export function PricingSection() {
   return (
     <Box id="pricing-section" as="section" py={8}>
-      <Stack mb={8}>
-        <Heading fontSize={"3xl"} textAlign={"center"} color="white">
-          Choose your plan
-        </Heading>
-      </Stack>
-
       <Stack spacing={4}>
+        <Text textAlign={"center"} fontSize={"2xl"} fontWeight={"bold"}>
+          Your Self-Discovery Guide is Ready!
+        </Text>
+
+        <BookCover
+          title="Self-Discovery Bible"
+          author={"John Doe"}
+          subtitle={"based on Astrology"}
+        />
+
+        <Stack fontWeight={"semibold"} pl={4} fontSize={"sm"}>
+          <Text>✅ 92 pages of in-depth birth chart analysis</Text>
+          <Text>✅ Step by step guide to realise your full potential</Text>
+          <Text>✅ Ideal partner selection</Text>
+          <Text>✅ Guide to a Perfect Relationship</Text>
+          <Text>✅ Career Guidance</Text>
+          <Text>✅ Self-Growth Discipline</Text>
+          <Text>✅ Future Life Path Guidance</Text>
+        </Stack>
+
+        {/* <Flex justifyContent={"start"} gap={4}>
+          <Card p={4} textAlign={"center"}>
+            <Text fontSize={"2xl"} fontWeight={"bold"}>
+              92
+            </Text>
+            <Text>Pages</Text>
+          </Card>
+          <Card p={4} textAlign={"center"}>
+            <Text fontSize={"2xl"} fontWeight={"bold"}>
+              6
+            </Text>
+            <Text>Themes Covered</Text>
+          </Card>
+        </Flex> */}
+
         <PricingPlans />
+        <Button colorScheme="orange" width={"full"}>
+          Get My Guide
+        </Button>
         <TermsAgreement />
-        <RiskFreeGuaranteed />
-        <SafeCheckout />
+        {/* <RiskFreeGuaranteed /> */}
+        {/* <SafeCheckout /> */}
       </Stack>
     </Box>
   );
@@ -94,34 +129,22 @@ function SafeCheckout() {
 }
 
 export function PricingPlans() {
+  const [selectedPlan, setSelectedPlan] = useState<string>(pricingPlans.digital.id);
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
-      <PricingPlanItem
-        billingText={"Billed every 6 months"}
-        tagText={"Best value"}
-        tagColor={"green.400"}
-        buttonText={"Claim my plan (save 75%)"}
-        buttonColor="#04a804"
-        borderColor="#04a804"
-        buttonHoverColor="#038b03"
-        buttonTextColor="white"
-        pricingPlan={pricingPlans["6month"]}
-      />
-
-      <DealRibbon />
-
-      <PricingPlanItem
-        billingText={"Billed every 3 months"}
-        tagColor={"brand.700"}
-        buttonText={"Claim my plan (save 65%)"}
-        pricingPlan={pricingPlans["3month"]}
-      />
-
-      <PricingPlanItem
-        billingText={"Billed every month"}
-        buttonText={"Claim my plan (save 50%)"}
-        pricingPlan={pricingPlans["1month"]}
-      />
+      {Object.values(pricingPlans).map((plan) => {
+        return (
+          <PricingPlanItem
+            key={plan.id}
+            billingText={plan.subtitle}
+            pricingPlan={plan}
+            borderColor={selectedPlan === plan.id ? "orange.600" : undefined}
+            onClick={() => {
+              setSelectedPlan(plan.id);
+            }}
+          />
+        );
+      })}
     </Flex>
   );
 }
@@ -129,23 +152,16 @@ export function PricingPlans() {
 function PricingPlanItem({
   billingText,
   tagText,
-  buttonText,
-  buttonColor,
-  buttonHoverColor,
   borderColor,
-  buttonTextColor,
   pricingPlan,
+  ...rest
 }: {
   billingText: string;
   tagText?: string;
   tagColor?: string;
-  buttonText: string;
-  buttonTextColor?: string;
-  buttonColor?: string;
-  buttonHoverColor?: string;
   borderColor?: string;
   pricingPlan: PricingPlanType;
-}) {
+} & ComponentProps<typeof Flex>) {
   return (
     <Flex
       flexDirection={"column"}
@@ -156,9 +172,10 @@ function PricingPlanItem({
       backgroundColor="bg.200"
       width={"100%"}
       position="relative"
-      border={`2px solid`}
-      borderColor={borderColor ?? "bg.400"}
+      border={`3px solid`}
+      borderColor={borderColor ?? "transparent"}
       mt={3}
+      {...rest}
     >
       {tagText && (
         <Badge position={"absolute"} top={0} left={3} transform={"translateY(-50%)"}>
@@ -190,39 +207,14 @@ function PricingPlanItem({
             lineHeight={"normal"}
             fontSize={"md"}
           >
-            ${pricingPlan.dailyBefore}
+            ${pricingPlan.priceBefore}
           </Text>
 
           <Text fontSize={"3xl"} fontWeight={"bold"} lineHeight={"normal"} color="bg.900">
-            ${pricingPlan.daily}
-          </Text>
-
-          <Text fontSize={"sm"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
-            per day
+            ${pricingPlan.price}
           </Text>
         </Flex>
       </Flex>
-
-      <Link
-        to={`/checkout?pricingPlanID=${pricingPlan.id}`}
-        style={{ width: "100%" }}
-        onClick={() => {
-          trackEvent({ name: "chose-pricing-plan", properties: { ...pricingPlan } });
-        }}
-      >
-        <Button
-          variant={"solid"}
-          backgroundColor={buttonColor ?? "brand.700"}
-          _hover={{
-            backgroundColor: buttonHoverColor ?? "brand.600",
-          }}
-          width={"full"}
-          color={buttonTextColor}
-          fontWeight={"semibold"}
-        >
-          {buttonText}
-        </Button>
-      </Link>
     </Flex>
   );
 }

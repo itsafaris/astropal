@@ -1,6 +1,7 @@
 export type PricingPlanType = {
   id: string;
   title: string;
+  subtitle: string;
   price: number;
   priceBefore: number;
   daily: number;
@@ -9,32 +10,25 @@ export type PricingPlanType = {
 };
 
 export const pricingPlans = {
-  "6month": {
-    id: "6month",
-    title: "6 month plan",
-    price: 49.99,
-    priceBefore: 199.99,
+  digital: {
+    id: "digital",
+    title: "Digital Edition (PDF)",
+    subtitle: "Instant delivered to your email",
+    price: 34,
+    priceBefore: 69,
     daily: 0.28,
     dailyBefore: 1.11,
     durationInMonths: 6,
   },
-  "3month": {
-    id: "3month",
-    title: "3 month plan",
-    price: 39.99,
-    priceBefore: 116.99,
+  hardcover: {
+    id: "printed",
+    title: "Hardcover Book (+ PDF)",
+    subtitle: "Delivered to your address",
+    price: 69,
+    priceBefore: 116,
     daily: 0.43,
     dailyBefore: 1.25,
     durationInMonths: 3,
-  },
-  "1month": {
-    id: "1month",
-    title: "1 month plan",
-    price: 29.99,
-    priceBefore: 59.99,
-    daily: 0.99,
-    dailyBefore: 1.99,
-    durationInMonths: 1,
   },
 } satisfies Record<string, PricingPlanType>;
 
