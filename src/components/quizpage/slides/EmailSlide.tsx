@@ -1,12 +1,13 @@
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { EmailState, Selector, Slide, useSlideState } from "@martynasj/quiz-lib";
 import { FaLock } from "react-icons/fa6";
 import { Box, Flex } from "@chakra-ui/react";
+import React from "react";
 
 import { Caption, SlideHeading, NextButton, Span } from "../components";
+import { navigate } from "gatsby";
+import { validateEmail } from "@utils/email";
 
 export function EmailSlide() {
-  const { submitQuestion } = useQuiz();
-
   return (
     <Slide
       id="your-email"
@@ -14,6 +15,16 @@ export function EmailSlide() {
       placeholder="Enter your email to get your book"
       hideNextButton
     >
+      <Content />
+    </Slide>
+  );
+}
+
+function Content() {
+  const { value } = useSlideState<EmailState>();
+
+  return (
+    <>
       <SlideHeading textAlign={"center"}>
         Enter your email <br /> to get your personal <br />
         <Span>Self-Discovery Guide</Span>
@@ -33,11 +44,14 @@ export function EmailSlide() {
 
       <NextButton
         onClick={() => {
-          submitQuestion();
+          if (!validateEmail(value ?? "")) {
+            return;
+          }
+          navigate("/summary");
         }}
       >
         Continue
       </NextButton>
-    </Slide>
+    </>
   );
 }

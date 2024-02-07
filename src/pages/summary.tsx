@@ -1,5 +1,16 @@
 import { ComponentProps, useEffect, useState } from "react";
-import { Box, Button, Card, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { PageProps } from "gatsby";
 
 import { TopNavigation } from "@components/topnavigation";
@@ -39,11 +50,6 @@ export default function SummaryPage({}: PageProps) {
       </Container> */}
 
       <Container>
-        <Text fontWeight="bold" textAlign={"center"} width={"full"} fontSize={"2xl"} mb={4}>
-          Your Hyper-Personal Astrology Guide
-          <br /> Is Ready
-        </Text>
-
         <Card p={4}>
           <Box mb={6}>
             <Text>
@@ -132,49 +138,68 @@ export default function SummaryPage({}: PageProps) {
           </Flex>
         </Card>
 
+        <Text my={4} textAlign={"center"} width={"full"} fontSize={"xl"} mb={4}>
+          Your personal Self-Discovery guide is based on the{" "}
+          <Span>most detailed astrological reading of your birth chart</Span>
+        </Text>
+
         <Flex gap={2} my={4}>
           <Card flex={1} py={3}>
             <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"center"}>
-              86
+              🌔 Moon
             </Text>
             <Text fontSize={"xs"} textAlign={"center"}>
-              Total number of pages
+              Leading Object
             </Text>
           </Card>
-          <Card flex={1} py={3} alignItems={"center"} justifyContent={"center"}>
+          <Card flex={1} py={3} justifyContent={"space-between"}>
             <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"center"}>
-              78
+              11th (health)
             </Text>
             <Text fontSize={"xs"} textAlign={"center"}>
-              Unique pages
+              House
             </Text>
           </Card>
-          <Card flex={1}></Card>
         </Flex>
 
-        <Card p={4} my={4}>
-          <Text mb={4}>We estimate the following benefits (based on other Female Aquarius):</Text>
-          <Stack alignItems={"start"} gap={2}>
-            <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
-              <Text color="green.500" fontSize={"2xl"} fontWeight={"bold"}>
-                +78%
-              </Text>
-              <Text fontWeight={"semibold"}>💞 Love and Relationships</Text>
+        <Button colorScheme="orange" width={"full"}>
+          Get My Guide
+        </Button>
+
+        <Box id="section-other-users" my={8}>
+          <Text textAlign={"center"} mb={4} fontSize={"xl"} fontWeight={"semibold"}>
+            Data from our similar users
+          </Text>
+          <Card p={4} my={4}>
+            <Flex gap={2} alignItems={"center"}>
+              <Badge colorScheme="orange">{quizState?.yourGender}</Badge>
+              <Badge colorScheme="blue">{quizState?.yourZodiac.name}</Badge>
+              <Badge colorScheme="gray">User Count: 14,322</Badge>
             </Flex>
-            <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
-              <Text color="green.500" fontSize={"2xl"} fontWeight={"bold"}>
-                +82%
-              </Text>
-              <Text fontWeight={"semibold"}>💼 Career and Professional Life</Text>
-            </Flex>
-            <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
-              <Text color="green.500" fontSize={"2xl"} fontWeight={"bold"}>
-                +94%
-              </Text>
-              <Text fontWeight={"semibold"}>🌿 Self Growth</Text>
-            </Flex>
-          </Stack>
-        </Card>
+            <Divider color="blackAlpha.500" my={2} />
+
+            <Stack alignItems={"start"} gap={2}>
+              <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
+                <Text color="green.500" fontSize={"xl"} fontWeight={"bold"}>
+                  +34%
+                </Text>
+                <Text fontWeight={"semibold"}>💞 Love and Relationships</Text>
+              </Flex>
+              <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
+                <Text color="green.500" fontSize={"xl"} fontWeight={"bold"}>
+                  +64%
+                </Text>
+                <Text fontWeight={"semibold"}>💼 Career and Professional Life</Text>
+              </Flex>
+              <Flex direction={"row"} alignItems={"center"} justifyContent={"start"} gap={4}>
+                <Text color="green.500" fontSize={"xl"} fontWeight={"bold"}>
+                  +48%
+                </Text>
+                <Text fontWeight={"semibold"}>🌿 Self Growth</Text>
+              </Flex>
+            </Stack>
+          </Card>
+        </Box>
 
         <Box as="ul" pl={4} my={12}>
           <Heading textAlign={"center"} mb={4}>
