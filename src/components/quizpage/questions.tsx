@@ -44,6 +44,32 @@ export function DecisionChallengeAgreement() {
   );
 }
 
+export function HesitationCause() {
+  return (
+    <Slide
+      id="hesitation-cause"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Fear of Failure", icon: "😨" },
+        { text: "Lack of Confidence", icon: "🙁" },
+        { text: "Overthinking the Outcomes", icon: "🤔" },
+        { text: "Not Feeling Prepared", icon: "📚" },
+        { text: "Worrying About Others' Opinions", icon: "👥" },
+        { text: "Uncertainty About the Correct Decision", icon: "❓" },
+        { text: "Lack of Support", icon: "🚫" },
+      ]}
+    >
+      <SlideHeading
+        text={
+          "What is the main cause for you to hesitate to take action when a major opportunity arises?"
+        }
+      />
+      <Selector />
+    </Slide>
+  );
+}
+
 export function LifeChangeTiming() {
   return (
     <Slide
@@ -158,7 +184,7 @@ export function NameOnTheBook() {
         <Span color="bg.700">(it will be displayed on the cover of the book)</Span>
       </SlideHeading>
       <Selector />
-      <NextButton>Generate My Guide</NextButton>
+      <NextButton>Create My Guide</NextButton>
     </Slide>
   );
 }

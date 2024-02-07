@@ -36,6 +36,7 @@ import {
   DefineSuccess,
   DetailLevelPreference,
   FillerPeopleInControl,
+  HesitationCause,
   HyperPersonalisedInsights,
   IncludeRealLifeExamples,
   InsightVsHoroscopeComparison,
@@ -92,6 +93,7 @@ export default function OnboardingQuiz() {
             <SelfUnderstanding />
             <DecisionMakingStruggles />
             <DecisionChallengeAgreement />
+            <HesitationCause />
             {/* <LifeChangeTiming /> */}
             <Filler_FactOnMissedOpportunities />
             <TopPersonalGoal />

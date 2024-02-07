@@ -27,7 +27,7 @@ export function Loading_CreatingBook() {
           testimonial={{
             name: "Michelle Richards",
             quote:
-              "Our marriage got a major upgrade thanks to the guide – turning challenges into growth moments!",
+              "After trying countless astrology readings, I finally found this one. Now, it's my go-to source of guidance whenever I face a challenging moment.",
             question: "Is it a good time to invest my savings?",
             avatar: <StaticImage alt="Astropal user image" src="../../../images/user2.png" />,
             commentAge: "4d",

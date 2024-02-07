@@ -19,8 +19,8 @@ export function Filler_NatalChartPreviewSlide() {
             <SlideHeading
               text={
                 <SpanJust>
-                  This is your Birth Chart!{" "}
-                  <Span>It is a foundation of your personalised guide</Span>.
+                  This is your Birth Chart! It is a foundation of your{" "}
+                  <Span>Self-Discovery Guide</Span>
                 </SpanJust>
               }
             />

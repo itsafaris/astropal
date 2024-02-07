@@ -16,7 +16,7 @@ export function EmailSlide() {
     >
       <SlideHeading textAlign={"center"}>
         Enter your email <br /> to get your personal <br />
-        <Span>Book of You</Span>
+        <Span>Self-Discovery Guide</Span>
       </SlideHeading>
 
       <Selector />
