@@ -65,7 +65,6 @@ export type TimeState = {
 
 export type LoadingState = {
   type: "loading";
-  progressValue?: number;
   isComplete?: boolean;
 } & BaseSelectorState;
 
@@ -344,11 +343,6 @@ export function createQuizState(input: {
     setLoadingStateComplete(selectorID: string, value: boolean) {
       const slideState = state.slideStateByID[selectorID] as LoadingState;
       slideState.isComplete = value;
-    },
-
-    setLoadingStateProgress(selectorID: string, value: number) {
-      const slideState = state.slideStateByID[selectorID] as LoadingState;
-      slideState.progressValue = value;
     },
   };
 

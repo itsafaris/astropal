@@ -18,9 +18,6 @@ export function LoadingSlide(props: LoadingSlideComponentProps) {
     <Flex width={"full"} direction={"column"} gap={4} alignItems={"center"}>
       <SpinnerWihtText
         {...props}
-        onProgressValueChange={(value) => {
-          actions.setLoadingStateProgress(slide.id, value);
-        }}
         onComplete={() => {
           props.onLoadingCompleted?.();
           actions.setLoadingStateComplete(slide.id, true);
@@ -151,7 +148,6 @@ function SpinnerCircleSvg({
   svgContainerProps,
 }: {
   value?: number; // 0 - 1
-  duration?: number; // in seconds
   svgContainerProps?: React.SVGProps<SVGSVGElement>;
 }) {
   const FULL_DASH_ARRAY = 1998; // this value is hardcoded, it depends on the radius of SVG (2*PI*r)
