@@ -83,7 +83,7 @@ export default function IndexPage() {
             maxWidth={400}
             mx="auto"
           >
-            Decide Your Life <br /> With{" "}
+            Decide Your Life <br /> With a{" "}
             <Text as="span" color="brand.600">
               Personalized{" "}
             </Text>{" "}
