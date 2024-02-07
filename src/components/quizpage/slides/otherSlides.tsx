@@ -19,7 +19,13 @@ export function AstrologerThemePreferences() {
         { text: "Self understanding", icon: "🧘" },
       ]}
     >
-      <SlideHeading text="Which area you want focus on improving first?" />
+      <SlideHeading>
+        Which topic do you want your{" "}
+        <Text as="span" color="brand.600">
+          Personalized Insights
+        </Text>{" "}
+        to focus on first?
+      </SlideHeading>
       <Selector />
     </Slide>
   );
@@ -62,9 +68,9 @@ export function DailyHoroscope() {
       ]}
     >
       <SlideHeading>
-        What time would you like to receive your{" "}
+        What time would you like to receive your daily{" "}
         <Text as="span" color="brand.600">
-          Astrology Insights
+          Personalized Insights
         </Text>
         ?
       </SlideHeading>

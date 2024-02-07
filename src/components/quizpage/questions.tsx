@@ -1,6 +1,6 @@
 import React from "react";
 import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
-import { Box, Flex, Stack, Text, useTheme } from "@chakra-ui/react";
+import { Box, Flex, Grid, Stack, Text, useTheme } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { getPersonalInfoFromState } from "@utils/state";
@@ -22,7 +22,9 @@ export function DecisionMakingStruggles() {
         { text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
-      <SlideHeading text={"What areas of your life do you struggle with the most?"} />
+      <SlideHeading
+        text={"To assist you better, mark the areas in which you currently struggle the most"}
+      />
       <Selector />
       <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
@@ -49,6 +51,24 @@ export function AdviceSeekingFrequency() {
   );
 }
 
+export function WrongDecisionSlide() {
+  return (
+    <Slide
+      id="wrong-decision"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Unfortunatelly yes", icon: "😩" },
+        { text: "Not yet", icon: "😟" },
+        { text: "I'm not sure", icon: "🤔" },
+      ]}
+    >
+      <SlideHeading text={"Have you ever made a decision that negatively affected your life?"} />
+      <Selector />
+    </Slide>
+  );
+}
+
 export function DecisionChallengeAgreement() {
   return (
     <Slide
@@ -63,26 +83,45 @@ export function DecisionChallengeAgreement() {
         { text: "Strongly disagree", icon: "👎" },
       ]}
     >
-      <SlideHeading
-        text={
-          <Text as="span">
-            Do you agree with the statement: <br />{" "}
-            <Text as="span" color="bg.700" fontStyle="italic">
-              "I often struggle to make decisions when opportunities arise"
-            </Text>
-          </Text>
-        }
-      />
+      <SlideHeading>
+        <Text mb={3}>Do you agree with the statement:</Text>
+        <Text textAlign="center" color="bg.700" fontSize={"lg"}>
+          "I often struggle to decide what is best for me"
+        </Text>
+      </SlideHeading>
 
       <Selector />
     </Slide>
   );
 }
 
-export function LifeChangeTiming() {
+export function InsightSourcesSlide() {
   return (
     <Slide
-      id="life-change-timing"
+      id="insight-sources"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Not useful at all", icon: "👎" },
+        { text: "It usually lacks personalization", icon: "👎" },
+        { text: "Sometimes it seems correct", icon: "😐" },
+        { text: "I find it useful", icon: "👍" },
+        { text: "It reflects me perfectly", icon: "👍" },
+      ]}
+    >
+      <SlideHeading>
+        When in doubt do you find generic insight of your zodiac sign useful?
+      </SlideHeading>
+
+      <Selector />
+    </Slide>
+  );
+}
+
+export function NatalChartReading() {
+  return (
+    <Slide
+      id="natal-chart-reading"
       type="single"
       variant="list"
       options={[
@@ -91,8 +130,44 @@ export function LifeChangeTiming() {
         { text: "I don't know", icon: "🤷" },
       ]}
     >
-      <SlideHeading text={"Do you feel like you're missing out on opportunities in your life?"} />
+      <SlideHeading>
+        Have you ever received insight based on your true identity - personal Natal Chart?
+      </SlideHeading>
+
       <Selector />
+    </Slide>
+  );
+}
+
+export function QuoteSlide() {
+  return (
+    <Slide id="quote" type="filler">
+      <StaticImage
+        alt="famous astrology quote"
+        src="../../images/person-in-doubt.png"
+        style={{
+          height: "200px",
+        }}
+      />
+
+      <SlideHeading textAlign={"center"} fontStyle={"italic"} mt={8}>
+        <Grid gridTemplateColumns="auto 1fr auto">
+          <Text fontSize={"4xl"} alignSelf="flex-start">
+            “
+          </Text>
+          <Text fontSize={"xl"}>
+            Astrology is a language. If you understand this language, the sky speaks to you.
+          </Text>
+          <Text fontSize={"4xl"} alignSelf="flex-end">
+            „
+          </Text>
+        </Grid>
+      </SlideHeading>
+      <Text color="white" textAlign={"right"}>
+        - Dane Rudhyar
+      </Text>
+
+      <NextButton mt={8}>Continue</NextButton>
     </Slide>
   );
 }
@@ -100,39 +175,41 @@ export function LifeChangeTiming() {
 export function FillerPeopleInControl() {
   return (
     <Slide id="filler-people-in-control" type="filler">
-      <SlideHeading>
-        <Text as="span" color="#f65874" fontWeight={"semibold"}>
-          86% of people feel lost in their lives
-        </Text>{" "}
-        or struggle to find help. Astropal offers guidance, helping you navigate life's challenges
-        with ease
-      </SlideHeading>
+      {({ quizState }) => {
+        const info = getPersonalInfoFromState(quizState);
 
-      <Flex justifyContent={"center"} alignItems={"center"} bg="bg.100" borderRadius={"xl"} py={7}>
-        <StaticImage
-          alt="chart showing how many people feel lost in their lives"
-          src="../../images/confidence_chart.png"
-          layout="fullWidth"
-          style={{
-            width: "280px",
-            marginLeft: "-15px",
-          }}
-        />
-      </Flex>
+        return (
+          <>
+            <SlideHeading>
+              <Text as="span" color="#f65874">
+                81% of {toTitleCase(info.yourZodiac.pluralName)} admit to having made at least 4
+                wrong major life decisions.
+              </Text>{" "}
+              All could have been avoided with the right assistance.
+            </SlideHeading>
 
-      <NextButton mt={8}>Continue</NextButton>
-    </Slide>
-  );
-}
+            <Flex
+              justifyContent={"center"}
+              alignItems={"center"}
+              bg="bg.100"
+              borderRadius={"xl"}
+              py={7}
+            >
+              <StaticImage
+                alt="chart showing how many people feel lost in their lives"
+                src="../../images/confidence_chart.png"
+                layout="fullWidth"
+                style={{
+                  width: "280px",
+                  marginLeft: "-15px",
+                }}
+              />
+            </Flex>
 
-export function FillerToBirthChart() {
-  return (
-    <Slide id="intro-birth-chart" type="filler">
-      <SlideHeading>
-        To overcome the problem we have a solution. But first lets find out who you are
-      </SlideHeading>
-
-      <NextButton mt={8}>Continue</NextButton>
+            <NextButton mt={8}>Continue</NextButton>
+          </>
+        );
+      }}
     </Slide>
   );
 }
@@ -149,13 +226,22 @@ export function HyperPersonalisedInsights() {
 
         return (
           <>
-            <SlideHeading>
+            {/* <SlideHeading>
               9 out of 10 {toTitleCase(info.yourZodiac.pluralName)} under {roundAgeUp(info.yourAge)}{" "}
               say{" "}
               <Text as="span" fontStyle={"italic"} color="#63dc94">
                 "knowing when and what decisions to make"
               </Text>{" "}
               became easier with personalized Astropal insights
+            </SlideHeading> */}
+
+            <SlideHeading>
+              9 out of 10 users claim
+              <Text as="span" color="#63dc94">
+                {" "}
+                personalized insights bring significant clarity in decision making
+              </Text>{" "}
+              compared to generic zodiac insights
             </SlideHeading>
 
             <Flex

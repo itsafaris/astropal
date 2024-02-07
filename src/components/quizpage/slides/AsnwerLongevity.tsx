@@ -18,7 +18,7 @@ export function AsnwerLongevity() {
       <SlideHeading>
         How would you like your{" "}
         <Text as="span" color="brand.600">
-          Astrology Insights
+          Personalized Insights
         </Text>{" "}
         to be present?
       </SlideHeading>

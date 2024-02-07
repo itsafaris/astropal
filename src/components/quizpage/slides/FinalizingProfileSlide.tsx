@@ -16,7 +16,7 @@ export function FinalizingProfileSlide() {
     >
       <SlideHeading
         textAlign={"center"}
-        text="Finalizing your Astrological Profile to offer the best insights"
+        text="Finalizing your Natal Chart to offer the best insights"
       />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
@@ -31,7 +31,7 @@ export function FinalizingProfileSlide() {
         </Text>
 
         <Text textAlign={"center"} color="white" fontWeight={"bold"} fontSize={"lg"} mb={5}>
-          have chosen Astropal
+          have chosen Astropal as their Personal Astrologer
         </Text>
       </Flex>
     </Slide>

@@ -52,7 +52,7 @@ export function SavingProfileSlide() {
     >
       <SlideHeading
         textAlign={"center"}
-        text="Improving your Astrological Profile to offer the best insights"
+        text="Updating your Natal Chart to offer the best insights"
       />
 
       <Flex flexDirection={"column"} alignItems={"center"}>

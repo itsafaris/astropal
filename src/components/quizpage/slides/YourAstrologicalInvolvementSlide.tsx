@@ -2,15 +2,15 @@ import { Selector, Slide } from "@martynasj/quiz-lib";
 
 import { SlideHeading } from "../components";
 
-export function YourSpiritualInvolvementSlide() {
+export function YourAstrologicalInvolvementSlide() {
   return (
     <Slide
-      id="your-spiritual-involvement"
+      id="your-astrological-involvement"
       type="single"
       variant="list"
       options={[
         {
-          text: "I'm new to spirituality",
+          text: "I'm new to astrology",
           icon: "🌑",
         },
         {
@@ -27,7 +27,7 @@ export function YourSpiritualInvolvementSlide() {
         },
       ]}
     >
-      <SlideHeading text="To what degree are you engaged with spiritual practices and concepts?" />
+      <SlideHeading text="To what degree are you engaged with astrological practices and concepts?" />
       <Selector />
     </Slide>
   );

@@ -78,10 +78,7 @@ export function PersonalityDescriptionSlide() {
 function LoadingSlide({ isLoading, onNextClick }: { isLoading: boolean; onNextClick: () => void }) {
   return (
     <>
-      <SlideHeading
-        textAlign={"center"}
-        text="Please wait as we prepare your Astrological Profile 😌"
-      />
+      <SlideHeading textAlign={"center"} text="Just a moment... finding your cosmic identity" />
 
       <LoadingPulse isLoading={isLoading} my={4} />
 
@@ -107,11 +104,11 @@ function ResultsSlide({
   return (
     <Flex flexDirection={"column"} position={"relative"} width={"full"}>
       <SlideHeading>
-        Here is brief preview of your{" "}
+        Your{" "}
         <Text as="span" color="brand.600">
-          Astrological Profile
-        </Text>
-        . It contains a snapshot of the sky data at the time you were born
+          Natal Chart - the unique cosmic identify that stores your entire life's story.{" "}
+        </Text>{" "}
+        Before we go, scroll down to see it all
       </SlideHeading>
 
       <AstrologicalProfile quizState={info} interpretation={interpretation} />
