@@ -84,7 +84,9 @@ export type SelectorPropsList = {
   options?: OptionPropsSimple[];
 };
 
-export type CommonSelectorProps = {} & (SelectorPropsList | SelectorPropsPicture);
+export type CommonSelectorProps = {
+  label?: string;
+} & (SelectorPropsList | SelectorPropsPicture);
 
 export type SlidePropsMulti = {
   type: "multi";

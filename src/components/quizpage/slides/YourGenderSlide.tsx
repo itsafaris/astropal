@@ -1,5 +1,5 @@
 import { Selector, Slide } from "@martynasj/quiz-lib";
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { SlideHeading, Span } from "../components";
@@ -11,6 +11,7 @@ export function YourGenderSlide() {
       type="single"
       variant="picture"
       size="medium"
+      label="Choose your gender to get started"
       options={[
         {
           text: "Female",
@@ -34,15 +35,32 @@ export function YourGenderSlide() {
         },
       ]}
     >
-      <SlideHeading textAlign={"center"} fontWeight={"bold"}>
-        A hyper-personalised guide
-        <br /> to self-discovery
-      </SlideHeading>
-      <Text textAlign={"center"} mb={12}>
-        A perfect blend of
-        <br /> <Span color="purple.700">Astrology</Span> and your{" "}
-        <Span color="purple.700">Personality</Span>
+      <Text fontSize={"md"} textAlign={"center"} bg="white" p={2}>
+        <Span fontWeight={"semibold"}>
+          "Clear the fog of your life. Learn how to use your strenghts and weaknesses to your
+          advantage."
+        </Span>{" "}
+        - Dr. Marty
       </Text>
+
+      <SlideHeading
+        mt={8}
+        mb={2}
+        textAlign={"center"}
+        fontWeight={"bold"}
+        maxWidth={"70%"}
+        mx="auto"
+      >
+        Discover yourself
+        <br /> with Astrology and take control of your:
+      </SlideHeading>
+
+      <Box mx="auto" mb={8}>
+        <Text>✅ Relationships</Text>
+        <Text>✅ Career</Text>
+        <Text>✅ Personal Growth</Text>
+      </Box>
+
       <Selector />
     </Slide>
   );
