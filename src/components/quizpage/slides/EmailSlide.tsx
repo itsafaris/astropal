@@ -2,13 +2,19 @@ import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
 
 import { Caption, SlideHeading, NextButton } from "../components";
 
+import { Text } from "@chakra-ui/react";
+
 export function EmailSlide() {
   const { submitQuestion } = useQuiz();
   return (
     <Slide id="your-email" type="email" placeholder="Enter your email">
-      <SlideHeading
-        text={`Your Personalized Astrology Insights are ready! Let us know where we should be sending them ✉️`}
-      />
+      <SlideHeading>
+        Your{" "}
+        <Text as="span" color={"brand.600"}>
+          Personalized Astrology Insights
+        </Text>{" "}
+        are ready! Let us know where we should be sending them ✉️
+      </SlideHeading>
 
       <Selector />
 
