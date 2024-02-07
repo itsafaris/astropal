@@ -187,7 +187,7 @@ export function Filler_IntroToPersonality() {
   return (
     <Slide id="filler-personality" type="filler">
       <SlideHeading>
-        Did you know: your entire personality can be decoded from your Birth Chart
+        Did you know: more than 90% of your current personality can be decoded from your Birth Chart
       </SlideHeading>
 
       <Box width={"70%"} mx="auto" mt={4} borderRadius={"xl"} bottom="0" overflow={"hidden"}>
@@ -208,8 +208,8 @@ export function Filler_BookStructure() {
   return (
     <Slide id="filler-book-structure" type="filler">
       <SlideHeading>
-        Your book will contain <Span>78 pages of hyper-personalised content</Span>. Here's a sneak
-        peek:
+        Your Personalised Self-Discovery Guide will contain <Span>78 pages of unique content</Span>.
+        Here's a sneak peek:
       </SlideHeading>
 
       <Box
@@ -273,20 +273,18 @@ export function Filler_FactOnMissedOpportunities() {
 }
 
 export function Filler_BookBlueprintSummary() {
-  const { quizState } = useQuizState();
-  const pinfo = getPersonalInfoFromState(quizState);
-
   return (
     <Slide id="filler-book-blueprint-summary" type="filler">
       <SlideHeading>
-        You will have full guidance on reaching your goals with confidence.
+        A personalised <Span>Self-Discovery Guide</Span> is the most optimal way to staying on the
+        right path
       </SlideHeading>
-      <Text fontSize={"xs"}>Reaching your goal:</Text>
-      <Text fontWeight={"bold"} color="green.600">
-        {pinfo.goal}
-      </Text>
       <Box my={4} overflow={"hidden"} borderRadius={"lg"} bg="white" p={4}>
-        <StaticImage alt="road to reaching a goal" src="../../../images/reaching_goal.png" />
+        <StaticImage
+          alt="road to reaching a goal"
+          placeholder="none"
+          src="../../../images/reaching_goal.png"
+        />
       </Box>
       <NextButton mt={8}>Continue</NextButton>
     </Slide>

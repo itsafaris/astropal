@@ -81,7 +81,18 @@ export default function SummaryPage({}: PageProps) {
               >
                 Now
               </Box>
-              <StaticImage src="../images/female_upset.png" />
+              {quizState?.yourGender.toLowerCase() === "male" ? (
+                <StaticImage
+                  alt="a person feeling lost and uncertain about their decisions"
+                  src="../images/male_upset.png"
+                />
+              ) : (
+                <StaticImage
+                  alt="a person feeling lost and uncertain about their decisions"
+                  src="../images/female_upset.png"
+                />
+              )}
+
               <Box my={2}>
                 <Text fontSize={"sm"} fontWeight={"bold"}>
                   Self-Understanding
@@ -109,7 +120,19 @@ export default function SummaryPage({}: PageProps) {
               <Box px={3} py={2} color="white" bg="purple.600" borderRadius={"lg"} mx="auto">
                 Your Goal
               </Box>
-              <StaticImage src="../images/female_happy.png" />
+
+              {quizState?.yourGender.toLowerCase() === "male" ? (
+                <StaticImage
+                  alt="a person feeling lost and uncertain about their decisions"
+                  src="../images/male_happy.png"
+                />
+              ) : (
+                <StaticImage
+                  alt="a person feeling lost and uncertain about their decisions"
+                  src="../images/female_happy.png"
+                />
+              )}
+
               <Box my={2}>
                 <Text fontSize={"sm"} fontWeight={"bold"}>
                   Self-Understanding

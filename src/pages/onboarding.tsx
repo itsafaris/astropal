@@ -96,10 +96,10 @@ export default function OnboardingQuiz() {
             <HesitationCause />
             {/* <LifeChangeTiming /> */}
             <Filler_FactOnMissedOpportunities />
-            <TopPersonalGoal />
+            {/* <TopPersonalGoal /> */}
             <Loading_CreatingBlueprint />
-            <Filler_BookBlueprintSummary />
             <Filler_BookStructure />
+            <Filler_BookBlueprintSummary />
             <NameOnTheBook />
             <Loading_CreatingBook />
             <EmailSlide />
