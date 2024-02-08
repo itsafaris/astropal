@@ -46,8 +46,15 @@ export function getReadableDate(date: DateValue): string {
   return `${date.day}/${date.month}/${date.year}`;
 }
 
+// export function getReadableTime(time: Time): string {
+//   return `${time.hour === 0 ? "00" : time.hour}:${time.minute === 0 ? "00" : time.minute} ${
+//     time.meridiem
+//   }`;
+// }
+
 export function getReadableTime(time: Time): string {
-  return `${time.hour === 0 ? "00" : time.hour}:${time.minute === 0 ? "00" : time.minute} ${
-    time.meridiem
-  }`;
+  const { hour, minute, meridiem } = time;
+  const formattedHour = hour.toString().padStart(2, "0");
+  const formattedMinute = minute.toString().padStart(2, "0");
+  return `${formattedHour}:${formattedMinute} ${meridiem.toLowerCase()}`;
 }
