@@ -5,7 +5,7 @@ import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 
 import { TopNavigation } from "@components/topnavigation";
-import { BookCover } from "@components/book/book";
+import { BookCover } from "@components/book/bookCover";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -39,7 +39,7 @@ export default function IndexPage() {
         </Box>
 
         <Flex justifyContent={"center"} my={8}>
-          <BookCover width={"260px"} height="100%" />
+          <BookCover height={400} gender="female" author="[your name here]" />
         </Flex>
 
         <Heading

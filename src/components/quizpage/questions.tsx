@@ -199,9 +199,13 @@ export function NameOnTheBook() {
             </SlideHeading>
             <Selector />
             <Flex justifyContent={"center"}>
-              <BookCover height={300} author={s?.value ?? "John Doe"} birthDate={p.dateValue} />
+              <BookCover
+                height={300}
+                author={s?.value ?? "[your name here]"}
+                gender={p.yourGender}
+              />
             </Flex>
-            <NextButton>Create My Guide</NextButton>
+            <NextButton mt={4}>Create My Guide</NextButton>
           </>
         );
       }}

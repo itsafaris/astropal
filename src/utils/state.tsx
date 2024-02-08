@@ -26,7 +26,9 @@ function splitFullName(fullName: string) {
 }
 
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
-  const yourGender = (state["your-gender"] as SingleState)?.value?.value ?? "Male";
+  const yourGender = ((state["your-gender"] as SingleState)?.value?.value?.toLowerCase() ??
+    "male") as "male" | "female";
+
   const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
   const { firstName, lastName } = splitFullName(fullname);
 
@@ -69,7 +71,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourGender,
     yourBirthDate,
     localeDate,
-    dateValue,
     yourBirthTime,
     yourBirthLocation,
     yourZodiac,
