@@ -1,106 +1,112 @@
-import { Box, Text, Heading, Flex, Grid, Container } from "@chakra-ui/react";
-import { QuizStateParsed } from "@utils/state";
+import { Box, Container, Text, Stack, Flex } from "@chakra-ui/react";
 
-import { HarmonyChart, COLORS } from "../HarmonyChart/HarmonyChart";
+import { ArrowDownIcon } from "@chakra-ui/icons";
+
+import { QuizStateParsed } from "@utils/state";
+import { BoltIcon, InfinityIcon, MoonIcon } from "@components/svg/icons";
 
 import { CTALinkToPricing } from "./components";
-import { AstrologicalProfile } from "../AstrologicalProfile";
+import { StaticImage } from "gatsby-plugin-image";
 
-export function HeroSection2({ quizState }: { quizState?: QuizStateParsed }) {
+export function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
-    <Box py={12} id="astrological-profile-section" bgGradient="linear(to-t, #170d28, bg.50)">
+    <Box id="hero-section" as="section">
       <Container>
-        <Heading textAlign={"center"} fontWeight={"bold"} mx={8} fontSize={"3xl"} color="white">
-          Your Astrological Profile Is Ready
-        </Heading>
+        <Flex flexDirection={"column"} alignItems={"center"}>
+          <Text
+            fontWeight="bold"
+            textAlign={"center"}
+            width={"full"}
+            fontSize={"3xl"}
+            color="white"
+          >
+            Your Personalized Insight is Ready
+          </Text>
 
-        <Heading
-          px={4}
-          py={4}
-          fontWeight={"semibold"}
-          fontSize={{ base: "xl" }}
-          color="brand.700"
-          textAlign={"center"}
-        >
-          On average,{" "}
-          <Text as="span" color="green.400">
-            93%
-          </Text>{" "}
-          of our users report feeling less self-doubt and greater clarity in their lives within just{" "}
-          <Text as="span" color="green.400">
-            14 days
-          </Text>{" "}
-          of consulting personalized astrologer.
-        </Heading>
+          <Flex
+            width={"full"}
+            p={6}
+            borderRadius={"xl"}
+            backgroundColor={"white"}
+            height={500}
+          ></Flex>
 
-        <Flex flexDirection={"column"} gap={3} borderRadius={"xl"}>
-          <Flex width={"full"} height={500} justifyContent={"center"} alignItems={"center"} p={4}>
-            <HarmonyChart
-              size={300}
-              items={[
-                {
-                  id: "a",
-                  title: "Personal growth",
-                  value: 1,
-                },
-                {
-                  id: "b",
-                  title: "Career",
-                  value: 5,
-                },
-                {
-                  id: "c",
-                  title: "Timing",
-                  value: 3,
-                },
-                {
-                  id: "d",
-                  title: "Emotional well-being",
-                  value: 2,
-                },
-                {
-                  id: "e",
-                  title: "Relationship",
-                  value: 3,
-                },
-                {
-                  id: "f",
-                  title: "Something",
-                  value: 3,
-                },
-              ]}
+          <Stack my={10} alignItems={"start"} color="brand.700">
+            <Text fontWeight={"semibold"}>
+              <InfinityIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Ask unlimited questions
+            </Text>
+            <Text fontWeight={"semibold"}>
+              <BoltIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Get Instant answers
+            </Text>
+            <Text fontWeight={"semibold"}>
+              <MoonIcon color="brand.500" height={"24px"} width={"24px"} mr={2} />
+              Receive daily horoscopes
+            </Text>
+          </Stack>
+
+          <CTALinkToPricing />
+
+          <Text
+            mt={8}
+            mb={2}
+            textAlign={"center"}
+            width={"full"}
+            fontSize={"sm"}
+            color={"whiteAlpha.600"}
+          >
+            Or scroll to find out more
+          </Text>
+          <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"2xl"} />
+        </Flex>
+
+        <Stack spacing={10}>
+          <Flex flexDirection={"row"} alignItems={"center"} gap={4}>
+            <StaticImage
+              alt=""
+              src="../../images/product/get.png"
+              style={{ width: 300, borderRadius: 15 }}
+            />
+
+            <Text color="white" fontSize={"xl"} fontWeight={"bold"} maxWidth={"40%"} width={"100%"}>
+              Receive <br /> Daily
+              <br /> Guidance
+            </Text>
+          </Flex>
+
+          <Flex flexDirection={"row"} alignItems={"center"} gap={4}>
+            <Text
+              color="white"
+              fontSize={"xl"}
+              fontWeight={"bold"}
+              maxWidth={"40%"}
+              width={"100%"}
+              textAlign={"right"}
+            >
+              Read It <br /> Listen to It
+              <br /> Use It
+            </Text>
+
+            <StaticImage
+              alt=""
+              src="../../images/product/read.png"
+              style={{ width: 300, borderRadius: 15 }}
             />
           </Flex>
 
-          <Grid
-            mx="auto"
-            my={3}
-            alignItems={"center"}
-            gap={2}
-            gridTemplateColumns={"auto 1fr auto"}
-            maxWidth={300}
-            width={"100%"}
-          >
-            <Text fontWeight={"bold"} color="whiteAlpha.700">
-              Low
-            </Text>
-            <Box
-              height={"10px"}
-              width={"full"}
-              borderRadius={6}
-              bgGradient={`linear(to-r, ${COLORS[0]}, ${COLORS[COLORS.length - 1]})`}
+          <Flex flexDirection={"row"} alignItems={"center"} gap={4}>
+            <StaticImage
+              alt=""
+              src="../../images/product/ask.png"
+              style={{ width: 300, borderRadius: 15 }}
             />
-            <Text fontWeight={"bold"} color="whiteAlpha.700">
-              High
+
+            <Text color="white" fontSize={"xl"} fontWeight={"bold"} maxWidth={"40%"} width={"100%"}>
+              Ask <br /> and Get <br /> Insights <br /> Instantly
             </Text>
-          </Grid>
-
-          <AstrologicalProfile quizState={quizState} />
-        </Flex>
-
-        <Flex flexDirection={"row"} justifyContent={"center"}>
-          <CTALinkToPricing />
-        </Flex>
+          </Flex>
+        </Stack>
       </Container>
     </Box>
   );

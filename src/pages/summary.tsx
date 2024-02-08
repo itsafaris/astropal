@@ -12,7 +12,8 @@ import { ExampleQuestionsSection } from "@components/summary/ExampleQuestionsSec
 import { MediaCoverageSection } from "@components/summary/MediaCoverageSection";
 import { SimilarUsersLikeYouSection } from "@components/summary/SimilarUsersLikeYouSection";
 import { TestimonialsSection } from "@components/summary/TestimonialsSection";
-import { HeroSection } from "@components/summary/HeroSection";
+// import { HeroSection } from "@components/summary/HeroSection";
+import { HeroSection } from "@components/summary/HeroSection2";
 import { PricingSection } from "@components/summary/PricingSection";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 
