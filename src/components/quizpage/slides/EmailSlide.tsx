@@ -54,7 +54,7 @@ function Content() {
           navigate("/summary");
         }}
       >
-        Get my insights
+        Get my insight
       </NextButton>
     </>
   );
