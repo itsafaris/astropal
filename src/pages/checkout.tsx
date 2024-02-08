@@ -9,6 +9,7 @@ import {
   Heading,
   Divider,
   AbsoluteCenter,
+  Progress,
 } from "@chakra-ui/react";
 import {
   Elements,
@@ -147,7 +148,12 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
       onSubmit={(e) => handleCardPaymentSubmit(e)}
     >
       <PlanPreview pricingPlan={pricingPlan} />
-
+      {(!cardCheckoutReady || !expressCheckoutReady) && (
+        <Box>
+          <Text>Loading Secure Payment</Text>
+          <Progress isIndeterminate />
+        </Box>
+      )}
       <Box width={"full"} display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
         <Text textAlign={"center"} my={4} fontWeight={"semibold"} color="bg.300">
           Select a secure payment
