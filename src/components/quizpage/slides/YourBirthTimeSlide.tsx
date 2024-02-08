@@ -4,7 +4,7 @@ import { SlideHeading, Span } from "../components";
 
 export function YourBirthTimeSlide() {
   return (
-    <Slide id="your-birth-time" type="time" optional>
+    <Slide id="your-birth-time" type="time">
       <SlideHeading>
         🕰️ What is the <Span>time</Span> you were born?
       </SlideHeading>

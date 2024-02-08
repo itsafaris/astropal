@@ -187,7 +187,10 @@ export function Filler_IntroToPersonality() {
   return (
     <Slide id="filler-personality" type="filler">
       <SlideHeading>
-        Did you know: more than 90% of your current personality can be decoded from your Birth Chart
+        Believe it or not, your Birth Chart contains the <Span color="purple.600">reasons</Span>{" "}
+        behind most of <Span color="purple.600">your actions</Span> and{" "}
+        <Span color="purple.600">choices</Span>.{" "}
+        <Span>It can be decoded to reveal the most significant insights</Span>
       </SlideHeading>
 
       <Box width={"70%"} mx="auto" mt={4} borderRadius={"xl"} bottom="0" overflow={"hidden"}>
@@ -200,6 +203,24 @@ export function Filler_IntroToPersonality() {
       <NextButton mt={8} onClick={() => submitQuestion()}>
         Continue
       </NextButton>
+    </Slide>
+  );
+}
+
+export function PersonalizedBirthChartReading() {
+  return (
+    <Slide
+      id="personalized-birth-chart-reading"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Yes", icon: "✅" },
+        { text: "No", icon: "❌" },
+        { text: "Not sure", icon: "😕" },
+      ]}
+    >
+      <SlideHeading text={"Have you ever received a personalised reading of your birth chart?"} />
+      <Selector />
     </Slide>
   );
 }

@@ -101,7 +101,7 @@ export function Location({ placeholder }: LocationProps) {
 
   return (
     <FormControl>
-      <MyFormLabel>City</MyFormLabel>
+      <MyFormLabel>Start typing to find your town</MyFormLabel>
       <AsyncSelect
         size={"lg"}
         chakraStyles={{
