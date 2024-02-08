@@ -42,7 +42,7 @@ export default function SummaryPage({}: PageProps) {
     <Box pb={24} bgGradient="linear(to-b, bg.50, bg.100)" color="bg.900" scrollBehavior={"smooth"}>
       <SpecialOfferBanner />
       <Container py={4}>
-        <Heading textAlign={"center"} mb={4} fontSize={"2xl"}>
+        <Heading textAlign={"center"} mb={8} mt={2} fontSize={"2xl"}>
           Your Guide is Ready!
         </Heading>
         <Card p={4}>
@@ -67,6 +67,10 @@ export default function SummaryPage({}: PageProps) {
             </Text>
           </Box>
 
+          <Text textAlign={"center"} mb={4} fontSize={"xl"} fontWeight={"bold"}>
+            Become who you are <br></br> meant to be.
+          </Text>
+
           <Flex flexDirection={"row"} gap={"1px"} bg="gray.200">
             {/* left */}
             <Stack flex={1} bg="white" pr={4}>
@@ -78,6 +82,7 @@ export default function SummaryPage({}: PageProps) {
                 borderRadius={"lg"}
                 mx="auto"
                 fontWeight={"bold"}
+                fontSize={"lg"}
               >
                 Now
               </Box>
@@ -122,11 +127,12 @@ export default function SummaryPage({}: PageProps) {
               <Box
                 px={3}
                 py={2}
-                color="white"
-                bg="green.500"
+                background={"white"}
+                color="green.600"
                 borderRadius={"lg"}
                 mx="auto"
                 fontWeight={"bold"}
+                fontSize={"lg"}
               >
                 With Guide
               </Box>
