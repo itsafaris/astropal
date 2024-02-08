@@ -253,11 +253,6 @@ function PlanPreview({ pricingPlan, ...rest }: { pricingPlan: PricingPlanType } 
           <Text fontWeight={"bold"} fontSize={"2xl"} textAlign={"right"}>
             ${pricingPlan.price}
           </Text>
-          <Text fontSize={"xs"}>
-            {pricingPlan.durationInMonths === 1
-              ? "Billed every month"
-              : `Billed every ${pricingPlan.durationInMonths} months`}
-          </Text>
         </Stack>
       </Stack>
     </Stack>
