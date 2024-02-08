@@ -106,7 +106,7 @@ function ResultsSlide({
       <SlideHeading>
         Your{" "}
         <Text as="span" color="brand.600">
-          Natal Chart - the unique cosmic identify that stores your entire life's story.{" "}
+          Natal Chart is unique cosmic identify that stores your life's story.{" "}
         </Text>{" "}
         Before we go, scroll down to see it all
       </SlideHeading>

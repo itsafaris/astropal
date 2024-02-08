@@ -97,7 +97,6 @@ export default function OnboardingQuiz() {
             <AstrologerThemePreferences />
             <DailyHoroscope />
             <AsnwerLongevity />
-            {/* <AskingQuestionsDirectly /> */}
             <FinalizingProfileSlide />
 
             <EmailSlide />

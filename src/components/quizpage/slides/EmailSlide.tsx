@@ -13,12 +13,12 @@ export function EmailSlide() {
         <Text as="span" color={"brand.600"}>
           Personalized Astrology Insights
         </Text>{" "}
-        are ready! Let us know where we should be sending them ✉️
+        are ready! Let us know where to send them
       </SlideHeading>
 
       <Selector />
 
-      <Caption mb={5}>
+      <Caption mb={7}>
         We'll only use your email to send you the insights. It's all about keeping it simple and
         friendly ❣️
       </Caption>

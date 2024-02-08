@@ -16,14 +16,15 @@ export function DecisionMakingStruggles() {
       options={[
         { text: "Relationships and Love", icon: "❤️" },
         { text: "Career and Work", icon: "🏢" },
-        { text: "Financial Management", icon: "💰" },
         { text: "Personal Growth", icon: "🌱" },
         { text: "Health and Well-being", icon: "🍏" },
         { text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
       <SlideHeading
-        text={"To assist you better, mark the areas in which you currently struggle the most"}
+        text={
+          "Now, let's determine how we can assist you. Please mark the areas in which you currently struggle the most"
+        }
       />
       <Selector />
       <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
@@ -58,9 +59,9 @@ export function WrongDecisionSlide() {
       type="single"
       variant="list"
       options={[
-        { text: "Unfortunatelly yes", icon: "😩" },
-        { text: "Not yet", icon: "😟" },
-        { text: "I'm not sure", icon: "🤔" },
+        { text: "Unfortunatelly yes", icon: "🤦" },
+        { text: "Not yet", icon: "🙆" },
+        { text: "I'm not sure", icon: "🤷" },
       ]}
     >
       <SlideHeading text={"Have you ever made a decision that negatively affected your life?"} />
@@ -102,11 +103,11 @@ export function InsightSourcesSlide() {
       type="single"
       variant="list"
       options={[
-        { text: "Not useful at all", icon: "👎" },
-        { text: "It usually lacks personalization", icon: "👎" },
-        { text: "Sometimes it seems correct", icon: "😐" },
+        { text: "Not useful at all", icon: "❌" },
+        { text: "It usually lacks personalization", icon: "👤" },
+        { text: "Sometimes it seems correct", icon: "🤏" },
         { text: "I find it useful", icon: "👍" },
-        { text: "It reflects me perfectly", icon: "👍" },
+        { text: "It reflects me perfectly", icon: "💯" },
       ]}
     >
       <SlideHeading>
@@ -125,13 +126,16 @@ export function NatalChartReading() {
       type="single"
       variant="list"
       options={[
-        { text: "Yes", icon: "🙋" },
-        { text: "No", icon: "🙅" },
         { text: "I don't know", icon: "🤷" },
+        { text: "No", icon: "😟" },
+        { text: "Yes", icon: "🌟" },
       ]}
     >
       <SlideHeading>
-        Have you ever received insight based on your true identity - personal Natal Chart?
+        Have you ever received insight based on your{" "}
+        <Text as="span" color="brand.600">
+          true identity - personal Natal Chart?
+        </Text>
       </SlideHeading>
 
       <Selector />
@@ -218,28 +222,13 @@ export function HyperPersonalisedInsights() {
   return (
     <Slide id="personalised-insights-intro" type="filler">
       {({ quizState }) => {
-        const info = getPersonalInfoFromState(quizState);
-
-        function roundAgeUp(age: number): number {
-          return Math.ceil(age / 10) * 10;
-        }
-
         return (
           <>
-            {/* <SlideHeading>
-              9 out of 10 {toTitleCase(info.yourZodiac.pluralName)} under {roundAgeUp(info.yourAge)}{" "}
-              say{" "}
-              <Text as="span" fontStyle={"italic"} color="#63dc94">
-                "knowing when and what decisions to make"
-              </Text>{" "}
-              became easier with personalized Astropal insights
-            </SlideHeading> */}
-
             <SlideHeading>
               9 out of 10 users claim
               <Text as="span" color="#63dc94">
                 {" "}
-                personalized insights bring significant clarity in decision making
+                personalized insights bring much more clarity in decision making
               </Text>{" "}
               compared to generic zodiac insights
             </SlideHeading>
