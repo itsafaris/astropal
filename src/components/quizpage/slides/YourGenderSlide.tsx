@@ -55,8 +55,8 @@ export function YourGenderSlide() {
 
       <Box textAlign={"center"}>
         <Text
-          mt={8}
-          mb={2}
+          mt={4}
+          mb={4}
           fontSize={"xl"}
           textAlign={"center"}
           fontWeight={"bold"}
@@ -69,7 +69,7 @@ export function YourGenderSlide() {
           With Astrology
         </Text>
 
-        <Text textAlign={"center"} mb={4} color="red.600" fontWeight={"semibold"}></Text>
+        <Text textAlign={"center"} my={8} color="red.600" fontWeight={"semibold"}></Text>
       </Box>
 
       <Box mx="auto" mb={8}>
@@ -80,7 +80,7 @@ export function YourGenderSlide() {
         <Text>✅ Future Decisions</Text>
       </Box>
 
-      <Flex flexDirection={"column"} alignItems={"center"} gap={2}>
+      <Flex flexDirection={"column"} alignItems={"center"} gap={2} mb={4}>
         <Text textAlign={"center"} fontWeight={"bold"} fontSize={"lg"}>
           Choose your gender to get started
         </Text>
