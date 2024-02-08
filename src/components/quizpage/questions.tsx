@@ -205,7 +205,7 @@ export function NameOnTheBook() {
                 gender={p.yourGender}
               />
             </Flex>
-            <NextButton mt={4}>Create My Guide</NextButton>
+            <NextButton mt={4}>Continue</NextButton>
           </>
         );
       }}

@@ -15,8 +15,8 @@ export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
     <Box id="pricing-section" as="section" py={8}>
       <Stack spacing={4}>
-        <Text textAlign={"center"} fontSize={"2xl"} fontWeight={"bold"}>
-          Your Self-Discovery Guide is Ready!
+        <Text textAlign={"center"} fontSize={"xl"} fontWeight={"bold"} maxWidth={"80%"} mx="auto">
+          Explore 92 Pages of Tailored Guidance, Complete with Illustrations and Clarifications
         </Text>
 
         <Flex justifyContent={"center"}>
@@ -28,9 +28,9 @@ export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
         </Flex>
 
         <Stack fontWeight={"semibold"} pl={4} fontSize={"sm"}>
-          <Text>✅ 92 pages of in-depth birth chart analysis</Text>
-          <Text>✅ Step by step guide to realise your full potential</Text>
-          <Text>✅ Ideal partner selection</Text>
+          <Text>✅ 92 Pages of In-Depth Birth Chart Analysis</Text>
+          <Text>✅ Step-by-Step Guide to Realizing Your Full Potential</Text>
+          <Text>✅ Ideal Partner Selection</Text>
           <Text>✅ Guide to a Perfect Relationship</Text>
           <Text>✅ Career Guidance</Text>
           <Text>✅ Self-Growth Discipline</Text>

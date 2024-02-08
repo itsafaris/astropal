@@ -26,9 +26,10 @@ import {
   Filler_BookStructure,
   Filler_IntroToPersonality,
   Loading_CreatingBlueprint,
-  Filler_BookBlueprintSummary,
   Filler_FactOnMissedOpportunities,
   PersonalizedBirthChartReading,
+  Filler_OptimalPath,
+  Filler_SummaryOfAnswers,
 } from "@components/quizpage/slides/otherSlides";
 import {
   AstrologyExperienceLevel,
@@ -101,9 +102,10 @@ export default function OnboardingQuiz() {
             {/* <TopPersonalGoal /> */}
             <Loading_CreatingBlueprint />
             <Filler_BookStructure />
-            <Filler_BookBlueprintSummary />
             <NameOnTheBook />
+            <Filler_SummaryOfAnswers />
             <Loading_CreatingBook />
+            <Filler_OptimalPath />
             <EmailSlide />
           </Segment>
         </QuizUI>

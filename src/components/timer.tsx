@@ -46,10 +46,7 @@ export function Timer() {
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
-      width={{
-        base: "85px",
-        lg: "105px",
-      }}
+      width={"64px"}
       color="black"
     >
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
@@ -63,18 +60,6 @@ export function Timer() {
           textAlign={"center"}
         >
           {readableTime.minutes}
-        </Text>
-
-        <Text
-          fontSize={{
-            base: "7px",
-            lg: "9px",
-          }}
-          lineHeight={1}
-          textAlign={"center"}
-          fontWeight={"bold"}
-        >
-          MINUTES
         </Text>
       </Flex>
 
@@ -100,18 +85,6 @@ export function Timer() {
           textAlign={"center"}
         >
           {readableTime.seconds}
-        </Text>
-
-        <Text
-          fontSize={{
-            base: "7px",
-            lg: "9px",
-          }}
-          fontWeight={"bold"}
-          lineHeight={1}
-          textAlign={"center"}
-        >
-          SECONDS
         </Text>
       </Flex>
     </Flex>

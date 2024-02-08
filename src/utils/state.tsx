@@ -29,7 +29,7 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourGender = ((state["your-gender"] as SingleState)?.value?.value?.toLowerCase() ??
     "male") as "male" | "female";
 
-  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
+  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "[your name]");
   const { firstName, lastName } = splitFullName(fullname);
 
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
@@ -44,7 +44,8 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
 
   const yourZodiac = getZodiacSign(dateValue.toISOString());
 
-  const struggleArea = (state["decision-making-struggles"] as SingleState)?.value?.value;
+  const struggleArea =
+    (state["decision-making-struggles"] as SingleState)?.value?.value ?? "Self-Growth";
 
   const yourBirthTime = createTime(
     (state["your-birth-time"] as TimeState)?.value ?? {

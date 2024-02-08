@@ -20,7 +20,7 @@ export function Loading_CreatingBook() {
           310,000+ people
         </Text>
         <Text textAlign={"center"} fontWeight={"bold"} fontSize={"lg"} mb={5}>
-          have read their personal book
+          follow their Self-Discovery Guides
         </Text>
 
         <TestimonialCard

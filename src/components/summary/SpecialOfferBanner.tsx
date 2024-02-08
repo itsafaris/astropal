@@ -14,39 +14,17 @@ export function SpecialOfferBanner() {
       justifyContent={"center"}
       shadow="lg"
     >
-      <Stack
-        direction={{ base: "row", md: "row" }}
-        alignItems={"center"}
-        spacing={{ base: 1, md: 5, lg: 8 }}
-      >
+      <Stack direction="row" alignItems={"center"} spacing={4}>
         <Flex
           direction={"column"}
           alignItems={"center"}
-          fontSize={{
-            base: "sm",
-            md: "md",
-            lg: "lg",
-          }}
+          fontSize={"lg"}
           as="span"
           textAlign={"center"}
           color="black"
           fontWeight={"semibold"}
         >
-          <Text>
-            🔥{" "}
-            <Text
-              as="span"
-              color="white"
-              backgroundColor={"#fd5555"}
-              borderRadius={"4px"}
-              px={2}
-              py={"2px"}
-            >
-              Get up to 75% discount
-            </Text>{" "}
-            🔥
-          </Text>
-          <Text>for your first-time purchase</Text>
+          <Text>The offer is valid for:</Text>
         </Flex>
 
         <Timer />
