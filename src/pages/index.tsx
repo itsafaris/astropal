@@ -2,10 +2,11 @@ import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 
 import { TopNavigation } from "@components/topnavigation";
 import { BookCover } from "@components/book/bookCover";
+import { useEffect } from "react";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -18,6 +19,12 @@ export function Head() {
 }
 
 export default function IndexPage() {
+  useEffect(() => {
+    navigate("/onboarding", { replace: true });
+  }, []);
+
+  return null;
+
   return (
     <Box minHeight={"100vh"} color="bg.900" bgGradient={"linear(to-b, bg.50, bg.100)"}>
       <Container>

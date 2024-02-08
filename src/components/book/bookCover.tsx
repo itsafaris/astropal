@@ -1,16 +1,18 @@
 import { Box, Text, VStack, Flex } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
+import { ComponentProps } from "react";
 
 export const BookCover = ({
   height = 400,
   author,
   gender = "male",
+  ...rest
 }: {
   height?: number;
   author: string;
   gender?: "male" | "female";
-}) => {
+} & ComponentProps<typeof Flex>) => {
   const width = height * 0.75;
 
   return (
@@ -25,6 +27,7 @@ export const BookCover = ({
       width={width}
       fontSize={`${height * 0.05}px`}
       color="whiteAlpha.800"
+      {...rest}
     >
       {gender === "male" ? (
         <StaticImage
