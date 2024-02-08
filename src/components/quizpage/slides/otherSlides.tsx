@@ -257,6 +257,7 @@ export function Filler_FactOnMissedOpportunities() {
         <Span>lack of self understanding</Span>
       </SlideHeading>
       <StaticImage
+        placeholder="none"
         alt="unused opportunities by people"
         src="../../../images/confidence_chart.png"
       />
@@ -312,7 +313,7 @@ export function Filler_SummaryOfAnswers() {
         <FaRegClock />
         <Text fontWeight={"regular"}>Time of birth:</Text>
         <Text color="black" textTransform={"capitalize"} fontWeight={"bold"}>
-          {p.yourBirthTime.hour}:{p.yourBirthTime.minute}
+          {p.yourBirthTime.hour}:{p.yourBirthTime.minute.toString().padStart(2, "0")}
           {p.yourBirthTime.meridiem}
         </Text>
       </Flex>

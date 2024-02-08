@@ -5,6 +5,7 @@ import {
   SingleState,
   LocationState,
   TimeState,
+  EmailState,
 } from "@martynasj/quiz-lib";
 
 import { getZodiacSign } from "@services/zodiacService";
@@ -29,7 +30,9 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourGender = ((state["your-gender"] as SingleState)?.value?.value?.toLowerCase() ??
     "male") as "male" | "female";
 
-  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "[your name]");
+  const yourEmail = (state["your-email"] as EmailState)?.value?.toLowerCase() ?? "";
+
+  const fullname = toTitleCase((state["name-on-book"] as ShortTextState)?.value ?? "[your name]");
   const { firstName, lastName } = splitFullName(fullname);
 
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
@@ -77,5 +80,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourZodiac,
     goal,
     struggleArea,
+    yourEmail,
   };
 }

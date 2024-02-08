@@ -309,6 +309,7 @@ function Rating({
         .map((_, idx) => {
           return (
             <Box
+              key={idx}
               height={"8px"}
               borderRadius={"sm"}
               flex={1}

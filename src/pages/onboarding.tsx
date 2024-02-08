@@ -48,6 +48,7 @@ import {
   TopPersonalGoal,
 } from "@components/quizpage/questions";
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
+import { navigate } from "gatsby";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -75,6 +76,11 @@ export default function OnboardingQuiz() {
       locationApiKey={locationApiKey}
       onTrackingEvent={(event) => {
         trackEvent(event);
+      }}
+      onSlideSubmitted={({ id, state }) => {
+        if (id === "your-email") {
+          navigate("/summary");
+        }
       }}
     >
       <QuizStateSaver />

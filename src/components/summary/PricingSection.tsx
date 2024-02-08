@@ -60,7 +60,7 @@ export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
           <BookCover
             height={300}
             author={quizState?.fullname ?? "John Doe"}
-            birthDate={quizState?.localeDate ?? ""}
+            gender={quizState?.yourGender}
           />
         </Flex>
 

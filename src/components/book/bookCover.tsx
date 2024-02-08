@@ -67,7 +67,13 @@ export const BookCover = ({
             >
               Of
             </Text>
-            <Text fontSize="0.8em" noOfLines={5} lineHeight={"1.2"} fontWeight={"bold"}>
+            <Text
+              fontSize="0.8em"
+              noOfLines={5}
+              lineHeight={"1.2"}
+              fontWeight={"bold"}
+              textTransform={"uppercase"}
+            >
               {author}
             </Text>
           </Box>
