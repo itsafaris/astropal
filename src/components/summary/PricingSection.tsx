@@ -1,17 +1,54 @@
-import { Box, Flex, Heading, Stack, Text, Button, TextProps, Card } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+  Button,
+  TextProps,
+  Card,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
+import { getPlanByID, pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 import { Span } from "@components/quizpage/components";
 import { BookCover } from "@components/book/bookCover";
 import { QuizStateParsed } from "@utils/state";
+import { CheckoutWidget } from "src/pages/checkout";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
 
 export interface IPricingPageProps {}
 
 export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
+  const [stripe, setStripe] = useState<Stripe>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedPlanID, setSelectedPlanID] = useState<string>("digital");
+
+  const selectedPlan = getPlanByID(selectedPlanID)!;
+
+  useEffect(() => {
+    loadStripe(
+      "pk_test_51OXhWrBgg62DxbyKMo0dMQmSM2j83tzEiGp9yZuWFIBIATRdsaA3XtPz4mQ9gHbrZXBAbSJtChMQirdp8TQh8OQR00hDaUAppF"
+    ).then((s) => {
+      if (s) {
+        setStripe(s);
+      }
+    });
+  }, []);
+
   return (
     <Box id="pricing-section" as="section" py={8}>
       <Stack spacing={4}>
@@ -52,14 +89,55 @@ export function PricingSection({ quizState }: { quizState?: QuizStateParsed }) {
           </Card>
         </Flex> */}
 
-        <PricingPlans />
-        <Button colorScheme="orange" width={"full"}>
+        <Flex flexDirection={"column"} alignItems={"center"}>
+          {Object.values(pricingPlans).map((plan) => {
+            return (
+              <PricingPlanItem
+                key={plan.id}
+                billingText={plan.subtitle}
+                pricingPlan={plan}
+                borderColor={selectedPlanID === plan.id ? "orange.600" : undefined}
+                onClick={() => {
+                  setSelectedPlanID(plan.id);
+                }}
+              />
+            );
+          })}
+        </Flex>
+
+        <Button colorScheme="orange" width={"full"} onClick={onOpen}>
           Get My Guide
         </Button>
         <TermsAgreement />
         {/* <RiskFreeGuaranteed /> */}
         {/* <SafeCheckout /> */}
       </Stack>
+
+      {stripe && (
+        <Elements
+          stripe={stripe}
+          options={{
+            appearance: {
+              theme: "stripe",
+              variables: {
+                tabLogoColor: "green",
+                tabLogoSelectedColor: "red",
+              },
+            },
+            mode: "payment",
+            amount: selectedPlan.price * 100,
+            currency: "usd",
+          }}
+        >
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent mx="2vw">
+              <ModalCloseButton />
+              <CheckoutWidget pricingPlan={selectedPlan} />
+            </ModalContent>
+          </Modal>
+        </Elements>
+      )}
     </Box>
   );
 }
@@ -131,26 +209,7 @@ function SafeCheckout() {
   );
 }
 
-export function PricingPlans() {
-  const [selectedPlan, setSelectedPlan] = useState<string>(pricingPlans.digital.id);
-  return (
-    <Flex flexDirection={"column"} alignItems={"center"}>
-      {Object.values(pricingPlans).map((plan) => {
-        return (
-          <PricingPlanItem
-            key={plan.id}
-            billingText={plan.subtitle}
-            pricingPlan={plan}
-            borderColor={selectedPlan === plan.id ? "orange.600" : undefined}
-            onClick={() => {
-              setSelectedPlan(plan.id);
-            }}
-          />
-        );
-      })}
-    </Flex>
-  );
-}
+export function PricingPlans() {}
 
 function PricingPlanItem({
   billingText,

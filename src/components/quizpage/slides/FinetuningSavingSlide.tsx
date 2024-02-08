@@ -23,7 +23,7 @@ export function Loading_CreatingBook() {
           follow their Self-Discovery Guides
         </Text>
 
-        <TestimonialCard
+        {/* <TestimonialCard
           testimonial={{
             name: "Michelle Richards",
             quote:
@@ -32,7 +32,7 @@ export function Loading_CreatingBook() {
             avatar: <StaticImage alt="Astropal user image" src="../../../images/user2.png" />,
             commentAge: "4d",
           }}
-        />
+        /> */}
       </Flex>
     </Slide>
   );

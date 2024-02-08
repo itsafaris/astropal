@@ -31,18 +31,8 @@ export interface ICheckoutPageProps {}
 
 export default function CheckoutPage(props: PageProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const [stripe, setStripe] = useState<Stripe>();
-  const [pricingPlan, setPricingPlan] = useState<PricingPlanType>();
 
-  useEffect(() => {
-    loadStripe(
-      "pk_test_51OXhWrBgg62DxbyKMo0dMQmSM2j83tzEiGp9yZuWFIBIATRdsaA3XtPz4mQ9gHbrZXBAbSJtChMQirdp8TQh8OQR00hDaUAppF"
-    ).then((s) => {
-      if (s) {
-        setStripe(s);
-      }
-    });
-  }, []);
+  const [pricingPlan, setPricingPlan] = useState<PricingPlanType>();
 
   useEffect(() => {
     setIsMounted(true);
@@ -53,40 +43,25 @@ export default function CheckoutPage(props: PageProps) {
     setPricingPlan(pricingPlan);
   }, []);
 
+  if (!pricingPlan || !isMounted) {
+    return "no pricing plan";
+  }
+
+  return <CheckoutWidget pricingPlan={pricingPlan} />;
+}
+
+export function CheckoutWidget({ pricingPlan }: { pricingPlan: PricingPlanType }) {
+  useEffect(() => {
+    trackEvent({ name: "checkout_started", properties: { pricingPlan } });
+  }, []);
+
   return (
-    <Box py={4} bg="bg.100" color="bg.900" minHeight={"100vh"}>
+    <Box py={4}>
       <Container flexDirection={"column"} display={"flex"} gap={5}>
-        <TopNavigation />
-
-        {isMounted && !pricingPlan ? (
-          <>No pricing plan found</>
-        ) : (
-          <>
-            <Heading textAlign={"center"} fontSize={"2xl"}>
-              Order Summary
-            </Heading>
-
-            {stripe && (
-              <Elements
-                stripe={stripe}
-                options={{
-                  appearance: {
-                    theme: "stripe",
-                    variables: {
-                      tabLogoColor: "green",
-                      tabLogoSelectedColor: "red",
-                    },
-                  },
-                  mode: "payment",
-                  amount: 2999,
-                  currency: "usd",
-                }}
-              >
-                <CheckoutForm pricingPlan={pricingPlan!} />
-              </Elements>
-            )}
-          </>
-        )}
+        <Heading textAlign={"center"} fontSize={"2xl"}>
+          Order Summary
+        </Heading>
+        <CheckoutForm pricingPlan={pricingPlan} />
       </Container>
     </Box>
   );
@@ -166,7 +141,6 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
   return (
     <Flex
       direction={"column"}
-      bg="bg.900"
       p={4}
       borderRadius={"xl"}
       opacity={isLoading ? 0.6 : undefined}
@@ -201,7 +175,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
 
         <Box width={"full"} my={8} position={"relative"} opacity={0.5}>
           <Divider borderColor={"black"} width={"full"} />
-          <AbsoluteCenter bg="bg.900" px="4" color="black" fontSize={"sm"}>
+          <AbsoluteCenter bg="white" px="4" color="black" fontSize={"sm"}>
             Or pay using card
           </AbsoluteCenter>
         </Box>

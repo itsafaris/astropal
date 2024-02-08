@@ -9,8 +9,8 @@ export type PricingPlanType = {
   durationInMonths: number;
 };
 
-export const pricingPlans = {
-  digital: {
+export const pricingPlans = [
+  {
     id: "digital",
     title: "Digital Edition (PDF)",
     subtitle: "Instant delivered to your email",
@@ -20,8 +20,8 @@ export const pricingPlans = {
     dailyBefore: 1.11,
     durationInMonths: 6,
   },
-  hardcover: {
-    id: "printed",
+  {
+    id: "hardcover",
     title: "Hardcover Book (+ PDF)",
     subtitle: "Delivered to your address",
     price: 69,
@@ -30,9 +30,8 @@ export const pricingPlans = {
     dailyBefore: 1.25,
     durationInMonths: 3,
   },
-} satisfies Record<string, PricingPlanType>;
+] satisfies PricingPlanType[];
 
 export function getPlanByID(id: string): PricingPlanType | undefined {
-  // @ts-ignore
-  return pricingPlans[id];
+  return pricingPlans.find((p) => p.id === id);
 }

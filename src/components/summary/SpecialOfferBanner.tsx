@@ -24,9 +24,8 @@ export function SpecialOfferBanner() {
           color="black"
           fontWeight={"semibold"}
         >
-          <Text>The offer is valid for:</Text>
+          <Text>Offer expires in:</Text>
         </Flex>
-
         <Timer />
       </Stack>
     </Flex>

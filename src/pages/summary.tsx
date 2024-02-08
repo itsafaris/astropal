@@ -209,8 +209,8 @@ export default function SummaryPage({}: PageProps) {
               <SquaredStar />
             </Flex>
             <Text mb={2}>
-              The ultimate gift of self-discovery: Perfect for anyone seeking deeper self-awareness
-              or a meaningful, personalized gift that speaks to the soul.
+              The ultimate gift of self-discovery. A must-have for anyone seeking deeper
+              self-awareness.
             </Text>
             <svg
               height={"16px"}
