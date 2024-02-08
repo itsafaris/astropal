@@ -80,25 +80,20 @@ export default function OnboardingQuiz() {
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
             <PersonalityDescriptionSlide />
-
             <DecisionMakingStruggles />
             <AdviceSeekingFrequency />
             <WrongDecisionSlide />
             <FillerPeopleInControl />
-
             <YourAstrologicalInvolvementSlide />
             <QuoteSlide />
             <InsightSourcesSlide />
             <NatalChartReading />
-
             <HyperPersonalisedInsights />
             <SavingProfileSlide />
-
             <AstrologerThemePreferences />
             <DailyHoroscope />
             <AsnwerLongevity />
             <FinalizingProfileSlide />
-
             <EmailSlide />
           </Segment>
         </QuizUI>

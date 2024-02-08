@@ -1,4 +1,4 @@
-import { useQuizActions, useQuizSnapshot } from "../internal/state";
+import { SelectorState, useQuizActions, useQuizSnapshot } from "../internal/state";
 
 export function useQuiz() {
   const actions = useQuizActions();
@@ -14,4 +14,10 @@ export function useQuizState() {
   return {
     quizState: snap.slideStateByID,
   };
+}
+
+export function useSlideState<T extends SelectorState>() {
+  const s = useQuizSnapshot();
+  const slideState = s.currentSlideID ? s.slideStateByID[s.currentSlideID] : undefined;
+  return slideState as T;
 }

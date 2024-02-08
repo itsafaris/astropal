@@ -17,6 +17,7 @@ export function Email({ placeholder, label }: Email) {
   return (
     <FormControl>
       {label && <MyFormLabel>{label}</MyFormLabel>}
+
       <Input
         {...commonInputStyles()}
         size={"lg"}

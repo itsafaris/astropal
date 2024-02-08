@@ -50,10 +50,7 @@ export function SavingProfileSlide() {
       duration={4}
       onLoadingCompleted={() => setShowInput(true)}
     >
-      <SlideHeading
-        textAlign={"center"}
-        text="Updating your Natal Chart to offer the best insights"
-      />
+      <SlideHeading textAlign={"center"} text="Updating your Natal Chart for enhanced insight" />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>

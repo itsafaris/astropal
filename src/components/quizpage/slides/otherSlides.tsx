@@ -20,11 +20,11 @@ export function AstrologerThemePreferences() {
       ]}
     >
       <SlideHeading>
-        Which topic do you want your{" "}
+        Which topic do you want your first{" "}
         <Text as="span" color="brand.600">
-          Personalized Insights
+          Personalized Insight
         </Text>{" "}
-        to focus on first?
+        to be focused on?
       </SlideHeading>
       <Selector />
     </Slide>
@@ -62,17 +62,16 @@ export function DailyHoroscope() {
       type="single"
       variant="list"
       options={[
-        { text: "Morning", icon: "🌅" },
-        { text: "Afternoon", icon: "☀️" },
-        { text: "Evening", icon: "🌃" },
+        { text: "In the mornings", icon: "🌅" },
+        { text: "In the afternoons", icon: "☀️" },
+        { text: "In the evenings", icon: "🌃" },
       ]}
     >
       <SlideHeading>
-        What time would you like to receive your daily{" "}
+        What time would you like to receive your following{" "}
         <Text as="span" color="brand.600">
-          Personalized Insights
+          Personalized Insights?
         </Text>
-        ?
       </SlideHeading>
       <Selector />
     </Slide>

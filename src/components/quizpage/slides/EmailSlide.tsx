@@ -1,35 +1,61 @@
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import React from "react";
+import { Selector, Slide, useSlideState, EmailState } from "@martynasj/quiz-lib";
 
 import { Caption, SlideHeading, NextButton } from "../components";
 
 import { Text } from "@chakra-ui/react";
+import { navigate } from "gatsby";
+import { validateEmail } from "@utils/email";
 
 export function EmailSlide() {
-  const { submitQuestion } = useQuiz();
   return (
     <Slide id="your-email" type="email" placeholder="Enter your email">
+      <Content />
+    </Slide>
+  );
+}
+
+function Content() {
+  const { value } = useSlideState<EmailState>();
+  const [isEmailValid, setIsEmailValid] = React.useState<boolean>(true);
+
+  return (
+    <>
       <SlideHeading>
-        Your{" "}
+        Your first{" "}
         <Text as="span" color={"brand.600"}>
-          Personalized Astrology Insights
+          Personalized Insight
         </Text>{" "}
-        are ready! Let us know where to send them
+        is ready! ✨
       </SlideHeading>
 
+      <Text color="white" fontSize={"md"} mt={-3} mb={7}>
+        Before we continue, please tell us where to send the next ones ✉️
+      </Text>
+
       <Selector />
+      {!isEmailValid && (
+        <Text mt={-6} mb={4} color="red.300" fontSize={"md"}>
+          Please enter a valid email address
+        </Text>
+      )}
 
       <Caption mb={7}>
-        We'll only use your email to send you the insights. It's all about keeping it simple and
-        friendly ❣️
+        We'll only use your email to send you insights. Keeping it simple and friendly ❣️
       </Caption>
 
       <NextButton
         onClick={() => {
-          submitQuestion();
+          if (!validateEmail(value ?? "")) {
+            setIsEmailValid(false);
+            return;
+          }
+
+          navigate("/summary");
         }}
       >
-        Continue
+        Get my insights
       </NextButton>
-    </Slide>
+    </>
   );
 }

@@ -16,7 +16,7 @@ export function FinalizingProfileSlide() {
     >
       <SlideHeading
         textAlign={"center"}
-        text="Finalizing your Natal Chart to offer the best insights"
+        text="Finalizing your Natal Chart to provide the most accurate insight"
       />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
