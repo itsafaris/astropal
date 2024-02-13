@@ -1,7 +1,7 @@
 import { Text, Stack, Box, Flex } from "@chakra-ui/react";
 
 import { QuizStateParsed } from "@utils/state";
-import { AstrologicalProfile } from "@components/AstrologicalProfile";
+import { AstrologicalProfile } from "./AstrologicalProfile";
 import { StaticImage } from "gatsby-plugin-image";
 
 export function PersonalizationSection({ state }: { state: QuizStateParsed }) {
@@ -42,7 +42,7 @@ export function PersonalizationSection({ state }: { state: QuizStateParsed }) {
           bottom={0}
           left={0}
           width={"full"}
-          height={100}
+          height={"80px"}
           bgGradient="linear(to-t, bg.50, transparent)"
         />
       </Flex>
