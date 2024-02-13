@@ -83,6 +83,23 @@ export default function IndexPage() {
             maxWidth={400}
             mx="auto"
           >
+            <Text as="span" color="brand.600">
+              Know Everything. <br />
+            </Text>
+            The Most Accurate Personalized Astrology
+          </Heading>
+          {/* <Heading
+            as="h1"
+            fontSize={{
+              base: "32px",
+              md: "32px",
+            }}
+            lineHeight={1.4}
+            textAlign="center"
+            color="white"
+            maxWidth={400}
+            mx="auto"
+          >
             Decide Your Life <br /> With a{" "}
             <Text as="span" color="brand.600">
               Personalized{" "}
@@ -91,7 +108,7 @@ export default function IndexPage() {
             <Text as="span" color="brand.600">
               Insights
             </Text>
-          </Heading>
+          </Heading> */}
 
           <Flex flexDirection={"column"} fontWeight={"thin"} color="brand.800">
             <Text fontSize="lg" textAlign="center">

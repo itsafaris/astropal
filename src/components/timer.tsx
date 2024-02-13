@@ -18,8 +18,6 @@ function formatTimestamp(timestamp: number): {
 }
 
 export function Timer() {
-  // const [timestamp, setTimestamp] = React.useState<number>(899000);
-
   const [timestamp, setTimestamp] = useGlobalState("timer", 899000);
 
   React.useEffect(() => {
@@ -46,71 +44,29 @@ export function Timer() {
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
-      width={{
-        base: "85px",
-        lg: "105px",
-      }}
+      width={"85px"}
       color="black"
     >
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text
-          fontWeight="bold"
-          fontSize={{
-            base: "2xl",
-            lg: "3xl",
-          }}
-          lineHeight={1}
-          textAlign={"center"}
-        >
+        <Text fontWeight="bold" fontSize={"2xl"} lineHeight={1} textAlign={"center"}>
           {readableTime.minutes}
         </Text>
 
-        <Text
-          fontSize={{
-            base: "7px",
-            lg: "9px",
-          }}
-          lineHeight={1}
-          textAlign={"center"}
-          fontWeight={"bold"}
-        >
+        <Text fontSize={"7px"} lineHeight={1} textAlign={"center"} fontWeight={"bold"}>
           MINUTES
         </Text>
       </Flex>
 
-      <Text
-        fontWeight={"bold"}
-        fontSize={{
-          base: "xl",
-          lg: "2xl",
-        }}
-        lineHeight={1}
-      >
+      <Text fontWeight={"bold"} fontSize={"xl"} lineHeight={1}>
         :
       </Text>
 
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text
-          fontWeight="bold"
-          fontSize={{
-            base: "2xl",
-            lg: "3xl",
-          }}
-          lineHeight={1}
-          textAlign={"center"}
-        >
+        <Text fontWeight="bold" fontSize={"2xl"} lineHeight={1} textAlign={"center"}>
           {readableTime.seconds}
         </Text>
 
-        <Text
-          fontSize={{
-            base: "7px",
-            lg: "9px",
-          }}
-          fontWeight={"bold"}
-          lineHeight={1}
-          textAlign={"center"}
-        >
+        <Text fontSize={"7px"} fontWeight={"bold"} lineHeight={1} textAlign={"center"}>
           SECONDS
         </Text>
       </Flex>

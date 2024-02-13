@@ -8,15 +8,19 @@ export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
   return (
     <AnchorLink to="/summary#special-offer" title="Pricing plans" stripHash>
       <Button
-        bg="orange.500"
-        color="white"
-        boxShadow={`0 0 0 6px ${theme.colors.orange["400"]}`}
+        px={8}
+        py={7}
+        variant={"solid"}
+        backgroundColor="brand.600"
         _hover={{
-          backgroundColor: "orange.600",
+          backgroundColor: "brand.500",
         }}
+        width={"full"}
+        boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}, 0px 5px 15px 0px #00000030`}
+        borderRadius={8}
         {...props}
       >
-        Get my astrologer
+        Get My Insights
       </Button>
     </AnchorLink>
   );

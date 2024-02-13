@@ -11,7 +11,7 @@ const testimonials = [
     name: "Sarah",
     quote: `I've always loved astrology, but never had insights made just for me. It's been surprisingly helpful in understanding my partner and dealing with tough times more kindly. Now, we're learning to appreciate our differences`,
     question: "",
-    avatar: <StaticImage alt="Astropal user image" src="../../../images/user3.png" />,
+    avatar: <StaticImage alt="Astropal user image" src="../../../images/user2.png" />,
     commentAge: "7d",
   },
   {
@@ -19,7 +19,7 @@ const testimonials = [
     quote:
       "Our marriage got a major upgrade thanks to the insights – turning challenges into growth moments!",
     question: "",
-    avatar: <StaticImage alt="Astropal user image" src="../../../images/user2.png" />,
+    avatar: <StaticImage alt="Astropal user image" src="../../../images/user4.png" />,
     commentAge: "4d",
   },
   {
@@ -105,14 +105,4 @@ export function SavingProfileSlide() {
       </Flex>
     </Slide>
   );
-}
-
-{
-  /* <Text textAlign={"center"} color="brand.600" fontSize={"3xl"} fontWeight={"black"}>
-31,000+ people
-</Text>
-
-<Text textAlign={"center"} color="white" fontWeight={"bold"} fontSize={"lg"} mb={5}>
-have chosen Astropal
-</Text> */
 }

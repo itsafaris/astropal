@@ -4,66 +4,60 @@ import { StaticImage } from "gatsby-plugin-image";
 
 export function AreasOfGuidanceSection() {
   return (
-    <Box id="guidance-section" my={20}>
+    <Flex flexDirection={"column"} alignItems={"center"} id="guidance-section" gap={8}>
       <Heading
+        fontWeight="semibold"
         textAlign={"center"}
-        fontWeight={"bold"}
-        mb={12}
-        mx={8}
+        width={"full"}
         fontSize={"2xl"}
         color="white"
+        lineHeight={"1.4"}
+        px={5}
       >
-        Life's uncertainties shouldn't overshadow your journey
+        Use Astrology As a Key When The Doors Are Closed
       </Heading>
 
-      <Box borderRadius={"xl"} overflow={"hidden"} backgroundColor={"bg.150"} pt={6} pb={12}>
-        <Box borderRadius={"50%"} height={150} width={150} overflow={"hidden"} mx="auto">
-          <StaticImage
-            alt="A person facing uncertainty in their life"
-            src="../../images/person-in-doubt.png"
-          />
-        </Box>
+      <StaticImage
+        alt=""
+        src="../../images/art-6.png"
+        style={{ width: 110, opacity: 1, marginLeft: "auto", marginRight: "auto" }}
+      />
 
-        <Stack mt={8} spacing={4}>
-          <Feature
-            title="Uncertain Decisions"
-            text="Stop second-guessing your next big life change. Our astrologer offers the assurance you need."
-            emoji="🤔"
-          />
-          <Separator />
-          <Feature
-            title="Identity Quest"
-            text="Feeling lost in the crowd? We will help you pinpoint your unique strengths and path."
-            emoji="🌟"
-          />
-          <Separator />
-          <Feature
-            title="Missed Opportunities"
-            text="Worried you're overlooking life's 'what ifs'? Our insights will help you catch the right waves."
-            emoji="⏳"
-          />
-          <Separator />
-          <Feature
-            title="Relationship Struggles"
-            text="Tired of the guessing game in relationships? Gain understanding to foster deeper connections."
-            emoji="💞"
-          />
-          <Separator />
-          <Feature
-            title="Financial Uncertainty"
-            text="Confused about money matters? Let the stars align your financial decisions toward stability."
-            emoji="💰"
-          />
-        </Stack>
-      </Box>
-    </Box>
+      <Stack spacing={4}>
+        <Feature
+          title="Uncertain Decisions"
+          text="Get insights for confidence in your next big life change"
+          emoji="🤔"
+        />
+        <Separator />
+        <Feature title="Identity Quest" text="Discover your unique strengths and path" emoji="🌟" />
+        <Separator />
+        <Feature
+          title="Missed Opportunities"
+          text="Personalized astrology ensures you seize every opportunity"
+          emoji="⏳"
+        />
+        <Separator />
+        <Feature
+          title="Relationship Struggles"
+          text="Unveil your compatibility, deepen connections with understanding"
+          emoji="💞"
+        />
+        <Separator />
+        <Feature
+          title="Career Uncertainty"
+          text="Let the stars align your career decisions toward stability"
+          emoji="💰"
+        />
+      </Stack>
+    </Flex>
   );
 }
 
 function Separator() {
   return (
     <Flex width={"full"} alignItems={"center"} flexDirection={"column"}>
-      <Box height={"2px"} width="80%" backgroundColor={"bg.200"} borderRadius={"full"} />
+      <Box height={"1px"} width="80%" backgroundColor={"bg.200"} borderRadius={"full"} />
     </Flex>
   );
 }

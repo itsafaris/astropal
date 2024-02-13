@@ -5,8 +5,6 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { orderBy, take } from "lodash";
 
-import { CTALinkToPricing } from "./components";
-
 const exampleQuestions = [
   {
     group: "Career  💼",
@@ -73,10 +71,30 @@ export function ExampleQuestionsSection() {
   );
 
   return (
-    <Box id="example-questions-section" as="section" my={20}>
-      <Heading fontSize={"3xl"} mb={10} mx={4} textAlign={"center"} color="white">
-        Our user's are asking questions every minute
+    <Flex
+      flexDirection={"column"}
+      alignItems={"center"}
+      id="example-questions-section"
+      as="section"
+      px={5}
+    >
+      <StaticImage
+        alt=""
+        src="../../images/art-5.png"
+        style={{ width: 80, opacity: 1, marginLeft: "auto", marginRight: "auto", marginBottom: 20 }}
+      />
+
+      <Heading
+        fontWeight="semibold"
+        textAlign={"center"}
+        width={"full"}
+        fontSize={"2xl"}
+        color="white"
+        lineHeight={"1.4"}
+      >
+        Our User's Are Asking <br /> Questions Every Hour
       </Heading>
+
       <QuestionsWeHaveAnswered />
 
       <Stack spacing={4}>
@@ -91,21 +109,23 @@ export function ExampleQuestionsSection() {
                 bg="bg.400"
                 ml={-4}
                 mt={"10px"}
-              ></Box>
+              />
+
               <Stack>
                 <Stack direction={"row"} alignItems={"center"}>
                   <Text fontWeight={"semibold"} color={`${q.color}.400`} fontSize={"sm"}>
                     {q.group}
                   </Text>
-                  <Text fontSize={"xs"}>
+                  <Text fontSize={"xs"} color="whiteAlpha.700">
                     Asked{" "}
                     <Text as="span" fontWeight={"bold"}>
-                      {q.when} min ago
+                      {q.when} hour ago
                     </Text>{" "}
                   </Text>
                 </Stack>
-                <Stack bg={"bg.900"} py={2} px={4} borderRadius={"xl"}>
-                  <Text fontSize={"sm"} fontWeight={"semibold"} color="black">
+
+                <Stack bg={"white"} py={3} px={4} borderRadius={"lg"}>
+                  <Text fontSize={"sm"} color="black">
                     → {q.text}
                   </Text>
                 </Stack>
@@ -158,19 +178,7 @@ export function ExampleQuestionsSection() {
           })}
         </Box>
       </Stack>
-
-      <Stack alignItems={"center"} my={16} px={6}>
-        <Heading fontSize={"xl"} textAlign={"center"} mb={2}>
-          You can ask any question you can think of, your personal astrologer will answer instantly
-        </Heading>
-        <StaticImage
-          height={120}
-          src="../../images/astrologer.png"
-          alt="Astrologer, sitting and thinking"
-        />
-        <CTALinkToPricing id="comparison-section-cta" />
-      </Stack>
-    </Box>
+    </Flex>
   );
 }
 
@@ -179,7 +187,7 @@ function QuestionsWeHaveAnswered() {
     <Stack my={8} spacing={2} justifyContent={"center"} alignItems={"center"}>
       <HappyCustomersCounter />
       <Text fontSize={{ base: "xs" }} fontWeight={"bold"}>
-        Questions answered today
+        Questions answered this week
       </Text>
     </Stack>
   );

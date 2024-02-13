@@ -12,7 +12,14 @@ export type Testimonial = {
 export const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
     <Stack spacing={2} direction={"row"}>
-      <Box flexShrink={0} width={8} height={8} bg="blue" borderRadius={"full"} overflow={"hidden"}>
+      <Box
+        flexShrink={0}
+        width={8}
+        height={8}
+        bg="gray.300"
+        borderRadius={"full"}
+        overflow={"hidden"}
+      >
         {testimonial.avatar}
       </Box>
       <Stack>
@@ -20,8 +27,11 @@ export const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) =
           <Text color="black" fontWeight={600} fontSize={"13px"}>
             {testimonial.name}
           </Text>
-          <Text fontSize={"13px"}>{testimonial.quote}</Text>
+          <Text color="black" fontSize={"13px"}>
+            {testimonial.quote}
+          </Text>
         </Stack>
+
         <Stack px={2} direction={"row"} fontSize={"xs"} color="gray.500" fontWeight={"bold"}>
           <Text color="gray.700" fontWeight={"regular"}>
             {testimonial.commentAge}

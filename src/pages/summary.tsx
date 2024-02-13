@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import { PageProps } from "gatsby";
 
 import { TopNavigation } from "@components/topnavigation";
@@ -10,11 +10,13 @@ import { AreasOfGuidanceSection } from "@components/summary/AreasOfGuidanceSecti
 import { AstrologerComparisonSection } from "@components/summary/AstrologerComparisonSection";
 import { ExampleQuestionsSection } from "@components/summary/ExampleQuestionsSection";
 import { MediaCoverageSection } from "@components/summary/MediaCoverageSection";
-import { SimilarUsersLikeYouSection } from "@components/summary/SimilarUsersLikeYouSection";
-import { TestimonialsSection } from "@components/summary/TestimonialsSection";
-// import { HeroSection } from "@components/summary/HeroSection";
 import { HeroSection } from "@components/summary/HeroSection2";
 import { PricingSection } from "@components/summary/PricingSection";
+import { ProductSection } from "@components/summary/ProductSection";
+import { ScrollDownSection } from "@components/summary/ScrollDownSection";
+import { UserTestimonialSection } from "@components/summary/UserTestimonialSection";
+import { PersonalizationSection } from "@components/summary/PersonalizationSection";
+import { CTALinkToPricing } from "@components/summary/components";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 
 export default function SummaryPage({}: PageProps) {
@@ -25,34 +27,81 @@ export default function SummaryPage({}: PageProps) {
     setQuizState(q);
   }, []);
 
+  if (!quizState) {
+    return null;
+  }
+
   return (
-    <Box
-      py={4}
-      pb={24}
-      bgGradient="linear(to-b, bg.50, bg.100)"
-      color="bg.900"
-      scrollBehavior={"smooth"}
-    >
-      <Container>
-        <TopNavigation />
-      </Container>
+    <Box pb={24} color="bg.900" backgroundColor={"bg.50"} scrollBehavior={"smooth"}>
+      <Box backgroundColor={"#142326"}>
+        <Container>
+          <TopNavigation />
+        </Container>
 
-      <HeroSection quizState={quizState} />
+        <HeroSection state={quizState} />
+        <ScrollDownSection />
+      </Box>
 
-      <Container>
-        <AreasOfGuidanceSection />
-        <ExampleQuestionsSection />
-        <SimilarUsersLikeYouSection />
-        <TestimonialsSection />
-        <MediaCoverageSection />
-      </Container>
+      <Box>
+        <Container>
+          <PersonalizationSection state={quizState} />
+        </Container>
+      </Box>
 
-      <SpecialOfferBanner />
+      <Box backgroundColor={"whiteAlpha.200"} py={10}>
+        <Container>
+          <ProductSection state={quizState} />
 
-      <Container>
-        <PricingSection />
-        <AstrologerComparisonSection />
-      </Container>
+          <Flex justifyContent={"center"} mt={12}>
+            <CTALinkToPricing id="comparison-section-cta" />
+          </Flex>
+        </Container>
+      </Box>
+
+      <Box backgroundColor="white" py={10}>
+        <Container>
+          <UserTestimonialSection />
+
+          <Flex justifyContent={"center"} mt={12}>
+            <CTALinkToPricing id="comparison-section-cta" />
+          </Flex>
+        </Container>
+      </Box>
+
+      <Box backgroundColor={"whiteAlpha.200"} py={10}>
+        <Container>
+          <AreasOfGuidanceSection />
+        </Container>
+      </Box>
+
+      <Box py={10}>
+        <Container px={0}>
+          <ExampleQuestionsSection />
+
+          <Flex justifyContent={"center"} mt={12}>
+            <CTALinkToPricing id="comparison-section-cta" />
+          </Flex>
+        </Container>
+      </Box>
+
+      <Box backgroundColor="whiteAlpha.200" py={10}>
+        <Container>
+          <AstrologerComparisonSection />
+        </Container>
+      </Box>
+
+      <Box py={10}>
+        <Container>
+          <MediaCoverageSection />
+        </Container>
+      </Box>
+
+      <Box backgroundColor="whiteAlpha.200" py={10}>
+        <Container>
+          <SpecialOfferBanner />
+          <PricingSection />
+        </Container>
+      </Box>
     </Box>
   );
 }

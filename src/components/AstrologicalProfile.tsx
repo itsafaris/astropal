@@ -1,7 +1,6 @@
 import React, { createElement } from "react";
 import { Box, Flex, Grid, Stack, Text, TextProps } from "@chakra-ui/react";
 import { QuizStateParsed } from "@utils/state";
-import { getZodiacSign } from "@services/zodiacService";
 
 import { ChartPosition, NatalChart } from "./NatalChart";
 import { getReadableDate, getReadableTime } from "@utils/dates";
@@ -20,24 +19,7 @@ export function AstrologicalProfile({
   quizState?: QuizStateParsed;
   interpretation: Interpretation;
 }) {
-  const state = React.useMemo(() => {
-    const res = quizState;
-    if (!res) {
-      return;
-    }
-
-    res.yourZodiac = getZodiacSign(
-      new Date(
-        res.yourBirthDate.year,
-        res.yourBirthDate.month - 1,
-        res.yourBirthDate.day
-      ).toISOString()
-    );
-
-    return res;
-  }, [quizState]);
-
-  if (!state) {
+  if (!quizState) {
     return null;
   }
 
@@ -58,9 +40,9 @@ export function AstrologicalProfile({
       <Stack spacing={5}>
         <Box mx="auto" my={-5}>
           <NatalChart
-            date={state.yourBirthDate}
-            time={state.yourBirthTime}
-            location={state.yourBirthLocation}
+            date={quizState.yourBirthDate}
+            time={quizState.yourBirthTime}
+            location={quizState.yourBirthLocation}
             size={240}
           />
         </Box>
@@ -78,7 +60,7 @@ export function AstrologicalProfile({
           justifyContent={"center"}
           alignItems={"center"}
         >
-          {createElement(state.yourZodiac.svgComponent, {
+          {createElement(quizState.yourZodiac.svgComponent, {
             stroke: "black",
             fill: "white",
             strokeWidth: 3,
@@ -86,12 +68,12 @@ export function AstrologicalProfile({
         </Flex>
 
         <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1}>
-          <Text fontSize={"2xl"}>{toTitleCase(state.yourZodiac.name)}</Text>
+          <Text fontSize={"2xl"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
           <Text fontSize={"xs"} textTransform={"uppercase"}>
-            {getReadableDate(state.yourBirthDate)}
-            {", "} {getReadableTime(state.yourBirthTime)}
+            {getReadableDate(quizState.yourBirthDate)}
+            {", "} {getReadableTime(quizState.yourBirthTime)}
           </Text>
-          <Text fontSize={"xs"}>{state.yourBirthLocation.formattedText}</Text>
+          <Text fontSize={"xs"}>{quizState.yourBirthLocation.formattedText}</Text>
         </Stack>
 
         <Flex
@@ -104,7 +86,7 @@ export function AstrologicalProfile({
           alignItems={"center"}
           transform={"rotateY(180deg)"}
         >
-          {createElement(state.yourZodiac.svgComponent, {
+          {createElement(quizState.yourZodiac.svgComponent, {
             stroke: "black",
             fill: "white",
             strokeWidth: 3,
@@ -115,7 +97,7 @@ export function AstrologicalProfile({
       <Grid gridTemplateColumns={"1fr 1fr"} gap={2}>
         <Flex flexDirection={"column"} alignItems={"center"}>
           <Box>
-            {state.horoscope.CelestialBodies.all.map((it: any, idx: number) => {
+            {quizState.horoscope._celestialBodies.all.map((it: any, idx: number) => {
               if (idx <= 5) {
                 const pos = it.ChartPosition as ChartPosition;
                 const relPos = pos.Ecliptic.ArcDegreesFormatted30;
@@ -135,7 +117,7 @@ export function AstrologicalProfile({
 
         <Flex flexDirection={"column"} alignItems={"center"}>
           <Box>
-            {state.horoscope.CelestialBodies.all.map((it: any, idx: number) => {
+            {quizState.horoscope._celestialBodies.all.map((it: any, idx: number) => {
               if (idx > 5) {
                 const pos = it.ChartPosition as ChartPosition;
                 const relPos = pos.Ecliptic.ArcDegreesFormatted30;

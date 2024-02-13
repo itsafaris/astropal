@@ -1,32 +1,25 @@
-import { Flex, Stack, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Stack, Text } from "@chakra-ui/react";
 
 import { Timer } from "@components/timer";
 
-export function SpecialOfferBanner() {
+export function SpecialOfferBanner(props: FlexProps) {
   return (
     <Flex
       id="special-offer"
-      px={{ base: 2 }}
-      py={{ base: 4 }}
+      px={2}
+      py={4}
       background="linear-gradient(10deg, #ffbf00, #ffee54)"
       width="full"
       alignItems={"center"}
       justifyContent={"center"}
       shadow="lg"
+      {...props}
     >
-      <Stack
-        direction={{ base: "row", md: "row" }}
-        alignItems={"center"}
-        spacing={{ base: 1, md: 5, lg: 8 }}
-      >
+      <Stack direction={{ base: "row", md: "row" }} alignItems={"center"} spacing={4}>
         <Flex
           direction={"column"}
           alignItems={"center"}
-          fontSize={{
-            base: "sm",
-            md: "md",
-            lg: "lg",
-          }}
+          fontSize={"sm"}
           as="span"
           textAlign={"center"}
           color="black"
@@ -42,11 +35,11 @@ export function SpecialOfferBanner() {
               px={2}
               py={"2px"}
             >
-              Get up to 75% discount
+              Get 75% discount
             </Text>{" "}
             🔥
           </Text>
-          <Text>for your first-time purchase</Text>
+          <Text>Offer valid for:</Text>
         </Flex>
 
         <Timer />

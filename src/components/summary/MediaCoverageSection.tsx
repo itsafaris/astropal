@@ -3,26 +3,26 @@ import { StaticImage } from "gatsby-plugin-image";
 
 export function MediaCoverageSection() {
   return (
-    <Stack id="media-coverage" gap={7} alignItems={"center"} my={10}>
+    <Stack id="media-coverage" gap={7} alignItems={"center"}>
       <Text fontSize={"md"} color="bg.900" fontWeight={"semibold"}>
-        Technology used is featured in:
+        Personalized astrology featured in:
       </Text>
 
-      <Flex width={"100px"} opacity={1}>
+      <Flex width={"120px"} opacity={1}>
         <StaticImage alt="The guardian" src="../../images/media-guardian.svg" />
       </Flex>
 
       <Flex flexDirection={"row"} alignItems={"center"} gap={6}>
-        <Flex width={"120px"} opacity={1}>
+        <Flex width={"140px"} opacity={1}>
           <StaticImage alt="Cosmopolitan" src="../../images/media-cosmopolitan.svg" />
         </Flex>
 
-        <Flex width={"90px"} opacity={1}>
+        <Flex width={"100px"} opacity={1}>
           <StaticImage alt="Vogue" src="../../images/media-vogue.svg" />
         </Flex>
       </Flex>
 
-      <Flex width={"200px"} opacity={1}>
+      <Flex width={"250px"} opacity={1}>
         <StaticImage alt="New york times" src="../../images/media-nyt.svg" />
       </Flex>
     </Stack>
