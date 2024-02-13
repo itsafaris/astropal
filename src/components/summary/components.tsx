@@ -1,12 +1,12 @@
 import { ComponentProps } from "react";
 import { Button, useTheme } from "@chakra-ui/react";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { Link } from "gatsby";
 
 export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
   const theme = useTheme();
 
   return (
-    <AnchorLink to="/summary#special-offer" title="Pricing plans" stripHash>
+    <Link to="/summary#pricing-plans" title="Pricing plans">
       <Button
         px={8}
         py={7}
@@ -22,6 +22,6 @@ export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
       >
         Get My Insights
       </Button>
-    </AnchorLink>
+    </Link>
   );
 }

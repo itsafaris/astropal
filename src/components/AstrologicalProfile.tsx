@@ -68,12 +68,12 @@ export function AstrologicalProfile({
         </Flex>
 
         <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1}>
-          <Text fontSize={"2xl"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
-          <Text fontSize={"xs"} textTransform={"uppercase"}>
+          <Text fontSize={"3xl"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
+          <Text fontSize={"sm"} textTransform={"uppercase"}>
             {getReadableDate(quizState.yourBirthDate)}
             {", "} {getReadableTime(quizState.yourBirthTime)}
           </Text>
-          <Text fontSize={"xs"}>{quizState.yourBirthLocation.formattedText}</Text>
+          <Text fontSize={"sm"}>{quizState.yourBirthLocation.formattedText}</Text>
         </Stack>
 
         <Flex

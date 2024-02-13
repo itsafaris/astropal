@@ -32,7 +32,7 @@ export default function SummaryPage({}: PageProps) {
   }
 
   return (
-    <Box pb={24} color="bg.900" backgroundColor={"bg.50"} scrollBehavior={"smooth"}>
+    <Box pb={24} color="bg.900" backgroundColor={"bg.50"}>
       <Box backgroundColor={"#142326"}>
         <Container>
           <TopNavigation />
@@ -53,7 +53,7 @@ export default function SummaryPage({}: PageProps) {
           <ProductSection state={quizState} />
 
           <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="comparison-section-cta" />
+            <CTALinkToPricing id="product-section-cta" />
           </Flex>
         </Container>
       </Box>
@@ -63,7 +63,7 @@ export default function SummaryPage({}: PageProps) {
           <UserTestimonialSection />
 
           <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="comparison-section-cta" />
+            <CTALinkToPricing id="testimonial-section-cta" />
           </Flex>
         </Container>
       </Box>
@@ -79,7 +79,7 @@ export default function SummaryPage({}: PageProps) {
           <ExampleQuestionsSection />
 
           <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="comparison-section-cta" />
+            <CTALinkToPricing id="example-questions-section-cta" />
           </Flex>
         </Container>
       </Box>
@@ -96,7 +96,7 @@ export default function SummaryPage({}: PageProps) {
         </Container>
       </Box>
 
-      <Box backgroundColor="whiteAlpha.200" py={10}>
+      <Box backgroundColor="whiteAlpha.200" py={10} id="pricing-plans">
         <Container>
           <SpecialOfferBanner />
           <PricingSection />

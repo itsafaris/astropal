@@ -33,13 +33,13 @@ export default function IndexPage() {
       </Container>
 
       <Container>
-        <Flex flexDirection={"column"} gap={8}>
+        <Flex flexDirection={"column"} gap={5}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Flex
               borderRadius={"full"}
               overflow={"hidden"}
-              height={"160px"}
-              width={"160px"}
+              height={"150px"}
+              width={"150px"}
               boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
               position={"relative"}
             >
@@ -47,8 +47,8 @@ export default function IndexPage() {
                 src={`../images/partner-3.png`}
                 alt="Option - in relationship"
                 placeholder="none"
-                width={150}
-                height={150}
+                width={140}
+                height={140}
                 layout="fixed"
                 style={{
                   position: "absolute",
@@ -84,61 +84,42 @@ export default function IndexPage() {
             mx="auto"
           >
             <Text as="span" color="brand.600">
-              Know Everything. <br />
+              Get All Answers. <br />
             </Text>
             The Most Accurate Personalized Astrology
           </Heading>
-          {/* <Heading
-            as="h1"
-            fontSize={{
-              base: "32px",
-              md: "32px",
-            }}
-            lineHeight={1.4}
-            textAlign="center"
-            color="white"
-            maxWidth={400}
-            mx="auto"
-          >
-            Decide Your Life <br /> With a{" "}
-            <Text as="span" color="brand.600">
-              Personalized{" "}
-            </Text>{" "}
-            Astrology{" "}
-            <Text as="span" color="brand.600">
-              Insights
-            </Text>
-          </Heading> */}
 
-          <Flex flexDirection={"column"} fontWeight={"thin"} color="brand.800">
-            <Text fontSize="lg" textAlign="center">
+          <Flex
+            flexDirection={"column"}
+            fontWeight={"regular"}
+            color="whiteAlpha.600"
+            fontSize="md"
+          >
+            <Text textAlign="center">
               - Time your{" "}
-              <Text as="span" fontWeight={"medium"}>
+              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
                 Opportunities
               </Text>
             </Text>
 
-            <Text fontSize="lg" textAlign="center">
+            <Text textAlign="center">
               - Make{" "}
-              <Text as="span" fontWeight={"medium"}>
+              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
                 Decisions
               </Text>{" "}
-              with confidence
+              with confidence -
             </Text>
 
-            <Text fontSize="lg" textAlign="center">
+            <Text textAlign="center">
               - Tailored Uniquely for{" "}
-              <Text as="span" fontWeight={"medium"}>
+              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
                 You
-              </Text>
+              </Text>{" "}
+              -
             </Text>
           </Flex>
 
-          {/* <Text fontSize="md" textAlign="center" color="bg.700">
-            Complete a 1-minute quiz <br /> to get a first insight
-          </Text> */}
-
-          <Flex flexDirection={"row"} justifyContent={"center"}>
+          <Flex flexDirection={"row"} justifyContent={"center"} mt={3}>
             <Link to="/onboarding">
               <Button
                 backgroundColor={"brand.600"}
