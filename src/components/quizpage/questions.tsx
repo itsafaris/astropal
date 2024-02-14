@@ -5,6 +5,7 @@ import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { getPersonalInfoFromState } from "@utils/state";
 import { toTitleCase } from "@utils/string";
+import { astrologyThemes } from "@utils/astrologyThemes";
 
 export function DecisionMakingStruggles() {
   const { submitQuestion } = useQuiz();
@@ -14,11 +15,11 @@ export function DecisionMakingStruggles() {
       type="multi"
       variant="list"
       options={[
-        { text: "Relationships and Love", icon: "❤️" },
-        { text: "Career and Work", icon: "🏢" },
-        { text: "Personal Growth", icon: "🌱" },
-        { text: "Health and Well-being", icon: "🍏" },
-        { text: "I'm doing well in all areas", icon: "🫣" },
+        { value: astrologyThemes.relationships.id, text: "Relationships and Love", icon: "❤️" },
+        { value: astrologyThemes.career.id, text: "Career and Work", icon: "🏢" },
+        { value: astrologyThemes.selfGrowth.id, text: "Personal Growth", icon: "🌱" },
+        { value: astrologyThemes.wellBeing.id, text: "Health and Well-being", icon: "🍏" },
+        { value: "none", text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
       <SlideHeading

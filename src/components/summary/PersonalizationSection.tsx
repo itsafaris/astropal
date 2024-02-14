@@ -1,10 +1,15 @@
-import { Text, Stack, Box, Flex } from "@chakra-ui/react";
+import { Text, Stack, Flex, Box } from "@chakra-ui/react";
 
 import { QuizStateParsed } from "@utils/state";
 import { AstrologicalProfile } from "./AstrologicalProfile";
 import { StaticImage } from "gatsby-plugin-image";
+import { Span } from "@components/quizpage/components";
+import { ArrowDownIcon } from "@chakra-ui/icons";
+import { Rating } from "@components/rating";
+import { getThemeByID } from "@utils/astrologyThemes";
 
 export function PersonalizationSection({ state }: { state: QuizStateParsed }) {
+  const { struggleAreas } = state;
   return (
     <Stack spacing={6} id="product-section" mx="auto" py={10}>
       <Text
@@ -28,24 +33,40 @@ export function PersonalizationSection({ state }: { state: QuizStateParsed }) {
         flexDirection={"column"}
         alignItems={"center"}
         position={"relative"}
-        height={450}
         overflow={"hidden"}
       >
         <AstrologicalProfile
           quizState={state}
           interpretation={{ about: "", strengths: [], weaknesses: [] }}
         />
-
-        <Box
-          position={"absolute"}
-          zIndex={1}
-          bottom={0}
-          left={0}
-          width={"full"}
-          height={"80px"}
-          bgGradient="linear(to-t, bg.50, transparent)"
-        />
       </Flex>
+
+      <Text textAlign={"center"} fontSize={"xl"}>
+        Based on our estimates, you will feel <Span color="green.300">💚 more clarity</Span> in
+        these areas using our isnights
+      </Text>
+
+      <Flex direction={"column"} alignItems={"center"}>
+        <Span>After first 2 weeks</Span>
+        <ArrowDownIcon mx="auto" fontSize={52} />
+      </Flex>
+
+      <Box w={"300px"} mx="auto">
+        {struggleAreas.map((s) => {
+          const theme = getThemeByID(s);
+          if (!theme) {
+            return null;
+          }
+          return (
+            <Box my={2}>
+              <Text>
+                {theme.title} <Span color="green.400">(+34%)</Span>{" "}
+              </Text>
+              <Rating total={10} value={7} lowValue={3} colorScheme="green" />
+            </Box>
+          );
+        })}
+      </Box>
     </Stack>
   );
 }
