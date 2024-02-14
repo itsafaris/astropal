@@ -1,7 +1,7 @@
-import { FormControl, Input } from "@chakra-ui/react";
+import { FormControl, Input, Text } from "@chakra-ui/react";
 import { useSlide } from "../public/slide";
 import { SlidePropsEmail } from "../public/types";
-import { ShortTextState, useQuizActions, useQuizSnapshot } from "./state";
+import { EmailState, useQuizActions, useQuizSnapshot } from "./state";
 import { commonInputStyles } from "./commonInput";
 import { MyFormLabel } from "./ui";
 
@@ -12,7 +12,7 @@ export function Email({ placeholder, label }: Email) {
   const slide = useSlide();
   const snap = useQuizSnapshot();
 
-  const state = snap.slideStateByID[slide.id] as ShortTextState;
+  const state = snap.slideStateByID[slide.id] as EmailState;
 
   return (
     <FormControl>
@@ -27,7 +27,14 @@ export function Email({ placeholder, label }: Email) {
         onChange={(e) => {
           actions.setEmailValue(slide.id, e.target.value);
         }}
+        mb={7}
       />
+
+      {!state.isValueValid && state.attempts > 0 && (
+        <Text position={"absolute"} bottom={0} color="red.300" fontSize={"md"}>
+          Please enter a valid email address
+        </Text>
+      )}
     </FormControl>
   );
 }

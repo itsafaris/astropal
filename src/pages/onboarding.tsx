@@ -1,4 +1,5 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
+import { navigate } from "gatsby";
 
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
@@ -64,7 +65,7 @@ export default function OnboardingQuiz() {
       }}
       onSlideSubmitted={(state) => {
         if (state.id === "your-email") {
-          trackPixel("Purchase", { currency: "USD", value: 30.0 });
+          navigate("/summary");
         }
       }}
     >
