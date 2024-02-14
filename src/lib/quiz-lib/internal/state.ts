@@ -79,7 +79,7 @@ export type BaseSelectorState = {
   isValueValid: boolean;
 };
 
-export type SelectorValue = Readonly<{ id: string; idx: number; value: string }>;
+export type SelectorValue = Readonly<{ value: string; idx: number }>;
 
 export type DateValue = { year: number; month: number; day: number };
 

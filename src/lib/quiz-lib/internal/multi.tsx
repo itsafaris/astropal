@@ -26,9 +26,7 @@ export function MultiSelect({}: MultiSelectProps) {
       <MyFormLabel>Choose one or more</MyFormLabel>
       <CommonSelect
         handleOptionClick={handleClick}
-        isOptionSelected={(optionID) =>
-          selectorState?.value?.some((v) => v.id === optionID) ?? false
-        }
+        isOptionSelected={(o) => selectorState?.value?.some((v) => v.value === o.value) ?? false}
       />
     </Box>
   );

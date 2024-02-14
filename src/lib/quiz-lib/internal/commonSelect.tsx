@@ -1,17 +1,17 @@
 import { Flex, Grid } from "@chakra-ui/react";
 
 import { useSlide } from "../public/slide";
-import { OptionPropsCommon, SlideProps, SlidePropsMulti, SlidePropsSingle } from "../public/types";
+import { OptionPropsCommon, SlidePropsMulti, SlidePropsSingle } from "../public/types";
 import { OptionSimple, OptionWithPicture } from "./option";
 import { SelectorValue } from "./state";
 
 export type OptionRendererProps = {
   handleOptionClick: (value: SelectorValue) => void;
-  isOptionSelected: (optionID: string) => boolean;
+  isOptionSelected: (value: SelectorValue) => boolean;
 };
 
-function getOptionID(slide: SlideProps, option: OptionPropsCommon) {
-  return slide.id + "/" + option.text;
+function getOptionValue(option: OptionPropsCommon) {
+  return option.value ?? option.text;
 }
 
 export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRendererProps) {
@@ -21,16 +21,15 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
     return (
       <Flex width={"full"} flexDir={"column"} gap={3}>
         {slideCtx.options?.map((option, idx) => {
-          const optionID = getOptionID(slideCtx, option);
+          const value = getOptionValue(option);
           const optionValue: SelectorValue = {
-            id: optionID,
+            value: value,
             idx,
-            value: option.text,
           };
           return (
             <OptionSimple
-              key={optionID}
-              isSelected={isOptionSelected(optionID)}
+              key={value}
+              isSelected={isOptionSelected(optionValue)}
               onClick={() => handleOptionClick(optionValue)}
               text={option.text}
               icon={option.icon}
@@ -48,12 +47,12 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
   return (
     <Grid templateColumns={`repeat(${columns}, 1fr)`} gap={3}>
       {slideCtx.options?.map((option, idx) => {
-        const optionID = getOptionID(slideCtx, option);
-        const optionValue: SelectorValue = { id: optionID, idx, value: option.text };
+        const value = getOptionValue(option);
+        const optionValue: SelectorValue = { value: value, idx };
         return (
           <OptionWithPicture
-            key={optionID}
-            isSelected={isOptionSelected(optionID)}
+            key={value}
+            isSelected={isOptionSelected(optionValue)}
             onClick={() => handleOptionClick(optionValue)}
             text={option.text}
             imgHeight={imgHeight}
