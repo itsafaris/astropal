@@ -1,26 +1,25 @@
-import { Box, Flex, Heading, Stack, Text, Button, TextProps } from "@chakra-ui/react";
-import { Link } from "gatsby";
+import { Box, Flex, Stack, Text, Button, TextProps } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
+import { ComponentProps, useState } from "react";
 
 export interface IPricingPageProps {}
 
-export function PricingSection() {
+export function PricingSection(props: ComponentProps<typeof Box>) {
   return (
-    <Box id="pricing-section" as="section" py={8}>
-      <Stack mb={8}>
-        <Heading fontSize={"3xl"} textAlign={"center"} color="white">
-          Choose your plan
-        </Heading>
-      </Stack>
-
+    <Box id="pricing-section" as="section" {...props}>
       <Stack spacing={4}>
         <PricingPlans />
-        <TermsAgreement />
-        <RiskFreeGuaranteed />
-        <SafeCheckout />
+        <Flex>
+          <Text fontSize={"sm"} color="bg.600">
+            Your subscription renews at the start of the period. You can cancel any time.
+          </Text>
+        </Flex>
+        {/* <TermsAgreement /> */}
+        {/* <RiskFreeGuaranteed /> */}
+        {/* <SafeCheckout /> */}
       </Stack>
     </Box>
   );
@@ -94,34 +93,54 @@ function SafeCheckout() {
 }
 
 export function PricingPlans() {
+  const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
+
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
       <PricingPlanItem
         billingText={"Billed every 6 months"}
-        tagText={"Best value"}
+        tagText={"Best"}
         tagColor={"green.400"}
-        buttonText={"Claim my plan (save 75%)"}
-        buttonColor="#04a804"
-        borderColor="#04a804"
-        buttonHoverColor="#038b03"
-        buttonTextColor="white"
         pricingPlan={pricingPlans["6month"]}
+        isSelected={selectedPlanID === pricingPlans["6month"].id}
+        onClick={() => {
+          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["6month"].id } });
+          setSelectedPlanID(pricingPlans["6month"].id);
+        }}
       />
-
-      <DealRibbon />
 
       <PricingPlanItem
         billingText={"Billed every 3 months"}
         tagColor={"brand.700"}
-        buttonText={"Claim my plan (save 65%)"}
         pricingPlan={pricingPlans["3month"]}
+        isSelected={selectedPlanID === pricingPlans["3month"].id}
+        onClick={() => {
+          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["3month"].id } });
+          setSelectedPlanID(pricingPlans["3month"].id);
+        }}
       />
 
       <PricingPlanItem
         billingText={"Billed every month"}
-        buttonText={"Claim my plan (save 50%)"}
         pricingPlan={pricingPlans["1month"]}
+        isSelected={selectedPlanID === pricingPlans["1month"].id}
+        onClick={() => {
+          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["1month"].id } });
+          setSelectedPlanID(pricingPlans["1month"].id);
+        }}
       />
+
+      <Button
+        width={"full"}
+        size="lg"
+        mt={4}
+        colorScheme="orange"
+        onClick={() => {
+          trackEvent({ name: "start-checkout", properties: { planID: selectedPlanID } });
+        }}
+      >
+        Start now
+      </Button>
     </Flex>
   );
 }
@@ -129,23 +148,16 @@ export function PricingPlans() {
 function PricingPlanItem({
   billingText,
   tagText,
-  buttonText,
-  buttonColor,
-  buttonHoverColor,
-  borderColor,
-  buttonTextColor,
   pricingPlan,
+  isSelected,
+  ...props
 }: {
   billingText: string;
   tagText?: string;
   tagColor?: string;
-  buttonText: string;
-  buttonTextColor?: string;
-  buttonColor?: string;
-  buttonHoverColor?: string;
-  borderColor?: string;
   pricingPlan: PricingPlanType;
-}) {
+  isSelected?: boolean;
+} & ComponentProps<typeof Flex>) {
   return (
     <Flex
       flexDirection={"column"}
@@ -157,8 +169,9 @@ function PricingPlanItem({
       width={"100%"}
       position="relative"
       border={`2px solid`}
-      borderColor={borderColor ?? "bg.400"}
+      borderColor={isSelected ? "orange.400" : "bg.400"}
       mt={3}
+      {...props}
     >
       {tagText && (
         <Badge position={"absolute"} top={0} left={3} transform={"translateY(-50%)"}>
@@ -197,32 +210,11 @@ function PricingPlanItem({
             ${pricingPlan.daily}
           </Text>
 
-          <Text fontSize={"sm"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.600">
+          <Text fontSize={"sm"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.700">
             per day
           </Text>
         </Flex>
       </Flex>
-
-      <Link
-        to={`/checkout?pricingPlanID=${pricingPlan.id}`}
-        style={{ width: "100%" }}
-        onClick={() => {
-          trackEvent({ name: "chose-pricing-plan", properties: { ...pricingPlan } });
-        }}
-      >
-        <Button
-          variant={"solid"}
-          backgroundColor={buttonColor ?? "brand.700"}
-          _hover={{
-            backgroundColor: buttonHoverColor ?? "brand.600",
-          }}
-          width={"full"}
-          color={buttonTextColor}
-          fontWeight={"semibold"}
-        >
-          {buttonText}
-        </Button>
-      </Link>
     </Flex>
   );
 }
@@ -241,34 +233,5 @@ function Badge({ ...rest }: TextProps) {
     >
       Best value
     </Text>
-  );
-}
-
-function DealRibbon() {
-  const color = "pink.100";
-
-  return (
-    <Flex flexDirection={"column"} alignItems={"center"} mt={"-8px"} zIndex={1}>
-      <Box
-        width={0}
-        height={0}
-        borderLeft={"20px solid transparent"}
-        borderRight={"20px solid transparent"}
-        borderBottom={`14px solid`}
-        borderBottomColor={color}
-        ml={100}
-      />
-      <Text
-        px={5}
-        py={"3px"}
-        backgroundColor={color}
-        color="pink.800"
-        fontWeight={"bold"}
-        fontSize={"small"}
-        borderRadius={100}
-      >
-        Biggest savings with this option!
-      </Text>
-    </Flex>
   );
 }

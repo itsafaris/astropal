@@ -3,7 +3,7 @@ import { Stack, Text } from "@chakra-ui/react";
 
 export function ScrollDownSection() {
   return (
-    <Stack alignItems={"center"} pb={8} backgroundColor={"bg.50"} fontWeight={"bold"}>
+    <Stack alignItems={"center"} pb={8} fontWeight={"bold"}>
       <Text textAlign={"center"} width={"full"} fontSize={"xl"} color={"whiteAlpha.600"}>
         Scroll to see more
       </Text>

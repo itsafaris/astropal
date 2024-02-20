@@ -1,188 +1,125 @@
 import { Box, Container, Text, Stack, Flex, useTheme } from "@chakra-ui/react";
+import React from "react";
 
-import { CheckIcon } from "@chakra-ui/icons";
+import { CheckIcon, PlusSquareIcon } from "@chakra-ui/icons";
 
 import { QuizStateParsed } from "@utils/state";
 
 import { CTALinkToPricing } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { AstrologicalProfileSmall } from "./AstrologicalProfileSmall";
+import { Span } from "@components/quizpage/components";
+import { PricingSection } from "./PricingSection";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export function HeroSection({ state }: { state: QuizStateParsed }) {
   const theme = useTheme();
 
   return (
-    <Box id="hero-section" as="section" bgGradient={"linear(to-t, bg.50, #142326)"}>
-      <Container>
-        <Flex flexDirection={"column"} alignItems={"center"}>
-          <Stack position={"relative"} spacing={6}>
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              Congratulations! <br /> Your{" "}
-              <Text as="span" color="#c398ff" fontWeight={"black"}>
-                1-Time FREE{" "}
-              </Text>{" "}
-              Insight Arrives <br />
-              🗓️ Tomorrow at 07:00
+    <>
+      <Box id="hero-section" as="section" color="white" py={12}>
+        <Container>
+          <Text textAlign={"center"} fontSize={"xl"}>
+            Congratulations!
+          </Text>
+          <Text fontWeight="bold" textAlign={"center"} fontSize={"xl"} mb={8}>
+            Your Astrological Self-Discovery Guide is Ready!
+          </Text>
+
+          <Flex direction={"column"} bg="white" color="black" p={4} borderRadius={"lg"}>
+            <Text fontSize={"xl"}>
+              According to your answers, you should feel the first positive change in your{" "}
+              <Span fontWeight={"bold"} color="purple.500">
+                Career
+              </Span>{" "}
+              within{" "}
+              <Span fontWeight={"bold"} color="purple.500">
+                1 Week
+              </Span>
             </Text>
+            <StaticImage alt="" src="../../images/method_benefits.png" />
+          </Flex>
 
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              SELF DISCOVERY MENTORSHIP
-            </Text>
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              UNIQUE METHOD
-            </Text>
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              +40 bobele
-            </Text>
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              BUS VISKO
-            </Text>
+          {/* <CTALinkToPricing
+          backgroundColor="green.700"
+          _hover={{
+            backgroundColor: "green.800",
+          }}
+          boxShadow={`inset 0 0 0 3px ${theme.colors.green["500"]}`}
+          color="white"
+        /> */}
+        </Container>
+      </Box>
 
-            <Text fontWeight="semibold" textAlign={"center"} fontSize={"xl"} color="white">
-              Stebedami real-time zvaigzdes galim pasakyt kada kokie opportuniciai tau bus
-            </Text>
+      <Box>
+        <Container my={16}>
+          <Text fontSize={"2xl"} color="white" my={8} px={4}>
+            What you get with your{" "}
+            <Span fontWeight="bold" color="white">
+              Astrological Self-Discovery Guide
+            </Span>
+            :
+          </Text>
 
-            <Box
-              position={"relative"}
-              maxWidth={290}
-              marginLeft={"auto"}
-              marginRight={"auto"}
-              mb={"130px"}
-            >
-              <StaticImage alt="" src="../../images/product/hero.png" />
+          <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
+            <Features />
+          </Flex>
 
-              <Flex
-                flexDirection={"column"}
-                alignItems={"center"}
-                gap={1}
-                position={"absolute"}
-                width={"100%"}
-                top={"75px"}
-                left={0}
-              >
-                <Text
-                  textAlign={"center"}
-                  width={"full"}
-                  fontSize={"35px"}
-                  color="white"
-                  fontWeight={400}
-                  lineHeight={1}
-                >
-                  07:00
-                </Text>
-                <Text
-                  textAlign={"center"}
-                  width={"full"}
-                  fontSize={"8px"}
-                  color="white"
-                  lineHeight={1}
-                >
-                  July 6, Wednesday
-                </Text>
-              </Flex>
+          <StaticImage alt="" src="../../images/package3.png" />
 
-              <Flex
-                flexDirection={"column"}
-                alignItems={"flex-start"}
-                py={3}
-                px={4}
-                backgroundColor="#b5adc0"
-                position={"absolute"}
-                gap={2}
-                borderRadius={5}
-                bottom={"-35%"}
-                left={"60%"}
-                transform={"translateX(-50%)"}
-                boxShadow={"0px 0px 20px 0px #00000040"}
-                width={200}
-                zIndex={1}
-                fontSize={"sm"}
-                fontWeight={"bold"}
-                color="black"
-                lineHeight={1}
-              >
-                <Text>• 1 FREE Insight</Text>
-                <Text>• Covers Relationships</Text>
-                <Text>• Uses Your Natal Chart</Text>
-              </Flex>
-
-              <AstrologicalProfileSmall
-                quizState={state}
-                position={"absolute"}
-                left={"-5%"}
-                bottom={"-35%"}
-                transform={"rotate(-25deg)"}
-                boxShadow={"0px 0px 20px 0px #00000040"}
-              />
-            </Box>
-
-            <Stack
-              spacing={7}
-              maxW={400}
-              width={"100%"}
-              mx="auto"
-              bgGradient={"linear(to-t, transparent 40%, bg.200 70%, bg.200 90%)"}
-              borderRadius={"xl"}
-              p={6}
-              pb={7}
-            >
-              <Text
-                fontWeight="semibold"
-                textAlign={"center"}
-                width={"full"}
-                fontSize={"xl"}
-                color="white"
-              >
-                Start Your <br /> Self-Discovery Journey <br /> with everyday insights
-              </Text>
-
-              <Flex flexDirection={"column"} alignItems={"center"}>
-                <Features />
-
-                <Flex flexDirection={"column"} alignItems={"center"} p={3} pt={5}>
-                  <StaticImage
-                    alt=""
-                    src="../../images/significant_clarity.png"
-                    style={{ width: "100%", opacity: 1 }}
-                  />
-                </Flex>
-              </Flex>
-
-              <CTALinkToPricing
-                backgroundColor="green.700"
-                _hover={{
-                  backgroundColor: "green.800",
-                }}
-                boxShadow={`inset 0 0 0 3px ${theme.colors.green["500"]}`}
-                color="white"
-              />
-            </Stack>
-          </Stack>
-        </Flex>
-      </Container>
-    </Box>
+          <PricingSection my={8} />
+        </Container>
+      </Box>
+    </>
   );
 }
 
 function Features() {
   return (
-    <Stack alignItems={"start"} color={"#80db4b"} mx="auto" fontSize={"lg"} fontWeight={"semibold"}>
-      <Text>
-        <CheckIcon color={"#80db4b"} height={"25px"} width={"25px"} mr={3} />
-        Full Astrological Profile
+    <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"} fontWeight={"bold"}>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Astrological Profile Analysis
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Everyday personalised horoscopes
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Everyday positivity mantras
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        24/7 access to a personal astrologer
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Career Guidance
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Relationship Analysis and Advice
+      </Flex>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Personal growth plan
+      </Flex>
+
+      <Text
+        mt={4}
+        color="purple.300"
+        fontWeight={"black"}
+        textAlign={"center"}
+        alignSelf={"stretch"}
+      >
+        + FREE now for a limited time
       </Text>
-      <Text>
-        <CheckIcon color={"#80db4b"} height={"25px"} width={"25px"} mr={3} />
-        Scheduled Insights
-      </Text>
-      <Text>
-        <CheckIcon color={"#80db4b"} height={"25px"} width={"25px"} mr={3} />
-        On-Demand Insights
-      </Text>
-      <Text>
-        <CheckIcon color={"#80db4b"} height={"25px"} width={"25px"} mr={3} />
-        Uses Your Natal Chart
-      </Text>
+
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"purple.300"} boxSize="20px" mr={1} />
+        Printable PDF Birth Chart Reading (worth $149)
+      </Flex>
     </Stack>
   );
 }
