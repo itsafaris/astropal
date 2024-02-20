@@ -33,6 +33,7 @@ export default function SummaryPage({}: PageProps) {
 
   return (
     <Box pb={24} color="bg.900" backgroundColor={"bg.50"}>
+      <SpecialOfferBanner />
       <Box backgroundColor={"#142326"}>
         <Container>
           <TopNavigation />
