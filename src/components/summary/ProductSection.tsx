@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { Link } from "gatsby";
@@ -32,79 +32,81 @@ export function ProductSection(props: IProductSectionProps) {
           </Flex>
         </Flex>
 
-        <Box mb={20}>
-          <Heading mb={12} textAlign={"center"} color="white" fontSize={"2xl"}>
-            <Span color="purple.300" fontSize={"6xl"}>
-              Receive
-            </Span>
-            <br />
-            Personalised Horoscopes and Mantras Daily
-          </Heading>
-          <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
-            It's way more than a generic horoscope. These are 100% made for your. Based on your
-            Birth Chart and Personality.
-          </Text>
-
-          <Box my={8}>
-            <StaticImage alt="astrology product image" src="../../images/product1.png" />
-          </Box>
-        </Box>
-
-        <Box mb={20}>
-          <Box mb={12}>
+        <Stack spacing={24}>
+          <Box>
             <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
               <Span color="purple.300" fontSize={"6xl"}>
-                Ask
+                Discover
               </Span>
-              <br /> Your most important questions and receive detailed answers instantly
+              <br /> Your Astrological Blueprint
             </Heading>
+            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
+              Uncover your strengths and weaknesses. Learn how to empower yourself with the help of
+              cosmos.
+            </Text>
+            <Box>
+              <StaticImage alt="astrology product image" src="../../images/product4.png" />
+            </Box>
+          </Box>
 
-            <Text textAlign={"center"} mt={8} mb={4} fontWeight={"bold"}>
-              How it works
+          <Box>
+            <Heading mb={12} textAlign={"center"} color="white" fontSize={"2xl"}>
+              <Span color="purple.300" fontSize={"6xl"}>
+                Receive
+              </Span>
+              <br />
+              Personalised Horoscopes and Mantras Daily
+            </Heading>
+            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
+              It's way more than a generic horoscope. These are 100% made for your. Based on your
+              Birth Chart and Personality.
             </Text>
 
-            <Box>
-              <Text textAlign={"center"} fontSize={"xl"}>
-                1. You ask any question
+            <Box mt={8}>
+              <StaticImage alt="astrology product image" src="../../images/product1.png" />
+            </Box>
+          </Box>
+
+          <Box>
+            <Box mb={12}>
+              <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
+                <Span color="purple.300" fontSize={"6xl"}>
+                  Ask
+                </Span>
+                <br /> Your most important questions and receive detailed answers instantly
+              </Heading>
+
+              <Text textAlign={"center"} mt={8} mb={4} fontWeight={"bold"}>
+                How it works
               </Text>
-              <Box pl={2} my={8} mx="auto">
-                <StaticImage alt="astrology product image" src="../../images/product2.png" />
+
+              <Box>
+                <Text textAlign={"center"} fontSize={"xl"}>
+                  1. You ask any question
+                </Text>
+                <Box pl={2} my={8} mx="auto">
+                  <StaticImage alt="astrology product image" src="../../images/product2.png" />
+                </Box>
+              </Box>
+            </Box>
+
+            <Box>
+              <Text my={10} maxWidth={"80%"} mx="auto" textAlign={"center"} fontSize={"xl"}>
+                2. Receive a personalised answer based on your astrological profile and current
+                celestial events
+              </Text>
+              <Box maxWidth={"80%"} my={8} mx="auto">
+                <StaticImage alt="astrology product image" src="../../images/product3.png" />
               </Box>
             </Box>
           </Box>
+        </Stack>
 
-          <Box>
-            <Text my={10} maxWidth={"80%"} mx="auto" textAlign={"center"} fontSize={"xl"}>
-              2. Receive a personalised answer based on your astrological profile and current
-              celestial events
-            </Text>
-            <Box maxWidth={"80%"} my={8} mx="auto">
-              <StaticImage alt="astrology product image" src="../../images/product3.png" />
-            </Box>
-          </Box>
-        </Box>
-
-        <Box>
-          <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
-            <Span color="purple.300" fontSize={"6xl"}>
-              Discover
-            </Span>
-            <br /> Your Astrological Blueprint
-          </Heading>
-          <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
-            Uncover your strengths and weaknesses. Learn how to empower yourself with the help of
-            cosmos.
-          </Text>
-          <Box>
-            <StaticImage alt="astrology product image" src="../../images/product4.png" />
-          </Box>
-
-          <Link to="/summary#pricing-plans" title="Pricing plans">
-            <Button width={"full"} mt={12} colorScheme="red" size="lg">
-              Start Now
-            </Button>
-          </Link>
-        </Box>
+        <Link to="/summary#pricing-plans" title="Pricing plans">
+          <Button width={"full"} colorScheme="red" size="lg" my={8}>
+            Start Now
+          </Button>
+        </Link>
       </Container>
     </Box>
   );
