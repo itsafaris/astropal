@@ -61,6 +61,8 @@ export type SlidePropsBase = {
 
 export type OptionPropsCommon = {
   text: string;
+  // if value is not provided, text will be used as value
+  value?: string;
 };
 
 export type OptionPropsSimple = {

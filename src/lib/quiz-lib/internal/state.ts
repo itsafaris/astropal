@@ -76,9 +76,10 @@ export type FillerState = {
 export type BaseSelectorState = {
   attempts: number;
   confirmed: boolean;
+  isValueValid: boolean;
 };
 
-export type SelectorValue = Readonly<{ id: string; idx: number; value: string }>;
+export type SelectorValue = Readonly<{ value: string; idx: number }>;
 
 export type DateValue = { year: number; month: number; day: number };
 
@@ -105,6 +106,7 @@ function createSlideState(type: ISelectorType): SelectorState {
     type,
     attempts: 0,
     confirmed: false,
+    isValueValid: true,
   };
 }
 
@@ -222,11 +224,14 @@ export function createQuizState(input: {
       if (!isSlideStateValid(state.currentSlideState)) {
         currentSlideState.attempts++;
         currentSlideState.confirmed = false;
+        currentSlideState.isValueValid = false;
         return;
       }
 
       currentSlideState.confirmed = true;
       currentSlideState.attempts = 0;
+      currentSlideState.isValueValid = true;
+
       input.onSlideSubmitted?.({
         id: currentSlide.id,
         state: currentSlideState,

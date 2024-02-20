@@ -5,6 +5,7 @@ import {
   SingleState,
   LocationState,
   TimeState,
+  MultiState,
 } from "@martynasj/quiz-lib";
 
 import { getZodiacSign } from "@services/zodiacService";
@@ -123,6 +124,9 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     new Date().toISOString()
   );
 
+  const struggleAreas =
+    (state["decision-making-struggles"] as MultiState)?.value?.map((it) => it.value) ?? [];
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -136,5 +140,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     yourZodiac,
     astrologer,
     horoscope,
+    struggleAreas,
   };
 }

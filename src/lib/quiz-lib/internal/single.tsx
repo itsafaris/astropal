@@ -26,7 +26,7 @@ export function SingleSelect(_: SingleSelectProps) {
 
       <CommonSelect
         handleOptionClick={handleClick}
-        isOptionSelected={(optionID) => selectorState?.value?.id === optionID}
+        isOptionSelected={(o) => selectorState?.value?.value === o.value}
       />
     </Box>
   );
