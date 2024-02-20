@@ -32,31 +32,15 @@ export default function SummaryPage({}: PageProps) {
   }
 
   return (
-    <Box pb={24} color="bg.900" backgroundColor={"bg.50"}>
-      <SpecialOfferBanner />
-      <Box backgroundColor={"#142326"}>
-        <Container>
-          <TopNavigation />
-        </Container>
-
+    <Box pb={24} color="bg.900" bg="bg.100">
+      {/* <SpecialOfferBanner /> */}
+      <Box>
         <HeroSection state={quizState} />
         <ScrollDownSection />
       </Box>
 
       <Box>
-        <Container>
-          <PersonalizationSection state={quizState} />
-        </Container>
-      </Box>
-
-      <Box backgroundColor={"whiteAlpha.200"} py={10}>
-        <Container>
-          <ProductSection state={quizState} />
-
-          <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="product-section-cta" />
-          </Flex>
-        </Container>
+        <ProductSection />
       </Box>
 
       <Box backgroundColor="white" py={10}>
@@ -94,13 +78,6 @@ export default function SummaryPage({}: PageProps) {
       <Box py={10}>
         <Container>
           <MediaCoverageSection />
-        </Container>
-      </Box>
-
-      <Box backgroundColor="whiteAlpha.200" py={10} id="pricing-plans">
-        <Container>
-          <SpecialOfferBanner />
-          <PricingSection />
         </Container>
       </Box>
     </Box>

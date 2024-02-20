@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { Button, useTheme } from "@chakra-ui/react";
+import { Box, Button, Flex, useTheme, Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
@@ -23,5 +23,34 @@ export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
         Get My Insights
       </Button>
     </Link>
+  );
+}
+
+export function DealRibbon() {
+  const color = "pink.100";
+
+  return (
+    <Flex flexDirection={"column"} alignItems={"center"} mt={"-8px"} zIndex={1}>
+      <Box
+        width={0}
+        height={0}
+        borderLeft={"20px solid transparent"}
+        borderRight={"20px solid transparent"}
+        borderBottom={`14px solid`}
+        borderBottomColor={color}
+        ml={100}
+      />
+      <Text
+        px={5}
+        py={"3px"}
+        backgroundColor={color}
+        color="pink.800"
+        fontWeight={"bold"}
+        fontSize={"small"}
+        borderRadius={100}
+      >
+        Biggest savings with this option!
+      </Text>
+    </Flex>
   );
 }
