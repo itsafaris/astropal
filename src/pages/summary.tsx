@@ -18,6 +18,7 @@ import { UserTestimonialSection } from "@components/summary/UserTestimonialSecti
 import { PersonalizationSection } from "@components/summary/PersonalizationSection";
 import { CTALinkToPricing } from "@components/summary/components";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
+import { MethodSection } from "@components/summary/MethodSection";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -35,12 +36,22 @@ export default function SummaryPage({}: PageProps) {
     <Box pb={24} color="bg.900" bg="bg.100">
       {/* <SpecialOfferBanner /> */}
       <Box>
-        <HeroSection state={quizState} />
-        <ScrollDownSection />
+        <Container>
+          <HeroSection state={quizState} />
+          <ScrollDownSection />
+        </Container>
+      </Box>
+
+      <Box backgroundColor="white" py={10}>
+        <Container>
+          <MethodSection />
+        </Container>
       </Box>
 
       <Box>
-        <ProductSection />
+        <Container>
+          <ProductSection />
+        </Container>
       </Box>
 
       <Box backgroundColor="white" py={10}>

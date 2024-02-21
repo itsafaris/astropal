@@ -1,33 +1,14 @@
 import React from "react";
-import { Box, Flex, Grid, List, ListItem, Stack, Text, TextProps } from "@chakra-ui/react";
+import { Box, Flex, Grid, List, ListItem, Stack, Text } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { FaStar } from "react-icons/fa";
 import { StaticImage } from "gatsby-plugin-image";
 
-const textGradientStyle = {
-  backgroundColor: "brand.600",
-  backgroundImage: "linear-gradient(140deg, yellow.300, brand.400)",
-  backgroundSize: "100%",
-  backgroundRepeat: "repeat",
-  sx: {
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    MozBackgroundClip: "text",
-    MozTextFillColor: "transparent",
-  },
-} as TextProps;
-
-const headlineStyle = {
-  fontSize: "2.5rem",
-  lineHeight: 1.2,
-  fontFamily: "serif",
-  fontWeight: "bold",
-  textAlign: "center",
-} as TextProps;
+import { Headline, HeadlineHighlight } from "./components";
 
 export function MethodSection() {
   return (
-    <Stack spacing={12} color="white">
+    <Stack spacing={16} color="black">
       <MethodHeadline />
       <LovedByUsers />
       <Phases />
@@ -39,14 +20,12 @@ export function MethodSection() {
 export function MethodHeadline() {
   return (
     <Stack spacing={8}>
-      <Text {...headlineStyle}>
+      <Headline>
         Your Guide Is Based On{" "}
-        <Text as="span" {...textGradientStyle}>
-          Celestial Self-Discovery Method{" "}
-        </Text>
-      </Text>
+        <HeadlineHighlight>Celestial Self-Discovery Method </HeadlineHighlight>
+      </Headline>
 
-      <Text fontSize={"xl"} fontWeight={"thin"}>
+      <Text fontSize={"xl"}>
         Week by week, you’ll join an incredible community of women worldwide as you tear down the
         barriers keeping you from your true self, so you can step into your potential and live the
         life you were destined to live.
@@ -58,15 +37,23 @@ export function MethodHeadline() {
 export function LovedByUsers() {
   return (
     <Stack>
-      <Text fontSize={"xl"} textAlign={"center"} mx="auto">
+      <Text fontSize={"2xl"} textAlign={"center"} mx="auto">
         Loved by{" "}
-        <Text as="span" fontWeight={"black"}>
+        <Text as="span" fontWeight={"bold"}>
           420000
         </Text>{" "}
         users worldwide
       </Text>
 
-      <Flex flexDirection={"row"} alignItems={"center"} gap={1} color="yellow.400" mx="auto" mb={4}>
+      <Flex
+        flexDirection={"row"}
+        alignItems={"center"}
+        gap={1}
+        color="yellow.400"
+        mx="auto"
+        mb={4}
+        fontSize={"xl"}
+      >
         <FaStar />
         <FaStar />
         <FaStar />
@@ -82,16 +69,12 @@ export function LovedByUsers() {
 export function PositiveReport() {
   return (
     <Stack spacing={4}>
-      <Text {...headlineStyle}>
-        <Text as="span" {...textGradientStyle}>
-          93%
-        </Text>{" "}
-        of our users
-      </Text>
+      <Headline>
+        <HeadlineHighlight>93% of our users</HeadlineHighlight> report a positive impact in their
+        lives in as little as 1 week.
+      </Headline>
 
-      <Text fontSize={"xl"} textAlign={"center"} mx="auto">
-        report a positive impact in their lives in as little as 1 week of following this method.
-      </Text>
+      <Text fontSize={"xl"} textAlign={"center"} mx="auto"></Text>
 
       <Testimonial />
     </Stack>
@@ -128,21 +111,18 @@ export function Testimonial() {
 
 export function Phases() {
   return (
-    <Stack spacing={4}>
-      <Text {...headlineStyle}>
-        Discover <br /> The 4 Phases Of <br />{" "}
-        <Text as="span" {...textGradientStyle}>
-          The Method
-        </Text>
-      </Text>
+    <Stack spacing={8}>
+      <Headline>
+        Discover The 4-Phases Of <br /> <HeadlineHighlight>The Method</HeadlineHighlight>
+      </Headline>
 
-      <StaticImage alt="" src="../../images/awakening-phase.png" style={{ maxHeight: 300 }} />
-
-      <Text fontSize={"xl"} fontWeight={"thin"}>
+      <Text fontSize={"xl"}>
         Week by week, you’ll join an incredible community of women worldwide as you tear down the
         barriers keeping you from your true self, so you can step into your potential and live the
         life you were destined to live.
       </Text>
+
+      <StaticImage alt="" src="../../images/awakening-phase.png" style={{ maxHeight: 300 }} />
 
       <Stack mt={4} alignItems={"center"} spacing={0}>
         <PhaseCard
@@ -153,14 +133,14 @@ export function Phases() {
               style={{ height: "100%" }}
             />
           }
-          title={"Awakening Phase"}
+          title={"Awakening"}
           achievements={["Self-awareness", "Self-awareness", "Self-awareness", "Self-awareness"]}
           week={"1-2"}
         />
 
         <PhaseCard
           img={<StaticImage alt="" src="../../images/user2.png" style={{ height: "100%" }} />}
-          title={"Public Mask Phase"}
+          title={"Public Mask"}
           achievements={["Self-awareness", "Self-awareness", "Self-awareness", "Self-awareness"]}
           week={"3-4"}
         />
@@ -173,7 +153,7 @@ export function Phases() {
               style={{ height: "100%" }}
             />
           }
-          title={"Relationship Phase"}
+          title={"Relationship"}
           achievements={["Self-awareness", "Self-awareness", "Self-awareness", "Self-awareness"]}
           week={"5-6"}
         />
@@ -186,7 +166,7 @@ export function Phases() {
               style={{ height: "100%" }}
             />
           }
-          title={"Evolution Phase"}
+          title={"Evolution"}
           achievements={["Self-awareness", "Self-awareness", "Self-awareness", "Self-awareness"]}
           week={"7-..."}
         />
@@ -202,24 +182,24 @@ function PhaseCard(props: {
   week: string;
 }) {
   return (
-    <Grid gridTemplateColumns={"auto auto 1fr"} gap={5}>
+    <Grid gridTemplateColumns={"auto auto 1fr"} gap={3}>
       <Stack fontWeight={"bold"} spacing={0} textAlign={"center"} textTransform={"uppercase"}>
+        <Box height={"70px"} width={"70px"} borderRadius={"50%"} overflow={"hidden"} mb={3}>
+          {props.img}
+        </Box>
+
         <Text>Week</Text>
         <Text>{props.week}</Text>
       </Stack>
 
-      <Flex height={"100%"} width={"2px"} backgroundColor={"white"} />
+      <Flex height={"100%"} width={"2px"} backgroundColor={"brand.500"} />
 
       <Stack spacing={3} flexGrow={1} pb={16} width={"250px"}>
-        <Box height={120} width={120} borderRadius={"50%"} overflow={"hidden"}>
-          {props.img}
-        </Box>
-
-        <Text {...headlineStyle} {...textGradientStyle} fontSize={"3xl"} textAlign={"left"}>
+        <Headline textAlign={"left"} color={"brand.500"}>
           {props.title}
-        </Text>
+        </Headline>
 
-        <Text color="white" textTransform={"uppercase"} fontSize={"sm"} fontWeight={"bold"}>
+        <Text textTransform={"uppercase"} fontSize={"sm"} fontWeight={"bold"}>
           Achievements of this phase:
         </Text>
 

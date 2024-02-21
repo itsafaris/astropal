@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { Box, Button, Flex, useTheme, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, useTheme, Text, TextProps } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
@@ -52,5 +52,37 @@ export function DealRibbon() {
         Biggest savings with this option!
       </Text>
     </Flex>
+  );
+}
+
+export function Headline(props: TextProps) {
+  return (
+    <Text
+      fontSize={"2.5rem"}
+      lineHeight={1.2}
+      fontFamily={"serif"}
+      fontWeight={"bold"}
+      textAlign={"center"}
+      {...props}
+    />
+  );
+}
+
+export function HeadlineHighlight(props: TextProps) {
+  return (
+    <Text
+      as="span"
+      backgroundColor={"brand.600"}
+      backgroundImage={"linear-gradient(140deg, #dfbc38, brand.400)"}
+      backgroundSize={"100%"}
+      backgroundRepeat={"repeat"}
+      sx={{
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        MozBackgroundClip: "text",
+        MozTextFillColor: "transparent",
+      }}
+      {...props}
+    />
   );
 }

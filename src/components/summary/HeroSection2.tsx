@@ -1,16 +1,14 @@
 import { Box, Container, Text, Stack, Flex, useTheme } from "@chakra-ui/react";
 import React from "react";
-
 import { CheckIcon, PlusSquareIcon } from "@chakra-ui/icons";
-
 import { QuizStateParsed } from "@utils/state";
-
-import { CTALinkToPricing } from "./components";
+import { CTALinkToPricing, HeadlineHighlight } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { AstrologicalProfileSmall } from "./AstrologicalProfileSmall";
 import { Span } from "@components/quizpage/components";
 import { PricingSection } from "./PricingSection";
 import { AiOutlinePlus } from "react-icons/ai";
+import { Headline } from "./components";
 
 export function HeroSection({ state }: { state: QuizStateParsed }) {
   const theme = useTheme();
@@ -18,29 +16,36 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
   return (
     <>
       <Box id="hero-section" as="section" color="white" py={12}>
-        <Container>
-          <Text textAlign={"center"} fontSize={"xl"}>
-            Congratulations!
-          </Text>
-          <Text fontWeight="bold" textAlign={"center"} fontSize={"xl"} mb={8}>
-            Your Astrological Self-Discovery Guide is Ready!
-          </Text>
+        <Text
+          fontSize={"2xl"}
+          textAlign={"center"}
+          fontWeight={"semibold"}
+          mb={5}
+          fontFamily={"serif"}
+        >
+          Your{" "}
+          <HeadlineHighlight>
+            {" "}
+            Astrological <br /> Self-Discovery Mentorship <br /> Program{" "}
+          </HeadlineHighlight>{" "}
+          Is Ready!
+        </Text>
 
-          <Flex direction={"column"} bg="white" color="black" p={4} borderRadius={"lg"}>
-            <Text fontSize={"xl"}>
-              According to your answers, you should feel the first positive change in your{" "}
-              <Span fontWeight={"bold"} color="purple.500">
-                Career
-              </Span>{" "}
-              within{" "}
-              <Span fontWeight={"bold"} color="purple.500">
-                1 Week
-              </Span>
-            </Text>
-            <StaticImage alt="" src="../../images/method_benefits.png" />
-          </Flex>
+        <Flex direction={"column"} bg="white" color="black" p={6} borderRadius={"lg"}>
+          <Text fontSize={"xl"} fontWeight={"semibold"}>
+            According to your answers, you should feel the first positive change in your{" "}
+            <Span fontWeight={"bold"} color="green.500">
+              Career
+            </Span>{" "}
+            within{" "}
+            <Span fontWeight={"bold"} color="green.500">
+              1 Week
+            </Span>
+          </Text>
+          <StaticImage alt="" src="../../images/method_benefits.png" />
+        </Flex>
 
-          {/* <CTALinkToPricing
+        {/* <CTALinkToPricing
           backgroundColor="green.700"
           _hover={{
             backgroundColor: "green.800",
@@ -48,27 +53,21 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
           boxShadow={`inset 0 0 0 3px ${theme.colors.green["500"]}`}
           color="white"
         /> */}
-        </Container>
       </Box>
 
       <Box>
-        <Container my={16}>
-          <Text fontSize={"2xl"} color="white" my={8} px={4}>
-            What you get with your{" "}
-            <Span fontWeight="bold" color="white">
-              Astrological Self-Discovery Guide
-            </Span>
-            :
-          </Text>
+        <Headline>
+          What You Get With Your{" "}
+          <HeadlineHighlight> Astrological Self-Discovery Mentorship Program:</HeadlineHighlight>
+        </Headline>
 
-          <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
-            <Features />
-          </Flex>
+        <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
+          <Features />
+        </Flex>
 
-          <StaticImage alt="" src="../../images/package3.png" />
+        <StaticImage alt="" src="../../images/package3.png" />
 
-          <PricingSection my={8} />
-        </Container>
+        <PricingSection my={8} />
       </Box>
     </>
   );
@@ -109,9 +108,10 @@ function Features() {
       <Text
         mt={4}
         color="purple.300"
-        fontWeight={"black"}
+        fontWeight={"bold"}
         textAlign={"center"}
         alignSelf={"stretch"}
+        fontSize={"xl"}
       >
         + FREE now for a limited time
       </Text>

@@ -5,6 +5,7 @@ import { Link } from "gatsby";
 import { Span } from "@components/quizpage/components";
 import { StarIcon } from "@chakra-ui/icons";
 import { NumberOfDownloads } from "@components/svg/appStore";
+import { Headline } from "./components";
 
 export interface IProductSectionProps {}
 
@@ -12,7 +13,10 @@ export function ProductSection(props: IProductSectionProps) {
   return (
     <Box id="product-section" as="section" py={12}>
       <Container maxWidth={"94%"}>
-        <Heading textAlign={"center"}>The Product that is loved by our customers</Heading>
+        <Headline textAlign={"center"}>
+          Explore Your Self-Discovery Guide With Astropal App
+        </Headline>
+
         <Flex gap={4} justifyContent={"center"} my={8} alignItems={"center"}>
           <NumberOfDownloads boxSize={24} />
           <Flex alignItems={"center"} borderRadius={"full"} px={4} py={2} direction={"column"}>
