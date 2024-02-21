@@ -111,9 +111,7 @@ export function InsightSourcesSlide() {
         { text: "It reflects me perfectly", icon: "💯" },
       ]}
     >
-      <SlideHeading>
-        When in doubt do you find generic insight of your zodiac sign useful?
-      </SlideHeading>
+      <SlideHeading>When in doubt do you find your horoscope readings useful?</SlideHeading>
 
       <Selector />
     </Slide>
@@ -133,10 +131,7 @@ export function NatalChartReading() {
       ]}
     >
       <SlideHeading>
-        Have you ever received insight based on your{" "}
-        <Text as="span" color="brand.600">
-          true identity - personal Natal Chart?
-        </Text>
+        Have you received a full reading of your personal <Span>Natal Chart</Span> before?
       </SlideHeading>
 
       <Selector />
@@ -226,12 +221,8 @@ export function HyperPersonalisedInsights() {
         return (
           <>
             <SlideHeading>
-              9 out of 10 users claim
-              <Text as="span" color="#63dc94">
-                {" "}
-                personalized insights bring much more clarity in decision making
-              </Text>{" "}
-              compared to generic zodiac insights
+              <Span> 9 out of 10 people</Span> claim that having a Natal Chart reading has enabled
+              them to make better decisions and experience less self-doubt.
             </SlideHeading>
 
             <Flex
@@ -252,7 +243,7 @@ export function HyperPersonalisedInsights() {
               />
             </Flex>
 
-            <NextButton mt={8}>Continue</NextButton>
+            <NextButton mt={8}>Create my Reading</NextButton>
           </>
         );
       }}

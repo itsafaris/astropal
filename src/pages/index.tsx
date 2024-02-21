@@ -4,6 +4,7 @@ import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { TopNavigation } from "@components/topnavigation";
+import { CheckIcon } from "@chakra-ui/icons";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -82,44 +83,35 @@ export default function IndexPage() {
             color="white"
             maxWidth={400}
             mx="auto"
+            mb={8}
           >
-            <Text as="span" color="brand.600">
+            Unlock Your Future: Experience the Most Accurate Personalized Astrology Readings
+            {/* <Text as="span" color="brand.600">
               Get All Answers. <br />
             </Text>
-            The Most Accurate Personalized Astrology
+            The Most Accurate Personalized Astrology */}
           </Heading>
 
           <Flex
             flexDirection={"column"}
-            fontWeight={"regular"}
-            color="whiteAlpha.600"
+            color="white"
             fontSize="md"
+            alignItems={"start"}
+            mx="auto"
+            gap={2}
           >
             <Text textAlign="center">
-              - Time your{" "}
-              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
-                Opportunities
-              </Text>
+              <CheckIcon color="green.500" /> Time Your Opportunities
             </Text>
-
             <Text textAlign="center">
-              - Make{" "}
-              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
-                Decisions
-              </Text>{" "}
-              with confidence -
+              <CheckIcon color="green.500" /> Make Life Decisions with Confidence
             </Text>
-
             <Text textAlign="center">
-              - Tailored Uniquely for{" "}
-              <Text as="span" fontWeight={"bold"} color="whiteAlpha.800">
-                You
-              </Text>{" "}
-              -
+              <CheckIcon color="green.500" /> Tailored Uniquely for You
             </Text>
           </Flex>
 
-          <Flex flexDirection={"row"} justifyContent={"center"} mt={3}>
+          <Flex flexDirection={"row"} justifyContent={"center"} mt={8}>
             <Link to="/onboarding">
               <Button
                 backgroundColor={"brand.600"}
@@ -132,7 +124,7 @@ export default function IndexPage() {
                   backgroundColor: "brand.500",
                 }}
               >
-                Get my first insight
+                Get Your Reading
               </Button>
             </Link>
           </Flex>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { NextButton, SlideHeading } from "../components";
 
 export function FinalizingProfileSlide() {
@@ -11,13 +11,12 @@ export function FinalizingProfileSlide() {
     <Slide
       id="finalizing-profile"
       type="loading"
-      duration={7}
+      duration={5}
       onLoadingCompleted={() => setShowInput(true)}
     >
-      <SlideHeading
-        textAlign={"center"}
-        text="Finalizing your Natal Chart to provide the most accurate insight"
-      />
+      <SlideHeading textAlign={"center"}>
+        Adjusting your Astrological Self-Discovery Mentorship Program based on your answers
+      </SlideHeading>
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>
@@ -25,14 +24,6 @@ export function FinalizingProfileSlide() {
         </Box>
 
         {showInput && <NextButton mb={5}>Continue</NextButton>}
-
-        <Text textAlign={"center"} color="brand.600" fontSize={"3xl"} fontWeight={"bold"}>
-          310'000+ people
-        </Text>
-
-        <Text textAlign={"center"} color="white" fontWeight={"bold"} fontSize={"lg"} mb={5}>
-          have chosen Astropal as their Personal Astrologer
-        </Text>
       </Flex>
     </Slide>
   );
