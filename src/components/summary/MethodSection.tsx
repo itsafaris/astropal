@@ -20,9 +20,13 @@ export function MethodSection() {
 export function MethodHeadline() {
   return (
     <Stack spacing={8}>
-      <Headline>
+      {/* <Headline>
         Your Guide Is Based On{" "}
         <HeadlineHighlight>Celestial Self-Discovery Method </HeadlineHighlight>
+      </Headline> */}
+
+      <Headline>
+        <HeadlineHighlight> Program Curriculum</HeadlineHighlight>
       </Headline>
 
       <Text fontSize={"xl"}>
@@ -113,7 +117,7 @@ export function Phases() {
   return (
     <Stack spacing={8}>
       <Headline>
-        Discover The 4-Phases Of <br /> <HeadlineHighlight>The Method</HeadlineHighlight>
+        Discover The 3-Phases Of <br /> <HeadlineHighlight>The Program</HeadlineHighlight>
       </Headline>
 
       <Text fontSize={"xl"}>
@@ -138,12 +142,12 @@ export function Phases() {
           week={"1-2"}
         />
 
-        <PhaseCard
+        {/* <PhaseCard
           img={<StaticImage alt="" src="../../images/user2.png" style={{ height: "100%" }} />}
           title={"Public Mask"}
           achievements={["Self-awareness", "Self-awareness", "Self-awareness", "Self-awareness"]}
           week={"3-4"}
-        />
+        /> */}
 
         <PhaseCard
           img={

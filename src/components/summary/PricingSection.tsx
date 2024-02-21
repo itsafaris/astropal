@@ -12,11 +12,13 @@ export function PricingSection(props: ComponentProps<typeof Box>) {
     <Box id="pricing-section" as="section" {...props}>
       <Stack spacing={4}>
         <PricingPlans />
+
         <Flex>
           <Text fontSize={"sm"} color="bg.600">
             Your subscription renews at the start of the period. You can cancel any time.
           </Text>
         </Flex>
+
         {/* <TermsAgreement /> */}
         {/* <RiskFreeGuaranteed /> */}
         {/* <SafeCheckout /> */}
@@ -168,8 +170,8 @@ function PricingPlanItem({
       backgroundColor="bg.200"
       width={"100%"}
       position="relative"
-      border={`2px solid`}
-      borderColor={isSelected ? "orange.400" : "bg.400"}
+      border={`3px solid`}
+      borderColor={isSelected ? "brand.500" : "bg.400"}
       mt={3}
       {...props}
     >
