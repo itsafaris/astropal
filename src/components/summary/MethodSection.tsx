@@ -26,7 +26,7 @@ export function MethodHeadline() {
       </Headline> */}
 
       <Headline>
-        <HeadlineHighlight> Program Curriculum</HeadlineHighlight>
+        <HeadlineHighlight>A Unique Way</HeadlineHighlight> To Harness Astrology
       </Headline>
 
       <Text fontSize={"xl"}>

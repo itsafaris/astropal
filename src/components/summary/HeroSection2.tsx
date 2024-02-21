@@ -2,7 +2,7 @@ import { Box, Container, Text, Stack, Flex, useTheme, Grid } from "@chakra-ui/re
 import React from "react";
 import { CheckIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { QuizStateParsed } from "@utils/state";
-import { CTALinkToPricing, HeadlineHighlight } from "./components";
+import { CTALinkToPricing, HeadlineHighlight, InvertedHighlight } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { AstrologicalProfileSmall } from "./AstrologicalProfileSmall";
 import { Span } from "@components/quizpage/components";
@@ -57,7 +57,7 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
       <Box>
         <Headline>
           What You Get With Your{" "}
-          <HeadlineHighlight> Astrological Self-Discovery Mentorship Program</HeadlineHighlight>
+          <InvertedHighlight> Astrological Self-Discovery Mentorship Program</InvertedHighlight>
         </Headline>
 
         <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
@@ -162,7 +162,7 @@ function Features() {
 
       <Text
         mt={4}
-        color="brand.500"
+        color="brand.600"
         fontWeight={"bold"}
         textAlign={"center"}
         alignSelf={"stretch"}
@@ -172,7 +172,7 @@ function Features() {
       </Text>
 
       <Flex alignItems={"center"} gap={2}>
-        <CheckIcon color={"brand.500"} boxSize="20px" mr={1} />
+        <CheckIcon color={"brand.600"} boxSize="20px" mr={1} />
         Printable PDF Birth Chart Reading (worth $149)
       </Flex>
     </Stack>
