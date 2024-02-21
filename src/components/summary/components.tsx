@@ -86,3 +86,22 @@ export function HeadlineHighlight(props: TextProps) {
     />
   );
 }
+
+export function InvertedHighlight(props: TextProps) {
+  return (
+    <Text
+      as="span"
+      // backgroundColor={"brand.600"}
+      backgroundImage={"linear-gradient(140deg, brand.500, brand.800)"}
+      backgroundSize={"100%"}
+      backgroundRepeat={"repeat"}
+      sx={{
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        MozBackgroundClip: "text",
+        MozTextFillColor: "transparent",
+      }}
+      {...props}
+    />
+  );
+}

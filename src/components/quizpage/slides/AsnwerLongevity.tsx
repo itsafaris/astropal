@@ -1,7 +1,6 @@
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { SlideHeading } from "../components";
-import { Text } from "@chakra-ui/react";
+import { SlideHeading, Span } from "../components";
 
 export function AsnwerLongevity() {
   return (
@@ -16,11 +15,7 @@ export function AsnwerLongevity() {
       ]}
     >
       <SlideHeading>
-        How would you like your{" "}
-        <Text as="span" color="brand.600">
-          Personalized Insights
-        </Text>{" "}
-        to be present?
+        How would you like your <Span>Personalized Horoscopes</Span> to be present?
       </SlideHeading>
       <Selector />
     </Slide>

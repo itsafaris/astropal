@@ -29,7 +29,7 @@ export function SpanJust(props: ComponentProps<typeof Text>) {
 }
 
 export function Span(props: React.ComponentProps<typeof SpanRaw>) {
-  return <SpanRaw color="orange.400" fontWeight={"semibold"} {...props} />;
+  return <SpanRaw color="brand.600" fontWeight={"semibold"} {...props} />;
 }
 
 export function Subtitle(props: React.ComponentProps<typeof Text>) {

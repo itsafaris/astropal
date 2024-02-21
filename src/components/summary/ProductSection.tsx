@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 import { Span } from "@components/quizpage/components";
 import { StarIcon } from "@chakra-ui/icons";
 import { NumberOfDownloads } from "@components/svg/appStore";
-import { Headline } from "./components";
+import { Headline, HeadlineHighlight, InvertedHighlight } from "./components";
 
 export interface IProductSectionProps {}
 
@@ -39,9 +39,7 @@ export function ProductSection(props: IProductSectionProps) {
         <Stack spacing={24}>
           <Box>
             <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
-              <Span color="purple.300" fontSize={"6xl"}>
-                Discover
-              </Span>
+              <BigWord>Discover</BigWord>
               <br /> Your Astrological Blueprint
             </Heading>
             <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
@@ -55,15 +53,12 @@ export function ProductSection(props: IProductSectionProps) {
 
           <Box>
             <Heading mb={12} textAlign={"center"} color="white" fontSize={"2xl"}>
-              <Span color="purple.300" fontSize={"6xl"}>
-                Receive
-              </Span>
+              <BigWord>Receive</BigWord>
               <br />
               Personalised Horoscopes and Mantras Daily
             </Heading>
             <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
-              It's way more than a generic horoscope. These are 100% made for your. Based on your
-              Birth Chart and Personality.
+              Forget the regular generic horoscopes. Based on your Birth Chart and Personality.
             </Text>
 
             <Box mt={8}>
@@ -74,10 +69,8 @@ export function ProductSection(props: IProductSectionProps) {
           <Box>
             <Box mb={12}>
               <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
-                <Span color="purple.300" fontSize={"6xl"}>
-                  Ask
-                </Span>
-                <br /> Your most important questions and receive detailed answers instantly
+                <BigWord>Consult</BigWord>
+                <br /> Your Expert Astrologer on Any Subject
               </Heading>
 
               <Text textAlign={"center"} mt={8} mb={4} fontWeight={"bold"}>
@@ -114,4 +107,8 @@ export function ProductSection(props: IProductSectionProps) {
       </Container>
     </Box>
   );
+}
+
+function BigWord(props: React.ComponentProps<typeof InvertedHighlight>) {
+  return <InvertedHighlight fontFamily={"serif"} fontSize={"5xl"} {...props} />;
 }

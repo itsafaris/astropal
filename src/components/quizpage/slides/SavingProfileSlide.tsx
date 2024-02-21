@@ -50,7 +50,7 @@ export function SavingProfileSlide() {
       duration={4}
       onLoadingCompleted={() => setShowInput(true)}
     >
-      <SlideHeading textAlign={"center"} text="Updating your Natal Chart for enhanced insight" />
+      <SlideHeading textAlign={"center"} text="Creating a reading of your Natal Chart" />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>
@@ -59,7 +59,7 @@ export function SavingProfileSlide() {
 
         {showInput && <NextButton mb={5}>Continue</NextButton>}
 
-        <Box
+        {/* <Box
           p={4}
           pb={0}
           bg="white"
@@ -70,9 +70,9 @@ export function SavingProfileSlide() {
           <Text textAlign={"center"} color="bg.100" fontWeight={"semibold"} fontSize={"md"}>
             See what others say
           </Text>
-        </Box>
+        </Box> */}
 
-        <Box
+        {/* <Box
           color="black"
           borderBottomLeftRadius={8}
           borderBottomRightRadius={8}
@@ -101,7 +101,7 @@ export function SavingProfileSlide() {
               </SlideAnimation>
             );
           })}
-        </Box>
+        </Box> */}
       </Flex>
     </Slide>
   );

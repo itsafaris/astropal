@@ -20,11 +20,7 @@ export function AstrologerThemePreferences() {
       ]}
     >
       <SlideHeading>
-        Which topic do you want your first{" "}
-        <Text as="span" color="brand.600">
-          Personalized Insight
-        </Text>{" "}
-        to be focused on?
+        Where would you like to start your <Span>Astrological Self-Discovery journey</Span>?
       </SlideHeading>
       <Selector />
     </Slide>
@@ -68,10 +64,7 @@ export function DailyHoroscope() {
       ]}
     >
       <SlideHeading>
-        What time would you like to receive your following{" "}
-        <Text as="span" color="brand.600">
-          Personalized Insights?
-        </Text>
+        At what time of the day would you like to receive your <Span>personalized horoscopes</Span>?{" "}
       </SlideHeading>
       <Selector />
     </Slide>
