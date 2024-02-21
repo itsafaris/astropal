@@ -26,35 +26,31 @@ export function AstrologicalProfileSmall({
       backgroundColor={"white"}
       px={1}
       py={3}
+      pb={5}
       gap={2}
       position={"relative"}
       fontStyle="italic"
       fontFamily={"serif"}
       color="black"
       borderRadius={"lg"}
-      width={100}
       {...rest}
     >
-      <Flex height={90} width={90} position={"relative"} mx="auto" my={-2}>
-        <Box transform={"scale(0.35)"} position={"absolute"} left={"-87%"} top={"-88%"}>
-          <NatalChart
-            date={quizState.yourBirthDate}
-            time={quizState.yourBirthTime}
-            location={quizState.yourBirthLocation}
-            size={250}
-          />
-        </Box>
-      </Flex>
+      <NatalChart
+        date={quizState.yourBirthDate}
+        time={quizState.yourBirthTime}
+        location={quizState.yourBirthLocation}
+        size={220}
+      />
 
       <Divider />
 
-      <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1} spacing={1}>
-        <Text fontSize={"12px"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
-        <Text fontSize={"7px"} textTransform={"uppercase"}>
+      <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1} spacing={2}>
+        <Text fontSize={"3xl"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
+        <Text fontSize={"md"} textTransform={"uppercase"}>
           {getReadableDate(quizState.yourBirthDate)}
           {", "} {getReadableTime(quizState.yourBirthTime)}
         </Text>
-        <Text fontSize={"7px"}>{quizState.yourBirthLocation.formattedText}</Text>
+        <Text fontSize={"md"}>{quizState.yourBirthLocation.formattedText}</Text>
       </Stack>
     </Flex>
   );
