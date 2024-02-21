@@ -14,7 +14,7 @@ export function ProductSection(props: IProductSectionProps) {
     <Box id="product-section" as="section" py={12}>
       <Container maxWidth={"94%"}>
         <Headline textAlign={"center"}>
-          Explore Your Self-Discovery Guide With Astropal App
+          Explore Your Self-Discovery Mentorship Program With Astropal App
         </Headline>
 
         <Flex gap={4} justifyContent={"center"} my={8} alignItems={"center"}>
