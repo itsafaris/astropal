@@ -54,10 +54,6 @@ export function CheckoutWidget({ pricingPlan }: { pricingPlan: PricingPlanType }
   const [stripe, setStripe] = useState<Stripe>();
 
   useEffect(() => {
-    trackEvent({ name: "checkout_started", properties: { pricingPlan } });
-  }, []);
-
-  useEffect(() => {
     loadStripe(
       "pk_test_51OXhWrBgg62DxbyKMo0dMQmSM2j83tzEiGp9yZuWFIBIATRdsaA3XtPz4mQ9gHbrZXBAbSJtChMQirdp8TQh8OQR00hDaUAppF"
     ).then((s) => {
