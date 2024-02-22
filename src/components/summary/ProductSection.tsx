@@ -87,8 +87,11 @@ export function ProductSection(props: IProductSectionProps) {
 
             <Box>
               <Text my={10} maxWidth={"80%"} mx="auto" textAlign={"center"} fontSize={"xl"}>
-                2. Receive a personalised answer based on your astrological profile and current
-                celestial events
+                2. Receive a personalised answer{" "}
+                <Text as="span" fontWeight={"black"} color="white">
+                  instantly
+                </Text>{" "}
+                based on your astrological profile and current celestial events
               </Text>
               <Box maxWidth={"80%"} my={8} mx="auto">
                 <StaticImage alt="astrology product image" src="../../images/product3.png" />
