@@ -85,7 +85,7 @@ export default function SummaryPage({}: PageProps) {
       </Box>
 
       <Box py={10}>
-        <Container id="pricing-section" as="section">
+        <Container id="pricing-plans" as="section">
           <Headline mb={8}>
             Unlock the Power of{" "}
             <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}</HeadlineHighlight> Within
