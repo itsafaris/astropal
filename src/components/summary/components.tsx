@@ -3,27 +3,30 @@ import { Box, Button, Flex, useTheme, Text, TextProps } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 export function CTALinkToPricing({ children, ...rest }: ComponentProps<typeof Button>) {
-  const theme = useTheme();
-
   return (
     <Link to="/summary#pricing-plans" title="Pricing plans">
-      <Button
-        px={8}
-        py={7}
-        variant={"solid"}
-        backgroundColor="brand.500"
-        bgGradient={"linear-gradient(140deg, #dfbc38, brand.500)"}
-        _hover={{
-          bgGradient: "linear-gradient(140deg, #dfbc38, brand.400)",
-        }}
-        width={"full"}
-        boxShadow={`inset 0 0 0 3px ${theme.colors.brand["800"]}, 0px 5px 15px 0px #00000030`}
-        borderRadius={8}
-        {...rest}
-      >
-        {children ?? "Start Now"}
-      </Button>
+      <CTAButton>{children ?? "Start Now"}</CTAButton>
     </Link>
+  );
+}
+
+export function CTAButton(props: ComponentProps<typeof Button>) {
+  const theme = useTheme();
+  return (
+    <Button
+      px={8}
+      py={7}
+      variant={"solid"}
+      backgroundColor="brand.500"
+      bgGradient={"linear-gradient(140deg, #dfbc38, brand.500)"}
+      _hover={{
+        bgGradient: "linear-gradient(140deg, #dfbc38, brand.400)",
+      }}
+      width={"full"}
+      boxShadow={`inset 0 0 0 3px ${theme.colors.brand["800"]}, 0px 5px 15px 0px #00000030`}
+      borderRadius={8}
+      {...props}
+    />
   );
 }
 
