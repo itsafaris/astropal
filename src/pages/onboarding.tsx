@@ -18,6 +18,7 @@ import {
   DecisionChallengeAgreement,
   DecisionMakingStruggles,
   FillerPeopleInControl,
+  Filler_MentorshipProgramIntro,
   HyperPersonalisedInsights,
   InsightSourcesSlide,
   InsightVsHoroscopeComparison,
@@ -26,12 +27,13 @@ import {
   WrongDecisionSlide,
 } from "@components/quizpage/questions";
 import { PersonalityDescriptionSlide } from "@components/quizpage/slides/PersonalityDescriptionSlide";
-import { SavingProfileSlide } from "@components/quizpage/slides/SavingProfileSlide";
+import { Loading_CreatingNatalChartReading } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import {
   AskingQuestionsDirectly,
   AstrologerThemePreferences,
   DailyHoroscope,
+  DedicationTime,
 } from "@components/quizpage/slides/otherSlides";
 import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
@@ -90,8 +92,10 @@ export default function OnboardingQuiz() {
             <InsightSourcesSlide />
             <NatalChartReading />
             <HyperPersonalisedInsights />
-            <SavingProfileSlide />
+            <Loading_CreatingNatalChartReading />
+            <Filler_MentorshipProgramIntro />
             <AstrologerThemePreferences />
+            <DedicationTime />
             <DailyHoroscope />
             <AsnwerLongevity />
             <FinalizingProfileSlide />

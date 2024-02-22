@@ -1,11 +1,12 @@
 import React from "react";
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Box, Flex, Grid, Stack, Text, useTheme } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { getPersonalInfoFromState } from "@utils/state";
 import { toTitleCase } from "@utils/string";
 import { astrologyThemes } from "@utils/astrologyThemes";
+import { NatalChart } from "@components/NatalChart";
 
 export function DecisionMakingStruggles() {
   const { submitQuestion } = useQuiz();
@@ -22,11 +23,10 @@ export function DecisionMakingStruggles() {
         { value: "none", text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
-      <SlideHeading
-        text={
-          "Now, let's determine how we can assist you. Please mark the areas in which you currently struggle the most"
-        }
-      />
+      <SlideHeading>
+        Now, let's determine how we can assist you. Please mark the areas in which you currently{" "}
+        <Span>struggle the most</Span>
+      </SlideHeading>
       <Selector />
       <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
@@ -111,8 +111,9 @@ export function InsightSourcesSlide() {
         { text: "It reflects me perfectly", icon: "💯" },
       ]}
     >
-      <SlideHeading>When in doubt do you find your horoscope readings useful?</SlideHeading>
-
+      <SlideHeading>
+        When in doubt do you find your <Span>horoscope readings</Span> useful?
+      </SlideHeading>
       <Selector />
     </Slide>
   );
@@ -217,36 +218,66 @@ export function FillerPeopleInControl() {
 export function HyperPersonalisedInsights() {
   return (
     <Slide id="personalised-insights-intro" type="filler">
-      {({ quizState }) => {
-        return (
-          <>
-            <SlideHeading>
-              <Span> 9 out of 10 people</Span> claim that having a Natal Chart reading has enabled
-              them to make better decisions and experience less self-doubt.
-            </SlideHeading>
+      <SlideHeading>
+        <Span> 9 out of 10 people</Span> claim that having a Natal Chart reading has enabled them to
+        make better decisions and experience less self-doubt.
+      </SlideHeading>
 
-            <Flex
-              justifyContent={"center"}
-              alignItems={"center"}
-              bg="bg.100"
-              borderRadius={"xl"}
-              py={7}
-            >
-              <StaticImage
-                alt="chart showing how your self-esteem will increase over time"
-                src="../../images/personalised_astro_benefits.png"
-                layout="fullWidth"
-                style={{
-                  width: "280px",
-                  marginLeft: "-15px",
-                }}
-              />
-            </Flex>
+      <Flex justifyContent={"center"} alignItems={"center"} bg="bg.100" borderRadius={"xl"} py={7}>
+        <StaticImage
+          alt="chart showing how your self-esteem will increase over time"
+          src="../../images/personalised_astro_benefits.png"
+          layout="fullWidth"
+          style={{
+            width: "280px",
+            marginLeft: "-15px",
+          }}
+        />
+      </Flex>
 
-            <NextButton mt={8}>Create my Reading</NextButton>
-          </>
-        );
-      }}
+      <NextButton mt={8}>Create my Reading</NextButton>
+    </Slide>
+  );
+}
+
+export function Filler_MentorshipProgramIntro() {
+  const { quizState } = useQuizState();
+  const p = getPersonalInfoFromState(quizState);
+
+  return (
+    <Slide id="mentorship-program-intro" type="filler">
+      <SlideHeading>Your Chart Analysis is complete!</SlideHeading>
+      <SlideHeading mt={-4}>
+        We will now create your personalized{" "}
+        <Span>Astrological Self-Discovery Mentorship Program</Span> based on the result of the
+        analysis
+      </SlideHeading>
+
+      <Box
+        position={"relative"}
+        bg="bg.200"
+        p={4}
+        borderRadius={"xl"}
+        border="2px solid"
+        borderColor={"brand.800"}
+      >
+        <Flex bg="white" position={"absolute"} bottom={8} right={4} borderRadius={"xl"}>
+          <NatalChart
+            date={p.yourBirthDate}
+            time={p.yourBirthTime}
+            location={p.yourBirthLocation}
+            size={240}
+          />
+        </Flex>
+        <StaticImage
+          alt="chart showing how your self-esteem will increase over time"
+          src="../../images/program_preview.png"
+          width={200}
+          layout="fixed"
+          style={{ borderRadius: 16 }}
+        />
+      </Box>
+      <NextButton mt={8}>Create my Program</NextButton>
     </Slide>
   );
 }

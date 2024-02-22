@@ -20,7 +20,7 @@ export function AstrologerThemePreferences() {
       ]}
     >
       <SlideHeading>
-        Where would you like to start your <Span>Astrological Self-Discovery journey</Span>?
+        Where would you like your <Span>Program</Span> to begin?
       </SlideHeading>
       <Selector />
     </Slide>
@@ -64,7 +64,27 @@ export function DailyHoroscope() {
       ]}
     >
       <SlideHeading>
-        At what time of the day would you like to receive your <Span>personalized horoscopes</Span>?{" "}
+        At what time of the day would you like to receive your <Span>Personalized Horoscopes</Span>?{" "}
+      </SlideHeading>
+      <Selector />
+    </Slide>
+  );
+}
+
+export function DedicationTime() {
+  return (
+    <Slide
+      id="dedication-time"
+      type="single"
+      variant="list"
+      options={[
+        { text: "Up to 5 minutes", icon: "◔" },
+        { text: "Up to 20 minutes", icon: "◕" },
+        { text: "Up to 1 hour", icon: "⏺︎" },
+      ]}
+    >
+      <SlideHeading>
+        How much time per day do you want to dedicate to self-discovery and reflection?
       </SlideHeading>
       <Selector />
     </Slide>

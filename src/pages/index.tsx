@@ -1,10 +1,11 @@
-import { Box, Container, Flex, Heading, Text, Button, useTheme } from "@chakra-ui/react";
+import { Box, Container, Flex, Text, Button, useTheme } from "@chakra-ui/react";
 import { SEO } from "@components/seo";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { TopNavigation } from "@components/topnavigation";
 import { CheckIcon } from "@chakra-ui/icons";
+import { Headline, InvertedHighlight } from "@components/summary/components";
 
 export function Head() {
   const { brandName } = useSiteMetadata();
@@ -72,25 +73,11 @@ export default function IndexPage() {
             </Flex>
           </Flex>
 
-          <Heading
-            as="h1"
-            fontSize={{
-              base: "32px",
-              md: "32px",
-            }}
-            lineHeight={1.4}
-            textAlign="center"
-            color="white"
-            maxWidth={400}
-            mx="auto"
-            mb={8}
-          >
-            Unlock Your Future: Experience the Most Accurate Personalized Astrology Readings
-            {/* <Text as="span" color="brand.600">
-              Get All Answers. <br />
-            </Text>
-            The Most Accurate Personalized Astrology */}
-          </Heading>
+          <Headline fontSize={"4xl"} my={4}>
+            <InvertedHighlight>
+              Experience the Most Accurate Personalized Astrology
+            </InvertedHighlight>
+          </Headline>
 
           <Flex
             flexDirection={"column"}
@@ -101,17 +88,24 @@ export default function IndexPage() {
             gap={2}
           >
             <Text textAlign="center">
-              <CheckIcon color="green.500" /> Time Your Opportunities
+              <CheckIcon mr={3} color="green.500" />
+              Time Your Opportunities
             </Text>
             <Text textAlign="center">
-              <CheckIcon color="green.500" /> Make Life Decisions with Confidence
+              <CheckIcon mr={3} color="green.500" />
+              Make Decisions with Confidence
             </Text>
             <Text textAlign="center">
-              <CheckIcon color="green.500" /> Tailored Uniquely for You
+              <CheckIcon mr={3} color="green.500" />
+              Capitalize on Your Talents
             </Text>
           </Flex>
 
-          <Flex flexDirection={"row"} justifyContent={"center"} mt={8}>
+          <Text mt={8} color={"white"} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
+            Unlock Your Future with a 1-min quiz
+          </Text>
+
+          <Flex flexDirection={"row"} justifyContent={"center"} mt={4} mb={20}>
             <Link to="/onboarding">
               <Button
                 backgroundColor={"brand.600"}
