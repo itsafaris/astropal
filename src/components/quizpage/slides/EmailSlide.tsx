@@ -16,7 +16,7 @@ export function EmailSlide() {
         you the instructions on how to get access to the program
       </Caption>
 
-      <NextButton>Get my Program</NextButton>
+      <NextButton>Get My Program</NextButton>
     </Slide>
   );
 }

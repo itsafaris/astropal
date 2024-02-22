@@ -235,7 +235,7 @@ export function HyperPersonalisedInsights() {
         />
       </Flex>
 
-      <NextButton mt={8}>Create my Reading</NextButton>
+      <NextButton mt={8}>Create My Reading</NextButton>
     </Slide>
   );
 }
@@ -277,7 +277,7 @@ export function Filler_MentorshipProgramIntro() {
           style={{ borderRadius: 16 }}
         />
       </Box>
-      <NextButton mt={8}>Create my Program</NextButton>
+      <NextButton mt={8}>Create My Program</NextButton>
     </Slide>
   );
 }

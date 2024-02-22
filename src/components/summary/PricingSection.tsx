@@ -15,7 +15,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
-import { CTAButton, CTALinkToPricing } from "./components";
+import { CTAButton } from "./components";
 import { CheckoutWidget } from "src/pages/checkout";
 import { SpecialOfferBanner } from "./SpecialOfferBanner";
 

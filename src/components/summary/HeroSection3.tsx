@@ -95,7 +95,7 @@ export function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             </Text>
           </Grid>
 
-          <AstrologicalProfile quizState={quizState} interpretation={{}} />
+          <AstrologicalProfile quizState={quizState} />
         </Flex>
 
         <Flex flexDirection={"row"} justifyContent={"center"}>
