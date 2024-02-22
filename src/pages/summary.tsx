@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { PageProps } from "gatsby";
 
-import { TopNavigation } from "@components/topnavigation";
 import { loadQuizState } from "@utils/localStorage";
 import { QuizStateParsed } from "@utils/state";
 
 import { AreasOfGuidanceSection } from "@components/summary/AreasOfGuidanceSection";
 import { AstrologerComparisonSection } from "@components/summary/AstrologerComparisonSection";
-import { ExampleQuestionsSection } from "@components/summary/ExampleQuestionsSection";
 import { MediaCoverageSection } from "@components/summary/MediaCoverageSection";
 import { HeroSection } from "@components/summary/HeroSection2";
 import { PricingSection } from "@components/summary/PricingSection";
 import { ProductSection } from "@components/summary/ProductSection";
-import { ScrollDownSection } from "@components/summary/ScrollDownSection";
 import { UserTestimonialSection } from "@components/summary/UserTestimonialSection";
-import { PersonalizationSection } from "@components/summary/PersonalizationSection";
 import { CTALinkToPricing, Headline, HeadlineHighlight } from "@components/summary/components";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 import { MethodSection } from "@components/summary/MethodSection";
