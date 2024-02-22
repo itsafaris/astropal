@@ -28,7 +28,7 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
           maxW={400}
           mx="auto"
         >
-          <Text fontSize={"2xl"}>
+          <Text fontSize={"xl"}>
             According to your answers, you should feel the first positive change in your{" "}
             <Span fontWeight={"black"} color="green.400">
               {state.focusArea}
@@ -44,7 +44,7 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
       </Box>
 
       <Box>
-        <Headline fontSize={"3xl"}>
+        <Headline fontSize={"3xl"} mt={5} mb={10}>
           Get Instant Access To All The Benefits Of{" "}
           <InvertedHighlight>Your Program</InvertedHighlight> From Your Phone
         </Headline>
@@ -120,7 +120,7 @@ function Features() {
     <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"} fontWeight={"bold"}>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
-        Continuous Learning, Guidance, Insights
+        Continuous Learning and Guidance
       </Flex>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
