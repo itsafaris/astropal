@@ -50,7 +50,17 @@ export function PricingSection({
           }}
         />
 
-        <CTAButton id={sectionID} mt={4} onClick={onOpen}>
+        <CTAButton
+          id={sectionID}
+          mt={4}
+          onClick={() => {
+            trackEvent({
+              name: "checkout_btn_click",
+              properties: { sectionID: sectionID, planID: selectedPlanID },
+            });
+            onOpen();
+          }}
+        >
           Start Your Program Now
         </CTAButton>
 
