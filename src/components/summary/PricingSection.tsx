@@ -256,7 +256,7 @@ function PricingPlanItem({
             ${pricingPlan.daily}
           </Text>
 
-          <Text fontSize={"sm"} fontWeight={"semibold"} lineHeight={"normal"} color="bg.700">
+          <Text fontSize={"sm"} fontWeight={"bold"} lineHeight={"normal"} color="bg.900">
             per day
           </Text>
         </Flex>

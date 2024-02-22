@@ -22,6 +22,7 @@ export function SpecialOfferBanner(props: FlexProps) {
           flexDirection="row"
           alignItems={"center"}
           justifyContent={"space-between"}
+          gap={5}
         >
           <Timer />
           <Text textAlign={"right"} fontSize={"sm"} fontWeight={"semibold"}>

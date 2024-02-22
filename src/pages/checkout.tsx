@@ -183,7 +183,7 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
       )}
 
       <Box width={"full"} display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
-        <Text textAlign={"center"} my={4} fontWeight={"semibold"} color="bg.300">
+        <Text my={5} color="black" fontSize={"sm"} textAlign={"center"}>
           Select a secure payment
         </Text>
 
@@ -207,9 +207,16 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
           }}
         />
 
-        <Box width={"full"} my={8} position={"relative"} opacity={0.5}>
-          <Divider borderColor={"black"} width={"full"} />
-          <AbsoluteCenter bg="bg.900" px="4" color="black" fontSize={"sm"}>
+        <Box width={"full"} my={8} position={"relative"}>
+          <Divider borderColor={"black"} width={"full"} opacity={0.5} />
+          <AbsoluteCenter
+            bg="bg.900"
+            px="4"
+            color="black"
+            fontSize={"sm"}
+            width={160}
+            textAlign={"center"}
+          >
             Or pay using card
           </AbsoluteCenter>
         </Box>
@@ -262,29 +269,32 @@ function PlanPreview({ pricingPlan, ...rest }: { pricingPlan: PricingPlanType } 
 
   return (
     <Stack color="black" {...rest}>
-      <Flex direction={"row"} gap={4} alignItems={"end"}>
-        <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
-          {pricingPlan.title}
-        </Text>
-        <Text fontWeight={"bold"} flex={2} textAlign={"right"}>
-          ${pricingPlan.priceBefore}
-        </Text>
-      </Flex>
-      <Flex direction={"row"} gap={4} alignItems={"end"}>
-        <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
-          Discount ({discountPerc}%)
-        </Text>
-        <Text fontWeight={"bold"} flex={2} color="red.500" textAlign={"right"}>
-          - ${discountAbs}
-        </Text>
-      </Flex>
+      <Stack spacing={0}>
+        <Flex direction={"row"} gap={4} alignItems={"end"}>
+          <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
+            {pricingPlan.title}:
+          </Text>
+          <Text fontWeight={"bold"} flex={2} textAlign={"right"} textDecoration="line-through">
+            ${pricingPlan.priceBefore}
+          </Text>
+        </Flex>
+
+        <Flex direction={"row"} gap={4} alignItems={"end"}>
+          <Text fontSize={"sm"} fontWeight={"semibold"} flex={5}>
+            Discount ({discountPerc}%):
+          </Text>
+          <Text fontWeight={"bold"} flex={2} color="red.500" textAlign={"right"}>
+            - ${discountAbs}.00
+          </Text>
+        </Flex>
+      </Stack>
 
       <Box height={"1px"} backgroundColor="blackAlpha.300" width={"full"} />
 
       <Stack direction={"row"} alignItems={"start"} justifyContent={"space-between"}>
         <Text fontWeight={"bold"}>Total:</Text>
         <Stack spacing={0}>
-          <Text fontWeight={"bold"} fontSize={"2xl"} textAlign={"right"}>
+          <Text fontWeight={"bold"} fontSize={"xl"} textAlign={"right"}>
             ${pricingPlan.price}
           </Text>
           <Text fontSize={"xs"}>

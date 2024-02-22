@@ -62,18 +62,6 @@ export default function SummaryPage({}: PageProps) {
         </Container>
       </Box>
 
-      {/* <Box py={10}>
-        <Container px={0}>
-          <ExampleQuestionsSection />
-
-          <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="example-questions-section-cta">
-              Start Your Program Now
-            </CTALinkToPricing>
-          </Flex>
-        </Container>
-      </Box> */}
-
       <Box py={10}>
         <Container>
           <MediaCoverageSection />
@@ -84,8 +72,8 @@ export default function SummaryPage({}: PageProps) {
         <Container id="pricing-plans" as="section">
           <Headline mb={8}>
             Unlock the Power of{" "}
-            <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}</HeadlineHighlight> Within
-            Yourself. Start <HeadlineHighlight>Your Program</HeadlineHighlight> Now
+            <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}.</HeadlineHighlight> Start{" "}
+            <HeadlineHighlight>Your Program</HeadlineHighlight> Now
           </Headline>
 
           <PricingSection sectionID="bottom-pricing-cta" />
