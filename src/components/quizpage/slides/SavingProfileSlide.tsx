@@ -31,7 +31,7 @@ const testimonials = [
   },
 ];
 
-export function SavingProfileSlide() {
+export function Loading_CreatingNatalChartReading() {
   const [testimonialIdx, setTestimonialIdx] = React.useState<number>(0);
   const [showInput, setShowInput] = React.useState<boolean>(false);
 
@@ -45,7 +45,7 @@ export function SavingProfileSlide() {
 
   return (
     <Slide
-      id="saving-profile"
+      id="creating-reading"
       type="loading"
       duration={4}
       onLoadingCompleted={() => setShowInput(true)}

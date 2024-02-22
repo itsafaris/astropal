@@ -19,9 +19,7 @@ export function AstrologerThemePreferences() {
         { text: "Self understanding", icon: "🧘" },
       ]}
     >
-      <SlideHeading>
-        Where would you like to start your <Span>Astrological Self-Discovery journey</Span>?
-      </SlideHeading>
+      <SlideHeading>Where would you like to start your journey?</SlideHeading>
       <Selector />
     </Slide>
   );
@@ -64,7 +62,7 @@ export function DailyHoroscope() {
       ]}
     >
       <SlideHeading>
-        At what time of the day would you like to receive your <Span>personalized horoscopes</Span>?{" "}
+        At what time of the day would you like to receive your <Span>Personalized Horoscopes</Span>?{" "}
       </SlideHeading>
       <Selector />
     </Slide>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { QuizQuestionsState, Slide, useQuiz, useQuizSnapshot } from "@martynasj/quiz-lib";
 import { Flex, Text } from "@chakra-ui/react";
 
-import { SlideHeading, NextButton } from "../components";
+import { SlideHeading, NextButton, Span } from "../components";
 import { Interpreter } from "../interpreter";
 import { LoadingPulse } from "../LoadingPulse";
 import { AstrologicalProfile, Interpretation } from "@components/AstrologicalProfile";
@@ -104,10 +104,7 @@ function ResultsSlide({
   return (
     <Flex flexDirection={"column"} position={"relative"} width={"full"}>
       <SlideHeading>
-        Your{" "}
-        <Text as="span" color="brand.600">
-          Natal Chart is a unique cosmic identity that stores your life's story.{" "}
-        </Text>{" "}
+        Your <Span>Natal Chart is a unique cosmic identity that stores your life's story. </Span>{" "}
         Before we go, scroll down to see it all
       </SlideHeading>
 

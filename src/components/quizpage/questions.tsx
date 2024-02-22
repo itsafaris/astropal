@@ -22,11 +22,10 @@ export function DecisionMakingStruggles() {
         { value: "none", text: "I'm doing well in all areas", icon: "🫣" },
       ]}
     >
-      <SlideHeading
-        text={
-          "Now, let's determine how we can assist you. Please mark the areas in which you currently struggle the most"
-        }
-      />
+      <SlideHeading>
+        Now, let's determine how we can assist you. Please mark the areas in which you currently{" "}
+        <Span>struggle the most</Span>
+      </SlideHeading>
       <Selector />
       <NextButton onClick={() => submitQuestion()}>Continue</NextButton>
     </Slide>
@@ -111,8 +110,9 @@ export function InsightSourcesSlide() {
         { text: "It reflects me perfectly", icon: "💯" },
       ]}
     >
-      <SlideHeading>When in doubt do you find your horoscope readings useful?</SlideHeading>
-
+      <SlideHeading>
+        When in doubt do you find your <Span>horoscope readings</Span> useful?
+      </SlideHeading>
       <Selector />
     </Slide>
   );
@@ -217,36 +217,43 @@ export function FillerPeopleInControl() {
 export function HyperPersonalisedInsights() {
   return (
     <Slide id="personalised-insights-intro" type="filler">
-      {({ quizState }) => {
-        return (
-          <>
-            <SlideHeading>
-              <Span> 9 out of 10 people</Span> claim that having a Natal Chart reading has enabled
-              them to make better decisions and experience less self-doubt.
-            </SlideHeading>
+      <SlideHeading>
+        <Span> 9 out of 10 people</Span> claim that having a Natal Chart reading has enabled them to
+        make better decisions and experience less self-doubt.
+      </SlideHeading>
 
-            <Flex
-              justifyContent={"center"}
-              alignItems={"center"}
-              bg="bg.100"
-              borderRadius={"xl"}
-              py={7}
-            >
-              <StaticImage
-                alt="chart showing how your self-esteem will increase over time"
-                src="../../images/personalised_astro_benefits.png"
-                layout="fullWidth"
-                style={{
-                  width: "280px",
-                  marginLeft: "-15px",
-                }}
-              />
-            </Flex>
+      <Flex justifyContent={"center"} alignItems={"center"} bg="bg.100" borderRadius={"xl"} py={7}>
+        <StaticImage
+          alt="chart showing how your self-esteem will increase over time"
+          src="../../images/personalised_astro_benefits.png"
+          layout="fullWidth"
+          style={{
+            width: "280px",
+            marginLeft: "-15px",
+          }}
+        />
+      </Flex>
 
-            <NextButton mt={8}>Create my Reading</NextButton>
-          </>
-        );
-      }}
+      <NextButton mt={8}>Create my Reading</NextButton>
+    </Slide>
+  );
+}
+
+export function Filler_MentorshipProgramIntro() {
+  return (
+    <Slide id="mentorship-program-intro" type="filler">
+      <SlideHeading>
+        As the final step, we'll tailor a <Span>Personalized Mentorship Program</Span> closely
+        aligned with your Natal Chart Reading.
+      </SlideHeading>
+
+      <StaticImage
+        alt="chart showing how your self-esteem will increase over time"
+        src="../../images/program.png"
+        layout="fullWidth"
+        style={{ borderRadius: 16 }}
+      />
+      <NextButton mt={8}>Continue</NextButton>
     </Slide>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
 import { Box, Flex } from "@chakra-ui/react";
-import { NextButton, SlideHeading } from "../components";
+import { NextButton, SlideHeading, Span } from "../components";
 
 export function FinalizingProfileSlide() {
   const [showInput, setShowInput] = React.useState<boolean>(false);
@@ -15,7 +15,8 @@ export function FinalizingProfileSlide() {
       onLoadingCompleted={() => setShowInput(true)}
     >
       <SlideHeading textAlign={"center"}>
-        Adjusting your Astrological Self-Discovery Mentorship Program based on your answers
+        Adjusting your <Span>Astrological Self-Discovery Mentorship Program</Span> based on your
+        answers
       </SlideHeading>
 
       <Flex flexDirection={"column"} alignItems={"center"}>
