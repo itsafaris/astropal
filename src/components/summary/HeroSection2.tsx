@@ -15,10 +15,12 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
 
   return (
     <>
-      <Box id="hero-section" as="section" color="white" pt={12} pb={20}>
-        <Text fontSize={"2xl"} textAlign={"center"} fontWeight={"semibold"} mb={5}>
-          Your Astrological <br /> Self-Discovery Mentorship <br /> Program Is Ready!
-        </Text>
+      <Box id="hero-section" as="section" color="white" pt={12} pb={12}>
+        <Headline fontSize={"3xl"} mb={6}>
+          Your <InvertedHighlight> Horoscope Reading </InvertedHighlight> and{" "}
+          <InvertedHighlight>Astrological Self-Discovery Mentorship Program</InvertedHighlight> Is
+          Ready!
+        </Headline>
 
         <Flex
           direction={"column"}
@@ -55,10 +57,7 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
       </Box>
 
       <Box>
-        <Headline>
-          What You Get With Your{" "}
-          <InvertedHighlight> Astrological Self-Discovery Mentorship Program</InvertedHighlight>
-        </Headline>
+        <Headline fontSize={"3xl"}>What You Get With The Program</Headline>
 
         <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
           <Features />

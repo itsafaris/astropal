@@ -1,21 +1,15 @@
-import { Box, Text, Stack, Heading, Flex } from "@chakra-ui/react";
+import { Text, Stack } from "@chakra-ui/react";
 import { TestimonialCard } from "@components/TestimonialCard";
 
 import { StaticImage } from "gatsby-plugin-image";
+import { Headline } from "./components";
 
 export function UserTestimonialSection() {
   return (
     <Stack spacing={7} id="product-section">
-      <Text
-        fontWeight="bold"
-        textAlign={"center"}
-        width={"full"}
-        fontSize={"2xl"}
-        color="black"
-        px={6}
-      >
+      <Headline color="black">
         Hear What <br /> Our User's Say
-      </Text>
+      </Headline>
 
       <StaticImage
         alt=""
@@ -26,7 +20,7 @@ export function UserTestimonialSection() {
       <TestimonialCard
         testimonial={{
           name: "Harper Wilson",
-          quote: `Hi Astropal, I love your insights! I spent the entire weekend experimenting, and it took me sooooooo deep into my explorations.🙏🙏🙏`,
+          quote: `Hi Astropal, I love your program! I spent the entire weekend experimenting, and it took me sooooooo deep into my explorations.🙏🙏🙏`,
           question: "",
           avatar: <StaticImage alt="Astropal user image" src="../../images/user3.png" />,
           commentAge: "1d",
@@ -47,7 +41,7 @@ export function UserTestimonialSection() {
         testimonial={{
           name: "Stephanie",
           quote: `I have always been a bit skeptical about astrology, but after diving into the world of
-        horoscopes and birth charts, I must say that I am thoroughly impressed. "Astrology Unveiled"
+        horoscopes and birth charts, I must say that I am thoroughly impressed. ASMP
         has been a revelation, providing me with valuable insights into various aspects of my life.
         The accuracy with which the astrologer interpreted my birth chart was truly remarkable. It
         felt like a personalized roadmap, guiding me through the intricacies of my personality,

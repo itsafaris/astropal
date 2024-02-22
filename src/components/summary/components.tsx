@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 import { Box, Button, Flex, useTheme, Text, TextProps } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
-export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
+export function CTALinkToPricing({ children, ...rest }: ComponentProps<typeof Button>) {
   const theme = useTheme();
 
   return (
@@ -11,16 +11,17 @@ export function CTALinkToPricing(props: ComponentProps<typeof Button>) {
         px={8}
         py={7}
         variant={"solid"}
-        backgroundColor="brand.600"
+        backgroundColor="brand.500"
+        bgGradient={"linear-gradient(140deg, #dfbc38, brand.500)"}
         _hover={{
-          backgroundColor: "brand.500",
+          bgGradient: "linear-gradient(140deg, #dfbc38, brand.400)",
         }}
         width={"full"}
-        boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}, 0px 5px 15px 0px #00000030`}
+        boxShadow={`inset 0 0 0 3px ${theme.colors.brand["800"]}, 0px 5px 15px 0px #00000030`}
         borderRadius={8}
-        {...props}
+        {...rest}
       >
-        Get My Insights
+        {children ?? "Start Now"}
       </Button>
     </Link>
   );
@@ -63,6 +64,7 @@ export function Headline(props: TextProps) {
       fontFamily={"serif"}
       fontWeight={"bold"}
       textAlign={"center"}
+      color="white"
       {...props}
     />
   );

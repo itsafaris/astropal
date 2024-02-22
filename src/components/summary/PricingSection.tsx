@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
+import { CTALinkToPricing } from "./components";
 
 export interface IPricingPageProps {}
 
@@ -21,7 +22,7 @@ export function PricingSection(props: ComponentProps<typeof Box>) {
 
         {/* <TermsAgreement /> */}
         {/* <RiskFreeGuaranteed /> */}
-        {/* <SafeCheckout /> */}
+        <SafeCheckout />
       </Stack>
     </Box>
   );
@@ -71,25 +72,25 @@ function RiskFreeGuaranteed() {
 function SafeCheckout() {
   return (
     <Flex
-      px={3}
+      px={2}
       py={2}
       borderRadius={8}
       border={"1px solid"}
       borderColor="bg.200"
       flexDirection={"column"}
       alignItems={"flex-start"}
-      gap={2}
+      gap={1}
     >
       <Text fontSize={"xs"} color="bg.500" fontWeight={"semibold"} lineHeight={"normal"}>
         Safe Checkout Guarantee
       </Text>
-      <Flex width={"full"}>
+      <Box mx="auto">
         <StaticImage
           alt="Safe checkout"
           src="../../images/safe-checkout.png"
           layout="constrained"
         />
-      </Flex>
+      </Box>
     </Flex>
   );
 }
@@ -132,17 +133,14 @@ export function PricingPlans() {
         }}
       />
 
-      <Button
-        width={"full"}
-        size="lg"
+      <CTALinkToPricing
         mt={4}
-        colorScheme="orange"
         onClick={() => {
           trackEvent({ name: "start-checkout", properties: { planID: selectedPlanID } });
         }}
       >
-        Start now
-      </Button>
+        Start Your Program Now
+      </CTALinkToPricing>
     </Flex>
   );
 }
@@ -224,12 +222,12 @@ function PricingPlanItem({
 function Badge({ ...rest }: TextProps) {
   return (
     <Text
-      py={"2px"}
-      px={"10px"}
-      backgroundColor="pink.100"
-      color="pink.800"
+      py={"3px"}
+      px={"15px"}
+      backgroundColor="brand.600"
+      color="black"
       fontWeight={"bold"}
-      fontSize={"small"}
+      fontSize={"14px"}
       borderRadius={"5px"}
       {...rest}
     >

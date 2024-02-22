@@ -4,6 +4,7 @@ import { Box, Text, Stack, Heading, Flex } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { orderBy, take } from "lodash";
+import { Headline } from "./components";
 
 const exampleQuestions = [
   {
@@ -84,16 +85,9 @@ export function ExampleQuestionsSection() {
         style={{ width: 80, opacity: 1, marginLeft: "auto", marginRight: "auto", marginBottom: 20 }}
       />
 
-      <Heading
-        fontWeight="semibold"
-        textAlign={"center"}
-        width={"full"}
-        fontSize={"2xl"}
-        color="white"
-        lineHeight={"1.4"}
-      >
+      <Headline>
         Our User's Are Asking <br /> Questions Every Hour
-      </Heading>
+      </Headline>
 
       <QuestionsWeHaveAnswered />
 

@@ -1,21 +1,12 @@
-import { Box, Text, Stack, Heading, Flex } from "@chakra-ui/react";
+import { Box, Text, Stack, Flex } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
+import { Headline } from "./components";
 
 export function AreasOfGuidanceSection() {
   return (
     <Flex flexDirection={"column"} alignItems={"center"} id="guidance-section" gap={8}>
-      <Heading
-        fontWeight="semibold"
-        textAlign={"center"}
-        width={"full"}
-        fontSize={"2xl"}
-        color="white"
-        lineHeight={"1.4"}
-        px={5}
-      >
-        Use Astrology As a Key When The Doors Are Closed
-      </Heading>
+      <Headline>Use Astrology As a Key When The Doors Are Closed</Headline>
 
       <StaticImage
         alt=""

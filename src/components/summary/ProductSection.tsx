@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 import { Span } from "@components/quizpage/components";
 import { StarIcon } from "@chakra-ui/icons";
 import { NumberOfDownloads } from "@components/svg/appStore";
-import { Headline, HeadlineHighlight, InvertedHighlight } from "./components";
+import { CTALinkToPricing, Headline, HeadlineHighlight, InvertedHighlight } from "./components";
 
 export interface IProductSectionProps {}
 
@@ -99,11 +99,9 @@ export function ProductSection(props: IProductSectionProps) {
           </Box>
         </Stack>
 
-        <Link to="/summary#pricing-plans" title="Pricing plans">
-          <Button width={"full"} colorScheme="red" size="lg" my={8}>
-            Start Now
-          </Button>
-        </Link>
+        <Flex justifyContent={"center"}>
+          <CTALinkToPricing id="product-section-cta">Start Your Program Now</CTALinkToPricing>
+        </Flex>
       </Container>
     </Box>
   );

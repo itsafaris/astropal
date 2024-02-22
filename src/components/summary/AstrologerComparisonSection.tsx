@@ -2,6 +2,7 @@ import { Box, Text, Stack, Heading, Icon, Flex } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import { Headline } from "./components";
 
 export function AstrologerComparisonSection() {
   return (
@@ -13,15 +14,7 @@ export function AstrologerComparisonSection() {
       as="section"
       px={2}
     >
-      <Heading
-        fontWeight="semibold"
-        textAlign={"center"}
-        width={"full"}
-        fontSize={"2xl"}
-        color="white"
-      >
-        10x better than your regular astrologer
-      </Heading>
+      <Headline>10x Better Than A Regular Astrologer</Headline>
 
       <StaticImage
         alt=""

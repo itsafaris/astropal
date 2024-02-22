@@ -59,7 +59,7 @@ export default function SummaryPage({}: PageProps) {
           <UserTestimonialSection />
 
           <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="testimonial-section-cta" />
+            <CTALinkToPricing id="testimonial-section-cta">Start Your Program Now</CTALinkToPricing>
           </Flex>
         </Container>
       </Box>
@@ -75,7 +75,9 @@ export default function SummaryPage({}: PageProps) {
           <ExampleQuestionsSection />
 
           <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="example-questions-section-cta" />
+            <CTALinkToPricing id="example-questions-section-cta">
+              Start Your Program Now
+            </CTALinkToPricing>
           </Flex>
         </Container>
       </Box>
