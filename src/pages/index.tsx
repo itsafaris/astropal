@@ -35,7 +35,7 @@ export default function IndexPage() {
       </Container>
 
       <Container>
-        <Flex flexDirection={"column"} gap={5}>
+        <Flex flexDirection={"column"} gap={2}>
           <Flex flexDirection={"row"} justifyContent={"center"}>
             <Flex
               borderRadius={"full"}
@@ -101,7 +101,7 @@ export default function IndexPage() {
             </Text>
           </Flex>
 
-          <Text mt={8} color={"white"} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
+          <Text mt={5} color={"white"} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
             Unlock Your Future with a 1-min quiz
           </Text>
 
