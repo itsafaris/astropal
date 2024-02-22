@@ -1,8 +1,6 @@
-import { Box, Button, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
-import { Link } from "gatsby";
-import { Span } from "@components/quizpage/components";
 import { StarIcon } from "@chakra-ui/icons";
 import { NumberOfDownloads } from "@components/svg/appStore";
 import { CTALinkToPricing, Headline, InvertedHighlight } from "./components";
@@ -24,8 +22,8 @@ export function ProductSection(props: IProductSectionProps) {
               <Flex gap={1}>
                 {Array(5)
                   .fill("")
-                  .map((it) => (
-                    <StarIcon color="orange.300" boxSize={"14px"} />
+                  .map((_, idx) => (
+                    <StarIcon key={idx} color="orange.300" boxSize={"14px"} />
                   ))}
               </Flex>{" "}
               <Text fontWeight={"bold"} fontSize={"lg"}>
