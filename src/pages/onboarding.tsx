@@ -3,7 +3,7 @@ import { navigate } from "gatsby";
 
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
-import { trackEvent, trackPixel } from "@utils/tracking";
+import { trackEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
@@ -11,26 +11,24 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
 import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
-import { CreatingSelfDiscoveryGuideSlide } from "@components/quizpage/slides/FinetuningSavingSlide";
+
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
 import {
   AdviceSeekingFrequency,
-  DecisionChallengeAgreement,
   DecisionMakingStruggles,
   FillerPeopleInControl,
   Filler_MentorshipProgramIntro,
   HyperPersonalisedInsights,
   InsightSourcesSlide,
-  InsightVsHoroscopeComparison,
   NatalChartReading,
   QuoteSlide,
   WrongDecisionSlide,
 } from "@components/quizpage/questions";
-import { PersonalityDescriptionSlide } from "@components/quizpage/slides/PersonalityDescriptionSlide";
+import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLoadingSlide";
+import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
 import { Loading_CreatingNatalChartReading } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import {
-  AskingQuestionsDirectly,
   AstrologerThemePreferences,
   DailyHoroscope,
   DedicationTime,
@@ -82,7 +80,8 @@ export default function OnboardingQuiz() {
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            <PersonalityDescriptionSlide />
+            <NatalChartLoadingSlide />
+            <NatalChartSlide />
             <DecisionMakingStruggles />
             <AdviceSeekingFrequency />
             <WrongDecisionSlide />
