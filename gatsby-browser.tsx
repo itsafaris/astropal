@@ -15,9 +15,7 @@ const POSTHOG_KEY = "phc_zq8o1MJETg7eWOWcLI224iei1EhnhIbX0AM0EVLerdt";
 const POSTHOG_HOST = "https://us.posthog.com";
 
 export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
-  if (POSTHOG_KEY) {
-    initPosthog(POSTHOG_KEY, POSTHOG_HOST, pkgjson.version);
-  }
+  initPosthog(POSTHOG_KEY, POSTHOG_HOST, pkgjson.version);
 };
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {

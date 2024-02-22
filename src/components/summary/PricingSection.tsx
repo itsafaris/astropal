@@ -164,7 +164,6 @@ export function PricingPlans({
         pricingPlan={pricingPlans["6month"]}
         isSelected={selectedPlanID === pricingPlans["6month"].id}
         onClick={() => {
-          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["6month"].id } });
           onPlanChanged(pricingPlans["6month"].id);
         }}
       />
@@ -175,7 +174,6 @@ export function PricingPlans({
         pricingPlan={pricingPlans["3month"]}
         isSelected={selectedPlanID === pricingPlans["3month"].id}
         onClick={() => {
-          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["3month"].id } });
           onPlanChanged(pricingPlans["3month"].id);
         }}
       />
@@ -185,7 +183,6 @@ export function PricingPlans({
         pricingPlan={pricingPlans["1month"]}
         isSelected={selectedPlanID === pricingPlans["1month"].id}
         onClick={() => {
-          trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["1month"].id } });
           onPlanChanged(pricingPlans["1month"].id);
         }}
       />

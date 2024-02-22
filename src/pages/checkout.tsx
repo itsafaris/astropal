@@ -158,7 +158,6 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
         pricePayed: pricingPlan.price,
         currency: "USD",
         paymentType: paymentType,
-        profile: quizState,
       },
     });
     trackPixel("Purchase", { currency: "USD", value: pricingPlan.price });
