@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 export function CTALinkToPricing({ children, ...rest }: ComponentProps<typeof Button>) {
   return (
     <Link to="/summary#pricing-plans" title="Pricing plans">
-      <CTAButton>{children ?? "Start Now"}</CTAButton>
+      <CTAButton {...rest}>{children ?? "Start Now"}</CTAButton>
     </Link>
   );
 }
