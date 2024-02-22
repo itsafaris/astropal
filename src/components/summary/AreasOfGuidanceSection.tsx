@@ -28,6 +28,7 @@ export function AreasOfGuidanceSection() {
           text="Let the stars align your career decisions toward stability"
           emoji="💰"
         />
+        <Separator />
         <Feature
           title="Doubt Your Decisions"
           text="Get insights for confidence in your next big life change"
@@ -35,7 +36,7 @@ export function AreasOfGuidanceSection() {
         />
         <Separator />
         <Feature
-          title="Are On an Identity Quest"
+          title="Experience an Identity Quest"
           text="Discover your unique strengths and path"
           emoji="🌟"
         />
@@ -45,7 +46,6 @@ export function AreasOfGuidanceSection() {
           text="Personalized astrology ensures you seize every opportunity"
           emoji="⏳"
         />
-        <Separator />
       </Stack>
     </Flex>
   );
@@ -61,7 +61,7 @@ function Separator() {
 
 const Feature = ({ title, text, emoji }: { title: string; text: string; emoji?: string }) => {
   return (
-    <Stack direction={"column"} px={6} gap={2} alignItems={"center"} textAlign={"center"}>
+    <Stack direction={"column"} px={6} gap={2}>
       <Text fontWeight={"semibold"} color={"black"} fontSize={"xl"}>
         {emoji} {title}
       </Text>

@@ -26,9 +26,9 @@ export function MethodHeadline() {
       </Headline>
 
       <Text fontSize={"xl"}>
-        The method we use guides you to discover your true self and authentic life path through
-        weekly explorations of your astrological journey. Overcoming obstacles, it empowers you to
-        embrace your full potential.
+        Our unique method guides you to discover your true self and your destined life path through
+        weekly astrological explorations. Overcoming obstacles, it empowers you to embrace your full
+        potential.
       </Text>
     </Stack>
   );
