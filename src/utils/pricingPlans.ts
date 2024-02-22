@@ -11,7 +11,7 @@ export type PricingPlanType = {
 export const pricingPlans = {
   "6month": {
     id: "6month",
-    title: "6 month plan",
+    title: "6 month program",
     price: 49.99,
     priceBefore: 199.99,
     daily: 0.28,
@@ -20,7 +20,7 @@ export const pricingPlans = {
   },
   "3month": {
     id: "3month",
-    title: "3 month plan",
+    title: "3 month program",
     price: 39.99,
     priceBefore: 116.99,
     daily: 0.43,
@@ -29,7 +29,7 @@ export const pricingPlans = {
   },
   "1month": {
     id: "1month",
-    title: "1 month plan",
+    title: "1 month program",
     price: 29.99,
     priceBefore: 59.99,
     daily: 0.99,

@@ -8,11 +8,14 @@ import { CTALinkToPricing } from "./components";
 
 export interface IPricingPageProps {}
 
-export function PricingSection(props: ComponentProps<typeof Box>) {
+export function PricingSection({
+  sectionID,
+  ...rest
+}: ComponentProps<typeof Box> & { sectionID: string }) {
   return (
-    <Box id="pricing-section" as="section" {...props}>
+    <Box {...rest}>
       <Stack spacing={4}>
-        <PricingPlans />
+        <PricingPlans sectionID={sectionID} />
 
         <Flex>
           <Text fontSize={"sm"} color="bg.600">
@@ -95,11 +98,11 @@ function SafeCheckout() {
   );
 }
 
-export function PricingPlans() {
+export function PricingPlans(props: { sectionID: string }) {
   const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
 
   return (
-    <Flex flexDirection={"column"} alignItems={"center"}>
+    <Flex flexDirection={"column"}>
       <PricingPlanItem
         billingText={"Billed every 6 months"}
         tagText={"Best"}
@@ -134,6 +137,7 @@ export function PricingPlans() {
       />
 
       <CTALinkToPricing
+        id={props.sectionID}
         mt={4}
         onClick={() => {
           trackEvent({ name: "start-checkout", properties: { planID: selectedPlanID } });
@@ -164,6 +168,7 @@ function PricingPlanItem({
       alignItems={"center"}
       gap={2}
       p={3}
+      cursor={"pointer"}
       borderRadius={10}
       backgroundColor="bg.200"
       width={"100%"}

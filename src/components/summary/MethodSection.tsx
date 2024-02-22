@@ -21,13 +21,14 @@ export function MethodHeadline() {
   return (
     <Stack spacing={8}>
       <Headline color="black">
-        <HeadlineHighlight>A Proven Way</HeadlineHighlight> To Harness Astrology
+        <HeadlineHighlight>Your Program</HeadlineHighlight> Is Based On A Proven Method To Harness
+        Astrology
       </Headline>
 
       <Text fontSize={"xl"}>
-        The program guides you to discover your true self and authentic life path through weekly
-        explorations of your astrological journey. Overcoming obstacles, it empowers you to embrace
-        your full potential.
+        The method we use guides you to discover your true self and authentic life path through
+        weekly explorations of your astrological journey. Overcoming obstacles, it empowers you to
+        embrace your full potential.
       </Text>
     </Stack>
   );
@@ -54,7 +55,7 @@ export function LovedByUsers() {
       <Text fontSize={"2xl"} textAlign={"center"} mx="auto" mb={4}>
         Loved by{" "}
         <Text as="span" fontWeight={"bold"}>
-          420000
+          420 000
         </Text>{" "}
         users worldwide
       </Text>
@@ -108,12 +109,12 @@ export function Phases() {
   return (
     <Stack spacing={8}>
       <Headline color="black">
-        Discover <br /> The 3-Phases Of <br /> <HeadlineHighlight>The Program</HeadlineHighlight>
+        Discover <br /> The 3-Pillars Of <br /> <HeadlineHighlight>The Method</HeadlineHighlight>
       </Headline>
 
       <Text fontSize={"xl"}>
-        Each phase unlocks necessary doors to enlightenment, starting with discovering your
-        astrological self and progressing towards understanding your destiny.
+        The program follows a proven 3-Pillar method. You'll Learn, Practice, and Master steps to
+        uncover your astrological self and understand your destiny.
       </Text>
 
       <StaticImage alt="" src="../../images/awakening-phase.png" style={{ maxHeight: 300 }} />
@@ -129,11 +130,6 @@ export function Phases() {
           }
           title={"Awakening"}
           achievements={["Basic Understanding", "Natal Chart Analysis", "Self-Reflection"]}
-          week={
-            <Text>
-              Week <br /> 1-2
-            </Text>
-          }
         />
 
         <PhaseCard
@@ -151,11 +147,6 @@ export function Phases() {
             "Relationship Insights",
             "Personal Growth Plan",
           ]}
-          week={
-            <Text>
-              Week <br /> 3-12
-            </Text>
-          }
         />
 
         <PhaseCard
@@ -172,31 +163,19 @@ export function Phases() {
             "24/7 Astrologer Assistance",
             "Sharing Insights with Others",
           ]}
-          week={
-            <Text textAlign={"left"}>
-              Long- <br /> term
-            </Text>
-          }
         />
       </Stack>
     </Stack>
   );
 }
 
-function PhaseCard(props: {
-  title: string;
-  achievements: string[];
-  img: React.ReactNode;
-  week: React.ReactNode;
-}) {
+function PhaseCard(props: { title: string; achievements: string[]; img: React.ReactNode }) {
   return (
     <Grid gridTemplateColumns={"auto 1fr"} gap={5}>
       <Stack fontWeight={"bold"} spacing={0} textAlign={"center"} textTransform={"uppercase"}>
         <Box height={"65px"} width={"65px"} borderRadius={"50%"} overflow={"hidden"} mb={3}>
           {props.img}
         </Box>
-
-        {props.week}
       </Stack>
 
       <Stack spacing={3} flexGrow={1} width={"250px"}>
@@ -205,7 +184,7 @@ function PhaseCard(props: {
         </Headline>
 
         <Text textTransform={"uppercase"} fontSize={"sm"} fontWeight={"bold"}>
-          Achievements of this phase:
+          Achievements:
         </Text>
 
         <List spacing={1}>

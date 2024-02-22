@@ -16,9 +16,10 @@ import { ProductSection } from "@components/summary/ProductSection";
 import { ScrollDownSection } from "@components/summary/ScrollDownSection";
 import { UserTestimonialSection } from "@components/summary/UserTestimonialSection";
 import { PersonalizationSection } from "@components/summary/PersonalizationSection";
-import { CTALinkToPricing } from "@components/summary/components";
+import { CTALinkToPricing, Headline, HeadlineHighlight } from "@components/summary/components";
 import { SpecialOfferBanner } from "@components/summary/SpecialOfferBanner";
 import { MethodSection } from "@components/summary/MethodSection";
+import { toTitleCase } from "@utils/string";
 
 export default function SummaryPage({}: PageProps) {
   const [quizState, setQuizState] = useState<QuizStateParsed | undefined>();
@@ -38,13 +39,18 @@ export default function SummaryPage({}: PageProps) {
       <Box>
         <Container>
           <HeroSection state={quizState} />
-          <ScrollDownSection />
+          <PricingSection my={8} sectionID="hero-pricing-cta" />
+          {/* <ScrollDownSection /> */}
         </Container>
       </Box>
 
       <Box backgroundColor="white" py={10}>
         <Container>
           <MethodSection />
+
+          <CTALinkToPricing mt={5} id="method-section-cta">
+            Start Your Program Now
+          </CTALinkToPricing>
         </Container>
       </Box>
 
@@ -57,20 +63,10 @@ export default function SummaryPage({}: PageProps) {
       <Box backgroundColor="white" py={10}>
         <Container>
           <UserTestimonialSection />
-
-          <Flex justifyContent={"center"} mt={12}>
-            <CTALinkToPricing id="testimonial-section-cta">Start Your Program Now</CTALinkToPricing>
-          </Flex>
         </Container>
       </Box>
 
-      <Box backgroundColor={"whiteAlpha.200"} py={10}>
-        <Container>
-          <AreasOfGuidanceSection />
-        </Container>
-      </Box>
-
-      <Box py={10}>
+      {/* <Box py={10}>
         <Container px={0}>
           <ExampleQuestionsSection />
 
@@ -80,17 +76,39 @@ export default function SummaryPage({}: PageProps) {
             </CTALinkToPricing>
           </Flex>
         </Container>
+      </Box> */}
+
+      <Box py={10}>
+        <Container>
+          <MediaCoverageSection />
+        </Container>
       </Box>
 
-      <Box backgroundColor="whiteAlpha.200" py={10}>
+      <Box py={10}>
+        <Container id="pricing-section" as="section">
+          <Headline mb={8}>
+            Unlock the Power of{" "}
+            <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}</HeadlineHighlight> Within
+            Yourself. Start <HeadlineHighlight>Your Program</HeadlineHighlight> Now
+          </Headline>
+
+          <PricingSection sectionID="bottom-pricing-cta" />
+        </Container>
+      </Box>
+
+      <Box py={10} backgroundColor={"white"}>
         <Container>
-          <AstrologerComparisonSection />
+          <AreasOfGuidanceSection />
         </Container>
       </Box>
 
       <Box py={10}>
         <Container>
-          <MediaCoverageSection />
+          <AstrologerComparisonSection />
+
+          <CTALinkToPricing mt={10} id="astro-comparison-section-cta">
+            Start Your Program Now
+          </CTALinkToPricing>
         </Container>
       </Box>
     </Box>

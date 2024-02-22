@@ -1,23 +1,19 @@
-import { Box, Container, Text, Stack, Flex, useTheme, Grid } from "@chakra-ui/react";
+import { Box, Text, Stack, Flex, Grid } from "@chakra-ui/react";
 import React from "react";
-import { CheckIcon, PlusSquareIcon } from "@chakra-ui/icons";
+import { CheckIcon } from "@chakra-ui/icons";
 import { QuizStateParsed } from "@utils/state";
-import { CTALinkToPricing, HeadlineHighlight, InvertedHighlight } from "./components";
+import { InvertedHighlight } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { AstrologicalProfileSmall } from "./AstrologicalProfileSmall";
 import { Span } from "@components/quizpage/components";
-import { PricingSection } from "./PricingSection";
-import { AiOutlinePlus } from "react-icons/ai";
 import { Headline } from "./components";
 
 export function HeroSection({ state }: { state: QuizStateParsed }) {
-  const theme = useTheme();
-
   return (
     <>
       <Box id="hero-section" as="section" color="white" pt={12} pb={12}>
         <Headline fontSize={"3xl"} mb={6}>
-          Your <InvertedHighlight> Horoscope Reading </InvertedHighlight> and{" "}
+          Your Horoscope Reading and{" "}
           <InvertedHighlight>Astrological Self-Discovery Mentorship Program</InvertedHighlight> Is
           Ready!
         </Headline>
@@ -45,19 +41,13 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
 
           <StaticImage alt="" src="../../images/hero-diagram.png" />
         </Flex>
-
-        {/* <CTALinkToPricing
-          backgroundColor="green.700"
-          _hover={{
-            backgroundColor: "green.800",
-          }}
-          boxShadow={`inset 0 0 0 3px ${theme.colors.green["500"]}`}
-          color="white"
-        /> */}
       </Box>
 
       <Box>
-        <Headline fontSize={"3xl"}>What You Get With The Program</Headline>
+        <Headline fontSize={"3xl"}>
+          Get Instant Access To All The Benefits Of{" "}
+          <InvertedHighlight>Your Program</InvertedHighlight> From Your Phone
+        </Headline>
 
         <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
           <Features />
@@ -120,8 +110,6 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
             </Text>
           </Flex>
         </Flex>
-
-        <PricingSection my={8} />
       </Box>
     </>
   );
@@ -130,6 +118,10 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
 function Features() {
   return (
     <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"} fontWeight={"bold"}>
+      <Flex alignItems={"center"} gap={2}>
+        <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
+        Continuous Learning, Guidance, Insights
+      </Flex>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
         Astrological Profile Analysis
@@ -148,7 +140,7 @@ function Features() {
       </Flex>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
-        Career Guidance
+        Career Opportunities
       </Flex>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />

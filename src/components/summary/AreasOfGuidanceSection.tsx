@@ -1,12 +1,14 @@
 import { Box, Text, Stack, Flex } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { Headline } from "./components";
+import { Headline, HeadlineHighlight } from "./components";
 
 export function AreasOfGuidanceSection() {
   return (
     <Flex flexDirection={"column"} alignItems={"center"} id="guidance-section" gap={8}>
-      <Headline>Use Astrology As a Key When The Doors Are Closed</Headline>
+      <Headline color="black">
+        <HeadlineHighlight>This Program</HeadlineHighlight> Is For You, If You…
+      </Headline>
 
       <StaticImage
         alt=""
@@ -14,32 +16,36 @@ export function AreasOfGuidanceSection() {
         style={{ width: 110, opacity: 1, marginLeft: "auto", marginRight: "auto" }}
       />
 
-      <Stack spacing={4}>
+      <Stack spacing={6}>
         <Feature
-          title="Uncertain Decisions"
-          text="Get insights for confidence in your next big life change"
-          emoji="🤔"
-        />
-        <Separator />
-        <Feature title="Identity Quest" text="Discover your unique strengths and path" emoji="🌟" />
-        <Separator />
-        <Feature
-          title="Missed Opportunities"
-          text="Personalized astrology ensures you seize every opportunity"
-          emoji="⏳"
-        />
-        <Separator />
-        <Feature
-          title="Relationship Struggles"
+          title="Struggle With Relationships"
           text="Unveil your compatibility, deepen connections with understanding"
           emoji="💞"
         />
         <Separator />
         <Feature
-          title="Career Uncertainty"
+          title="Have Career Uncertainty"
           text="Let the stars align your career decisions toward stability"
           emoji="💰"
         />
+        <Feature
+          title="Doubt Your Decisions"
+          text="Get insights for confidence in your next big life change"
+          emoji="🤔"
+        />
+        <Separator />
+        <Feature
+          title="Are On an Identity Quest"
+          text="Discover your unique strengths and path"
+          emoji="🌟"
+        />
+        <Separator />
+        <Feature
+          title="Miss Opportunities"
+          text="Personalized astrology ensures you seize every opportunity"
+          emoji="⏳"
+        />
+        <Separator />
       </Stack>
     </Flex>
   );
@@ -48,18 +54,21 @@ export function AreasOfGuidanceSection() {
 function Separator() {
   return (
     <Flex width={"full"} alignItems={"center"} flexDirection={"column"}>
-      <Box height={"1px"} width="80%" backgroundColor={"bg.200"} borderRadius={"full"} />
+      <Box height={"1px"} width="30%" backgroundColor={"blackAlpha.300"} />
     </Flex>
   );
 }
 
 const Feature = ({ title, text, emoji }: { title: string; text: string; emoji?: string }) => {
   return (
-    <Stack direction={"column"} px={6} gap={4}>
-      <Text fontWeight={"bold"} color={"white"}>
+    <Stack direction={"column"} px={6} gap={2} alignItems={"center"} textAlign={"center"}>
+      <Text fontWeight={"semibold"} color={"black"} fontSize={"xl"}>
         {emoji} {title}
       </Text>
-      <Text color={"bg.800"}>{text}</Text>
+
+      <Text color={"blackAlpha.800"} fontSize={"lg"}>
+        {text}
+      </Text>
     </Stack>
   );
 };
