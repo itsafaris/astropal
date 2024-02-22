@@ -43,14 +43,8 @@ export function PricingSection(props: ComponentProps<typeof Box>) {
           Start Your Program Now
         </CTALinkToPricing>
 
-        <Flex>
-          <Text fontSize={"sm"} color="bg.600">
-            Your subscription renews at the start of the period. You can cancel any time.
-          </Text>
-        </Flex>
-
         {/* <TermsAgreement /> */}
-        {/* <RiskFreeGuaranteed /> */}
+        <RiskFreeGuaranteed />
         <SafeCheckout />
       </Stack>
 
@@ -91,15 +85,16 @@ function RiskFreeGuaranteed() {
       justifyContent={"center"}
     >
       <Flex height={"80px"} width={"80px"} flexShrink={0}>
-        <StaticImage alt="Risk free guarantee" src="../../images/risk-free-widget.png" />
+        <StaticImage alt="Risk free guarantee" src="../../images/money_back.png" />
       </Flex>
 
       <Flex flexDirection={"column"} alignItems={"flex-start"} maxWidth={300}>
         <Text fontSize={"xs"} color="green.400" fontWeight={"semibold"} lineHeight={"normal"}>
-          Risk-Free Guarantee
+          Money-Back Guarantee
         </Text>
         <Text color="bg.500" fontSize={"xs"}>
-          No commitment, cancel anytime ✨
+          We're super confident you're going to love our product. If you don't start seeing the
+          awesome benefits of personalised astrology, we've got your back with a full refund.
         </Text>
       </Flex>
     </Flex>
