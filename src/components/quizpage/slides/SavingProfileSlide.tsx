@@ -50,7 +50,7 @@ export function Loading_CreatingNatalChartReading() {
       duration={4}
       onLoadingCompleted={() => setShowInput(true)}
     >
-      <SlideHeading textAlign={"center"} text="Creating a reading of your Natal Chart" />
+      <SlideHeading textAlign={"center"} text="Analyzing your Natal Chart" />
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>

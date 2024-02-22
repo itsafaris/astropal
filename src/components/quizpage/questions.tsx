@@ -1,11 +1,12 @@
 import React from "react";
-import { Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Box, Flex, Grid, Stack, Text, useTheme } from "@chakra-ui/react";
 import { NextButton, SlideHeading, Span } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { getPersonalInfoFromState } from "@utils/state";
 import { toTitleCase } from "@utils/string";
 import { astrologyThemes } from "@utils/astrologyThemes";
+import { NatalChart } from "@components/NatalChart";
 
 export function DecisionMakingStruggles() {
   const { submitQuestion } = useQuiz();
@@ -240,20 +241,43 @@ export function HyperPersonalisedInsights() {
 }
 
 export function Filler_MentorshipProgramIntro() {
+  const { quizState } = useQuizState();
+  const p = getPersonalInfoFromState(quizState);
+
   return (
     <Slide id="mentorship-program-intro" type="filler">
-      <SlideHeading>
-        As the final step, we'll tailor a <Span>Personalized Mentorship Program</Span> closely
-        aligned with your Natal Chart Reading.
+      <SlideHeading>Your Chart Analysis is complete!</SlideHeading>
+      <SlideHeading mt={-4}>
+        We will now create your personalized{" "}
+        <Span>Astrological Self-Discovery Mentorship Program</Span> based on the result of the
+        analysis
       </SlideHeading>
 
-      <StaticImage
-        alt="chart showing how your self-esteem will increase over time"
-        src="../../images/program.png"
-        layout="fullWidth"
-        style={{ borderRadius: 16 }}
-      />
-      <NextButton mt={8}>Continue</NextButton>
+      <Box
+        position={"relative"}
+        bg="bg.200"
+        p={4}
+        borderRadius={"xl"}
+        border="2px solid"
+        borderColor={"brand.800"}
+      >
+        <Flex bg="white" position={"absolute"} bottom={8} right={4} borderRadius={"xl"}>
+          <NatalChart
+            date={p.yourBirthDate}
+            time={p.yourBirthTime}
+            location={p.yourBirthLocation}
+            size={240}
+          />
+        </Flex>
+        <StaticImage
+          alt="chart showing how your self-esteem will increase over time"
+          src="../../images/program_preview.png"
+          width={200}
+          layout="fixed"
+          style={{ borderRadius: 16 }}
+        />
+      </Box>
+      <NextButton mt={8}>Create my Program</NextButton>
     </Slide>
   );
 }

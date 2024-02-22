@@ -75,7 +75,7 @@ export default function IndexPage() {
 
           <Headline fontSize={"4xl"} my={4}>
             <InvertedHighlight>
-              Experience the Most Accurate Personalized Astrology Readings
+              Experience the Most Accurate Personalized Astrology
             </InvertedHighlight>
           </Headline>
 
