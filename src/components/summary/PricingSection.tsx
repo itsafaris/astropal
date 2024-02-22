@@ -15,7 +15,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
-import { CTALinkToPricing } from "./components";
+import { CTAButton, CTALinkToPricing } from "./components";
 import { CheckoutWidget } from "src/pages/checkout";
 
 export interface IPricingPageProps {}
@@ -41,9 +41,9 @@ export function PricingSection({
           }}
         />
 
-        <CTALinkToPricing id={sectionID} mt={4} onClick={onOpen}>
+        <CTAButton id={sectionID} mt={4} onClick={onOpen}>
           Start Your Program Now
-        </CTALinkToPricing>
+        </CTAButton>
 
         {/* <TermsAgreement /> */}
         <RiskFreeGuaranteed />
