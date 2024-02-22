@@ -17,6 +17,7 @@ import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
 import { CTAButton, CTALinkToPricing } from "./components";
 import { CheckoutWidget } from "src/pages/checkout";
+import { SpecialOfferBanner } from "./SpecialOfferBanner";
 
 export interface IPricingPageProps {}
 
@@ -31,8 +32,16 @@ export function PricingSection({
   const selectedPlan = pricingPlans[selectedPlanID];
 
   return (
-    <Box {...rest}>
+    <Box px={3} py={5} borderRadius={"xl"} backgroundColor={"whiteAlpha.200"} {...rest}>
       <Stack spacing={4}>
+        <SpecialOfferBanner
+          background={"transparent"}
+          px={0}
+          py={0}
+          color="brand.600"
+          shadow={"none"}
+        />
+
         <PricingPlans
           selectedPlanID={selectedPlanID}
           onPlanChanged={(planID) => {

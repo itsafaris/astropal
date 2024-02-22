@@ -31,7 +31,7 @@ export default function SummaryPage({}: PageProps) {
 
   return (
     <Box pb={24} color="bg.900" bg="bg.100">
-      {/* <SpecialOfferBanner /> */}
+      <SpecialOfferBanner />
       <Box>
         <Container>
           <HeroSection state={quizState} />
