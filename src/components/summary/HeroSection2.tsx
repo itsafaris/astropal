@@ -1,7 +1,7 @@
 import { Box, Container, Text, Stack, Flex, useTheme, Grid } from "@chakra-ui/react";
 import React from "react";
 import { CheckIcon, PlusSquareIcon } from "@chakra-ui/icons";
-import { QuizStateParsed } from "@utils/state";
+import { QuizStateParsed, getPersonalInfoFromState } from "@utils/state";
 import { CTALinkToPricing, HeadlineHighlight, InvertedHighlight } from "./components";
 import { StaticImage } from "gatsby-plugin-image";
 import { AstrologicalProfileSmall } from "./AstrologicalProfileSmall";
@@ -35,7 +35,7 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
           <Text fontSize={"2xl"}>
             According to your answers, you should feel the first positive change in your{" "}
             <Span fontWeight={"black"} color="green.400">
-              Career
+              {state.focusArea}
             </Span>{" "}
             within{" "}
             <Span fontWeight={"black"} color="green.400">

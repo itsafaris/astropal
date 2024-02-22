@@ -127,6 +127,9 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const struggleAreas =
     (state["decision-making-struggles"] as MultiState)?.value?.map((it) => it.value) ?? [];
 
+  const focusArea =
+    (state["astrologer-theme-preferences"] as SingleState)?.value?.value ?? "Personal-Growth";
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -141,5 +144,6 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     astrologer,
     horoscope,
     struggleAreas,
+    focusArea,
   };
 }
