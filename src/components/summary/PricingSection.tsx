@@ -1,10 +1,22 @@
-import { Box, Flex, Stack, Text, Button, TextProps } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Text,
+  TextProps,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
 import { CTALinkToPricing } from "./components";
+import { CheckoutWidget } from "src/pages/checkout";
 
 export interface IPricingPageProps {}
 
@@ -12,21 +24,39 @@ export function PricingSection({
   sectionID,
   ...rest
 }: ComponentProps<typeof Box> & { sectionID: string }) {
+  const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // @ts-ignore
+  const selectedPlan = pricingPlans[selectedPlanID];
+
   return (
     <Box {...rest}>
       <Stack spacing={4}>
-        <PricingPlans sectionID={sectionID} />
+        <PricingPlans
+          selectedPlanID={selectedPlanID}
+          onPlanChanged={(planID) => {
+            trackEvent({ name: "change-pricing", properties: { planID: planID } });
+            setSelectedPlanID(planID);
+          }}
+        />
 
-        <Flex>
-          <Text fontSize={"sm"} color="bg.600">
-            Your subscription renews at the start of the period. You can cancel any time.
-          </Text>
-        </Flex>
+        <CTALinkToPricing id={sectionID} mt={4} onClick={onOpen}>
+          Start Your Program Now
+        </CTALinkToPricing>
 
         {/* <TermsAgreement /> */}
-        {/* <RiskFreeGuaranteed /> */}
+        <RiskFreeGuaranteed />
         <SafeCheckout />
       </Stack>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent mx="2vw">
+          <ModalCloseButton />
+          <CheckoutWidget pricingPlan={selectedPlan} />
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
@@ -57,15 +87,16 @@ function RiskFreeGuaranteed() {
       justifyContent={"center"}
     >
       <Flex height={"80px"} width={"80px"} flexShrink={0}>
-        <StaticImage alt="Risk free guarantee" src="../../images/risk-free-widget.png" />
+        <StaticImage alt="Risk free guarantee" src="../../images/money_back.png" />
       </Flex>
 
       <Flex flexDirection={"column"} alignItems={"flex-start"} maxWidth={300}>
         <Text fontSize={"xs"} color="green.400" fontWeight={"semibold"} lineHeight={"normal"}>
-          Risk-Free Guarantee
+          Money-Back Guarantee
         </Text>
         <Text color="bg.500" fontSize={"xs"}>
-          No commitment, cancel anytime ✨
+          We're super confident you're going to love our product. If you don't start seeing the
+          awesome benefits of personalised astrology, we've got your back with a full refund.
         </Text>
       </Flex>
     </Flex>
@@ -98,9 +129,13 @@ function SafeCheckout() {
   );
 }
 
-export function PricingPlans(props: { sectionID: string }) {
-  const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
-
+export function PricingPlans({
+  selectedPlanID,
+  onPlanChanged,
+}: {
+  selectedPlanID: string;
+  onPlanChanged: (planID: string) => void;
+}) {
   return (
     <Flex flexDirection={"column"}>
       <PricingPlanItem
@@ -111,7 +146,7 @@ export function PricingPlans(props: { sectionID: string }) {
         isSelected={selectedPlanID === pricingPlans["6month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["6month"].id } });
-          setSelectedPlanID(pricingPlans["6month"].id);
+          onPlanChanged(pricingPlans["6month"].id);
         }}
       />
 
@@ -122,7 +157,7 @@ export function PricingPlans(props: { sectionID: string }) {
         isSelected={selectedPlanID === pricingPlans["3month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["3month"].id } });
-          setSelectedPlanID(pricingPlans["3month"].id);
+          onPlanChanged(pricingPlans["3month"].id);
         }}
       />
 
@@ -132,19 +167,9 @@ export function PricingPlans(props: { sectionID: string }) {
         isSelected={selectedPlanID === pricingPlans["1month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["1month"].id } });
-          setSelectedPlanID(pricingPlans["1month"].id);
+          onPlanChanged(pricingPlans["1month"].id);
         }}
       />
-
-      <CTALinkToPricing
-        id={props.sectionID}
-        mt={4}
-        onClick={() => {
-          trackEvent({ name: "start-checkout", properties: { planID: selectedPlanID } });
-        }}
-      >
-        Start Your Program Now
-      </CTALinkToPricing>
     </Flex>
   );
 }
