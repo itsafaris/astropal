@@ -12,13 +12,7 @@ export interface Interpretation {
   weaknesses: string[];
 }
 
-export function AstrologicalProfile({
-  quizState,
-  interpretation,
-}: {
-  quizState?: QuizStateParsed;
-  interpretation: Interpretation;
-}) {
+export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed }) {
   if (!quizState) {
     return null;
   }
@@ -140,7 +134,7 @@ export function AstrologicalProfile({
 
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your personality</Title>
-        <Text>{interpretation.about}</Text>
+        <Text>{quizState.yourZodiac.personality}</Text>
       </Stack>
 
       <Divider />
@@ -148,7 +142,7 @@ export function AstrologicalProfile({
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your strenghts</Title>
         <Stack spacing={0} alignItems={"center"}>
-          {interpretation.strengths.map((it) => {
+          {quizState.yourZodiac.strengths.map((it) => {
             return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
           })}
         </Stack>
@@ -159,7 +153,7 @@ export function AstrologicalProfile({
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your weaknesses</Title>
         <Stack spacing={0} alignItems={"center"}>
-          {interpretation.weaknesses.map((it) => {
+          {quizState.yourZodiac.weaknesses.map((it) => {
             return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
           })}
         </Stack>

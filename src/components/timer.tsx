@@ -45,7 +45,7 @@ export function Timer() {
       alignItems="center"
       justifyContent="space-between"
       width={"85px"}
-      color="black"
+      color="inherit"
     >
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
         <Text fontWeight="bold" fontSize={"2xl"} lineHeight={1} textAlign={"center"}>

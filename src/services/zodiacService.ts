@@ -95,6 +95,9 @@ export function getZodiacSign(birthDate: string): {
   svgComponent: typeof aquariusImg;
   countOfProfiles: number;
   emoji: string;
+  personality: string;
+  strengths: string[];
+  weaknesses: string[];
 } {
   const date = new Date(birthDate);
   const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript Date object
@@ -107,6 +110,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: ariesImg,
         countOfProfiles: 35422,
         emoji: "♈️",
+        personality:
+          "Aries are natural leaders, full of energy and confidence. They're passionate, driven, and have a bold approach to life. Always ready for new adventures and challenges.",
+        strengths: ["Courageous", "Determined", "Optimistic"],
+        weaknesses: ["Impulsive", "Impatient", "Competitive"],
       };
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
@@ -115,6 +122,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: taurusImg,
         countOfProfiles: 27814,
         emoji: "♉️",
+        personality:
+          "Taurus values stability and comfort, often showing a strong sense of beauty and love for the pleasures of life. They're reliable, hardworking, and dedicated.",
+        strengths: ["Reliable", "Patient", "Practical"],
+        weaknesses: ["Stubborn", "Materialistic", "Indulgent"],
       };
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
@@ -123,6 +134,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: geminiImg,
         countOfProfiles: 38472,
         emoji: "♊️",
+        personality:
+          "Gemini are quick-witted and lively. They have an insatiable curiosity, loving to learn and exchange ideas. Known for their adaptability and outgoing nature.",
+        strengths: ["Adaptable", "Intelligent", "Energetic"],
+        weaknesses: ["Inconsistent", "Indecisive", "Anxious"],
       };
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
@@ -131,6 +146,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: cancerImg,
         countOfProfiles: 28921,
         emoji: "♋",
+        personality:
+          "Cancerians are deeply intuitive and sentimental. They're family-oriented, loyal, and empathetic, with a strong protective nature towards loved ones.",
+        strengths: ["Compassionate", "Protective", "Intuitive"],
+        weaknesses: ["Moody", "Clingy", "Overly Sensitive"],
       };
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
@@ -139,6 +158,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: leoImg,
         countOfProfiles: 27162,
         emoji: "♌",
+        personality:
+          "Leos are born leaders, exuding charisma and confidence. They're generous, creative, and have a strong sense of dignity and honor.",
+        strengths: ["Charismatic", "Generous", "Confident"],
+        weaknesses: ["Arrogant", "Stubborn", "Self-centered"],
       };
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
@@ -147,6 +170,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: virgoImg,
         countOfProfiles: 36412,
         emoji: "♍",
+        personality:
+          "Virgos are practical, analytical, and meticulous. They have a deep sense of humanity, making them caring and hardworking, with a keen attention to detail.",
+        strengths: ["Analytical", "Reliable", "Precise"],
+        weaknesses: ["Overly Critical", "Worrying", "Perfectionist"],
       };
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
@@ -155,6 +182,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: libraImg,
         countOfProfiles: 31901,
         emoji: "♎",
+        personality:
+          "Libras are known for their charm and harmony. They value justice and balance, often playing the role of mediator. They're social, diplomatic, and have a keen sense of beauty.",
+        strengths: ["Diplomatic", "Fair", "Social"],
+        weaknesses: ["Indecisive", "Avoids Confrontation", "Self-pity"],
       };
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
@@ -163,6 +194,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: scorpioImg,
         countOfProfiles: 30982,
         emoji: "♏",
+        personality:
+          "Scorpios are passionate and assertive. They're determined and decisive, and will research until they find out the truth. Scorpios are known for their bravery and loyalty.",
+        strengths: ["Brave", "Loyal", "Ambitious"],
+        weaknesses: ["Jealous", "Secretive", "Dominating"],
       };
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
@@ -171,6 +206,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: sagittariusImg,
         countOfProfiles: 38141,
         emoji: "♐",
+        personality:
+          "Sagittarius are curious and energetic. They are the travelers of the zodiac, with a philosophical approach to life, searching for the ultimate truth.",
+        strengths: ["Optimistic", "Lover of Freedom", "Honest"],
+        weaknesses: ["Careless", "Impatient", "Tactless"],
       };
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
@@ -179,6 +218,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: capricornImg,
         countOfProfiles: 25132,
         emoji: "♑",
+        personality:
+          "Capricorns are disciplined and possess great self-control. They're responsible and manage people well, valuing tradition and quality craftsmanship.",
+        strengths: ["Disciplined", "Responsible", "Self-Control"],
+        weaknesses: ["Know-it-all", "Unforgiving", "Condescending"],
       };
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
@@ -187,6 +230,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: aquariusImg,
         countOfProfiles: 37319,
         emoji: "♒",
+        personality:
+          "Aquarians are progressive, independent, and intelligent. They are humanitarians at heart, often innovative, and strive to make the world a better place.",
+        strengths: ["Innovative", "Humanitarian", "Independent"],
+        weaknesses: ["Unpredictable", "Inflexible", "Detached"],
       };
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
@@ -195,6 +242,10 @@ export function getZodiacSign(birthDate: string): {
         svgComponent: piscesImg,
         countOfProfiles: 33784,
         emoji: "♓",
+        personality:
+          "Pisces are compassionate and artistic. They are empathetic, often feeling the pain of others, and are known for their wisdom and musical talents.",
+        strengths: ["Compassionate", "Artistic", "Intuitive"],
+        weaknesses: ["Fearful", "Overly Trusting", "Sad"],
       };
     default:
       throw new Error("Failed to compute Zodiac sign");
