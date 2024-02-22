@@ -1,18 +1,47 @@
-import { Box, Flex, Stack, Text, Button, TextProps } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Text,
+  Button,
+  TextProps,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
 import { trackEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
 import { CTALinkToPricing } from "./components";
+import { CheckoutWidget } from "src/pages/checkout";
 
 export interface IPricingPageProps {}
 
 export function PricingSection(props: ComponentProps<typeof Box>) {
+  const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // @ts-ignore
+  const selectedPlan = pricingPlans[selectedPlanID];
+
   return (
     <Box id="pricing-section" as="section" {...props}>
       <Stack spacing={4}>
-        <PricingPlans />
+        <PricingPlans
+          selectedPlanID={selectedPlanID}
+          onPlanChanged={(planID) => {
+            trackEvent({ name: "change-pricing", properties: { planID: planID } });
+            setSelectedPlanID(planID);
+          }}
+        />
+
+        <CTALinkToPricing mt={4} onClick={onOpen}>
+          Start Your Program Now
+        </CTALinkToPricing>
 
         <Flex>
           <Text fontSize={"sm"} color="bg.600">
@@ -24,6 +53,14 @@ export function PricingSection(props: ComponentProps<typeof Box>) {
         {/* <RiskFreeGuaranteed /> */}
         <SafeCheckout />
       </Stack>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent mx="2vw">
+          <ModalCloseButton />
+          <CheckoutWidget pricingPlan={selectedPlan} />
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
@@ -95,9 +132,13 @@ function SafeCheckout() {
   );
 }
 
-export function PricingPlans() {
-  const [selectedPlanID, setSelectedPlanID] = useState(pricingPlans["6month"].id);
-
+export function PricingPlans({
+  selectedPlanID,
+  onPlanChanged,
+}: {
+  selectedPlanID: string;
+  onPlanChanged: (planID: string) => void;
+}) {
   return (
     <Flex flexDirection={"column"} alignItems={"center"}>
       <PricingPlanItem
@@ -108,7 +149,7 @@ export function PricingPlans() {
         isSelected={selectedPlanID === pricingPlans["6month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["6month"].id } });
-          setSelectedPlanID(pricingPlans["6month"].id);
+          onPlanChanged(pricingPlans["6month"].id);
         }}
       />
 
@@ -119,7 +160,7 @@ export function PricingPlans() {
         isSelected={selectedPlanID === pricingPlans["3month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["3month"].id } });
-          setSelectedPlanID(pricingPlans["3month"].id);
+          onPlanChanged(pricingPlans["3month"].id);
         }}
       />
 
@@ -129,18 +170,9 @@ export function PricingPlans() {
         isSelected={selectedPlanID === pricingPlans["1month"].id}
         onClick={() => {
           trackEvent({ name: "change-pricing", properties: { planID: pricingPlans["1month"].id } });
-          setSelectedPlanID(pricingPlans["1month"].id);
+          onPlanChanged(pricingPlans["1month"].id);
         }}
       />
-
-      <CTALinkToPricing
-        mt={4}
-        onClick={() => {
-          trackEvent({ name: "start-checkout", properties: { planID: selectedPlanID } });
-        }}
-      >
-        Start Your Program Now
-      </CTALinkToPricing>
     </Flex>
   );
 }

@@ -9,6 +9,7 @@ import {
   Heading,
   Divider,
   AbsoluteCenter,
+  Progress,
 } from "@chakra-ui/react";
 import {
   Elements,
@@ -23,7 +24,6 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineSafety } from "react-icons/ai";
 import { trackEvent, trackPixel } from "@utils/tracking";
 import { PricingPlanType, getPlanByID } from "@utils/pricingPlans";
-import { TopNavigation } from "@components/topnavigation";
 import { loadQuizState } from "@utils/localStorage";
 import { QuizStateParsed } from "@utils/state";
 
@@ -31,8 +31,31 @@ export interface ICheckoutPageProps {}
 
 export default function CheckoutPage(props: PageProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const [stripe, setStripe] = useState<Stripe>();
+
   const [pricingPlan, setPricingPlan] = useState<PricingPlanType>();
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    const params = new URLSearchParams(props.location.search);
+    const pricingPlanID = params.get("pricingPlanID");
+    const pricingPlan = pricingPlanID ? getPlanByID(pricingPlanID) : undefined;
+    setPricingPlan(pricingPlan);
+  }, []);
+
+  if (!pricingPlan || !isMounted) {
+    return "no pricing plan";
+  }
+
+  return <CheckoutWidget pricingPlan={pricingPlan} />;
+}
+
+export function CheckoutWidget({ pricingPlan }: { pricingPlan: PricingPlanType }) {
+  const [stripe, setStripe] = useState<Stripe>();
+
+  useEffect(() => {
+    trackEvent({ name: "checkout_started", properties: { pricingPlan } });
+  }, []);
 
   useEffect(() => {
     loadStripe(
@@ -44,48 +67,31 @@ export default function CheckoutPage(props: PageProps) {
     });
   }, []);
 
-  useEffect(() => {
-    setIsMounted(true);
-
-    const params = new URLSearchParams(props.location.search);
-    const pricingPlanID = params.get("pricingPlanID");
-    const pricingPlan = pricingPlanID ? getPlanByID(pricingPlanID) : undefined;
-    setPricingPlan(pricingPlan);
-  }, []);
-
   return (
-    <Box py={4} bg="bg.100" color="bg.900" minHeight={"100vh"}>
+    <Box py={4}>
       <Container flexDirection={"column"} display={"flex"} gap={5}>
-        <TopNavigation />
+        <Heading textAlign={"center"} fontSize={"2xl"}>
+          Order Summary
+        </Heading>
 
-        {isMounted && !pricingPlan ? (
-          <>No pricing plan found</>
-        ) : (
-          <>
-            <Heading textAlign={"center"} fontSize={"2xl"}>
-              Order Summary
-            </Heading>
-
-            {stripe && (
-              <Elements
-                stripe={stripe}
-                options={{
-                  appearance: {
-                    theme: "stripe",
-                    variables: {
-                      tabLogoColor: "green",
-                      tabLogoSelectedColor: "red",
-                    },
-                  },
-                  mode: "payment",
-                  amount: 2999,
-                  currency: "usd",
-                }}
-              >
-                <CheckoutForm pricingPlan={pricingPlan!} />
-              </Elements>
-            )}
-          </>
+        {stripe && (
+          <Elements
+            stripe={stripe}
+            options={{
+              appearance: {
+                theme: "stripe",
+                variables: {
+                  tabLogoColor: "green",
+                  tabLogoSelectedColor: "red",
+                },
+              },
+              mode: "payment",
+              amount: pricingPlan.price * 100,
+              currency: "usd",
+            }}
+          >
+            <CheckoutForm pricingPlan={pricingPlan} />
+          </Elements>
         )}
       </Container>
     </Box>
@@ -173,6 +179,13 @@ function CheckoutForm({ pricingPlan }: { pricingPlan: PricingPlanType }) {
       onSubmit={(e) => handleCardPaymentSubmit(e)}
     >
       <PlanPreview pricingPlan={pricingPlan} />
+
+      {(!cardCheckoutReady || !expressCheckoutReady) && (
+        <Box mt={4}>
+          <Text fontWeight={"semibold"}>Loading Secure Payment Form</Text>
+          <Progress mt={2} size="lg" isIndeterminate />
+        </Box>
+      )}
 
       <Box width={"full"} display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
         <Text textAlign={"center"} my={4} fontWeight={"semibold"} color="bg.300">
