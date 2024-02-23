@@ -10,7 +10,7 @@ import { MyFormLabel } from "./ui";
 
 export type MultiSelectProps = {} & SlidePropsMulti;
 
-export function MultiSelect({}: MultiSelectProps) {
+export function MultiSelect(props: MultiSelectProps) {
   const actions = useQuizActions();
   const slideCtx = useSlide();
   const snap = useQuizSnapshot();
@@ -23,7 +23,7 @@ export function MultiSelect({}: MultiSelectProps) {
 
   return (
     <Box>
-      <MyFormLabel>Choose one or more</MyFormLabel>
+      <MyFormLabel>{props.label ?? "Choose one or more"} </MyFormLabel>
       <CommonSelect
         handleOptionClick={handleClick}
         isOptionSelected={(o) => selectorState?.value?.some((v) => v.value === o.value) ?? false}
