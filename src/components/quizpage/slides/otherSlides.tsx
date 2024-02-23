@@ -137,7 +137,7 @@ export function MajorLifeEventsSlide() {
         },
       ]}
     >
-      <SlideHeading>Which major life events you have experienced?</SlideHeading>
+      <SlideHeading>Which major life events have you experienced?</SlideHeading>
       <Selector />
       <NextButton>Continue</NextButton>
     </Slide>
