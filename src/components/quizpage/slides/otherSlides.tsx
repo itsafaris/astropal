@@ -58,13 +58,13 @@ export function DailyHoroscope() {
       type="single"
       variant="list"
       options={[
-        { text: "In the mornings", icon: "🌅" },
-        { text: "In the afternoons", icon: "☀️" },
-        { text: "In the evenings", icon: "🌃" },
+        { text: "Every day", icon: "🌅" },
+        { text: "A few times per week", icon: "🌆" },
+        { text: "Once a week", icon: "📆" },
       ]}
     >
       <SlideHeading>
-        At what time of the day would you like to receive your <Span>Personalized Horoscopes</Span>?{" "}
+        How often would you like to receive your <Span>Personalized Horoscopes</Span>?
       </SlideHeading>
       <Selector />
     </Slide>
