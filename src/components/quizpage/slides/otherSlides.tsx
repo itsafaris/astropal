@@ -71,6 +71,50 @@ export function DailyHoroscope() {
   );
 }
 
+export function MajorLifeEventsSlide() {
+  return (
+    <Slide
+      id="major-life-events"
+      type="multi"
+      variant="list"
+      options={[
+        {
+          text: "Career change",
+          icon: "💼",
+        },
+        {
+          text: "Marriage",
+          icon: "💍",
+        },
+        {
+          text: "Divorce",
+          icon: "💔",
+        },
+        {
+          text: "Moving",
+          icon: "📦",
+        },
+        {
+          text: "Having children",
+          icon: "👪",
+        },
+        {
+          text: "Spiritual enlightenment ",
+          icon: "🙏",
+        },
+        {
+          text: "Academic achievements",
+          icon: "🎓",
+        },
+      ]}
+    >
+      <SlideHeading>Which major life events you have experienced?</SlideHeading>
+      <Selector />
+      <NextButton>Continue</NextButton>
+    </Slide>
+  );
+}
+
 export function DedicationTime() {
   return (
     <Slide
