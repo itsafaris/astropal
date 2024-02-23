@@ -71,6 +71,35 @@ export function DailyHoroscope() {
   );
 }
 
+export function MostImportantProgramFeatureSlide() {
+  return (
+    <Slide
+      id="most-important-program-feature"
+      type="single"
+      variant="list"
+      options={[
+        {
+          text: "Individual consultations",
+          icon: "💬",
+        },
+        {
+          text: "Future event predictions",
+          icon: "🔮",
+        },
+        {
+          text: "Spiritual mentorship",
+          icon: "🙏",
+        },
+      ]}
+    >
+      <SlideHeading>
+        Which feature of your <Span>Program</Span> is the most important to you?
+      </SlideHeading>
+      <Selector />
+    </Slide>
+  );
+}
+
 export function MajorLifeEventsSlide() {
   return (
     <Slide

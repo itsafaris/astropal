@@ -34,6 +34,7 @@ import {
   DailyHoroscope,
   DedicationTime,
   MajorLifeEventsSlide,
+  MostImportantProgramFeatureSlide,
 } from "@components/quizpage/slides/otherSlides";
 import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
@@ -102,6 +103,7 @@ export default function OnboardingQuiz() {
             <DedicationTime />
             <DailyHoroscope />
             <AsnwerLongevity />
+            <MostImportantProgramFeatureSlide />
             <FinalizingProfileSlide />
             <YourNameSlide />
             <EmailSlide />
