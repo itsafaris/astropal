@@ -12,8 +12,8 @@ export function EmailSlide() {
       <Selector />
 
       <Caption mt={-6} mb={7}>
-        🔒 We respect your privacy and are committed to protecting your personal data. We will email
-        you the instructions on how to get access to the program
+        🔒 We respect your privacy and are committed to protecting your personal data. We will only
+        send you personalized astrological insights and updates to enlighten your journey.
       </Caption>
 
       <NextButton>Get My Program</NextButton>
