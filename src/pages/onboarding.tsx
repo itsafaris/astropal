@@ -35,6 +35,7 @@ import {
 } from "@components/quizpage/slides/otherSlides";
 import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
+import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -77,6 +78,7 @@ export default function OnboardingQuiz() {
           }}
         >
           <Segment title="Progress">
+            <YourGenderSlide />
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />

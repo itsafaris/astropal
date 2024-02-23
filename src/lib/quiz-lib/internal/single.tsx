@@ -9,7 +9,7 @@ import { MyFormLabel } from "./ui";
 
 export type SingleSelectProps = {} & SlidePropsSingle;
 
-export function SingleSelect(_: SingleSelectProps) {
+export function SingleSelect(props: SingleSelectProps) {
   const actions = useQuizActions();
   const slideCtx = useSlide();
   const snap = useQuizSnapshot();
@@ -22,8 +22,7 @@ export function SingleSelect(_: SingleSelectProps) {
 
   return (
     <Box>
-      <MyFormLabel>Choose one</MyFormLabel>
-
+      <MyFormLabel>{props.label ?? "Choose one"}</MyFormLabel>
       <CommonSelect
         handleOptionClick={handleClick}
         isOptionSelected={(o) => selectorState?.value?.value === o.value}
