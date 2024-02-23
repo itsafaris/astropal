@@ -32,6 +32,7 @@ import {
   AstrologerThemePreferences,
   DailyHoroscope,
   DedicationTime,
+  MajorLifeEventsSlide,
 } from "@components/quizpage/slides/otherSlides";
 import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
@@ -86,6 +87,7 @@ export default function OnboardingQuiz() {
             <NatalChartSlide />
             <DecisionMakingStruggles />
             <AdviceSeekingFrequency />
+            <MajorLifeEventsSlide />
             <WrongDecisionSlide />
             <FillerPeopleInControl />
             <YourAstrologicalInvolvementSlide />

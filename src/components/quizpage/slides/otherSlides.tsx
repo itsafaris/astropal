@@ -58,15 +58,59 @@ export function DailyHoroscope() {
       type="single"
       variant="list"
       options={[
-        { text: "In the mornings", icon: "🌅" },
-        { text: "In the afternoons", icon: "☀️" },
-        { text: "In the evenings", icon: "🌃" },
+        { text: "Every day", icon: "🌅" },
+        { text: "A few times per week", icon: "🌆" },
+        { text: "Once a week", icon: "📆" },
       ]}
     >
       <SlideHeading>
-        At what time of the day would you like to receive your <Span>Personalized Horoscopes</Span>?{" "}
+        How often would you like to receive your <Span>Personalized Horoscopes</Span>?
       </SlideHeading>
       <Selector />
+    </Slide>
+  );
+}
+
+export function MajorLifeEventsSlide() {
+  return (
+    <Slide
+      id="major-life-events"
+      type="multi"
+      variant="list"
+      options={[
+        {
+          text: "Career change",
+          icon: "💼",
+        },
+        {
+          text: "Marriage",
+          icon: "💍",
+        },
+        {
+          text: "Divorce",
+          icon: "💔",
+        },
+        {
+          text: "Moving",
+          icon: "📦",
+        },
+        {
+          text: "Having children",
+          icon: "👪",
+        },
+        {
+          text: "Spiritual enlightenment ",
+          icon: "🙏",
+        },
+        {
+          text: "Academic achievements",
+          icon: "🎓",
+        },
+      ]}
+    >
+      <SlideHeading>Which major life events you have experienced?</SlideHeading>
+      <Selector />
+      <NextButton>Continue</NextButton>
     </Slide>
   );
 }
