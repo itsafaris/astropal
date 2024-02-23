@@ -23,6 +23,7 @@ import {
   NatalChartReading,
   QuoteSlide,
   WrongDecisionSlide,
+  YourNameSlide,
 } from "@components/quizpage/questions";
 import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLoadingSlide";
 import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
@@ -102,6 +103,7 @@ export default function OnboardingQuiz() {
             <DailyHoroscope />
             <AsnwerLongevity />
             <FinalizingProfileSlide />
+            <YourNameSlide />
             <EmailSlide />
           </Segment>
         </QuizUI>

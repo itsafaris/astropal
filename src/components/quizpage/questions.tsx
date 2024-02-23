@@ -33,6 +33,16 @@ export function DecisionMakingStruggles() {
   );
 }
 
+export function YourNameSlide() {
+  return (
+    <Slide id="name-slide" type="short-text" placeholder="E.g. Jane" optional>
+      <SlideHeading>How should we call you?</SlideHeading>
+      <Selector />
+      <NextButton>Continue</NextButton>
+    </Slide>
+  );
+}
+
 export function AdviceSeekingFrequency() {
   return (
     <Slide

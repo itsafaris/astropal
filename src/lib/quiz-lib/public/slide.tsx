@@ -111,7 +111,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
             <NextButton />
           </Box>
         )} */}
-        {showSkipButton && <SkipButton mt={2} />}
+        {showSkipButton && <SkipButton mt={8} />}
       </Flex>
     </Flex>
   );
