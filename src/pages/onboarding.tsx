@@ -105,7 +105,7 @@ export default function OnboardingQuiz() {
             <AsnwerLongevity />
             <MostImportantProgramFeatureSlide />
             <FinalizingProfileSlide />
-            <YourNameSlide />
+            {/* <YourNameSlide /> */}
             <EmailSlide />
           </Segment>
         </QuizUI>
