@@ -13,9 +13,8 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
     <>
       <Box id="hero-section" as="section" color="white" pt={12} pb={12}>
         <Headline fontSize={"3xl"} mb={6}>
-          Your Horoscope Reading and{" "}
-          <InvertedHighlight>Astrological Self-Discovery Mentorship Program</InvertedHighlight> Is
-          Ready!
+          Your <InvertedHighlight>Astrological Self-Discovery Mentorship Program</InvertedHighlight>{" "}
+          Is Ready. You Will Start Receiving Personalized Horoscopes Shortly!
         </Headline>
 
         <Flex
