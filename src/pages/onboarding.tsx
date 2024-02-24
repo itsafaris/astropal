@@ -3,7 +3,7 @@ import { navigate } from "gatsby";
 
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
-import { trackEvent } from "@utils/tracking";
+import { trackEvent, trackPixel } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
@@ -69,6 +69,7 @@ export default function OnboardingQuiz() {
       }}
       onSlideSubmitted={(state) => {
         if (state.id === "your-email") {
+          trackPixel("Lead", {});
           navigate("/summary");
         }
       }}
