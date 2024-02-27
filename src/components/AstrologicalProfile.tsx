@@ -140,7 +140,7 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
       <Divider />
 
       <Stack spacing={5}>
-        <Title fontSize={"xl"}>Your strenghts</Title>
+        <Title fontSize={"xl"}>Your strengths</Title>
         <Stack spacing={0} alignItems={"center"}>
           {quizState.yourZodiac.strengths.map((it) => {
             return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
