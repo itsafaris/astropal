@@ -48,6 +48,18 @@ export interface NatalChart {
   //   progressions: Array<{ planet: string; sign: string; house: number }>;
 }
 
+export function createBirthOrigin(input: {
+  year: number;
+  month: number;
+  date: number;
+  hour: number;
+  minute: number;
+  latitude: number;
+  longitude: number;
+}) {
+  return new Origin(input);
+}
+
 export function createHoroscopeData(input: {
   year: number;
   month: number;
@@ -60,7 +72,6 @@ export function createHoroscopeData(input: {
   return new Horoscope({
     origin: new Origin({
       ...input,
-      month: input.month - 1, // 0 = January, 11 = December!
     }),
     houseSystem: "whole-sign",
     zodiac: "tropical",

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { INTERNAL_Snapshot, proxy, ref, useSnapshot } from "valtio";
+import { INTERNAL_Snapshot, proxy, ref, snapshot, useSnapshot } from "valtio";
 import { ISelectorType, LogicDefinition, SlideProps, TrackingEventCallback } from "../public/types";
 import { getPosInBounds, validateEmail } from "./utils";
 import { getSlideProperties } from "./tracking";
@@ -101,6 +101,8 @@ export type SegmentDescriptor = {
 
 export type QuizState = ReturnType<typeof createQuizState>;
 
+export type QuizSlideState = QuizState["state"]["slideStateByID"];
+
 function createSlideState(type: ISelectorType): SelectorState {
   return {
     type,
@@ -116,7 +118,11 @@ export function createQuizState(input: {
   };
   // segments: SegmentDescriptor[];
   // slides: SlideProps[];
-  onSlideSubmitted?: (slideState: { id: string; state: SelectorState }) => void;
+  onSlideSubmitted?: (slideState: {
+    id: string;
+    state: SelectorState;
+    getQuizState: () => Promise<QuizSlideState>;
+  }) => void;
   onTrackingEvent?: TrackingEventCallback;
 }) {
   // let validationError = validateSegments(input.segments);
@@ -235,6 +241,10 @@ export function createQuizState(input: {
       input.onSlideSubmitted?.({
         id: currentSlide.id,
         state: currentSlideState,
+        // @ts-expect-error
+        getQuizState: () => {
+          return snapshot(state.slideStateByID);
+        },
       });
       input.onTrackingEvent?.({
         name: "slide-submitted",

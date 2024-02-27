@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { devtools } from "valtio/utils";
 
-import { QuizCtx, SelectorState, createQuizState } from "../internal/state";
+import { QuizCtx, QuizSlideState, SelectorState, createQuizState } from "../internal/state";
 import { QuizErrorEvent, TrackingEventCallback } from "./types";
 
 export type QuizProps = {
@@ -14,7 +14,11 @@ export type QuizConfigType = {
   onErrorEvent?: (event: QuizErrorEvent) => void;
   // return only the id for now to not expose the proxied objects
   onSlideChange?: (newSlide: { id: string }) => void;
-  onSlideSubmitted?: (state: { id: string; state: SelectorState }) => void;
+  onSlideSubmitted?: (state: {
+    id: string;
+    state: SelectorState;
+    getQuizState: () => Promise<QuizSlideState>;
+  }) => void;
   onTrackingEvent?: TrackingEventCallback;
 };
 

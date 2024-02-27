@@ -3,11 +3,11 @@ import { navigate } from "gatsby";
 
 import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
-import { trackEvent, trackPixel } from "@utils/tracking";
+import { setPersonProperties, trackEvent, trackPixel } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { saveQuizState } from "@utils/localStorage";
-import { getPersonalInfoFromState } from "@utils/state";
+import { calcPersonalInfo, getPersonalInfoFromState } from "@utils/state";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
 import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
@@ -67,7 +67,19 @@ export default function OnboardingQuiz() {
       onTrackingEvent={(event) => {
         trackEvent(event);
       }}
-      onSlideSubmitted={(state) => {
+      onSlideSubmitted={async (state) => {
+        const rawState = await state.getQuizState();
+        const parsedState = getPersonalInfoFromState(rawState);
+        const calcState = calcPersonalInfo(parsedState);
+
+        setPersonProperties({
+          gender: parsedState.yourGender,
+          zodiac_sign: parsedState.yourZodiac.name,
+          birth_date_local: calcState.birthOrigin.localTimeFormatted,
+          birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
+          birth_place: parsedState.yourBirthLocation,
+        });
+
         if (state.id === "your-email") {
           trackPixel("Lead", {});
           navigate("/summary");

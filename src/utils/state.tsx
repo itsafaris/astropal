@@ -12,7 +12,7 @@ import { getZodiacSign } from "@services/zodiacService";
 
 import { toTitleCase } from "@utils/string";
 import { createTime } from "./dates";
-import { createHoroscopeData } from "./natalChart";
+import { createBirthOrigin, createHoroscopeData } from "./natalChart";
 
 // IMPORTANT: change this if structure changes, to invalidate local storage
 export const STATE_VERSION = 5;
@@ -37,8 +37,28 @@ function calculateAge(birthdate: string, currentDate: string): number {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
+export function calcPersonalInfo({
+  yourBirthDate,
+  yourBirthTime,
+  yourBirthLocation,
+}: QuizStateParsed) {
+  const birthOrigin = createBirthOrigin({
+    year: yourBirthDate.year,
+    month: yourBirthDate.month - 1,
+    date: yourBirthDate.day,
+    hour: yourBirthTime.time24.hour,
+    minute: yourBirthTime.time24.minute,
+    latitude: yourBirthLocation.lat,
+    longitude: yourBirthLocation.long,
+  });
+
+  return {
+    birthOrigin,
+  };
+}
+
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
-  const yourGender = (state["your-gender"] as SingleState)?.value?.value;
+  const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase();
   const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
   const { firstName, lastName } = splitFullName(fullname);
 
@@ -69,7 +89,7 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
 
   const horoscope = createHoroscopeData({
     year: yourBirthDate.year,
-    month: yourBirthDate.month,
+    month: yourBirthDate.month - 1,
     date: yourBirthDate.day,
     hour: yourBirthTime.time24.hour,
     minute: yourBirthTime.time24.minute,

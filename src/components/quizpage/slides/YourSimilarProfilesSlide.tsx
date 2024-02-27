@@ -16,7 +16,7 @@ export function YourSimilarProfilesSlide() {
         return (
           <Fragment>
             <Title textAlign={"center"}>{`We helped other ${yourZodiac.name} ${
-              !yourGender ? "" : yourGender === "Other" ? "people" : yourGender.toLowerCase() + "s"
+              !yourGender ? "" : yourGender === "other" ? "people" : yourGender + "s"
             } like you`}</Title>
             <Subtitle textAlign={"center"} color="bg.600">
               We are currently guiding <Span>{yourZodiac.countOfProfiles.toLocaleString()}</Span>{" "}
