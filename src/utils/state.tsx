@@ -60,7 +60,10 @@ export function calcPersonalInfo({
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase();
   const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
+
   const { firstName, lastName } = splitFullName(fullname);
+
+  const email = (state["your-email"] as ShortTextState)?.value ?? "";
 
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
     year: 1990,
@@ -108,6 +111,18 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const focusArea =
     (state["astrologer-theme-preferences"] as SingleState)?.value?.value ?? "Personal-Growth";
 
+  const astrologyLevel =
+    (state["your-astrological-involvement"] as SingleState)?.value?.value ?? "";
+
+  const dedicationTime = (state["dedication-time"] as SingleState)?.value?.value ?? "";
+
+  const horoscopeFreqWeekly = (state["daily-horoscope"] as SingleState)?.value?.value ?? "";
+
+  const answerLongevity = (state["answer-longevity"] as SingleState)?.value?.value ?? "";
+
+  const mostImportantFeature =
+    (state["most-important-program-feature"] as SingleState)?.value?.value ?? "";
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -122,5 +137,11 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
     horoscope,
     struggleAreas,
     focusArea,
+    astrologyLevel,
+    dedicationTime,
+    horoscopeFreqWeekly,
+    answerLongevity,
+    mostImportantFeature,
+    email,
   };
 }

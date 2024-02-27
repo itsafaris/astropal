@@ -39,6 +39,7 @@ import {
 import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingProfileSlide";
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
+import posthog from "posthog-js";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -78,9 +79,16 @@ export default function OnboardingQuiz() {
           birth_date_local: calcState.birthOrigin.localTimeFormatted,
           birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
           birth_place: parsedState.yourBirthLocation,
+          astrology_level: parsedState.astrologyLevel,
+          theme_focus: parsedState.focusArea,
+          dedication_time_per_day: parsedState.dedicationTime,
+          horoscope_freq_weekly: parsedState.horoscopeFreqWeekly,
+          answer_longevity: parsedState.answerLongevity,
+          most_important_feature: parsedState.mostImportantFeature,
         });
 
         if (state.id === "your-email") {
+          posthog.identify(parsedState.email);
           trackPixel("Lead", {});
           navigate("/summary");
         }

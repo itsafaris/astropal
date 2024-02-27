@@ -10,18 +10,22 @@ export function YourAstrologicalInvolvementSlide() {
       variant="list"
       options={[
         {
+          value: "beginner",
           text: "I'm new to astrology",
           icon: "🌑",
         },
         {
+          value: "casual",
           text: "I have a casual interest",
           icon: "🌒",
         },
         {
+          value: "modest",
           text: "I actively practice and study",
           icon: "🌔",
         },
         {
+          value: "expert",
           text: "Deeply committed",
           icon: "🌕",
         },

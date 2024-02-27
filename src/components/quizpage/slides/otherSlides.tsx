@@ -12,11 +12,11 @@ export function AstrologerThemePreferences() {
       type="single"
       variant="list"
       options={[
-        { text: "Love & Relationships", icon: "💞" },
-        { text: "Career", icon: "💼" },
-        { text: "Finances", icon: "💰" },
-        { text: "Personal Growth", icon: "🍀" },
-        { text: "Self understanding", icon: "🧘" },
+        { text: "Love & Relationships", icon: "💞", value: "relationships" },
+        { text: "Career", icon: "💼", value: "career" },
+        { text: "Finances", icon: "💰", value: "finances" },
+        { text: "Personal Growth", icon: "🍀", value: "personal-growth" },
+        { text: "Self understanding", icon: "🧘", value: "self-understanding" },
       ]}
     >
       <SlideHeading>
@@ -58,9 +58,9 @@ export function DailyHoroscope() {
       type="single"
       variant="list"
       options={[
-        { text: "Every day", icon: "🌅" },
-        { text: "A few times per week", icon: "🌆" },
-        { text: "Once a week", icon: "📆" },
+        { text: "Every day", icon: "🌅", value: "7" },
+        { text: "A few times per week", icon: "🌆", value: "3" },
+        { text: "Once a week", icon: "📆", value: "1" },
       ]}
     >
       <SlideHeading>
@@ -81,14 +81,17 @@ export function MostImportantProgramFeatureSlide() {
         {
           text: "Individual consultations",
           icon: "💬",
+          value: "individual-consultations",
         },
         {
           text: "Future event predictions",
           icon: "🔮",
+          value: "future-predictions",
         },
         {
           text: "Spiritual mentorship",
           icon: "🙏",
+          value: "mentorship",
         },
       ]}
     >
@@ -151,9 +154,9 @@ export function DedicationTime() {
       type="single"
       variant="list"
       options={[
-        { text: "Up to 5 minutes", icon: "◔" },
-        { text: "Up to 20 minutes", icon: "◕" },
-        { text: "Up to 1 hour", icon: "⏺︎" },
+        { text: "Up to 5 minutes", icon: "◔", value: "quick" },
+        { text: "Up to 20 minutes", icon: "◕", value: "regular" },
+        { text: "Up to 1 hour", icon: "⏺︎", value: "dedicated" },
       ]}
     >
       <SlideHeading>
