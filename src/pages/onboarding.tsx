@@ -77,6 +77,11 @@ export default function OnboardingQuiz() {
           gender: parsedState.yourGender,
           zodiac_sign: parsedState.yourZodiac.name,
           birth_date_local: calcState.birthOrigin.localTimeFormatted,
+          birth_date_local_extracted: {
+            year: parsedState.yourBirthDate.year,
+            month: parsedState.yourBirthDate.month - 1,
+            date: parsedState.yourBirthDate.day,
+          },
           birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
           birth_place: parsedState.yourBirthLocation,
           astrology_level: parsedState.astrologyLevel,
