@@ -80,8 +80,11 @@ export default function SummaryPage({}: PageProps) {
         </Container>
       </Box>
 
-      <Box py={10} backgroundColor={"white"}>
+      <Box py={10} backgroundColor={"white"} color="bg.100">
         <Container>
+          <Headline color="black">
+            <HeadlineHighlight>This Program</HeadlineHighlight> Is For You, If You…
+          </Headline>
           <AreasOfGuidanceSection />
         </Container>
       </Box>

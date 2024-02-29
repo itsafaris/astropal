@@ -1,15 +1,10 @@
 import { Box, Text, Stack, Flex } from "@chakra-ui/react";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { Headline, HeadlineHighlight } from "./components";
 
 export function AreasOfGuidanceSection() {
   return (
     <Flex flexDirection={"column"} alignItems={"center"} id="guidance-section" gap={8}>
-      <Headline color="black">
-        <HeadlineHighlight>This Program</HeadlineHighlight> Is For You, If You…
-      </Headline>
-
       <StaticImage
         alt=""
         src="../../images/art-6.png"
@@ -62,13 +57,11 @@ function Separator() {
 const Feature = ({ title, text, emoji }: { title: string; text: string; emoji?: string }) => {
   return (
     <Stack direction={"column"} px={6} gap={2}>
-      <Text fontWeight={"semibold"} color={"black"} fontSize={"xl"}>
+      <Text fontWeight={"semibold"} fontSize={"xl"}>
         {emoji} {title}
       </Text>
 
-      <Text color={"blackAlpha.800"} fontSize={"lg"}>
-        {text}
-      </Text>
+      <Text fontSize={"lg"}>{text}</Text>
     </Stack>
   );
 };

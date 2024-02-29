@@ -42,75 +42,81 @@ export function HeroSection({ state }: { state: QuizStateParsed }) {
         </Flex>
       </Box>
 
-      <Box>
-        <Headline fontSize={"3xl"} mt={5} mb={10}>
-          Get Instant Access To All The Benefits Of{" "}
-          <InvertedHighlight>Your Program</InvertedHighlight> From Your Phone
-        </Headline>
+      <BenefitsSection state={state} />
+    </>
+  );
+}
 
-        <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
-          <Features />
-        </Flex>
+export function BenefitsSection({ state }: { state?: QuizStateParsed }) {
+  return (
+    <Box>
+      <Headline fontSize={"3xl"} mt={5} mb={10}>
+        Get Instant Access To All The Benefits Of{" "}
+        <InvertedHighlight>Your Program</InvertedHighlight> From Your Phone
+      </Headline>
 
-        <Grid gridTemplateColumns={"repeat(2, 1fr)"} maxWidth={400} mx={"auto"}>
-          <Box position={"relative"}>
-            <StaticImage
-              alt=""
-              src="../../images/hero-books.png"
-              style={{
-                position: "absolute",
-                width: "140%",
-                right: "-40%",
-                top: "5%",
-              }}
-            />
+      <Flex flexDirection={"column"} alignItems={"center"} px={3} my={8}>
+        <Features />
+      </Flex>
 
-            <Box
-              position={"absolute"}
-              bottom={"-70px"}
-              right={"-80px"}
-              transform={{
-                base: "scale(0.5)",
-                sm: "scale(0.55)",
-              }}
-            >
-              <AstrologicalProfileSmall quizState={state} />
-            </Box>
-          </Box>
-
-          <Box alignSelf={"center"}>
-            <StaticImage alt="" src="../../images/hero-phone.png" />
-          </Box>
-        </Grid>
-
-        <Flex
-          flexDirection={"row"}
-          width={"100%"}
-          gap={5}
-          alignItems={"center"}
-          alignSelf={"center"}
-          maxWidth={400}
-          mx="auto"
-          mt={10}
-        >
+      <Grid gridTemplateColumns={"repeat(2, 1fr)"} maxWidth={400} mx={"auto"}>
+        <Box position={"relative"}>
           <StaticImage
             alt=""
-            src="../../images/user9.png"
-            style={{ width: 100, height: 100, borderRadius: "50%", flexShrink: 0 }}
+            src="../../images/hero-books.png"
+            style={{
+              position: "absolute",
+              width: "140%",
+              right: "-40%",
+              top: "5%",
+            }}
           />
 
-          <Flex flexDirection={"column"} gap={1}>
-            <Text fontSize={"md"} lineHeight={1.3}>
-              "This unique program helped me to unveil my authentic essence"
-            </Text>
+          <Box
+            position={"absolute"}
+            bottom={"-70px"}
+            right={"-80px"}
+            transform={{
+              base: "scale(0.5)",
+              sm: "scale(0.55)",
+            }}
+          >
+            {state && <AstrologicalProfileSmall quizState={state} />}
+          </Box>
+        </Box>
 
-            <Text textAlign={"right"} fontSize={"md"} width={"100%"}>
-              - Linda Miller
-            </Text>
-          </Flex>
+        <Box alignSelf={"center"}>
+          <StaticImage alt="" src="../../images/hero-phone.png" />
+        </Box>
+      </Grid>
+
+      <Flex
+        flexDirection={"row"}
+        width={"100%"}
+        gap={5}
+        alignItems={"center"}
+        alignSelf={"center"}
+        maxWidth={400}
+        mx="auto"
+        mt={10}
+      >
+        <StaticImage
+          alt=""
+          src="../../images/user9.png"
+          style={{ width: 100, height: 100, borderRadius: "50%", flexShrink: 0 }}
+        />
+
+        <Flex flexDirection={"column"} gap={1}>
+          <Text fontSize={"md"} lineHeight={1.3}>
+            "This unique program helped me to unveil my authentic essence"
+          </Text>
+
+          <Text textAlign={"right"} fontSize={"md"} width={"100%"}>
+            - Linda Miller
+          </Text>
         </Flex>
-      </Box>
-    </>
+      </Flex>
+    </Box>
   );
 }
 
