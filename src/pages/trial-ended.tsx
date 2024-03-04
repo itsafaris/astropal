@@ -10,18 +10,22 @@ function PersonalPage(props: IPersonalPageProps) {
   return (
     <Box minH={"100vh"} bg="bg.100" color="white" py={8}>
       <Container>
-        <Flex direction="column" textAlign={"center"} gap={4}>
-          <Heading>Your 7-day trial has ended</Heading>
-          <Text>
-            You will no longer be receiving daily personalized horoscopes and will lose access to
-            personalized email consultations.
-          </Text>
-        </Flex>
+        <Heading textAlign={"center"} color="brand.600" fontSize={"2xl"}>
+          Your 7-day trial has ended
+        </Heading>
+        <Text mt={4} textAlign={"center"} fontWeight={"semibold"}>
+          You will no longer be receiving daily personalized horoscopes and will lose access to
+          personalized email consultations.
+        </Text>
 
-        <Stack mt={16} spacing={4} color="brand.700">
+        <Heading as="h2" fontSize={"lg"} mt={12}>
+          Choose your plan:
+        </Heading>
+
+        <Stack mt={4} spacing={4} color="brand.700">
           <Box bg="bg.200" p={4} borderRadius={"lg"}>
             <Text fontWeight={"bold"} mb={4} fontSize={"xl"}>
-              Basic Plan
+              Basic
             </Text>
             <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"}>
               <Flex alignItems={"start"} gap={2}>
@@ -61,13 +65,13 @@ function PersonalPage(props: IPersonalPageProps) {
 
           <Box bg="bg.200" p={4} borderRadius={"lg"}>
             <Text fontWeight={"bold"} mb={4} fontSize={"xl"}>
-              Premium Plan
+              Premium
             </Text>
             <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"}>
               <Flex alignItems={"start"} gap={2}>
                 <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
                 <Box>
-                  <Text>Includes Everything from Basic Plan</Text>
+                  <Text>Includes Everything from Basic</Text>
                 </Box>
               </Flex>
               <Flex alignItems={"start"} gap={2}>
