@@ -2,6 +2,7 @@ import { CheckIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { Span } from "@components/quizpage/components";
 import { CTAButton } from "@components/summary/components";
+import { navigate } from "gatsby";
 import * as React from "react";
 
 interface IPersonalPageProps {}
@@ -56,7 +57,14 @@ function PersonalPage(props: IPersonalPageProps) {
             >
               $3.90 <Span fontWeight={"normal"}>/ month</Span>
             </Text>
-            <CTAButton mt={8}>Choose Basic</CTAButton>
+            <CTAButton
+              mt={8}
+              onClick={() => {
+                navigate("/checkout-error");
+              }}
+            >
+              Choose Basic
+            </CTAButton>
             <Text mt={4} color="bg.700" fontSize={"sm"}>
               There is no commitment. You can cancel your subscription any time and will no longer
               be charged a monthly fee.
@@ -94,7 +102,14 @@ function PersonalPage(props: IPersonalPageProps) {
             >
               $8.90 <Span fontWeight={"normal"}>/ month</Span>
             </Text>
-            <CTAButton mt={8}>Choose Premium</CTAButton>
+            <CTAButton
+              mt={8}
+              onClick={() => {
+                navigate("/checkout-error");
+              }}
+            >
+              Choose Premium
+            </CTAButton>
             <Text mt={4} color="bg.700" fontSize={"sm"}>
               There is no commitment. You can cancel your subscription any time and will no longer
               be charged a monthly fee.

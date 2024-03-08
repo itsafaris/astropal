@@ -8,7 +8,7 @@ export default function CheckoutErrorPage() {
         <TopNavigation />
 
         <Heading textAlign={"center"} fontSize={"2xl"}>
-          Unable to complete your order
+          Unable to complete your operation
         </Heading>
 
         <Stack
@@ -20,9 +20,10 @@ export default function CheckoutErrorPage() {
           spacing={5}
         >
           <Text>
-            Oops! Something went wrong, but don't worry, we're working hard to fix the issue.
+            We're currently working through some technical difficulties with our service. Rest
+            assured, we're on it and will notify you as soon as everything is back to normal.
           </Text>
-          <Text>Please come back in a few hours. We appreciate your understanding!</Text>
+          <Text>We apologize for any inconvenience and appreciate your patience.</Text>
         </Stack>
       </Container>
     </Box>
