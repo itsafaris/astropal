@@ -58,7 +58,7 @@ export function calcPersonalInfo({
 }
 
 export function getPersonalInfoFromState(state: QuizQuestionsState) {
-  const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase();
+  const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase() ?? "male";
   const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
 
   const { firstName, lastName } = splitFullName(fullname);
@@ -108,8 +108,7 @@ export function getPersonalInfoFromState(state: QuizQuestionsState) {
   const struggleAreas =
     (state["decision-making-struggles"] as MultiState)?.value?.map((it) => it.value) ?? [];
 
-  const focusArea =
-    (state["astrologer-theme-preferences"] as SingleState)?.value?.value ?? "Personal-Growth";
+  const focusArea = (state["astrologer-theme-preferences"] as SingleState)?.value?.value;
 
   const astrologyLevel =
     (state["your-astrological-involvement"] as SingleState)?.value?.value ?? "";

@@ -2,7 +2,7 @@ name: Build and deploy
 run-name: ${{ github.actor }} - Build and deploy
 on:
   push:
-    branches: [main, v2, v3, v4, v5-mentorship]
+    branches: [main, v2, v3, v4, v5-mentorship, v6-first-mvp]
   pull_request:
     branches: [main]
 
@@ -21,6 +21,7 @@ jobs:
         env:
           GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
           GATSBY_SENTRY_DSN: ${{ secrets.GATSBY_SENTRY_DSN }}
+          GATSBY_CORE_URL: https://api.theastropal.com
       - name: Netlify Deploy
         uses: nwtgck/actions-netlify@v2.1.0
         with:

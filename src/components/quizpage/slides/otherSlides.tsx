@@ -14,9 +14,8 @@ export function AstrologerThemePreferences() {
       options={[
         { text: "Love & Relationships", icon: "💞", value: "relationships" },
         { text: "Career", icon: "💼", value: "career" },
-        { text: "Finances", icon: "💰", value: "finances" },
-        { text: "Personal Growth", icon: "🍀", value: "personal-growth" },
-        { text: "Self understanding", icon: "🧘", value: "self-understanding" },
+        { text: "Emotional Growth", icon: "🍀", value: "emotions" },
+        { text: "Self understanding", icon: "🧘", value: "personality" },
       ]}
     >
       <SlideHeading>
