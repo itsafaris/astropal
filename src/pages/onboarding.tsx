@@ -95,8 +95,6 @@ export default function OnboardingQuiz() {
         if (state.id === "your-email") {
           posthog.identify(parsedState.email);
           trackPixel("Lead", {});
-          await createNewUserProfile(parsedState);
-          // navigate("/summary");
         }
       }}
     >
@@ -112,28 +110,28 @@ export default function OnboardingQuiz() {
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            <NatalChartLoadingSlide />
-            <NatalChartSlide />
-            <DecisionMakingStruggles />
-            <AdviceSeekingFrequency />
-            <MajorLifeEventsSlide />
-            <WrongDecisionSlide />
-            <FillerPeopleInControl />
-            <YourAstrologicalInvolvementSlide />
-            <QuoteSlide />
-            <InsightSourcesSlide />
-            <NatalChartReading />
-            <HyperPersonalisedInsights />
-            <Loading_CreatingNatalChartReading />
-            <Filler_MentorshipProgramIntro />
+            {/* <NatalChartLoadingSlide /> */}
+            {/* <NatalChartSlide /> */}
+            {/* <DecisionMakingStruggles /> */}
+            {/* <AdviceSeekingFrequency /> */}
+            {/* <MajorLifeEventsSlide /> */}
+            {/* <WrongDecisionSlide /> */}
+            {/* <FillerPeopleInControl /> */}
+            {/* <YourAstrologicalInvolvementSlide /> */}
+            {/* <QuoteSlide /> */}
+            {/* <InsightSourcesSlide /> */}
+            {/* <NatalChartReading /> */}
+            {/* <HyperPersonalisedInsights /> */}
+            {/* <Loading_CreatingNatalChartReading /> */}
+            {/* <Filler_MentorshipProgramIntro /> */}
             <AstrologerThemePreferences />
-            <DedicationTime />
-            <DailyHoroscope />
-            <AsnwerLongevity />
-            <MostImportantProgramFeatureSlide />
-            <FinalizingProfileSlide />
+            {/* <DedicationTime /> */}
+            {/* <DailyHoroscope /> */}
+            {/* <AsnwerLongevity /> */}
+            {/* <MostImportantProgramFeatureSlide /> */}
             <YourNameSlide />
             <EmailSlide />
+            <FinalizingProfileSlide />
           </Segment>
         </QuizUI>
       </QuizServiceWrapper>
@@ -150,29 +148,4 @@ function QuizStateSaver() {
   }, [q.slideStateByID]);
 
   return null;
-}
-
-async function createNewUserProfile(input: QuizStateParsed) {
-  await fetch(`${process.env.GATSBY_CORE_URL}/createNewUser`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: input.email,
-      gender: input.yourGender,
-      name: input.fullname,
-      current_tz_id: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      dob_local_year: input.yourBirthDate.year,
-      dob_local_month: input.yourBirthDate.month - 1,
-      dob_local_date: input.yourBirthDate.day,
-      dob_local_hour: input.yourBirthTime.time24.hour,
-      dob_local_minute: input.yourBirthTime.time24.minute,
-      birth_place_place_id: input.yourBirthLocation.placeID,
-      birth_place_formatted_text: input.yourBirthLocation.formattedText,
-      birth_place_lat: input.yourBirthLocation.lat,
-      birth_place_lng: input.yourBirthLocation.long,
-      focus_area: input.focusArea,
-    }),
-  });
 }
