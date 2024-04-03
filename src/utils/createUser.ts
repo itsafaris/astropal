@@ -1,6 +1,6 @@
 import { QuizStateParsed } from "./state";
 
-export async function createNewUserProfile(input: QuizStateParsed) {
+export async function createNewUserProfile(input: QuizStateParsed): Promise<{ id?: string }> {
   const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNewUser`, {
     method: "POST",
     headers: {
@@ -23,6 +23,10 @@ export async function createNewUserProfile(input: QuizStateParsed) {
       focus_area: input.focusArea,
     }),
   });
+
+  if (r.status !== 200) {
+    throw new Error(r.statusText);
+  }
 
   return await r.json();
 }

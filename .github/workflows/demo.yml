@@ -22,7 +22,7 @@ jobs:
           GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
           GATSBY_SENTRY_DSN: ${{ secrets.GATSBY_SENTRY_DSN }}
           GATSBY_CORE_URL: https://api.theastropal.com
-          GATSBY_WEBAPP_URL: http://app.theastropal.com
+          GATSBY_WEBAPP_URL: https://app.theastropal.com
       - name: Netlify Deploy
         uses: nwtgck/actions-netlify@v2.1.0
         with:
