@@ -6,7 +6,7 @@ import { isProdMode } from "@utils/isProdMode";
 import { setPersonProperties, trackEvent, trackPixel } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
-import { saveQuizState } from "@utils/localStorage";
+import { clearQuizState, saveQuizState } from "@utils/localStorage";
 import { QuizStateParsed, calcPersonalInfo, getPersonalInfoFromState } from "@utils/state";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
@@ -96,6 +96,10 @@ export default function OnboardingQuiz() {
           posthog.identify(parsedState.email);
           trackPixel("Lead", {});
         }
+
+        if (state.id === "your-gender") {
+          clearQuizState();
+        }
       }}
     >
       <QuizStateSaver />
@@ -110,8 +114,8 @@ export default function OnboardingQuiz() {
             <YourBirthDateSlide />
             <YourBirthTimeSlide />
             <YourBirthPlaceSlide />
-            {/* <NatalChartLoadingSlide /> */}
-            {/* <NatalChartSlide /> */}
+            <NatalChartLoadingSlide />
+            <NatalChartSlide />
             {/* <DecisionMakingStruggles /> */}
             {/* <AdviceSeekingFrequency /> */}
             {/* <MajorLifeEventsSlide /> */}

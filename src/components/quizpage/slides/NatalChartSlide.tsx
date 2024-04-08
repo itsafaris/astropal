@@ -1,35 +1,29 @@
 import React from "react";
 import { Slide, useQuiz } from "@martynasj/quiz-lib";
-import { Flex } from "@chakra-ui/react";
+import { Card, Flex, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span } from "../components";
-import { AstrologicalProfile } from "@components/AstrologicalProfile";
-import { getPersonalInfoFromState } from "@utils/state";
+
+import { useUserProfileState } from "src/appState";
 
 export function NatalChartSlide() {
   const quiz = useQuiz();
+  const [userProfile] = useUserProfileState();
 
   return (
     <Slide id="natal-chart" type="filler">
       {({ quizState }) => {
-        const info = getPersonalInfoFromState(quizState);
-
         return (
           <Flex flexDirection={"column"} position={"relative"} width={"full"}>
             <SlideHeading>
-              Your{" "}
-              <Span>Natal Chart is a unique cosmic identity that stores your life's story. </Span>{" "}
-              Before we go, scroll down to see it all
+              <Span>Here's what you are according to your natal chart reading</Span>{" "}
             </SlideHeading>
 
-            <AstrologicalProfile quizState={info} />
+            {userProfile.result && (
+              <NatalChartReading natalChartReading={userProfile.result.natalChartReading} />
+            )}
 
             <NextButton
-              position={"fixed"}
-              maxWidth={"300px"}
-              bottom={0}
-              left={"50%"}
-              transform={"translateX(-50%)"}
               onClick={() => {
                 quiz.submitQuestion();
               }}
@@ -41,5 +35,16 @@ export function NatalChartSlide() {
         );
       }}
     </Slide>
+  );
+}
+
+function NatalChartReading({ natalChartReading }: { natalChartReading: any }) {
+  return (
+    <Card bg="bg.50" p={4}>
+      <Text fontWeight={"bold"}>Your Core Personality</Text>
+      <Flex fontSize={"sm"}>{natalChartReading.core}</Flex>
+      <Text fontWeight={"bold"}>Relatioships</Text>
+      <Flex fontSize={"sm"}>{natalChartReading.relationships}</Flex>
+    </Card>
   );
 }

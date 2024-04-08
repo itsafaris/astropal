@@ -3,8 +3,9 @@ import { Selector, Slide, useQuizState } from "@martynasj/quiz-lib";
 
 import { Box, Flex, Progress, Text } from "@chakra-ui/react";
 import { NextButton, SlideHeading } from "../components";
-import { createNewUserProfile } from "@utils/createUser";
+import { createNewUserProfile } from "@utils/coreApi";
 import { getPersonalInfoFromState } from "@utils/state";
+import { wait } from "@utils/wait";
 
 export function FinalizingProfileSlide() {
   return (
@@ -12,10 +13,6 @@ export function FinalizingProfileSlide() {
       <Content />
     </Slide>
   );
-}
-
-export function wait(ms: number) {
-  return new Promise((res) => setTimeout(res, ms));
 }
 
 const cycles = [

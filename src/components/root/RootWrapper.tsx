@@ -28,10 +28,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
 
 type StateSetter<T> = T | ((currentState: T) => T);
 
-export function useGlobalState<T>(
-  id: string,
-  initialValue: T
-): [T, (val: StateSetter<T>) => void] {
+export function useGlobalState<T>(id: string, initialValue: T): [T, (val: StateSetter<T>) => void] {
   const ctx = React.useContext(GlobalStateCtx);
 
   // set initial state, hope it's right

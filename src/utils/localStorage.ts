@@ -5,6 +5,10 @@ export function saveQuizState(state: QuizStateParsed) {
   localStorage.setItem("quizstate", JSON.stringify(state));
 }
 
+export function clearQuizState() {
+  localStorage.removeItem("quizstate");
+}
+
 export function loadQuizState(): QuizStateParsed | undefined {
   const it = localStorage.getItem("quizstate");
   if (!it) {
