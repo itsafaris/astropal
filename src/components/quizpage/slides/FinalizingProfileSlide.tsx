@@ -31,12 +31,13 @@ type CycleID = (typeof cycles)[number];
 function Content() {
   const { quizState } = useQuizState();
   const p = getPersonalInfoFromState(quizState);
-  const [loadingResult, setLoadingResult] = React.useState<{
+
+  const [cycle, setCycle] = useState<CycleID>("initial");
+  const [userProfile, setUserProfile] = React.useState<{
     isLoading: boolean;
     error?: Error;
-    result?: any;
+    result?: { id?: string };
   }>({ isLoading: true });
-  const [cycle, setCycle] = useState<CycleID>("initial");
 
   async function startCycle() {
     setCycle(cycles[1]);
@@ -49,14 +50,13 @@ function Content() {
   }
 
   async function startLoading() {
-    setLoadingResult({ isLoading: true, result: undefined, error: undefined });
+    setUserProfile({ isLoading: true, result: undefined, error: undefined });
     createNewUserProfile(p)
       .then((result) => {
-        setLoadingResult({ isLoading: false, error: undefined, result });
+        setUserProfile({ isLoading: false, error: undefined, result });
       })
       .catch((err) => {
-        console.error(err);
-        setLoadingResult({ isLoading: false, error: err, result: undefined });
+        setUserProfile({ isLoading: false, error: err, result: undefined });
       });
   }
 
@@ -82,6 +82,48 @@ function Content() {
     }
   }
 
+  function renderContent() {
+    if (cycle !== "done" || userProfile.isLoading) {
+      return (
+        <Box width={"100%"}>
+          <Progress isIndeterminate />
+          <Text color="white">{renderStatusText()}</Text>
+        </Box>
+      );
+    }
+
+    if (cycle === "done" && !userProfile.isLoading) {
+      if (userProfile.error || !userProfile.result) {
+        return (
+          <Box width={"100%"}>
+            <Text color="white">
+              Unfortunatelly we could not create your profile. Please try again!
+            </Text>
+          </Box>
+        );
+      }
+
+      return (
+        <Box width={"100%"}>
+          <SlideHeading>Your personal astrologer is now ready!</SlideHeading>
+          <NextButton
+            mb={5}
+            onClick={() => {
+              const params = new URLSearchParams();
+              params.append("userID", userProfile.result!.id!);
+              const url = `${process.env.GATSBY_WEBAPP_URL}?${params.toString()}`;
+              location.href = url;
+            }}
+          >
+            Take me to my astrologer
+          </NextButton>
+        </Box>
+      );
+    }
+
+    return null;
+  }
+
   return (
     <>
       <SlideHeading textAlign={"center"}>We're now creating your personal astrologer</SlideHeading>
@@ -91,31 +133,7 @@ function Content() {
           <Selector />
         </Box>
 
-        {loadingResult.error ? (
-          <Box>
-            Error has occured when creating your profile. {JSON.stringify(loadingResult.error)}
-          </Box>
-        ) : loadingResult.isLoading || cycle !== "done" ? (
-          <Box width={"100%"}>
-            <Progress isIndeterminate />
-            <Text color="text.main">{renderStatusText()}</Text>
-          </Box>
-        ) : (
-          <Box>
-            <SlideHeading>Your personal astrologer is now ready!</SlideHeading>
-            <NextButton
-              mb={5}
-              onClick={() => {
-                const params = new URLSearchParams();
-                params.append("userID", loadingResult.result!.id);
-                const url = `${process.env.GATSBY_WEBAPP_URL}?${params.toString()}`;
-                location.href = url;
-              }}
-            >
-              Take me to my astrologer
-            </NextButton>
-          </Box>
-        )}
+        {renderContent()}
       </Flex>
     </>
   );
