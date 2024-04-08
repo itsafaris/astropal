@@ -10,7 +10,7 @@ export function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
   return (
     <Box py={12} id="astrological-profile-section" bgGradient="linear(to-t, #170d28, bg.50)">
       <Container>
-        <Heading textAlign={"center"} fontWeight={"bold"} mx={8} fontSize={"3xl"} color="white">
+        <Heading textAlign={"center"} fontWeight={"bold"} mx={8} fontSize={"3xl"} color="text.main">
           Your Astrological Profile Is Ready
         </Heading>
 

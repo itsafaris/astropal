@@ -11,7 +11,7 @@ export default function UserPreferencesPage() {
           Your Preferences Have Been Saved!
         </Heading>
 
-        <Stack p={4} color="white" fontWeight={"semibold"} borderRadius={8} spacing={5}>
+        <Stack p={4} color="text.main" fontWeight={"semibold"} borderRadius={8} spacing={5}>
           <Text>Your following Daily Astrological Forecasts will reflect your choices</Text>
         </Stack>
       </Container>

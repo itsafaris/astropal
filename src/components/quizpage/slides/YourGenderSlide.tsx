@@ -84,33 +84,11 @@ export function YourGenderSlide() {
             </InvertedHighlight>
           </Headline>
 
-          {/* <Flex
-            flexDirection={"column"}
-            color="white"
-            fontSize="md"
-            alignItems={"start"}
-            mx="auto"
-            gap={2}
-          >
-            <Text textAlign="center">
-              <CheckIcon mr={3} color="green.500" />
-              Time Your Opportunities
-            </Text>
-            <Text textAlign="center">
-              <CheckIcon mr={3} color="green.500" />
-              Make Decisions with Confidence
-            </Text>
-            <Text textAlign="center">
-              <CheckIcon mr={3} color="green.500" />
-              Capitalize on Your Talents
-            </Text>
-          </Flex> */}
-
           <Flex flexDirection={"column"} alignItems={"center"} gap={2} mb={4}>
-            <Text mt={5} color={"white"} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
+            <Text mt={5} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
               Choose your gender to get started
             </Text>
-            <FaArrowDown color="white" />
+            <FaArrowDown />
           </Flex>
         </Flex>
       </Container>

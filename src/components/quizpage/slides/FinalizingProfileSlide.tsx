@@ -98,7 +98,7 @@ function Content() {
         ) : loadingResult.isLoading || cycle !== "done" ? (
           <Box width={"100%"}>
             <Progress isIndeterminate />
-            <Text color="white">{renderStatusText()}</Text>
+            <Text color="text.main">{renderStatusText()}</Text>
           </Box>
         ) : (
           <Box>

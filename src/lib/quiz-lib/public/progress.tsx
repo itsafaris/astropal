@@ -24,7 +24,7 @@ export function ProgressIndicator() {
   const colorScheme = colorOverrides?.colorScheme ?? "brand";
   const activeSegmentBg = colorOverrides?.activeSegmentBg ?? "bg.200";
   const inactiveSegmentBg = colorOverrides?.inactiveSegmentBg ?? "bg.200";
-  const textColor = colorOverrides?.textColor ?? "brand.500";
+  const textColor = colorOverrides?.textColor ?? "text.main";
 
   return (
     <Flex p={4} direction={"column"} gap={1} alignItems={"center"}>

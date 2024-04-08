@@ -65,7 +65,7 @@ export function TestimonialCard({ testimonial }: { testimonial: ITestimonial }) 
       alignItems="center"
       gap="4"
       width="100%"
-      color="white"
+      color="text.main"
     >
       <Box
         display={"flex"}

@@ -11,7 +11,7 @@ import { Headline } from "./components";
 export function HeroSection({ state }: { state: QuizStateParsed }) {
   return (
     <>
-      <Box id="hero-section" as="section" color="white" pt={12} pb={12}>
+      <Box id="hero-section" as="section" color="text.main" pt={12} pb={12}>
         <Headline fontSize={"3xl"} mb={6}>
           Your <InvertedHighlight>Astrological Self-Discovery Mentorship Program</InvertedHighlight>{" "}
           Is Ready. You Will Start Receiving Personalized Horoscopes Shortly!
@@ -122,7 +122,7 @@ export function BenefitsSection({ state }: { state?: QuizStateParsed }) {
 
 function Features() {
   return (
-    <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"} fontWeight={"bold"}>
+    <Stack alignItems={"start"} spacing={2} color="text.main" fontSize={"md"} fontWeight={"bold"}>
       <Flex alignItems={"center"} gap={2}>
         <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
         Continuous Learning and Guidance

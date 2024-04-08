@@ -36,7 +36,7 @@ export function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
             textAlign={"center"}
             width={"full"}
             fontSize={"3xl"}
-            color="white"
+            color="text.main"
           >
             <Text as="span" color="teal.500">
               {quizState?.firstName}

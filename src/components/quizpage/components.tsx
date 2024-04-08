@@ -11,12 +11,9 @@ export function NextButton(props: ComponentProps<typeof Button>) {
       px={8}
       py={6}
       variant={"solid"}
-      backgroundColor="brand.600"
-      _hover={{
-        backgroundColor: "brand.500",
-      }}
+      colorScheme="brand"
       width={"full"}
-      boxShadow={`inset 0 0 0 6px ${theme.colors.brand["800"]}, 0px 5px 30px 0px black`}
+      boxShadow={`inset 0 0 0 6px ${theme.colors.brand["400"]}, 0px 5px 30px 0px rgba(0,0,0,0.2)`}
       borderRadius={8}
       onClick={() => submitQuestion()}
       {...props}
@@ -41,7 +38,7 @@ export function ImageWithCaptionWrapper(props: React.ComponentProps<typeof Flex>
 }
 
 export function Caption(props: React.ComponentProps<typeof Text>) {
-  return <Text fontSize={"sm"} color="bg.600" {...props} />;
+  return <Text fontSize={"sm"} color="text.500" {...props} />;
 }
 
 export function CustomerMessage(props: { text: string } & ComponentProps<typeof Text>) {
@@ -54,7 +51,7 @@ export function CustomerMessage(props: { text: string } & ComponentProps<typeof 
 
 export function SlideHeading(props: { text?: React.ReactNode } & ComponentProps<typeof Text>) {
   return (
-    <Text my={2} mb={8} color="white" {...props} fontSize={"xl"}>
+    <Text my={2} mb={8} color="text.main" {...props} fontSize={"xl"}>
       {props.text ?? props.children}
     </Text>
   );
@@ -74,7 +71,7 @@ export function ChatMessage({
 
   return (
     <TypewriterText
-      color="white"
+      color="text.main"
       fontWeight={"medium"}
       fontSize={"md"}
       text={messageText ?? "Typing..."}

@@ -5,7 +5,7 @@ import { Caption, SlideHeading, NextButton } from "../components";
 export function EmailSlide() {
   return (
     <Slide id="your-email" type="email" placeholder="Enter your email">
-      <SlideHeading color="white" fontSize={"md"} mt={-3} mb={7}>
+      <SlideHeading color="text.main" fontSize={"md"} mt={-3} mb={7}>
         Where would you like to receive your program?
       </SlideHeading>
 

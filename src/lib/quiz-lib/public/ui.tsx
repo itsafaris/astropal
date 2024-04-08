@@ -66,7 +66,7 @@ export function Callout(props: PropsWithChildren<{ title?: string }>) {
         <Box
           flexShrink={0}
           borderRadius={"full"}
-          color="bg.900"
+          color="text.main"
           fontWeight={"bold"}
           fontSize={"sm"}
         >
@@ -75,7 +75,7 @@ export function Callout(props: PropsWithChildren<{ title?: string }>) {
       )}
 
       <Flex borderRadius={"md"}>
-        <Text fontSize="sm" color="bg.600">
+        <Text fontSize="sm" color="text.main">
           {children}
         </Text>
       </Flex>

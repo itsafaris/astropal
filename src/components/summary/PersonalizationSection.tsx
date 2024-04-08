@@ -17,7 +17,7 @@ export function PersonalizationSection({ state }: { state: QuizStateParsed }) {
         textAlign={"center"}
         width={"full"}
         fontSize={"2xl"}
-        color="white"
+        color="text.main"
         px={6}
       >
         Insights Are Tailored Uniquely For You. Using Your Natal Chart

@@ -92,14 +92,14 @@ function BaseOption({ isSelected, children, ...chakraButtonProps }: BaseOptionPr
       as={motion.button}
       borderRadius={"md"}
       outline={`${isSelected ? 3 : 0}px solid`}
-      outlineColor={"bg.400"}
-      backgroundColor={isSelected ? "bg.300" : "bg.200"}
+      outlineColor={"brand.500"}
+      backgroundColor={isSelected ? "bg.400" : "bg.200"}
       // @ts-expect-error
       transition={{
         scale: { type: "spring", stiffness: 800, damping: 25 },
       }}
       whileTap={{ scale: 0.98 }}
-      color={"bg.900"}
+      color={"text.main"}
       {...chakraButtonProps}
     >
       {children}

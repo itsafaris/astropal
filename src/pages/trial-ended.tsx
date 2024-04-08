@@ -9,7 +9,7 @@ interface IPersonalPageProps {}
 
 function PersonalPage(props: IPersonalPageProps) {
   return (
-    <Box minH={"100vh"} bg="bg.100" color="white" py={8}>
+    <Box minH={"100vh"} bg="bg.100" color="text.main" py={8}>
       <Container>
         <Heading textAlign={"center"} color="brand.600" fontSize={"2xl"}>
           Your 7-day trial has ended
@@ -28,7 +28,7 @@ function PersonalPage(props: IPersonalPageProps) {
             <Text fontWeight={"bold"} mb={4} fontSize={"xl"}>
               Basic
             </Text>
-            <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"}>
+            <Stack alignItems={"start"} spacing={2} color="text.main" fontSize={"md"}>
               <Flex alignItems={"start"} gap={2}>
                 <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
                 <Box>
@@ -75,7 +75,7 @@ function PersonalPage(props: IPersonalPageProps) {
             <Text fontWeight={"bold"} mb={4} fontSize={"xl"}>
               Premium
             </Text>
-            <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"}>
+            <Stack alignItems={"start"} spacing={2} color="text.main" fontSize={"md"}>
               <Flex alignItems={"start"} gap={2}>
                 <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
                 <Box>

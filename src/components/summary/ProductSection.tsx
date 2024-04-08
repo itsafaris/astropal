@@ -36,11 +36,11 @@ export function ProductSection(props: IProductSectionProps) {
 
         <Stack spacing={24}>
           <Box>
-            <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
+            <Heading textAlign={"center"} color="text.main" fontSize={"2xl"}>
               <BigWord>Discover</BigWord>
               <br /> Your Astrological Blueprint
             </Heading>
-            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
+            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="text.main">
               Uncover your strengths and weaknesses. Learn how to empower yourself with the help of
               cosmos.
             </Text>
@@ -50,12 +50,12 @@ export function ProductSection(props: IProductSectionProps) {
           </Box>
 
           <Box>
-            <Heading mb={12} textAlign={"center"} color="white" fontSize={"2xl"}>
+            <Heading mb={12} textAlign={"center"} color="text.main" fontSize={"2xl"}>
               <BigWord>Receive</BigWord>
               <br />
               Personalised Horoscopes and Mantras Daily
             </Heading>
-            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="white">
+            <Text my={12} textAlign={"center"} fontWeight={"semibold"} color="text.main">
               Forget the regular generic horoscopes. Based on your Birth Chart and Personality.
             </Text>
 
@@ -66,7 +66,7 @@ export function ProductSection(props: IProductSectionProps) {
 
           <Box>
             <Box mb={12}>
-              <Heading textAlign={"center"} color="white" fontSize={"2xl"}>
+              <Heading textAlign={"center"} color="text.main" fontSize={"2xl"}>
                 <BigWord>Consult</BigWord>
                 <br /> Your Expert Astrologer on Any Subject
               </Heading>
@@ -88,7 +88,7 @@ export function ProductSection(props: IProductSectionProps) {
             <Box>
               <Text my={10} maxWidth={"80%"} mx="auto" textAlign={"center"} fontSize={"xl"}>
                 2. Receive a personalised answer{" "}
-                <Text as="span" fontWeight={"black"} color="white">
+                <Text as="span" fontWeight={"black"} color="text.main">
                   instantly
                 </Text>{" "}
                 based on your astrological profile and current celestial events

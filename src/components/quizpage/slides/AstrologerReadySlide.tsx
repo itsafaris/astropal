@@ -70,7 +70,7 @@ export function AstrologerReadySlide() {
               textAlign={"center"}
               width={"full"}
               fontSize={"2xl"}
-              color="white"
+              color="text.main"
             >
               {firstName}, <br />
               Your Astrological Profile <br /> Is Ready

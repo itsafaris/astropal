@@ -53,7 +53,7 @@ function DebugUI() {
   const quiz = useQuizSnapshot();
   const actions = useQuizActions();
   return (
-    <Grid style={{ background: "black" }} gap={2} p={1} autoFlow={"column"} color="white">
+    <Grid style={{ background: "black" }} gap={2} p={1} autoFlow={"column"} color="text.invert">
       <Text>total: {quiz.slideCount}</Text>
       <Button
         size="xs"

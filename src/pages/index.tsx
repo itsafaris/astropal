@@ -21,7 +21,7 @@ export function Head() {
 export default function IndexPage() {
   return (
     <Box bg="bg.100" minH={"100vh"}>
-      <TopNavigation color="white" />
+      <TopNavigation color="text.main" />
 
       <Flex
         borderRadius={"full"}
@@ -58,10 +58,16 @@ export default function IndexPage() {
       </Container>
 
       <Container pl={8} py={8}>
-        <Text color="white" fontSize={"xl"} fontWeight={"semibold"} mb={4}>
+        <Text color="text.main" fontSize={"xl"} fontWeight={"semibold"} mb={4}>
           Delivered to your 📥 inbox every morning:
         </Text>
-        <Stack alignItems={"start"} spacing={2} color="white" fontSize={"md"} fontWeight={"bold"}>
+        <Stack
+          alignItems={"start"}
+          spacing={2}
+          color="text.main"
+          fontSize={"md"}
+          fontWeight={"bold"}
+        >
           <Flex alignItems={"center"} gap={2}>
             <CheckIcon color={"#80db4b"} boxSize="20px" mr={1} />
             Astrological Profile Analysis
@@ -81,7 +87,7 @@ export default function IndexPage() {
         </Stack>
       </Container>
 
-      <Box py={10} color="white">
+      <Box py={10} color="text.main">
         <Container px={8}>
           <Heading textAlign={"center"} as="h2" mb={8} fontSize={"2xl"}>
             <InvertedHighlight>We help people with their</InvertedHighlight>
@@ -127,7 +133,7 @@ export default function IndexPage() {
         </Container>
       </Box>
 
-      <Box py={10} color="white">
+      <Box py={10} color="text.main">
         <Container px={8}>
           <Heading textAlign={"center"} as="h2" mb={8} fontSize={"2xl"}>
             <InvertedHighlight>Our personalised astrology is for you if you:</InvertedHighlight>

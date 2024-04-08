@@ -80,7 +80,7 @@ export function Headline(props: TextProps) {
       fontFamily={"serif"}
       fontWeight={"bold"}
       textAlign={"center"}
-      color="white"
+      color="bg.500"
       {...props}
     />
   );

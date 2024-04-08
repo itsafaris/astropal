@@ -50,7 +50,7 @@ const testimonials: Testimonial[] = [
 export function TestimonialsSection() {
   return (
     <Box id="testimonials-section" as="section" my={12}>
-      <Heading textAlign={"center"} fontSize={"3xl"} mb={10} color="white">
+      <Heading textAlign={"center"} fontSize={"3xl"} mb={10} color="text.main">
         Hear it <br /> from our users
       </Heading>
       <Stack>

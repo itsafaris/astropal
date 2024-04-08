@@ -174,7 +174,7 @@ export function QuoteSlide() {
           </Text>
         </Grid>
       </SlideHeading>
-      <Text color="white" textAlign={"right"}>
+      <Text color="text.main" textAlign={"right"}>
         - Dane Rudhyar
       </Text>
 

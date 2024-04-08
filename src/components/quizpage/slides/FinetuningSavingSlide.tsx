@@ -23,7 +23,7 @@ export function CreatingSelfDiscoveryGuideSlide() {
         <Text textAlign={"center"} color="teal.300" fontSize={"3xl"} fontWeight={"black"}>
           31,000+ people
         </Text>
-        <Text textAlign={"center"} color="white" fontWeight={"bold"} fontSize={"lg"} mb={5}>
+        <Text textAlign={"center"} color="text.main" fontWeight={"bold"} fontSize={"lg"} mb={5}>
           have chosen Astropal
         </Text>
 
