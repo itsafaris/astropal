@@ -7,6 +7,8 @@ import { getPersonalInfoFromState } from "@utils/state";
 import { toTitleCase } from "@utils/string";
 import { astrologyThemes } from "@utils/astrologyThemes";
 import { NatalChart } from "@components/NatalChart";
+import { updateUserProfile } from "@utils/coreApi";
+import { useUserProfileState } from "src/appState";
 
 export function DecisionMakingStruggles() {
   const { submitQuestion } = useQuiz();
@@ -35,11 +37,47 @@ export function DecisionMakingStruggles() {
 
 export function YourNameSlide() {
   return (
-    <Slide id="name-slide" type="short-text" placeholder="E.g. Jane" optional>
+    <Slide id="name-slide" type="short-text" placeholder="E.g. Jane">
+      <NameSlideContent />
+    </Slide>
+  );
+}
+
+function NameSlideContent() {
+  const [userProfile] = useUserProfileState();
+  const { submitQuestion } = useQuiz();
+  const { quizState } = useQuizState();
+
+  const p = getPersonalInfoFromState(quizState);
+
+  function updateUserProf() {
+    if (!userProfile.result) {
+      console.error("User profile has not been created");
+      return;
+    }
+
+    void updateUserProfile({ userID: userProfile.result.id, quizState: p }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  return (
+    <>
       <SlideHeading>How should we call you?</SlideHeading>
       <Selector />
-      <NextButton>Continue</NextButton>
-    </Slide>
+      <NextButton
+        isLoading={userProfile.isLoading}
+        isDisabled={userProfile.error}
+        onClick={() => {
+          const r = submitQuestion();
+          if (r) {
+            updateUserProf();
+          }
+        }}
+      >
+        Continue
+      </NextButton>
+    </>
   );
 }
 

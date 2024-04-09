@@ -4,7 +4,10 @@ export function useQuiz() {
   const actions = useQuizActions();
   return {
     submitQuestion() {
-      actions.submitQuestion();
+      return actions.submitQuestion();
+    },
+    checkQuestion() {
+      return actions.checkQuestion();
     },
   };
 }

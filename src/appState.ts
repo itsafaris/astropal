@@ -2,7 +2,7 @@ import { useGlobalState } from "@components/root/RootWrapper";
 
 type UserProfileState = {
   isLoading?: boolean;
-  result?: { user: { id: string }; natalChartReading: any } | null;
+  result?: { id: string } | null;
   error?: any;
 };
 

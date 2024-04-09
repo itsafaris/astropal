@@ -1,8 +1,6 @@
 import { QuizStateParsed } from "./state";
 
-export async function createNewUserProfile(
-  input: QuizStateParsed
-): Promise<{ user: { id: string }; natalChartReading: {} }> {
+export async function createNewUserProfile(input: QuizStateParsed): Promise<{ id: string }> {
   const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNewUser`, {
     method: "POST",
     headers: {
@@ -10,7 +8,6 @@ export async function createNewUserProfile(
     },
     body: JSON.stringify({
       gender: input.yourGender,
-      name: input.fullname,
       current_tz_id: Intl.DateTimeFormat().resolvedOptions().timeZone,
       dob_local_year: input.yourBirthDate.year,
       dob_local_month: input.yourBirthDate.month - 1,
@@ -21,7 +18,48 @@ export async function createNewUserProfile(
       birth_place_formatted_text: input.yourBirthLocation.formattedText,
       birth_place_lat: input.yourBirthLocation.lat,
       birth_place_lng: input.yourBirthLocation.long,
-      focus_area: input.focusArea,
+    }),
+  });
+
+  if (r.status !== 200) {
+    throw new Error(r.statusText);
+  }
+
+  return await r.json();
+}
+
+export async function createNatalChartReading({ userID }: { userID: string }): Promise<void> {
+  const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNatalChartReading`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userID: userID,
+    }),
+  });
+
+  if (r.status !== 200) {
+    throw new Error(r.statusText);
+  }
+}
+
+export async function updateUserProfile({
+  quizState,
+  userID,
+}: {
+  quizState: QuizStateParsed;
+  userID: string;
+}): Promise<{ user: { id: string } }> {
+  const r = await fetch(`${process.env.GATSBY_CORE_URL}/updateUserProfile`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: userID,
+      name: quizState.fullname,
+      focus_area: quizState.focusArea,
     }),
   });
 
@@ -31,25 +69,8 @@ export async function createNewUserProfile(
 
   const user = await r.json();
 
-  const _reading = await fetch(
-    `${process.env.GATSBY_CORE_URL}/getNatalChartReading?userID=${user.id}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  if (_reading.status !== 200) {
-    throw new Error(r.statusText);
-  }
-
-  const natalChartReading = await _reading.json();
-
   return {
     user,
-    natalChartReading,
   };
 }
 

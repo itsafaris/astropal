@@ -218,10 +218,27 @@ export function createQuizState(input: {
       state.segments.push(segment);
     },
 
-    /** Validate everything and go to next question */
-    submitQuestion() {
+    checkQuestion(): boolean {
       if (!state.currentSlide || !state.currentSlideState) {
-        return;
+        return false;
+      }
+
+      const currentSlideState = state.slideStateByID[state.currentSlideID!];
+
+      if (!isSlideStateValid(state.currentSlideState)) {
+        currentSlideState.attempts++;
+        currentSlideState.confirmed = false;
+        currentSlideState.isValueValid = false;
+        return false;
+      }
+
+      return true;
+    },
+
+    /** Validate everything and go to next question */
+    submitQuestion(): boolean {
+      if (!state.currentSlide || !state.currentSlideState) {
+        return false;
       }
 
       const currentSlideState = state.slideStateByID[state.currentSlideID!];
@@ -231,7 +248,7 @@ export function createQuizState(input: {
         currentSlideState.attempts++;
         currentSlideState.confirmed = false;
         currentSlideState.isValueValid = false;
-        return;
+        return false;
       }
 
       currentSlideState.confirmed = true;
@@ -259,11 +276,12 @@ export function createQuizState(input: {
         const slideId = evalLogic(slideState, currentSlide.logic);
         if (slideId != null) {
           actions.goToSlideID(slideId);
-          return;
+          return true;
         }
       }
 
       actions.goToNext();
+      return true;
     },
 
     skipQuestion() {
@@ -372,13 +390,13 @@ export function createQuizState(input: {
 
 type QuizCtxType = QuizState;
 
-export function isSlideStateValid(state: SelectorState) {
+export function isSlideStateValid(state: SelectorState): boolean {
   switch (state.type) {
     case "single": {
       return state.value != null;
     }
     case "multi": {
-      return state.value && state.value.length > 0;
+      return state.value != null && state.value.length > 0;
     }
     case "date": {
       return state.value != null;
@@ -387,10 +405,10 @@ export function isSlideStateValid(state: SelectorState) {
       return state.value != null;
     }
     case "short-text": {
-      return state.value && state.value.trim() !== "";
+      return state.value != null && state.value.trim() !== "";
     }
     case "email": {
-      return state.value && validateEmail(state.value);
+      return state.value != null && validateEmail(state.value);
     }
     default: {
       return true;
