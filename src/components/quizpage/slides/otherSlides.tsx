@@ -19,7 +19,8 @@ export function AstrologerThemePreferences() {
       ]}
     >
       <SlideHeading>
-        Where would you like your <Span>Program</Span> to begin?
+        <Span>Choose your focus area.</Span> You will receive increased attention from your personal
+        astrologer on your specified area.
       </SlideHeading>
       <Selector />
     </Slide>

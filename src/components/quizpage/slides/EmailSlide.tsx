@@ -1,12 +1,12 @@
 import { Selector, Slide } from "@martynasj/quiz-lib";
 
-import { Caption, SlideHeading, NextButton } from "../components";
+import { Caption, SlideHeading, NextButton, Span } from "../components";
 
 export function EmailSlide() {
   return (
     <Slide id="your-email" type="email" placeholder="Enter your email">
       <SlideHeading color="text.main" fontSize={"md"} mt={-3} mb={7}>
-        Where would you like to receive your program?
+        <Span>One last thing!</Span> Enter your email and start using your personalised astrologer
       </SlideHeading>
 
       <Selector />
@@ -16,7 +16,7 @@ export function EmailSlide() {
         send you personalized astrological insights and updates to enlighten your journey.
       </Caption>
 
-      <NextButton>Get My Program</NextButton>
+      <NextButton>Take me to my astrologer</NextButton>
     </Slide>
   );
 }

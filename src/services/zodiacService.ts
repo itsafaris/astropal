@@ -88,7 +88,7 @@ export function getZodiacCompatibility(
   };
 }
 
-export function getZodiacSign(birthDate: string): {
+export type ZodiacSignDataType = {
   name: ZodiacSignType;
   pluralName: string;
   imgUrl?: string;
@@ -98,7 +98,9 @@ export function getZodiacSign(birthDate: string): {
   personality: string;
   strengths: string[];
   weaknesses: string[];
-} {
+};
+
+export function getZodiacSign(birthDate: string): ZodiacSignDataType {
   const date = new Date(birthDate);
   const month = date.getMonth() + 1; // Months are 0-indexed in JavaScript Date object
 
@@ -111,7 +113,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 35422,
         emoji: "♈️",
         personality:
-          "Aries are natural leaders, full of energy and confidence. They're passionate, driven, and have a bold approach to life. Always ready for new adventures and challenges.",
+          "You are a natural leader, full of energy and confidence. You are passionate, driven, and have a bold approach to life. Always ready for new adventures and challenges.",
         strengths: ["Courageous", "Determined", "Optimistic"],
         weaknesses: ["Impulsive", "Impatient", "Competitive"],
       };
@@ -123,7 +125,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 27814,
         emoji: "♉️",
         personality:
-          "Taurus values stability and comfort, often showing a strong sense of beauty and love for the pleasures of life. They're reliable, hardworking, and dedicated.",
+          "You value stability and comfort, often showing a strong sense of beauty and love for the pleasures of life. You're reliable, hardworking, and dedicated.",
         strengths: ["Reliable", "Patient", "Practical"],
         weaknesses: ["Stubborn", "Materialistic", "Indulgent"],
       };
@@ -135,7 +137,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 38472,
         emoji: "♊️",
         personality:
-          "Gemini are quick-witted and lively. They have an insatiable curiosity, loving to learn and exchange ideas. Known for their adaptability and outgoing nature.",
+          "You are quick-witted and lively. You have an insatiable curiosity, loving to learn and exchange ideas. You are known for your adaptability and outgoing nature.",
         strengths: ["Adaptable", "Intelligent", "Energetic"],
         weaknesses: ["Inconsistent", "Indecisive", "Anxious"],
       };
@@ -147,7 +149,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 28921,
         emoji: "♋",
         personality:
-          "Cancerians are deeply intuitive and sentimental. They're family-oriented, loyal, and empathetic, with a strong protective nature towards loved ones.",
+          "You are deeply intuitive and sentimental. You're family-oriented, loyal, and empathetic, with a strong protective nature towards loved ones.",
         strengths: ["Compassionate", "Protective", "Intuitive"],
         weaknesses: ["Moody", "Clingy", "Overly Sensitive"],
       };
@@ -159,7 +161,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 27162,
         emoji: "♌",
         personality:
-          "Leos are born leaders, exuding charisma and confidence. They're generous, creative, and have a strong sense of dignity and honor.",
+          "You are a born leader, exuding charisma and confidence. You're generous, creative, and have a strong sense of dignity and honor.",
         strengths: ["Charismatic", "Generous", "Confident"],
         weaknesses: ["Arrogant", "Stubborn", "Self-centered"],
       };
@@ -171,7 +173,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 36412,
         emoji: "♍",
         personality:
-          "Virgos are practical, analytical, and meticulous. They have a deep sense of humanity, making them caring and hardworking, with a keen attention to detail.",
+          "You are practical, analytical, and meticulous. You have a deep sense of humanity, making you caring and hardworking, with a keen attention to detail.",
         strengths: ["Analytical", "Reliable", "Precise"],
         weaknesses: ["Overly Critical", "Worrying", "Perfectionist"],
       };
@@ -183,7 +185,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 31901,
         emoji: "♎",
         personality:
-          "Libras are known for their charm and harmony. They value justice and balance, often playing the role of mediator. They're social, diplomatic, and have a keen sense of beauty.",
+          "You are known for your charm and harmony. You value justice and balance, often playing the role of mediator. You're social, diplomatic, and have a keen sense of beauty.",
         strengths: ["Diplomatic", "Fair", "Social"],
         weaknesses: ["Indecisive", "Avoids Confrontation", "Self-pity"],
       };
@@ -195,7 +197,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 30982,
         emoji: "♏",
         personality:
-          "Scorpios are passionate and assertive. They're determined and decisive, and will research until they find out the truth. Scorpios are known for their bravery and loyalty.",
+          "You are passionate and assertive. You're determined and decisive, and will research until you find out the truth. You are known for your bravery and loyalty.",
         strengths: ["Brave", "Loyal", "Ambitious"],
         weaknesses: ["Jealous", "Secretive", "Dominating"],
       };
@@ -207,7 +209,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 38141,
         emoji: "♐",
         personality:
-          "Sagittarius are curious and energetic. They are the travelers of the zodiac, with a philosophical approach to life, searching for the ultimate truth.",
+          "You are curious and energetic. You are the traveler of the zodiac, with a philosophical approach to life, searching for the ultimate truth.",
         strengths: ["Optimistic", "Lover of Freedom", "Honest"],
         weaknesses: ["Careless", "Impatient", "Tactless"],
       };
@@ -219,7 +221,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 25132,
         emoji: "♑",
         personality:
-          "Capricorns are disciplined and possess great self-control. They're responsible and manage people well, valuing tradition and quality craftsmanship.",
+          "You are disciplined and possess great self-control. You're responsible and manage people well, valuing tradition and quality craftsmanship.",
         strengths: ["Disciplined", "Responsible", "Self-Control"],
         weaknesses: ["Know-it-all", "Unforgiving", "Condescending"],
       };
@@ -231,7 +233,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 37319,
         emoji: "♒",
         personality:
-          "Aquarians are progressive, independent, and intelligent. They are humanitarians at heart, often innovative, and strive to make the world a better place.",
+          "You are progressive, independent, and intelligent. You are humanitarian at heart, often innovative, and strive to make the world a better place.",
         strengths: ["Innovative", "Humanitarian", "Independent"],
         weaknesses: ["Unpredictable", "Inflexible", "Detached"],
       };
@@ -243,7 +245,7 @@ export function getZodiacSign(birthDate: string): {
         countOfProfiles: 33784,
         emoji: "♓",
         personality:
-          "Pisces are compassionate and artistic. They are empathetic, often feeling the pain of others, and are known for their wisdom and musical talents.",
+          "You are compassionate and artistic. You are empathetic, often feeling the pain of others, and you're known for your wisdom and musical talents.",
         strengths: ["Compassionate", "Artistic", "Intuitive"],
         weaknesses: ["Fearful", "Overly Trusting", "Sad"],
       };

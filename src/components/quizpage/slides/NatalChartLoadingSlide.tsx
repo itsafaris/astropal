@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Slide, useQuizState } from "@martynasj/quiz-lib";
+import { Callout, Slide, useQuizState } from "@martynasj/quiz-lib";
 
-import { SlideHeading, NextButton } from "../components";
+import { SlideHeading, NextButton, Span } from "../components";
 import { createNewUserProfile } from "@utils/coreApi";
 import { wait } from "@utils/wait";
 import { getPersonalInfoFromState } from "@utils/state";
@@ -73,46 +73,36 @@ function Content() {
         return "Creating user";
       case "creating-natal-chart":
       case "done":
-        return "Creating natal chart reading";
+        return userProfile.isLoading ? "Creating natal chart reading" : "Cosmic identity is ready";
     }
-  }
-
-  function renderContent() {
-    if (cycle !== "done" || userProfile.isLoading) {
-      return (
-        <Box width={"100%"}>
-          <Progress isIndeterminate />
-          <Text color="text.main">{renderStatusText()}</Text>
-        </Box>
-      );
-    }
-
-    if (cycle === "done" && !userProfile.isLoading) {
-      if (userProfile.error || !userProfile.result) {
-        return (
-          <Box width={"100%"}>
-            <Text color="text.main">
-              Unfortunatelly we could not create your profile. Please try again!
-            </Text>
-          </Box>
-        );
-      }
-
-      return (
-        <Box width={"100%"}>
-          <SlideHeading>Your natal chart reading is prepared!</SlideHeading>
-          <NextButton my={8}>Continue</NextButton>
-        </Box>
-      );
-    }
-
-    return null;
   }
 
   return (
     <>
-      <SlideHeading textAlign={"center"} text="Just a moment... finding your cosmic identity" />
-      {renderContent()}
+      <SlideHeading textAlign={"center"}>
+        Hold on while we calculate your cosmic identity
+      </SlideHeading>
+      <Callout title="Did you know?">
+        A <Span>cosmic identity</Span> is a unique astrological map that outlines the positions of
+        the planets and stars at the exact moment and location of your birth, shaping your
+        personality, potential, and life path.
+      </Callout>
+
+      <Box width={"100%"}>
+        <Progress
+          isIndeterminate={cycle !== "done" || userProfile.isLoading}
+          value={cycle === "done" && !userProfile.isLoading ? 100 : undefined}
+        />
+
+        {userProfile.error && (
+          <Text color="text.main">
+            Unfortunatelly we could not create your profile. Please try again!
+          </Text>
+        )}
+        <Text color="text.main">{renderStatusText()}</Text>
+
+        {userProfile.result && cycle === "done" && <NextButton my={8}>Continue</NextButton>}
+      </Box>
     </>
   );
 }

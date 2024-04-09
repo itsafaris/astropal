@@ -15,7 +15,7 @@ export function AsnwerLongevity() {
       ]}
     >
       <SlideHeading>
-        How would you like your <Span>Personalized Horoscopes</Span> to be present?
+        How would you like your <Span>Personalized Readings</Span> to be present?
       </SlideHeading>
       <Selector />
     </Slide>

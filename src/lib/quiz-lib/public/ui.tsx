@@ -50,8 +50,10 @@ export function TransitionText({
   );
 }
 
-export function Callout(props: PropsWithChildren<{ title?: string }>) {
-  const { title, children } = props;
+export function Callout(
+  props: PropsWithChildren<{ title?: string } & ComponentProps<typeof Flex>>
+) {
+  const { title, children, ...rest } = props;
   return (
     <Flex
       px={4}
@@ -60,7 +62,8 @@ export function Callout(props: PropsWithChildren<{ title?: string }>) {
       gap={1}
       borderRadius={"xl"}
       flexDirection="column"
-      backgroundColor={"bg.100"}
+      backgroundColor={"blue.50"}
+      {...rest}
     >
       {title && (
         <Box

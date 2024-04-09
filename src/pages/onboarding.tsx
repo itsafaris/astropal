@@ -27,7 +27,7 @@ import {
 } from "@components/quizpage/questions";
 import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLoadingSlide";
 import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
-import { Loading_CreatingNatalChartReading } from "@components/quizpage/slides/SavingProfileSlide";
+import { Loading_SavingAstrologerPreferences } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import {
   AstrologerThemePreferences,
@@ -126,12 +126,12 @@ export default function OnboardingQuiz() {
             {/* <InsightSourcesSlide /> */}
             {/* <NatalChartReading /> */}
             {/* <HyperPersonalisedInsights /> */}
-            {/* <Loading_CreatingNatalChartReading /> */}
             {/* <Filler_MentorshipProgramIntro /> */}
             <AstrologerThemePreferences />
-            {/* <DedicationTime /> */}
+            <DedicationTime />
             {/* <DailyHoroscope /> */}
-            {/* <AsnwerLongevity /> */}
+            <AsnwerLongevity />
+            <Loading_SavingAstrologerPreferences />
             {/* <MostImportantProgramFeatureSlide /> */}
             <YourNameSlide />
             <EmailSlide />
