@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Callout, Slide, useQuizState } from "@martynasj/quiz-lib";
+import { Callout, Slide } from "@martynasj/quiz-lib";
 
 import { SlideHeading, NextButton, Span } from "../components";
-import { createNewUserProfile } from "@utils/coreApi";
-import { wait } from "@utils/wait";
-import { getPersonalInfoFromState } from "@utils/state";
-import { Box, Progress, Text } from "@chakra-ui/react";
 
-import { useUserProfileState } from "src/appState";
+import { Progress, Text } from "@chakra-ui/react";
 
 export function NatalChartLoadingSlide() {
   return (
@@ -17,92 +13,76 @@ export function NatalChartLoadingSlide() {
   );
 }
 
-const cycles = [
-  "initial",
-  "acquiring-natal-data",
-  "creating-user",
-  "creating-natal-chart",
-  "done",
-] as const;
-type CycleID = (typeof cycles)[number];
-
 function Content() {
-  const { quizState } = useQuizState();
-  const [userProfile, setUserProfile] = useUserProfileState();
-  const p = getPersonalInfoFromState(quizState);
-
-  const [cycle, setCycle] = useState<CycleID>("initial");
-
-  async function startCycle() {
-    setCycle(cycles[1]);
-    await wait(2000);
-    setCycle(cycles[2]);
-    await wait(3000);
-    setCycle(cycles[3]);
-    await wait(3000);
-    setCycle(cycles[4]);
-  }
-
-  async function startLoading() {
-    setUserProfile({ isLoading: true, result: undefined, error: undefined });
-    createNewUserProfile(p)
-      .then((result) => {
-        setUserProfile({ isLoading: false, error: undefined, result });
-      })
-      .catch((err) => {
-        setUserProfile({ isLoading: false, error: err, result: undefined });
-      });
-  }
+  const [loadedValue, setLoadedValue] = useState(0);
 
   useEffect(() => {
-    if (userProfile.result || userProfile.error) {
-      setCycle("done");
-      return;
-    }
-    void startCycle();
-    void startLoading();
+    const it = setInterval(() => {
+      setLoadedValue((v) => {
+        if (v === 100) {
+          clearInterval(it);
+          return 100;
+        }
+        return v === 100 ? 100 : v + 1;
+      });
+    }, 70);
+
+    return () => {
+      clearInterval(it);
+    };
   }, []);
 
   function renderStatusText() {
-    switch (cycle) {
-      case "initial":
-        return "";
-      case "acquiring-natal-data":
-        return "Acquiring natal data";
-      case "creating-user":
-        return "Creating user";
-      case "creating-natal-chart":
-      case "done":
-        return userProfile.isLoading ? "Creating natal chart reading" : "Cosmic identity is ready";
+    if (loadedValue <= 0) {
+      return "";
+    }
+
+    if (loadedValue <= 30) {
+      return "Acquiring natal data";
+    }
+
+    if (loadedValue <= 60) {
+      return "Calculating your chart";
+    }
+
+    if (loadedValue < 100) {
+      return "Creating cosmic identity";
+    }
+
+    if (loadedValue === 100) {
+      return "Done";
     }
   }
 
   return (
     <>
-      <SlideHeading textAlign={"center"}>
-        Hold on while we calculate your cosmic identity
-      </SlideHeading>
-      <Callout title="Did you know?">
-        A <Span>cosmic identity</Span> is a unique astrological map that outlines the positions of
-        the planets and stars at the exact moment and location of your birth, shaping your
-        personality, potential, and life path.
+      <SlideHeading>Hold on while we calculate your cosmic identity</SlideHeading>
+      <Callout title="What's a cosmic identity?">
+        It's a unique astrological <Span whiteSpace={"nowrap"}>🌌 map</Span> that outlines the
+        positions of the <Span whiteSpace={"nowrap"}>🪐 planets</Span> and{" "}
+        <Span whiteSpace={"nowrap"}>⭐ stars</Span> at the exact moment and location of your birth,
+        shaping your personality, potential, and life path.
       </Callout>
 
-      <Box width={"100%"}>
-        <Progress
-          isIndeterminate={cycle !== "done" || userProfile.isLoading}
-          value={cycle === "done" && !userProfile.isLoading ? 100 : undefined}
-        />
+      <Text fontSize="sm" fontWeight={"semibold"} mb={2}>
+        {renderStatusText()}
+      </Text>
+      <Progress
+        value={loadedValue}
+        size="sm"
+        colorScheme={loadedValue === 100 ? "green" : "bg"}
+        borderRadius={"full"}
+      />
+      <Text
+        fontWeight={"semibold"}
+        color={loadedValue === 100 ? "text.main" : "text.300"}
+        fontSize={"sm"}
+        mt={2}
+      >
+        {loadedValue === 100 ? "Cosmic identity is ready" : `${loadedValue} / 100`}
+      </Text>
 
-        {userProfile.error && (
-          <Text color="text.main">
-            Unfortunatelly we could not create your profile. Please try again!
-          </Text>
-        )}
-        <Text color="text.main">{renderStatusText()}</Text>
-
-        {userProfile.result && cycle === "done" && <NextButton my={8}>Continue</NextButton>}
-      </Box>
+      {loadedValue === 100 && <NextButton my={8}>Continue</NextButton>}
     </>
   );
 }

@@ -40,6 +40,8 @@ import { FinalizingProfileSlide } from "@components/quizpage/slides/FinalizingPr
 import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
 import posthog from "posthog-js";
+import { useUserProfileState } from "src/appState";
+import { createNewUserProfile } from "@utils/coreApi";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -49,6 +51,7 @@ export const Head = () => {
 
 export default function OnboardingQuiz() {
   const [mounted, setMounted] = useState(false);
+  const [_, setUserProfile] = useUserProfileState();
 
   useEffect(() => {
     setMounted(true);
@@ -56,6 +59,17 @@ export default function OnboardingQuiz() {
 
   if (!mounted) {
     return null;
+  }
+
+  async function createUser(p: QuizStateParsed) {
+    setUserProfile({ isLoading: true, result: undefined, error: undefined });
+    createNewUserProfile(p)
+      .then((result) => {
+        setUserProfile({ isLoading: false, error: undefined, result });
+      })
+      .catch((err) => {
+        setUserProfile({ isLoading: false, error: err, result: undefined });
+      });
   }
 
   return (
@@ -100,6 +114,10 @@ export default function OnboardingQuiz() {
         if (state.id === "your-gender") {
           clearQuizState();
         }
+
+        if (state.id === "your-birth-place") {
+          void createUser(parsedState);
+        }
       }}
     >
       <QuizStateSaver />
@@ -116,23 +134,10 @@ export default function OnboardingQuiz() {
             <YourBirthPlaceSlide />
             <NatalChartLoadingSlide />
             <NatalChartSlide />
-            {/* <DecisionMakingStruggles /> */}
-            {/* <AdviceSeekingFrequency /> */}
-            {/* <MajorLifeEventsSlide /> */}
-            {/* <WrongDecisionSlide /> */}
-            {/* <FillerPeopleInControl /> */}
-            {/* <YourAstrologicalInvolvementSlide /> */}
-            {/* <QuoteSlide /> */}
-            {/* <InsightSourcesSlide /> */}
-            {/* <NatalChartReading /> */}
-            {/* <HyperPersonalisedInsights /> */}
-            {/* <Filler_MentorshipProgramIntro /> */}
             <AstrologerThemePreferences />
             <DedicationTime />
-            {/* <DailyHoroscope /> */}
             <AsnwerLongevity />
             <Loading_SavingAstrologerPreferences />
-            {/* <MostImportantProgramFeatureSlide /> */}
             <YourNameSlide />
             <EmailSlide />
             <FinalizingProfileSlide />

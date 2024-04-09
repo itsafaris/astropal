@@ -22,7 +22,7 @@ export function NatalChartSlide() {
         return (
           <Flex flexDirection={"column"} position={"relative"} width={"full"}>
             <SlideHeading>
-              <Span>Here's a quick sneak peek into your profile</Span>{" "}
+              <Span>Here's a sneak peek into your cosmic identity</Span>{" "}
             </SlideHeading>
 
             <PersonalityReading
