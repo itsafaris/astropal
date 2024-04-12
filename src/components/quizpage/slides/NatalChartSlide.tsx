@@ -5,7 +5,7 @@ import { Card, Flex, Stack, Tag, TagLabel, TagLeftIcon, Text } from "@chakra-ui/
 import { SlideHeading, NextButton, Span } from "../components";
 
 import { StaticImage } from "gatsby-plugin-image";
-import { getPersonalInfoFromState } from "@utils/state";
+import { getTypedQuizState, getZodiacFromState } from "@utils/state";
 import { ZodiacSignDataType } from "@services/zodiacService";
 import { toTitleCase } from "@utils/string";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -17,7 +17,8 @@ export function NatalChartSlide() {
   return (
     <Slide id="natal-chart" type="filler">
       {({ quizState }) => {
-        const p = getPersonalInfoFromState(quizState);
+        const p = getTypedQuizState(quizState);
+        const zodiac = getZodiacFromState(p);
 
         return (
           <Flex flexDirection={"column"} position={"relative"} width={"full"}>
@@ -26,7 +27,7 @@ export function NatalChartSlide() {
             </SlideHeading>
 
             <PersonalityReading
-              state={p.yourZodiac}
+              state={zodiac}
               birthDate={p.yourBirthDate}
               birthTime={p.yourBirthTime}
               birthLocFormatted={p.yourBirthLocation.formattedText}

@@ -3,16 +3,24 @@ import { Callout, Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz
 
 import { SlideHeading, NextButton } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
-import { QuizStateParsed, getPersonalInfoFromState } from "@utils/state";
+import { QuizStateParsed, getTypedQuizState } from "@utils/state";
 import { useUserProfileState } from "src/appState";
 import { createNatalChartReading, createNewUserProfile } from "@utils/coreApi";
 
 export function YourBirthPlaceSlide() {
+  return (
+    <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
+      <ContentAs />
+    </Slide>
+  );
+}
+
+function ContentAs() {
   const { checkQuestion, submitQuestion } = useQuiz();
   const { quizState } = useQuizState();
   const [userProfile, setUserProfile] = useUserProfileState();
 
-  const p = getPersonalInfoFromState(quizState);
+  const p = getTypedQuizState(quizState);
 
   async function createUser(p: QuizStateParsed) {
     setUserProfile({ isLoading: true, result: undefined, error: undefined });
@@ -30,7 +38,7 @@ export function YourBirthPlaceSlide() {
   }
 
   return (
-    <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
+    <>
       <SlideHeading mb={2} text="What city were you born in?" />
       <StaticImage
         src="../../../images/city_skyline_pencil.png"
@@ -59,6 +67,6 @@ export function YourBirthPlaceSlide() {
       >
         Continue
       </NextButton>
-    </Slide>
+    </>
   );
 }

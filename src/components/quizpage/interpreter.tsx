@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuizSnapshot } from "@martynasj/quiz-lib";
 
-import { getPersonalInfoFromState } from "@utils/state";
+import { getTypedQuizState } from "@utils/state";
 
 import { ChatMessage } from "./components";
 import { createNatalChartData } from "@utils/natalChart";
@@ -18,7 +18,7 @@ export function Interpreter(props: {
 
   React.useEffect(() => {
     (async function () {
-      const { yourBirthDate, yourBirthTime, yourBirthLocation } = getPersonalInfoFromState(
+      const { yourBirthDate, yourBirthTime, yourBirthLocation } = getTypedQuizState(
         state.slideStateByID
       );
 

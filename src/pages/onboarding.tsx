@@ -1,47 +1,26 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
-import { navigate } from "gatsby";
 
-import { QuizServiceWrapper } from "@components/quizpage/quizServiceWrapper";
 import { isProdMode } from "@utils/isProdMode";
-import { setPersonProperties, trackEvent, trackPixel } from "@utils/tracking";
+import { setPersonProperties, trackEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearQuizState, saveQuizState } from "@utils/localStorage";
-import { QuizStateParsed, calcPersonalInfo, getPersonalInfoFromState } from "@utils/state";
+import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
 import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
 import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
 
 import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
-import {
-  AdviceSeekingFrequency,
-  DecisionMakingStruggles,
-  FillerPeopleInControl,
-  Filler_MentorshipProgramIntro,
-  HyperPersonalisedInsights,
-  InsightSourcesSlide,
-  NatalChartReading,
-  QuoteSlide,
-  WrongDecisionSlide,
-  YourNameSlide,
-} from "@components/quizpage/questions";
+import { YourNameSlide } from "@components/quizpage/questions";
 import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLoadingSlide";
 import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
 import { Loading_SavingAstrologerPreferences } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
-import {
-  AstrologerThemePreferences,
-  DailyHoroscope,
-  DedicationTime,
-  MajorLifeEventsSlide,
-  MostImportantProgramFeatureSlide,
-} from "@components/quizpage/slides/otherSlides";
+import { FocusThemeSlide, DedicationTime } from "@components/quizpage/slides/otherSlides";
 
-import { YourAstrologicalInvolvementSlide } from "@components/quizpage/slides/YourAstrologicalInvolvementSlide";
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
-import posthog from "posthog-js";
+
 import { useUserProfileState } from "src/appState";
-import { createNatalChartReading, createNewUserProfile, updateUserProfile } from "@utils/coreApi";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -73,12 +52,11 @@ export default function OnboardingQuiz() {
       }}
       onSlideSubmitted={async (state) => {
         const rawState = await state.getQuizState();
-        const parsedState = getPersonalInfoFromState(rawState);
+        const parsedState = getTypedQuizState(rawState);
         const calcState = calcPersonalInfo(parsedState);
 
         setPersonProperties({
           gender: parsedState.yourGender,
-          zodiac_sign: parsedState.yourZodiac.name,
           birth_date_local: calcState.birthOrigin.localTimeFormatted,
           birth_date_local_extracted: {
             year: parsedState.yourBirthDate.year,
@@ -87,12 +65,9 @@ export default function OnboardingQuiz() {
           },
           birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
           birth_place: parsedState.yourBirthLocation,
-          astrology_level: parsedState.astrologyLevel,
           theme_focus: parsedState.focusArea,
           dedication_time_per_day: parsedState.dedicationTime,
-          horoscope_freq_weekly: parsedState.horoscopeFreqWeekly,
           answer_longevity: parsedState.answerLongevity,
-          most_important_feature: parsedState.mostImportantFeature,
         });
 
         // reset state
@@ -103,28 +78,26 @@ export default function OnboardingQuiz() {
       }}
     >
       <QuizStateSaver />
-      <QuizServiceWrapper>
-        <QuizUI
-          containerProps={{
-            minH: "100vh",
-          }}
-        >
-          <Segment title="Progress">
-            <YourGenderSlide />
-            <YourBirthDateSlide />
-            <YourBirthTimeSlide />
-            <YourBirthPlaceSlide />
-            <NatalChartLoadingSlide />
-            <NatalChartSlide />
-            <AstrologerThemePreferences />
-            <DedicationTime />
-            <AsnwerLongevity />
-            <Loading_SavingAstrologerPreferences />
-            <YourNameSlide />
-            <EmailSlide />
-          </Segment>
-        </QuizUI>
-      </QuizServiceWrapper>
+      <QuizUI
+        containerProps={{
+          minH: "100vh",
+        }}
+      >
+        <Segment title="Progress">
+          <YourGenderSlide />
+          <YourBirthDateSlide />
+          <YourBirthTimeSlide />
+          <YourBirthPlaceSlide />
+          <NatalChartLoadingSlide />
+          <NatalChartSlide />
+          <FocusThemeSlide />
+          <DedicationTime />
+          <AsnwerLongevity />
+          <Loading_SavingAstrologerPreferences />
+          <YourNameSlide />
+          <EmailSlide />
+        </Segment>
+      </QuizUI>
     </QuizProvider>
   );
 }
@@ -133,7 +106,7 @@ function QuizStateSaver() {
   const q = useQuizSnapshot();
 
   useEffect(() => {
-    const quizState = getPersonalInfoFromState(q.slideStateByID);
+    const quizState = getTypedQuizState(q.slideStateByID);
     saveQuizState(quizState);
   }, [q.slideStateByID]);
 

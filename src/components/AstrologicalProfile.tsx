@@ -1,6 +1,6 @@
 import React, { createElement } from "react";
 import { Box, Flex, Grid, Stack, Text, TextProps } from "@chakra-ui/react";
-import { QuizStateParsed } from "@utils/state";
+import { QuizStateParsed, getZodiacFromState } from "@utils/state";
 
 import { ChartPosition, NatalChart } from "./NatalChart";
 import { getReadableDate, getReadableTime } from "@utils/dates";
@@ -16,6 +16,8 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
   if (!quizState) {
     return null;
   }
+
+  const zodiac = getZodiacFromState(quizState);
 
   return (
     <Flex

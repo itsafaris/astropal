@@ -25,6 +25,7 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
       config.onTrackingEvent?.({
         name: "slide-entered",
         properties: {
+          // @ts-expect-error
           ...getSlideProperties(slide),
         },
       });

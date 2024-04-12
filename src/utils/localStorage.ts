@@ -1,5 +1,4 @@
 import { QuizStateParsed, STATE_VERSION } from "./state";
-import { getZodiacSign } from "@services/zodiacService";
 
 export function saveQuizState(state: QuizStateParsed) {
   localStorage.setItem("quizstate", JSON.stringify(state));
@@ -32,14 +31,6 @@ export function loadQuizState(): QuizStateParsed | undefined {
     localStorage.removeItem("quizstate");
     return;
   }
-
-  state.yourZodiac = getZodiacSign(
-    new Date(
-      state.yourBirthDate.year,
-      state.yourBirthDate.month - 1,
-      state.yourBirthDate.day
-    ).toISOString()
-  );
 
   return state;
 }

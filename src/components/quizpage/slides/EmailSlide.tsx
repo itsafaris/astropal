@@ -1,19 +1,19 @@
-import React from "react";
-import { QuizQuestionsState, Selector, Slide, useQuiz } from "@martynasj/quiz-lib";
+import React, { useEffect } from "react";
+import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
 import { Text } from "@chakra-ui/react";
 
 import { Caption, SlideHeading, NextButton, Span } from "../components";
 import { useState } from "react";
 import { useUserProfileState } from "src/appState";
 import { convertUserFromAnonymous } from "@utils/coreApi";
-import { getPersonalInfoFromState } from "@utils/state";
+import { getTypedQuizState } from "@utils/state";
 import posthog from "posthog-js";
 import { trackPixel } from "@utils/tracking";
 
 export function EmailSlide() {
   return (
     <Slide id="your-email" type="email" placeholder="Enter your email">
-      {({ quizState }) => <Content quizState={quizState} />}
+      <ContentEmail />
     </Slide>
   );
 }
@@ -23,23 +23,20 @@ type RequestStatus = {
   error?: any;
 };
 
-function Content({ quizState }: { quizState: QuizQuestionsState }) {
+function ContentEmail() {
   const { submitQuestion } = useQuiz();
+  const { quizState } = useQuizState();
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>({ isLoading: false });
   const [userProfile] = useUserProfileState();
 
-  const parsedQuizState = getPersonalInfoFromState(quizState);
+  const parsedQuizState = getTypedQuizState(quizState);
 
   function redirectToApp(input: { userID: string }) {
     const params = new URLSearchParams();
     params.append("userID", input.userID);
     const url = `${process.env.GATSBY_WEBAPP_URL}?${params.toString()}`;
     location.href = url;
-  }
-
-  if (!userProfile.result) {
-    return <Text>{"Unexpected state: user profile has not been created"}</Text>;
   }
 
   return (
@@ -68,6 +65,10 @@ function Content({ quizState }: { quizState: QuizQuestionsState }) {
 
           posthog.identify(parsedQuizState.email);
           trackPixel("Lead", {});
+
+          if (!userProfile) {
+            return;
+          }
 
           setRequestStatus({ isLoading: true });
           try {

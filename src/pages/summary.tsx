@@ -72,7 +72,7 @@ export default function SummaryPage({}: PageProps) {
         <Container id="pricing-plans" as="section">
           <Headline mb={8}>
             Unlock the Power of{" "}
-            <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}.</HeadlineHighlight> Start{" "}
+            {/* <HeadlineHighlight> {toTitleCase(quizState.yourZodiac.name)}.</HeadlineHighlight> Start{" "} */}
             <HeadlineHighlight>Your Program</HeadlineHighlight> Now
           </Headline>
 
