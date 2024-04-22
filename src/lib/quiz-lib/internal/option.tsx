@@ -16,9 +16,9 @@ function OptionInput({ type, isSelected }: { type: "radio" | "checkbox"; isSelec
   switch (type) {
     case "checkbox": {
       return isSelected ? (
-        <CheckIcon width={size} height={size} color={theme.colors.bg["700"]} />
+        <CheckIcon width={size} height={size} color={theme.colors.text["700"]} />
       ) : (
-        <CheckIconEmpty width={size} height={size} color={theme.colors.bg["400"]} />
+        <CheckIconEmpty width={size} height={size} color={theme.colors.text["200"]} />
       );
     }
     case "radio": {

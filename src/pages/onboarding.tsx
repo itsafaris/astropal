@@ -6,26 +6,24 @@ import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearQuizState, saveQuizState } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
-import { YourBirthDateSlide } from "@components/quizpage/slides/YourBirthDateSlide";
-import { YourBirthTimeSlide } from "@components/quizpage/slides/YourBirthTimeSlide";
-import { YourBirthPlaceSlide } from "@components/quizpage/slides/YourBirthPlaceSlide";
-
-import { EmailSlide } from "@components/quizpage/slides/EmailSlide";
-import { YourNameSlide } from "@components/quizpage/questions";
-import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLoadingSlide";
-import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
-import { Loading_SavingAstrologerPreferences } from "@components/quizpage/slides/SavingProfileSlide";
-import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
 import {
   AreasOfInterestSlide,
+  AsnwerLongevity,
   AstrologicalKnowledgeLevelSlide,
   DedicationTime,
+  EmailSlide,
+  Loading_SavingAstrologerPreferences,
   MajorLifeEventsSlide,
+  Loading_NatalChart,
+  NatalChartSlide,
+  QuoteSlide,
   RelationshipStatusSlide,
-} from "@components/quizpage/slides/otherSlides";
-
-import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
-
+  YourBirthDateSlide,
+  YourBirthPlaceSlide,
+  YourBirthTimeSlide,
+  YourGenderSlide,
+  YourNameSlide,
+} from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
@@ -94,7 +92,7 @@ export default function OnboardingQuiz() {
           <YourBirthDateSlide />
           <YourBirthTimeSlide />
           <YourBirthPlaceSlide />
-          <NatalChartLoadingSlide />
+          <Loading_NatalChart />
           <NatalChartSlide />
           <AstrologicalKnowledgeLevelSlide />
           <AreasOfInterestSlide />
@@ -103,6 +101,7 @@ export default function OnboardingQuiz() {
           <DedicationTime />
           <AsnwerLongevity />
           <Loading_SavingAstrologerPreferences />
+          <QuoteSlide />
           <YourNameSlide />
           <EmailSlide />
         </Segment>

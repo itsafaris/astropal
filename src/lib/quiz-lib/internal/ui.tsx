@@ -54,7 +54,7 @@ export function SkipButton(props: ComponentProps<typeof Button>) {
 }
 
 export function MyFormLabel(props: ComponentProps<typeof FormLabel>) {
-  return <FormLabel color="text.900" {...props} lineHeight={1} />;
+  return <FormLabel color="text.900" fontSize={"sm"} {...props} lineHeight={1} />;
 }
 
 export function MySelect(props: ComponentProps<typeof Select>) {
