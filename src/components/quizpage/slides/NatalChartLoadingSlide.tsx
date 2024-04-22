@@ -25,7 +25,7 @@ function Content() {
         }
         return v === 100 ? 100 : v + 1;
       });
-    }, 70);
+    }, 40);
 
     return () => {
       clearInterval(it);

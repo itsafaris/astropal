@@ -16,7 +16,13 @@ import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLo
 import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
 import { Loading_SavingAstrologerPreferences } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
-import { AreasOfInterestSlide, DedicationTime } from "@components/quizpage/slides/otherSlides";
+import {
+  AreasOfInterestSlide,
+  AstrologicalKnowledgeLevelSlide,
+  DedicationTime,
+  MajorLifeEventsSlide,
+  RelationshipStatusSlide,
+} from "@components/quizpage/slides/otherSlides";
 
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
 
@@ -90,7 +96,10 @@ export default function OnboardingQuiz() {
           <YourBirthPlaceSlide />
           <NatalChartLoadingSlide />
           <NatalChartSlide />
+          <AstrologicalKnowledgeLevelSlide />
           <AreasOfInterestSlide />
+          <RelationshipStatusSlide />
+          <MajorLifeEventsSlide />
           <DedicationTime />
           <AsnwerLongevity />
           <Loading_SavingAstrologerPreferences />

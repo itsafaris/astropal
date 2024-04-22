@@ -59,7 +59,10 @@ export async function updateUserProfile({
     body: JSON.stringify({
       id: userID,
       name: quizState.fullname,
-      areas_of_interest: quizState.areasOfInterest?.map((a) => a.value),
+      areas_of_interest: quizState.areasOfInterest?.map((it) => it.value),
+      astrological_knowledge_level: quizState.astrologicalKnowledgeLevel,
+      major_life_events: quizState.majorLifeEvents?.map((it) => it.value),
+      relationship_status: quizState.relationshipStatus,
     }),
   });
 

@@ -15,7 +15,7 @@ import { createTime } from "./dates";
 import { createBirthOrigin, createHoroscopeData } from "./natalChart";
 
 // IMPORTANT: change this if structure changes, to invalidate local storage
-export const STATE_VERSION = 6;
+export const STATE_VERSION = 7;
 
 export type QuizStateParsed = ReturnType<typeof getTypedQuizState>;
 
@@ -110,6 +110,13 @@ export function getTypedQuizState(state: QuizQuestionsState) {
 
   const answerLongevity = (state["answer-longevity"] as SingleState)?.value?.value ?? "";
 
+  const relationshipStatus = (state["relationship-status"] as SingleState)?.value?.value ?? "";
+
+  const majorLifeEvents = (state["major-life-events"] as MultiState)?.value;
+
+  const astrologicalKnowledgeLevel =
+    (state["astro-knowledge-level"] as SingleState)?.value?.value ?? "";
+
   return {
     version: STATE_VERSION, // IMPORTANT: change this if structure changes, to invalidate local storage
     fullname,
@@ -120,6 +127,9 @@ export function getTypedQuizState(state: QuizQuestionsState) {
     areasOfInterest,
     dedicationTime,
     answerLongevity,
+    astrologicalKnowledgeLevel,
+    majorLifeEvents,
+    relationshipStatus,
     email,
   };
 }
