@@ -1,6 +1,6 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { ComponentProps, createContext, useContext, useEffect } from "react";
-import { NextButton, SkipButton } from "../internal/ui";
+import { SkipButton } from "../internal/ui";
 import { ExtractSlideProps, ISelectorType, SlideProps, SlidePropsLoading } from "./types";
 import {
   GetSlideStateType,
@@ -19,12 +19,7 @@ export function useSlide() {
 export type QuizQuestionsState = Record<string, Snapshot<SelectorState>>;
 
 export type SlideComponentProps<T extends ISelectorType> = ExtractSlideProps<T> & {
-  children?:
-    | React.ReactNode
-    | ((param: {
-        state: Snapshot<GetSlideStateType<T>>;
-        quizState: QuizQuestionsState;
-      }) => React.ReactNode);
+  children?: React.ReactNode;
   containerProps?: ComponentProps<typeof Flex>;
 };
 
@@ -53,46 +48,30 @@ export function Slide<T extends ISelectorType>(props: SlideComponentProps<T>) {
 
 function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
   const { children, containerProps, ...slideProps } = props;
-  const snap = useQuizSnapshot();
-  const state = snap.currentSlideState;
 
-  let hideNextButton = () => {
-    if (slideProps.type === "single") {
-      return true;
-    }
+  // const snap = useQuizSnapshot();
+  // const state = snap.currentSlideState;
 
-    if (state?.type === "loading") {
-      const s = snap.currentSlide as SlidePropsLoading;
-      if (s.autoProceed) {
-        return true;
-      }
-      if (state.isComplete) {
-        return false;
-      }
-      return true;
-    }
+  // let hideNextButton = () => {
+  //   if (slideProps.type === "single") {
+  //     return true;
+  //   }
 
-    return false;
-  };
+  //   if (state?.type === "loading") {
+  //     const s = snap.currentSlide as SlidePropsLoading;
+  //     if (s.autoProceed) {
+  //       return true;
+  //     }
+  //     if (state.isComplete) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
 
-  if (!state) {
-    return;
-  }
+  //   return false;
+  // };
 
   const showSkipButton = slideProps.optional;
-
-  const realChildren =
-    typeof children === "function"
-      ? children({
-          // @ts-expect-error
-          state: state,
-          quizState: snap.slideStateByID,
-        })
-      : children;
-
-  if (!state) {
-    return null;
-  }
 
   return (
     <Flex
@@ -104,7 +83,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       {...containerProps}
     >
       <Flex w="100vw" maxWidth={"390px"} flexDir={"column"} py={4} px={6}>
-        {realChildren}
+        {children}
 
         {/* {!hideNextButton() && (
           <Box width={"full"} mt={4} mb={2} bottom={8}>

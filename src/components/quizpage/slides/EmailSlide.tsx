@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Selector, Slide, useQuiz, useQuizState } from "@martynasj/quiz-lib";
+import React from "react";
+import { Selector, Slide, useQuiz, useQuizContext } from "@martynasj/quiz-lib";
 import { Text } from "@chakra-ui/react";
 
 import { Caption, SlideHeading, NextButton, Span } from "../components";
@@ -25,12 +25,10 @@ type RequestStatus = {
 
 function ContentEmail() {
   const { submitQuestion } = useQuiz();
-  const { quizState } = useQuizState();
+  const quizState = useQuizContext();
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>({ isLoading: false });
   const [userProfile] = useUserProfileState();
-
-  const parsedQuizState = getTypedQuizState(quizState);
 
   function redirectToApp(input: { userID: string }) {
     const params = new URLSearchParams();
@@ -62,6 +60,8 @@ function ContentEmail() {
           if (!result) {
             return;
           }
+
+          const parsedQuizState = getTypedQuizState(quizState);
 
           posthog.identify(parsedQuizState.email);
           trackPixel("Lead", {});

@@ -1,4 +1,11 @@
-import { SelectorState, useQuizActions, useQuizSnapshot } from "../internal/state";
+import { useContext } from "react";
+import { QuizCtx, SelectorState, useQuizActions, useQuizSnapshot } from "../internal/state";
+
+/** Non-reactive usage */
+export function useQuizContext() {
+  const c = useContext(QuizCtx).state.slideStateByID;
+  return c;
+}
 
 export function useQuiz() {
   const actions = useQuizActions();

@@ -4,22 +4,18 @@ import { SlidePropsEmail } from "../public/types";
 import { EmailState, useQuizActions, useQuizSnapshot } from "./state";
 import { commonInputStyles } from "./commonInput";
 import { MyFormLabel } from "./ui";
-import { useEffect } from "react";
+import { useState } from "react";
 
 export type Email = {} & SlidePropsEmail;
 
 export function Email({ placeholder, label }: Email) {
+  const [localEmailValue, setLocalEmailValue] = useState("");
+
   const actions = useQuizActions();
   const slide = useSlide();
   const snap = useQuizSnapshot();
 
   const state = snap.slideStateByID[slide.id] as EmailState;
-
-  useEffect(() => {
-    console.log("mount input");
-  }, []);
-
-  console.log(state.value);
 
   return (
     <FormControl>
@@ -29,9 +25,10 @@ export function Email({ placeholder, label }: Email) {
         {...commonInputStyles()}
         size={"lg"}
         placeholder={placeholder}
-        value={state.value ?? ""}
+        value={localEmailValue}
         type="email"
         onChange={(e) => {
+          setLocalEmailValue(e.target.value);
           actions.setEmailValue(slide.id, e.target.value);
         }}
         mb={7}

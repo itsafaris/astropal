@@ -1,5 +1,5 @@
 import React from "react";
-import { Slide, useQuiz } from "@martynasj/quiz-lib";
+import { Slide, useQuizActions, useQuizState } from "@martynasj/quiz-lib";
 import { Card, Flex, Stack, Tag, TagLabel, TagLeftIcon, Text } from "@chakra-ui/react";
 
 import { SlideHeading, NextButton, Span } from "../components";
@@ -12,39 +12,42 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { DateValue, Time, getReadableDate, getReadableTime } from "@utils/dates";
 
 export function NatalChartSlide() {
-  const quiz = useQuiz();
-
   return (
     <Slide id="natal-chart" type="filler">
-      {({ quizState }) => {
-        const p = getTypedQuizState(quizState);
-        const zodiac = getZodiacFromState(p);
-
-        return (
-          <Flex flexDirection={"column"} position={"relative"} width={"full"}>
-            <SlideHeading>
-              <Span>Here's a sneak peek into your cosmic identity</Span>{" "}
-            </SlideHeading>
-
-            <PersonalityReading
-              state={zodiac}
-              birthDate={p.yourBirthDate}
-              birthTime={p.yourBirthTime}
-              birthLocFormatted={p.yourBirthLocation.formattedText}
-            />
-
-            <NextButton
-              onClick={() => {
-                quiz.submitQuestion();
-              }}
-              my={8}
-            >
-              Continue
-            </NextButton>
-          </Flex>
-        );
-      }}
+      <Content />
     </Slide>
+  );
+}
+
+function Content() {
+  const { quizState } = useQuizState();
+  const actions = useQuizActions();
+
+  const p = getTypedQuizState(quizState);
+  const zodiac = getZodiacFromState(p);
+
+  return (
+    <Flex flexDirection={"column"} position={"relative"} width={"full"}>
+      <SlideHeading>
+        <Span>Here's a sneak peek into your cosmic identity</Span>{" "}
+      </SlideHeading>
+
+      <PersonalityReading
+        state={zodiac}
+        birthDate={p.yourBirthDate}
+        birthTime={p.yourBirthTime}
+        birthLocFormatted={p.yourBirthLocation.formattedText}
+      />
+
+      <NextButton
+        onClick={() => {
+          actions.submitQuestion();
+        }}
+        my={8}
+      >
+        Continue
+      </NextButton>
+    </Flex>
   );
 }
 
