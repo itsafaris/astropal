@@ -34,20 +34,45 @@ type OptionPropsSimple = {
   text: string;
   icon?: React.ReactNode;
   selectorIconType: "radio" | "checkbox";
+  size?: "small" | "medium";
 } & BaseOptionProps;
 
-export function OptionSimple({ text, icon, selectorIconType, ...rest }: OptionPropsSimple) {
+export function OptionSimple({
+  text,
+  icon,
+  selectorIconType,
+  size = "medium",
+  ...rest
+}: OptionPropsSimple) {
+  const iconSize = size === "small" ? 5 : 10;
   return (
-    <BaseOption display="flex" alignItems="center" px={4} py={1} {...rest}>
+    <BaseOption
+      display="flex"
+      alignItems="center"
+      px={size === "small" ? 2 : 4}
+      py={size === "small" ? 1 : 2}
+      {...rest}
+    >
       {icon && (
-        <Flex width={10} height={10} alignItems={"center"} justifyContent={"center"}>
-          {typeof icon === "string" ? <Text fontSize={"3xl"}>{icon}</Text> : icon}
+        <Flex width={iconSize} height={iconSize} alignItems={"center"} justifyContent={"center"}>
+          {typeof icon === "string" ? (
+            <Text fontSize={size === "small" ? "lg" : "3xl"}>{icon}</Text>
+          ) : (
+            icon
+          )}
         </Flex>
       )}
-      <Text textAlign={"start"} flexGrow={1} my={3} ml={3} mr={2}>
+      <Text
+        textAlign={"start"}
+        fontSize={size === "small" ? "sm" : "md"}
+        flexGrow={1}
+        my={size === "small" ? 1 : 2}
+        ml={size === "small" ? 2 : 3}
+        mr={2}
+      >
         {text}
       </Text>
-      <OptionInput type={selectorIconType} isSelected={rest.isSelected} />
+      {size === "medium" && <OptionInput type={selectorIconType} isSelected={rest.isSelected} />}
     </BaseOption>
   );
 }

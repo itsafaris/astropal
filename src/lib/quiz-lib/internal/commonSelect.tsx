@@ -18,8 +18,9 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
   const slideCtx = useSlide() as SlidePropsMulti | SlidePropsSingle;
 
   if (slideCtx.variant === "list") {
+    const dir = slideCtx.direction ?? "column";
     return (
-      <Flex width={"full"} flexDir={"column"} gap={3}>
+      <Flex width={"full"} flexDir={dir} flexWrap={dir === "row" ? "wrap" : undefined} gap={3}>
         {slideCtx.options?.map((option, idx) => {
           const value = getOptionValue(option);
           const optionValue: SelectorValue = {
@@ -34,6 +35,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
               text={option.text}
               icon={option.icon}
               selectorIconType={slideCtx.type === "single" ? "radio" : "checkbox"}
+              size={slideCtx.size}
             />
           );
         })}

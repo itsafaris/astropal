@@ -508,6 +508,8 @@ export function MajorLifeEventsSlide() {
       id="major-life-events"
       type="multi"
       variant="list"
+      direction="row"
+      size="small"
       label="Choose one or more"
       options={[
         { text: "Graduation", icon: "🎓", value: "graduation" },

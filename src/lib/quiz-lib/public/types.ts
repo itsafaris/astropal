@@ -82,6 +82,8 @@ export type SelectorPropsPicture = {
 
 export type SelectorPropsList = {
   variant: "list";
+  direction?: "row" | "column";
+  size?: "small" | "medium";
   options?: OptionPropsSimple[];
 };
 
