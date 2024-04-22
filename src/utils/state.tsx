@@ -5,6 +5,7 @@ import {
   SingleState,
   LocationState,
   TimeState,
+  MultiState,
 } from "@martynasj/quiz-lib";
 
 import { getZodiacSign } from "@services/zodiacService";
@@ -103,7 +104,7 @@ export function getTypedQuizState(state: QuizQuestionsState) {
     long: 22,
   };
 
-  const focusArea = (state["astrologer-theme-preferences"] as SingleState)?.value?.value;
+  const areasOfInterest = (state["areas-of-interest"] as MultiState)?.value;
 
   const dedicationTime = (state["dedication-time"] as SingleState)?.value?.value ?? "";
 
@@ -116,7 +117,7 @@ export function getTypedQuizState(state: QuizQuestionsState) {
     yourBirthDate,
     yourBirthTime,
     yourBirthLocation,
-    focusArea,
+    areasOfInterest,
     dedicationTime,
     answerLongevity,
     email,

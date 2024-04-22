@@ -2,22 +2,23 @@ import { Selector, Slide } from "@martynasj/quiz-lib";
 
 import { SlideHeading, Span } from "../components";
 
-export function FocusThemeSlide() {
+export function AreasOfInterestSlide() {
   return (
     <Slide
-      id="focus-theme"
-      type="single"
+      id="areas-of-interest"
+      type="multi"
       variant="list"
+      label="Choose one or more"
       options={[
         { text: "Love & Relationships", icon: "💞", value: "relationships" },
-        { text: "Career", icon: "💼", value: "career" },
-        { text: "Emotional Growth", icon: "🍀", value: "emotions" },
-        { text: "Self understanding", icon: "🧘", value: "personality" },
+        { text: "Career & Education", icon: "💼", value: "career" },
+        { text: "Growth & Self-Discovery", icon: "🧘", value: "personality" },
+        { text: "Adventure & Exploration", icon: "🏔️", value: "exploration" },
       ]}
     >
       <SlideHeading>
-        <Span>Choose your focus area.</Span> You will receive increased attention from your personal
-        astrologer on your specified area.
+        <Span>Choose your interest areas.</Span> You will receive increased attention from your
+        personal astrologer on these areas.
       </SlideHeading>
       <Selector />
     </Slide>

@@ -59,7 +59,7 @@ export async function updateUserProfile({
     body: JSON.stringify({
       id: userID,
       name: quizState.fullname,
-      focus_area: quizState.focusArea,
+      areas_of_interest: quizState.areasOfInterest?.map((a) => a.value),
     }),
   });
 

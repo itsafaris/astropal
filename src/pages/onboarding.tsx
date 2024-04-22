@@ -16,7 +16,7 @@ import { NatalChartLoadingSlide } from "@components/quizpage/slides/NatalChartLo
 import { NatalChartSlide } from "@components/quizpage/slides/NatalChartSlide";
 import { Loading_SavingAstrologerPreferences } from "@components/quizpage/slides/SavingProfileSlide";
 import { AsnwerLongevity } from "@components/quizpage/slides/AsnwerLongevity";
-import { FocusThemeSlide, DedicationTime } from "@components/quizpage/slides/otherSlides";
+import { AreasOfInterestSlide, DedicationTime } from "@components/quizpage/slides/otherSlides";
 
 import { YourGenderSlide } from "@components/quizpage/slides/YourGenderSlide";
 
@@ -65,7 +65,7 @@ export default function OnboardingQuiz() {
           },
           birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
           birth_place: parsedState.yourBirthLocation,
-          theme_focus: parsedState.focusArea,
+          theme_focus: parsedState.areasOfInterest?.map((a) => a.value),
           dedication_time_per_day: parsedState.dedicationTime,
           answer_longevity: parsedState.answerLongevity,
         });
@@ -90,7 +90,7 @@ export default function OnboardingQuiz() {
           <YourBirthPlaceSlide />
           <NatalChartLoadingSlide />
           <NatalChartSlide />
-          <FocusThemeSlide />
+          <AreasOfInterestSlide />
           <DedicationTime />
           <AsnwerLongevity />
           <Loading_SavingAstrologerPreferences />
