@@ -546,8 +546,6 @@ export function RelationshipStatusSlide() {
         { text: "Committed", icon: "💖", value: "committed" },
         { text: "Engaged", icon: "💍", value: "engaged" },
         { text: "Married", icon: "💒", value: "married" },
-        { text: "Divorced", icon: "💔", value: "divorced" },
-        { text: "Widowed", icon: "🕊️", value: "widowed" },
       ]}
     >
       <SlideHeading>What is your current relationship status?</SlideHeading>
