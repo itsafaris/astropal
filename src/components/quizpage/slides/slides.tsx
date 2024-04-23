@@ -168,7 +168,7 @@ export function YourBirthTimeSlide() {
 
 export function YourBirthPlaceSlide() {
   return (
-    <Slide id="your-birth-place" type="location" placeholder="e.g. New York">
+    <Slide id="your-birth-place" type="location" placeholder="Start typing to search">
       <YourBirthPlaceSlide_ />
     </Slide>
   );
@@ -198,20 +198,20 @@ function YourBirthPlaceSlide_() {
 
   return (
     <>
-      <SlideHeading mb={2} text="What city were you born in?" />
+      <SlideHeading mb={2} text="Where were you born?" />
       <StaticImage
         src="../../../images/city_skyline_pencil.png"
         alt="pencil drawing of a city skyline"
         layout="fixed"
         placeholder="blurred"
         height={180}
-        style={{ margin: "0 auto 32px" }}
+        style={{ margin: "0 auto 16px" }}
       />
-      <Callout mb={0}>
+
+      <Selector mb={3} />
+      <Callout mb={8}>
         💡 If you're unsure of the exact location, enter a nearby major city.
       </Callout>
-
-      <Selector />
       <NextButton
         isLoading={userProfile.isLoading}
         isDisabled={!!userProfile.error}

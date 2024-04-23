@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { motion, useAnimationControls } from "framer-motion";
-import { useEffect } from "react";
+import { ComponentProps, useEffect } from "react";
 import DatePicker from "../internal/datepicker";
 import { LoadingSlide } from "../internal/loading";
 import { Location } from "../internal/location";
@@ -14,7 +14,7 @@ import { TimePicker } from "../internal/timepicker";
 
 type SelectorProps = {};
 
-export function Selector({}: SelectorProps) {
+export function Selector(props: ComponentProps<typeof Box> & SelectorProps) {
   const slide = useSlide();
   const slideState = useQuizSnapshot().currentSlideState;
   const currentSlide = useQuizSnapshot().currentSlideID;
@@ -82,7 +82,7 @@ export function Selector({}: SelectorProps) {
   }
 
   return (
-    <Box as={motion.div} width={"full"} mb={8} animate={controls}>
+    <Box as={motion.div} width={"full"} mb={8} animate={controls} {...props}>
       {getSpecificSelector()}
     </Box>
   );
