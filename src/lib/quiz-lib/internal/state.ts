@@ -83,10 +83,15 @@ export type SelectorValue = Readonly<{ value: string; idx: number }>;
 
 export type DateValue = { year: number; month: number; day: number };
 
+const QUICK_TIME_PERIODS = ["Morning", "Noon", "Evening", "Night"] as const;
+
+export type QuickTimePeriod = (typeof QUICK_TIME_PERIODS)[number];
+
 export type TimeValue = {
   hour: number;
   minute: number;
   meridiem: "am" | "pm";
+  quickPeriod?: QuickTimePeriod;
 };
 
 export type SelectorDescriptor = {

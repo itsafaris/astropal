@@ -143,15 +143,16 @@ export function YourBirthTimeSlide() {
   return (
     <Slide id="your-birth-time" type="time">
       <SlideHeading text="What is your birth hour?" mb={2} />
-      <StaticImage
-        alt="Astropal - pencil drawing of an astrological clock"
-        layout="fixed"
-        placeholder="blurred"
-        height={180}
-        style={{ margin: "0 auto" }}
-        src="../../../images/clock_pencil.png"
-      />
-      <Callout mt={2}>💡 If you're unsure about the time, pick the closest hour.</Callout>
+      <Box position={"absolute"} bottom={8} left={0} right={0}>
+        <StaticImage
+          alt="Astropal - pencil drawing of an astrological clock"
+          layout="fixed"
+          placeholder="blurred"
+          height={180}
+          style={{ margin: "0 auto" }}
+          src="../../../images/clock_pencil.png"
+        />
+      </Box>
       <Selector />
 
       <NextButton
