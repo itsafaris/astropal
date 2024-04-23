@@ -468,10 +468,12 @@ export function AreasOfInterestSlide() {
       variant="list"
       label="Choose one or more"
       options={[
-        { text: "Love & Relationships", icon: "💞", value: "relationships" },
-        { text: "Career & Education", icon: "💼", value: "career" },
+        { text: "Love, Family & Relationships", icon: "💞", value: "relationships" },
+        { text: "Career, Finance & Education", icon: "💼", value: "career" },
+        { text: "Health & Mental Wellbeing", icon: "💚", value: "wellbeing" },
         { text: "Growth & Self-Discovery", icon: "🧘", value: "personality" },
-        { text: "Adventure & Exploration", icon: "🏔️", value: "exploration" },
+        { text: "Decision Making & Future Planning", icon: "🤔", value: "decision-making" },
+        { text: "Relocation & Travel", icon: "🏡", value: "exploration" },
       ]}
     >
       <SlideHeading>Which areas interest you most?</SlideHeading>
@@ -552,46 +554,6 @@ export function RelationshipStatusSlide() {
       <Callout title="💡 Why this matters?">
         Understanding your relationship status helps us offer insights tailored to your love life.
       </Callout>
-      <Selector />
-    </Slide>
-  );
-}
-
-export function DedicationTime() {
-  return (
-    <Slide
-      id="dedication-time"
-      type="single"
-      variant="list"
-      options={[
-        { text: "Up to 5 minutes", icon: "◔", value: "quick" },
-        { text: "Up to 20 minutes", icon: "◕", value: "regular" },
-        { text: "Up to 1 hour", icon: "⏺︎", value: "dedicated" },
-      ]}
-    >
-      <SlideHeading>
-        How much time per day do you want to dedicate to self-discovery and reflection?
-      </SlideHeading>
-      <Selector />
-    </Slide>
-  );
-}
-
-export function AsnwerLongevity() {
-  return (
-    <Slide
-      id="answer-longevity"
-      type="single"
-      variant="list"
-      options={[
-        { text: "Short and to-the-point", icon: "💬", value: "short" },
-        { text: "Balanced", icon: "👌", value: "balanced" },
-        { text: "Long and detailed", icon: "📝", value: "detailed" },
-      ]}
-    >
-      <SlideHeading>
-        How would you like your <Span>Personalized Readings</Span> to be present?
-      </SlideHeading>
       <Selector />
     </Slide>
   );

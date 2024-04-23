@@ -8,9 +8,7 @@ import { clearQuizState, saveQuizState } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 import {
   AreasOfInterestSlide,
-  AsnwerLongevity,
   AstrologicalKnowledgeLevelSlide,
-  DedicationTime,
   EmailSlide,
   Loading_SavingAstrologerPreferences,
   MajorLifeEventsSlide,
@@ -98,8 +96,6 @@ export default function OnboardingQuiz() {
           <AreasOfInterestSlide />
           <RelationshipStatusSlide />
           <MajorLifeEventsSlide />
-          <DedicationTime />
-          <AsnwerLongevity />
           <Loading_SavingAstrologerPreferences />
           <QuoteSlide />
           <YourNameSlide />
