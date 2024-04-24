@@ -1,16 +1,12 @@
-import { Box, Flex, FormControl, Select } from "@chakra-ui/react";
+import { Box, Flex, FormControl } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSlide } from "../public/slide";
 import { SlidePropsDate } from "../public/types";
 import { DateState, DateValue, useQuizActions, useQuizSnapshot } from "./state";
-import { commonInputStyles } from "./commonInput";
 import { MyFormLabel, MySelect } from "./ui";
+import { getNumberOfDaysInMonth } from "@utils/dates";
 
 const DEFAULT_DATE: DateValue = { year: 1990, month: 1, day: 1 };
-
-const days = Array(31)
-  .fill(0)
-  .map((_, idx) => idx + 1);
 
 const months = [
   "January",
@@ -48,23 +44,23 @@ export function DatePicker(_: DatePickerProps) {
 
   return (
     <Flex width={"full"} gap={2}>
-      <Box flex={3} width={"full"}>
+      <Box flex={4} width={"full"}>
         <FormControl>
-          <MyFormLabel>Day</MyFormLabel>
+          <MyFormLabel>Year</MyFormLabel>
           <MySelect
             onChange={(e) => {
               const v = parseInt(e.target.value);
               actions.setDateValue(slide.id, {
                 ...DEFAULT_DATE,
                 ...state.value,
-                day: v,
+                year: v,
               });
             }}
-            value={state.value?.day ?? DEFAULT_DATE.day}
+            value={state.value?.year ?? DEFAULT_DATE.year}
           >
-            {days.map((day) => (
-              <option value={day} key={day}>
-                {day}
+            {years.map((year) => (
+              <option value={year} key={year}>
+                {year}
               </option>
             ))}
           </MySelect>
@@ -92,25 +88,35 @@ export function DatePicker(_: DatePickerProps) {
           </MySelect>
         </FormControl>
       </Box>
-      <Box flex={4} width={"full"}>
+      <Box flex={3} width={"full"}>
         <FormControl>
-          <MyFormLabel>Year</MyFormLabel>
+          <MyFormLabel>Day</MyFormLabel>
           <MySelect
             onChange={(e) => {
               const v = parseInt(e.target.value);
               actions.setDateValue(slide.id, {
                 ...DEFAULT_DATE,
                 ...state.value,
-                year: v,
+                day: v,
               });
             }}
-            value={state.value?.year ?? DEFAULT_DATE.year}
+            value={state.value?.day ?? DEFAULT_DATE.day}
           >
-            {years.map((year) => (
-              <option value={year} key={year}>
-                {year}
-              </option>
-            ))}
+            {Array(
+              getNumberOfDaysInMonth(
+                state.value?.year ?? 1900,
+                state.value?.month ? state.value.month - 1 : 0
+              )
+            )
+              .fill("")
+              .map((_, idx) => {
+                let day = idx + 1;
+                return (
+                  <option value={day} key={day}>
+                    {day}
+                  </option>
+                );
+              })}
           </MySelect>
         </FormControl>
       </Box>

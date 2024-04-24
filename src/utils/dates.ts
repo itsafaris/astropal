@@ -58,3 +58,9 @@ export function getReadableTime(time: Time): string {
   const formattedMinute = minute.toString().padStart(2, "0");
   return `${formattedHour}:${formattedMinute} ${meridiem.toLowerCase()}`;
 }
+
+/** Month's are 0 indexed */
+export function getNumberOfDaysInMonth(year: number, month: number) {
+  // 0 is the last day of the previous month, so that's why we add +1 to a month here
+  return new Date(year, month + 1, 0).getDate();
+}
