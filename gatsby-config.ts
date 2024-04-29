@@ -14,7 +14,9 @@ const config: GatsbyConfig = {
     title: `Astropal`,
     siteUrl: `https://www.theastropal.com`,
     version: pkgjson.version,
-    description: "Astrological Keys to Relationship Success",
+    image: "/images/meta_img.jpg",
+    description:
+      "Astropal is your personalized astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
   } satisfies SiteMetadata,
 
   flags: {

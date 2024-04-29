@@ -6,6 +6,7 @@ export type SiteMetadata = {
   version: string;
   siteUrl: string;
   description: string;
+  image: string;
 };
 
 export const useSiteMetadata = (): SiteMetadata => {
@@ -18,6 +19,7 @@ export const useSiteMetadata = (): SiteMetadata => {
           version
           siteUrl
           description
+          image
         }
       }
     }

@@ -27,7 +27,7 @@ import { useUserProfileState } from "src/appState";
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
 export const Head = () => {
-  return <SEO />;
+  return <SEO title="Start your journey now" />;
 };
 
 export default function OnboardingQuiz() {
