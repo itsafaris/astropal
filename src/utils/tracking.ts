@@ -10,7 +10,7 @@ type TrackingEvent = {
 
 export function trackEvent(e: TrackingEvent) {
   sendToGTM(e);
-  trackPosthog(e.name, e.properties);
+  posthog.capture(e.name, e.properties);
 }
 
 function sendToGTM(e: TrackingEvent) {
@@ -42,10 +42,6 @@ export function trackPixel(event: string, properties: Record<string, any>) {
     return;
   }
   (window as any).fbq("track", event, properties);
-}
-
-export function trackPosthog(...props: Parameters<typeof posthog.capture>) {
-  posthog.capture(...props);
 }
 
 export function setPersonProperties(...props: Parameters<typeof posthog.setPersonProperties>) {

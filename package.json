@@ -7,13 +7,12 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "npm run clean && gatsby develop --host 0.0.0.0 --https",
+    "develop": "npm run clean && gatsby develop --host 0.0.0.0",
     "start": "npm run develop",
     "build": "npm run clean && gatsby build && npx tsx copyDomainOwnerhship.ts",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit",
-    "tunnel": "ngrok http --domain=tidy-sensibly-wasp.ngrok-free.app https://localhost:8000"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@astrodraw/astrochart": "^3.0.2",
