@@ -528,7 +528,7 @@ export function MajorLifeEventsSlide() {
         { text: "Major Travel", icon: "✈️", value: "majortravel" },
       ]}
     >
-      <SlideHeading>Which events were the most impactful?</SlideHeading>
+      <SlideHeading>Which events had the biggest impact in your lifetime?</SlideHeading>
       <Selector />
       <NextButton>Continue</NextButton>
     </Slide>
