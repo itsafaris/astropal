@@ -98,6 +98,7 @@ export type ZodiacSignDataType = {
   personality: string;
   strengths: string[];
   weaknesses: string[];
+  majorWeaknessText: string;
 };
 
 export function getZodiacSign(birthDate: string): ZodiacSignDataType {
@@ -116,6 +117,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are a natural leader, full of energy and confidence. You are passionate, driven, and have a bold approach to life. Always ready for new adventures and challenges.",
         strengths: ["Courageous", "Determined", "Optimistic"],
         weaknesses: ["Impulsive", "Impatient", "Competitive"],
+        majorWeaknessText:
+          "Your Mars square Mercury makes you prone to impulsive decisions, leading to unintended consequences.",
       };
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
@@ -128,6 +131,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You value stability and comfort, often showing a strong sense of beauty and love for the pleasures of life. You're reliable, hardworking, and dedicated.",
         strengths: ["Reliable", "Patient", "Practical"],
         weaknesses: ["Stubborn", "Materialistic", "Indulgent"],
+        majorWeaknessText:
+          "Your Venus opposition Saturn suggests a stubborn streak that can sometimes isolate you from others' perspectives.",
       };
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
@@ -140,6 +145,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are quick-witted and lively. You have an insatiable curiosity, loving to learn and exchange ideas. You are known for your adaptability and outgoing nature.",
         strengths: ["Adaptable", "Intelligent", "Energetic"],
         weaknesses: ["Inconsistent", "Indecisive", "Anxious"],
+        majorWeaknessText:
+          "Your Mercury square Neptune points to a tendency for distraction and inconsistency in your thoughts and actions.",
       };
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
@@ -152,6 +159,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are deeply intuitive and sentimental. You're family-oriented, loyal, and empathetic, with a strong protective nature towards loved ones.",
         strengths: ["Compassionate", "Protective", "Intuitive"],
         weaknesses: ["Moody", "Clingy", "Overly Sensitive"],
+        majorWeaknessText:
+          "Your Moon opposite Pluto exposes a vulnerability to mood swings that can strain personal relationships.",
       };
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
@@ -164,6 +173,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are a born leader, exuding charisma and confidence. You're generous, creative, and have a strong sense of dignity and honor.",
         strengths: ["Charismatic", "Generous", "Confident"],
         weaknesses: ["Arrogant", "Stubborn", "Self-centered"],
+        majorWeaknessText:
+          "Your Sun square Uranus identifies a propensity for arrogance, often overshadowing your genuine leadership qualities.",
       };
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
@@ -176,6 +187,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are practical, analytical, and meticulous. You have a deep sense of humanity, making you caring and hardworking, with a keen attention to detail.",
         strengths: ["Analytical", "Reliable", "Precise"],
         weaknesses: ["Overly Critical", "Worrying", "Perfectionist"],
+        majorWeaknessText:
+          "Your Mercury opposition Jupiter reveals a critical nature that can be perceived as overly judgmental by others.",
       };
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
@@ -188,6 +201,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are known for your charm and harmony. You value justice and balance, often playing the role of mediator. You're social, diplomatic, and have a keen sense of beauty.",
         strengths: ["Diplomatic", "Fair", "Social"],
         weaknesses: ["Indecisive", "Avoids Confrontation", "Self-pity"],
+        majorWeaknessText:
+          "Your Venus square Mars can lead to indecisiveness, particularly in situations requiring swift judgment.",
       };
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
@@ -200,6 +215,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are passionate and assertive. You're determined and decisive, and will research until you find out the truth. You are known for your bravery and loyalty.",
         strengths: ["Brave", "Loyal", "Ambitious"],
         weaknesses: ["Jealous", "Secretive", "Dominating"],
+        majorWeaknessText:
+          "Your Pluto opposition Moon highlights a tendency towards manipulative behaviors when you feel threatened or insecure.",
       };
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
@@ -212,6 +229,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are curious and energetic. You are the traveler of the zodiac, with a philosophical approach to life, searching for the ultimate truth.",
         strengths: ["Optimistic", "Lover of Freedom", "Honest"],
         weaknesses: ["Careless", "Impatient", "Tactless"],
+        majorWeaknessText:
+          "Your Jupiter square Neptune suggests an overoptimistic outlook, causing you to underestimate real challenges.",
       };
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
@@ -224,6 +243,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are disciplined and possess great self-control. You're responsible and manage people well, valuing tradition and quality craftsmanship.",
         strengths: ["Disciplined", "Responsible", "Self-Control"],
         weaknesses: ["Know-it-all", "Unforgiving", "Condescending"],
+        majorWeaknessText:
+          "Your Saturn square Mercury may result in a pessimistic attitude, sometimes hindering potential opportunities.",
       };
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
@@ -236,6 +257,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are progressive, independent, and intelligent. You are humanitarian at heart, often innovative, and strive to make the world a better place.",
         strengths: ["Innovative", "Humanitarian", "Independent"],
         weaknesses: ["Unpredictable", "Inflexible", "Detached"],
+        majorWeaknessText:
+          "Your Uranus opposition Sun can foster a rebellious nature that might alienate you from potential allies.",
       };
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
@@ -248,6 +271,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
           "You are compassionate and artistic. You are empathetic, often feeling the pain of others, and you're known for your wisdom and musical talents.",
         strengths: ["Compassionate", "Artistic", "Intuitive"],
         weaknesses: ["Fearful", "Overly Trusting", "Sad"],
+        majorWeaknessText:
+          "Your Neptune square Mars indicates a susceptibility to escapism when faced with reality's harsher aspects.",
       };
     default:
       throw new Error("Failed to compute Zodiac sign");

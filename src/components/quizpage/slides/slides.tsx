@@ -26,9 +26,11 @@ import {
   Progress,
   Grid,
   Divider,
+  Icon,
 } from "@chakra-ui/react";
 import { Headline, InvertedHighlight } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
+import { PiArrowBendRightDown } from "react-icons/pi";
 import { useUserProfileState } from "src/appState";
 import { QuizStateParsed, getTypedQuizState, getZodiacFromState } from "@utils/state";
 import {
@@ -39,7 +41,6 @@ import {
 } from "@utils/coreApi";
 import { useEffect, useState } from "react";
 
-import { Time } from "@utils/dates";
 import { ZodiacSignDataType } from "@services/zodiacService";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import posthog from "posthog-js";
@@ -278,13 +279,7 @@ function NatalChartSlide_() {
     <Flex flexDirection={"column"} position={"relative"} width={"full"}>
       <SlideHeading>Here's a sneak peek into your cosmic identity</SlideHeading>
 
-      <PersonalityReading
-        state={zodiac}
-        birthDate={p.yourBirthDate}
-        birthTime={p.yourBirthTime}
-        birthLocFormatted={p.yourBirthLocation.formattedText}
-        quizState={quizState}
-      />
+      <PersonalityReading state={zodiac} quizState={quizState} />
 
       <NextButton
         onClick={() => {
@@ -300,15 +295,9 @@ function NatalChartSlide_() {
 
 function PersonalityReading({
   state,
-  birthDate,
-  birthTime,
-  birthLocFormatted,
   quizState,
 }: {
   state: ZodiacSignDataType;
-  birthDate: DateValue;
-  birthTime: Time;
-  birthLocFormatted: string;
   quizState: QuizQuestionsState;
 }) {
   const p = getTypedQuizState(quizState);
@@ -641,6 +630,71 @@ export function QuoteSlide() {
       </Text>
 
       <NextButton mt={8}>Continue</NextButton>
+    </Slide>
+  );
+}
+
+export function WeaknessSlide() {
+  const { quizState } = useQuizState();
+  const q = getTypedQuizState(quizState);
+  const zodiacSign = getZodiacFromState(q);
+  return (
+    <Slide id="weakness" type="filler">
+      <Text fontSize={"md"} textAlign={"center"} color="gray.700">
+        Major Weakness Identified
+      </Text>
+      <Icon as={PiArrowBendRightDown} fontSize={"2xl"} mx="auto" mt={0} mb={8} color="gray.500" />
+      <Box position={"relative"}>
+        <Box
+          position={"absolute"}
+          border={"1px solid"}
+          borderColor={"red.300"}
+          borderRadius={"100%"}
+          height={"130%"}
+          top={"-20%"}
+          left={"0%"}
+          width={"105%"}
+        />
+        <Box
+          position={"absolute"}
+          border={"1px solid"}
+          borderColor={"red.200"}
+          borderRadius={"100%"}
+          height={"120%"}
+          top={"-10%"}
+          left={"-2%"}
+          width={"105%"}
+        />
+        <Box
+          position={"absolute"}
+          border={"1px solid"}
+          borderColor={"red.100"}
+          borderRadius={"100%"}
+          height={"120%"}
+          top={"-15%"}
+          left={"-4%"}
+          width={"105%"}
+        />
+        <Text
+          fontSize={"lg"}
+          fontWeight={"bold"}
+          p={6}
+          borderRadius={"md"}
+          color="black"
+          textAlign={"center"}
+        >
+          {zodiacSign.majorWeaknessText}
+        </Text>
+      </Box>
+
+      <Text textAlign={"center"} mt={12}>
+        Let's see what your astrologer
+        <br /> can tell about it
+      </Text>
+      <Text fontSize={"3xl"} textAlign={"center"}>
+        👁️
+      </Text>
+      <NextButton mt={4}>Ask astrologer</NextButton>
     </Slide>
   );
 }

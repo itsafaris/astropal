@@ -21,6 +21,7 @@ import {
   YourBirthTimeSlide,
   YourGenderSlide,
   YourNameSlide,
+  WeaknessSlide,
 } from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
 
@@ -92,12 +93,13 @@ export default function OnboardingQuiz() {
           <YourBirthPlaceSlide />
           <Loading_NatalChart />
           <NatalChartSlide />
-          <AstrologicalKnowledgeLevelSlide />
+          {/* <AstrologicalKnowledgeLevelSlide /> */}
           <AreasOfInterestSlide />
           <RelationshipStatusSlide />
           <MajorLifeEventsSlide />
           <Loading_SavingAstrologerPreferences />
-          <QuoteSlide />
+          <WeaknessSlide />
+          {/* <QuoteSlide /> */}
           <YourNameSlide />
           <EmailSlide />
         </Segment>
