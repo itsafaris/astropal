@@ -97,10 +97,10 @@ export default function OnboardingQuiz() {
           <AreasOfInterestSlide />
           <RelationshipStatusSlide />
           <MajorLifeEventsSlide />
+          <YourNameSlide />
           <Loading_SavingAstrologerPreferences />
           <WeaknessSlide />
           {/* <QuoteSlide /> */}
-          <YourNameSlide />
           <EmailSlide />
         </Segment>
       </QuizUI>

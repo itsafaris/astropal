@@ -584,7 +584,15 @@ function NameSlideContent() {
   return (
     <>
       <SlideHeading>How should we call you?</SlideHeading>
-      <Selector />
+      <StaticImage
+        alt="image of a unisex face"
+        src="../../../images/unisex_face.png"
+        placeholder="blurred"
+        style={{ borderRadius: "100%", margin: "0 auto" }}
+        height={200}
+        layout="fixed"
+      />
+      <Selector mt={4} />
       <NextButton
         isLoading={userProfile.isLoading}
         isDisabled={userProfile.error}
@@ -729,13 +737,23 @@ function EmailSlide_() {
 
   return (
     <>
-      <SlideHeading color="text.main" fontSize={"md"} mt={-3} mb={7}>
-        <Span>One last thing!</Span> Enter your email and start using your personalised astrologer
+      <SlideHeading color="text.main" mb={4}>
+        Before we proceed to your astrologer, enter your email so we can identify you in the future
+        💌
       </SlideHeading>
 
-      <Selector />
+      <StaticImage
+        alt="image of the astrological map"
+        src="../../../images/astrologer_planets.png"
+        placeholder="blurred"
+        style={{ borderRadius: "8px", margin: "0 auto" }}
+        layout="fixed"
+        height={140}
+      />
 
-      <Caption mt={-6} mb={7}>
+      <Selector mt={4} mb={2} />
+
+      <Caption mt={0} mb={7} fontSize={"xs"}>
         🔒 We respect your privacy and are committed to protecting your personal data. We will only
         send you personalized astrological insights and updates to enlighten your journey.
       </Caption>
