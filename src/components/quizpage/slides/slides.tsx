@@ -719,9 +719,10 @@ function EmailSlide_() {
   const [requestStatus, setRequestStatus] = useState<RequestStatus>({ isLoading: false });
   const [userProfile] = useUserProfileState();
 
-  function redirectToApp(input: { userID: string }) {
+  function redirectToApp(input: { userID: string; question: string }) {
     const params = new URLSearchParams();
     params.append("userID", input.userID);
+    params.append("onboardingQuestion", input.question);
     const url = `${process.env.GATSBY_WEBAPP_URL}?${params.toString()}`;
     location.href = url;
   }
@@ -771,7 +772,9 @@ function EmailSlide_() {
             return;
           }
 
-          redirectToApp({ userID: userProfile.result!.id });
+          const zodiac = getZodiacFromState(parsedQuizState);
+
+          redirectToApp({ userID: userProfile.result!.id, question: zodiac.onboardingQuestion });
         }}
       >
         Take me to my astrologer

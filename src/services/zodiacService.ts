@@ -99,6 +99,7 @@ export type ZodiacSignDataType = {
   strengths: string[];
   weaknesses: string[];
   majorWeaknessText: string;
+  onboardingQuestion: string;
 };
 
 export function getZodiacSign(birthDate: string): ZodiacSignDataType {
@@ -119,6 +120,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Impulsive", "Impatient", "Competitive"],
         majorWeaknessText:
           "Your Mars square Mercury makes you prone to impulsive decisions, leading to unintended consequences.",
+        onboardingQuestion:
+          "How can I manage my impulsive nature to make more thoughtful decisions in life?",
       };
     case (month === 4 && date.getDate() >= 20) || (month === 5 && date.getDate() <= 20):
       return {
@@ -133,6 +136,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Stubborn", "Materialistic", "Indulgent"],
         majorWeaknessText:
           "Your Venus opposition Saturn suggests a stubborn streak that can sometimes isolate you from others' perspectives.",
+        onboardingQuestion:
+          "What strategies can I use to be more open to others' ideas and less resistant to change?",
       };
     case (month === 5 && date.getDate() >= 21) || (month === 6 && date.getDate() <= 20):
       return {
@@ -147,6 +152,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Inconsistent", "Indecisive", "Anxious"],
         majorWeaknessText:
           "Your Mercury square Neptune points to a tendency for distraction and inconsistency in your thoughts and actions.",
+        onboardingQuestion:
+          "Is there a way to improve my focus and reduce my tendency towards inconsistency?",
       };
     case (month === 6 && date.getDate() >= 21) || (month === 7 && date.getDate() <= 22):
       return {
@@ -161,6 +168,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Moody", "Clingy", "Overly Sensitive"],
         majorWeaknessText:
           "Your Moon opposite Pluto exposes a vulnerability to mood swings that can strain personal relationships.",
+        onboardingQuestion:
+          "What can I do to stabilize my emotions and reduce the impact of mood swings on my relationships?",
       };
     case (month === 7 && date.getDate() >= 23) || (month === 8 && date.getDate() <= 22):
       return {
@@ -175,6 +184,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Arrogant", "Stubborn", "Self-centered"],
         majorWeaknessText:
           "Your Sun square Uranus identifies a propensity for arrogance, often overshadowing your genuine leadership qualities.",
+        onboardingQuestion:
+          "How can I balance my leadership qualities with humility to avoid coming off as arrogant?",
       };
     case (month === 8 && date.getDate() >= 23) || (month === 9 && date.getDate() <= 22):
       return {
@@ -189,6 +200,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Overly Critical", "Worrying", "Perfectionist"],
         majorWeaknessText:
           "Your Mercury opposition Jupiter reveals a critical nature that can be perceived as overly judgmental by others.",
+        onboardingQuestion:
+          "Can you suggest ways for me to soften my critical approach and be more accepting of others?",
       };
     case (month === 9 && date.getDate() >= 23) || (month === 10 && date.getDate() <= 22):
       return {
@@ -203,6 +216,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Indecisive", "Avoids Confrontation", "Self-pity"],
         majorWeaknessText:
           "Your Venus square Mars can lead to indecisiveness, particularly in situations requiring swift judgment.",
+        onboardingQuestion:
+          "What are some effective methods to help me make decisions more confidently and quickly?",
       };
     case (month === 10 && date.getDate() >= 23) || (month === 11 && date.getDate() <= 21):
       return {
@@ -217,6 +232,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Jealous", "Secretive", "Dominating"],
         majorWeaknessText:
           "Your Pluto opposition Moon highlights a tendency towards manipulative behaviors when you feel threatened or insecure.",
+        onboardingQuestion:
+          "How can I handle feelings of insecurity without resorting to manipulation?",
       };
     case (month === 11 && date.getDate() >= 22) || (month === 12 && date.getDate() <= 21):
       return {
@@ -231,6 +248,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Careless", "Impatient", "Tactless"],
         majorWeaknessText:
           "Your Jupiter square Neptune suggests an overoptimistic outlook, causing you to underestimate real challenges.",
+        onboardingQuestion:
+          "What practices can I adopt to develop a more realistic approach to challenges and goals?",
       };
     case (month === 12 && date.getDate() >= 22) || (month === 1 && date.getDate() <= 19):
       return {
@@ -245,6 +264,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Know-it-all", "Unforgiving", "Condescending"],
         majorWeaknessText:
           "Your Saturn square Mercury may result in a pessimistic attitude, sometimes hindering potential opportunities.",
+        onboardingQuestion:
+          "How can I overcome my pessimistic outlook to see and seize opportunities more effectively?",
       };
     case (month === 1 && date.getDate() >= 20) || (month === 2 && date.getDate() <= 18):
       return {
@@ -259,6 +280,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Unpredictable", "Inflexible", "Detached"],
         majorWeaknessText:
           "Your Uranus opposition Sun can foster a rebellious nature that might alienate you from potential allies.",
+        onboardingQuestion:
+          "What can I do to channel my rebellious energy into positive actions without alienating others?",
       };
     case (month === 2 && date.getDate() >= 19) || (month === 3 && date.getDate() <= 20):
       return {
@@ -273,6 +296,8 @@ export function getZodiacSign(birthDate: string): ZodiacSignDataType {
         weaknesses: ["Fearful", "Overly Trusting", "Sad"],
         majorWeaknessText:
           "Your Neptune square Mars indicates a susceptibility to escapism when faced with reality's harsher aspects.",
+        onboardingQuestion:
+          "In what ways can I confront and handle reality without feeling the need to escape?",
       };
     default:
       throw new Error("Failed to compute Zodiac sign");
