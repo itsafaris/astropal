@@ -1,8 +1,8 @@
-import React, { createElement } from "react";
+import React, { ComponentProps, createElement } from "react";
 import { Box, Flex, Grid, Stack, Text, TextProps } from "@chakra-ui/react";
 import { QuizStateParsed, getZodiacFromState } from "@utils/state";
 
-import { ChartPosition, NatalChart } from "./NatalChart";
+import { NatalChart } from "./NatalChart";
 import { getReadableDate, getReadableTime } from "@utils/dates";
 import { toTitleCase } from "@utils/string";
 
@@ -46,97 +46,15 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
 
       <Divider />
 
-      <Grid gridTemplateColumns="auto 1fr auto" alignItems={"center"} gap={1}>
-        <Flex
-          padding={4}
-          borderRadius="50%"
-          height={"70px"}
-          width={"70px"}
-          backgroundColor="gray.100"
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          {createElement(quizState.yourZodiac.svgComponent, {
-            stroke: "black",
-            fill: "white",
-            strokeWidth: 3,
-          })}
-        </Flex>
+      <ZodiacTitleHeader quizState={quizState} />
 
-        <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1}>
-          <Text fontSize={"3xl"}>{toTitleCase(quizState.yourZodiac.name)}</Text>
-          <Text fontSize={"sm"} textTransform={"uppercase"}>
-            {getReadableDate(quizState.yourBirthDate)}
-            {", "} {getReadableTime(quizState.yourBirthTime)}
-          </Text>
-          <Text fontSize={"sm"}>{quizState.yourBirthLocation.formattedText}</Text>
-        </Stack>
-
-        <Flex
-          padding={4}
-          borderRadius="50%"
-          height={"70px"}
-          width={"70px"}
-          backgroundColor="gray.100"
-          justifyContent={"center"}
-          alignItems={"center"}
-          transform={"rotateY(180deg)"}
-        >
-          {createElement(quizState.yourZodiac.svgComponent, {
-            stroke: "black",
-            fill: "white",
-            strokeWidth: 3,
-          })}
-        </Flex>
-      </Grid>
-
-      <Grid gridTemplateColumns={"1fr 1fr"} gap={2}>
-        <Flex flexDirection={"column"} alignItems={"center"}>
-          <Box>
-            {quizState.horoscope._celestialBodies.all.map((it: any, idx: number) => {
-              if (idx <= 5) {
-                const pos = it.ChartPosition as ChartPosition;
-                const relPos = pos.Ecliptic.ArcDegreesFormatted30;
-                const [degrees] = relPos.split(" ");
-                return (
-                  <Text key={it.key} fontSize={"xs"}>
-                    <Text as="span" fontWeight={"bold"}>
-                      {it.label}
-                    </Text>{" "}
-                    at {degrees} in {it.Sign.label}
-                  </Text>
-                );
-              }
-            })}
-          </Box>
-        </Flex>
-
-        <Flex flexDirection={"column"} alignItems={"center"}>
-          <Box>
-            {quizState.horoscope._celestialBodies.all.map((it: any, idx: number) => {
-              if (idx > 5) {
-                const pos = it.ChartPosition as ChartPosition;
-                const relPos = pos.Ecliptic.ArcDegreesFormatted30;
-                const [degrees] = relPos.split(" ");
-                return (
-                  <Text key={it.key} fontSize={"xs"}>
-                    <Text as="span" fontWeight={"bold"}>
-                      {it.label}
-                    </Text>{" "}
-                    at {degrees} in {it.Sign.label}
-                  </Text>
-                );
-              }
-            })}
-          </Box>
-        </Flex>
-      </Grid>
+      <Grid gridTemplateColumns={"1fr 1fr"} gap={2}></Grid>
 
       <Divider />
 
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your personality</Title>
-        <Text>{quizState.yourZodiac.personality}</Text>
+        <Text>{zodiac.personality}</Text>
       </Stack>
 
       <Divider />
@@ -144,7 +62,7 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your strengths</Title>
         <Stack spacing={0} alignItems={"center"}>
-          {quizState.yourZodiac.strengths.map((it) => {
+          {zodiac.strengths.map((it) => {
             return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
           })}
         </Stack>
@@ -155,7 +73,7 @@ export function AstrologicalProfile({ quizState }: { quizState?: QuizStateParsed
       <Stack spacing={5}>
         <Title fontSize={"xl"}>Your weaknesses</Title>
         <Stack spacing={0} alignItems={"center"}>
-          {quizState.yourZodiac.weaknesses.map((it) => {
+          {zodiac.weaknesses.map((it) => {
             return <ListItem key={it}>{toTitleCase(it)}</ListItem>;
           })}
         </Stack>
@@ -187,5 +105,56 @@ function ListItem({ children, ...rest }: TextProps) {
       <Box height={"4px"} width={"4px"} borderRadius={"50%"} backgroundColor={"black"} />
       <Text {...rest}>{children}</Text>
     </Flex>
+  );
+}
+
+export function ZodiacTitleHeader({
+  quizState,
+  ...rest
+}: { quizState: QuizStateParsed } & ComponentProps<typeof Grid>) {
+  const zodiac = getZodiacFromState(quizState);
+
+  return (
+    <Grid gridTemplateColumns="auto 1fr auto" alignItems={"center"} gap={1} {...rest}>
+      <Flex
+        padding={4}
+        borderRadius="50%"
+        height={"70px"}
+        width={"70px"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        {createElement(zodiac.svgComponent, {
+          stroke: "black",
+          fill: "white",
+          strokeWidth: 3,
+        })}
+      </Flex>
+
+      <Stack textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1}>
+        <Text fontSize={"2xl"}>{toTitleCase(zodiac.name)}</Text>
+        <Text fontSize={"sm"} textTransform={"uppercase"}>
+          {getReadableDate(quizState.yourBirthDate)}
+          {", "} {getReadableTime(quizState.yourBirthTime)}
+        </Text>
+        <Text fontSize={"sm"}>{quizState.yourBirthLocation.formattedText}</Text>
+      </Stack>
+
+      <Flex
+        padding={4}
+        borderRadius="50%"
+        height={"70px"}
+        width={"70px"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        transform={"rotateY(180deg)"}
+      >
+        {createElement(zodiac.svgComponent, {
+          stroke: "black",
+          fill: "white",
+          strokeWidth: 3,
+        })}
+      </Flex>
+    </Grid>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import {
   Callout,
   DateValue,
+  QuizQuestionsState,
   Selector,
   Slide,
   useQuiz,
@@ -24,6 +25,7 @@ import {
   TagLabel,
   Progress,
   Grid,
+  Divider,
 } from "@chakra-ui/react";
 import { Headline, InvertedHighlight } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
@@ -36,12 +38,13 @@ import {
   updateUserProfile,
 } from "@utils/coreApi";
 import { useEffect, useState } from "react";
-import { toTitleCase } from "@utils/string";
-import { Time, getReadableDate, getReadableTime } from "@utils/dates";
+
+import { Time } from "@utils/dates";
 import { ZodiacSignDataType } from "@services/zodiacService";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import posthog from "posthog-js";
 import { trackPixel } from "@utils/tracking";
+import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 
 export function YourGenderSlide() {
   return (
@@ -280,6 +283,7 @@ function NatalChartSlide_() {
         birthDate={p.yourBirthDate}
         birthTime={p.yourBirthTime}
         birthLocFormatted={p.yourBirthLocation.formattedText}
+        quizState={quizState}
       />
 
       <NextButton
@@ -299,52 +303,55 @@ function PersonalityReading({
   birthDate,
   birthTime,
   birthLocFormatted,
+  quizState,
 }: {
   state: ZodiacSignDataType;
   birthDate: DateValue;
   birthTime: Time;
   birthLocFormatted: string;
+  quizState: QuizQuestionsState;
 }) {
+  const p = getTypedQuizState(quizState);
   return (
-    <Card bg="bg.50" p={4} boxShadow={`0 0 100px 20px #ff752b, 0 0 5px 5px #cf6d093b`}>
-      <Stack mb={4} textAlign={"center"} color="black" fontWeight={"bold"} lineHeight={1}>
-        <Text fontSize={"3xl"}>{toTitleCase(state.name)}</Text>
-        <Text fontSize={"sm"} textTransform={"uppercase"}>
-          {getReadableDate(birthDate)}
-          {", "} {getReadableTime(birthTime)}
-        </Text>
-        <Text fontSize={"sm"}>{birthLocFormatted}</Text>
-      </Stack>
-
-      <StaticImage
-        alt="A graphical drawing of a personalised natal chart"
-        src="../../../images/cosmic_identity.png"
-      />
+    <Card
+      bg="bg.50"
+      px={4}
+      py={4}
+      boxShadow={`0 0 100px 20px #7bb4d859`}
+      border="1px solid"
+      borderColor={"gray.500"}
+    >
+      <ZodiacTitleHeader quizState={p} mb={4} />
 
       <Stack my={4}>
-        <Text fontWeight={"bold"}>Your Core Personality</Text>
-        <Flex fontSize={"sm"}>{state.personality}</Flex>
-        <Text fontWeight={"bold"}>Strengths</Text>
-        <Flex gap={2} flexWrap={"wrap"}>
-          {state.strengths.map((str) => {
-            return (
-              <Tag size={"sm"} key={str} variant="solid" colorScheme="green">
-                <TagLeftIcon boxSize="12px" as={AddIcon} />
-                <TagLabel>{str}</TagLabel>
-              </Tag>
-            );
-          })}
-        </Flex>
-        <Text fontWeight={"bold"}>Weaknesses</Text>
-        <Flex gap={2} flexWrap={"wrap"}>
-          {state.weaknesses.map((str) => {
-            return (
-              <Tag size={"sm"} key={str} variant="solid" colorScheme="red">
-                <TagLeftIcon boxSize="12px" as={MinusIcon} />
-                <TagLabel>{str}</TagLabel>
-              </Tag>
-            );
-          })}
+        <Grid templateColumns={"1fr auto 1fr"} mb={4}>
+          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"}>
+            <Text fontWeight={"semibold"}>Your strengths</Text>
+            {state.strengths.map((str, idx) => {
+              return (
+                <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="green">
+                  <TagLeftIcon boxSize="12px" as={AddIcon} />
+                  <TagLabel>{str}</TagLabel>
+                </Tag>
+              );
+            })}
+          </Flex>
+          <Divider orientation="vertical" mx={3} color={"black"} borderColor={"black"} />
+          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"}>
+            <Text fontWeight={"semibold"}>Your weaknesses</Text>
+            {state.weaknesses.map((str, idx) => {
+              return (
+                <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="red">
+                  <TagLeftIcon boxSize="12px" as={MinusIcon} />
+                  <TagLabel>{str}</TagLabel>
+                </Tag>
+              );
+            })}
+          </Flex>
+        </Grid>
+
+        <Flex fontSize={"md"} fontWeight={"normal"}>
+          {state.personality}
         </Flex>
       </Stack>
     </Card>
