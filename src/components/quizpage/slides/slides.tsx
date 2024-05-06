@@ -769,7 +769,8 @@ function EmailSlide_() {
           redirectToApp({
             userID: userProfile.result!.id,
             // question: zodiac.onboardingQuestion
-            question: "Which single and most powerful talent is indicated by my birth chart?",
+            question: "What is the most significant natural gift highlighted in my birth chart?",
+            // question: "Which single and most powerful talent is indicated by my birth chart?",
           });
         }}
       >
