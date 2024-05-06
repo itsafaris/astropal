@@ -728,8 +728,8 @@ function EmailSlide_() {
       <Selector mt={4} mb={2} />
 
       <Caption mt={0} mb={7} fontSize={"xs"}>
-        🔒 We respect your privacy and are committed to protecting your personal data. We will only
-        send you personalized astrological insights and updates to enlighten your journey.
+        🔒 We respect your privacy and protect your personal data. We will use your email to
+        identify you and send personalized astrological insights.
       </Caption>
 
       {requestStatus.error && <Text>{String(requestStatus.error)}</Text>}
