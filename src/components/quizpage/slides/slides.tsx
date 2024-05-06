@@ -764,9 +764,13 @@ function EmailSlide_() {
             return;
           }
 
-          const zodiac = getZodiacFromState(parsedQuizState);
+          // const zodiac = getZodiacFromState(parsedQuizState);
 
-          redirectToApp({ userID: userProfile.result!.id, question: zodiac.onboardingQuestion });
+          redirectToApp({
+            userID: userProfile.result!.id,
+            // question: zodiac.onboardingQuestion
+            question: "Which single and most powerful talent is indicated by my birth chart?",
+          });
         }}
       >
         Go to your astrologer <Icon as={BsChevronRight} ml={4} fontSize={"md"} />
