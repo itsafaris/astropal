@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Callout,
-  DateValue,
   QuizQuestionsState,
   Selector,
   Slide,
@@ -30,7 +29,6 @@ import {
 } from "@chakra-ui/react";
 import { Headline, InvertedHighlight } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
-import { PiArrowBendRightDown } from "react-icons/pi";
 import { useUserProfileState } from "src/appState";
 import { QuizStateParsed, getTypedQuizState, getZodiacFromState } from "@utils/state";
 import {
@@ -46,6 +44,7 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import posthog from "posthog-js";
 import { trackPixel } from "@utils/tracking";
 import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
+import { BsChevronRight } from "react-icons/bs";
 
 export function YourGenderSlide() {
   return (
@@ -438,12 +437,9 @@ export function Loading_SavingAstrologerPreferences() {
       type="loading"
       duration={3}
       onLoadingCompleted={() => setShowInput(true)}
+      statusText={"creating..."}
     >
-      <SlideHeading>Adjusting your astrologer to your preferences.</SlideHeading>
-
-      <Callout title="💡 Hint">
-        You can always adjust these settings later on in your profile settings
-      </Callout>
+      <SlideHeading>Creating your personal astrologer</SlideHeading>
 
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>
@@ -642,67 +638,45 @@ export function QuoteSlide() {
   );
 }
 
-export function WeaknessSlide() {
+export function UniqueGiftSlideUncovered() {
   const { quizState } = useQuizState();
   const q = getTypedQuizState(quizState);
-  const zodiacSign = getZodiacFromState(q);
+
   return (
-    <Slide id="weakness" type="filler">
-      <Text fontSize={"md"} textAlign={"center"} color="gray.700">
-        Major Weakness Identified
-      </Text>
-      <Icon as={PiArrowBendRightDown} fontSize={"2xl"} mx="auto" mt={0} mb={8} color="gray.500" />
-      <Box position={"relative"}>
+    <Slide id="unique-gift-uncovered" type="filler">
+      <SlideHeading>
+        Astrologer has identified numerous natural hidden gifts and talents in your profile 🫶
+      </SlideHeading>
+
+      <Box bg="white.400" borderRadius={"xl"} p={2} boxShadow={"xl"} mb={4}>
         <Box
-          position={"absolute"}
-          border={"1px solid"}
-          borderColor={"red.300"}
-          borderRadius={"100%"}
-          height={"130%"}
-          top={"-20%"}
-          left={"0%"}
-          width={"105%"}
-        />
-        <Box
-          position={"absolute"}
-          border={"1px solid"}
-          borderColor={"red.200"}
-          borderRadius={"100%"}
-          height={"120%"}
-          top={"-10%"}
-          left={"-2%"}
-          width={"105%"}
-        />
-        <Box
-          position={"absolute"}
-          border={"1px solid"}
-          borderColor={"red.100"}
-          borderRadius={"100%"}
-          height={"120%"}
-          top={"-15%"}
-          left={"-4%"}
-          width={"105%"}
-        />
-        <Text
-          fontSize={"lg"}
-          fontWeight={"bold"}
-          p={6}
-          borderRadius={"md"}
-          color="black"
-          textAlign={"center"}
+          bg="gray.50"
+          boxShadow={"inner"}
+          p={2}
+          border="1px solid"
+          borderColor={"white"}
+          borderRadius={"xl"}
         >
-          {zodiacSign.majorWeaknessText}
-        </Text>
+          <Flex flexDirection={"row"} alignItems={"center"} mr="auto" justifyContent={"center"}>
+            <Text fontSize={32}>💛</Text>
+            <Text
+              fontSize={82}
+              fontWeight={"bold"}
+              textAlign={"center"}
+              color="orange.500"
+              mx="16px"
+            >
+              7
+            </Text>
+            <Text fontSize={32}>💛</Text>
+          </Flex>
+          <Text textAlign={"center"} fontWeight={"semibold"} mt={0} mb={8}>
+            Natural Gifts
+          </Text>
+        </Box>
       </Box>
 
-      <Text textAlign={"center"} mt={12}>
-        Let's see what your astrologer
-        <br /> can tell about it
-      </Text>
-      <Text fontSize={"3xl"} textAlign={"center"}>
-        👁️
-      </Text>
-      <NextButton mt={4}>Ask astrologer</NextButton>
+      <NextButton mt={4}>Explore your gifts</NextButton>
     </Slide>
   );
 }
@@ -795,7 +769,7 @@ function EmailSlide_() {
           redirectToApp({ userID: userProfile.result!.id, question: zodiac.onboardingQuestion });
         }}
       >
-        Take me to my astrologer
+        Go to your astrologer <Icon as={BsChevronRight} ml={4} fontSize={"md"} />
       </NextButton>
     </>
   );

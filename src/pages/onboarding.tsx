@@ -8,20 +8,18 @@ import { clearQuizState, saveQuizState } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 import {
   AreasOfInterestSlide,
-  AstrologicalKnowledgeLevelSlide,
   EmailSlide,
   Loading_SavingAstrologerPreferences,
   MajorLifeEventsSlide,
   Loading_NatalChart,
   NatalChartSlide,
-  QuoteSlide,
   RelationshipStatusSlide,
   YourBirthDateSlide,
   YourBirthPlaceSlide,
   YourBirthTimeSlide,
   YourGenderSlide,
   YourNameSlide,
-  WeaknessSlide,
+  UniqueGiftSlideUncovered,
 } from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
 
@@ -99,7 +97,7 @@ export default function OnboardingQuiz() {
           <MajorLifeEventsSlide />
           <YourNameSlide />
           <Loading_SavingAstrologerPreferences />
-          <WeaknessSlide />
+          <UniqueGiftSlideUncovered />
           {/* <QuoteSlide /> */}
           <EmailSlide />
         </Segment>
