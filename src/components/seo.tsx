@@ -45,6 +45,8 @@ export const SEO = ({ title, image, description, pathname, children }: SEOProps)
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
       {/* <meta name="twitter:creator" content={seo.twitterUsername} /> */}
+
+      <meta name="facebook-domain-verification" content="f77cds66xztr7hc40tw7fkrxza3a9y" />
       {children}
     </>
   );
