@@ -129,6 +129,7 @@ export type SlidePropsLocation = {
 
 export type SlidePropsLoading = {
   type: "loading";
+  variant?: "circle" | "linear";
   /** 0 - 100 */
   from?: number;
   /** 0 - 100 */

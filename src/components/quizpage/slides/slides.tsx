@@ -21,11 +21,12 @@ import {
   Stack,
   Tag,
   TagLeftIcon,
-  TagLabel,
   Progress,
   Grid,
   Divider,
   Icon,
+  keyframes,
+  ScaleFade,
 } from "@chakra-ui/react";
 import { Headline, InvertedHighlight } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
@@ -45,7 +46,13 @@ import posthog from "posthog-js";
 import { trackPixel } from "@utils/tracking";
 import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 import { BsChevronRight } from "react-icons/bs";
-import { astrologers } from "@utils/astrologers";
+import { astrologers, getAstrologerOrDefault } from "@utils/astrologers";
+import { NatalChart } from "@components/NatalChart";
+
+const PULSE_ANIMATION = keyframes`
+  0% { box-shadow: 0 0 0 0px #e65400; }
+  100% { box-shadow: 0 0 0 20px rgba(0, 0, 0, 0); }; }
+`;
 
 export function YourGenderSlide() {
   return (
@@ -439,20 +446,54 @@ function Loading_NatalChart_() {
 
 export function Loading_SavingAstrologerPreferences() {
   const [showInput, setShowInput] = useState<boolean>(false);
+  const { quizState } = useQuizState();
+  const p = getTypedQuizState(quizState);
+  const astrologer = getAstrologerOrDefault(p.astrologerID);
 
   return (
     <Slide
       id="saving-preferences"
       type="loading"
       duration={3}
+      variant="linear"
       onLoadingCompleted={() => setShowInput(true)}
-      statusText={"creating..."}
+      statusText={showInput ? "\u200b" : "Learning your chart..."}
+      completedText={`${astrologer.name} has learned your chart`}
     >
-      <SlideHeading>Creating your astrologer</SlideHeading>
+      <SlideHeading textAlign={"center"}>Creating your astrologer</SlideHeading>
       <Flex flexDirection={"column"} alignItems={"center"}>
-        <Box my={5}>
-          <Selector />
+        <Box position={"relative"}>
+          <Box
+            width={160}
+            height={160}
+            boxShadow={showInput ? "0 0 0 6px #04e487, 0 0 10px 10px #04e4879c" : undefined}
+            borderRadius={"full"}
+            transition={"200ms ease-in"}
+            transitionDelay={"200ms"}
+          >
+            {astrologer.imgComponent}
+          </Box>
+          <ScaleFade in={!showInput} transition={{ exit: { duration: 0.2 } }}>
+            <Box
+              bg="gray.200"
+              borderRadius={"full"}
+              animation={`${PULSE_ANIMATION} 1.5s ease-in-out  infinite`}
+              position={"absolute"}
+              bottom={"-100px"}
+              right={"-100px"}
+              transformOrigin={"center"}
+              transform={"scale(0.6)"}
+            >
+              <NatalChart
+                date={p.yourBirthDate}
+                time={p.yourBirthTime}
+                location={p.yourBirthLocation}
+              />
+            </Box>
+          </ScaleFade>
         </Box>
+
+        <Selector mt={20} />
 
         {showInput && <NextButton mb={5}>Continue</NextButton>}
       </Flex>

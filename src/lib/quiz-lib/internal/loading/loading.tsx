@@ -41,6 +41,7 @@ export function LoadingSlide(props: LoadingSlideComponentProps) {
 type SpinnerWihtTextProps = {
   from?: SlidePropsLoading["from"];
   to?: SlidePropsLoading["to"];
+  variant?: SlidePropsLoading["variant"];
   duration?: SlidePropsLoading["duration"];
   completedText?: SlidePropsLoading["completedText"];
   statusText?: SlidePropsLoading["statusText"];
@@ -53,6 +54,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
     from = 0,
     to = 100,
     duration = 5,
+    variant = "circle",
     completedText,
     statusText,
     onComplete,
@@ -119,9 +121,22 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
     return typeof _statusText === "string" ? _statusText : _statusText({ progress: loadingValue });
   }
 
+  if (variant === "linear") {
+    return (
+      <Flex flexDirection={"column"} alignItems={"center"}>
+        <Text textAlign={"center"} color="brand.900" fontSize={"md"} fontWeight={"semibold"}>
+          {getStatusText()}
+        </Text>
+        <Text fontWeight={"semibold"} color="brand.900" fontSize={"lg"}>
+          {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
+        </Text>
+      </Flex>
+    );
+  }
+
   return (
     <Flex position={"relative"} boxShadow={BOX_SHADOW_CSS} borderRadius={"50%"}>
-      <SpinnerCircleSvg value={loadingValue} />
+      {/* <SpinnerCircleSvg value={loadingValue} /> */}
 
       <Flex
         display={"flex"}

@@ -49,6 +49,6 @@ export const astrologers = [
 
 export type AstrologerID = (typeof astrologers)[number]["id"];
 
-export function getAstrologerOrDefault(id: AstrologerID) {
+export function getAstrologerOrDefault(id?: AstrologerID) {
   return astrologers.find((it) => it.id === id) ?? astrologers[0];
 }

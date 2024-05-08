@@ -87,12 +87,12 @@ export function NatalChart(props: NatalChartProps) {
         "white",
         "white",
       ],
-      LINE_COLOR: theme.colors.bg[300],
-      CIRCLE_COLOR: theme.colors.bg[300],
-      SIGNS_COLOR: theme.colors.brand[400], // zodiakai
-      POINTS_COLOR: theme.colors.brand[200], // planetos
-      CUSPS_FONT_COLOR: theme.colors.bg[400],
-      SYMBOL_AXIS_FONT_COLOR: theme.colors.brand[400], // As, Ds, Mc, Ic
+      LINE_COLOR: "black" ?? theme.colors.bg[300],
+      CIRCLE_COLOR: "black" ?? theme.colors.bg[300],
+      SIGNS_COLOR: "black" ?? theme.colors.brand[400], // zodiakai
+      POINTS_COLOR: "black" ?? theme.colors.brand[200], // planetos
+      CUSPS_FONT_COLOR: "black" ?? theme.colors.bg[400],
+      SYMBOL_AXIS_FONT_COLOR: "black" ?? theme.colors.brand[400], // As, Ds, Mc, Ic
       COLOR_BACKGROUND: "white" ?? "rgba(0,0,0,0.2)",
       CUSPS_STROKE: 1,
     });

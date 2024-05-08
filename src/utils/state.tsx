@@ -114,6 +114,8 @@ export function getTypedQuizState(state: QuizQuestionsState) {
 
   const majorLifeEvents = (state["major-life-events"] as MultiState)?.value;
 
+  const astrologerID = (state["choose-astrologer"] as SingleState)?.value?.value;
+
   // const astrologicalKnowledgeLevel =
   //   (state["astro-knowledge-level"] as SingleState)?.value?.value ?? "";
 
@@ -130,6 +132,7 @@ export function getTypedQuizState(state: QuizQuestionsState) {
     // astrologicalKnowledgeLevel,
     majorLifeEvents,
     relationshipStatus,
+    astrologerID,
     email,
   };
 }
