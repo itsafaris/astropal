@@ -27,6 +27,7 @@ import {
   Icon,
   keyframes,
   ScaleFade,
+  Fade,
 } from "@chakra-ui/react";
 import { Headline, InvertedHighlight } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
@@ -445,7 +446,7 @@ function Loading_NatalChart_() {
 }
 
 export function Loading_SavingAstrologerPreferences() {
-  const [showInput, setShowInput] = useState<boolean>(false);
+  const [loadingFinished, setLoadingFinished] = useState<boolean>(false);
   const { quizState } = useQuizState();
   const p = getTypedQuizState(quizState);
   const astrologer = getAstrologerOrDefault(p.astrologerID);
@@ -454,11 +455,11 @@ export function Loading_SavingAstrologerPreferences() {
     <Slide
       id="saving-preferences"
       type="loading"
-      duration={3}
+      duration={5}
       variant="linear"
-      onLoadingCompleted={() => setShowInput(true)}
-      statusText={showInput ? "\u200b" : "Learning your chart..."}
-      completedText={`${astrologer.name} has learned your chart`}
+      onLoadingCompleted={() => setLoadingFinished(true)}
+      statusText={loadingFinished ? "\u200b" : "Learning your chart..."}
+      completedText={""}
     >
       <SlideHeading textAlign={"center"}>Creating your astrologer</SlideHeading>
       <Flex flexDirection={"column"} alignItems={"center"}>
@@ -466,14 +467,14 @@ export function Loading_SavingAstrologerPreferences() {
           <Box
             width={160}
             height={160}
-            boxShadow={showInput ? "0 0 0 6px #04e487, 0 0 10px 10px #04e4879c" : undefined}
+            boxShadow={loadingFinished ? "0 0 0 6px #04e487, 0 0 10px 10px #04e4879c" : undefined}
             borderRadius={"full"}
             transition={"200ms ease-in"}
-            transitionDelay={"200ms"}
+            transitionDelay={"800ms"}
           >
             {astrologer.imgComponent}
           </Box>
-          <ScaleFade in={!showInput} transition={{ exit: { duration: 0.2 } }}>
+          <ScaleFade in={!loadingFinished} transition={{ exit: { duration: 0.4, delay: 0.4 } }}>
             <Box
               bg="gray.200"
               borderRadius={"full"}
@@ -495,7 +496,14 @@ export function Loading_SavingAstrologerPreferences() {
 
         <Selector mt={20} />
 
-        {showInput && <NextButton mb={5}>Continue</NextButton>}
+        <Fade in={loadingFinished} transition={{ enter: { delay: 0.8, duration: 0.2 } }}>
+          <Stack mt={-12}>
+            <Text mx="auto" textAlign={"center"} fontSize={"lg"} fontWeight={"bold"} mb={4}>
+              {astrologer.name} has learned your chart
+            </Text>
+            <NextButton mb={5}>Continue</NextButton>
+          </Stack>
+        </Fade>
       </Flex>
     </Slide>
   );
