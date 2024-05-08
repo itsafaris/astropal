@@ -20,6 +20,7 @@ import {
   YourGenderSlide,
   YourNameSlide,
   UniqueGiftSlideUncovered,
+  ChooseAstrologerSlide,
 } from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
 
@@ -96,6 +97,7 @@ export default function OnboardingQuiz() {
           <RelationshipStatusSlide />
           <MajorLifeEventsSlide />
           <YourNameSlide />
+          <ChooseAstrologerSlide />
           <Loading_SavingAstrologerPreferences />
           <UniqueGiftSlideUncovered />
           {/* <QuoteSlide /> */}

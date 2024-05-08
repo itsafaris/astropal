@@ -102,7 +102,7 @@ export function OptionWithPicture({
       {...rest}
     >
       <Box maxHeight={imgHeight}>{imgComponent}</Box>
-      {!hideText && <Text>{text}</Text>}
+      {!hideText && <Text fontWeight={"bold"}>{text}</Text>}
     </BaseOption>
   );
 }

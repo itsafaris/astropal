@@ -45,6 +45,7 @@ import posthog from "posthog-js";
 import { trackPixel } from "@utils/tracking";
 import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 import { BsChevronRight } from "react-icons/bs";
+import { astrologers } from "@utils/astrologers";
 
 export function YourGenderSlide() {
   return (
@@ -439,8 +440,7 @@ export function Loading_SavingAstrologerPreferences() {
       onLoadingCompleted={() => setShowInput(true)}
       statusText={"creating..."}
     >
-      <SlideHeading>Creating your personal astrologer</SlideHeading>
-
+      <SlideHeading>Creating your astrologer</SlideHeading>
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Box my={5}>
           <Selector />
@@ -602,6 +602,29 @@ function NameSlideContent() {
         Continue
       </NextButton>
     </>
+  );
+}
+
+export function ChooseAstrologerSlide() {
+  return (
+    <Slide
+      id="choose-astrologer"
+      type="single"
+      variant="picture"
+      size="medium"
+      options={astrologers.map((a) => ({
+        imgComponent: a.imgComponent,
+        value: a.id,
+        text: a.name,
+      }))}
+    >
+      <SlideHeading>Choose your AI astrologer</SlideHeading>
+      <Callout>
+        💬 Each Astrologer offers a unique communication style, but they are all of the same level
+        of expertise
+      </Callout>
+      <Selector />
+    </Slide>
   );
 }
 
