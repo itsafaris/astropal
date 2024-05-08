@@ -62,6 +62,7 @@ export async function updateUserProfile({
       areas_of_interest: quizState.areasOfInterest?.map((it) => it.value),
       major_life_events: quizState.majorLifeEvents?.map((it) => it.value),
       relationship_status: quizState.relationshipStatus,
+      astrologer_persona_id: quizState.astrologerID,
     }),
   });
 

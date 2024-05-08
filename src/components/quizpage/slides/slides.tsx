@@ -611,20 +611,6 @@ export function YourNameSlide() {
 function NameSlideContent() {
   const [userProfile] = useUserProfileState();
   const { submitQuestion } = useQuiz();
-  const { quizState } = useQuizState();
-
-  const p = getTypedQuizState(quizState);
-
-  function updateUserProf() {
-    if (!userProfile.result) {
-      console.error("User profile has not been created");
-      return;
-    }
-
-    void updateUserProfile({ userID: userProfile.result.id, quizState: p }).catch((err) => {
-      console.error(err);
-    });
-  }
 
   return (
     <>
@@ -642,10 +628,7 @@ function NameSlideContent() {
         isLoading={userProfile.isLoading}
         isDisabled={userProfile.error}
         onClick={() => {
-          const r = submitQuestion();
-          if (r) {
-            updateUserProf();
-          }
+          submitQuestion();
         }}
       >
         Continue
@@ -827,6 +810,11 @@ function EmailSlide_() {
 
           setRequestStatus({ isLoading: true });
           try {
+            await updateUserProfile({
+              userID: userProfile.result!.id,
+              quizState: parsedQuizState,
+            });
+
             await convertUserFromAnonymous({
               userID: userProfile.result!.id,
               email: parsedQuizState.email,
