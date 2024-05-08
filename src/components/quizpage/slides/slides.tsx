@@ -314,25 +314,33 @@ function PersonalityReading({
 
       <Stack my={4}>
         <Grid templateColumns={"1fr auto 1fr"} mb={4}>
-          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"}>
-            <Text fontWeight={"semibold"}>Your strengths</Text>
+          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"} alignItems={"center"}>
+            <Text textAlign={"center"} fontWeight={"semibold"}>
+              Your strengths
+            </Text>
             {state.strengths.map((str, idx) => {
               return (
                 <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="green">
                   <TagLeftIcon boxSize="12px" as={AddIcon} />
-                  <TagLabel>{str}</TagLabel>
+                  <Text textAlign={"center"} py={1}>
+                    {str}
+                  </Text>
                 </Tag>
               );
             })}
           </Flex>
           <Divider orientation="vertical" mx={3} color={"black"} borderColor={"black"} />
-          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"}>
-            <Text fontWeight={"semibold"}>Your weaknesses</Text>
+          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"} alignItems={"center"}>
+            <Text textAlign={"center"} fontWeight={"semibold"}>
+              Your weaknesses
+            </Text>
             {state.weaknesses.map((str, idx) => {
               return (
                 <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="red">
                   <TagLeftIcon boxSize="12px" as={MinusIcon} />
-                  <TagLabel>{str}</TagLabel>
+                  <Text textAlign={"center"} py={1}>
+                    {str}
+                  </Text>
                 </Tag>
               );
             })}
@@ -728,7 +736,7 @@ function EmailSlide_() {
     const params = new URLSearchParams();
     params.append("userID", input.userID);
     params.append("onboardingQuestion", input.question);
-    const url = `${process.env.GATSBY_WEBAPP_URL}/onboarding?${params.toString()}`;
+    const url = `${process.env.GATSBY_WEBAPP_URL}/intro?${params.toString()}`;
     location.href = url;
   }
 
