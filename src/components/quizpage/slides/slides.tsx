@@ -713,7 +713,7 @@ function EmailSlide_() {
     const params = new URLSearchParams();
     params.append("userID", input.userID);
     params.append("onboardingQuestion", input.question);
-    const url = `${process.env.GATSBY_WEBAPP_URL}/onboarding?${params.toString()}`;
+    const url = `${process.env.GATSBY_WEBAPP_URL}/intro?${params.toString()}`;
     location.href = url;
   }
 
