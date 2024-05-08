@@ -713,11 +713,12 @@ export function QuoteSlide() {
 export function UniqueGiftSlideUncovered() {
   const { quizState } = useQuizState();
   const q = getTypedQuizState(quizState);
+  const astrologer = getAstrologerOrDefault(q.astrologerID);
 
   return (
     <Slide id="unique-gift-uncovered" type="filler">
       <SlideHeading>
-        Astrologer has identified numerous natural hidden gifts and talents in your profile 🫶
+        {astrologer.name} has identified numerous natural hidden gifts and talents in your profile 🫶
       </SlideHeading>
 
       <Box bg="white.400" borderRadius={"xl"} p={2} boxShadow={"xl"} mb={4}>
