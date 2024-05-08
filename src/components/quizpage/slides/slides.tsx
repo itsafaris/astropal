@@ -285,7 +285,7 @@ function NatalChartSlide_() {
 
   return (
     <Flex flexDirection={"column"} position={"relative"} width={"full"}>
-      <SlideHeading>Here's a sneak peek into your cosmic identity</SlideHeading>
+      <SlideHeading>Here's a sneak peek into your natal chart</SlideHeading>
 
       <PersonalityReading state={zodiac} quizState={quizState} />
 
@@ -319,6 +319,8 @@ function PersonalityReading({
       borderColor={"gray.500"}
     >
       <ZodiacTitleHeader quizState={p} mb={4} />
+
+      <NatalChart date={p.yourBirthDate} time={p.yourBirthTime} location={p.yourBirthLocation} />
 
       <Stack my={4}>
         <Grid templateColumns={"1fr auto 1fr"} mb={4}>
@@ -399,12 +401,8 @@ function Loading_NatalChart_() {
       return "Acquiring natal data";
     }
 
-    if (loadedValue <= 60) {
-      return "Calculating your chart";
-    }
-
     if (loadedValue < 100) {
-      return "Creating cosmic identity";
+      return "Calculating your chart";
     }
 
     if (loadedValue === 100) {
@@ -414,8 +412,8 @@ function Loading_NatalChart_() {
 
   return (
     <>
-      <SlideHeading>Hold on while we calculate your cosmic identity</SlideHeading>
-      <Callout title="What's a cosmic identity?">
+      <SlideHeading>Hold on while we calculate your natal chart</SlideHeading>
+      <Callout title="What's a natal chart?">
         It's a unique astrological <Span whiteSpace={"nowrap"}>🌌 map</Span> that outlines the
         positions of the <Span whiteSpace={"nowrap"}>🪐 planets</Span> and{" "}
         <Span whiteSpace={"nowrap"}>⭐ stars</Span> at the exact moment and location of your birth,
@@ -437,7 +435,7 @@ function Loading_NatalChart_() {
         fontSize={"sm"}
         mt={2}
       >
-        {loadedValue === 100 ? "Cosmic identity is ready" : `${loadedValue} / 100`}
+        {loadedValue === 100 ? "Natal chart is ready" : `${loadedValue} / 100`}
       </Text>
 
       {loadedValue === 100 && <NextButton my={8}>Continue</NextButton>}
