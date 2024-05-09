@@ -23,6 +23,7 @@ import {
   ChooseAstrologerSlide,
 } from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
+import posthog from "posthog-js";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -76,6 +77,7 @@ export default function OnboardingQuiz() {
         if (state.id === "your-gender") {
           clearQuizState();
           setUserProfile({ result: undefined, error: undefined, isLoading: false });
+          posthog.reset();
         }
       }}
     >

@@ -58,6 +58,7 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
 
   posthog.register({
     frontend_version: feVersion,
+    frontend_app: "gatsby-marketing-webapp",
   });
 
   // Do not track in dev mode
