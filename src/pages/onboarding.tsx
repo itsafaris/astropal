@@ -71,6 +71,7 @@ export default function OnboardingQuiz() {
           theme_focus: parsedState.areasOfInterest?.map((a) => a.value),
           dedication_time_per_day: parsedState.dedicationTime,
           answer_longevity: parsedState.answerLongevity,
+          email: parsedState.email,
         });
 
         // reset state
