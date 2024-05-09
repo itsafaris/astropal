@@ -24,6 +24,17 @@ export const astrologers = [
     ),
   },
   {
+    id: "vega",
+    name: "Vega",
+    imgComponent: (
+      <StaticImage
+        alt="AI astrologer avatar"
+        src="../images/avatars/avatar-5.jpg"
+        style={{ borderRadius: "100%" }}
+      />
+    ),
+  },
+  {
     id: "sophia",
     name: "Sophia",
     imgComponent: (
