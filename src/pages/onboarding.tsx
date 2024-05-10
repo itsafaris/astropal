@@ -1,7 +1,7 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { isProdMode } from "@utils/isProdMode";
-import { setPersonProperties, trackEvent } from "@utils/tracking";
+import { trackEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearQuizState, saveQuizState } from "@utils/localStorage";
@@ -21,6 +21,7 @@ import {
   YourNameSlide,
   UniqueGiftSlideUncovered,
   ChooseAstrologerSlide,
+  TestimonialSlide,
 } from "@components/quizpage/slides";
 import { useUserProfileState } from "src/appState";
 import posthog from "posthog-js";
@@ -95,11 +96,12 @@ export default function OnboardingQuiz() {
           <AreasOfInterestSlide />
           <RelationshipStatusSlide />
           <MajorLifeEventsSlide />
+
           <YourNameSlide />
           <ChooseAstrologerSlide />
           <Loading_SavingAstrologerPreferences />
           <UniqueGiftSlideUncovered />
-          {/* <QuoteSlide /> */}
+          <TestimonialSlide />
           <EmailSlide />
         </Segment>
       </QuizUI>
