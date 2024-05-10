@@ -7,8 +7,8 @@ export function TestimonialSlide() {
   return (
     <Slide id="quote" type="filler">
       <SlideHeading>
-        Users love personalized AI astrologers ❤️. A rapid increase in clarity comes within the
-        first 2 weeks
+        Users love their personalized AI astrologers ❤️. A rapid increase in clarity comes within
+        the first 2 weeks
       </SlideHeading>
 
       <Stack spacing={10}>
