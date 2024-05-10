@@ -79,7 +79,7 @@ export function getZodiacFromState(state: QuizStateParsed) {
 /** IMPORTANT: this function should have no derived state, only the state extracted directly from the quiz state */
 export function getTypedQuizState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase() ?? "male";
-  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "Anonymous");
+  const fullname = toTitleCase((state["name-slide"] as ShortTextState)?.value ?? "");
 
   const email = (state["your-email"] as ShortTextState)?.value ?? "";
 

@@ -608,7 +608,7 @@ export function RelationshipStatusSlide() {
 
 export function YourNameSlide() {
   return (
-    <Slide id="name-slide" type="short-text" placeholder="E.g. Jane">
+    <Slide id="name-slide" type="short-text" placeholder="E.g. Jane" optional>
       <NameSlideContent />
     </Slide>
   );
