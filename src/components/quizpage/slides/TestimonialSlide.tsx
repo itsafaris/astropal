@@ -1,27 +1,16 @@
 import { Slide } from "@martynasj/quiz-lib";
 import { StaticImage } from "gatsby-plugin-image";
-import { NextButton, SlideHeading } from "../components";
+import { NextButton, SlideHeading, Span } from "../components";
 import { Box, Stack, Text } from "@chakra-ui/react";
 
 export function TestimonialSlide() {
   return (
     <Slide id="quote" type="filler">
       <SlideHeading>
-        Users love their personalized AI astrologers ❤️. A rapid increase in clarity comes within
-        the first 2 weeks
+        So far, <Span>8 out of 10</Span> of our users love their AI astrologers 💛
       </SlideHeading>
 
       <Stack spacing={10}>
-        <StaticImage
-          alt="increase of clarity"
-          src="../../../images/testimonial-chart.png"
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            width: "80%",
-          }}
-        />
-
         <TestimonialSection />
 
         <Stack
@@ -32,7 +21,7 @@ export function TestimonialSlide() {
           bgGradient="linear(to-t, white 60%, transparent)"
         >
           <NextButton position={"sticky"} bottom={3} width={"100%"}>
-            Continue
+            Try Yours
           </NextButton>
         </Stack>
       </Stack>
