@@ -268,6 +268,7 @@ export function createQuizState(input: {
           return snapshot(state.slideStateByID);
         },
       });
+
       input.onTrackingEvent?.({
         name: "slide-submitted",
         properties: {

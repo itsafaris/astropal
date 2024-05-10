@@ -37,6 +37,9 @@ export default function OnboardingQuiz() {
 
   useEffect(() => {
     setMounted(true);
+    // reset state
+    clearQuizState();
+    setUserProfile({ result: undefined, error: undefined, isLoading: false });
   }, []);
 
   if (!mounted) {
@@ -58,7 +61,8 @@ export default function OnboardingQuiz() {
         const parsedState = getTypedQuizState(rawState);
         const calcState = calcPersonalInfo(parsedState);
 
-        setPersonProperties({
+        posthog.setPersonProperties({
+          email: parsedState.email,
           gender: parsedState.yourGender,
           birth_date_local: calcState.birthOrigin.localTimeFormatted,
           birth_date_local_extracted: {
@@ -69,17 +73,9 @@ export default function OnboardingQuiz() {
           birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
           birth_place: parsedState.yourBirthLocation,
           theme_focus: parsedState.areasOfInterest?.map((a) => a.value),
-          dedication_time_per_day: parsedState.dedicationTime,
-          answer_longevity: parsedState.answerLongevity,
-          email: parsedState.email,
+          astrologer_persona_id: parsedState.astrologerID,
+          relationship_status: parsedState.relationshipStatus,
         });
-
-        // reset state
-        if (state.id === "your-gender") {
-          clearQuizState();
-          setUserProfile({ result: undefined, error: undefined, isLoading: false });
-          posthog.reset();
-        }
       }}
     >
       <QuizStateSaver />

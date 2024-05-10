@@ -44,10 +44,6 @@ export function trackPixel(event: string, properties: Record<string, any>) {
   (window as any).fbq("track", event, properties);
 }
 
-export function setPersonProperties(...props: Parameters<typeof posthog.setPersonProperties>) {
-  posthog.setPersonProperties(...props);
-}
-
 export function initPosthog(token: string, apiHost: string, feVersion: string) {
   posthog.init(token, {
     api_host: apiHost,
