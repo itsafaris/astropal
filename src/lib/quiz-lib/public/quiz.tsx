@@ -107,6 +107,7 @@ function useStateSyncToUrl() {
     if (!snap.currentSlideID) {
       return;
     }
+
     history.pushState(null, "", `?${PARAM_SLIDE_ID}=${snap.currentSlideID}`);
   }, [snap.currentSlideID]);
 

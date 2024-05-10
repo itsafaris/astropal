@@ -50,6 +50,7 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
     capture_pageview: false,
     autocapture: false,
     debug: !isProdMode(),
+    disable_session_recording: !isProdMode(),
   });
 
   posthog.register({
