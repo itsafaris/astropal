@@ -31,7 +31,11 @@ import {
 import { Headline } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
 import { useUserProfileState } from "src/appState";
-import { QuizStateParsed, getTypedQuizState, getZodiacFromState } from "@utils/state";
+import {
+  QuizStateParsed,
+  getTypedQuizState,
+  getZodiacFromState,
+} from "@utils/state";
 import {
   convertUserFromAnonymous,
   createNatalChartReading,
@@ -140,7 +144,7 @@ export function YourGenderSlide() {
           textShadow={"0 0 7px #00f7ff"}
           color="white"
         >
-          Meet the world's first
+          Meet world's first
           <br /> AI Astrologer
         </Headline>
       </Box>
@@ -165,7 +169,14 @@ export function YourGenderSlide() {
           </Span>
         </Text>
 
-        <Flex flexDirection={"column"} alignItems={"center"} gap={1} mb={4} mt={5} color="white">
+        <Flex
+          flexDirection={"column"}
+          alignItems={"center"}
+          gap={1}
+          mb={4}
+          mt={5}
+          color="white"
+        >
           <Text fontSize={"lg"} fontWeight={"bold"} textAlign={"center"}>
             Choose your gender
           </Text>
@@ -211,7 +222,11 @@ export function YourBirthTimeSlide() {
 
 export function YourBirthPlaceSlide() {
   return (
-    <Slide id="your-birth-place" type="location" placeholder="Start typing to search">
+    <Slide
+      id="your-birth-place"
+      type="location"
+      placeholder="Start typing to search"
+    >
       <YourBirthPlaceSlide_ />
     </Slide>
   );
@@ -351,17 +366,32 @@ function PersonalityReading({
     >
       <ZodiacTitleHeader quizState={p} mb={4} />
 
-      <NatalChart date={p.yourBirthDate} time={p.yourBirthTime} location={p.yourBirthLocation} />
+      <NatalChart
+        date={p.yourBirthDate}
+        time={p.yourBirthTime}
+        location={p.yourBirthLocation}
+      />
 
       <Stack my={4}>
         <Grid templateColumns={"1fr auto 1fr"} mb={4}>
-          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"} alignItems={"center"}>
+          <Flex
+            gap={2}
+            flexWrap={"wrap"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Text textAlign={"center"} fontWeight={"semibold"}>
               Your strengths
             </Text>
             {state.strengths.map((str, idx) => {
               return (
-                <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="green">
+                <Tag
+                  size={"md"}
+                  fontWeight={"bold"}
+                  key={str}
+                  variant="solid"
+                  colorScheme="green"
+                >
                   <TagLeftIcon boxSize="12px" as={AddIcon} />
                   <Text textAlign={"center"} py={1}>
                     {str}
@@ -370,14 +400,30 @@ function PersonalityReading({
               );
             })}
           </Flex>
-          <Divider orientation="vertical" mx={3} color={"black"} borderColor={"black"} />
-          <Flex gap={2} flexWrap={"wrap"} justifyContent={"center"} alignItems={"center"}>
+          <Divider
+            orientation="vertical"
+            mx={3}
+            color={"black"}
+            borderColor={"black"}
+          />
+          <Flex
+            gap={2}
+            flexWrap={"wrap"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Text textAlign={"center"} fontWeight={"semibold"}>
               Your weaknesses
             </Text>
             {state.weaknesses.map((str, idx) => {
               return (
-                <Tag size={"md"} fontWeight={"bold"} key={str} variant="solid" colorScheme="red">
+                <Tag
+                  size={"md"}
+                  fontWeight={"bold"}
+                  key={str}
+                  variant="solid"
+                  colorScheme="red"
+                >
                   <TagLeftIcon boxSize="12px" as={MinusIcon} />
                   <Text textAlign={"center"} py={1}>
                     {str}
@@ -457,8 +503,8 @@ function Loading_NatalChart_() {
         <Span fontWeight={"bold"} whiteSpace={"nowrap"}>
           ⭐ stars
         </Span>{" "}
-        at the exact moment and location of your birth, shaping your personality, potential, and
-        life path.
+        at the exact moment and location of your birth, shaping your
+        personality, potential, and life path.
       </Callout>
 
       <Text fontSize="sm" fontWeight={"semibold"} mb={2}>
@@ -506,14 +552,21 @@ export function Loading_SavingAstrologerPreferences() {
           <Box
             width={160}
             height={160}
-            boxShadow={loadingFinished ? "0 0 0 6px #04e487, 0 0 10px 10px #04e4879c" : undefined}
+            boxShadow={
+              loadingFinished
+                ? "0 0 0 6px #04e487, 0 0 10px 10px #04e4879c"
+                : undefined
+            }
             borderRadius={"full"}
             transition={"200ms ease-in"}
             transitionDelay={"800ms"}
           >
             {astrologer.imgComponent}
           </Box>
-          <ScaleFade in={!loadingFinished} transition={{ exit: { duration: 0.4, delay: 0.4 } }}>
+          <ScaleFade
+            in={!loadingFinished}
+            transition={{ exit: { duration: 0.4, delay: 0.4 } }}
+          >
             <Box
               bg="gray.200"
               borderRadius={"full"}
@@ -535,9 +588,18 @@ export function Loading_SavingAstrologerPreferences() {
 
         <Selector mt={20} />
 
-        <Fade in={loadingFinished} transition={{ enter: { delay: 0.8, duration: 0.2 } }}>
+        <Fade
+          in={loadingFinished}
+          transition={{ enter: { delay: 0.8, duration: 0.2 } }}
+        >
           <Stack mt={-12}>
-            <Text mx="auto" textAlign={"center"} fontSize={"lg"} fontWeight={"bold"} mb={4}>
+            <Text
+              mx="auto"
+              textAlign={"center"}
+              fontSize={"lg"}
+              fontWeight={"bold"}
+              mb={4}
+            >
               {astrologer.name} has learned your chart
             </Text>
             <NextButton mb={5}>Continue</NextButton>
@@ -556,17 +618,26 @@ export function AreasOfInterestSlide() {
       variant="list"
       label="Choose one or more"
       options={[
-        { text: "Love, Family & Relationships", icon: "💞", value: "relationships" },
+        {
+          text: "Love, Family & Relationships",
+          icon: "💞",
+          value: "relationships",
+        },
         { text: "Career, Finance & Education", icon: "💼", value: "career" },
         { text: "Health & Mental Wellbeing", icon: "💚", value: "wellbeing" },
         { text: "Growth & Self-Discovery", icon: "🧘", value: "personality" },
-        { text: "Decision Making & Future Planning", icon: "🤔", value: "decision-making" },
+        {
+          text: "Decision Making & Future Planning",
+          icon: "🤔",
+          value: "decision-making",
+        },
         { text: "Relocation & Travel", icon: "🏡", value: "exploration" },
       ]}
     >
       <SlideHeading>Which areas interest you most?</SlideHeading>
       <Callout title="💡 Why this matters?">
-        You will receive increased attention from your personal astrologer on these areas.
+        You will receive increased attention from your personal astrologer on
+        these areas.
       </Callout>
       <Selector />
       <NextButton>Continue</NextButton>
@@ -616,7 +687,9 @@ export function MajorLifeEventsSlide() {
         { text: "Major Travel", icon: "✈️", value: "majortravel" },
       ]}
     >
-      <SlideHeading>Which events had the biggest impact in your lifetime?</SlideHeading>
+      <SlideHeading>
+        Which events had the biggest impact in your lifetime?
+      </SlideHeading>
       <Selector />
       <NextButton>Continue</NextButton>
     </Slide>
@@ -640,7 +713,8 @@ export function RelationshipStatusSlide() {
     >
       <SlideHeading>What is your current relationship status?</SlideHeading>
       <Callout title="💡 Why this matters?">
-        Understanding your relationship status helps us offer insights tailored to your love life.
+        Understanding your relationship status helps us offer insights tailored
+        to your love life.
       </Callout>
       <Selector />
     </Slide>
@@ -699,8 +773,8 @@ export function ChooseAstrologerSlide() {
     >
       <SlideHeading>Choose your AI astrologer</SlideHeading>
       <Callout>
-        💬 Each Astrologer offers a unique communication style, but they are all of the same level
-        of expertise
+        💬 Each Astrologer offers a unique communication style, but they are all
+        of the same level of expertise
       </Callout>
       <Selector />
     </Slide>
@@ -724,7 +798,8 @@ export function QuoteSlide() {
             “
           </Text>
           <Text fontSize={"xl"}>
-            Astrology is a language. If you understand this language, the sky speaks to you.
+            Astrology is a language. If you understand this language, the sky
+            speaks to you.
           </Text>
           <Text fontSize={"4xl"} alignSelf="flex-end">
             „
@@ -748,7 +823,8 @@ export function UniqueGiftSlideUncovered() {
   return (
     <Slide id="unique-gift-uncovered" type="filler">
       <SlideHeading>
-        {astrologer.name} has identified numerous natural hidden gifts and talents in your profile 🫶
+        {astrologer.name} has identified numerous natural hidden gifts and
+        talents in your profile 🫶
       </SlideHeading>
 
       <Box bg="white.400" borderRadius={"xl"} p={2} boxShadow={"xl"} mb={4}>
@@ -760,7 +836,12 @@ export function UniqueGiftSlideUncovered() {
           borderColor={"white"}
           borderRadius={"xl"}
         >
-          <Flex flexDirection={"row"} alignItems={"center"} mr="auto" justifyContent={"center"}>
+          <Flex
+            flexDirection={"row"}
+            alignItems={"center"}
+            mr="auto"
+            justifyContent={"center"}
+          >
             <Text fontSize={32}>💛</Text>
             <Text
               fontSize={82}
@@ -801,7 +882,9 @@ function EmailSlide_() {
   const { submitQuestion } = useQuiz();
   const quizState = useQuizContext();
 
-  const [requestStatus, setRequestStatus] = useState<RequestStatus>({ isLoading: false });
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>({
+    isLoading: false,
+  });
   const [userProfile] = useUserProfileState();
 
   function redirectToApp(input: { userID: string; question: string }) {
@@ -815,8 +898,8 @@ function EmailSlide_() {
   return (
     <>
       <SlideHeading color="text.main" mb={4}>
-        Before we proceed to your astrologer, enter your email so we can identify you in the future
-        💌
+        Before we proceed to your astrologer, enter your email so we can
+        identify you in the future 💌
       </SlideHeading>
 
       <StaticImage
@@ -831,8 +914,8 @@ function EmailSlide_() {
       <Selector mt={4} mb={2} />
 
       <Caption mt={0} mb={7} fontSize={"xs"}>
-        🔒 We respect your privacy and protect your personal data. We will use your email to
-        identify you and send personalized astrological insights.
+        🔒 We respect your privacy and protect your personal data. We will use
+        your email to identify you and send personalized astrological insights.
       </Caption>
 
       {requestStatus.error && <Text>{String(requestStatus.error)}</Text>}
@@ -877,12 +960,14 @@ function EmailSlide_() {
           redirectToApp({
             userID: userProfile.result!.id,
             // question: zodiac.onboardingQuestion
-            question: "What is the most powerful gift highlighted in my birth chart?",
+            question:
+              "What is the most powerful gift highlighted in my birth chart?",
             // question: "Which single and most powerful talent is indicated by my birth chart?",
           });
         }}
       >
-        Go to your astrologer <Icon as={BsChevronRight} ml={4} fontSize={"md"} />
+        Go to your astrologer{" "}
+        <Icon as={BsChevronRight} ml={4} fontSize={"md"} />
       </NextButton>
     </>
   );
