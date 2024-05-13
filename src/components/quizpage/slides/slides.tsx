@@ -68,7 +68,6 @@ export function YourGenderSlide() {
       size="medium"
       label=""
       containerProps={{
-        maxWidth: "100vw",
         px: 0,
         py: 0,
         bg: "black",
