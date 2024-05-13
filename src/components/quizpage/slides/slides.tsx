@@ -140,7 +140,7 @@ export function YourGenderSlide() {
           textShadow={"0 0 7px #00f7ff"}
           color="white"
         >
-          Meet world's first
+          Meet the world's first
           <br /> AI Astrologer
         </Headline>
       </Box>
