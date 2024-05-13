@@ -7,7 +7,8 @@ export function TestimonialSlide() {
   return (
     <Slide id="quote" type="filler">
       <SlideHeading>
-        So far, <Span>8 out of 10</Span> of our users love their AI astrologers 💛
+        So far, <Span fontWeight={"bold"}>8 out of 10</Span> of our users love their AI astrologers
+        💛
       </SlideHeading>
 
       <Stack spacing={10}>

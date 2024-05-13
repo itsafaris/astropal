@@ -13,7 +13,6 @@ import {
 import { Caption, NextButton, SlideHeading, Span } from "../components";
 import { StaticImage } from "gatsby-plugin-image";
 import {
-  Container,
   Flex,
   Text,
   Box,
@@ -29,7 +28,7 @@ import {
   ScaleFade,
   Fade,
 } from "@chakra-ui/react";
-import { Headline, InvertedHighlight } from "@components/summary/components";
+import { Headline } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
 import { useUserProfileState } from "src/appState";
 import { QuizStateParsed, getTypedQuizState, getZodiacFromState } from "@utils/state";
@@ -55,6 +54,11 @@ const PULSE_ANIMATION = keyframes`
   100% { box-shadow: 0 0 0 20px rgba(0, 0, 0, 0); }; }
 `;
 
+const PULSE_ANIMATION_2 = keyframes`
+  0% { box-shadow: 0 0 0 0px #805ad5; }
+  100% { box-shadow: 0 0 0 30px rgba(0, 0, 0, 0); }; }
+`;
+
 export function YourGenderSlide() {
   return (
     <Slide
@@ -63,9 +67,24 @@ export function YourGenderSlide() {
       variant="picture"
       size="medium"
       label=""
+      containerProps={{
+        maxWidth: "100vw",
+        px: 0,
+        py: 0,
+        bg: "black",
+      }}
       options={[
         {
           text: "Female",
+          styleProps: {
+            bg: "purple.50",
+            color: "black",
+            animation: `${PULSE_ANIMATION_2} 1.5s ease-in-out  infinite`,
+            px: 1,
+            py: 1,
+            outline: "4px solid",
+            outlineColor: "purple.500",
+          },
           imgComponent: (
             <StaticImage
               alt="image of a female"
@@ -78,6 +97,15 @@ export function YourGenderSlide() {
         },
         {
           text: "Male",
+          styleProps: {
+            bg: "purple.50",
+            color: "black",
+            animation: `${PULSE_ANIMATION_2} 1.5s ease-in-out  infinite`,
+            px: 1,
+            py: 1,
+            outline: "4px solid",
+            outlineColor: "purple.500",
+          },
           imgComponent: (
             <StaticImage
               alt="image of a male"
@@ -90,61 +118,65 @@ export function YourGenderSlide() {
         },
       ]}
     >
-      <Container>
-        <Flex flexDirection={"column"} gap={2}>
-          <Flex flexDirection={"row"} justifyContent={"center"}>
-            <Flex
-              borderRadius={"full"}
-              overflow={"hidden"}
-              height={"150px"}
-              width={"150px"}
-              boxShadow={"inset 0 0 50px 0 #ffc9001f, 0 0 50px 0 #ffc9002b"}
-              position={"relative"}
-            >
-              <StaticImage
-                src={`../../../images/partner-3.png`}
-                alt="Option - in relationship"
-                placeholder="none"
-                width={140}
-                height={140}
-                layout="fixed"
-                style={{
-                  position: "absolute",
-                  zIndex: 1,
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  border: `1px solid #e4b382`,
-                  borderRadius: "50%",
-                }}
-              />
+      <Box position={"relative"}>
+        <StaticImage
+          src={`../../../images/lp_astrologer.png`}
+          alt="Option - in relationship"
+          placeholder="none"
+          layout="fullWidth"
+          style={{ marginTop: -120 }}
+        />
+        <Box
+          py={24}
+          bgGradient="linear(to-b, transparent, black)"
+          position={"absolute"}
+          bottom={0}
+          width={"full"}
+        ></Box>
+        <Headline
+          fontSize={"3xl"}
+          position={"absolute"}
+          bottom={24}
+          width={"full"}
+          textShadow={"0 0 7px #00f7ff"}
+          color="white"
+        >
+          Meet worlds first
+          <br /> AI Astrologer
+        </Headline>
+      </Box>
 
-              <StaticImage
-                style={{ opacity: 1, position: "absolute", top: 0, left: 0, zIndex: 0 }}
-                alt=""
-                src="../../../images/astro-avatar.png"
-                width={170}
-                height={170}
-              />
-            </Flex>
-          </Flex>
+      <Box mt={-16} zIndex={1}>
+        <Text
+          color="white"
+          fontWeight={"black"}
+          fontSize={"3xl"}
+          px={4}
+          textAlign={"center"}
+          lineHeight={1.2}
+        >
+          Reveal the truth about{" "}
+          <Span color="purple.300" px={1}>
+            yourself
+          </Span>{" "}
+          or{" "}
+          <Span color="purple.300" px={1}>
+            {" "}
+            another person
+          </Span>
+        </Text>
 
-          <Headline fontSize={"3xl"} my={4}>
-            <InvertedHighlight>
-              Experience the Most Accurate Personalized Astrology
-            </InvertedHighlight>
-          </Headline>
-
-          <Flex flexDirection={"column"} alignItems={"center"} gap={2} mb={4}>
-            <Text mt={5} fontSize={"md"} fontWeight={"bold"} textAlign={"center"}>
-              Choose your gender to get started
-            </Text>
-            <FaArrowDown />
-          </Flex>
+        <Flex flexDirection={"column"} alignItems={"center"} gap={1} mb={4} mt={5} color="white">
+          <Text fontSize={"lg"} fontWeight={"bold"} textAlign={"center"}>
+            Choose your gender
+          </Text>
+          <FaArrowDown />
         </Flex>
-      </Container>
 
-      <Selector />
+        <Box px={8}>
+          <Selector />
+        </Box>
+      </Box>
     </Slide>
   );
 }
@@ -414,10 +446,20 @@ function Loading_NatalChart_() {
     <>
       <SlideHeading>Hold on while we calculate your natal chart</SlideHeading>
       <Callout title="What's a natal chart?">
-        It's a unique astrological <Span whiteSpace={"nowrap"}>🌌 map</Span> that outlines the
-        positions of the <Span whiteSpace={"nowrap"}>🪐 planets</Span> and{" "}
-        <Span whiteSpace={"nowrap"}>⭐ stars</Span> at the exact moment and location of your birth,
-        shaping your personality, potential, and life path.
+        It's a unique astrological{" "}
+        <Span fontWeight={"bold"} whiteSpace={"nowrap"}>
+          🌌 map
+        </Span>{" "}
+        that outlines the positions of the{" "}
+        <Span fontWeight={"bold"} whiteSpace={"nowrap"}>
+          🪐 planets
+        </Span>{" "}
+        and{" "}
+        <Span fontWeight={"bold"} whiteSpace={"nowrap"}>
+          ⭐ stars
+        </Span>{" "}
+        at the exact moment and location of your birth, shaping your personality, potential, and
+        life path.
       </Callout>
 
       <Text fontSize="sm" fontWeight={"semibold"} mb={2}>

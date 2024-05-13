@@ -22,8 +22,14 @@ export function _NatalChartStatsSlide() {
   return (
     <Stack>
       <SlideHeading mb={2}>
-        🔎 Astrologer <Span color="purple.600">{astrologer.name}</Span> has found some interesting
-        insights in <Span color="purple.600">your natal chart</Span>
+        🔎 Astrologer{" "}
+        <Span fontWeight={"bold"} color="purple.600">
+          {astrologer.name}
+        </Span>{" "}
+        has found some interesting insights in{" "}
+        <Span fontWeight={"bold"} color="purple.600">
+          your natal chart
+        </Span>
       </SlideHeading>
 
       <TableContainer>

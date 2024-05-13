@@ -78,20 +78,22 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       id="slide"
       direction={"column"}
       justifyContent={"start"}
-      alignItems={"center"}
+      alignItems={"stretch"}
       minHeight={"100%"}
+      width="100vw"
+      maxWidth={"390px"}
+      py={4}
+      px={6}
       {...containerProps}
     >
-      <Flex w="100vw" maxWidth={"390px"} flexDir={"column"} py={4} px={6}>
-        {children}
+      {children}
 
-        {/* {!hideNextButton() && (
+      {/* {!hideNextButton() && (
           <Box width={"full"} mt={4} mb={2} bottom={8}>
             <NextButton />
           </Box>
         )} */}
-        {showSkipButton && <SkipButton mt={8} />}
-      </Flex>
+      {showSkipButton && <SkipButton mt={8} />}
     </Flex>
   );
 }

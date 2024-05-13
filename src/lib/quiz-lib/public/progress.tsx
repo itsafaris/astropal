@@ -26,6 +26,10 @@ export function ProgressIndicator() {
   const inactiveSegmentBg = colorOverrides?.inactiveSegmentBg ?? "bg.200";
   const textColor = colorOverrides?.textColor ?? "text.main";
 
+  if (snap.currentIdx === 0) {
+    return null;
+  }
+
   return (
     <Flex p={4} direction={"column"} gap={1} alignItems={"center"}>
       <Flex width={"full"} fontSize={"sm"} justifyContent={"space-between"}>

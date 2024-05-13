@@ -36,6 +36,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
               icon={option.icon}
               selectorIconType={slideCtx.type === "single" ? "radio" : "checkbox"}
               size={slideCtx.size}
+              {...option.styleProps}
             />
           );
         })}
@@ -60,6 +61,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
             imgHeight={imgHeight}
             imgComponent={option.imgComponent}
             hideText={slideCtx.hideText}
+            {...option.styleProps}
           />
         );
       })}

@@ -1,4 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import { BackgroundProps, ColorProps, ThemeTypings } from "@chakra-ui/styled-system";
+import { ComponentProps } from "react";
 
 export type IOptionInputType = "checkbox" | "radio" | "none";
 
@@ -63,6 +65,7 @@ export type OptionPropsCommon = {
   text: string;
   // if value is not provided, text will be used as value
   value?: string;
+  styleProps?: Omit<ComponentProps<typeof Button>, "size">;
 };
 
 export type OptionPropsSimple = {

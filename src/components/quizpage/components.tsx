@@ -26,7 +26,7 @@ export function SpanJust(props: ComponentProps<typeof Text>) {
 }
 
 export function Span(props: React.ComponentProps<typeof SpanRaw>) {
-  return <SpanRaw fontWeight={"bold"} {...props} />;
+  return <SpanRaw {...props} />;
 }
 
 export function Subtitle(props: React.ComponentProps<typeof Text>) {

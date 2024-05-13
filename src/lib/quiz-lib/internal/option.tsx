@@ -109,7 +109,7 @@ export function OptionWithPicture({
 
 type BaseOptionProps = {
   isSelected: boolean;
-} & ComponentProps<typeof Button>;
+} & Omit<ComponentProps<typeof Button>, "size">;
 
 function BaseOption({ isSelected, children, ...chakraButtonProps }: BaseOptionProps) {
   return (
