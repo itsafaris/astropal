@@ -109,7 +109,7 @@ export function TimePicker(props: TimePickerProps) {
           isSelected={state.value?.quickPeriod === "Morning"}
           onClick={async () => {
             actions.setTimeValue(slide.id, {
-              hour: 8,
+              hour: 6,
               minute: 0,
               meridiem: "am",
               quickPeriod: "Morning",
@@ -117,17 +117,17 @@ export function TimePicker(props: TimePickerProps) {
             await wait(150);
             actions.submitQuestion();
           }}
-          width={"25%"}
           flex={1}
           flexShrink={0}
           title="Morning"
+          subtitle="6am - 12pm"
           icon={BsSunriseFill}
         />
         <CustomButton
           isSelected={state.value?.quickPeriod === "Noon"}
           onClick={async () => {
             actions.setTimeValue(slide.id, {
-              hour: 2,
+              hour: 12,
               minute: 0,
               meridiem: "pm",
               quickPeriod: "Noon",
@@ -135,17 +135,17 @@ export function TimePicker(props: TimePickerProps) {
             await wait(150);
             actions.submitQuestion();
           }}
-          width={"25%"}
           flex={1}
           flexShrink={0}
           title="Noon"
+          subtitle="12pm - 6pm"
           icon={BsSunFill}
         />
         <CustomButton
           isSelected={state.value?.quickPeriod === "Evening"}
           onClick={async () => {
             actions.setTimeValue(slide.id, {
-              hour: 8,
+              hour: 6,
               minute: 0,
               meridiem: "pm",
               quickPeriod: "Evening",
@@ -153,17 +153,17 @@ export function TimePicker(props: TimePickerProps) {
             await wait(150);
             actions.submitQuestion();
           }}
-          width={"25%"}
           flex={1}
           flexShrink={0}
           title="Evening"
+          subtitle="6pm - 12am"
           icon={BsMoonFill}
         />
         <CustomButton
           isSelected={state.value?.quickPeriod === "Night"}
           onClick={async () => {
             actions.setTimeValue(slide.id, {
-              hour: 2,
+              hour: 12,
               minute: 0,
               meridiem: "am",
               quickPeriod: "Night",
@@ -171,10 +171,10 @@ export function TimePicker(props: TimePickerProps) {
             await wait(150);
             actions.submitQuestion();
           }}
-          width={"25%"}
           flex={1}
           flexShrink={0}
           title="Night"
+          subtitle="12am - 6am"
           icon={BsMoonStarsFill}
         />
       </Grid>
@@ -185,9 +185,15 @@ export function TimePicker(props: TimePickerProps) {
 function CustomButton({
   icon,
   title,
+  subtitle,
   isSelected,
   ...rest
-}: ComponentProps<typeof Stack> & { title: string; icon: IconType; isSelected: boolean }) {
+}: ComponentProps<typeof Stack> & {
+  title: string;
+  subtitle: string;
+  icon: IconType;
+  isSelected: boolean;
+}) {
   return (
     <Stack as="button" alignItems={"center"} {...rest}>
       <Flex
@@ -206,9 +212,14 @@ function CustomButton({
       >
         <Icon as={icon} />
       </Flex>
-      <Text fontSize={"xs"} fontWeight={"semibold"}>
-        {title}
-      </Text>
+      <Stack spacing={0}>
+        <Text fontSize={"xs"} fontWeight={"semibold"}>
+          {title}
+        </Text>
+        <Text width={"100%"} fontSize={"2xs"} fontWeight={"semibold"}>
+          {subtitle}
+        </Text>
+      </Stack>
     </Stack>
   );
 }
