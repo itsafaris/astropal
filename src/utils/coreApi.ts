@@ -50,8 +50,8 @@ export async function updateUserProfile({
 }: {
   quizState: QuizStateParsed;
   userID: string;
-}): Promise<{ user: { id: string } }> {
-  const r = await fetch(`${process.env.GATSBY_CORE_URL}/updateUserProfile`, {
+}) {
+  return fetch(`${process.env.GATSBY_CORE_URL}/updateUserProfile`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -65,23 +65,10 @@ export async function updateUserProfile({
       astrologer_persona_id: quizState.astrologerID,
     }),
   });
-
-  if (r.status !== 200) {
-    throw new Error(r.statusText);
-  }
-
-  const user = await r.json();
-
-  return {
-    user,
-  };
 }
 
-export async function convertUserFromAnonymous(input: {
-  userID: string;
-  email: string;
-}): Promise<{ id?: string }> {
-  const r = await fetch(`${process.env.GATSBY_CORE_URL}/convertUserFromAnonymous`, {
+export async function convertUserFromAnonymous(input: { userID: string; email: string }) {
+  return fetch(`${process.env.GATSBY_CORE_URL}/convertUserFromAnonymous`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -91,10 +78,4 @@ export async function convertUserFromAnonymous(input: {
       email: input.email,
     }),
   });
-
-  if (r.status !== 200) {
-    throw new Error(r.statusText);
-  }
-
-  return await r.json();
 }
