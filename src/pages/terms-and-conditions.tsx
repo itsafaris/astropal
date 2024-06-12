@@ -398,9 +398,7 @@ export default function TermsAndConditionsPage() {
                 also available.
               </Text>
 
-              <Text>
-                7.7. Subscription periods for Content include 1 month, 3 months, and 6 months.
-              </Text>
+              <Text>7.7. Subscription periods for Content include: 1 month.</Text>
 
               <Text>
                 7.8. Upon subscription purchase, the Buyer receives login details for the Webapp to
@@ -829,7 +827,7 @@ export default function TermsAndConditionsPage() {
             </Text>
           </Section>
 
-          <TitleXL>Last updated: May 16th, 2024</TitleXL>
+          <TitleXL>Last updated: June 12th, 2024</TitleXL>
         </Stack>
       </Container>
     </Stack>
