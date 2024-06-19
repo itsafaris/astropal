@@ -232,8 +232,6 @@ function YourBirthPlaceSlide_() {
       .then((result) => {
         setUserProfile({ isLoading: false, error: undefined, result });
         submitQuestion();
-        // this does not need to be awaited, it's only for the backend to make things quicker to appear
-        void createNatalChartReading({ userID: result.id });
       })
       .catch((err) => {
         console.error(err);
