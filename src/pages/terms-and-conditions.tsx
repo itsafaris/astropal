@@ -150,6 +150,16 @@ export default function TermsAndConditionsPage() {
                 <Link to={APP_DATA.website.title}>{APP_DATA.website.url}</Link>
                 ).
               </Text>
+              <Text>
+                1.18. "Lifetime Access" refers to a single, one-off payment that grants the
+                subscriber ongoing access to the Content for as long as the Seller remains in
+                operation and continues to offer the Content. The duration of this access is tied to
+                the Seller's active business period, during which they continue to provide and
+                maintain the Content. While the Lifetime Access is governed by the same general
+                terms and conditions that apply to other subscription types, it also has specific
+                provisions that are detailed within these Terms. These provisions address the unique
+                nature of this long-term subscription model.
+              </Text>
             </Stack>
           </Section>
 
@@ -398,7 +408,7 @@ export default function TermsAndConditionsPage() {
                 also available.
               </Text>
 
-              <Text>7.7. Subscription periods for Content include: 1 month.</Text>
+              <Text>7.7. Subscription periods for Content include: 1 month, Lifetime Access</Text>
 
               <Text>
                 7.8. Upon subscription purchase, the Buyer receives login details for the Webapp to
@@ -468,6 +478,19 @@ export default function TermsAndConditionsPage() {
                 7.15. One-off Content has a 2-year quality guarantee from submission. Continuous
                 Content provision has a liability period for arising defects during the provision.
               </Text>
+
+              <Text>
+                7.16. By purchasing a Lifetime Subscription, the Buyer secures access to the Content
+                for as long as the Seller remains in active operation. However, it's important to
+                note that this doesn't assure unlimited or eternal access. The duration of access is
+                directly tied to the Seller's continued business activities. Should the Seller
+                decide to cease operations or make significant alterations to their service
+                offerings, they are obligated to inform Lifetime Subscription holders about any
+                resulting changes. This communication will be sent to the email address linked to
+                the Buyer's account. This clause underscores that while a Lifetime Subscription
+                offers extended access, it's still contingent on the Seller's ongoing business
+                status and service provision.
+              </Text>
             </Stack>
           </Section>
 
@@ -488,8 +511,8 @@ export default function TermsAndConditionsPage() {
               <Text>8.3. Payment methods are specified during checkout.</Text>
 
               <Text>
-                8.4. Subscriptions require upfront payment and automatically renew until canceled 24
-                hours before the end of the period.
+                8.4. Subscriptions including Lifetime Access require upfront payment and
+                automatically renew until canceled 24 hours before the end of the period.
               </Text>
 
               <Text>
@@ -594,6 +617,14 @@ export default function TermsAndConditionsPage() {
               <Text>
                 11.4. The right of withdrawal applies to EU-resident Buyers deemed consumers under
                 applicable law.
+              </Text>
+
+              <Text>
+                11.5. Once a Buyer has purchased a Lifetime Access and has been granted access to
+                the Content, they cannot exercise the right of withdrawal. This exclusion from the
+                right of withdrawal applies specifically when the Buyer has explicitly acknowledged,
+                at the time of purchase, that they understand and agree to the immediate provision
+                of services associated with the Lifetime Access.
               </Text>
             </Stack>
           </Section>
@@ -815,6 +846,18 @@ export default function TermsAndConditionsPage() {
                 responsibility for Third-Party content. Using Third-Party content is at the Buyer's
                 risk, with no guarantees or endorsements from the Seller.
               </Text>
+
+              <Text>
+                15.4. In the event that changes to the Seller's operational status impact the
+                availability of the Lifetime Access, the Seller commits to informing the Buyer as
+                soon as possible. This notification will include a description of the changes
+                occurring and an explanation of how these changes affect the Lifetime Access. The
+                Seller maintains the authority to decide, based on the specific situation, whether
+                to offer compensatory measures or refunds. This decision will be made at the
+                Seller's discretion and will take into account the particular circumstances leading
+                to the discontinuation or significant alteration of the services provided under the
+                Lifetime Access.
+              </Text>
             </Stack>
           </Section>
 
@@ -827,7 +870,7 @@ export default function TermsAndConditionsPage() {
             </Text>
           </Section>
 
-          <TitleXL>Last updated: June 12th, 2024</TitleXL>
+          <TitleXL>Last updated: July 09th, 2024</TitleXL>
         </Stack>
       </Container>
     </Stack>
