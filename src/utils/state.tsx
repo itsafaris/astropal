@@ -98,10 +98,10 @@ export function getTypedQuizState(state: QuizQuestionsState) {
   );
 
   const yourBirthLocation = (state["your-birth-place"] as LocationState)?.value ?? {
-    formattedText: "Unknown loc",
-    placeID: "0",
-    lat: 55,
-    long: 22,
+    formattedText: "",
+    lat: 39.7508287,
+    long: -101.532943,
+    placeID: "323203125123",
   };
 
   const areasOfInterest = (state["areas-of-interest"] as MultiState)?.value;

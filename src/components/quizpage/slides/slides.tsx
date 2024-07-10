@@ -8,6 +8,7 @@ import {
   useQuizActions,
   useQuizContext,
   useQuizState,
+  useSlide,
 } from "@martynasj/quiz-lib";
 
 import * as Sentry from "@sentry/gatsby";
@@ -29,6 +30,7 @@ import {
   keyframes,
   ScaleFade,
   Fade,
+  Button,
 } from "@chakra-ui/react";
 import { Headline } from "@components/summary/components";
 import { FaArrowDown } from "react-icons/fa";
@@ -222,6 +224,8 @@ export function YourBirthPlaceSlide() {
 function YourBirthPlaceSlide_() {
   const { checkQuestion, submitQuestion } = useQuiz();
   const { quizState } = useQuizState();
+  const slide = useSlide();
+  const actions = useQuizActions();
   const [userProfile, setUserProfile] = useUserProfileState();
 
   const p = getTypedQuizState(quizState);
@@ -237,6 +241,15 @@ function YourBirthPlaceSlide_() {
         console.error(err);
         setUserProfile({ isLoading: false, error: err, result: undefined });
       });
+  }
+
+  function submit() {
+    const r = checkQuestion();
+    if (!r) {
+      return;
+    }
+
+    void createUser(p);
   }
 
   return (
@@ -258,17 +271,31 @@ function YourBirthPlaceSlide_() {
       <NextButton
         isLoading={userProfile.isLoading}
         isDisabled={!!userProfile.error}
-        onClick={() => {
-          const r = checkQuestion();
-          if (!r) {
-            return;
-          }
-
-          void createUser(p);
-        }}
+        onClick={submit}
       >
         Continue
       </NextButton>
+
+      <Button
+        mt={8}
+        px={6}
+        variant={"link"}
+        colorScheme="brand"
+        width={"full"}
+        onClick={() => {
+          // Sets the default location which is the center of USA
+          actions.setLocationValue(slide.id, {
+            formattedText: "",
+            lat: 39.7508287,
+            long: -101.532943,
+            placeID: "323203125123",
+          });
+
+          submit();
+        }}
+      >
+        I don't know
+      </Button>
     </>
   );
 }
