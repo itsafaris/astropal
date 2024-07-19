@@ -81,7 +81,7 @@ function CurrentSlide<T extends ISelectorType>(props: SlideComponentProps<T>) {
       alignItems={"stretch"}
       minHeight={"100%"}
       width="100vw"
-      maxWidth={"390px"}
+      maxWidth={"430px"}
       py={4}
       px={6}
       {...containerProps}

@@ -147,7 +147,7 @@ export function YourGenderSlide() {
           lineHeight={1.4}
           color={"white"}
           mb={2}
-          px={2}
+          px={4}
         >
           Discover Your Destiny: Accurate Astrology for{" "}
           <Text as="span" color="purple.300" textDecoration="underline">
