@@ -1,16 +1,16 @@
 import { ChakraTheme, DeepPartial, extendTheme } from "@chakra-ui/react";
 
 export const brandColor = {
-  50: "#ffe7db",
-  100: "#ffc2af",
-  200: "#ffa07e",
-  300: "#ff824c",
-  400: "#ff651a",
-  500: "#e65400",
-  600: "#b43400",
-  700: "#811d00",
-  800: "#4f0a00",
-  900: "#210003",
+  "50": "#f9f6fe",
+  "100": "#f1ebfc",
+  "200": "#e6dbf9",
+  "300": "#ceb8f3",
+  "400": "#b694ec",
+  "500": "#9a6be1",
+  "600": "#834cd1",
+  "700": "#6e39b7",
+  "800": "#5e3396",
+  "900": "#4d2a79",
 };
 
 export const bg = {
