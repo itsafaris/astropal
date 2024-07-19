@@ -123,55 +123,49 @@ export function YourGenderSlide() {
     >
       <Box position={"relative"}>
         <StaticImage
-          src={`../../../images/lp_astrologer.png`}
+          src={`../../../images/landing-bg.jpg`}
           alt="Option - in relationship"
           placeholder="none"
           layout="fullWidth"
-          style={{ marginTop: -120 }}
+          style={{ marginTop: -70 }}
         />
+
         <Box
           py={24}
           bgGradient="linear(to-b, transparent, black)"
           position={"absolute"}
           bottom={0}
           width={"full"}
-        ></Box>
-        <Headline
-          fontSize={"3xl"}
-          position={"absolute"}
-          bottom={24}
-          width={"full"}
-          textShadow={"0 0 7px #00f7ff"}
-          color="white"
-        >
-          Meet world's first
-          <br /> AI Astrologer
-        </Headline>
+        />
       </Box>
 
-      <Box mt={-16} zIndex={1}>
+      <Box zIndex={1} mt={"-50px"}>
         <Text
-          color="white"
-          fontWeight={"black"}
-          fontSize={"3xl"}
-          px={4}
           textAlign={"center"}
-          lineHeight={1.2}
+          fontSize={"2xl"}
+          fontWeight={"bold"}
+          lineHeight={1.4}
+          color={"white"}
+          mb={2}
+          px={2}
         >
-          Reveal the truth about{" "}
-          <Span color="purple.300" px={1}>
-            yourself
-          </Span>{" "}
-          or{" "}
-          <Span color="purple.300" px={1}>
-            {" "}
-            another person
-          </Span>
+          Discover Your Destiny: Accurate Astrology for{" "}
+          <Text as="span" color="purple.300" textDecoration="underline">
+            Love, Career, and Life Path
+          </Text>
         </Text>
 
-        <Flex flexDirection={"column"} alignItems={"center"} gap={1} mb={4} mt={5} color="white">
-          <Text fontSize={"lg"} fontWeight={"bold"} textAlign={"center"}>
-            Choose your gender
+        <Flex
+          flexDirection={"column"}
+          alignItems={"center"}
+          textTransform={"uppercase"}
+          gap={1}
+          mb={4}
+          mt={10}
+          color="purple.200"
+        >
+          <Text fontSize={"md"} fontWeight={"semibold"} textAlign={"center"}>
+            Choose your gender to start
           </Text>
           <FaArrowDown />
         </Flex>
