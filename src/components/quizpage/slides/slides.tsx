@@ -231,7 +231,7 @@ const defaultTheme: ThemeContent = {
     >
       Discover Your Destiny: Accurate Astrology for{" "}
       <Text as="span" color="purple.300" textDecoration="underline">
-        Love, Career, and Life Path
+        Love, Career and Life Path
       </Text>
     </Text>
   ),
