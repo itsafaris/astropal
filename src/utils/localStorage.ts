@@ -1,43 +1,38 @@
-import { QuizStateParsed, STATE_VERSION } from "./state";
-
-export function saveQuizState(state: QuizStateParsed) {
-  localStorage.setItem("quizstate", JSON.stringify(state));
+export function saveToStorage<T extends object>(name: string, state: T) {
+  localStorage.setItem(name, JSON.stringify(state));
 }
 
-export function clearQuizState() {
-  localStorage.removeItem("quizstate");
+export function clearStorage(name: string) {
+  localStorage.removeItem(name);
 }
 
-export function loadQuizState(): QuizStateParsed | undefined {
-  const it = localStorage.getItem("quizstate");
+export function loadFromStorage<T extends object>(
+  name: string,
+  validate: (state: object) => state is T
+) {
+  const it = localStorage.getItem(name);
   if (!it) {
     return;
   }
 
-  let state;
+  let state: unknown;
 
   try {
     state = JSON.parse(it);
   } catch (err) {
+    localStorage.removeItem(name);
     return;
   }
 
-  if (!isQuizState(state)) {
-    localStorage.removeItem("quizstate");
+  if (typeof state !== "object" || state == null) {
+    localStorage.removeItem(name);
     return;
   }
 
-  if (state.version !== STATE_VERSION) {
+  if (!validate(state)) {
     localStorage.removeItem("quizstate");
     return;
   }
 
   return state;
-}
-
-function isQuizState(obj: unknown): obj is QuizStateParsed {
-  if (typeof obj !== "object" || obj == null) {
-    return false;
-  }
-  return true;
 }

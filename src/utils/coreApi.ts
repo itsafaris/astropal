@@ -1,6 +1,9 @@
 import { QuizStateParsed } from "./state";
 
-export async function createNewUserProfile(input: QuizStateParsed): Promise<{ id: string }> {
+export async function createNewUserProfile(
+  input: QuizStateParsed,
+  funnelTheme?: "relationships" | "loneliness"
+): Promise<{ id: string }> {
   const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNewUser`, {
     method: "POST",
     headers: {
@@ -18,6 +21,7 @@ export async function createNewUserProfile(input: QuizStateParsed): Promise<{ id
       birth_place_formatted_text: input.yourBirthLocation.formattedText,
       birth_place_lat: input.yourBirthLocation.lat,
       birth_place_lng: input.yourBirthLocation.long,
+      initial_sales_funnel_theme: funnelTheme,
     }),
   });
 

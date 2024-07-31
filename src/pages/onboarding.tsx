@@ -4,7 +4,7 @@ import { isProdMode } from "@utils/isProdMode";
 import { trackEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
-import { clearQuizState, saveQuizState } from "@utils/localStorage";
+import { clearStorage, saveToStorage } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 import {
   AreasOfInterestSlide,
@@ -39,7 +39,7 @@ export default function OnboardingQuiz() {
   useEffect(() => {
     setMounted(true);
     // reset state
-    clearQuizState();
+    clearStorage("quizstate");
     setUserProfile({ result: undefined, error: undefined, isLoading: false });
   }, []);
 
@@ -115,7 +115,7 @@ function QuizStateSaver() {
 
   useEffect(() => {
     const quizState = getTypedQuizState(q.slideStateByID);
-    saveQuizState(quizState);
+    saveToStorage("quizstate", quizState);
   }, [q.slideStateByID]);
 
   return null;
