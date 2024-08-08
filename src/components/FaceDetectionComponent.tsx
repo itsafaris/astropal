@@ -1,0 +1,173 @@
+import { Box, Image } from "@chakra-ui/react";
+import {
+  DrawingUtils,
+  FaceLandmarker,
+  FaceLandmarkerResult,
+  FilesetResolver,
+} from "@mediapipe/tasks-vision";
+import * as React from "react";
+
+export interface IFaceDetectionComponentProps {
+  imgFile?: File;
+}
+
+export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
+  const $canvas = React.useRef<HTMLCanvasElement>(null);
+  const [imgDataUrl, setImgDataUrl] = React.useState<string>();
+  const [faceLandmarker, setFaceLandmarker] = React.useState<FaceLandmarker>();
+  const [faceLandmarkerResult, setFaceLandmarkerResult] =
+    React.useState<FaceLandmarkerResult | null>(null);
+
+  React.useEffect(() => {
+    loadModels();
+  }, []);
+
+  React.useEffect(() => {
+    if (!props.imgFile) {
+      return;
+    }
+    readFileAsDataURL(props.imgFile).then((dataurl) => {
+      setImgDataUrl(dataurl);
+    });
+  }, [props.imgFile]);
+
+  React.useEffect(() => {
+    if (!faceLandmarkerResult) {
+      return;
+    }
+
+    const canvas = $canvas.current;
+    if (!canvas) {
+      console.error("canvas element not found");
+      return;
+    }
+
+    console.log($canvas.current.clientHeight);
+    console.log($canvas.current.clientWidth);
+    canvas.setAttribute("width", $canvas.current.clientHeight + "px");
+    canvas.setAttribute("height", $canvas.current.clientWidth + "px");
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("canvas ctx not found");
+      return;
+    }
+
+    const drawingUtils = new DrawingUtils(ctx);
+
+    for (const landmarks of faceLandmarkerResult.faceLandmarks) {
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_TESSELATION, {
+        color: "#42c99a",
+        lineWidth: 1,
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE, {
+        color: "#FF3030",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW, {
+        color: "#FF3030",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, {
+        color: "#30FF30",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW, {
+        color: "#30FF30",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_FACE_OVAL, {
+        color: "#45ffbe",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
+        color: "#E0E0E0",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS, {
+        color: "#FF3030",
+      });
+      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS, {
+        color: "#30FF30",
+      });
+    }
+  }, [faceLandmarkerResult]);
+
+  React.useEffect(() => {
+    if (!imgDataUrl) {
+      return;
+    }
+    setFaceLandmarkerResult(null);
+    createHTMLImageElement(imgDataUrl).then((img) => {
+      detectFeatures(img);
+    });
+  }, [imgDataUrl]);
+
+  async function loadModels() {
+    let f = await createFaceLandmarker();
+    setFaceLandmarker(f);
+  }
+
+  async function detectFeatures($image: HTMLImageElement) {
+    if (!faceLandmarker) {
+      console.log("Wait for faceLandmarker to load before clicking!");
+      return;
+    }
+
+    await faceLandmarker.setOptions({ runningMode: "IMAGE" });
+    const faceLandmarkerResult = faceLandmarker.detect($image);
+    setFaceLandmarkerResult(faceLandmarkerResult);
+  }
+
+  return (
+    <Box p={8}>
+      <Box position={"relative"} display={"inline-block"}>
+        {imgDataUrl && <Image src={imgDataUrl} width={500} />}
+        <canvas
+          ref={$canvas}
+          width={"800px"}
+          height={"999px"}
+          style={{
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            pointerEvents: "none",
+          }}
+        />
+      </Box>
+    </Box>
+  );
+}
+
+// Function to read file as data URL
+const readFileAsDataURL = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = (e) => resolve(reader.result as string);
+    reader.onerror = (e) => reject(e);
+    reader.readAsDataURL(file);
+  });
+};
+
+// Function to create HTMLImageElement
+const createHTMLImageElement = (dataUrl: string): Promise<HTMLImageElement> => {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image();
+    img.onload = () => resolve(img);
+    img.onerror = (e) => reject(e);
+    img.src = dataUrl;
+  });
+};
+
+async function createFaceLandmarker() {
+  const filesetResolver = await FilesetResolver.forVisionTasks(
+    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+  );
+  const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+    baseOptions: {
+      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+      delegate: "GPU",
+    },
+    outputFaceBlendshapes: true,
+    runningMode: "IMAGE",
+    numFaces: 1,
+  });
+
+  return faceLandmarker;
+}
