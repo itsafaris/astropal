@@ -1,11 +1,7 @@
 import { Box, Image } from "@chakra-ui/react";
-import {
-  DrawingUtils,
-  FaceLandmarker,
-  FaceLandmarkerResult,
-  FilesetResolver,
-} from "@mediapipe/tasks-vision";
+import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import * as React from "react";
+import { useServices } from "./root/RootWrapper";
 
 export interface IFaceDetectionComponentProps {
   imgFile?: File;
@@ -14,14 +10,11 @@ export interface IFaceDetectionComponentProps {
 export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
   const $canvas = React.useRef<HTMLCanvasElement>(null);
   const [imgDataUrl, setImgDataUrl] = React.useState<string>();
-  const [faceLandmarker, setFaceLandmarker] = React.useState<FaceLandmarker>();
+  const { faceLandmarker } = useServices();
+
   const [faceLandmarkerResult, setFaceLandmarkerResult] =
     React.useState<FaceLandmarkerResult | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    loadModels();
-  }, []);
 
   React.useEffect(() => {
     if (!props.imgFile) {
@@ -99,11 +92,6 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
     });
   }, [imgDataUrl]);
 
-  async function loadModels() {
-    let f = await createFaceLandmarker();
-    setFaceLandmarker(f);
-  }
-
   async function detectFeatures($image: HTMLImageElement) {
     if (!faceLandmarker) {
       console.log("Wait for faceLandmarker to load before clicking!");
@@ -176,20 +164,3 @@ const createHTMLImageElement = (dataUrl: string): Promise<HTMLImageElement> => {
     img.src = dataUrl;
   });
 };
-
-async function createFaceLandmarker() {
-  const filesetResolver = await FilesetResolver.forVisionTasks(
-    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
-  );
-  const faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
-    baseOptions: {
-      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
-      delegate: "GPU",
-    },
-    outputFaceBlendshapes: true,
-    runningMode: "IMAGE",
-    numFaces: 1,
-  });
-
-  return faceLandmarker;
-}
