@@ -17,6 +17,7 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
   const [faceLandmarker, setFaceLandmarker] = React.useState<FaceLandmarker>();
   const [faceLandmarkerResult, setFaceLandmarkerResult] =
     React.useState<FaceLandmarkerResult | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     loadModels();
@@ -91,6 +92,7 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
     if (!imgDataUrl) {
       return;
     }
+    setIsLoading(true);
     setFaceLandmarkerResult(null);
     createHTMLImageElement(imgDataUrl).then((img) => {
       detectFeatures(img);
@@ -116,7 +118,26 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
   return (
     <Box p={8}>
       <Box position={"relative"} display={"inline-block"}>
-        {imgDataUrl && <Image src={imgDataUrl} width={500} />}
+        {imgDataUrl && (
+          <Box position={"relative"}>
+            <Image src={imgDataUrl} width={500} />
+            {isLoading && (
+              <Box
+                width={"100%"}
+                animation={"handPoints 8s ease-in-out"}
+                bg="teal.300"
+                opacity={0.5}
+                position={"absolute"}
+                top={0}
+                left={0}
+                borderBottom={"4px solid green"}
+                onAnimationEnd={() => {
+                  setIsLoading(false);
+                }}
+              />
+            )}
+          </Box>
+        )}
         <canvas
           ref={$canvas}
           width={"800px"}
@@ -128,6 +149,7 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
             height: "100%",
             position: "absolute",
             pointerEvents: "none",
+            visibility: isLoading ? "hidden" : "visible",
           }}
         />
       </Box>
