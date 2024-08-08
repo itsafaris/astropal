@@ -3,6 +3,9 @@ body {
   font-size: 16px;
   scroll-behavior: smooth;
 }
+a {
+  text-decoration: underline;
+}
 
 @keyframes handPoints {
   0% {
