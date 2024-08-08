@@ -19,25 +19,16 @@ export function ProgressIndicator() {
     setColorOverrides(snap.currentSlide.quizContainerProps?.progressBar as any);
   }, [snap.currentSlide]);
 
-  const overallProgress = Math.ceil(((snap.currentIdx + 1) / snap.slideCount) * 100);
-
   const colorScheme = colorOverrides?.colorScheme ?? "brand";
   const activeSegmentBg = colorOverrides?.activeSegmentBg ?? "bg.200";
   const inactiveSegmentBg = colorOverrides?.inactiveSegmentBg ?? "bg.200";
   const textColor = colorOverrides?.textColor ?? "text.main";
-
-  if (snap.currentIdx === 0) {
-    return null;
-  }
 
   return (
     <Flex p={4} direction={"column"} gap={1} alignItems={"center"}>
       <Flex width={"full"} fontSize={"sm"} justifyContent={"space-between"}>
         <Text color={textColor} fontWeight={"bold"}>
           {snap.currentSegment?.title}
-        </Text>
-        <Text fontWeight={"bold"} color={textColor}>
-          {overallProgress}%
         </Text>
       </Flex>
       <Flex direction={"row"} gap={2} width={"100%"}>

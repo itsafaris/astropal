@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Progress, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import { SlidePropsLoading } from "../../public/types";
@@ -130,6 +130,7 @@ function SpinnerWihtText(props: SpinnerWihtTextProps) {
         <Text fontWeight={"semibold"} color="brand.900" fontSize={"lg"}>
           {loadingValue === to ? completedText ?? `${loadingValue}%` : `${loadingValue}%`}
         </Text>
+        <Progress width={"full"} value={loadingValue} colorScheme="brand" borderRadius={"full"} />
       </Flex>
     );
   }

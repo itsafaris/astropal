@@ -59,6 +59,9 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
       <Button
         as={Link}
         to="quiz"
+        size="lg"
+        border="4px solid"
+        borderColor={"brand.400"}
         textDecoration={"none"}
         my={10}
         width={"full"}
