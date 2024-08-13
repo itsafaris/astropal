@@ -25,10 +25,12 @@ import { CgInfinity } from "react-icons/cg";
 import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
 import { FaCheck, FaCircle, FaRegLightbulb } from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
 import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
+import { Link } from "gatsby";
 
 export default function SummaryPage() {
   return (
@@ -38,6 +40,7 @@ export default function SummaryPage() {
       <WhatsIncluded />
       <MoneyGuarantee />
       <UserReviews />
+      <Footer />
     </Container>
   );
 }
@@ -303,14 +306,14 @@ function UserReviews() {
     },
   ];
   return (
-    <Box my={8} ml={6}>
-      <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
+    <Box my={10}>
+      <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
         Why does everyone love <Span color="blue.600">{meta.brandName}</Span>?
       </Heading>
       <VStack spacing={8}>
         {reviews.map((review) => {
           return (
-            <Flex bg="blue.50" p={4} borderRadius={"xl"} gap={0}>
+            <Flex bg="blue.50" p={4} borderRadius={"xl"} gap={0} ml={6}>
               <Flex
                 alignItems={"center"}
                 width={"80px"}
@@ -337,6 +340,25 @@ function UserReviews() {
           );
         })}
       </VStack>
+    </Box>
+  );
+}
+
+function Footer() {
+  const meta = useSiteMetadata();
+  return (
+    <Box textAlign={"center"} py={8}>
+      <Text>Questions? We're here to help.</Text>
+      <Flex gap={2} my={2}>
+        <Button as={Link} to="/customer-support" variant="text" leftIcon={<Icon as={BiSupport} />}>
+          Customer Support
+        </Button>
+        <Button as={Link} to="/customer-support" variant="text" leftIcon={<Icon as={BiSupport} />}>
+          Help Center
+        </Button>
+      </Flex>
+      <Text fontSize={"xs"}>© 2024 {meta.brandName} America Inc.</Text>
+      <Text fontSize={"xs"}>2542 Platte Pl, Colorado Springs, CO 80909, US</Text>
     </Box>
   );
 }
