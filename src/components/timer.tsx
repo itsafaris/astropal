@@ -41,33 +41,26 @@ export function Timer() {
 
   return (
     <Flex
+      display={"inline-flex"}
       flexDirection="row"
       alignItems="center"
-      justifyContent="space-between"
-      width={"85px"}
+      justifyContent="center"
+      width={"60px"}
       color="inherit"
     >
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text fontWeight="bold" fontSize={"2xl"} lineHeight={1} textAlign={"center"}>
+        <Text fontWeight="bold" fontSize={"lg"} lineHeight={1} textAlign={"center"}>
           {readableTime.minutes}
-        </Text>
-
-        <Text fontSize={"7px"} lineHeight={1} textAlign={"center"} fontWeight={"bold"}>
-          MINUTES
         </Text>
       </Flex>
 
-      <Text fontWeight={"bold"} fontSize={"xl"} lineHeight={1}>
+      <Text fontWeight={"bold"} fontSize={"lg"} lineHeight={1}>
         :
       </Text>
 
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text fontWeight="bold" fontSize={"2xl"} lineHeight={1} textAlign={"center"}>
+        <Text fontWeight="bold" fontSize={"lg"} lineHeight={1} textAlign={"center"}>
           {readableTime.seconds}
-        </Text>
-
-        <Text fontSize={"7px"} fontWeight={"bold"} lineHeight={1} textAlign={"center"}>
-          SECONDS
         </Text>
       </Flex>
     </Flex>

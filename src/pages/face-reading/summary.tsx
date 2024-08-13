@@ -31,6 +31,8 @@ import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
+import { Timer } from "@components/timer";
+import { useEffect, useState } from "react";
 
 export default function SummaryPage() {
   return (
@@ -41,6 +43,7 @@ export default function SummaryPage() {
       <MoneyGuarantee />
       <UserReviews />
       <Footer />
+      <CTABanner />
     </Container>
   );
 }
@@ -360,5 +363,46 @@ function Footer() {
       <Text fontSize={"xs"}>© 2024 {meta.brandName} America Inc.</Text>
       <Text fontSize={"xs"}>2542 Platte Pl, Colorado Springs, CO 80909, US</Text>
     </Box>
+  );
+}
+
+function CTABanner() {
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("scroll", (e) => {
+      if (window.scrollY > 500) {
+        setShowBanner(true);
+      } else {
+        setShowBanner(false);
+      }
+    });
+  }, []);
+
+  return (
+    <Flex
+      position={"fixed"}
+      width={"100%"}
+      left={0}
+      bottom={showBanner ? 0 : "-100px"}
+      zIndex={10}
+      transition={"all 500ms"}
+      bg="blue.50"
+      borderTop={"2px solid"}
+      borderColor={"blue.300"}
+      p={1}
+    >
+      <Container as={Flex} alignItems={"center"} justifyContent={"center"}>
+        <Box>
+          <Text as="span" fontWeight={"bold"} fontSize={"sm"}>
+            Your personalized offer reserved
+          </Text>
+          <Timer />
+        </Box>
+        <Button colorScheme="blue" flexShrink={0}>
+          Get my prediction
+        </Button>
+      </Container>
+    </Flex>
   );
 }
