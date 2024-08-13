@@ -4,6 +4,7 @@ import "../../styles/global.css";
 import { GlobalHead } from "./head";
 import { loadFromStorage, saveToStorage } from "@utils/localStorage";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
+import { donationPricingPlans } from "@utils/pricingPlans";
 
 export interface IRootWrapperProps {}
 
@@ -21,6 +22,7 @@ const GlobalUpdateContext = React.createContext<
 type TypedGlobalState = {
   funnelTheme?: "relationships" | "loneliness";
   faceImageDataUrl?: string;
+  selectedPricingPlan?: string;
 };
 
 export type ServicesCtx = {
@@ -36,10 +38,9 @@ export const useGlobalUpdate2 = () => React.useContext(GlobalUpdateContext);
 /** Wraps every page but is not re-mounted when chaning pages */
 export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
-  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>(
-    // wtf why i have to do this
-    null as unknown as {}
-  );
+  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
+    selectedPricingPlan: donationPricingPlans[0].id,
+  });
   const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
 
   function setInGlobalState(id: string, value: (value: any) => any) {
