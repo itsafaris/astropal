@@ -8,7 +8,6 @@ import { clearStorage, saveToStorage } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 
 import { useUserProfileState } from "src/appState";
-import posthog from "posthog-js";
 import {
   YourGenderSlide,
   YourBirthDateSlide,
@@ -18,7 +17,10 @@ import {
   DecisionMaking,
   LoadingSimilarPeople,
   IntroToScan,
+  EmailSlide,
 } from "@components/faceReading/slides";
+import { FaceScanSlide } from "@components/faceReading/faceScanSlide";
+import { FaceScanAnalysisSlide } from "@components/faceReading/faceScanAnalysisSlide";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -87,6 +89,9 @@ export default function FaceReadingPage() {
           <DecisionMaking />
           <LoadingSimilarPeople />
           <IntroToScan />
+          <FaceScanSlide />
+          <FaceScanAnalysisSlide />
+          <EmailSlide />
         </Segment>
       </QuizUI>
     </QuizProvider>

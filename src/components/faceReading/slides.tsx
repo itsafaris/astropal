@@ -1,8 +1,12 @@
-import { Box, Icon, keyframes, Text } from "@chakra-ui/react";
-import { NextButton, SlideHeading, Span } from "@components/quizpage/components";
-import { Selector, Slide } from "@martynasj/quiz-lib/index";
+import { Box, Flex, Icon, keyframes, Text } from "@chakra-ui/react";
+import { Caption, NextButton, SlideHeading, Span } from "@components/quizpage/components";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
+import { Selector, Slide, useQuiz, useQuizContext } from "@martynasj/quiz-lib/index";
+import { getTypedQuizState } from "@utils/state";
+import { trackPixel } from "@utils/tracking";
+import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import React from "react";
+import posthog from "posthog-js";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 
@@ -81,8 +85,6 @@ export function YourGenderSlide() {
 }
 
 export function YourBirthDateSlide() {
-  // const { submitQuestion } = useQuiz();
-
   return (
     <Slide id="your-birth-date" type="date">
       <SlideHeading mb={2}>What is your date of birth?</SlideHeading>
@@ -95,13 +97,7 @@ export function YourBirthDateSlide() {
         src="../../../images/calendar_pencil.png"
       />
       <Selector />
-      <NextButton
-        onClick={() => {
-          // submitQuestion();
-        }}
-      >
-        Continue
-      </NextButton>
+      <NextButton>Continue</NextButton>
     </Slide>
   );
 }
@@ -141,7 +137,6 @@ export function LifeArea() {
         Which aspects of life do you wish to gain insights into with face reading?
       </SlideHeading>
       <Selector />
-      <NextButton>Continue</NextButton>
     </Slide>
   );
 }
@@ -162,7 +157,6 @@ export function ElementSlide() {
     >
       <SlideHeading>Which element resonates with you the most?</SlideHeading>
       <Selector />
-      <NextButton>Continue</NextButton>
     </Slide>
   );
 }
@@ -182,7 +176,6 @@ export function DecisionMaking() {
     >
       <SlideHeading>Do you make decisions with your head or heart?</SlideHeading>
       <Selector />
-      <NextButton>Continue</NextButton>
     </Slide>
   );
 }
@@ -247,5 +240,62 @@ export function IntroToScan() {
         🔒 No biometric data is collected. All recognition processes are performed on your device.
       </Text>
     </Slide>
+  );
+}
+
+export function EmailSlide() {
+  return (
+    <Slide id="your-email" type="email" placeholder="Enter your email">
+      <EmailSlide_ />
+    </Slide>
+  );
+}
+function EmailSlide_() {
+  const { submitQuestion } = useQuiz();
+  const quizState = useQuizContext();
+  const meta = useSiteMetadata();
+
+  return (
+    <Flex height={"100%"} position={"relative"} flexDirection={"column"}>
+      <SlideHeading color="text.main" mb={8} textAlign={"center"} fontWeight={"bold"}>
+        Ready for insights into your love, life, and emotions?
+      </SlideHeading>
+
+      <Text>
+        <Span fontWeight={"bold"}>Share* your email</Span> so you don't lose all your information
+      </Text>
+
+      <Selector mt={4} mb={2} />
+
+      <Caption mt={0} mb={7} fontSize={"xs"}>
+        *{meta.brandName} does not share any personal information. We'll email you a copy of your
+        program for convenient access.
+      </Caption>
+
+      <NextButton
+        onClick={async () => {
+          const result = submitQuestion();
+          // validation failed
+          if (!result) {
+            return;
+          }
+
+          const parsedQuizState = getTypedQuizState(quizState);
+
+          posthog.identify(parsedQuizState.email);
+          trackPixel("Lead", {});
+
+          navigate("/face-reading/summary");
+        }}
+      >
+        Continue
+      </NextButton>
+
+      <Text position={"sticky"} fontSize={"xs"} mt={8} textAlign={"center"}>
+        By continuing, I agree to {meta.brandName}'s{" "}
+        <Link to="/privacy-policy">Privacy policy</Link> and{" "}
+        <Link to="/terms-and-conditions">Terms & Conditions</Link>
+      </Text>
+    </Flex>
   );
 }

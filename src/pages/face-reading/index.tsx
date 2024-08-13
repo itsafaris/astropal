@@ -56,17 +56,19 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
           <TagLabel>Personalized guide</TagLabel>
         </Tag>
       </Flex>
+
       <Button
         as={Link}
+        display={"flex"}
         to="quiz"
         size="lg"
         border="4px solid"
         borderColor={"brand.400"}
         textDecoration={"none"}
         my={10}
+        mx="auto"
         width={"full"}
         maxWidth={"md"}
-        mx="auto"
         colorScheme="brand"
         rightIcon={<LuArrowRight />}
       >

@@ -20,6 +20,7 @@ const GlobalUpdateContext = React.createContext<
 
 type TypedGlobalState = {
   funnelTheme?: "relationships" | "loneliness";
+  faceImageDataUrl?: string;
 };
 
 export type ServicesCtx = {

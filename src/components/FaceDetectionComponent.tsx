@@ -1,43 +1,80 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Flex, Icon, Image, Progress, Text } from "@chakra-ui/react";
 import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import * as React from "react";
 import { useServices } from "./root/RootWrapper";
+import { dataUrlToHtmlImageElement } from "@utils/image";
+import { FaCheck } from "react-icons/fa";
 
 export interface IFaceDetectionComponentProps {
-  imgFile?: File;
+  imgDataUrl?: string;
+  onAnalysisComplete?: () => void;
 }
 
-export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
+type FaceReadingStateInitial = {
+  type: "initial";
+  faceLandmarkerResult?: FaceLandmarkerResult;
+};
+
+type FaceReadingStateScanning = {
+  type: "scanning";
+  faceLandmarkerResult?: FaceLandmarkerResult;
+};
+
+type FaceReadingStateInterpreting = {
+  type: "interpreting";
+  phase: number;
+  faceLandmarkerResult?: FaceLandmarkerResult;
+};
+
+type FaceReadingStateDone = {
+  type: "done";
+  faceLandmarkerResult?: FaceLandmarkerResult;
+};
+
+type FaceReadingState =
+  | FaceReadingStateInitial
+  | FaceReadingStateScanning
+  | FaceReadingStateInterpreting
+  | FaceReadingStateDone;
+
+export function FaceDetectionComponent({
+  imgDataUrl,
+  onAnalysisComplete,
+}: IFaceDetectionComponentProps) {
   const $canvas = React.useRef<HTMLCanvasElement>(null);
-  const [imgDataUrl, setImgDataUrl] = React.useState<string>();
   const { faceLandmarker } = useServices();
 
-  const [faceLandmarkerResult, setFaceLandmarkerResult] =
-    React.useState<FaceLandmarkerResult | null>(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [faceReadingState, setFaceReadingState] = React.useState<FaceReadingState>({
+    type: "initial",
+  });
 
   React.useEffect(() => {
-    if (!props.imgFile) {
+    if (!faceReadingState.faceLandmarkerResult) {
       return;
     }
-    readFileAsDataURL(props.imgFile).then((dataurl) => {
-      setImgDataUrl(dataurl);
+    drawResults(faceReadingState.faceLandmarkerResult);
+  }, [faceReadingState.faceLandmarkerResult]);
+
+  React.useEffect(() => {
+    if (!imgDataUrl) {
+      return;
+    }
+    if (!faceLandmarker) {
+      return;
+    }
+    setFaceReadingState({ type: "scanning", faceLandmarkerResult: undefined });
+    dataUrlToHtmlImageElement(imgDataUrl).then((img) => {
+      detectFeatures(img);
     });
-  }, [props.imgFile]);
+  }, [imgDataUrl, faceLandmarker]);
 
-  React.useEffect(() => {
-    if (!faceLandmarkerResult) {
-      return;
-    }
-
+  async function drawResults(result: FaceLandmarkerResult) {
     const canvas = $canvas.current;
     if (!canvas) {
       console.error("canvas element not found");
       return;
     }
 
-    console.log($canvas.current.clientHeight);
-    console.log($canvas.current.clientWidth);
     canvas.setAttribute("width", $canvas.current.clientHeight + "px");
     canvas.setAttribute("height", $canvas.current.clientWidth + "px");
 
@@ -49,48 +86,13 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
 
     const drawingUtils = new DrawingUtils(ctx);
 
-    for (const landmarks of faceLandmarkerResult.faceLandmarks) {
+    for (const landmarks of result.faceLandmarks) {
       drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_TESSELATION, {
         color: "#42c99a",
         lineWidth: 1,
       });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE, {
-        color: "#FF3030",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW, {
-        color: "#FF3030",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, {
-        color: "#30FF30",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW, {
-        color: "#30FF30",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_FACE_OVAL, {
-        color: "#45ffbe",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
-        color: "#E0E0E0",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS, {
-        color: "#FF3030",
-      });
-      drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS, {
-        color: "#30FF30",
-      });
     }
-  }, [faceLandmarkerResult]);
-
-  React.useEffect(() => {
-    if (!imgDataUrl) {
-      return;
-    }
-    setIsLoading(true);
-    setFaceLandmarkerResult(null);
-    createHTMLImageElement(imgDataUrl).then((img) => {
-      detectFeatures(img);
-    });
-  }, [imgDataUrl]);
+  }
 
   async function detectFeatures($image: HTMLImageElement) {
     if (!faceLandmarker) {
@@ -100,19 +102,28 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
 
     await faceLandmarker.setOptions({ runningMode: "IMAGE" });
     const faceLandmarkerResult = faceLandmarker.detect($image);
-    setFaceLandmarkerResult(faceLandmarkerResult);
+    setFaceReadingState((s) => ({ ...s, faceLandmarkerResult }));
   }
 
   return (
     <Box p={8}>
-      <Box position={"relative"} display={"inline-block"}>
+      <Box
+        position={"relative"}
+        display={"inline-block"}
+        transform={faceReadingState.type === "interpreting" ? "scale(0.6)" : "scale(1)"}
+        transformOrigin={"top center"}
+        transition={"transform 2s"}
+        onTransitionEnd={() => {
+          setFaceReadingState((s) => ({ ...s, phase: 1 }));
+        }}
+      >
         {imgDataUrl && (
           <Box position={"relative"}>
-            <Image src={imgDataUrl} width={500} />
-            {isLoading && (
+            <Image src={imgDataUrl} width={600} />
+            {faceReadingState.type === "scanning" && (
               <Box
                 width={"100%"}
-                animation={"handPoints 8s ease-in-out"}
+                animation={"handPoints 3s ease-in-out"}
                 bg="teal.300"
                 opacity={0.5}
                 position={"absolute"}
@@ -120,7 +131,7 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
                 left={0}
                 borderBottom={"4px solid green"}
                 onAnimationEnd={() => {
-                  setIsLoading(false);
+                  setFaceReadingState({ type: "interpreting", phase: 0 });
                 }}
               />
             )}
@@ -137,30 +148,61 @@ export function FaceDetectionComponent(props: IFaceDetectionComponentProps) {
             height: "100%",
             position: "absolute",
             pointerEvents: "none",
-            visibility: isLoading ? "hidden" : "visible",
+            visibility: faceReadingState.type === "scanning" ? "hidden" : "visible",
           }}
         />
+      </Box>
+      <Box>
+        {faceReadingState.type === "interpreting" && (
+          <Box position={"relative"} top={-20}>
+            {faceReadingState.phase === 0 ? null : (
+              <LoadingComponent onComplete={onAnalysisComplete} />
+            )}
+          </Box>
+        )}
       </Box>
     </Box>
   );
 }
 
-// Function to read file as data URL
-const readFileAsDataURL = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = (e) => resolve(reader.result as string);
-    reader.onerror = (e) => reject(e);
-    reader.readAsDataURL(file);
-  });
-};
+function LoadingComponent({ onComplete }: { onComplete?: () => void }) {
+  const [phase, setPhase] = React.useState(0);
 
-// Function to create HTMLImageElement
-const createHTMLImageElement = (dataUrl: string): Promise<HTMLImageElement> => {
-  return new Promise((resolve, reject) => {
-    const img = new window.Image();
-    img.onload = () => resolve(img);
-    img.onerror = (e) => reject(e);
-    img.src = dataUrl;
-  });
-};
+  React.useEffect(() => {
+    startAnalysisPhases();
+  }, []);
+
+  async function startAnalysisPhases() {
+    const i = setInterval(() => {
+      setPhase((v) => {
+        const next = v + 1;
+        if (next > 100) {
+          clearInterval(i);
+          onComplete?.();
+        }
+        return next;
+      });
+    }, 50);
+  }
+
+  return (
+    <Box>
+      <Progress value={phase} borderRadius={"full"} colorScheme="brand" mb={2} />
+      <Flex direction={"column"} gap={3} fontWeight={"bold"}>
+        <LoadingListItem isComplete={phase >= 25} text="Reading the face data"></LoadingListItem>
+        <LoadingListItem isComplete={phase >= 50} text="Analysing results" />
+        <LoadingListItem isComplete={phase >= 75} text="Forecasting destiny" />
+        <LoadingListItem isComplete={phase >= 100} text="Results are ready" />
+      </Flex>
+    </Box>
+  );
+}
+
+function LoadingListItem({ isComplete, text }: { isComplete?: boolean; text: string }) {
+  return (
+    <Flex gap={2} alignItems={"center"}>
+      <Icon as={FaCheck} color={isComplete ? "green.500" : "text.200"} />
+      <Text color={isComplete ? "text" : "text.200"}>{text}</Text>
+    </Flex>
+  );
+}

@@ -114,6 +114,8 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const ctx = canvas.getContext("2d")!;
+    ctx!.translate(canvas.width, 0);
+    ctx!.scale(-1, 1); // flip horizontally
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     const dataUrl = canvas.toDataURL("image/png");
     props.onCaptureImage?.(dataUrl, faceLandmarkerResult.current!);
@@ -175,25 +177,19 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
             </Text>
           </Flex>
         )}
-
-        <Flex
-          position={"absolute"}
-          bottom={0}
-          left={0}
-          width={"full"}
-          p={6}
-          justifyContent={"center"}
-        >
-          <Button
-            isDisabled={resultsState !== "ok"}
-            onClick={() => {
-              captureImage();
-            }}
-          >
-            Capture
-          </Button>
-        </Flex>
       </Box>
+
+      <Flex width={"full"} p={2} justifyContent={"center"}>
+        <Button
+          isDisabled={resultsState !== "ok"}
+          colorScheme="brand"
+          onClick={() => {
+            captureImage();
+          }}
+        >
+          Capture
+        </Button>
+      </Flex>
     </Box>
   );
 }
