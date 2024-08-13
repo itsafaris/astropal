@@ -22,15 +22,22 @@ import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
 import { StaticImage } from "gatsby-plugin-image";
 import { CgInfinity } from "react-icons/cg";
-import { PiChatCircleDotsFill } from "react-icons/pi";
-import { MdOutlineGroupAdd } from "react-icons/md";
-import { FaCheck, FaCircle } from "react-icons/fa";
+import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
+import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
+import { FaCheck, FaCircle, FaRegLightbulb } from "react-icons/fa";
+import { TbFaceId } from "react-icons/tb";
+import { GiOppositeHearts } from "react-icons/gi";
+import { LuCalendarCheck } from "react-icons/lu";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
 
 export default function SummaryPage() {
   return (
     <Container py={4}>
       <HeroSection />
       <HowItWorks />
+      <WhatsIncluded />
+      <MoneyGuarantee />
+      <UserReviews />
     </Container>
   );
 }
@@ -180,8 +187,8 @@ function HowItWorks() {
   ];
 
   return (
-    <Box p={4} maxWidth="400px" margin="auto">
-      <Heading as="h1" size="xl" mb={6} textAlign="center">
+    <Box p={4} my={8}>
+      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
         How does Hint work?
       </Heading>
       <Stepper index={2} orientation="vertical" gap={0}>
@@ -205,6 +212,131 @@ function HowItWorks() {
           </Step>
         ))}
       </Stepper>
+    </Box>
+  );
+}
+
+function WhatsIncluded() {
+  return (
+    <Box my={8}>
+      <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
+        What's included?
+      </Heading>
+      <VStack
+        spacing={4}
+        alignItems={"start"}
+        p={4}
+        bg="blue.50"
+        border="1px solid"
+        borderColor={"blue.200"}
+        borderRadius={"lg"}
+      >
+        <Flex alignItems={"center"} gap={2}>
+          <Icon as={TbFaceId} fontSize={"2xl"} />
+          <Text>
+            <Span fontWeight={"bold"}>Unlimited</Span> face readings
+          </Text>
+        </Flex>
+        <Flex alignItems={"center"} gap={2}>
+          <Icon as={PiChatsCircleDuotone} fontSize={"2xl"} />
+          <Text>
+            <Span fontWeight={"bold"}>1:1 live chats</Span> with professional astrologers
+          </Text>
+        </Flex>
+        <Flex alignItems={"center"} gap={2}>
+          <Icon as={GiOppositeHearts} fontSize={"2xl"} />
+          <Text>
+            <Span fontWeight={"bold"}>Daily compatibility</Span> readings
+          </Text>
+        </Flex>
+        <Flex alignItems={"center"} gap={2}>
+          <Icon as={FaRegLightbulb} fontSize={"2xl"} />
+          Cosmic <Span fontWeight={"bold"}>relationship tips</Span>
+        </Flex>
+        <Flex alignItems={"center"} gap={2}>
+          <Icon as={LuCalendarCheck} fontSize={"2xl"} />
+          <Span fontWeight={"bold"}>Daily horoscopes</Span>
+        </Flex>
+      </VStack>
+    </Box>
+  );
+}
+
+function MoneyGuarantee() {
+  return (
+    <Box bg="green.50" p={3} textAlign={"center"}>
+      <Flex alignItems={"center"} color="green.600" mb={2} justifyContent={"center"} gap={2}>
+        <Icon fontSize={"2xl"} as={MdVerified} />
+        <Text fontSize={"lg"} fontWeight={"bold"}>
+          100% Money-back Guarantee
+        </Text>
+      </Flex>
+      <Text>
+        If you don't notice any progress after using the app for at least a week, we are ready to
+        make a complete refund within 14 days.
+      </Text>
+    </Box>
+  );
+}
+
+function UserReviews() {
+  const meta = useSiteMetadata();
+
+  const reviews = [
+    {
+      title: "It's changed my life!",
+      text: `I'm thankful for this app and Akho! She's an excellent palm reader and astrologer—clear, thorough, and reassuring. I eagerly look forward to more sessions with her!`,
+      name: "Rebecca Bauman",
+      image: <StaticImage alt="user image" src="../../images/user11.png" width={100} />,
+    },
+    {
+      title: "After years of seeking, I've finally found a true love.",
+      text: `I was hesitant about whether it was really worth trying, but now I have no regrets and I'm enjoying my new relationships!`,
+      name: "Mika Ryan",
+      image: <StaticImage alt="user image" src="../../images/user12.png" width={100} />,
+    },
+    {
+      title: "I've found a job I really enjoy.",
+      text: `Thanks to Vladana, I've finally discovered a clue about what my life's purpose really is and what kind of job resonates with me better!`,
+      name: "Amanda Holmes",
+      image: <StaticImage alt="user image" src="../../images/user13.png" width={100} />,
+    },
+  ];
+  return (
+    <Box my={8} ml={6}>
+      <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
+        Why does everyone love <Span color="blue.600">{meta.brandName}</Span>?
+      </Heading>
+      <VStack spacing={8}>
+        {reviews.map((review) => {
+          return (
+            <Flex bg="blue.50" p={4} borderRadius={"xl"} gap={0}>
+              <Flex
+                alignItems={"center"}
+                width={"80px"}
+                height={"80px"}
+                flexShrink={0}
+                borderRadius={"lg"}
+                overflow={"hidden"}
+                position={"relative"}
+                left={-8}
+                top={-6}
+              >
+                {review.image}
+              </Flex>
+              <Box flex={1} ml={-4}>
+                <Text fontWeight={"bold"} mb={2}>
+                  {review.title}
+                </Text>
+                <Text fontSize={"sm"}>{review.text}</Text>
+                <Text fontSize={"xs"} mt={2}>
+                  {review.name}
+                </Text>
+              </Box>
+            </Flex>
+          );
+        })}
+      </VStack>
     </Box>
   );
 }
