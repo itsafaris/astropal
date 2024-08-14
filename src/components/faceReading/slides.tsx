@@ -1,14 +1,24 @@
 import { Box, Flex, Icon, keyframes, Text } from "@chakra-ui/react";
 import { Caption, NextButton, SlideHeading, Span } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Selector, Slide, useQuiz, useQuizContext } from "@martynasj/quiz-lib/index";
-import { getTypedQuizState } from "@utils/state";
+import {
+  Selector,
+  Slide,
+  useQuiz,
+  useQuizActions,
+  useQuizContext,
+  useQuizState,
+} from "@martynasj/quiz-lib/index";
+import { eden } from "@utils/coreApi";
 import { trackPixel } from "@utils/tracking";
 import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import posthog from "posthog-js";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
+import { getTypedQuizState, QuizStateTyped } from "./quizState";
+import { useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useState } from "react";
 
 const PULSE_ANIMATION_2 = keyframes`
   0% { box-shadow: 0 0 0 0px #805ad5; }
@@ -85,6 +95,58 @@ export function YourGenderSlide() {
 }
 
 export function YourBirthDateSlide() {
+  const { submitQuestion, checkQuestion } = useQuizActions();
+  const { quizState } = useQuizState();
+  const [userProfile, setUserProfile] = useState<{
+    isLoading?: boolean;
+    result?: { id: string } | null;
+    error?: any;
+  }>({});
+  const update = useGlobalUpdate2();
+
+  const typedState = getTypedQuizState(quizState);
+
+  async function createUser(input: QuizStateTyped) {
+    setUserProfile({ isLoading: true, result: undefined, error: undefined });
+
+    eden("/createNewUser", {
+      method: "POST",
+      body: {
+        gender: input.yourGender as any,
+        current_tz_id: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        dob_local_year: input.yourBirthDate.year,
+        dob_local_month: input.yourBirthDate.month - 1,
+        dob_local_date: input.yourBirthDate.day,
+        dob_local_hour: input.yourBirthTime.time24.hour,
+        dob_local_minute: input.yourBirthTime.time24.minute,
+        birth_place_place_id: input.yourBirthLocation.placeID,
+        birth_place_formatted_text: input.yourBirthLocation.formattedText,
+        birth_place_lat: input.yourBirthLocation.lat,
+        birth_place_lng: input.yourBirthLocation.long,
+      },
+    })
+      .then((result) => {
+        if (!result.data) {
+          return;
+        }
+        update((s) => ({ ...s, userProfile: result.data }));
+        submitQuestion();
+      })
+      .catch((err) => {
+        console.error(err);
+        setUserProfile({ isLoading: false, error: err, result: undefined });
+      });
+  }
+
+  function submit() {
+    const r = checkQuestion();
+    if (!r) {
+      return;
+    }
+
+    void createUser(typedState);
+  }
+
   return (
     <Slide id="your-birth-date" type="date">
       <SlideHeading mb={2}>What is your date of birth?</SlideHeading>
@@ -97,7 +159,13 @@ export function YourBirthDateSlide() {
         src="../../../images/calendar_pencil.png"
       />
       <Selector />
-      <NextButton>Continue</NextButton>
+      <NextButton
+        isLoading={userProfile.isLoading}
+        isDisabled={!!userProfile.error}
+        onClick={submit}
+      >
+        Continue
+      </NextButton>
     </Slide>
   );
 }

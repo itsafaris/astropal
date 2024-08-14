@@ -30,9 +30,9 @@ import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import { Timer } from "@components/timer";
-import { useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 export default function SummaryPage() {
   return (
@@ -155,9 +155,9 @@ function HeroSection() {
         </Text>
       </HStack>
 
-      <Button colorScheme="blue" width="100%" size="lg" mb={4}>
+      <CTAButton width="100%" size="lg" mb={4}>
         Get My Prediction
-      </Button>
+      </CTAButton>
 
       <HStack justifyContent="center">
         <Icon as={MdOutlineGroupAdd} color="gray.500" fontSize={"xl"} />
@@ -399,10 +399,23 @@ function CTABanner() {
           </Text>
           <Timer />
         </Box>
-        <Button colorScheme="blue" flexShrink={0}>
-          Get my prediction
-        </Button>
+        <CTAButton>Get my prediction</CTAButton>
       </Container>
     </Flex>
+  );
+}
+
+function CTAButton(props: ComponentProps<typeof Button>) {
+  return (
+    <Button
+      colorScheme="blue"
+      flexShrink={0}
+      {...props}
+      onClick={() => {
+        navigate("/face-reading/checkout");
+      }}
+    >
+      Get my prediction
+    </Button>
   );
 }

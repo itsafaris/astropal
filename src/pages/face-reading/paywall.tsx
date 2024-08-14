@@ -1,9 +1,9 @@
 import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
-import { donationPricingPlans } from "@utils/pricingPlans";
 import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
+import { sortBy } from "lodash";
 
 export interface IPaywallPageProps {}
 
@@ -11,6 +11,10 @@ export default function PaywallPage(props: IPaywallPageProps) {
   const meta = useSiteMetadata();
   const globalState = useGlobalState2();
   const updateState = useGlobalUpdate2();
+
+  const trialPricingPlan = globalState.trialPricingPlan?.oneTimeFee ?? [];
+  const donationPrices = sortBy([...trialPricingPlan], (it) => it.unit_amount, "desc");
+  const compensationPrice = donationPrices[donationPrices.length - 1];
 
   return (
     <Container as={Flex} direction={"column"} alignItems={"center"} justifyContent={"center"}>
@@ -32,27 +36,29 @@ export default function PaywallPage(props: IPaywallPageProps) {
       </Box>
 
       <Flex gap={2} my={8}>
-        {donationPricingPlans.map((plan) => {
+        {donationPrices.map((price) => {
           return (
             <Button
-              key={plan.price}
+              key={price.priceID}
               size="lg"
               px={2}
               variant={"outline"}
               borderWidth={2}
-              borderColor={globalState.selectedPricingPlan === plan.id ? "brand.600" : "gray.300"}
+              borderColor={
+                globalState.selectedPricingPlan === price.priceID ? "brand.600" : "gray.300"
+              }
               onClick={() => {
-                updateState((s) => ({ ...s, selectedPricingPlan: plan.id }));
+                updateState((s) => ({ ...s, selectedPricingPlan: price.priceID }));
               }}
             >
-              ${plan.price.toFixed(2)}
+              ${(price.unit_amount / 100).toFixed(2)}
             </Button>
           );
         })}
       </Flex>
       <Text fontSize={"sm"} fontWeight={"bold"} textAlign={"center"}>
-        It costs us €13.21 to compensate our Hint employees for the trial, but please choose the
-        amount you are comfortable with.
+        It costs us ${compensationPrice?.unit_amount / 100} to compensate our {meta.brandName}{" "}
+        employees for the trial, but please choose the amount you are comfortable with.
       </Text>
 
       <Button

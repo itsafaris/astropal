@@ -4,7 +4,8 @@ import "../../styles/global.css";
 import { GlobalHead } from "./head";
 import { loadFromStorage, saveToStorage } from "@utils/localStorage";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
-import { donationPricingPlans } from "@utils/pricingPlans";
+import { getTrialPricingPlan, TrialPricingPlan } from "@utils/coreApi";
+import { orderBy } from "lodash";
 
 export interface IRootWrapperProps {}
 
@@ -19,10 +20,16 @@ const GlobalUpdateContext = React.createContext<
   React.Dispatch<React.SetStateAction<TypedGlobalState>>
 >(null as any);
 
-type TypedGlobalState = {
+export type UserProfileState = {
+  id: string;
+};
+
+export type TypedGlobalState = {
   funnelTheme?: "relationships" | "loneliness";
   faceImageDataUrl?: string;
   selectedPricingPlan?: string;
+  trialPricingPlan?: TrialPricingPlan;
+  userProfile?: UserProfileState;
 };
 
 export type ServicesCtx = {
@@ -38,9 +45,7 @@ export const useGlobalUpdate2 = () => React.useContext(GlobalUpdateContext);
 /** Wraps every page but is not re-mounted when chaning pages */
 export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
-  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
-    selectedPricingPlan: donationPricingPlans[0].id,
-  });
+  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({});
   const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
 
   function setInGlobalState(id: string, value: (value: any) => any) {
@@ -59,6 +64,21 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
       saveToStorage("globalState", typedGlobalState);
     }
   }, [typedGlobalState]);
+
+  React.useEffect(() => {
+    getTrialPricingPlan()
+      .then((res) => {
+        const ordered = orderBy(res.oneTimeFee, (it) => it.unit_amount);
+        setTypedGlobalState((s) => ({
+          ...s,
+          trialPricingPlan: res,
+          selectedPricingPlan: ordered[0]?.priceID,
+        }));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
 
   React.useEffect(() => {
     loadModels();

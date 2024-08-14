@@ -1,22 +1,3 @@
-export const donationPricingPlans = [
-  {
-    id: "1",
-    price: 0.52,
-  },
-  {
-    id: "2",
-    price: 5,
-  },
-  {
-    id: "3",
-    price: 9,
-  },
-  {
-    id: "4",
-    price: 13.21,
-  },
-];
-
 export type PricingPlanType = {
   id: string;
   title: string;

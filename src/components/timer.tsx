@@ -44,7 +44,7 @@ export function Timer() {
       display={"inline-flex"}
       flexDirection="row"
       alignItems="center"
-      justifyContent="center"
+      justifyContent="start"
       width={"60px"}
       color="inherit"
     >
