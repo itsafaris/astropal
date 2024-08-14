@@ -1,10 +1,17 @@
+import { edenFetch } from "@elysiajs/eden";
 import { QuizStateParsed } from "./state";
+import { CoreClientType } from "@astropal/api-client";
+import { siteConfig } from "src/conf";
+
+export const eden = edenFetch<CoreClientType>(siteConfig.coreApiHost);
+
+export type TrialPricingPlan = Awaited<ReturnType<typeof getTrialPricingPlan>>;
 
 export async function createNewUserProfile(
   input: QuizStateParsed,
   funnelTheme?: "relationships" | "loneliness"
 ): Promise<{ id: string }> {
-  const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNewUser`, {
+  const r = await fetch(`${siteConfig.coreApiHost}/createNewUser`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +40,7 @@ export async function createNewUserProfile(
 }
 
 export async function createNatalChartReading({ userID }: { userID: string }): Promise<void> {
-  const r = await fetch(`${process.env.GATSBY_CORE_URL}/createNatalChartReading`, {
+  const r = await fetch(`${siteConfig.coreApiHost}/createNatalChartReading`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +62,7 @@ export async function updateUserProfile({
   quizState: QuizStateParsed;
   userID: string;
 }) {
-  return fetch(`${process.env.GATSBY_CORE_URL}/updateUserProfile`, {
+  return fetch(`${siteConfig.coreApiHost}/updateUserProfile`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -72,7 +79,7 @@ export async function updateUserProfile({
 }
 
 export async function convertUserFromAnonymous(input: { userID: string; email: string }) {
-  return fetch(`${process.env.GATSBY_CORE_URL}/convertUserFromAnonymous`, {
+  return fetch(`${siteConfig.coreApiHost}/convertUserFromAnonymous`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,4 +89,34 @@ export async function convertUserFromAnonymous(input: { userID: string; email: s
       email: input.email,
     }),
   });
+}
+
+export async function getTrialPricingPlan() {
+  const res = await eden("/currentPaidTrialPricingPlan", {
+    method: "GET",
+  });
+  return res.data!;
+}
+
+export async function createSubscription({
+  userID,
+  priceID,
+  oneTimeFeePriceID,
+  couponID,
+}: {
+  userID: string;
+  priceID: string;
+  oneTimeFeePriceID?: string;
+  couponID?: string;
+}) {
+  const res = await eden("/payments/createSubscription", {
+    method: "POST",
+    body: {
+      userID,
+      priceID,
+      oneTimeFeePriceID,
+      couponID,
+    },
+  });
+  return res.data!;
 }

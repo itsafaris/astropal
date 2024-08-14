@@ -34,7 +34,7 @@ function sendToGTM(e: TrackingEvent) {
   });
 }
 
-export function trackPixel(event: string, properties: Record<string, any>) {
+export function trackPixel(event: string, properties?: Record<string, any>) {
   if (typeof window === "undefined") {
     return;
   }

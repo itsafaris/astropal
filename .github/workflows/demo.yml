@@ -23,6 +23,7 @@ jobs:
           GATSBY_SENTRY_DSN: ${{ secrets.GATSBY_SENTRY_DSN }}
           GATSBY_CORE_URL: https://api.theastropal.com
           GATSBY_WEBAPP_URL: https://app.theastropal.com
+          GATSBY_STRIPE_PUBLIC_KEY: pk_live_51PYUIdCWlM2pSlwevAgMytrIlAbSyIsue1Il0nKslO94qEaMcaAn542p0aMBT2ch3aYUjEaOYAJBYawJo6t4jwga00mY7TUEka
       - name: Netlify Deploy
         uses: nwtgck/actions-netlify@v3.0.0
         with:
