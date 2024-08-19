@@ -79,15 +79,12 @@ export async function updateUserProfile({
 }
 
 export async function convertUserFromAnonymous(input: { userID: string; email: string }) {
-  return fetch(`${siteConfig.coreApiHost}/convertUserFromAnonymous`, {
+  return eden(`/convertUserFromAnonymous`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+    body: {
       userID: input.userID,
       email: input.email,
-    }),
+    },
   });
 }
 

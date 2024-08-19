@@ -1,5 +1,6 @@
 import { posthog } from "posthog-js";
 import { isProdMode } from "./isProdMode";
+import { siteConfig } from "src/conf";
 
 type TrackingEvent = {
   name: string;
@@ -62,4 +63,21 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
   if (!isProdMode()) {
     posthog.opt_out_capturing();
   }
+}
+
+/**
+ * @param value - for $5 usd pass 5
+ */
+export function gaTrackPaidTrialPurchaseConversion(input: { value: number; currency: string }) {
+  if (!(window as any).gtag) {
+    console.error("google tag not loaded before the app is loaded");
+    return;
+  }
+
+  (window as any).gtag("event", "conversion", {
+    send_to: `${siteConfig.gaTrackingID}/ppfXCKaJlcAZEMrCmPw9`,
+    value: input.value,
+    currency: input.currency.toUpperCase(),
+    transaction_id: "",
+  });
 }

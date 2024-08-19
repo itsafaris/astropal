@@ -24,6 +24,9 @@ jobs:
           GATSBY_CORE_URL: https://api.theastropal.com
           GATSBY_WEBAPP_URL: https://app.theastropal.com
           GATSBY_STRIPE_PUBLIC_KEY: pk_live_51PYUIdCWlM2pSlwevAgMytrIlAbSyIsue1Il0nKslO94qEaMcaAn542p0aMBT2ch3aYUjEaOYAJBYawJo6t4jwga00mY7TUEka
+          GATSBY_FB_PIXEL_ID: "488679697025748"
+          GATSBY_GOOGLE_ADS_TAG: AW-16635011402
+
       - name: Netlify Deploy
         uses: nwtgck/actions-netlify@v3.0.0
         with:

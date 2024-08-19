@@ -1,4 +1,5 @@
 import { Box, Flex, Icon, keyframes, Text } from "@chakra-ui/react";
+import * as Sentry from "@sentry/gatsby";
 import { Caption, NextButton, SlideHeading, Span } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import {
@@ -9,7 +10,7 @@ import {
   useQuizContext,
   useQuizState,
 } from "@martynasj/quiz-lib/index";
-import { eden } from "@utils/coreApi";
+import { convertUserFromAnonymous, eden } from "@utils/coreApi";
 import { trackPixel } from "@utils/tracking";
 import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
@@ -17,7 +18,7 @@ import posthog from "posthog-js";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 import { getTypedQuizState, QuizStateTyped } from "./quizState";
-import { useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
 import { useState } from "react";
 
 const PULSE_ANIMATION_2 = keyframes`
@@ -318,27 +319,33 @@ export function EmailSlide() {
     </Slide>
   );
 }
+
+type RequestStatus = {
+  isLoading: boolean;
+  error?: any;
+};
+
 function EmailSlide_() {
   const { submitQuestion } = useQuiz();
+
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>({
+    isLoading: false,
+  });
   const quizState = useQuizContext();
   const meta = useSiteMetadata();
+  const { userProfile } = useGlobalState2();
 
   return (
     <Flex height={"100%"} position={"relative"} flexDirection={"column"}>
       <SlideHeading color="text.main" mb={8} textAlign={"center"} fontWeight={"bold"}>
-        Ready for insights into your love, life, and emotions?
+        Your Face Reading Awaits
       </SlideHeading>
 
-      <Text>
-        <Span fontWeight={"bold"}>Share* your email</Span> so you don't lose all your information
+      <Text fontSize={"lg"} textAlign={"center"}>
+        Enter your email to get your advanced Face reading with Astropal
       </Text>
 
       <Selector mt={4} mb={2} />
-
-      <Caption mt={0} mb={7} fontSize={"xs"}>
-        *{meta.brandName} does not share any personal information. We'll email you a copy of your
-        program for convenient access.
-      </Caption>
 
       <NextButton
         onClick={async () => {
@@ -348,21 +355,45 @@ function EmailSlide_() {
             return;
           }
 
+          setRequestStatus({ isLoading: true, error: null });
+
           const parsedQuizState = getTypedQuizState(quizState);
 
           posthog.identify(parsedQuizState.email);
-          trackPixel("Lead", {});
+          trackPixel("Lead");
 
-          navigate("/face-reading/summary");
+          if (!userProfile) {
+            console.error("no user profile created");
+            return;
+          }
+
+          try {
+            const res = await convertUserFromAnonymous({
+              userID: userProfile.id,
+              email: parsedQuizState.email,
+            });
+
+            if (res.error) {
+              console.error(res.error);
+            }
+          } catch (err) {
+            Sentry.captureException(err);
+            setRequestStatus({ isLoading: false, error: String(err) });
+            return;
+          }
+
+          setRequestStatus({ isLoading: false });
+
+          navigate("/face-reading/paywall");
         }}
       >
         Continue
       </NextButton>
 
       <Text position={"sticky"} fontSize={"xs"} mt={8} textAlign={"center"}>
-        By continuing, I agree to {meta.brandName}'s{" "}
-        <Link to="/privacy-policy">Privacy policy</Link> and{" "}
-        <Link to="/terms-and-conditions">Terms & Conditions</Link>
+        {meta.brandName} ensures the confidentiality of your personal information. By clicking
+        "Continue" you agree to {meta.brandName}'s' <Link to="/privacy-policy">Privacy policy</Link>{" "}
+        and <Link to="/terms-and-conditions">Terms & Conditions</Link>
       </Text>
     </Flex>
   );

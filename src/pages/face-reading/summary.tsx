@@ -394,7 +394,7 @@ function CTABanner() {
     >
       <Container as={Flex} alignItems={"center"} justifyContent={"center"}>
         <Box>
-          <Text as="span" fontWeight={"bold"} fontSize={"sm"}>
+          <Text as="span" fontWeight={"bold"} fontSize={"sm"} mr={2}>
             Your personalized offer reserved
           </Text>
           <Timer />
