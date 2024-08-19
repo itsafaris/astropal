@@ -77,7 +77,7 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
 
       <Box>
         <Text fontSize={"xs"} textAlign={"center"}>
-          By continuing, I agree to <Link to="/privacy-policy">Astropal's Privacy Policy</Link> and
+          By continuing, I agree to <Link to="/privacy-policy">Astropal's Privacy Policy</Link> and{" "}
           <Link to="/terms-and-conditions">Terms and Conditions</Link>
         </Text>
         <Text my={2} fontSize={"xs"} textAlign={"center"}>

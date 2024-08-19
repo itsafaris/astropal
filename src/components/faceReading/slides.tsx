@@ -17,7 +17,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import posthog from "posthog-js";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
-import { getTypedQuizState, QuizStateTyped } from "./quizState";
+import { getTypedQuizState, getZodiacFromState, QuizStateTyped } from "./quizState";
 import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
 import { useState } from "react";
 
@@ -84,8 +84,8 @@ export function YourGenderSlide() {
       </SlideHeading>
 
       <Text textAlign={"center"}>
-        In physiognomy, everyone has both masculine and feminine traits. Knowing your's will lead to
-        a more accurate reading.
+        In face reading, everyone has both masculine and feminine traits. Knowing your's will lead
+        to a more accurate reading.
       </Text>
 
       <Box px={8} mt={8}>
@@ -250,6 +250,10 @@ export function DecisionMaking() {
 }
 
 export function LoadingSimilarPeople() {
+  const { quizState } = useQuizState();
+  const typed = getTypedQuizState(quizState);
+  const zodiac = getZodiacFromState(typed);
+
   return (
     <Slide
       id="loading-similar-people"
@@ -260,8 +264,12 @@ export function LoadingSimilarPeople() {
       duration={6}
     >
       <Text textAlign={"center"} mt={2}>
-        We've helped 124,327 men with <Span fontWeight={"bold"}>Aquarius</Span> Sun sign gain
-        insights into their intelect and decision making. We can't wait to do the same for you!
+        We've helped 124,327 men with{" "}
+        <Span fontWeight={"bold"} textTransform={"capitalize"}>
+          {zodiac.name}
+        </Span>{" "}
+        Sun sign gain insights into their intelect and decision making. We can't wait to do the same
+        for you!
       </Text>
       <Text mt={4} fontSize={"sm"} textAlign={"center"}>
         * as of April, 2024

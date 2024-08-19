@@ -1,7 +1,18 @@
 import { DateState, EmailState, QuizQuestionsState, SingleState } from "@martynasj/quiz-lib/index";
+import { getZodiacSign } from "@services/zodiacService";
 import { createTime } from "@utils/dates";
 
 export type QuizStateTyped = ReturnType<typeof getTypedQuizState>;
+
+export function getZodiacFromState(state: QuizStateTyped) {
+  return getZodiacSign(
+    new Date(
+      state.yourBirthDate.year,
+      state.yourBirthDate.month - 1,
+      state.yourBirthDate.day
+    ).toISOString()
+  );
+}
 
 export function getTypedQuizState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase() ?? "male";

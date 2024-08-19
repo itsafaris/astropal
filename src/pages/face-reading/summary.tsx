@@ -36,7 +36,7 @@ import { ComponentProps, useEffect, useState } from "react";
 
 export default function SummaryPage() {
   return (
-    <Container py={4}>
+    <Container py={4} pb={20}>
       <HeroSection />
       <HowItWorks />
       <WhatsIncluded />
@@ -157,7 +157,7 @@ function HeroSection() {
         <Text fontWeight="semibold">
           Unlimited chats with a{" "}
           <Text as="span" color="blue.500">
-            palm reader
+            face reader
           </Text>
         </Text>
       </HStack>
@@ -299,7 +299,7 @@ function UserReviews() {
   const reviews = [
     {
       title: "It's changed my life!",
-      text: `I'm thankful for this app and Akho! She's an excellent palm reader and astrologer—clear, thorough, and reassuring. I eagerly look forward to more sessions with her!`,
+      text: `I'm thankful for this app and Akho! She's an excellent face reader and astrologer—clear, thorough, and reassuring. I eagerly look forward to more sessions with her!`,
       name: "Rebecca Bauman",
       image: <StaticImage alt="user image" src="../../images/user11.png" width={100} />,
     },
