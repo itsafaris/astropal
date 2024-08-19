@@ -54,6 +54,7 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
       const constraints = { video: true };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       if (!video) {
+        console.log("no video");
         return;
       }
 

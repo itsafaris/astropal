@@ -76,7 +76,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
         }));
       })
       .catch((err) => {
-        throw err;
+        console.error(err);
       });
   }, []);
 
