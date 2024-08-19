@@ -51,9 +51,16 @@ export default function SummaryPage() {
 function HeroSection() {
   return (
     <Box>
+      <Flex width={"full"} justifyContent={"center"} pb={4}>
+        <StaticImage
+          src="../../images/astropal_logo.png"
+          alt="astropal logo"
+          style={{ width: 100 }}
+          width={100}
+        />
+      </Flex>
       <HStack justifyContent="space-between" mb={4}>
         <HStack>
-          <Image src="path_to_astrology_icon.png" boxSize="40px" />
           <Text fontSize="sm" fontWeight="bold" color="gray.600">
             The #1 Astrology app trusted <br /> by over <Span color="blue.500">25 million </Span>{" "}
             people.
@@ -110,7 +117,7 @@ function HeroSection() {
         <Span color="blue.600" fontWeight={"bold"}>
           Akho
         </Span>{" "}
-        6 years in palmistry readings and spiritual guidance.
+        6 years in face readings and spiritual guidance.
       </Text>
 
       <Flex
@@ -170,32 +177,33 @@ function HeroSection() {
 }
 
 function HowItWorks() {
+  const meta = useSiteMetadata();
+
   const steps = [
     {
-      title: "Send us your palm scan",
-      description: "We analyze your palm lines to get hints about your future",
+      title: "Get your face scanned",
+      description: "We analyze your face landmarks to get hints about your future",
     },
     {
-      title: "Your palm reading is generated",
+      title: "Your face reading is generated",
       description:
-        "One of our professional palm readers puts together a report filled with hints about your future",
+        "One of our professional face readers puts together a report filled with hints about your future",
     },
     {
       title: "Start your trial to receive your prediction",
-      description:
-        "Once you're a Hint member, we'll be able to send over your prediction report so you can begin living a better life.",
+      description: `Once you're a ${meta.brandName} member, we'll be able to send over your prediction report so you can begin living a better life.`,
     },
     {
-      title: "Talk with a palm reading specialist anytime:",
+      title: "Talk with a face reading specialist anytime:",
       description:
-        "Get the ongoing support you need by discussing your readings, personal horoscopes, and compatibilities with our expert palm reader and astrologist support team.",
+        "Get the ongoing support you need by discussing your readings, personal horoscopes, and compatibilities with our face reader and astrologist support team.",
     },
   ];
 
   return (
     <Box p={4} my={8}>
       <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
-        How does Hint work?
+        How does {meta.brandName} work?
       </Heading>
       <Stepper index={2} orientation="vertical" gap={0}>
         {steps.map((step, index) => (
