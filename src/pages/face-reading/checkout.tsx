@@ -54,6 +54,10 @@ export default function CheckoutPage(props: ICheckoutPageProps) {
   const { trialPricingPlan, selectedPricingPlan } = useGlobalState2();
   const plan = trialPricingPlan?.oneTimeFee.find((p) => p.priceID === selectedPricingPlan);
 
+  const recurringDiscount = 10;
+  const currentRecurringPrice = (trialPricingPlan?.recurring.unit_amount ?? 0) / 100;
+  const beforeRecurringPrice = currentRecurringPrice + recurringDiscount;
+
   React.useEffect(() => {
     trackPixel("InitiateCheckout");
   }, []);
@@ -110,8 +114,9 @@ export default function CheckoutPage(props: ICheckoutPageProps) {
             <Span fontWeight={"bold"}>
               ${(plan.unit_amount / 100).toFixed(2)} for your 7-day trial.
             </Span>{" "}
-            Then <Span textDecoration={"line-through"}>€29</Span> $19 per week. Save €10 every week.{" "}
-            We'll <Span fontWeight={"bold"}>email you a reminder</Span> before your trial ends.
+            Then <Span textDecoration={"line-through"}>${beforeRecurringPrice}</Span> $
+            {currentRecurringPrice} per week. Save ${recurringDiscount} every week. We'll{" "}
+            <Span fontWeight={"bold"}>email you a reminder</Span> before your trial ends.
           </Text>
         </Box>
 
