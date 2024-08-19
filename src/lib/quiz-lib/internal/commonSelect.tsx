@@ -48,7 +48,7 @@ export function CommonSelect({ handleOptionClick, isOptionSelected }: OptionRend
   const imgHeight = slideCtx.size === "small" ? 100 : 160;
 
   return (
-    <Grid templateColumns={`repeat(${columns}, 1fr)`} gap={3}>
+    <Grid templateColumns={`repeat(${columns}, 1fr)`} gap={4}>
       {slideCtx.options?.map((option, idx) => {
         const value = getOptionValue(option);
         const optionValue: SelectorValue = { value: value, idx };
