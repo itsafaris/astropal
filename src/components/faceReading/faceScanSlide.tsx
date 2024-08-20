@@ -89,10 +89,13 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
       <Modal isOpen={isWebcamOpen} onClose={onWebcamClose}>
         <ModalOverlay />
         <ModalContent
-          mx={4}
-          height={"80vh"}
-          maxHeight={"500px"}
-          p={2}
+          as={Flex}
+          direction={"column"}
+          gap={4}
+          mx={3}
+          p={4}
+          height={"70vh"}
+          maxHeight={"650px"}
           alignItems={"center"}
           justifyContent={"space-evenly"}
         >

@@ -7,7 +7,10 @@ export interface IWebcamDetectionProps {
   onCaptureImage?: (imgDataUrl: string, detectionResult: FaceLandmarkerResult) => void;
 }
 
-export function WebcamDetection(props: IWebcamDetectionProps) {
+export function WebcamDetection({
+  onCaptureImage,
+  ...rest
+}: IWebcamDetectionProps & React.ComponentProps<typeof Box>) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const [webcamRunning, setWebcamRunning] = React.useState(false);
@@ -18,6 +21,9 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
   const faceLandmarkerResult = React.useRef<FaceLandmarkerResult | null>(null);
 
   React.useEffect(() => {
+    if (!faceLandmarker) {
+      return;
+    }
     enableCam();
     drawingUtilsRef.current = new DrawingUtils(canvasRef.current!.getContext("2d")!);
   }, [faceLandmarker]);
@@ -40,6 +46,11 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
     }
 
     const video = videoRef.current;
+    if (!video) {
+      console.log("no video");
+      return;
+    }
+
     const canvasElement = canvasRef.current;
     if (!canvasElement) {
       return;
@@ -51,10 +62,15 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
     } else {
       setWebcamRunning(true);
 
-      const constraints = { video: true };
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      if (!video) {
-        console.log("no video");
+      let stream: MediaStream | undefined;
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (!stream) {
+          console.error("no stream aquired");
+        }
+      } catch (err) {
+        console.error("User media was not aquired", err);
         return;
       }
 
@@ -119,11 +135,11 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
     ctx!.scale(-1, 1); // flip horizontally
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     const dataUrl = canvas.toDataURL("image/png");
-    props.onCaptureImage?.(dataUrl, faceLandmarkerResult.current!);
+    onCaptureImage?.(dataUrl, faceLandmarkerResult.current!);
   }
 
   return (
-    <Box>
+    <Box {...rest}>
       <Box
         position={"relative"}
         display={"inline-block"}
@@ -135,8 +151,12 @@ export function WebcamDetection(props: IWebcamDetectionProps) {
         <video
           ref={videoRef}
           autoPlay
+          playsInline
           onLoadedData={() => predictWebcam()}
-          style={{ transform: "scaleX(-1)" }}
+          style={{
+            maxHeight: "46vh",
+            transform: "scaleX(-1)",
+          }}
         ></video>
         <canvas
           ref={canvasRef}
