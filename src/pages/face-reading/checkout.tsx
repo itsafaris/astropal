@@ -298,6 +298,7 @@ function CheckoutForm(props: React.PropsWithChildren) {
       });
 
       if (res.error) {
+        console.error(res.error);
         setPayment({
           state: "error",
           error: res.error.message ?? "Your payment has been declined.",
@@ -306,8 +307,8 @@ function CheckoutForm(props: React.PropsWithChildren) {
         return;
       }
     } catch (err) {
+      console.error(err);
       setPayment({ state: "error", error: String(err) });
-      throw err;
     }
   }
 
@@ -332,6 +333,21 @@ function CheckoutForm(props: React.PropsWithChildren) {
         </Text>
         <Box width={"40px"}></Box>
       </Flex>
+
+      {payment.state === "error" && (
+        <Text
+          color={"red.600"}
+          mb={3}
+          fontSize={"sm"}
+          fontWeight={"semibold"}
+          py={1}
+          px={3}
+          borderRadius={"lg"}
+          backgroundColor={"#ffdad3"}
+        >
+          {payment.error}
+        </Text>
+      )}
 
       {(!cardCheckoutReady || !expressCheckoutReady) && (
         <Loading text="Loading secure payment form..." />
