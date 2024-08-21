@@ -359,7 +359,14 @@ function CheckoutForm(props: React.PropsWithChildren) {
                 terms: { card: "never" },
               }}
             />
-            <Button type="submit" colorScheme="blue" width={"full"} size="lg" mt={4}>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              width={"full"}
+              size="lg"
+              mt={4}
+              isLoading={payment.state === "loading"}
+            >
               Start 7-day trial
             </Button>
           </form>

@@ -264,7 +264,7 @@ export function LoadingSimilarPeople() {
       duration={6}
     >
       <Text textAlign={"center"} mt={2}>
-        We've helped 124,327 men with{" "}
+        We've helped 124,327 {typed.yourGender === "female" ? "women" : "men"} with{" "}
         <Span fontWeight={"bold"} textTransform={"capitalize"}>
           {zodiac.name}
         </Span>{" "}
