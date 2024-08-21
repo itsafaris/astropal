@@ -16,6 +16,7 @@ export function getZodiacFromState(state: QuizStateTyped) {
 
 export function getTypedQuizState(state: QuizQuestionsState) {
   const yourGender = (state["your-gender"] as SingleState)?.value?.value.toLowerCase() ?? "male";
+  const focusArea = (state["life-area"] as SingleState)?.value?.value;
   const email = (state["your-email"] as EmailState)?.value ?? "";
 
   const yourBirthDate = (state["your-birth-date"] as DateState)?.value ?? {
@@ -45,5 +46,6 @@ export function getTypedQuizState(state: QuizQuestionsState) {
     yourBirthTime,
     yourBirthLocation,
     email,
+    focusArea,
   };
 }

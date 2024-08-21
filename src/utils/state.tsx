@@ -6,12 +6,14 @@ import {
   LocationState,
   TimeState,
   MultiState,
+  LocationValue,
+  DateValue,
 } from "@martynasj/quiz-lib";
 
 import { getZodiacSign } from "@services/zodiacService";
 
 import { toTitleCase } from "@utils/string";
-import { createTime } from "./dates";
+import { createTime, Time } from "./dates";
 import { createBirthOrigin, createHoroscopeData } from "./natalChart";
 
 // IMPORTANT: change this if structure changes, to invalidate local storage
@@ -33,7 +35,11 @@ export function calcPersonalInfo({
   yourBirthDate,
   yourBirthTime,
   yourBirthLocation,
-}: QuizStateParsed) {
+}: {
+  yourBirthDate: DateValue;
+  yourBirthTime: Time;
+  yourBirthLocation: LocationValue;
+}) {
   const birthOrigin = createBirthOrigin({
     year: yourBirthDate.year,
     month: yourBirthDate.month - 1,

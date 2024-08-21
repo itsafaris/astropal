@@ -5,7 +5,6 @@ import { trackEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearStorage, saveToStorage } from "@utils/localStorage";
-import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 
 import { useUserProfileState } from "src/appState";
 import {
@@ -21,6 +20,9 @@ import {
 } from "@components/faceReading/slides";
 import { FaceScanSlide } from "@components/faceReading/faceScanSlide";
 import { FaceScanAnalysisSlide } from "@components/faceReading/faceScanAnalysisSlide";
+import posthog from "posthog-js";
+import { getTypedQuizState } from "@components/faceReading/quizState";
+import { calcPersonalInfo } from "@utils/state";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -54,24 +56,22 @@ export default function FaceReadingPage() {
         trackEvent(event);
       }}
       onSlideSubmitted={async (state) => {
-        // const rawState = await state.getQuizState();
-        // const parsedState = getTypedQuizState(rawState);
-        // const calcState = calcPersonalInfo(parsedState);
-        // posthog.setPersonProperties({
-        //   email: parsedState.email,
-        //   gender: parsedState.yourGender,
-        //   birth_date_local: calcState.birthOrigin.localTimeFormatted,
-        //   birth_date_local_extracted: {
-        //     year: parsedState.yourBirthDate.year,
-        //     month: parsedState.yourBirthDate.month - 1,
-        //     date: parsedState.yourBirthDate.day,
-        //   },
-        //   birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
-        //   birth_place: parsedState.yourBirthLocation,
-        //   theme_focus: parsedState.areasOfInterest?.map((a) => a.value),
-        //   astrologer_persona_id: parsedState.astrologerID,
-        //   relationship_status: parsedState.relationshipStatus,
-        // });
+        const rawState = await state.getQuizState();
+        const parsedState = getTypedQuizState(rawState);
+        const calcState = calcPersonalInfo(parsedState);
+        posthog.setPersonProperties({
+          email: parsedState.email,
+          gender: parsedState.yourGender,
+          birth_date_local: calcState.birthOrigin.localTimeFormatted,
+          birth_date_local_extracted: {
+            year: parsedState.yourBirthDate.year,
+            month: parsedState.yourBirthDate.month - 1,
+            date: parsedState.yourBirthDate.day,
+          },
+          birth_date_utc: calcState.birthOrigin.utcTimeFormatted,
+          birth_place: parsedState.yourBirthLocation,
+          theme_focus: parsedState.focusArea,
+        });
       }}
     >
       <QuizStateSaver />

@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, keyframes, Text } from "@chakra-ui/react";
 import * as Sentry from "@sentry/gatsby";
-import { Caption, NextButton, SlideHeading, Span } from "@components/quizpage/components";
+import { NextButton, SlideHeading, Span } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import {
   Selector,
@@ -198,7 +198,7 @@ export function LifeArea() {
       label="Choose one or more"
       options={[
         { text: "Love & Relationships", icon: "💏", value: "relationships" },
-        { text: "Health & Vitality", icon: "🧘", value: "health" },
+        { text: "Health & Vitality", icon: "🧘", value: "wellbeing" },
         { text: "Career & Destiny", icon: "💼", value: "career" },
       ]}
     >
