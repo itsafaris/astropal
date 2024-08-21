@@ -62,19 +62,19 @@ export async function updateUserProfile({
   quizState: QuizStateParsed;
   userID: string;
 }) {
-  return fetch(`${siteConfig.coreApiHost}/updateUserProfile`, {
+  return eden(`/updateUserProfile`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+    body: {
       id: userID,
       name: quizState.fullname,
+      // @ts-expect-error
       areas_of_interest: quizState.areasOfInterest?.map((it) => it.value),
+      // @ts-expect-error
       major_life_events: quizState.majorLifeEvents?.map((it) => it.value),
+      // @ts-expect-error
       relationship_status: quizState.relationshipStatus,
       astrologer_persona_id: quizState.astrologerID,
-    }),
+    },
   });
 }
 

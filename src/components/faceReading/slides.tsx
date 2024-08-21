@@ -376,6 +376,15 @@ function EmailSlide_() {
           }
 
           try {
+            eden("/updateUserProfile", {
+              method: "POST",
+              body: {
+                id: userProfile.id,
+                // @ts-expect-error
+                focus_area: parsedQuizState.focusArea,
+              },
+            });
+
             const res = await convertUserFromAnonymous({
               userID: userProfile.id,
               email: parsedQuizState.email,
