@@ -61,7 +61,10 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
 
   React.useEffect(() => {
     if (typedGlobalState) {
-      saveToStorage("globalState", typedGlobalState);
+      const cp = { ...typedGlobalState };
+      // this sometimes is too big to be saved in local storage
+      delete cp.faceImageDataUrl;
+      saveToStorage("globalState", cp);
     }
   }, [typedGlobalState]);
 
