@@ -2,7 +2,7 @@ name: Build and deploy
 run-name: ${{ github.actor }} - Build and deploy
 on:
   push:
-    branches: [main, v2, v3, v4, v5-mentorship, v6-first-mvp, v7-minimal-astrologer]
+    branches: [main]
   pull_request:
     branches: [main]
 
