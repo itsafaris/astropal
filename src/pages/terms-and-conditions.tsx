@@ -129,10 +129,10 @@ export default function TermsAndConditionsPage() {
                 ).
               </Text>
               <Text>
-                1.13.“Seller, the Company” refers to a sole proprietorship run by Matas Domarkas,
-                with central commercial registry number 1073841, located at Karaliaus Mindaugo g. 47
-                Telsiai, Lithuania, email {APP_DATA.email}. The Seller's information is recorded in
-                the Register of Legal Entities.
+                1.13.“Seller, the Company” refers to a company MB Neontree, registered under company
+                code 306964389, with its principal office located at Zemaitės str. 17-6, LT-87133
+                Telsiai, Lithuania, contactable via email at {APP_DATA.email}. The Seller's
+                information is recorded in the Register of Legal Entities.
               </Text>
               <Text>
                 1.14. “Subscription” signifies a subscription to the Content for a period chosen by
@@ -408,7 +408,7 @@ export default function TermsAndConditionsPage() {
                 also available.
               </Text>
 
-              <Text>7.7. Subscription periods for Content include: 1 month, Lifetime Access</Text>
+              <Text>7.7. Subscription periods for Content include: 1 week.</Text>
 
               <Text>
                 7.8. Upon subscription purchase, the Buyer receives login details for the Webapp to
@@ -438,7 +438,7 @@ export default function TermsAndConditionsPage() {
               </Text>
 
               <Text>
-                - The Seller's team will review the refund request within 7 calendar days and make a
+                - The Seller's team will review the refund request within 4 calendar days and make a
                 decision.
               </Text>
 
@@ -870,7 +870,7 @@ export default function TermsAndConditionsPage() {
             </Text>
           </Section>
 
-          <TitleXL>Last updated: July 09th, 2024</TitleXL>
+          <TitleXL>Last updated: September 05th, 2024</TitleXL>
         </Stack>
       </Container>
     </Stack>
