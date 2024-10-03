@@ -74,19 +74,23 @@ export default function CheckoutPage(props: ICheckoutPageProps) {
             The #1 Astrology app trusted by
             <br /> over 25 million people.
           </Text>
+
           <Flex gap={1}>
             {Array(5)
               .fill("")
-              .map((it) => (
-                <Icon as={FaStar} color="orange.300" />
+              .map((_, idx) => (
+                <Icon key={idx} as={FaStar} color="orange.300" />
               ))}
           </Flex>
         </Flex>
+
         <Flex p={3} bg="blue.50" my={6} justifyContent={"space-between"}>
           <Text>Personalized offer reserved</Text>
           <Timer />
         </Flex>
+
         <Heading my={8}>Start your 7-day trial</Heading>
+
         <Flex
           justifyContent={"space-between"}
           borderTop={"1px solid"}
@@ -98,16 +102,19 @@ export default function CheckoutPage(props: ICheckoutPageProps) {
           <Text fontSize={"lg"} fontWeight={"bold"}>
             Total today
           </Text>
+
           <Text fontSize={"lg"} color="blue.600" fontWeight={"bold"}>
             ${(plan.unit_amount / 100).toFixed(2)}
           </Text>
         </Flex>
+
         <Flex alignItems={"center"} gap={2} my={6}>
           <Icon as={MdOutlineDiscount} fontSize={"lg"} color="green.600" />
           <Text fontSize={"xs"} fontWeight={"bold"} color="green.500">
             Code FACEASTRO24 applied!
           </Text>
         </Flex>
+
         <Box>
           <Text fontSize={"sm"}>
             You will be charged only{" "}
@@ -168,12 +175,14 @@ function PaymentWidget() {
       return;
     }
 
-    if (paymentIntent.state === "ok") {
+    if (paymentIntent.state !== "initial") {
       return;
     }
 
     try {
       setPaymentIntent({ state: "loading" });
+
+      console.log("FETCH");
 
       const res = await eden("/payments/createSubscription", {
         method: "POST",
@@ -233,7 +242,7 @@ function PaymentWidget() {
         </Box>
       )}
 
-      {paymentIntent.state === "loading" && <Loading text="Loading secure payment form..." />}
+      {paymentIntent.state === "loading" && <LoadingView text="Loading secure payment form..." />}
 
       {paymentIntent.state === "ok" && (
         <Elements
@@ -334,26 +343,36 @@ function CheckoutForm(props: React.PropsWithChildren) {
         <Box width={"40px"}></Box>
       </Flex>
 
-      {payment.state === "error" && (
-        <Text
-          color={"red.600"}
-          mb={3}
-          fontSize={"sm"}
-          fontWeight={"semibold"}
-          py={1}
-          px={3}
-          borderRadius={"lg"}
-          backgroundColor={"#ffdad3"}
-        >
-          {payment.error}
-        </Text>
-      )}
+      {payment.state === "error" && <ErrorView text={payment.error} />}
 
       {(!cardCheckoutReady || !expressCheckoutReady) && (
-        <Loading text="Loading secure payment form..." />
+        <LoadingView text="Loading secure payment form..." />
       )}
 
       <Box display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
+        <Box display={paymentType === "initial" ? "box" : "none"}>
+          <ExpressCheckoutElement
+            options={{
+              layout: { maxColumns: 1, maxRows: 5 },
+            }}
+            onReady={() => setExpressCheckoutReady(true)}
+            onConfirm={() => {
+              submitPayment("express");
+            }}
+          />
+
+          <Button
+            size="lg"
+            colorScheme="blue"
+            width={"full"}
+            mt={4}
+            leftIcon={<Icon as={MdCreditCard} />}
+            onClick={() => setPaymentType("card")}
+          >
+            Credit or debit card
+          </Button>
+        </Box>
+
         <Flex
           display={paymentType === "card" ? "flex" : "none"}
           direction={"column"}
@@ -375,6 +394,7 @@ function CheckoutForm(props: React.PropsWithChildren) {
                 terms: { card: "never" },
               }}
             />
+
             <Button
               type="submit"
               colorScheme="blue"
@@ -387,33 +407,29 @@ function CheckoutForm(props: React.PropsWithChildren) {
             </Button>
           </form>
         </Flex>
-        <Box display={paymentType === "initial" ? "box" : "none"}>
-          <ExpressCheckoutElement
-            options={{
-              layout: { maxColumns: 1, maxRows: 5 },
-            }}
-            onReady={() => setExpressCheckoutReady(true)}
-            onConfirm={() => {
-              submitPayment("express");
-            }}
-          />
-          <Button
-            size="lg"
-            colorScheme="blue"
-            width={"full"}
-            mt={4}
-            leftIcon={<Icon as={MdCreditCard} />}
-            onClick={() => setPaymentType("card")}
-          >
-            Credit or debit card
-          </Button>
-        </Box>
       </Box>
     </Box>
   );
 }
 
-export function Loading({ text = "Loading..." }: { text?: string }) {
+function ErrorView({ text }: { text: string }) {
+  return (
+    <Text
+      color={"red.600"}
+      mb={3}
+      fontSize={"sm"}
+      fontWeight={"semibold"}
+      py={1}
+      px={3}
+      borderRadius={"lg"}
+      backgroundColor={"#ffdad3"}
+    >
+      {text}
+    </Text>
+  );
+}
+
+function LoadingView({ text = "Loading..." }: { text?: string }) {
   return (
     <Stack mt={2}>
       <Text color="gray.700" fontSize={"sm"} textAlign={"center"}>
