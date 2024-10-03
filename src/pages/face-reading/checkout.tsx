@@ -182,8 +182,6 @@ function PaymentWidget() {
     try {
       setPaymentIntent({ state: "loading" });
 
-      console.log("FETCH");
-
       const res = await eden("/payments/createSubscription", {
         method: "POST",
         body: {
