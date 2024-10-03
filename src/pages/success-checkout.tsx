@@ -3,25 +3,6 @@ import { useGlobalState2 } from "@components/root/RootWrapper";
 import { gaTrackPaidTrialPurchaseConversion, trackEvent, trackPixel } from "@utils/tracking";
 import * as React from "react";
 
-export function createSuccessCheckoutURL(
-  paymentType: "express" | "card",
-  pricePaid: number,
-  currency: string,
-  planID: string
-) {
-  // this is a redirect url after the successful payment
-  const redirectUrl = new URL(window.location.href);
-  redirectUrl.searchParams.delete("checkout");
-  redirectUrl.pathname = "/success-checkout";
-
-  redirectUrl.searchParams.set("paymentType", paymentType);
-  redirectUrl.searchParams.set("pricePaid", pricePaid.toString());
-  redirectUrl.searchParams.set("currency", currency);
-  redirectUrl.searchParams.set("planID", planID);
-
-  return redirectUrl;
-}
-
 type UrlParts = ReturnType<typeof parseRedirectURL>;
 
 function parseRedirectURL() {
