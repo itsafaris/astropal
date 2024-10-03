@@ -132,7 +132,7 @@ export default function CheckoutPage(props: ICheckoutPageProps) {
           <Flex flex={1} alignItems={"center"} gap={2}>
             <Icon as={MdVerified} fontSize={"3xl"} color="blue.500" />
             <Text fontSize={"xs"} fontWeight={"semibold"} color="gray.600">
-              30-day money-back guarantee
+              14-day money-back guarantee
             </Text>
           </Flex>
         </Flex>
