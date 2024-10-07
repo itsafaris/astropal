@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Slide, Text } from "@chakra-ui/react";
+import { Container, Slide } from "@chakra-ui/react";
 import { Elements } from "@stripe/react-stripe-js";
 import { CheckoutForm } from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
@@ -28,31 +28,31 @@ export function CheckoutDrawer() {
     };
   }, [location]);
 
+  if (!plan) {
+    return null;
+  }
+
   return (
-    <Slide direction="bottom" in={isDrawerOpen} style={{ zIndex: 10, backgroundColor: "red" }}>
-      <Container>
-        {plan ? (
-          <Elements
-            stripe={stripe}
-            options={{
-              mode: "subscription",
-              amount: plan.unit_amount,
-              currency: plan.currency,
-              appearance: {
-                theme: "stripe",
-                variables: {
-                  tabLogoColor: "green",
-                  tabLogoSelectedColor: "red",
-                },
-              },
-            }}
-          >
-            <CheckoutForm plan={plan} />
-          </Elements>
-        ) : (
-          <Text>Pricing plan not selected</Text>
-        )}
-      </Container>
-    </Slide>
+    <Elements
+      stripe={stripe}
+      options={{
+        mode: "subscription",
+        amount: plan.unit_amount,
+        currency: plan.currency,
+        appearance: {
+          theme: "stripe",
+          variables: {
+            tabLogoColor: "green",
+            tabLogoSelectedColor: "red",
+          },
+        },
+      }}
+    >
+      <Slide direction="bottom" in={isDrawerOpen} style={{ zIndex: 10, backgroundColor: "red" }}>
+        <Container>
+          <CheckoutForm plan={plan} />
+        </Container>
+      </Slide>
+    </Elements>
   );
 }

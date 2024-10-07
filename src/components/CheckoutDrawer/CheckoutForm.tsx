@@ -12,121 +12,32 @@ import {
 import { trackPixel } from "@utils/tracking";
 import { createSuccessCheckoutURL } from "./utils";
 import { ErrorView, LoadingView } from "./components";
-import { RequestType } from "./types";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { eden } from "@utils/coreApi";
 import { useGlobalState2 } from "@components/root/RootWrapper";
 
-export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const { userProfile, selectedPricingPlan, trialPricingPlan } = useGlobalState2();
+export type RequestType =
+  | {
+      state: "initial";
+    }
+  | {
+      state: "loading";
+    }
+  | {
+      state: "ok";
+    }
+  | {
+      state: "error";
+      error: string;
+    };
 
+export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
   const [paymentType, setPaymentType] = React.useState<"card" | "initial">("initial");
   const [expressCheckoutReady, setExpressCheckoutReady] = React.useState(false);
   const [cardCheckoutReady, setCardCheckoutReady] = React.useState(false);
-  const [payment, setPayment] = React.useState<RequestType>({
-    state: "initial",
-  });
+  const [payment, submitPayment] = usePayment(plan);
 
-  async function submitPayment(type: "express" | "card") {
-    if (!userProfile || !selectedPricingPlan || !trialPricingPlan || !stripe || !elements) {
-      console.warn("data missing for subscription setup");
-      return;
-    }
-
-    if (payment.state !== "initial") {
-      return;
-    }
-
-    setPayment({ state: "loading" });
-
-    const redirectUrl = createSuccessCheckoutURL(
-      type,
-      plan.unit_amount,
-      plan.currency,
-      plan.priceID
-    );
-
-    trackPixel("AddPaymentInfo");
-
-    try {
-      elements.update({
-        amount: plan.unit_amount,
-        currency: plan.currency,
-      });
-
-      // Trigger form validation and wallet collection
-      const elementSubmission = await elements.submit();
-      if (elementSubmission.error) {
-        setPayment({
-          state: "error",
-          error: elementSubmission.error.message ?? "Element submission failed",
-        });
-
-        return;
-      }
-
-      const subscription = await eden("/payments/createSubscription", {
-        method: "POST",
-        body: {
-          userID: userProfile.id,
-          priceID: trialPricingPlan.recurring.priceID,
-          oneTimeFeePriceID: selectedPricingPlan,
-        },
-      });
-
-      if (subscription.error) {
-        setPayment({
-          state: "error",
-          error: subscription.error.message,
-        });
-
-        return;
-      }
-
-      if (!subscription.data) {
-        setPayment({
-          state: "error",
-          error: "missing payment intent data",
-        });
-
-        return;
-      }
-
-      // Empty client secret means that overall price of the cart is very close to 0.
-      // In that case subscription becomes automatically activated.
-      // GOOD FOR TESTING!
-      if (!subscription.data.client_secret) {
-        console.log("no client secret, payment has been paid");
-
-        return;
-      }
-
-      const confirmation = await stripe.confirmPayment({
-        elements,
-        clientSecret: subscription.data.client_secret,
-        confirmParams: {
-          return_url: redirectUrl.toString(),
-        },
-      });
-
-      if (confirmation.error) {
-        console.error(confirmation.error);
-        setPayment({
-          state: "error",
-          error: confirmation.error.message ?? "Your payment has been declined.",
-        });
-
-        return;
-      }
-
-      setPayment({ state: "ok", data: { clientSecret: subscription.data.client_secret } });
-    } catch (err) {
-      console.error(err);
-      setPayment({ state: "error", error: String(err) });
-    }
-  }
+  const isReady = cardCheckoutReady && expressCheckoutReady;
 
   return (
     <Box>
@@ -148,12 +59,10 @@ export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
 
       {payment.state === "error" && <ErrorView text={payment.error} />}
 
-      {(!cardCheckoutReady || !expressCheckoutReady) && (
-        <LoadingView text="Loading secure payment form..." />
-      )}
+      {!isReady && <LoadingView text="Loading secure payment form..." />}
 
-      <Box display={cardCheckoutReady && expressCheckoutReady ? undefined : "none"}>
-        <Box display={paymentType === "initial" ? "box" : "none"}>
+      <Box display={isReady ? "block" : "none"}>
+        <Box display={paymentType === "initial" ? "block" : "none"}>
           <ExpressCheckoutElement
             options={{
               layout: { maxColumns: 1, maxRows: 5 },
@@ -213,4 +122,118 @@ export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
       </Box>
     </Box>
   );
+}
+
+function usePayment(
+  plan: OneTimeFeePrice
+): [RequestType, (type: "express" | "card") => Promise<void>] {
+  const planRef = React.useRef(plan);
+  const stripe = useStripe();
+  const elements = useElements();
+  const { userProfile, selectedPricingPlan, trialPricingPlan } = useGlobalState2();
+
+  const [request, setRequest] = React.useState<RequestType>({
+    state: "initial",
+  });
+
+  async function submit(type: "express" | "card") {
+    if (!userProfile || !selectedPricingPlan || !trialPricingPlan || !stripe || !elements) {
+      console.warn("data missing for subscription setup");
+      return;
+    }
+
+    if (request.state !== "initial") {
+      return;
+    }
+
+    setRequest({ state: "loading" });
+
+    const redirectUrl = createSuccessCheckoutURL(
+      type,
+      planRef.current.unit_amount,
+      planRef.current.currency,
+      planRef.current.priceID
+    );
+
+    trackPixel("AddPaymentInfo");
+
+    try {
+      elements.update({
+        amount: planRef.current.unit_amount,
+        currency: planRef.current.currency,
+      });
+
+      // Trigger form validation and wallet collection
+      const elementSubmission = await elements.submit();
+      if (elementSubmission.error) {
+        setRequest({
+          state: "error",
+          error: elementSubmission.error.message ?? "Element submission failed",
+        });
+
+        return;
+      }
+
+      const subscription = await eden("/payments/createSubscription", {
+        method: "POST",
+        body: {
+          userID: userProfile.id,
+          priceID: trialPricingPlan.recurring.priceID,
+          oneTimeFeePriceID: selectedPricingPlan,
+        },
+      });
+
+      if (subscription.error) {
+        setRequest({
+          state: "error",
+          error: subscription.error.message,
+        });
+
+        return;
+      }
+
+      if (!subscription.data) {
+        setRequest({
+          state: "error",
+          error: "missing payment intent data",
+        });
+
+        return;
+      }
+
+      // Empty client secret means that overall price of the cart is very close to 0.
+      // In that case subscription becomes automatically activated.
+      // GOOD FOR TESTING!
+      if (!subscription.data.client_secret) {
+        console.log("no client secret, payment has been paid");
+
+        return;
+      }
+
+      const confirmation = await stripe.confirmPayment({
+        elements,
+        clientSecret: subscription.data.client_secret,
+        confirmParams: {
+          return_url: redirectUrl.toString(),
+        },
+      });
+
+      if (confirmation.error) {
+        console.error(confirmation.error);
+        setRequest({
+          state: "error",
+          error: confirmation.error.message ?? "Your payment has been declined.",
+        });
+
+        return;
+      }
+
+      setRequest({ state: "ok" });
+    } catch (err) {
+      console.error(err);
+      setRequest({ state: "error", error: String(err) });
+    }
+  }
+
+  return [request, submit];
 }
