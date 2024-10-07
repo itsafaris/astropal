@@ -3,7 +3,8 @@ import { GatsbyBrowser } from "gatsby";
 import { posthog } from "posthog-js";
 
 import { initPosthog } from "./src/utils/tracking";
-import { RootWrapper } from "./src/components/root/RootWrapper";
+import { RootWrapper } from "./src/components/wrappers/RootWrapper";
+import { PageWrapper } from "./src/components/wrappers/PageWrapper";
 
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/inter";
@@ -24,4 +25,8 @@ export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
 
 export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
   return <RootWrapper>{element}</RootWrapper>;
+};
+
+export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({ element }) => {
+  return <PageWrapper>{element}</PageWrapper>;
 };

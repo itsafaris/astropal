@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Flex, Text } from "@chakra-ui/react";
-import { useGlobalState } from "./root/RootWrapper";
+import { useGlobalState } from "./wrappers/RootWrapper";
 
 function formatTimestamp(timestamp: number): {
   minutes: string;

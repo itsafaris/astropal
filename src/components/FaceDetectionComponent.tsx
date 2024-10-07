@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, Image, Progress, Text } from "@chakra-ui/react";
 import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import * as React from "react";
-import { useServices } from "./root/RootWrapper";
+import { useServices } from "./wrappers/RootWrapper";
 import { dataUrlToHtmlImageElement } from "@utils/image";
 import { FaCheck } from "react-icons/fa";
 

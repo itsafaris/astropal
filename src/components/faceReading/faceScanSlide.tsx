@@ -11,7 +11,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { SlideHeading } from "@components/quizpage/components";
-import { useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 import { WebcamDetection } from "@components/WebcamDetection";
 import { Slide, useQuiz } from "@martynasj/quiz-lib/index";
 import { readFileAsDataURL } from "@utils/image";
