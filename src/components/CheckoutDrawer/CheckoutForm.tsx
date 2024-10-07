@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Button, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
-import { useGlobalState2 } from "@components/root/RootWrapper";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { MdCreditCard } from "react-icons/md";
@@ -14,16 +13,16 @@ import { trackPixel } from "@utils/tracking";
 import { createSuccessCheckoutURL } from "./utils";
 import { ErrorView, LoadingView } from "./components";
 import { RequestType } from "./types";
+import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
+import { eden } from "@utils/coreApi";
+import { useGlobalState2 } from "@components/root/RootWrapper";
 
-export function CheckoutForm() {
+export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
   const stripe = useStripe();
   const elements = useElements();
+  const { userProfile, selectedPricingPlan, trialPricingPlan } = useGlobalState2();
 
   const [paymentType, setPaymentType] = React.useState<"card" | "initial">("initial");
-
-  const { trialPricingPlan, selectedPricingPlan } = useGlobalState2();
-  const plan = trialPricingPlan?.oneTimeFee.find((p) => p.priceID === selectedPricingPlan);
-
   const [expressCheckoutReady, setExpressCheckoutReady] = React.useState(false);
   const [cardCheckoutReady, setCardCheckoutReady] = React.useState(false);
   const [payment, setPayment] = React.useState<RequestType>({
@@ -31,7 +30,12 @@ export function CheckoutForm() {
   });
 
   async function submitPayment(type: "express" | "card") {
-    if (!stripe || !elements) {
+    if (!userProfile || !selectedPricingPlan || !trialPricingPlan || !stripe || !elements) {
+      console.warn("data missing for subscription setup");
+      return;
+    }
+
+    if (payment.state !== "initial") {
       return;
     }
 
@@ -39,38 +43,89 @@ export function CheckoutForm() {
 
     const redirectUrl = createSuccessCheckoutURL(
       type,
-      plan!.unit_amount,
-      plan!.currency,
-      plan!.priceID
+      plan.unit_amount,
+      plan.currency,
+      plan.priceID
     );
 
     trackPixel("AddPaymentInfo");
 
     try {
-      const res = await stripe.confirmPayment({
+      elements.update({
+        amount: plan.unit_amount,
+        currency: plan.currency,
+      });
+
+      // Trigger form validation and wallet collection
+      const elementSubmission = await elements.submit();
+      if (elementSubmission.error) {
+        setPayment({
+          state: "error",
+          error: elementSubmission.error.message ?? "Element submission failed",
+        });
+
+        return;
+      }
+
+      const subscription = await eden("/payments/createSubscription", {
+        method: "POST",
+        body: {
+          userID: userProfile.id,
+          priceID: trialPricingPlan.recurring.priceID,
+          oneTimeFeePriceID: selectedPricingPlan,
+        },
+      });
+
+      if (subscription.error) {
+        setPayment({
+          state: "error",
+          error: subscription.error.message,
+        });
+
+        return;
+      }
+
+      if (!subscription.data) {
+        setPayment({
+          state: "error",
+          error: "missing payment intent data",
+        });
+
+        return;
+      }
+
+      // Empty client secret means that overall price of the cart is very close to 0.
+      // In that case subscription becomes automatically activated.
+      // GOOD FOR TESTING!
+      if (!subscription.data.client_secret) {
+        console.log("no client secret, payment has been paid");
+
+        return;
+      }
+
+      const confirmation = await stripe.confirmPayment({
         elements,
+        clientSecret: subscription.data.client_secret,
         confirmParams: {
           return_url: redirectUrl.toString(),
         },
       });
 
-      if (res.error) {
-        console.error(res.error);
+      if (confirmation.error) {
+        console.error(confirmation.error);
         setPayment({
           state: "error",
-          error: res.error.message ?? "Your payment has been declined.",
+          error: confirmation.error.message ?? "Your payment has been declined.",
         });
 
         return;
       }
+
+      setPayment({ state: "ok", data: { clientSecret: subscription.data.client_secret } });
     } catch (err) {
       console.error(err);
       setPayment({ state: "error", error: String(err) });
     }
-  }
-
-  if (!plan) {
-    return "pricing plan not selected";
   }
 
   return (
