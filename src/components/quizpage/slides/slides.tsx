@@ -46,7 +46,7 @@ import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 import { BsChevronRight } from "react-icons/bs";
 import { astrologers, getAstrologerOrDefault } from "@utils/astrologers";
 import { NatalChart } from "@components/NatalChart";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 
 const PULSE_ANIMATION = keyframes`
   0% { box-shadow: 0 0 0 0px #e65400; }

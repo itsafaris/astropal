@@ -1,4 +1,4 @@
-import { useGlobalState } from "@components/root/RootWrapper";
+import { useGlobalState } from "@components/wrappers/RootWrapper";
 
 type UserProfileState = {
   isLoading?: boolean;

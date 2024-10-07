@@ -1,5 +1,5 @@
 import { Button, Container, Stack, Text } from "@chakra-ui/react";
-import { useGlobalState2 } from "@components/root/RootWrapper";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { gaTrackPaidTrialPurchaseConversion, trackEvent, trackPixel } from "@utils/tracking";
 import * as React from "react";
 

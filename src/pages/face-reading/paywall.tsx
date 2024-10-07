@@ -1,5 +1,5 @@
 import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";

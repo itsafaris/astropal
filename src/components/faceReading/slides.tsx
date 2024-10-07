@@ -18,7 +18,7 @@ import posthog from "posthog-js";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 import { getTypedQuizState, getZodiacFromState, QuizStateTyped } from "./quizState";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/root/RootWrapper";
+import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 import { useState } from "react";
 
 const PULSE_ANIMATION_2 = keyframes`

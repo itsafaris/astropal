@@ -5,7 +5,7 @@ import { CheckoutForm } from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { siteConfig } from "src/conf";
 import { useLocation } from "@gatsbyjs/reach-router";
-import { useGlobalState2 } from "@components/root/RootWrapper";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 import "../../styles/global.css";
 
@@ -48,8 +48,12 @@ export function CheckoutDrawer() {
         },
       }}
     >
-      <Slide direction="bottom" in={isDrawerOpen} style={{ zIndex: 10, backgroundColor: "red" }}>
-        <Container>
+      <Slide
+        direction="bottom"
+        in={isDrawerOpen}
+        style={{ zIndex: 10, backgroundColor: "white", boxShadow: "0px 10px 20px 0px black" }}
+      >
+        <Container py={5}>
           <CheckoutForm plan={plan} />
         </Container>
       </Slide>

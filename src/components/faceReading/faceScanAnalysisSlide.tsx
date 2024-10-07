@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { FaceDetectionComponent } from "@components/FaceDetectionComponent";
 import { NextButton } from "@components/quizpage/components";
-import { useGlobalState2 } from "@components/root/RootWrapper";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { Slide } from "@martynasj/quiz-lib/index";
 import { useState } from "react";
 

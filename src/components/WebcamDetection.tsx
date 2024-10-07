@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useServices } from "./root/RootWrapper";
+import { useServices } from "./wrappers/RootWrapper";
 import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 

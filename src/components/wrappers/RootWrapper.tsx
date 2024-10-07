@@ -6,9 +6,7 @@ import { loadFromStorage, saveToStorage } from "@utils/localStorage";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import { getTrialPricingPlan, TrialPricingPlan } from "@utils/coreApi";
 import { orderBy } from "lodash";
-import { Box } from "@chakra-ui/react";
 import { LocationProvider } from "@gatsbyjs/reach-router";
-import { CheckoutDrawer } from "@components/CheckoutDrawer";
 
 export interface IRootWrapperProps {}
 
@@ -103,10 +101,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
             <LocationProvider>
               <GlobalHead />
 
-              <Box>
-                {props.children}
-                <CheckoutDrawer />
-              </Box>
+              {props.children}
             </LocationProvider>
           </ServicesContext.Provider>
         </GlobalStateCtx.Provider>

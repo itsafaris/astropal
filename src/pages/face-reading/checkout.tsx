@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Container, Flex, Heading, Icon, Text } from "@chakra-ui/react";
-import { useGlobalState2 } from "@components/root/RootWrapper";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { Timer } from "@components/timer";
 import { FaStar } from "react-icons/fa";
 import { MdFreeCancellation, MdOutlineDiscount, MdVerified } from "react-icons/md";

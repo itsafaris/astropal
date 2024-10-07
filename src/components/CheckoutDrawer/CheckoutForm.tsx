@@ -14,7 +14,7 @@ import { createSuccessCheckoutURL } from "./utils";
 import { ErrorView, LoadingView } from "./components";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { eden } from "@utils/coreApi";
-import { useGlobalState2 } from "@components/root/RootWrapper";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 export type RequestType =
   | {
