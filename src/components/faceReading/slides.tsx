@@ -157,7 +157,7 @@ export function YourBirthDateSlide() {
         height={180}
         style={{ margin: "0 auto" }}
         placeholder="blurred"
-        src="../../../images/calendar_pencil.png"
+        src="../../images/calendar_pencil.png"
       />
       <Selector />
       <NextButton

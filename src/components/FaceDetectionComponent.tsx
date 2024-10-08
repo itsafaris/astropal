@@ -160,6 +160,7 @@ export function FaceDetectionComponent({
               )}
             </Box>
           )}
+
           <canvas
             ref={$canvas}
             width={"800px"}
@@ -176,6 +177,7 @@ export function FaceDetectionComponent({
           />
         </Box>
       </Flex>
+
       <Box>
         {faceReadingState.type === "interpreting" && (
           <Box position={"relative"} mx={8}>
