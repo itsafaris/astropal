@@ -15,12 +15,22 @@ import { useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 import { WebcamDetection } from "@components/WebcamDetection";
 import { Slide, useQuiz } from "@martynasj/quiz-lib/index";
 import { readFileAsDataURL } from "@utils/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { FiCamera, FiUpload } from "react-icons/fi";
+import posthog from "posthog-js";
+import { isProdMode } from "@utils/isProdMode";
 
 export interface IFaceScanSlideProps {}
 
 export function FaceScanSlide(props: IFaceScanSlideProps) {
+  return (
+    <Slide id="face-scan" type="filler">
+      <FaceScanSlide_ />
+    </Slide>
+  );
+}
+
+export function FaceScanSlide_(props: IFaceScanSlideProps) {
   const { submitQuestion } = useQuiz();
   const update = useGlobalUpdate2();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +38,15 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
   const imgUploadRef = React.useRef<HTMLInputElement | null>(null);
 
   const cancelRef = React.useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    posthog.stopSessionRecording();
+    return () => {
+      if (isProdMode()) {
+        posthog.startSessionRecording();
+      }
+    };
+  }, []);
 
   async function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
@@ -40,7 +59,7 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
   }
 
   return (
-    <Slide id="face-scan" type="filler">
+    <React.Fragment>
       <SlideHeading>Take a picture of your head as instructed</SlideHeading>
       <Button colorScheme="brand" onClick={onOpen}>
         Take a picture now
@@ -111,6 +130,6 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
           />
         </ModalContent>
       </Modal>
-    </Slide>
+    </React.Fragment>
   );
 }
