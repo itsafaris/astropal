@@ -18,19 +18,19 @@ import { readFileAsDataURL } from "@utils/image";
 import React, { useEffect } from "react";
 import { FiCamera, FiUpload } from "react-icons/fi";
 import posthog from "posthog-js";
-import { isProdMode } from "@utils/isProdMode";
+
 
 export interface IFaceScanSlideProps {}
 
 export function FaceScanSlide(props: IFaceScanSlideProps) {
   return (
     <Slide id="face-scan" type="filler">
-      <FaceScanSlide_ />
+      <FaceScanContent />
     </Slide>
   );
 }
 
-export function FaceScanSlide_(props: IFaceScanSlideProps) {
+export function FaceScanContent(props: IFaceScanSlideProps) {
   const { submitQuestion } = useQuiz();
   const update = useGlobalUpdate2();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,11 +41,7 @@ export function FaceScanSlide_(props: IFaceScanSlideProps) {
 
   useEffect(() => {
     posthog.stopSessionRecording();
-    return () => {
-      if (isProdMode()) {
-        posthog.startSessionRecording();
-      }
-    };
+    // session recording will be enabled in the next step
   }, []);
 
   async function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {

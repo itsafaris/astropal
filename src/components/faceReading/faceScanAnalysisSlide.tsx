@@ -3,16 +3,35 @@ import { FaceDetectionComponent } from "@components/FaceDetectionComponent";
 import { NextButton } from "@components/quizpage/components";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { Slide } from "@martynasj/quiz-lib/index";
-import { useState } from "react";
+import { isProdMode } from "@utils/isProdMode";
+import posthog from "posthog-js";
+import React, { useEffect, useState } from "react";
 
 export interface IFaceScanAnalysisSlideProps {}
 
 export function FaceScanAnalysisSlide(props: IFaceScanAnalysisSlideProps) {
+  return (
+    <Slide id="face-scan-analysis" type="filler">
+      <FaceScanAnalysisContent />
+    </Slide>
+  );
+}
+
+function FaceScanAnalysisContent() {
   const [isComplete, setIsComplete] = useState(false);
   const globalState = useGlobalState2();
 
+  useEffect(() => {
+    posthog.stopSessionRecording();
+    return () => {
+      if (isProdMode()) {
+        posthog.startSessionRecording();
+      }
+    };
+  }, []);
+
   return (
-    <Slide id="face-scan-analysis" type="filler">
+    <React.Fragment>
       <Box mb={4} mt={-3}>
         <FaceDetectionComponent
           imgDataUrl={globalState.faceImageDataUrl}
@@ -22,6 +41,6 @@ export function FaceScanAnalysisSlide(props: IFaceScanAnalysisSlideProps) {
         />
       </Box>
       {isComplete && <NextButton>Continue</NextButton>}
-    </Slide>
+    </React.Fragment>
   );
 }
