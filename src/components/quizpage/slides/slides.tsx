@@ -27,7 +27,6 @@ import {
   Grid,
   Divider,
   Icon,
-  keyframes,
   ScaleFade,
   Fade,
   Button,
@@ -47,6 +46,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { astrologers, getAstrologerOrDefault } from "@utils/astrologers";
 import { NatalChart } from "@components/NatalChart";
 import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
+import { keyframes } from "@emotion/react";
 
 const PULSE_ANIMATION = keyframes`
   0% { box-shadow: 0 0 0 0px #e65400; }

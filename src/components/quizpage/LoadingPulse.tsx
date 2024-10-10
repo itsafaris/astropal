@@ -1,6 +1,7 @@
 import React from "react";
-import { Flex, FlexProps, Text, keyframes } from "@chakra-ui/react";
+import { Flex, FlexProps, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { keyframes } from "@emotion/react";
 
 const DEFAULT_COLOR = "#dfbe9d96";
 const BOX_SHADOW_CSS = `0px 0px 50px 0px ${DEFAULT_COLOR}, 0px 0px 10px 0px ${DEFAULT_COLOR}`;
