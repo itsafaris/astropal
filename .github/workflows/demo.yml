@@ -21,8 +21,8 @@ jobs:
         env:
           GATSBY_OPENAI_API_KEY: ${{ secrets.GATSBY_OPENAI_API_KEY }}
           GATSBY_SENTRY_DSN: ${{ secrets.GATSBY_SENTRY_DSN }}
-          GATSBY_CORE_URL: https://api.theastropal.com
-          GATSBY_WEBAPP_URL: https://app.theastropal.com
+          GATSBY_CORE_URL: https://api.intuvist.com
+          GATSBY_WEBAPP_URL: https://app.intuvist.com
           GATSBY_STRIPE_PUBLIC_KEY: pk_live_51Q7d1o08pYnCnuS2zkJlnojZWLSpynxm9ElrBULd91dABcP2DZUTcdcO35pQEsJuZDiz9dLc5PURj5kkJS3YNdFi00b6eeD9gs
           GATSBY_FB_PIXEL_ID: "488679697025748"
           GATSBY_GOOGLE_ADS_TAG: AW-16635011402
