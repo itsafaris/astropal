@@ -27,7 +27,7 @@ export default function CheckoutPage() {
       <Container pb={"400px"}>
         <Flex direction={"column"} alignItems={"center"}>
           <Text my={4} textAlign={"center"} mx="auto" fontSize={"sm"}>
-            The #1 Astrology app trusted by
+            The #1 Face Reading app trusted by
             <br /> over 25 million people.
           </Text>
 
