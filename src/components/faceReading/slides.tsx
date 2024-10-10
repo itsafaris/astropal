@@ -1,4 +1,6 @@
-import { Box, Flex, Icon, keyframes, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { keyframes } from "@emotion/react";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import * as Sentry from "@sentry/gatsby";
 import { NextButton, SlideHeading, Span } from "@components/quizpage/components";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
@@ -19,7 +21,6 @@ import posthog from "posthog-js";
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 import { getTypedQuizState, getZodiacFromState, QuizStateTyped } from "./quizState";
 import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
-import { useState } from "react";
 
 const PULSE_ANIMATION_2 = keyframes`
   0% { box-shadow: 0 0 0 0px #805ad5; }

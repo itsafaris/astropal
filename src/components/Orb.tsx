@@ -1,4 +1,5 @@
-import { Flex, FlexProps, keyframes, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import { keyframes } from "@emotion/react";
 
 const boxShadow = (color: string = "#dfbe9d") =>
   `inset 0px 0px 20px 5px ${color}, 0px 0px 50px 0px ${color}, 0px 0px 10px 0px ${color}`;
