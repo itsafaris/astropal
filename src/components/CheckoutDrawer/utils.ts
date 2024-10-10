@@ -7,7 +7,7 @@ export function createSuccessCheckoutURL(
   // this is a redirect url after the successful payment
   const redirectUrl = new URL(window.location.href);
   redirectUrl.searchParams.delete("checkout");
-  redirectUrl.pathname = "/success-checkout";
+  redirectUrl.pathname = "/face-reading/success-checkout";
 
   redirectUrl.searchParams.set("paymentType", paymentType);
   redirectUrl.searchParams.set("pricePaid", pricePaid.toString());
