@@ -54,7 +54,7 @@ function HeroSection() {
       <Flex width={"full"} justifyContent={"center"} pb={4}>
         <StaticImage
           src="../../images/astropal_logo.png"
-          alt="astropal logo"
+          alt="Intuvist logo"
           style={{ width: 100 }}
           width={100}
         />

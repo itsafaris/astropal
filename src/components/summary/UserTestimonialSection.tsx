@@ -20,9 +20,9 @@ export function UserTestimonialSection() {
       <TestimonialCard
         testimonial={{
           name: "Harper Wilson",
-          quote: `Hi Astropal, I love your program! I spent the entire weekend experimenting, and it took me sooooooo deep into my explorations.🙏🙏🙏`,
+          quote: `Hi Intuvist, I love your program! I spent the entire weekend experimenting, and it took me sooooooo deep into my explorations.🙏🙏🙏`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src="../../images/user3.png" />,
+          avatar: <StaticImage alt="Intuvist user image" src="../../images/user3.png" />,
           commentAge: "1d",
         }}
       />
@@ -32,7 +32,7 @@ export function UserTestimonialSection() {
           name: "Josh",
           quote: `Bought this. Worth every penny.`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src="../../images/user8.png" />,
+          avatar: <StaticImage alt="Intuvist user image" src="../../images/user8.png" />,
           commentAge: "3d",
         }}
       />
@@ -54,7 +54,7 @@ export function UserTestimonialSection() {
         motivation during uncertain times, helping me navigate life's twists and turns with a newfound
         sense of purpose`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src="../../images/user7.png" />,
+          avatar: <StaticImage alt="Intuvist user image" src="../../images/user7.png" />,
           commentAge: "7d",
         }}
       />

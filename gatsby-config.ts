@@ -10,13 +10,13 @@ dotenv.config({
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    brandName: "Astropal",
-    title: `Astropal`,
-    siteUrl: `https://www.theastropal.com`,
+    brandName: "Intuvist",
+    title: `Intuvist`,
+    siteUrl: `https://www.intuvist.com`,
     version: pkgjson.version,
     image: "/images/meta_img.jpg",
     description:
-      "Astropal is your personalized astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
+      "Intuvist is your personalized astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
   } satisfies SiteMetadata,
 
   flags: {

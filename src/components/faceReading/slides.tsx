@@ -350,7 +350,7 @@ function EmailSlide_() {
       </SlideHeading>
 
       <Text fontSize={"lg"} textAlign={"center"}>
-        Enter your email to get your advanced Face reading with Astropal
+        Enter your email to get your advanced Face reading with Intuvist
       </Text>
 
       <Selector mt={4} mb={2} />

@@ -1,12 +1,12 @@
 export const APP_DATA = {
-  productName: "Astropal",
-  email: "info@theastropal.com",
+  productName: "Intuvist",
+  email: "info@intuvist.com",
   website: {
-    url: "https://theastropal.com",
-    title: "theastropal.com",
+    url: "https://intuvist.com",
+    title: "intuvist.com",
   },
   webapp: {
-    url: "https://app.theastropal.com",
-    title: "app.theastropal.com",
+    url: "https://app.intuvist.com",
+    title: "app.intuvist.com",
   },
 };

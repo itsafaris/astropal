@@ -74,7 +74,7 @@ export function HeroSection({ quizState }: { quizState?: QuizStateParsed }) {
           <ArrowDownIcon mb={6} color="whiteAlpha.600" fontSize={"2xl"} />
 
           <Box position="relative" overflow={"hidden"}>
-            <StaticImage alt="Astropal UI preview" src="../../images/phone_ui.png" />
+            <StaticImage alt="Intuvist UI preview" src="../../images/phone_ui.png" />
 
             <Box position={"absolute"} top="40%" width="100%" px={16}>
               <Text fontSize={"xl"} textAlign={"center"}>

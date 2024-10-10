@@ -38,7 +38,7 @@ export function TestimonialSection() {
           name: "Harper Wilson",
           quote: `Love my astrologer Sophia! I spent entire weekend experimenting and it took me sooooooo deep into my explorations 🙏🙏🙏`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src={"../../../images/user3.png"} />,
+          avatar: <StaticImage alt="Intuvist user image" src={"../../../images/user3.png"} />,
           commentAge: "1d",
         }}
       />
@@ -48,7 +48,7 @@ export function TestimonialSection() {
           name: "Josh",
           quote: `3 weeks in and so far it has been pretty spot on 🎯`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src={"../../../images/user8.png"} />,
+          avatar: <StaticImage alt="Intuvist user image" src={"../../../images/user8.png"} />,
           commentAge: "3d",
         }}
       />
@@ -58,7 +58,7 @@ export function TestimonialSection() {
           name: "Paige Madison Hartley",
           quote: `well that basically can now replace my astrologer here in Greeley haha 😅`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src={"../../../images/user1.png"} />,
+          avatar: <StaticImage alt="Intuvist user image" src={"../../../images/user1.png"} />,
           commentAge: "7d",
         }}
       />
@@ -68,7 +68,7 @@ export function TestimonialSection() {
           name: "Stephanie",
           quote: `I was initially skeptical, but I must now admit that I am thoroughly impressed. The accuracy with which the Luna interprets my birth chart is remarkable. The predictions are also accurate, offers glimpses into potential opportunities and challenges on the horizon`,
           question: "",
-          avatar: <StaticImage alt="Astropal user image" src={"../../../images/user7.png"} />,
+          avatar: <StaticImage alt="Intuvist user image" src={"../../../images/user7.png"} />,
           commentAge: "7d",
         }}
       />

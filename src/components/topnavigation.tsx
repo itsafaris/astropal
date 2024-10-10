@@ -8,14 +8,10 @@ export function TopNavigation(props: ComponentProps<typeof Flex>) {
     <Flex flexDirection={"row"} alignItems={"center"} gap={3} py={6} {...props}>
       <Link to="/">
         <Stack direction={"row"} alignItems={"center"} gap={2}>
-          <StaticImage
-            src={`../images/favicon.png`}
-            alt="Astropal logo"
-            height={35}
-          />
+          <StaticImage src={`../images/favicon.png`} alt="Intuvist logo" height={35} />
 
           <Text fontSize={"md"} fontWeight={"semibold"}>
-            Astropal
+            Intuvist
           </Text>
         </Stack>
       </Link>

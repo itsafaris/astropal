@@ -30,7 +30,7 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
         <StaticImage
           src="../../images/facereading_lp.png"
           placeholder="blurred"
-          alt="face reading by astropal"
+          alt="face reading by Intuvist"
           style={{ borderRadius: 12 }}
           width={600}
           height={440}
@@ -77,11 +77,11 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
 
       <Box>
         <Text fontSize={"xs"} textAlign={"center"}>
-          By continuing, I agree to <Link to="/privacy-policy">Astropal's Privacy Policy</Link> and{" "}
+          By continuing, I agree to <Link to="/privacy-policy">Intuvist's Privacy Policy</Link> and{" "}
           <Link to="/terms-and-conditions">Terms and Conditions</Link>
         </Text>
         <Text my={2} fontSize={"xs"} textAlign={"center"}>
-          © Astropal, 2024
+          © Intuvist, 2024
         </Text>
       </Box>
     </Container>

@@ -252,7 +252,7 @@ export function YourBirthTimeSlide() {
       </NextButton>
 
       <StaticImage
-        alt="Astropal - pencil drawing of an astrological clock"
+        alt="Intuvist - pencil drawing of an astrological clock"
         layout="fixed"
         placeholder="blurred"
         height={180}
