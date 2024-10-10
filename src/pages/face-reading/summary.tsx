@@ -368,8 +368,7 @@ function Footer() {
           Help Center
         </Button>
       </Flex>
-      <Text fontSize={"xs"}>© 2024 {meta.brandName} America Inc.</Text>
-      <Text fontSize={"xs"}>2542 Platte Pl, Colorado Springs, CO 80909, US</Text>
+      <Text fontSize={"xs"}>©2024 {meta.brandName}. All rights reserved.</Text>
     </Box>
   );
 }

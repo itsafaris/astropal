@@ -58,8 +58,7 @@ export default function TermsAndConditionsPage() {
             </Text>
 
             <Text>
-              If you disagree with any part of these Terms, do not use
-              {APP_DATA.productName}.
+              If you disagree with any part of these Terms, do not use {APP_DATA.productName}.
             </Text>
 
             <Text>
@@ -72,8 +71,8 @@ export default function TermsAndConditionsPage() {
             </Text>
 
             <Text>
-              – YOUR SUBSCRIPTION TO {APP_DATA.productName} WILL AUTOMATICALLY RENEW UNLESS YOU
-              CANCEL, AS EXPLAINED FURTHER BELOW.
+              – YOUR SUBSCRIPTION TO {APP_DATA.productName.toUpperCase()} WILL AUTOMATICALLY RENEW
+              UNLESS YOU CANCEL, AS EXPLAINED FURTHER BELOW.
             </Text>
 
             <Stack>
@@ -129,10 +128,10 @@ export default function TermsAndConditionsPage() {
                 ).
               </Text>
               <Text>
-                1.13.“Seller, the Company” refers to a company MB Neontree, registered under company
-                code 306964389, with its principal office located at Zemaitės str. 17-6, LT-87133
-                Telsiai, Lithuania, contactable via email at {APP_DATA.email}. The Seller's
-                information is recorded in the Register of Legal Entities.
+                1.13.“Seller, the Company” refers to a company MB Vrm datalabs, registered under
+                company code 307004972, with its principal office located at Ragainės str. 3-15,
+                LT-92196 Klaipėda, Lithuania, contactable via email at {APP_DATA.email}. The
+                Seller's information is recorded in the Register of Legal Entities.
               </Text>
               <Text>
                 1.14. “Subscription” signifies a subscription to the Content for a period chosen by
@@ -149,16 +148,6 @@ export default function TermsAndConditionsPage() {
                 1.17. “Website” refers to the site located at (
                 <Link to={APP_DATA.website.title}>{APP_DATA.website.url}</Link>
                 ).
-              </Text>
-              <Text>
-                1.18. "Lifetime Access" refers to a single, one-off payment that grants the
-                subscriber ongoing access to the Content for as long as the Seller remains in
-                operation and continues to offer the Content. The duration of this access is tied to
-                the Seller's active business period, during which they continue to provide and
-                maintain the Content. While the Lifetime Access is governed by the same general
-                terms and conditions that apply to other subscription types, it also has specific
-                provisions that are detailed within these Terms. These provisions address the unique
-                nature of this long-term subscription model.
               </Text>
             </Stack>
           </Section>
@@ -511,7 +500,7 @@ export default function TermsAndConditionsPage() {
               <Text>8.3. Payment methods are specified during checkout.</Text>
 
               <Text>
-                8.4. Subscriptions including Lifetime Access require upfront payment and
+                8.4. Paid-trials, Subscriptions and Lifetime Access require upfront payment and
                 automatically renew until canceled 24 hours before the end of the period.
               </Text>
 
@@ -870,7 +859,7 @@ export default function TermsAndConditionsPage() {
             </Text>
           </Section>
 
-          <TitleXL>Last updated: September 05th, 2024</TitleXL>
+          <TitleXL>Last updated: October 10, 2024</TitleXL>
         </Stack>
       </Container>
     </Stack>

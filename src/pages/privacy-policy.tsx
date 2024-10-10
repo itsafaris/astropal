@@ -12,36 +12,15 @@ import { Link as LinkRaw } from "gatsby";
 import { APP_DATA } from "src/data";
 
 function Headline(props: TextProps) {
-  return (
-    <TextRaw
-      textAlign={"left"}
-      fontSize={"3xl"}
-      fontWeight={"bold"}
-      {...props}
-    />
-  );
+  return <TextRaw textAlign={"left"} fontSize={"3xl"} fontWeight={"bold"} {...props} />;
 }
 
 function TitleXL(props: TextProps) {
-  return (
-    <TextRaw
-      textAlign={"left"}
-      fontSize={"xl"}
-      fontWeight={"bold"}
-      {...props}
-    />
-  );
+  return <TextRaw textAlign={"left"} fontSize={"xl"} fontWeight={"bold"} {...props} />;
 }
 
 function TitleLG(props: TextProps) {
-  return (
-    <TextRaw
-      textAlign={"left"}
-      fontSize={"lg"}
-      fontWeight={"bold"}
-      {...props}
-    />
-  );
+  return <TextRaw textAlign={"left"} fontSize={"lg"} fontWeight={"bold"} {...props} />;
 }
 
 function Section(props: StackProps) {
@@ -72,50 +51,44 @@ export default function PrivacyPolicyPage() {
           <Headline>Privacy Policy</Headline>
 
           <Text>
-            {APP_DATA.productName} prioritizes the safeguarding of your personal
-            information. This Privacy Policy outlines our practices concerning
-            the collection, storage, utilization, and disclosure of data. This
-            policy is applicable to our website {APP_DATA.website.title} (the
-            “Website”), our web application {APP_DATA.webapp.title} (the
-            “Webapp”), and our corporate operations collectively known as our
-            services (the “Services”). By accessing our Services or providing us
-            with your information, you consent to the practices described in
-            this Privacy Policy.
+            {APP_DATA.productName} prioritizes the safeguarding of your personal information. This
+            Privacy Policy outlines our practices concerning the collection, storage, utilization,
+            and disclosure of data. This policy is applicable to our website{" "}
+            {APP_DATA.website.title} (the “Website”), our web application {APP_DATA.webapp.title}{" "}
+            (the “Webapp”), and our corporate operations collectively known as our services (the
+            “Services”). By accessing our Services or providing us with your information, you
+            consent to the practices described in this Privacy Policy.
           </Text>
 
           <Section>
             <TitleXL>1. Acceptance of Privacy Policy</TitleXL>
 
             <Text>
-              This Privacy Policy replaces all previous declarations and notices
-              regarding our privacy practices related to the Services. If you
-              disagree with any part of this Privacy Policy, you should not
-              access or use the Services.
+              This Privacy Policy replaces all previous declarations and notices regarding our
+              privacy practices related to the Services. If you disagree with any part of this
+              Privacy Policy, you should not access or use the Services.
             </Text>
 
             <Text>
-              We reserve the right to amend this Privacy Policy periodically. If
-              significant changes are made to this policy or the manner in which
-              we handle, share, or collect Personal Information, we will notify
-              you either by updating the “Last update Date” at the bottom of
-              this policy, prominently posting an announcement on our Services,
-              or sending a notification using the contact details you have
-              provided us. By continuing to use the Services after such changes,
-              you are bound by the updated Privacy Policy. We advise you to
-              review this Privacy Policy regularly to stay informed about
+              We reserve the right to amend this Privacy Policy periodically. If significant changes
+              are made to this policy or the manner in which we handle, share, or collect Personal
+              Information, we will notify you either by updating the “Last update Date” at the
+              bottom of this policy, prominently posting an announcement on our Services, or sending
+              a notification using the contact details you have provided us. By continuing to use
+              the Services after such changes, you are bound by the updated Privacy Policy. We
+              advise you to review this Privacy Policy regularly to stay informed about
               {APP_DATA.productName}’s current privacy practices.
             </Text>
 
             <Text>
-              In addition, you acknowledge that this Privacy Policy is part of
-              our Terms and Conditions at{" "}
+              In addition, you acknowledge that this Privacy Policy is part of our Terms and
+              Conditions at{" "}
               <Link to={`${APP_DATA.website.url}/terms-and-conditions`}>
                 {APP_DATA.website.title}/terms-and-conditions
               </Link>
-              , and by reference, it is included therein. By accessing or using
-              our Services, you agree to comply with the Terms and Conditions.
-              If you do not agree to our Terms and Conditions, please refrain
-              from using our Service.
+              , and by reference, it is included therein. By accessing or using our Services, you
+              agree to comply with the Terms and Conditions. If you do not agree to our Terms and
+              Conditions, please refrain from using our Service.
             </Text>
           </Section>
 
@@ -123,66 +96,55 @@ export default function PrivacyPolicyPage() {
             <TitleXL>2. Information We Obtain from You</TitleXL>
 
             <Text>
-              We collect information that you actively provide to us as well as
-              information that is automatically gathered. Some of this
-              information can identify you (“Personal Information”), while some
-              remains anonymous (“Anonymous Information”). Anonymous Information
-              may sometimes be linked or combined with Personal Information, in
-              which case we will treat such combined information as Personal
-              Information for the purposes of this Privacy Policy. Moreover, if
-              Internet Protocol (“IP”) addresses or similar identifiers are
-              deemed personally identifiable information by applicable law, we
-              treat them as Personal Information in this policy.
+              We collect information that you actively provide to us as well as information that is
+              automatically gathered. Some of this information can identify you (“Personal
+              Information”), while some remains anonymous (“Anonymous Information”). Anonymous
+              Information may sometimes be linked or combined with Personal Information, in which
+              case we will treat such combined information as Personal Information for the purposes
+              of this Privacy Policy. Moreover, if Internet Protocol (“IP”) addresses or similar
+              identifiers are deemed personally identifiable information by applicable law, we treat
+              them as Personal Information in this policy.
             </Text>
 
             <TitleLG>Information You Provide</TitleLG>
 
             <Text>
-              The information you provide may include your name, email address,
-              birth date, birth time, place of birth, and login or account
-              credentials. If you purchase our Services or products, you may
-              provide payment details, though {APP_DATA.productName} uses
-              third-party payment processors and does not store credit card
-              information.
+              The information you provide may include your name, email address, birth date, birth
+              time, place of birth, and login or account credentials. If you purchase our Services
+              or products, you may provide payment details, though {APP_DATA.productName} uses
+              third-party payment processors and does not store credit card information.
             </Text>
 
             <TitleLG>Device-Related Information</TitleLG>
 
             <Text>
-              When you use our Services, we may automatically collect data
-              associated with your device, such as your IP address, operating
-              system and version, local time zone, activity timestamps, device
-              type, manufacturer, screen size, and language settings.
+              When you use our Services, we may automatically collect data associated with your
+              device, such as your IP address, operating system and version, local time zone,
+              activity timestamps, device type, manufacturer, screen size, and language settings.
             </Text>
 
-            <Text>
-              We utilize the following technologies to gather device
-              information:
-            </Text>
+            <Text>We utilize the following technologies to gather device information:</Text>
 
             <UnorderedList>
               <ListItem>
                 <Text>
-                  Cookies: Data files placed on your device, often containing an
-                  anonymous unique identifier. Visit{" "}
-                  <Link to={"http://www.allaboutcookies.org"}>
-                    http://www.allaboutcookies.org
-                  </Link>
+                  Cookies: Data files placed on your device, often containing an anonymous unique
+                  identifier. Visit{" "}
+                  <Link to={"http://www.allaboutcookies.org"}>http://www.allaboutcookies.org</Link>
                 </Text>
               </ListItem>
 
               <ListItem>
                 <Text>
-                  Log Files: These track actions on our Site and collect data
-                  such as IP address, browser type, Internet service provider,
-                  referring/exit pages, and time stamps.
+                  Log Files: These track actions on our Site and collect data such as IP address,
+                  browser type, Internet service provider, referring/exit pages, and time stamps.
                 </Text>
               </ListItem>
 
               <ListItem>
                 <Text>
-                  Tags and Pixels: Electronic files used to track your browsing
-                  activities on our Site.
+                  Tags and Pixels: Electronic files used to track your browsing activities on our
+                  Site.
                 </Text>
               </ListItem>
             </UnorderedList>
@@ -190,10 +152,9 @@ export default function PrivacyPolicyPage() {
             <TitleLG>Do Not Track (DNT)</TitleLG>
 
             <Text>
-              Do Not Track (“DNT”) is a browser setting that allows you to
-              express preferences regarding tracking by advertisers and other
-              third parties. We employ technology to recognize and respect DNT
-              preferences you set in your web browser.
+              Do Not Track (“DNT”) is a browser setting that allows you to express preferences
+              regarding tracking by advertisers and other third parties. We employ technology to
+              recognize and respect DNT preferences you set in your web browser.
             </Text>
           </Section>
 
@@ -201,11 +162,10 @@ export default function PrivacyPolicyPage() {
             <TitleXL>3. Utilization of Information</TitleXL>
 
             <Text>
-              Generally, the data collected is used to provide, maintain, and
-              improve our Services. We may use both Anonymous and Personal
-              Information as described in this Privacy Policy for research,
-              commercial purposes, and operational improvements, including but
-              not limited to:
+              Generally, the data collected is used to provide, maintain, and improve our Services.
+              We may use both Anonymous and Personal Information as described in this Privacy Policy
+              for research, commercial purposes, and operational improvements, including but not
+              limited to:
             </Text>
 
             <UnorderedList>
@@ -233,9 +193,8 @@ export default function PrivacyPolicyPage() {
             </UnorderedList>
 
             <Text>
-              Additionally, we may use your data for legal reasons, including
-              protecting our business and addressing any illegal, unethical, or
-              legally actionable activities.
+              Additionally, we may use your data for legal reasons, including protecting our
+              business and addressing any illegal, unethical, or legally actionable activities.
             </Text>
           </Section>
 
@@ -258,9 +217,9 @@ export default function PrivacyPolicyPage() {
             <TitleLG>Information You Share</TitleLG>
 
             <Text>
-              Any content you share, like your profile or DMs, can be saved or
-              copied by users outside the webapp. As with general internet use,
-              only share content you are comfortable with being distributed.
+              Any content you share, like your profile or DMs, can be saved or copied by users
+              outside the webapp. As with general internet use, only share content you are
+              comfortable with being distributed.
             </Text>
           </Section>
 
@@ -268,10 +227,9 @@ export default function PrivacyPolicyPage() {
             <TitleXL>5. Behavioral Advertising</TitleXL>
 
             <Text>
-              The Personal Information is used to deliver targeted
-              advertisements or marketing communications of potential interest
-              to you. To understand more, visit the Network Advertising
-              Initiative:{" "}
+              The Personal Information is used to deliver targeted advertisements or marketing
+              communications of potential interest to you. To understand more, visit the Network
+              Advertising Initiative:{" "}
               <Link
                 to={`http://www.networkadvertising.org/understanding-online-advertising/how-does-it-work`}
               >
@@ -316,9 +274,8 @@ export default function PrivacyPolicyPage() {
             <TitleXL>6. Minors</TitleXL>
 
             <Text>
-              The Site is not for individuals under 18 years of age. If you
-              believe we have collected data from such individuals, please
-              contact us at {APP_DATA.email}.
+              The Site is not for individuals under 18 years of age. If you believe we have
+              collected data from such individuals, please contact us at {APP_DATA.email}.
             </Text>
           </Section>
 
@@ -326,10 +283,9 @@ export default function PrivacyPolicyPage() {
             <TitleXL>7. Links to External Websites</TitleXL>
 
             <Text>
-              Our Services may direct you to other websites and applications
-              beyond our control. We encourage you to review the Privacy
-              Policies and Terms and Conditions of these third-party sites. This
-              Privacy Policy only applies to our Services.
+              Our Services may direct you to other websites and applications beyond our control. We
+              encourage you to review the Privacy Policies and Terms and Conditions of these
+              third-party sites. This Privacy Policy only applies to our Services.
             </Text>
           </Section>
 
@@ -339,27 +295,25 @@ export default function PrivacyPolicyPage() {
             <TitleLG>Storage</TitleLG>
 
             <Text>
-              Your Personal Information is usually stored on servers located in
-              the United States. If you are situated in another jurisdiction,
-              your data will be transferred to our U.S. servers, subject to
-              local data protection laws.
+              Your Personal Information is usually stored on servers located in the United States.
+              If you are situated in another jurisdiction, your data will be transferred to our U.S.
+              servers, subject to local data protection laws.
             </Text>
 
             <TitleLG>Security</TitleLG>
 
             <Text>
-              We have implemented various technical and organizational methods
-              to protect your personal data against accidental or unlawful
-              destruction, loss, alteration, unauthorized access, or disclosure.
-              However, the security of data transmitted over the internet cannot
-              be guaranteed.
+              We have implemented various technical and organizational methods to protect your
+              personal data against accidental or unlawful destruction, loss, alteration,
+              unauthorized access, or disclosure. However, the security of data transmitted over the
+              internet cannot be guaranteed.
             </Text>
 
             <TitleLG>Data Retention</TitleLG>
 
             <Text>
-              Personal data is retained only as long as necessary for the
-              intended purposes, such as:
+              Personal data is retained only as long as necessary for the intended purposes, such
+              as:
             </Text>
 
             <UnorderedList>
@@ -378,14 +332,13 @@ export default function PrivacyPolicyPage() {
             </UnorderedList>
 
             <Text>
-              In some cases, specific retention periods cannot be predetermined.
-              For instance, device data is retained as long as required for
-              processing.
+              In some cases, specific retention periods cannot be predetermined. For instance,
+              device data is retained as long as required for processing.
             </Text>
 
             <Text>
-              Notwithstanding, we may retain your personal data to comply with
-              legal obligations or protect vital interests.
+              Notwithstanding, we may retain your personal data to comply with legal obligations or
+              protect vital interests.
             </Text>
           </Section>
 
@@ -393,34 +346,29 @@ export default function PrivacyPolicyPage() {
             <TitleXL>9. Your Choices and Rights</TitleXL>
 
             <Text>
-              To update contact information/preferences, remove data, or inquire
-              about this Privacy Policy, contact us at {APP_DATA.email}.
-              Providing personal information is not obligatory, but refusing may
-              limit our ability to respond to requests or offer certain
-              Services. Opt-out of email comunicaciones by clicking unsubscribe
-              links within messages. Control cookie settings via your browser's
-              privacy settings; opting out of analytics cookies can also be done
-              through{" "}
+              To update contact information/preferences, remove data, or inquire about this Privacy
+              Policy, contact us at {APP_DATA.email}. Providing personal information is not
+              obligatory, but refusing may limit our ability to respond to requests or offer certain
+              Services. Opt-out of email comunicaciones by clicking unsubscribe links within
+              messages. Control cookie settings via your browser's privacy settings; opting out of
+              analytics cookies can also be done through{" "}
               <Link to={`https://tools.google.com/dlpage/gaoptout`}>
                 https://tools.google.com/dlpage/gaoptout
               </Link>
             </Text>
 
             <Text>
-              Depending on your jurisdiction, you may have rights regarding your
-              data, including access, correction, deletion, objection, and
-              restriction of processing. These rights are subject to exceptions
-              and conditions under applicable laws. Verify your identity for
-              these requests by contacting {APP_DATA.email}.
+              Depending on your jurisdiction, you may have rights regarding your data, including
+              access, correction, deletion, objection, and restriction of processing. These rights
+              are subject to exceptions and conditions under applicable laws. Verify your identity
+              for these requests by contacting {APP_DATA.email}.
             </Text>
 
             <Text>
-              EU residents have the right to access and request corrections or
-              deletions of their personal data. To exercise this, contact{" "}
-              {APP_DATA.email}. We process EU resident data as needed to fulfill
-              contracts or for legitimate business interests, and your data may
-              be transferred internationally, including to Canada and the United
-              States.
+              EU residents have the right to access and request corrections or deletions of their
+              personal data. To exercise this, contact {APP_DATA.email}. We process EU resident data
+              as needed to fulfill contracts or for legitimate business interests, and your data may
+              be transferred internationally, including to Canada and the United States.
             </Text>
           </Section>
 
@@ -428,13 +376,12 @@ export default function PrivacyPolicyPage() {
             <TitleXL>10. Modifications to this Privacy Policy</TitleXL>
 
             <Text>
-              We may revise this Privacy Policy periodically and notify you by
-              updating the “Last updated Date” at the bottom, posting an
-              announcement, or sending written communication before new policies
-              take effect. Continued use of our Websites, Webapps, and Services
-              following such notifications indicates your agreement to the
-              revised policy. Regularly review this Privacy Policy to remain
-              informed about {APP_DATA.productName}'s current practices.
+              We may revise this Privacy Policy periodically and notify you by updating the “Last
+              updated Date” at the bottom, posting an announcement, or sending written communication
+              before new policies take effect. Continued use of our Websites, Webapps, and Services
+              following such notifications indicates your agreement to the revised policy. Regularly
+              review this Privacy Policy to remain informed about {APP_DATA.productName}'s current
+              practices.
             </Text>
           </Section>
 
@@ -442,12 +389,12 @@ export default function PrivacyPolicyPage() {
             <TitleXL>11. Contact Information</TitleXL>
 
             <Text>
-              Should you have any inquiries regarding this Privacy Policy, feel
-              free to reach out to us at {APP_DATA.email}.
+              Should you have any inquiries regarding this Privacy Policy, feel free to reach out to
+              us at {APP_DATA.email}.
             </Text>
           </Section>
 
-          <TitleXL>Last updated: May 16th, 2024</TitleXL>
+          <TitleXL>Last updated: October 10, 2024</TitleXL>
         </Stack>
       </Container>
     </Stack>
