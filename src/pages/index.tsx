@@ -3,17 +3,10 @@ import { Footer } from "@components/Footer";
 import { OrbRotating } from "@components/OrbRotating";
 import { SEO } from "@components/seo";
 import { TopNavigation } from "@components/topnavigation";
-import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
 
 export function Head() {
-  const { brandName } = useSiteMetadata();
-  return (
-    <SEO
-      title={`Experience the Most Accurate Personalized Astrology - ${brandName}`}
-      description="Begin your Intuvist journey and unlock cosmic secrets for love and connection. Take our quiz to reveal personalized astrological and numerological insights for your relationships."
-    />
-  );
+  return <SEO />;
 }
 
 export default function IndexPage() {

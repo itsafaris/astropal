@@ -29,7 +29,7 @@ import { NatalChartStatsSlide } from "@components/quizpage/slides/natalChartStat
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
 export const Head = () => {
-  return <SEO title="Start your journey now" />;
+  return <SEO />;
 };
 
 export default function OnboardingQuiz() {
