@@ -26,7 +26,7 @@ export function AstrologerComparisonSection() {
         <Stack>
           <Stack direction={"row"} alignItems={"center"}>
             <StaticImage
-              src={`../../images/favicon.png`}
+              src={`../../images/favicon.jpg`}
               alt="Intuvist logo"
               height={35}
               width={35}

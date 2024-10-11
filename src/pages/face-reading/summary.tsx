@@ -52,7 +52,7 @@ function HeroSection() {
     <Box>
       <Flex width={"full"} justifyContent={"center"} pb={4}>
         <StaticImage
-          src="../../images/astropal_logo.png"
+          src="../../images/intuvist-logo-black-h.png"
           alt="Intuvist logo"
           style={{ width: 100 }}
           width={100}
@@ -61,8 +61,8 @@ function HeroSection() {
       <HStack justifyContent="space-between" mb={4}>
         <HStack>
           <Text fontSize="sm" fontWeight="bold" color="gray.600">
-            The #1 Astrology app trusted <br /> by over <Span color="blue.500">25 million </Span>{" "}
-            people.
+            The #1 Face-reading and astrology app trusted <br /> by over{" "}
+            <Span color="blue.500">25 million </Span> people.
           </Text>
         </HStack>
         <HStack bg="yellow.100" borderRadius="full" px={2} py={1}>
