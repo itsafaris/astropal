@@ -3,7 +3,6 @@ import {
   VStack,
   HStack,
   Text,
-  Image,
   Button,
   Avatar,
   AvatarGroup,

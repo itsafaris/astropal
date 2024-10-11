@@ -12,7 +12,8 @@ const config: GatsbyConfig = {
   siteMetadata: {
     brandName: "Intuvist",
     title: `Intuvist`,
-    siteUrl: `https://www.intuvist.com`,
+    siteUrl:
+      process.env.NODE_ENV === "production" ? `https://www.intuvist.com` : "https://localhost:8000",
     version: pkgjson.version,
     image: "/images/meta_img.jpg",
     description:

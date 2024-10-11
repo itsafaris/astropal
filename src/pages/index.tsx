@@ -1,4 +1,5 @@
 import { Box, Button, Container, Flex, Grid, Stack, Text, useBreakpoint } from "@chakra-ui/react";
+import { Footer } from "@components/Footer";
 import { OrbRotating } from "@components/OrbRotating";
 import { SEO } from "@components/seo";
 import { TopNavigation } from "@components/topnavigation";
@@ -90,8 +91,10 @@ export default function IndexPage() {
         </Stack>
       </Container>
 
-      <Box borderTop={"1px solid"} borderColor={"whiteAlpha.300"} height={"100px"}>
-        <Container maxW={"container.xl"}></Container>
+      <Box borderTop={"1px solid"} borderColor={"whiteAlpha.300"}>
+        <Container maxW={"container.xl"}>
+          <Footer />
+        </Container>
       </Box>
     </Grid>
   );
