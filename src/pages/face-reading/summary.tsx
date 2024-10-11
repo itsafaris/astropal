@@ -32,8 +32,14 @@ import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link, navigate } from "gatsby";
 import { Timer } from "@components/timer";
 import { ComponentProps, useEffect, useState } from "react";
+import React from "react";
+import { trackPixel } from "@utils/tracking";
 
 export default function SummaryPage() {
+  React.useEffect(() => {
+    trackPixel("AddToCart");
+  }, []);
+
   return (
     <Container py={4} pb={20}>
       <HeroSection />

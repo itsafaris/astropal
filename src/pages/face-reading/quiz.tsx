@@ -1,7 +1,7 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { isProdMode } from "@utils/isProdMode";
-import { trackEvent } from "@utils/tracking";
+import { trackEvent, trackPixel } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearStorage, saveToStorage } from "@utils/localStorage";
@@ -54,6 +54,10 @@ export default function FaceReadingPage() {
       locationApiKey={locationApiKey}
       onTrackingEvent={(event) => {
         trackEvent(event);
+
+        if (event.name === "slide-entered") {
+          trackPixel("ViewContent");
+        }
       }}
       onSlideSubmitted={async (state) => {
         const rawState = await state.getQuizState();
