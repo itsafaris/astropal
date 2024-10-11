@@ -86,7 +86,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
-        pixelId: "488679697025748",
+        pixelId: "812726984135413",
       },
     },
 
