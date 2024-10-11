@@ -17,7 +17,7 @@ const config: GatsbyConfig = {
     version: pkgjson.version,
     image: "/images/meta_img.jpg",
     description:
-      "Intuvist is your personalized astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
+      "Intuvist is your personalized face reading and astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
   } satisfies SiteMetadata,
 
   flags: {
