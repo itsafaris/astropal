@@ -88,24 +88,6 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
     loadModels();
   }, []);
 
-  React.useEffect(() => {
-    console.log("TEST: ENABLING TIMER");
-
-    const timeouts: NodeJS.Timeout[] = [];
-
-    for (let i = 1; i <= 10; i++) {
-      timeouts.push(
-        setTimeout(() => {
-          console.log(`TEST: ${i}s PASSED`);
-        }, i * 1000)
-      );
-    }
-
-    return () => {
-      timeouts.forEach(clearTimeout);
-    };
-  }, []);
-
   async function loadModels() {
     let f = await createFaceLandmarker();
     setServicesCtx({ faceLandmarker: f });
