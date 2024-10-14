@@ -1,13 +1,8 @@
+import "./load-env";
 import type { GatsbyConfig } from "gatsby";
-import dotenv from "dotenv";
-
 import pkgjson from "./package.json";
 import { SiteMetadata } from "src/hooks/useSiteMetadata";
 import { siteConfig } from "./src/conf";
-
-dotenv.config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
 
 const config: GatsbyConfig = {
   siteMetadata: {
