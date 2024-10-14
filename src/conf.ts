@@ -1,3 +1,9 @@
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 const coreApiHost = process.env.GATSBY_CORE_URL ?? "";
 const stripePublicKey = process.env.GATSBY_STRIPE_PUBLIC_KEY ?? "";
 const stripeEnv = stripePublicKey.includes("live") ? "live" : "test";
