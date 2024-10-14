@@ -33,11 +33,11 @@ import { Link, navigate } from "gatsby";
 import { Timer } from "@components/timer";
 import { ComponentProps, useEffect, useState } from "react";
 import React from "react";
-import { trackPixel } from "@utils/tracking";
+import { trackPixelEvent } from "@utils/tracking";
 
 export default function SummaryPage() {
   React.useEffect(() => {
-    trackPixel("AddToCart");
+    trackPixelEvent("AddToCart");
   }, []);
 
   return (

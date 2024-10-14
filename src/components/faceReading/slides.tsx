@@ -13,7 +13,7 @@ import {
   useQuizState,
 } from "@martynasj/quiz-lib/index";
 import { convertUserFromAnonymous, eden } from "@utils/coreApi";
-import { trackPixel } from "@utils/tracking";
+import { trackPixelEvent } from "@utils/tracking";
 import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import posthog from "posthog-js";
@@ -370,7 +370,7 @@ function EmailSlide_() {
           const parsedQuizState = getTypedQuizState(quizState);
 
           posthog.identify(parsedQuizState.email);
-          trackPixel("Lead");
+          trackPixelEvent("Lead");
 
           if (!userProfile) {
             console.error("no user profile created");

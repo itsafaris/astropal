@@ -5,7 +5,7 @@ import { Timer } from "@components/timer";
 import { FaStar } from "react-icons/fa";
 import { MdFreeCancellation, MdOutlineDiscount, MdVerified } from "react-icons/md";
 import { Span } from "@components/quizpage/components";
-import { trackPixel } from "@utils/tracking";
+import { trackPixelEvent } from "@utils/tracking";
 
 export default function CheckoutPage() {
   const { trialPricingPlan, selectedPricingPlan } = useGlobalState2();
@@ -15,7 +15,7 @@ export default function CheckoutPage() {
   const beforeRecurringPrice = currentRecurringPrice + recurringDiscount;
 
   React.useEffect(() => {
-    trackPixel("InitiateCheckout");
+    trackPixelEvent("InitiateCheckout");
   }, []);
 
   if (!plan) {

@@ -9,7 +9,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { trackPixel } from "@utils/tracking";
+import { trackPixelEvent } from "@utils/tracking";
 import { createSuccessCheckoutURL } from "./utils";
 import { ErrorView, LoadingView } from "./components";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
@@ -155,7 +155,7 @@ function usePayment(
       planRef.current.priceID
     );
 
-    trackPixel("AddPaymentInfo");
+    trackPixelEvent("AddPaymentInfo");
 
     try {
       elements.update({

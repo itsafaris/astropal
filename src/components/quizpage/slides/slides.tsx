@@ -40,7 +40,7 @@ import { useEffect, useState } from "react";
 import { ZodiacSignDataType } from "@services/zodiacService";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import posthog from "posthog-js";
-import { trackPixel } from "@utils/tracking";
+import { trackPixelEvent } from "@utils/tracking";
 import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 import { BsChevronRight } from "react-icons/bs";
 import { astrologers, getAstrologerOrDefault } from "@utils/astrologers";
@@ -938,7 +938,7 @@ function EmailSlide_() {
           const parsedQuizState = getTypedQuizState(quizState);
 
           posthog.identify(parsedQuizState.email);
-          trackPixel("Lead", {});
+          trackPixelEvent("Lead", {});
 
           if (!userProfile) {
             return;
