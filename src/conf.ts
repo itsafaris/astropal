@@ -1,18 +1,30 @@
 const coreApiHost = process.env.GATSBY_CORE_URL ?? "";
 const stripePublicKey = process.env.GATSBY_STRIPE_PUBLIC_KEY ?? "";
 const stripeEnv = stripePublicKey.includes("live") ? "live" : "test";
-const gaTrackingID = process.env.GATSBY_GOOGLE_ADS_TAG ?? "";
+const googleAdsTag = process.env.GATSBY_GOOGLE_ADS_TAG ?? "";
+const googleAnalyticsTag = process.env.GATSBY_GOOGLE_ANALYTICS_TAG ?? "";
+const fbPixelID = process.env.GATSBY_FB_PIXEL_ID ?? "";
+const posthogKey = process.env.GATSBY_POSTHOG_KEY ?? "";
+const posthogHost = process.env.GATSBY_POSTHOG_HOST ?? "";
 
 export type SiteConfig = {
   stripePublicKey: string;
   stripeEnv: "live" | "test";
   coreApiHost: string;
-  gaTrackingID: string;
+  googleAdsTag: string;
+  googleAnalyticsTag: string;
+  fbPixelID: string;
+  posthogKey: string;
+  posthogHost: string;
 };
 
 export const siteConfig: SiteConfig = {
   stripePublicKey,
   stripeEnv,
   coreApiHost,
-  gaTrackingID,
+  googleAdsTag,
+  googleAnalyticsTag,
+  fbPixelID,
+  posthogKey,
+  posthogHost,
 };
