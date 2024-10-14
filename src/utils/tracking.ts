@@ -85,7 +85,7 @@ export function gaTrackPaidTrialPurchaseConversion(input: { value: number; curre
   }
 
   (window as any).gtag("event", "conversion", {
-    send_to: `${siteConfig.gaTrackingID}/ppfXCKaJlcAZEMrCmPw9`,
+    send_to: `${siteConfig.googleAdsTag}/P55RCMD3otwZEP2m7ao-`,
     value: input.value,
     currency: input.currency.toUpperCase(),
     transaction_id: "",

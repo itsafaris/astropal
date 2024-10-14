@@ -5,6 +5,7 @@ import { posthog } from "posthog-js";
 import { initPosthog, trackPixelEvent } from "./src/utils/tracking";
 import { RootWrapper } from "./src/components/wrappers/RootWrapper";
 import { PageWrapper } from "./src/components/wrappers/PageWrapper";
+import { siteConfig } from "./src/conf";
 
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/inter";
@@ -12,11 +13,8 @@ import "@fontsource-variable/inter";
 // @ts-ignore
 import pkgjson from "./package.json";
 
-const POSTHOG_KEY = "phc_zq8o1MJETg7eWOWcLI224iei1EhnhIbX0AM0EVLerdt";
-const POSTHOG_HOST = "https://us.i.posthog.com";
-
 export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
-  initPosthog(POSTHOG_KEY, POSTHOG_HOST, pkgjson.version);
+  initPosthog(siteConfig.posthogKey, siteConfig.posthogHost, pkgjson.version);
 };
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {

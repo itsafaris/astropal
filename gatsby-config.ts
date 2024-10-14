@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 import pkgjson from "./package.json";
 import { SiteMetadata } from "src/hooks/useSiteMetadata";
+import { siteConfig } from "./src/conf";
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -77,8 +78,8 @@ const config: GatsbyConfig = {
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-QSW70Z2GFE", // Google Analytics / GA
-          // "AW-16458847507", // Google Ads / Adwords / AW
+          siteConfig.googleAnalyticsTag, // Google Analytics / GA
+          siteConfig.googleAdsTag, // Google Ads / Adwords / AW
         ],
       },
     },
@@ -86,7 +87,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
-        pixelId: "812726984135413",
+        pixelId: siteConfig.fbPixelID,
       },
     },
 
