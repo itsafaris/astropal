@@ -2,12 +2,19 @@ import * as React from "react";
 
 import { CheckoutDrawer } from "@components/CheckoutDrawer";
 import { trackCustomPixelEvent } from "@utils/tracking";
+import { useLocation } from "@gatsbyjs/reach-router";
 
 export interface IPageWrapperProps {}
 
 export function PageWrapper(props: React.PropsWithChildren<IPageWrapperProps>) {
+  const location = useLocation();
+
   // Sends custom pixel events tracking time spent during the session. Placed code here for the sake of simplicity.
   React.useEffect(() => {
+    if (location.pathname.includes("/success-checkout")) {
+      return;
+    }
+
     const timeouts: NodeJS.Timeout[] = [];
     const events = [
       {
