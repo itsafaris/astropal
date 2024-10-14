@@ -1,6 +1,6 @@
 import { Button, Container, Stack, Text } from "@chakra-ui/react";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
-import { gaTrackPaidTrialPurchaseConversion, trackEvent, trackPixel } from "@utils/tracking";
+import { gaTrackPaidTrialPurchaseConversion, trackEvent, trackPixelEvent } from "@utils/tracking";
 import * as React from "react";
 
 type UrlParts = ReturnType<typeof parseRedirectURL>;
@@ -39,7 +39,7 @@ export default function SuccessCheckoutPage() {
   function trackSuccessPayment(urlParts: UrlParts) {
     const pricePaid = (urlParts.pricePaid ?? 0) / 100;
 
-    trackPixel("Purchase", {
+    trackPixelEvent("Purchase", {
       currency: urlParts.currency,
       value: pricePaid,
       paymentType: urlParts.paymentType,

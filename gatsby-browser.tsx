@@ -2,7 +2,7 @@ import * as React from "react";
 import { GatsbyBrowser } from "gatsby";
 import { posthog } from "posthog-js";
 
-import { initPosthog, trackPixel } from "./src/utils/tracking";
+import { initPosthog, trackPixelEvent } from "./src/utils/tracking";
 import { RootWrapper } from "./src/components/wrappers/RootWrapper";
 import { PageWrapper } from "./src/components/wrappers/PageWrapper";
 
@@ -21,7 +21,7 @@ export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
   posthog.capture("$pageview");
-  trackPixel("ViewContent");
+  trackPixelEvent("ViewContent");
 };
 
 export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => {

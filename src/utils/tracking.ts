@@ -35,7 +35,7 @@ function sendToGTM(e: TrackingEvent) {
   });
 }
 
-export function trackPixel(event: string, properties?: Record<string, any>) {
+export function trackPixelEvent(event: string, properties?: Record<string, any>) {
   if (typeof window === "undefined") {
     return;
   }
@@ -43,6 +43,16 @@ export function trackPixel(event: string, properties?: Record<string, any>) {
     return;
   }
   (window as any).fbq("track", event, properties);
+}
+
+export function trackCustomPixelEvent(event: string, properties?: Record<string, any>) {
+  if (typeof window === "undefined") {
+    return;
+  }
+  if (!(window as any).fbq) {
+    return;
+  }
+  (window as any).fbq("trackCustom", event, properties);
 }
 
 export function initPosthog(token: string, apiHost: string, feVersion: string) {
