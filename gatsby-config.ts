@@ -50,7 +50,7 @@ const config: GatsbyConfig = {
     {
       resolve: "@sentry/gatsby",
       options: {
-        dsn: process.env.GATSBY_SENTRY_DSN,
+        dsn: siteConfig.sentryDSN,
       },
     },
 

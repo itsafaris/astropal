@@ -12,6 +12,7 @@ const googleAnalyticsTag = process.env.GATSBY_GOOGLE_ANALYTICS_TAG ?? "";
 const fbPixelID = process.env.GATSBY_FB_PIXEL_ID ?? "";
 const posthogKey = process.env.GATSBY_POSTHOG_KEY ?? "";
 const posthogHost = process.env.GATSBY_POSTHOG_HOST ?? "";
+const sentryDSN = process.env.GATSBY_SENTRY_DSN ?? "";
 
 export type SiteConfig = {
   stripePublicKey: string;
@@ -22,6 +23,7 @@ export type SiteConfig = {
   fbPixelID: string;
   posthogKey: string;
   posthogHost: string;
+  sentryDSN: string;
 };
 
 export const siteConfig: SiteConfig = {
@@ -33,4 +35,5 @@ export const siteConfig: SiteConfig = {
   fbPixelID,
   posthogKey,
   posthogHost,
+  sentryDSN,
 };
