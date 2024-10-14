@@ -10,11 +10,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Span } from "@components/quizpage/components";
+import { SEO } from "@components/seo";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { ComponentProps } from "react";
-
 import { LuScanFace, LuClock, LuGift, LuArrowRight } from "react-icons/lu";
+
+export function Head() {
+  return <SEO />;
+}
 
 export interface IFaceReadingLandingPageProps {}
 

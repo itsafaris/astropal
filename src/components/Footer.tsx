@@ -1,7 +1,6 @@
 import { Stack, Text } from "@chakra-ui/react";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link } from "gatsby";
-import { APP_DATA } from "src/data";
 
 export function Footer() {
   const meta = useSiteMetadata();
@@ -16,19 +15,19 @@ export function Footer() {
         justifyContent={"center"}
         spacing={[1, 3]}
       >
-        <Link to={`${meta.siteUrl}/terms-and-conditions`}>
+        <Link to={`/terms-and-conditions`}>
           <Text cursor={"pointer"} as="span" fontSize={"sm"}>
             Terms & Conditions
           </Text>
         </Link>
 
-        <Link to={`${APP_DATA.website.url}/privacy-policy`}>
+        <Link to={`/privacy-policy`}>
           <Text cursor={"pointer"} as="span" fontSize={"sm"}>
             Privacy Policy
           </Text>
         </Link>
 
-        <Link to={`${APP_DATA.website.url}/contact-us`}>
+        <Link to={`/contact-us`}>
           <Text cursor={"pointer"} as="span" fontSize={"sm"}>
             Contact us
           </Text>
