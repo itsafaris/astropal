@@ -4,12 +4,13 @@ import pkgjson from "./package.json";
 import { SiteMetadata } from "src/hooks/useSiteMetadata";
 import { siteConfig } from "./src/conf";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     brandName: "Intuvist",
     title: `Intuvist`,
-    siteUrl:
-      process.env.NODE_ENV === "production" ? `https://www.intuvist.com` : "https://localhost:8000",
+    siteUrl: isProd ? `https://www.intuvist.com` : "https://localhost:8000",
     version: pkgjson.version,
     image: "/images/meta_img.jpg",
     description:
@@ -46,6 +47,7 @@ const config: GatsbyConfig = {
       resolve: "@sentry/gatsby",
       options: {
         dsn: siteConfig.sentryDSN,
+        enabled: isProd,
       },
     },
 
