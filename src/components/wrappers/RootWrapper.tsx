@@ -7,6 +7,8 @@ import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import { getTrialPricingPlan, TrialPricingPlan } from "@utils/coreApi";
 import { orderBy } from "lodash";
 import { LocationProvider } from "@gatsbyjs/reach-router";
+import * as Sentry from "@sentry/gatsby";
+import posthog from "posthog-js";
 
 export interface IRootWrapperProps {}
 
@@ -52,6 +54,16 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   function setInGlobalState(id: string, value: (value: any) => any) {
     setGlobalState((s) => ({ ...globalState, [id]: value(s[id]) }));
   }
+
+  React.useEffect(() => {
+    // Additional data passed to Sentry that ensures easier issue debugging
+    const posthogID = posthog.get_distinct_id();
+    if (posthogID) {
+      Sentry.setUser({
+        posthogID: posthogID,
+      });
+    }
+  }, []);
 
   React.useEffect(() => {
     const s = loadFromStorage("globalState", (s): s is TypedGlobalState => true);
