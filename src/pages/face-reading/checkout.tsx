@@ -78,7 +78,8 @@ export default function CheckoutPage() {
               ${(plan.unit_amount / 100).toFixed(2)} for your 7-day trial.
             </Span>{" "}
             Then <Span textDecoration={"line-through"}>${beforeRecurringPrice}</Span> $
-            {currentRecurringPrice} per week. Save ${recurringDiscount} every week.
+            {currentRecurringPrice} per week. Save ${recurringDiscount} every week. We'll{" "}
+            <Span fontWeight={"bold"}>email you a reminder</Span> before your trial ends.
           </Text>
         </Box>
 
