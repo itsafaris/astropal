@@ -327,9 +327,9 @@ function UserReviews() {
         Why does everyone love <Span color="blue.600">{meta.brandName}</Span>?
       </Heading>
       <VStack spacing={8}>
-        {reviews.map((review) => {
+        {reviews.map((review, idx) => {
           return (
-            <Flex bg="blue.50" p={4} borderRadius={"xl"} gap={0} ml={6}>
+            <Flex key={idx} bg="blue.50" p={4} borderRadius={"xl"} gap={0} ml={6}>
               <Flex
                 alignItems={"center"}
                 width={"80px"}
