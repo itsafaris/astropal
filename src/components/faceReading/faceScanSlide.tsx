@@ -60,7 +60,7 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
   return (
     <React.Fragment>
       <SlideHeading textAlign={"center"} fontWeight={"bold"} mb={4}>
-        Take a picture of your face or upload existing one
+        Take a photo of your face or upload existing one
       </SlideHeading>
 
       <Stack spacing={3} mb={5}>
