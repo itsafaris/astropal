@@ -17,6 +17,7 @@ import { trackPixelEvent } from "@utils/tracking";
 import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import posthog from "posthog-js";
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 import { getTypedQuizState, getZodiacFromState, QuizStateTyped } from "./quizState";
@@ -80,9 +81,7 @@ export function YourGenderSlide() {
         },
       ]}
     >
-      <SlideHeading fontSize={"md"} fontWeight={"semibold"} textAlign={"center"}>
-        Choose your gender to start
-      </SlideHeading>
+      <SlideHeading textAlign={"center"}>Choose your gender to start</SlideHeading>
 
       <Text textAlign={"center"}>
         In face reading, everyone has both masculine and feminine traits. Knowing your's will lead
@@ -196,7 +195,6 @@ export function LifeArea() {
       id="life-area"
       type="single"
       variant="list"
-      label="Choose one or more"
       options={[
         { text: "Love & Relationships", icon: "💏", value: "relationships" },
         { text: "Health & Vitality", icon: "🧘", value: "wellbeing" },
@@ -217,7 +215,6 @@ export function ElementSlide() {
       id="element"
       type="single"
       variant="list"
-      label="Choose one or more"
       options={[
         { text: "Earth", icon: <Icon fontSize={"2xl"} as={GiEarthSpit} /> },
         { text: "Water", icon: <Icon fontSize={"2xl"} as={GiWaterSplash} /> },
@@ -237,7 +234,6 @@ export function DecisionMaking() {
       id="decision-making"
       type="single"
       variant="list"
-      label="Choose one or more"
       options={[
         { text: "Heart", icon: "💛" },
         { text: "Head", icon: "🧠" },
@@ -273,7 +269,7 @@ export function LoadingSimilarPeople() {
         for you!
       </Text>
       <Text mt={4} fontSize={"sm"} textAlign={"center"}>
-        * as of April, 2024
+        * as of October, 2024
       </Text>
       <Selector mt={8} />
       {/* <NextButton>Continue</NextButton> */}
@@ -306,14 +302,18 @@ export function IntroToScan() {
     <Slide id="intro-to-scan" type="filler">
       <StaticImage src="../../images/face_scan.png" alt="face reading features" />
       <SlideHeading textAlign={"center"} fontWeight={"bold"} mt={4} mb={4}>
-        Let's scan your face
+        Let's start your secure face scan
       </SlideHeading>
+
       <Text>
         Follow the on-screen instructions, so we can analyze your face points and reveal your
         future, and the secrets of your destiny!
       </Text>
+
       <Selector />
-      <NextButton>Let's do it</NextButton>
+      <NextButton>
+        Start Secure Face Scan <Icon ml={2} as={IoShieldCheckmarkSharp} />
+      </NextButton>
       <Text fontSize={"sm"} mt={4}>
         🔒 No biometric data is collected. All recognition processes are performed on your device.
       </Text>

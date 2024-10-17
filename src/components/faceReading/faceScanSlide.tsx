@@ -9,16 +9,20 @@ import {
   Text,
   Input,
   Box,
+  Stack,
+  useTheme,
+  HStack,
 } from "@chakra-ui/react";
 import { SlideHeading } from "@components/quizpage/components";
 import { useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
 import { WebcamDetection } from "@components/WebcamDetection";
 import { Slide, useQuiz } from "@martynasj/quiz-lib/index";
 import { readFileAsDataURL } from "@utils/image";
-import React, { useEffect } from "react";
-import { FiCamera, FiUpload } from "react-icons/fi";
+import React, { ComponentProps, useEffect } from "react";
 import posthog from "posthog-js";
-
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
+import { FaCamera } from "react-icons/fa";
+import { MdFileUpload } from "react-icons/md";
 
 export interface IFaceScanSlideProps {}
 
@@ -33,7 +37,6 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
 export function FaceScanContent(props: IFaceScanSlideProps) {
   const { submitQuestion } = useQuiz();
   const update = useGlobalUpdate2();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isWebcamOpen, onOpen: onWebcamOpen, onClose: onWebcamClose } = useDisclosure();
   const imgUploadRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -56,50 +59,67 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
 
   return (
     <React.Fragment>
-      <SlideHeading>Take a picture of your head as instructed</SlideHeading>
-      <Button colorScheme="brand" onClick={onOpen}>
-        Take a picture now
-      </Button>
+      <SlideHeading textAlign={"center"} fontWeight={"bold"} mb={4}>
+        Take a picture of your face or upload existing one
+      </SlideHeading>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent mx={4}>
-          <Flex gap={4} flexDirection={"column"} p={4}>
-            <Button
-              size="lg"
-              ref={cancelRef}
-              onClick={() => {
-                onWebcamOpen();
-                onClose();
-              }}
-              leftIcon={<Icon as={FiCamera} />}
-            >
-              Take a Photo
-            </Button>
-            <Box position={"relative"} width={"full"}>
-              <Button size="lg" leftIcon={<Icon as={FiUpload} />} width={"full"}>
-                Choose File
-              </Button>
-              <Input
-                ref={imgUploadRef}
-                height="100%"
-                width="100%"
-                position="absolute"
-                top="0"
-                left="0"
-                opacity="0"
-                aria-hidden="true"
-                accept="image/*"
-                type="file"
-                onChange={(e) => {
-                  handleFileUpload(e);
-                  onClose();
-                }}
-              />
-            </Box>
-          </Flex>
-        </ModalContent>
-      </Modal>
+      <Stack spacing={3} mb={5}>
+        <CTAButton
+          colorScheme="brand"
+          ref={cancelRef}
+          onClick={() => {
+            onWebcamOpen();
+          }}
+          rightIcon={<Icon as={FaCamera} />}
+        >
+          Take a New Photo
+        </CTAButton>
+
+        <Box position={"relative"} width={"full"}>
+          <CTAButton colorScheme="brand">
+            Upload a Photo <Icon ml={1} as={MdFileUpload} boxSize={6} />
+          </CTAButton>
+
+          <Input
+            ref={imgUploadRef}
+            height="100%"
+            width="100%"
+            position="absolute"
+            top="0"
+            left="0"
+            opacity="0"
+            aria-hidden="true"
+            accept="image/*"
+            type="file"
+            onChange={(e) => {
+              handleFileUpload(e);
+            }}
+          />
+        </Box>
+      </Stack>
+
+      <Stack
+        backgroundColor={"green.50"}
+        p={3}
+        py={4}
+        borderRadius={"lg"}
+        textAlign={"center"}
+        color={"green.700"}
+        mb={4}
+      >
+        <HStack justifyContent={"center"}>
+          <Text fontWeight={"bold"} fontSize={"lg"}>
+            Your privacy is our top priority{" "}
+          </Text>
+          <Icon as={IoShieldCheckmarkSharp} ml={1} boxSize={5} />
+        </HStack>
+
+        <Stack alignItems={"center"} spacing={1}>
+          <Text>1. Your photo never leaves your device</Text>
+
+          <Text>2. It gets immediately deleted</Text>
+        </Stack>
+      </Stack>
 
       <Modal isOpen={isWebcamOpen} onClose={onWebcamClose}>
         <ModalOverlay />
@@ -129,3 +149,23 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
     </React.Fragment>
   );
 }
+
+export const CTAButton = React.forwardRef<HTMLButtonElement, ComponentProps<typeof Button>>(
+  (props, ref) => {
+    const theme = useTheme();
+
+    return (
+      <Button
+        px={8}
+        py={6}
+        variant={"solid"}
+        colorScheme="brand"
+        width={"full"}
+        boxShadow={`inset 0 0 0 6px ${theme.colors.brand["400"]}, 0px 5px 30px 0px rgba(0,0,0,0.2)`}
+        borderRadius={8}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
