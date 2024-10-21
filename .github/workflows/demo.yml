@@ -2,9 +2,9 @@ name: Build and deploy
 run-name: ${{ github.actor }} - Build and deploy
 on:
   push:
-    branches: []
-  pull_request:
-    branches: []
+    # branches: [main]
+  # pull_request:
+  # branches: [main]
 
 jobs:
   Build:
