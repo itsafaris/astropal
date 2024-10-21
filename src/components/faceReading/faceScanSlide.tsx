@@ -63,7 +63,7 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
         Take a photo of your face or upload existing one
       </SlideHeading>
 
-      <Stack spacing={3} mb={5}>
+      <Stack spacing={3} my={8}>
         <CTAButton
           colorScheme="brand"
           ref={cancelRef}
@@ -74,6 +74,10 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
         >
           Take a New Photo
         </CTAButton>
+
+        <Text textAlign={"center"} fontWeight={"semibold"}>
+          Or
+        </Text>
 
         <Box position={"relative"} width={"full"}>
           <CTAButton colorScheme="brand">
