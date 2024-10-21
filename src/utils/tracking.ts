@@ -62,6 +62,13 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
     autocapture: false,
     debug: !isProdMode(),
     disable_session_recording: !isProdMode(),
+    advanced_disable_feature_flags_on_first_load: true,
+    advanced_disable_feature_flags: true,
+    bootstrap: {
+      featureFlags: {
+        "navigation-blocker": "control",
+      },
+    },
   });
 
   posthog.register({
