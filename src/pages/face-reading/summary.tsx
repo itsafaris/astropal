@@ -65,7 +65,7 @@ function HeroSection() {
         <HStack>
           <Text fontSize="sm" fontWeight="bold" color="gray.600">
             The #1 Face-reading and astrology app trusted <br /> by over{" "}
-            <Span color="blue.500">25 million </Span> people.
+            <Span color="brand.500">25 million </Span> people.
           </Text>
         </HStack>
         <HStack bg="yellow.100" borderRadius="full" px={2} py={1}>
@@ -78,7 +78,7 @@ function HeroSection() {
         <Heading fontSize="3xl" fontWeight="bold">
           Your Face Reading
           <br />
-          <Span fontSize="3xl" fontWeight="bold" color="blue.500">
+          <Span fontSize="3xl" fontWeight="bold" color="brand.500">
             Is Ready!
           </Span>
         </Heading>
@@ -93,7 +93,7 @@ function HeroSection() {
         <Box position={"relative"}>
           <Box
             border="4px solid"
-            borderColor={"blue.300"}
+            borderColor={"brand.300"}
             borderRadius={"full"}
             overflow={"hidden"}
           >
@@ -108,7 +108,7 @@ function HeroSection() {
             position={"absolute"}
             top={4}
             left={-3}
-            color="red.400"
+            color="brand.900"
             fontSize={"4xl"}
             transform={"scaleX(-1)"}
           />
@@ -116,7 +116,7 @@ function HeroSection() {
       </HStack>
 
       <Text mb={4} color="gray.500" fontSize={"sm"}>
-        <Span color="blue.600" fontWeight={"bold"}>
+        <Span color="brand.600" fontWeight={"bold"}>
           Akho
         </Span>{" "}
         6 years in face readings and spiritual guidance.
@@ -158,7 +158,7 @@ function HeroSection() {
         <Icon as={CgInfinity} color="orange.500" fontSize={"3xl"} />
         <Text fontWeight="semibold">
           Unlimited chats with a{" "}
-          <Text as="span" color="blue.500">
+          <Text as="span" color="brand.500">
             face reader
           </Text>
         </Text>
@@ -207,18 +207,19 @@ function HowItWorks() {
       <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
         How does {meta.brandName} work?
       </Heading>
-      <Stepper index={2} orientation="vertical" gap={0}>
+
+      <Stepper index={2} orientation="vertical" gap={0} colorScheme="brand">
         {steps.map((step, index) => (
           <Step key={index}>
             <StepIndicator>
               <StepStatus
                 complete={<Icon as={FaCheck} />}
-                active={<Icon as={FaCircle} color="blue.300" />}
+                active={<Icon as={FaCircle} color="brand.300" />}
               />
             </StepIndicator>
 
             <Box mb={6}>
-              <Text fontWeight={"bold"} fontSize={"lg"} color="blue.700">
+              <Text fontWeight={"bold"} fontSize={"lg"} color="brand.700">
                 {step.title}
               </Text>
               <StepDescription>{step.description}</StepDescription>
@@ -242,9 +243,9 @@ function WhatsIncluded() {
         spacing={4}
         alignItems={"start"}
         p={4}
-        bg="blue.50"
+        bg="brand.50"
         border="1px solid"
-        borderColor={"blue.200"}
+        borderColor={"brand.200"}
         borderRadius={"lg"}
       >
         <Flex alignItems={"center"} gap={2}>
@@ -321,13 +322,13 @@ function UserReviews() {
   return (
     <Box my={10}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
-        Why does everyone love <Span color="blue.600">{meta.brandName}</Span>?
+        Why does everyone love <Span color="brand.600">{meta.brandName}</Span>?
       </Heading>
 
       <VStack spacing={8}>
         {reviews.map((review, idx) => {
           return (
-            <Flex key={idx} bg="blue.50" p={4} borderRadius={"xl"} gap={0} ml={6}>
+            <Flex key={idx} bg="brand.50" p={4} borderRadius={"xl"} gap={0} ml={6}>
               <Flex
                 alignItems={"center"}
                 width={"80px"}
@@ -397,9 +398,9 @@ function CTABanner() {
       bottom={showBanner ? 0 : "-100px"}
       zIndex={10}
       transition={"all 500ms"}
-      bg="blue.50"
+      bg="brand.50"
       borderTop={"2px solid"}
-      borderColor={"blue.300"}
+      borderColor={"brand.300"}
       p={1}
     >
       <Container as={Flex} alignItems={"center"} justifyContent={"center"}>
@@ -418,7 +419,7 @@ function CTABanner() {
 function CTAButton(props: ComponentProps<typeof Button>) {
   return (
     <Button
-      colorScheme="blue"
+      colorScheme="brand"
       flexShrink={0}
       {...props}
       onClick={() => {
