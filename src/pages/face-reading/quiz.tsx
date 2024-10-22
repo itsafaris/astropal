@@ -23,6 +23,7 @@ import { FaceScanAnalysisSlide } from "@components/faceReading/faceScanAnalysisS
 import posthog from "posthog-js";
 import { getTypedQuizState } from "@components/faceReading/quizState";
 import { calcPersonalInfo } from "@utils/state";
+import { TopNavigation } from "@components/topnavigation";
 
 const locationApiKey = "pk.ce6e81605ad27d8ee1815287902636e1";
 
@@ -79,12 +80,18 @@ export default function FaceReadingPage() {
       }}
     >
       <QuizStateSaver />
+
       <QuizUI
+        headerComponent={<TopNavigation theme="dark" border="none" />}
         containerProps={{
           minH: "100vh",
         }}
+        progressContainerProps={{
+          showTitle: false,
+          pt: 0,
+        }}
       >
-        <Segment title="Progress">
+        <Segment title="">
           <YourGenderSlide />
           <LifeArea />
           <FillerFaceInformation />

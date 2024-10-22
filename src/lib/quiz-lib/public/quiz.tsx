@@ -10,9 +10,15 @@ export type QuizUIProps = {
   children?: React.ReactNode;
   headerComponent?: React.ReactNode;
   containerProps?: FlexProps;
+  progressContainerProps?: { showTitle?: boolean } & FlexProps;
 };
 
-export function QuizUI({ children, headerComponent, containerProps }: QuizUIProps) {
+export function QuizUI({
+  children,
+  headerComponent,
+  containerProps,
+  progressContainerProps,
+}: QuizUIProps) {
   useStateSyncToUrl();
 
   const config = useQuizConfig();
@@ -41,8 +47,11 @@ export function QuizUI({ children, headerComponent, containerProps }: QuizUIProp
     <Flex id="#quiz-lib-root" direction={"column"} {...containerProps}>
       <QuizBg />
       {config.showDebugUI && <DebugUI />}
+
       {headerComponent && <Box id="header-wrapper">{headerComponent}</Box>}
-      <ProgressIndicator />
+
+      <ProgressIndicator {...progressContainerProps} />
+
       <Flex position={"relative"} flexGrow={1} width={"100%"} justifyContent={"center"}>
         {children}
       </Flex>

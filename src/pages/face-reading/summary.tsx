@@ -34,6 +34,7 @@ import { Timer } from "@components/timer";
 import { ComponentProps, useEffect, useState } from "react";
 import React from "react";
 import { trackPixelEvent } from "@utils/tracking";
+import { TopNavigation } from "@components/topnavigation";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -41,29 +42,25 @@ export default function SummaryPage() {
   }, []);
 
   return (
-    <Container py={4} pb={20}>
-      <HeroSection />
-      <HowItWorks />
-      <WhatsIncluded />
-      <MoneyGuarantee />
-      <UserReviews />
-      <Footer />
-      <CTABanner />
-    </Container>
+    <Box>
+      <TopNavigation theme="dark" />
+
+      <Container py={4} pb={20}>
+        <HeroSection />
+        <HowItWorks />
+        <WhatsIncluded />
+        <MoneyGuarantee />
+        <UserReviews />
+        <Footer />
+        <CTABanner />
+      </Container>
+    </Box>
   );
 }
 
 function HeroSection() {
   return (
     <Box>
-      <Flex width={"full"} justifyContent={"center"} pb={4}>
-        <StaticImage
-          src="../../images/intuvist-logo-black-h.png"
-          alt="Intuvist logo"
-          style={{ width: 100 }}
-          width={100}
-        />
-      </Flex>
       <HStack justifyContent="space-between" mb={4}>
         <HStack>
           <Text fontSize="sm" fontWeight="bold" color="gray.600">
@@ -326,6 +323,7 @@ function UserReviews() {
       <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
         Why does everyone love <Span color="blue.600">{meta.brandName}</Span>?
       </Heading>
+
       <VStack spacing={8}>
         {reviews.map((review, idx) => {
           return (
