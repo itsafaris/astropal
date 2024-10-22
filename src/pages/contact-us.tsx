@@ -22,7 +22,7 @@ function Text(props: TextProps) {
 export default function ContactsPage() {
   return (
     <Stack>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container my={10}>
         <Headline>Contact us</Headline>

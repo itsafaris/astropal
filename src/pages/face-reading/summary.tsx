@@ -43,7 +43,7 @@ export default function SummaryPage() {
 
   return (
     <Box>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container py={4} pb={20}>
         <HeroSection />

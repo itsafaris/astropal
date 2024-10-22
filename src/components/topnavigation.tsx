@@ -8,12 +8,12 @@ export function TopNavigation({
 }: { theme?: "light" | "dark" } & ComponentProps<typeof Flex>) {
   return (
     <Flex
-      color={theme === "light" ? "white" : "black"}
+      color={theme === "light" ? "black" : "white"}
       flexDirection={"row"}
       alignItems={"center"}
       justifyContent={"center"}
       borderBottom={"1px solid"}
-      borderColor={theme === "light" ? "whiteAlpha.300" : "blackAlpha.200"}
+      borderColor={theme === "light" ? "blackAlpha.200" : "whiteAlpha.300"}
       gap={3}
       py={3}
       {...rest}
@@ -21,13 +21,13 @@ export function TopNavigation({
       <Stack direction={"row"} alignItems={"center"} gap={2}>
         {theme === "light" ? (
           <StaticImage
-            src={`../images/intuvist-logo-white-h.png`}
+            src={`../images/intuvist-logo-black-h.png`}
             alt="Intuvist logo"
             height={35}
           />
         ) : (
           <StaticImage
-            src={`../images/intuvist-logo-black-h.png`}
+            src={`../images/intuvist-logo-white-h.png`}
             alt="Intuvist logo"
             height={35}
           />

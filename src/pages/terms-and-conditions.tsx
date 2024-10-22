@@ -41,7 +41,7 @@ function Link({ to, children }: { to: string } & React.PropsWithChildren) {
 export default function TermsAndConditionsPage() {
   return (
     <Stack>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container>
         <Stack spacing={8} my={10}>

@@ -65,7 +65,7 @@ export default function SuccessCheckoutPage() {
 
   return (
     <Box>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container py={10}>
         <Stack textAlign={"center"} spacing={6}>

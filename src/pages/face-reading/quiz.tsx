@@ -82,7 +82,7 @@ export default function FaceReadingPage() {
       <QuizStateSaver />
 
       <QuizUI
-        headerComponent={<TopNavigation theme="dark" border="none" />}
+        headerComponent={<TopNavigation border="none" />}
         containerProps={{
           minH: "100vh",
         }}
