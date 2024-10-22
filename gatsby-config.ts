@@ -38,7 +38,9 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          quality: 75, // @mj - changed this from 50 to 90
+          quality: 60,
+          placeholder: `blurred`,
+          backgroundColor: `transparent`,
         },
       },
     },
