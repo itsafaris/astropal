@@ -76,7 +76,7 @@ export default function SuccessCheckoutPage() {
             The instructions on how to access your reading will be sent to your email shortly
           </Text>
           <Button
-            colorScheme="blue"
+            colorScheme="brand"
             onClick={() => redirectToApp({ userID: globalState.userProfile!.id })}
           >
             Go to predictions
