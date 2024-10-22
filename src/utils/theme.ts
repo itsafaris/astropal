@@ -14,16 +14,16 @@ export const brandColor = {
 };
 
 export const bg = {
-  50: "#FFFFFF",
-  100: "#F5EEE5",
-  200: "#F2E9DE",
-  300: "#EFE4D7",
-  400: "#ECDFD0",
-  500: "#E9DAC9",
-  600: "#E6D5C2",
-  700: "#E3D0BB",
-  800: "#E0CBB4",
-  900: "#DFC9AA",
+  50: "#FAF9FA",
+  100: "#F6F4F6",
+  200: "#EDE8ED",
+  300: "#E6E0E6",
+  400: "#DDD4DD",
+  500: "#BEACBE",
+  600: "#9E859E",
+  700: "#785F78",
+  800: "#503F50",
+  900: "#282028",
 };
 
 export const text = {

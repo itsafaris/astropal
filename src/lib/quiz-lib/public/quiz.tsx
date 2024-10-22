@@ -162,9 +162,7 @@ function QuizBg() {
       height={"100vh"}
       position={"fixed"}
       background={customBg}
-      bgGradient={
-        customBgGradient ? customBgGradient : customBg ? undefined : "radial(bg.50, bg.50)"
-      }
+      bgGradient={customBgGradient ? customBgGradient : customBg ? customBg : undefined}
     />
   );
 }
