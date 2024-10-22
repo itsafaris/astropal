@@ -66,7 +66,7 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
     advanced_disable_feature_flags: true,
     bootstrap: {
       featureFlags: {
-        "navigation-blocker": "control",
+        "summary-face-features-section": "control",
       },
     },
   });
