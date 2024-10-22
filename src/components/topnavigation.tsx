@@ -1,5 +1,4 @@
 import { Flex, Stack } from "@chakra-ui/react";
-import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { ComponentProps } from "react";
 
@@ -12,27 +11,28 @@ export function TopNavigation({
       color={theme === "light" ? "white" : "black"}
       flexDirection={"row"}
       alignItems={"center"}
+      justifyContent={"center"}
+      borderBottom={"1px solid"}
+      borderColor={theme === "light" ? "whiteAlpha.300" : "blackAlpha.200"}
       gap={3}
-      py={6}
+      py={3}
       {...rest}
     >
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <Stack direction={"row"} alignItems={"center"} gap={2}>
-          {theme === "light" ? (
-            <StaticImage
-              src={`../images/intuvist-logo-white-h.png`}
-              alt="Intuvist logo"
-              height={35}
-            />
-          ) : (
-            <StaticImage
-              src={`../images/intuvist-logo-black-h.png`}
-              alt="Intuvist logo"
-              height={35}
-            />
-          )}
-        </Stack>
-      </Link>
+      <Stack direction={"row"} alignItems={"center"} gap={2}>
+        {theme === "light" ? (
+          <StaticImage
+            src={`../images/intuvist-logo-white-h.png`}
+            alt="Intuvist logo"
+            height={35}
+          />
+        ) : (
+          <StaticImage
+            src={`../images/intuvist-logo-black-h.png`}
+            alt="Intuvist logo"
+            height={35}
+          />
+        )}
+      </Stack>
     </Flex>
   );
 }

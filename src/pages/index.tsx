@@ -37,11 +37,7 @@ export default function IndexPage() {
       bgGradient={"linear(to-t, #191135, black)"}
       minHeight={"100vh"}
     >
-      <Box borderBottom={"1px solid"} borderColor={"whiteAlpha.300"}>
-        <Container maxW={"container.xl"}>
-          <TopNavigation theme="light" />
-        </Container>
-      </Box>
+      <TopNavigation theme="light" />
 
       <Container maxW={"container.xl"}>
         <Stack height={"100%"} alignItems={"center"} justifyContent="center" position={"relative"}>

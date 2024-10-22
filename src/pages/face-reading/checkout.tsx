@@ -6,6 +6,7 @@ import { FaStar } from "react-icons/fa";
 import { MdFreeCancellation, MdOutlineDiscount, MdVerified } from "react-icons/md";
 import { Span } from "@components/quizpage/components";
 import { trackPixelEvent } from "@utils/tracking";
+import { TopNavigation } from "@components/topnavigation";
 
 export default function CheckoutPage() {
   const { trialPricingPlan, selectedPricingPlan } = useGlobalState2();
@@ -24,6 +25,8 @@ export default function CheckoutPage() {
 
   return (
     <Box>
+      <TopNavigation theme="dark" />
+
       <Container pb={"400px"}>
         <Flex direction={"column"} alignItems={"center"}>
           <Text my={4} textAlign={"center"} mx="auto" fontSize={"sm"}>

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Flex, Progress, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Progress, Text } from "@chakra-ui/react";
 
 import { useQuizSnapshot } from "../internal/state";
 import { getPosInBounds } from "../internal/utils";
 import { ContainerPropsOverride } from "./types";
 
-export function ProgressIndicator() {
+export function ProgressIndicator({
+  showTitle = true,
+  ...rest
+}: FlexProps & { showTitle?: boolean }) {
   const snap = useQuizSnapshot();
   const [colorOverrides, setColorOverrides] = useState<
     ContainerPropsOverride["progressBar"] | undefined
@@ -25,12 +28,15 @@ export function ProgressIndicator() {
   const textColor = colorOverrides?.textColor ?? "text.main";
 
   return (
-    <Flex p={4} direction={"column"} gap={1} alignItems={"center"}>
-      <Flex width={"full"} fontSize={"sm"} justifyContent={"space-between"}>
-        <Text color={textColor} fontWeight={"bold"}>
-          {snap.currentSegment?.title}
-        </Text>
-      </Flex>
+    <Flex p={4} direction={"column"} gap={1} alignItems={"center"} {...rest}>
+      {showTitle && (
+        <Flex width={"full"} fontSize={"sm"} justifyContent={"space-between"}>
+          <Text color={textColor} fontWeight={"bold"}>
+            {snap.currentSegment?.title}
+          </Text>
+        </Flex>
+      )}
+
       <Flex direction={"row"} gap={2} width={"100%"}>
         {snap.segmentsFull.map((s, idx) => {
           const posInBounds = getPosInBounds(snap.currentIdx, s.bounds);

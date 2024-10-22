@@ -1,4 +1,5 @@
-import { Button, Container, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Stack, Text } from "@chakra-ui/react";
+import { TopNavigation } from "@components/topnavigation";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { gaTrackPaidTrialPurchaseConversion, trackEvent, trackPixelEvent } from "@utils/tracking";
 import * as React from "react";
@@ -63,21 +64,25 @@ export default function SuccessCheckoutPage() {
   }
 
   return (
-    <Container py={10}>
-      <Stack textAlign={"center"} spacing={6}>
-        <Text fontSize={"xl"} fontWeight={"bold"}>
-          Thank your for your purchase
-        </Text>
-        <Text>
-          The instructions on how to access your reading will be sent to your email shortly
-        </Text>
-        <Button
-          colorScheme="blue"
-          onClick={() => redirectToApp({ userID: globalState.userProfile!.id })}
-        >
-          Go to predictions
-        </Button>
-      </Stack>
-    </Container>
+    <Box>
+      <TopNavigation theme="dark" />
+
+      <Container py={10}>
+        <Stack textAlign={"center"} spacing={6}>
+          <Text fontSize={"xl"} fontWeight={"bold"}>
+            Thank your for your purchase
+          </Text>
+          <Text>
+            The instructions on how to access your reading will be sent to your email shortly
+          </Text>
+          <Button
+            colorScheme="blue"
+            onClick={() => redirectToApp({ userID: globalState.userProfile!.id })}
+          >
+            Go to predictions
+          </Button>
+        </Stack>
+      </Container>
+    </Box>
   );
 }
