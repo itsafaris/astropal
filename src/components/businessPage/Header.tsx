@@ -53,10 +53,6 @@ const links: Array<{ title: string; path: string }> = [
     title: "Careers",
     path: "/careers",
   },
-  {
-    title: "About Us",
-    path: "/about-us",
-  },
 ];
 
 function MenuFlat() {
