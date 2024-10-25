@@ -6,7 +6,6 @@ import {
   Grid,
   Box,
   Flex,
-  Link,
   Menu,
   MenuButton,
   MenuList,
@@ -15,11 +14,18 @@ import {
 
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { StaticImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
 
 export function Header() {
   return (
-    <Grid gridTemplateColumns={"auto 1fr"} width={"full"} alignItems={"center"}>
-      <StaticImage src={`../../images/intuvist-logo-black-h.png`} alt="Intuvist logo" height={35} />
+    <Grid gridTemplateColumns={"auto 1fr"} width={"full"} alignItems={"center"} py={4}>
+      <Link to="/">
+        <StaticImage
+          src={`../../images/intuvist-logo-black-h.png`}
+          alt="Intuvist logo"
+          height={35}
+        />
+      </Link>
 
       <Box ml="auto">
         <Show above="sm">
@@ -58,7 +64,7 @@ function MenuFlat() {
     <Flex gap={4}>
       {links.map((it) => {
         return (
-          <Link key={it.path} href={it.path}>
+          <Link key={it.path} to={it.path}>
             <Text fontSize={"sm"} fontWeight={"semibold"}>
               {it.title}
             </Text>
@@ -77,7 +83,7 @@ function MenuHamburger() {
       <MenuList>
         {links.map((it) => {
           return (
-            <Link key={it.path} href={it.path}>
+            <Link key={it.path} to={it.path}>
               <MenuItem value={it.path}>{it.title}</MenuItem>
             </Link>
           );
