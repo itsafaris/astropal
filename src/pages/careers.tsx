@@ -28,6 +28,8 @@ import {
 import { Header } from "@components/businessPage/Header";
 import { Footer } from "@components/businessPage/Footer";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
+import { Link } from "gatsby";
+import { createProductURL } from "@utils/urls";
 
 export default function CareersPage() {
   return (
@@ -63,9 +65,11 @@ const HeroSection: React.FC = () => {
         market for over 4 years, we've been consistently at the forefront of innovation.
       </Text>
 
-      <Button colorScheme="blue" size="lg">
-        Explore Now
-      </Button>
+      <Link to={createProductURL()}>
+        <Button colorScheme="teal" size="lg">
+          Explore Now
+        </Button>
+      </Link>
     </Stack>
   );
 };
@@ -116,9 +120,12 @@ const ValuesSection: React.FC = () => {
               description="We push boundaries to develop groundbreaking solutions"
             />
           </Grid>
-          <Button colorScheme="blue" size="lg">
-            Join Our Team
-          </Button>
+
+          <Link to={"/contact-us"}>
+            <Button colorScheme="teal" size="lg">
+              Join Our Team
+            </Button>
+          </Link>
         </VStack>
       </Container>
     </Box>
@@ -225,9 +232,12 @@ const InterviewProcessSection: React.FC = () => (
           description="Receive and accept your offer - let's get started!"
         />
       </Grid>
-      <Button as="a" href="#" colorScheme="blue" size="lg">
-        Submit Application
-      </Button>
+
+      <Link to={"/contact-us"}>
+        <Button colorScheme="teal" size="lg">
+          Submit Application
+        </Button>
+      </Link>
     </VStack>
   </Container>
 );

@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, VStack, Heading } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
+import { createProductURL } from "@utils/urls";
 
 export function AppShowcase() {
   return (
@@ -11,9 +13,11 @@ export function AppShowcase() {
 
       <StaticImage src={`../../images/lp-product-image.jpg`} alt="Intuvist webapp" width={400} />
 
-      <Button mt={6} colorScheme="teal" size="lg">
-        Access Your Account
-      </Button>
+      <Link to={createProductURL()}>
+        <Button mt={6} colorScheme="teal" size="lg">
+          Access Your Account
+        </Button>
+      </Link>
     </VStack>
   );
 }
