@@ -22,9 +22,9 @@ function Text(props: TextProps) {
 export default function ContactsPage() {
   return (
     <Stack>
-      <Container>
-        <TopNavigation />
+      <TopNavigation />
 
+      <Container my={10}>
         <Headline>Contact us</Headline>
         <Stack spacing={8} my={10}>
           <Section>

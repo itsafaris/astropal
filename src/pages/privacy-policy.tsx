@@ -44,9 +44,9 @@ function Link({ to, children }: { to: string } & React.PropsWithChildren) {
 export default function PrivacyPolicyPage() {
   return (
     <Stack>
-      <Container>
-        <TopNavigation />
+      <TopNavigation />
 
+      <Container>
         <Stack spacing={8} my={10}>
           <Headline>Privacy Policy</Headline>
 

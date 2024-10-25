@@ -25,7 +25,7 @@ export default function CheckoutPage() {
 
   return (
     <Box>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container pb={"400px"}>
         <Flex direction={"column"} alignItems={"center"}>

@@ -43,7 +43,7 @@ export default function SummaryPage() {
 
   return (
     <Box>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container py={4} pb={20}>
         <HeroSection />
@@ -365,10 +365,10 @@ function Footer() {
     <Box textAlign={"center"} py={8}>
       <Text>Questions? We're here to help.</Text>
       <Flex gap={2} my={2}>
-        <Button as={Link} to="/customer-support" variant="text" leftIcon={<Icon as={BiSupport} />}>
+        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
           Customer Support
         </Button>
-        <Button as={Link} to="/customer-support" variant="text" leftIcon={<Icon as={BiSupport} />}>
+        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
           Help Center
         </Button>
       </Flex>

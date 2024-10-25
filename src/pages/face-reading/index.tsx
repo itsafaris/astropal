@@ -16,7 +16,7 @@ export interface IFaceReadingLandingPageProps {}
 export default function FaceReadingLandingPage(props: IFaceReadingLandingPageProps) {
   return (
     <Box>
-      <TopNavigation theme="dark" />
+      <TopNavigation />
 
       <Container pt={4} pb={8}>
         <Flex gap={4} justifyContent={"center"} mb={4}>
