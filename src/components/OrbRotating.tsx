@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { keyframes } from "@emotion/react";
 
-const DEFAULT_COLOR_1 = "#cdbeff";
+const DEFAULT_COLOR_1 = "#65b2a1";
 const BOX_SHADOW_CSS = `0px 0px 50px 0px ${DEFAULT_COLOR_1}, 0px 0px 10px 0px ${DEFAULT_COLOR_1}`;
 
 export function OrbRotating({
