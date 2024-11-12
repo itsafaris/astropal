@@ -13,13 +13,20 @@ import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
 export default function SpecialOfferSkipTrial() {
   const [hasSkipped, setHasSkipped] = React.useState(false);
 
-  function handlePurchase() {}
+  function handlePurchase() {
+    //TODO: handle properly
+    navigateFurther();
+  }
 
   function handleFirstSkip() {
     setHasSkipped(true);
   }
 
   function handleSecondSkip() {
+    navigateFurther();
+  }
+
+  function navigateFurther() {
     navigate("/face-reading/special-offer-guides");
   }
 

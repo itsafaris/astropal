@@ -76,10 +76,14 @@ export default function SpecialOfferGuides() {
   }
 
   function handlePurchase() {
+    //TODO: handle properly
+    navigate("/face-reading/special-offer-guides");
     navigateFurther();
   }
 
   function handlePurchaseExtra() {
+    //TODO: handle properly
+    navigate("/face-reading/special-offer-guides");
     navigateFurther();
   }
 
