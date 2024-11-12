@@ -1,16 +1,13 @@
-import { Box, Button, Container, Flex, Icon, Radio, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
 import React from "react";
 
-import { PiHandPalmLight } from "react-icons/pi";
-import { LuCalendarCheck2 } from "react-icons/lu";
-import { GiSelfLove } from "react-icons/gi";
-import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
 import { FaCheck } from "react-icons/fa";
 import { IoMdStarOutline } from "react-icons/io";
 
 import { LuCalendarCheck } from "react-icons/lu";
+import { SpecialOfferCaution } from "@components/SpecialOfferCaution";
 
 type Guide = {
   id: string;
@@ -98,6 +95,7 @@ export default function SpecialOfferGuides() {
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={2} />
+          <SpecialOfferCaution />
 
           {hasSkipped ? (
             <Stack spacing={6}>

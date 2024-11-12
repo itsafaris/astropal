@@ -7,6 +7,8 @@ import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
+import { navigate } from "gatsby";
+import { SpecialOfferCaution } from "@components/SpecialOfferCaution";
 
 export default function SpecialOfferSkipTrial() {
   const [hasSkipped, setHasSkipped] = React.useState(false);
@@ -17,7 +19,9 @@ export default function SpecialOfferSkipTrial() {
     setHasSkipped(true);
   }
 
-  function handleSecondSkip() {}
+  function handleSecondSkip() {
+    navigate("/face-reading/special-offer-guides");
+  }
 
   return (
     <Box>
@@ -26,6 +30,7 @@ export default function SpecialOfferSkipTrial() {
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={1} />
+          <SpecialOfferCaution />
 
           {hasSkipped ? (
             <Stack spacing={6}>
