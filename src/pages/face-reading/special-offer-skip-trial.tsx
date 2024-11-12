@@ -8,7 +8,7 @@ import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
 import { navigate } from "gatsby";
-import { SpecialOfferCaution } from "@components/SpecialOfferCaution";
+import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
 
 export default function SpecialOfferSkipTrial() {
   const [hasSkipped, setHasSkipped] = React.useState(false);
@@ -30,10 +30,15 @@ export default function SpecialOfferSkipTrial() {
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={1} />
-          <SpecialOfferCaution />
 
           {hasSkipped ? (
             <Stack spacing={6}>
+              <SpecialOfferBadge
+                icon="📣"
+                title="Caution!"
+                text="To prevent double charges please don't close the page and don't go back."
+              />
+
               <Text fontSize={"xl"} fontWeight={"bold"}>
                 Are you sure?
               </Text>
@@ -132,7 +137,9 @@ export default function SpecialOfferSkipTrial() {
               </Stack>
             </Stack>
           ) : (
-            <Stack>
+            <Stack spacing={5}>
+              <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
+
               <Text fontSize={"xl"} fontWeight={"bold"}>
                 Not planning on looking back?
               </Text>

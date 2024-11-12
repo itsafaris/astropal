@@ -1,6 +1,14 @@
 import { Flex, Stack, Text } from "@chakra-ui/react";
 
-export function SpecialOfferCaution() {
+export function SpecialOfferBadge({
+  icon,
+  title,
+  text,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+}) {
   return (
     <Flex
       backgroundColor="blue.100"
@@ -10,11 +18,11 @@ export function SpecialOfferCaution() {
       borderRadius={"lg"}
       alignItems={"center"}
     >
-      <Text fontSize={"3xl"}>📣</Text>
+      <Text fontSize={"3xl"}>{icon}</Text>
 
       <Stack fontSize={"sm"} textAlign={"left"} lineHeight={1.3} spacing={0}>
-        <Text fontWeight={"bold"}>Caution!</Text>
-        <Text>To prevent double charges please don't close the page and don't go back.</Text>
+        <Text fontWeight={"bold"}>{title}</Text>
+        <Text>{text}</Text>
       </Stack>
     </Flex>
   );

@@ -7,7 +7,7 @@ import { FaCheck } from "react-icons/fa";
 import { IoMdStarOutline } from "react-icons/io";
 
 import { LuCalendarCheck } from "react-icons/lu";
-import { SpecialOfferCaution } from "@components/SpecialOfferCaution";
+import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
 
 type Guide = {
   id: string;
@@ -95,7 +95,11 @@ export default function SpecialOfferGuides() {
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={2} />
-          <SpecialOfferCaution />
+          <SpecialOfferBadge
+            icon="📣"
+            title="Caution!"
+            text="To prevent double charges please don't close the page and don't go back."
+          />
 
           {hasSkipped ? (
             <Stack spacing={6}>
