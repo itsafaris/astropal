@@ -1,20 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  Icon,
-  Progress,
-  Stack,
-  Step,
-  StepIcon,
-  StepIndicator,
-  Stepper,
-  StepStatus,
-  Text,
-  useSteps,
-} from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Grid, Icon, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
 import React from "react";
 
@@ -22,6 +6,7 @@ import { PiHandPalmLight } from "react-icons/pi";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
+import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
 
 export default function SpecialOfferSkipTrial() {
   const [hasSkipped, setHasSkipped] = React.useState(false);
@@ -54,7 +39,7 @@ export default function SpecialOfferSkipTrial() {
               </Text>
 
               <Stack spacing={4}>
-                <Text fontSize={"md"} fontWeight={"bold"} color={"brand.500"}>
+                <Text fontSize={"md"} fontWeight={"bold"} color={"brand.700"}>
                   What you get:
                 </Text>
 
@@ -68,7 +53,7 @@ export default function SpecialOfferSkipTrial() {
                       p={2}
                       borderRadius={"md"}
                     />
-                    <Text fontWeight={"semibold"} color={"brand.500"}>
+                    <Text fontWeight={"semibold"} color={"brand.600"}>
                       Unlimited palm readings
                     </Text>
                   </Flex>
@@ -82,7 +67,7 @@ export default function SpecialOfferSkipTrial() {
                       p={2}
                       borderRadius={"md"}
                     />
-                    <Text fontWeight={"semibold"} color={"brand.500"}>
+                    <Text fontWeight={"semibold"} color={"brand.600"}>
                       Daily compatibility readings
                     </Text>
                   </Flex>
@@ -96,7 +81,7 @@ export default function SpecialOfferSkipTrial() {
                       p={2}
                       borderRadius={"md"}
                     />
-                    <Text fontWeight={"semibold"} color={"brand.500"}>
+                    <Text fontWeight={"semibold"} color={"brand.560"}>
                       Cosmic relationships tips
                     </Text>
                   </Flex>
@@ -110,7 +95,7 @@ export default function SpecialOfferSkipTrial() {
                       p={2}
                       borderRadius={"md"}
                     />
-                    <Text fontWeight={"semibold"} color={"brand.500"}>
+                    <Text fontWeight={"semibold"} color={"brand.600"}>
                       Daily horoscopes
                     </Text>
                   </Flex>
@@ -239,55 +224,6 @@ function CardSpecial({ onSelect }: { onSelect: () => void }) {
           </Text>
         </Button>
       </Stack>
-    </Stack>
-  );
-}
-
-const steps = [{ title: "Skip Trial" }, { title: "Add Guides" }, { title: "Access Product" }];
-
-function SpecialOfferSteps({ activeStepIdx = 1 }: { activeStepIdx?: number }) {
-  const { activeStep } = useSteps({
-    index: activeStepIdx,
-    count: steps.length,
-  });
-
-  const max = steps.length - 1;
-  const progressPercent = (activeStep / max) * 100;
-
-  return (
-    <Stack>
-      <Grid
-        gridTemplateColumns={"repeat(3, 1fr)"}
-        alignItems={"center"}
-        fontSize={"xs"}
-        fontWeight={"semibold"}
-      >
-        <Text mr={"auto"}>{steps[0].title}</Text>
-        <Text mx="auto">{steps[1].title}</Text>
-        <Text ml={"auto"}>{steps[2].title}</Text>
-      </Grid>
-
-      <Box position="relative">
-        <Stepper size="sm" index={activeStep} gap="0" colorScheme="brand">
-          {steps.map((_, index) => (
-            <Step key={index} gap="0">
-              <StepIndicator bg="white">
-                <StepStatus complete={<StepIcon />} />
-              </StepIndicator>
-            </Step>
-          ))}
-        </Stepper>
-
-        <Progress
-          value={progressPercent}
-          position="absolute"
-          height="3px"
-          width="full"
-          top="10px"
-          zIndex={-1}
-          colorScheme="brand"
-        />
-      </Box>
     </Stack>
   );
 }
