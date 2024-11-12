@@ -8,6 +8,7 @@ import { IoMdStarOutline } from "react-icons/io";
 
 import { LuCalendarCheck } from "react-icons/lu";
 import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
+import { navigate } from "gatsby";
 
 type Guide = {
   id: string;
@@ -74,18 +75,28 @@ export default function SpecialOfferGuides() {
     }
   }
 
-  function handlePurchase() {}
+  function handlePurchase() {
+    navigateFurther();
+  }
 
-  function handlePurchaseExtra() {}
+  function handlePurchaseExtra() {
+    navigateFurther();
+  }
 
   function handleFirstSkip() {
     setHasSkipped(true);
   }
 
-  function handleSecondSkip() {}
+  function handleSecondSkip() {
+    navigateFurther();
+  }
 
   function handleSelect(id: string) {
     setSelectedGuideID(id);
+  }
+
+  function navigateFurther() {
+    navigate("/face-reading/special-offer-product");
   }
 
   return (
