@@ -4,7 +4,12 @@ import "../../styles/global.css";
 import { GlobalHead } from "./head";
 import { loadFromStorage, saveToStorage } from "@utils/localStorage";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
-import { getTrialPricingPlan, TrialPricingPlan } from "@utils/coreApi";
+import {
+  getTrialPricingPlan,
+  getPricingPlans,
+  TrialPricingPlan,
+  PricingPlans,
+} from "@utils/coreApi";
 import { orderBy } from "lodash";
 import { LocationProvider } from "@gatsbyjs/reach-router";
 import * as Sentry from "@sentry/gatsby";
@@ -17,7 +22,9 @@ const GlobalStateCtx = React.createContext<{
   setInGlobalState: (id: string, value: (current: any) => any) => void;
 }>(null as any);
 
-const GlobalStateContext = React.createContext<TypedGlobalState>({});
+const GlobalStateContext = React.createContext<TypedGlobalState>({
+  pricingPlans: [],
+});
 
 const GlobalUpdateContext = React.createContext<
   React.Dispatch<React.SetStateAction<TypedGlobalState>>
@@ -32,6 +39,7 @@ export type TypedGlobalState = {
   faceImageDataUrl?: string;
   selectedPricingPlan?: string;
   trialPricingPlan?: TrialPricingPlan;
+  pricingPlans: PricingPlans;
   userProfile?: UserProfileState;
 };
 
@@ -48,7 +56,9 @@ export const useGlobalUpdate2 = () => React.useContext(GlobalUpdateContext);
 /** Wraps every page but is not re-mounted when chaning pages */
 export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
-  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({});
+  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
+    pricingPlans: [],
+  });
   const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
 
   function setInGlobalState(id: string, value: (value: any) => any) {
@@ -89,6 +99,19 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
           ...s,
           trialPricingPlan: res,
           selectedPricingPlan: ordered[0]?.priceID,
+        }));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    getPricingPlans()
+      .then((res) => {
+        setTypedGlobalState((s) => ({
+          ...s,
+          pricingPlans: res,
         }));
       })
       .catch((err) => {
