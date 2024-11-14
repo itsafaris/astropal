@@ -2,10 +2,11 @@ import { Box, Button, Container, Flex, Icon, Stack, Text } from "@chakra-ui/reac
 import { TopNavigation } from "@components/topnavigation";
 import React from "react";
 
-import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
+import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 import { FaCheck } from "react-icons/fa";
-import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
+import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import { navigate } from "gatsby";
+import { createInternalURL, useURLParams } from "@components/onboarding/utils";
 
 type Guide = {
   id: string;
@@ -56,8 +57,13 @@ const guides: Array<Guide> = [
   },
 ];
 
-export default function SpecialOfferGuides1() {
+export default function OnboardingGuides1() {
   const [selectedGuideID, setSelectedGuideID] = React.useState<string | null>(null);
+
+  const urlParams = useURLParams<{
+    currency: string;
+    paymentType: string;
+  }>();
 
   React.useEffect(() => {
     setSelectedGuideID(guides[0].id);
@@ -73,11 +79,22 @@ export default function SpecialOfferGuides1() {
 
   function handlePurchase() {
     //TODO: handle properly
-    navigate("/face-reading/special-offer-product");
+
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+      paymentType: urlParams.paymentType,
+      currency: urlParams.currency,
+    });
+
+    navigate(url);
   }
 
   function handleSkip() {
-    navigate("/face-reading/special-offer-guides-2");
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-guides-2", {
+      paymentType: urlParams.paymentType,
+      currency: urlParams.currency,
+    });
+
+    navigate(url);
   }
 
   function handleSelect(id: string) {

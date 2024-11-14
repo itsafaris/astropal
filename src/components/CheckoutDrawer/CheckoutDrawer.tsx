@@ -1,20 +1,13 @@
 import * as React from "react";
 import { Container, Slide } from "@chakra-ui/react";
-import { Elements } from "@stripe/react-stripe-js";
 import { CheckoutForm } from "./CheckoutForm";
-import { loadStripe } from "@stripe/stripe-js";
-import { siteConfig } from "src/conf";
 import { useLocation } from "@gatsbyjs/reach-router";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 import "../../styles/global.css";
+import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 
-const stripe = loadStripe(siteConfig.stripePublicKey);
-
-export function CheckoutDrawer() {
+export function CheckoutDrawer({ plan }: { plan: OneTimeFeePrice }) {
   const location = useLocation();
-  const { selectedPricingPlan, trialPricingPlan } = useGlobalState2();
-  const plan = trialPricingPlan?.oneTimeFee.find((p) => p.priceID === selectedPricingPlan);
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState<boolean>(false);
 
@@ -28,35 +21,15 @@ export function CheckoutDrawer() {
     };
   }, [location]);
 
-  if (!plan) {
-    return null;
-  }
-
   return (
-    <Elements
-      stripe={stripe}
-      options={{
-        mode: "subscription",
-        amount: plan.unit_amount,
-        currency: plan.currency,
-        appearance: {
-          theme: "stripe",
-          variables: {
-            tabLogoColor: "green",
-            tabLogoSelectedColor: "red",
-          },
-        },
-      }}
+    <Slide
+      direction="bottom"
+      in={isDrawerOpen}
+      style={{ zIndex: 10, backgroundColor: "white", boxShadow: "0px 10px 20px 0px black" }}
     >
-      <Slide
-        direction="bottom"
-        in={isDrawerOpen}
-        style={{ zIndex: 10, backgroundColor: "white", boxShadow: "0px 10px 20px 0px black" }}
-      >
-        <Container py={5}>
-          <CheckoutForm plan={plan} />
-        </Container>
-      </Slide>
-    </Elements>
+      <Container py={5}>
+        <CheckoutForm plan={plan} />
+      </Container>
+    </Slide>
   );
 }

@@ -1,13 +1,19 @@
 import { Box, Button, Container, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
 
-import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
+import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 import { IoMdStarOutline } from "react-icons/io";
 import { LuCalendarCheck } from "react-icons/lu";
-import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
+import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import { navigate } from "gatsby";
+import { createInternalURL, useURLParams } from "@components/onboarding/utils";
 
-export default function SpecialOfferGuides2() {
+export default function OnboardingGuides2() {
+  const urlParams = useURLParams<{
+    currency: string;
+    paymentType: string;
+  }>();
+
   function handlePurchase() {
     //TODO: handle properly
     navigateToNextStep();
@@ -18,7 +24,12 @@ export default function SpecialOfferGuides2() {
   }
 
   function navigateToNextStep() {
-    navigate("/face-reading/special-offer-product");
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+      paymentType: urlParams.paymentType,
+      currency: urlParams.currency,
+    });
+
+    navigate(url);
   }
 
   return (

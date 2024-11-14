@@ -5,13 +5,29 @@ import { PiHandPalmLight } from "react-icons/pi";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
-import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
+import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 import { navigate } from "gatsby";
-import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
+import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
+import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useStripe } from "@stripe/react-stripe-js";
+import { createInternalURL, useURLParams } from "@components/onboarding/utils";
+import React from "react";
+import { eden } from "@utils/coreApi";
+import { trackPosthogPurchaseEvent } from "@utils/tracking";
 
-export default function SpecialOfferSkipTrial2() {
-  function handlePurchase() {
-    //TODO: handle properly
+export default function OnboardingSkipTrial2() {
+  const { pricingPlans } = useGlobalState2();
+  const monthlyPlan = pricingPlans[0];
+  const [request, submit] = usePayment(monthlyPlan);
+
+  const urlParams = useURLParams<{
+    paymentType: number;
+    currency: string;
+  }>();
+
+  async function handlePurchase() {
+    await submit();
     navigateToNextStep();
   }
 
@@ -20,7 +36,12 @@ export default function SpecialOfferSkipTrial2() {
   }
 
   function navigateToNextStep() {
-    navigate("/face-reading/special-offer-guides-1");
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+      paymentType: urlParams.paymentType,
+      currency: urlParams.currency,
+    });
+
+    navigate(url);
   }
 
   return (
@@ -129,6 +150,7 @@ export default function SpecialOfferSkipTrial2() {
                   colorScheme="brand"
                   flexGrow={1}
                   onClick={handlePurchase}
+                  isLoading={request.state === "loading"}
                 >
                   <Text fontSize={["sm", "md"]}>Accept this offer</Text>
                 </Button>
@@ -139,4 +161,94 @@ export default function SpecialOfferSkipTrial2() {
       </Container>
     </Box>
   );
+}
+
+export type RequestType =
+  | {
+      state: "initial";
+    }
+  | {
+      state: "loading";
+    }
+  | {
+      state: "ok";
+    }
+  | {
+      state: "error";
+      error: string;
+    };
+
+function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] {
+  const { userProfile } = useGlobalState2();
+  const stripe = useStripe();
+
+  const urlParams = useURLParams<{
+    pricePaid: number;
+    currency: string;
+    paymentType: string;
+    planID: string;
+  }>();
+
+  const [request, setRequest] = React.useState<RequestType>({
+    state: "initial",
+  });
+
+  async function submit() {
+    if (!userProfile || !plan || !stripe) {
+      console.warn("data missing for subscription setup");
+      return;
+    }
+
+    if (request.state !== "initial") {
+      return;
+    }
+
+    setRequest({ state: "loading" });
+
+    try {
+      const subscription = await eden("/payments/updateSubscription", {
+        method: "POST",
+        body: {
+          userID: userProfile.id,
+          priceID: plan.priceID,
+        },
+      });
+
+      if (subscription.error) {
+        setRequest({
+          state: "error",
+          error: subscription.error.message,
+        });
+
+        return;
+      }
+
+      if (!subscription.data) {
+        setRequest({
+          state: "error",
+          error: "missing payment intent data",
+        });
+
+        return;
+      }
+
+      trackPosthogPurchaseEvent({
+        name: "purchase",
+        properties: {
+          currency: urlParams.currency ?? undefined,
+          value: plan.unit_amount / 100,
+          paymentType: urlParams.paymentType ?? undefined,
+          contentType: "subscription",
+          contentIDs: [plan.priceID],
+        },
+      });
+
+      setRequest({ state: "ok" });
+    } catch (err) {
+      console.error(err);
+      setRequest({ state: "error", error: String(err) });
+    }
+  }
+
+  return [request, submit];
 }

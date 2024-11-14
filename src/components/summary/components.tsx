@@ -1,14 +1,14 @@
 import { ComponentProps } from "react";
 import { Box, Button, Flex, useTheme, Text, TextProps } from "@chakra-ui/react";
 import { Link } from "gatsby";
-import { trackEvent } from "@utils/tracking";
+import { trackPosthogEvent } from "@utils/tracking";
 
 export function CTALinkToPricing({ children, ...rest }: ComponentProps<typeof Button>) {
   return (
     <Link to="/summary#pricing-plans" title="Pricing plans">
       <CTAButton
         onClick={() => {
-          trackEvent({
+          trackPosthogEvent({
             name: "cta-click",
             properties: {
               id: rest.id,

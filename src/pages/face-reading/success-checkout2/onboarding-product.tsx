@@ -2,13 +2,13 @@ import { Box, Button, Container, Flex, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
 import React from "react";
 
-import { SpecialOfferSteps } from "@components/SpecialOfferSteps";
+import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 
-import { SpecialOfferBadge } from "@components/SpecialOfferBadge";
+import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import { createProductURL } from "src/utils/urls";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
-export default function SpecialOfferProduct() {
+export default function OnboardingProduct() {
   const globalState = useGlobalState2();
 
   const [hasPurchasedGuides, setHasPurchasedGuides] = React.useState(false);

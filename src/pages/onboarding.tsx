@@ -1,7 +1,7 @@
 import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
 
 import { isProdMode } from "@utils/isProdMode";
-import { trackEvent } from "@utils/tracking";
+import { trackPosthogEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
 import { clearStorage, saveToStorage } from "@utils/localStorage";
@@ -55,7 +55,7 @@ export default function OnboardingQuiz() {
       }}
       locationApiKey={locationApiKey}
       onTrackingEvent={(event) => {
-        trackEvent(event);
+        trackPosthogEvent(event);
       }}
       onSlideSubmitted={async (state) => {
         const rawState = await state.getQuizState();

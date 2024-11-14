@@ -9,12 +9,12 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { trackEvent, trackPixelEvent } from "@utils/tracking";
-import { createSuccessCheckoutURL } from "./utils";
+import { trackPosthogEvent, trackPixelEvent } from "@utils/tracking";
 import { ErrorView, LoadingView } from "./components";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { eden } from "@utils/coreApi";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { createExternalURL } from "@components/onboarding/utils";
 
 export type RequestType =
   | {
@@ -148,16 +148,19 @@ function usePayment(
 
     setRequest({ state: "loading" });
 
-    const redirectUrl = createSuccessCheckoutURL(
-      type,
-      planRef.current.unit_amount,
-      planRef.current.currency,
-      planRef.current.priceID
+    const redirectUrl = createExternalURL(
+      "/face-reading/success-checkout/onboarding-skip-trial-1",
+      {
+        paymentType: type,
+        pricePaid: planRef.current.unit_amount,
+        currency: planRef.current.currency,
+        planID: planRef.current.priceID,
+      }
     );
 
     trackPixelEvent("AddPaymentInfo");
 
-    trackEvent({
+    trackPosthogEvent({
       name: "add-payment-info",
       properties: {},
     });

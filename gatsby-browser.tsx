@@ -26,9 +26,9 @@ export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }
   const isInFunnelUrl = /\/face-reading\/.+/.test(location.pathname);
   const hasPurchased = sessionCache.hasPurchased();
 
-  if (hasPurchased && isInFunnelUrl) {
-    navigate(createProductURL());
-  }
+  // if (hasPurchased && isInFunnelUrl) {
+  //   navigate(createProductURL());
+  // }
 };
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {

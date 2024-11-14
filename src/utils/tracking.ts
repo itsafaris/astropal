@@ -9,7 +9,22 @@ type TrackingEvent = {
   };
 };
 
-export function trackEvent(e: TrackingEvent) {
+export function trackPosthogEvent(e: TrackingEvent) {
+  sendToGTM(e);
+  posthog.capture(e.name, e.properties);
+}
+
+export function trackPosthogPurchaseEvent(
+  e: TrackingEvent & {
+    properties: {
+      currency?: string;
+      value?: number;
+      paymentType?: string;
+      contentType: "trial" | "subscription" | "one-time";
+      contentIDs: string[];
+    };
+  }
+) {
   sendToGTM(e);
   posthog.capture(e.name, e.properties);
 }

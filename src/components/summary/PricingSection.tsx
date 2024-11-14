@@ -13,7 +13,7 @@ import {
 
 import { StaticImage } from "gatsby-plugin-image";
 import { pricingPlans, PricingPlanType } from "@utils/pricingPlans";
-import { trackEvent } from "@utils/tracking";
+import { trackPosthogEvent } from "@utils/tracking";
 import { ComponentProps, useState } from "react";
 import { CTAButton } from "./components";
 import { CheckoutWidget } from "src/pages/checkout";
@@ -45,7 +45,7 @@ export function PricingSection({
         <PricingPlans
           selectedPlanID={selectedPlanID}
           onPlanChanged={(planID) => {
-            trackEvent({ name: "change-pricing", properties: { planID: planID } });
+            trackPosthogEvent({ name: "change-pricing", properties: { planID: planID } });
             setSelectedPlanID(planID);
           }}
         />
@@ -54,7 +54,7 @@ export function PricingSection({
           id={sectionID}
           mt={4}
           onClick={() => {
-            trackEvent({
+            trackPosthogEvent({
               name: "checkout_btn_click",
               properties: { sectionID: sectionID, planID: selectedPlanID },
             });

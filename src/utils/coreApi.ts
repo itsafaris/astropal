@@ -1,9 +1,9 @@
 import { edenFetch } from "@elysiajs/eden";
 import { QuizStateParsed } from "./state";
-import { CoreClientType } from "@astropal/api-client";
+import { CoreServerType } from "@astropal/api-client";
 import { siteConfig } from "src/conf";
 
-export const eden = edenFetch<CoreClientType>(siteConfig.coreApiHost);
+export const eden = edenFetch<CoreServerType>(siteConfig.coreApiHost);
 
 export type TrialPricingPlan = Awaited<ReturnType<typeof getTrialPricingPlan>>;
 export type PricingPlans = Awaited<ReturnType<typeof getPricingPlans>>;
