@@ -9,6 +9,8 @@ import {
   getPricingPlans,
   TrialPricingPlan,
   PricingPlans,
+  Reports,
+  getReports,
 } from "@utils/coreApi";
 import { orderBy } from "lodash";
 import { LocationProvider } from "@gatsbyjs/reach-router";
@@ -24,6 +26,7 @@ const GlobalStateCtx = React.createContext<{
 
 const GlobalStateContext = React.createContext<TypedGlobalState>({
   pricingPlans: [],
+  reports: [],
 });
 
 const GlobalUpdateContext = React.createContext<
@@ -40,6 +43,7 @@ export type TypedGlobalState = {
   selectedPricingPlan?: string;
   trialPricingPlan?: TrialPricingPlan;
   pricingPlans: PricingPlans;
+  reports: Reports;
   userProfile?: UserProfileState;
 };
 
@@ -58,6 +62,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
   const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
     pricingPlans: [],
+    reports: [],
   });
   const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
 
@@ -112,6 +117,19 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
         setTypedGlobalState((s) => ({
           ...s,
           pricingPlans: res,
+        }));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    getReports()
+      .then((res) => {
+        setTypedGlobalState((s) => ({
+          ...s,
+          reports: res.reverse(),
         }));
       })
       .catch((err) => {

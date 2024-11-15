@@ -7,6 +7,7 @@ export const eden = edenFetch<CoreServerType>(siteConfig.coreApiHost);
 
 export type TrialPricingPlan = Awaited<ReturnType<typeof getTrialPricingPlan>>;
 export type PricingPlans = Awaited<ReturnType<typeof getPricingPlans>>;
+export type Reports = Awaited<ReturnType<typeof getReports>>;
 
 export async function createNewUserProfile(
   input: QuizStateParsed,
@@ -87,6 +88,13 @@ export async function convertUserFromAnonymous(input: { userID: string; email: s
       email: input.email,
     },
   });
+}
+
+export async function getReports() {
+  const res = await eden("/reports", {
+    method: "GET",
+  });
+  return res.data!;
 }
 
 export async function getTrialPricingPlan() {

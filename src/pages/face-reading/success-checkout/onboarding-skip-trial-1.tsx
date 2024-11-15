@@ -14,7 +14,7 @@ import {
   trackPixelEvent,
   trackPosthogPurchaseEvent,
 } from "@utils/tracking";
-import { createInternalURL, useURLParams } from "@components/onboarding/utils";
+import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
 
 export type RequestType =
   | {
@@ -36,15 +36,15 @@ export default function OnboardingSkipTrial1() {
   const monthlyPlan = pricingPlans[0];
   const [request, submit] = usePayment(monthlyPlan);
 
-  const urlParams = useURLParams<{
-    pricePaid: number;
-    currency: string;
-    paymentType: string;
-    planID: string;
-  }>();
-
   React.useEffect(() => {
     const hasPurchased = sessionCache.hasPurchased();
+
+    const urlParams = parseURLParams<{
+      pricePaid: number;
+      currency: string;
+      paymentType: string;
+      planID: string;
+    }>(window.location.href);
 
     if (!hasPurchased) {
       const pricePaid = (urlParams.pricePaid ?? 0) / 100;
@@ -81,6 +81,11 @@ export default function OnboardingSkipTrial1() {
   }, []);
 
   function handleSkip() {
+    const urlParams = parseURLParams<{
+      currency: string;
+      paymentType: string;
+    }>(window.location.href);
+
     const url = createInternalURL("/face-reading/success-checkout/onboarding-skip-trial-2", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
@@ -91,7 +96,13 @@ export default function OnboardingSkipTrial1() {
 
   async function handlePurchase() {
     await submit();
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+
+    const urlParams = parseURLParams<{
+      currency: string;
+      paymentType: string;
+    }>(window.location.href);
+
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-1", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
@@ -216,13 +227,6 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
   const { userProfile } = useGlobalState2();
   const stripe = useStripe();
 
-  const urlParams = useURLParams<{
-    pricePaid: number;
-    currency: string;
-    paymentType: string;
-    planID: string;
-  }>();
-
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
   });
@@ -265,6 +269,13 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
 
         return;
       }
+
+      const urlParams = parseURLParams<{
+        pricePaid: number;
+        currency: string;
+        paymentType: string;
+        planID: string;
+      }>(window.location.href);
 
       trackPosthogPurchaseEvent({
         name: "purchase",

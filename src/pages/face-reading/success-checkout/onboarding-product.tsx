@@ -1,6 +1,5 @@
 import { Box, Button, Container, Flex, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
-import React from "react";
 
 import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 
@@ -10,12 +9,6 @@ import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 export default function OnboardingProduct() {
   const globalState = useGlobalState2();
-
-  const [hasPurchasedGuides, setHasPurchasedGuides] = React.useState(false);
-
-  React.useEffect(() => {
-    setHasPurchasedGuides(true);
-  }, []);
 
   function redirectToApp(input: { userID: string }) {
     const params = new URLSearchParams();
@@ -29,7 +22,7 @@ export default function OnboardingProduct() {
 
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={2} />
+          <SpecialOfferSteps activeStepIdx={3} />
           <SpecialOfferBadge
             icon="🎉"
             title="Congrats!"
@@ -49,15 +42,13 @@ export default function OnboardingProduct() {
               </Text>
             </Flex>
 
-            {hasPurchasedGuides && (
-              <Flex alignItems={"flex-start"} gap={2}>
-                <Text fontSize={"lg"}>•</Text>
-                <Text>
-                  Your guides will be sent to your email address shortly. If you don't see them in
-                  your inbox, please check your spam folder.
-                </Text>
-              </Flex>
-            )}
+            <Flex alignItems={"flex-start"} gap={2}>
+              <Text fontSize={"lg"}>•</Text>
+              <Text>
+                If you purchased reports, they will be sent to your email address shortly. If you
+                don't see them in your inbox, please check your spam folder.
+              </Text>
+            </Flex>
           </Stack>
 
           <Button

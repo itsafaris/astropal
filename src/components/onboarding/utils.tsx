@@ -1,5 +1,3 @@
-import React from "react";
-
 export function createExternalURL<T = Record<string, any>>(pathname: string, params: T): string {
   const result = new URL(window.location.href);
   result.pathname = pathname;
@@ -31,14 +29,4 @@ export function parseURLParams<T extends Record<string, any>>(urlString: string)
   });
 
   return result;
-}
-
-export function useURLParams<T extends Record<string, any>>(): Partial<T> {
-  const [params, setParams] = React.useState<Partial<T>>({});
-
-  React.useEffect(() => {
-    setParams(parseURLParams(window.location.href));
-  }, []);
-
-  return params;
 }

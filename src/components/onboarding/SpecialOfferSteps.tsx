@@ -12,8 +12,7 @@ import {
   Progress,
 } from "@chakra-ui/react";
 
-const steps = [{ title: "Skip Trial" }, { title: "Access Product" }];
-// const steps = [{ title: "Skip Trial" }, { title: "Add Guides" }, { title: "Access Product" }];
+const steps = [{ title: "Skip Trial" }, { title: "Add Guides" }, { title: "Access Product" }];
 
 export function SpecialOfferSteps({ activeStepIdx = 1 }: { activeStepIdx?: number }) {
   const { activeStep } = useSteps({
@@ -27,15 +26,6 @@ export function SpecialOfferSteps({ activeStepIdx = 1 }: { activeStepIdx?: numbe
   return (
     <Stack>
       <Grid
-        gridTemplateColumns={"repeat(2, 1fr)"}
-        alignItems={"center"}
-        fontSize={"xs"}
-        fontWeight={"semibold"}
-      >
-        <Text mr={"auto"}>{steps[0].title}</Text>
-        <Text ml="auto">{steps[1].title}</Text>
-      </Grid>
-      {/* <Grid
         gridTemplateColumns={"repeat(3, 1fr)"}
         alignItems={"center"}
         fontSize={"xs"}
@@ -44,7 +34,7 @@ export function SpecialOfferSteps({ activeStepIdx = 1 }: { activeStepIdx?: numbe
         <Text mr={"auto"}>{steps[0].title}</Text>
         <Text mx="auto">{steps[1].title}</Text>
         <Text ml={"auto"}>{steps[2].title}</Text>
-      </Grid> */}
+      </Grid>
 
       <Box position="relative">
         <Stepper size="sm" index={activeStep} gap="0" colorScheme="brand">
