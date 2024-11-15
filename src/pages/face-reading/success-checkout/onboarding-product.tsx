@@ -6,6 +6,8 @@ import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import { createProductURL } from "src/utils/urls";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import React from "react";
+import { sessionCache } from "src/sessionCache";
 
 export default function OnboardingProduct() {
   const globalState = useGlobalState2();
@@ -15,6 +17,10 @@ export default function OnboardingProduct() {
     params.append("userID", input.userID);
     location.href = createProductURL(params.toString());
   }
+
+  React.useEffect(() => {
+    sessionCache.setFinishedOnboarding();
+  }, []);
 
   return (
     <Box>

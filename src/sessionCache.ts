@@ -1,26 +1,34 @@
 type UserSession = {
-  hasPerformedPurchase: boolean;
+  hasPurchasedTrial: boolean;
+  hasPurchasedSubscription: boolean;
+  hasPurchasedReport: boolean;
+  hasFinishedOnboarding: boolean;
 };
 
 const KEY = "intuvist-user-session";
 const DEFAULT_SESSION: UserSession = {
-  hasPerformedPurchase: false,
+  hasPurchasedTrial: false,
+  hasPurchasedSubscription: false,
+  hasPurchasedReport: false,
+  hasFinishedOnboarding: false,
 };
 
-function setSession(input: UserSession) {
-  sessionStorage.setItem(KEY, JSON.stringify(input));
+function setSession(input: Partial<UserSession>) {
+  const session = getSession() ?? DEFAULT_SESSION;
+  sessionStorage.setItem(KEY, JSON.stringify({ ...session, ...input }));
 }
 
-function getSession(): UserSession | undefined {
+function getSession(): UserSession {
   const item = sessionStorage.getItem(KEY);
   if (!item) {
-    return;
+    return DEFAULT_SESSION;
   }
 
   try {
     return JSON.parse(item);
   } catch (err) {
     console.error("Failed to parse user session data from session storage");
+    return DEFAULT_SESSION;
   }
 }
 
@@ -33,27 +41,14 @@ function createNewCache(): void {
   setSession(DEFAULT_SESSION);
 }
 
-function registerPurchase(): void {
-  const session = getSession();
-
-  setSession({
-    ...(session ? session : DEFAULT_SESSION),
-    hasPerformedPurchase: true,
-  });
-}
-
-function hasPurchased(): boolean {
-  const session = getSession();
-  if (!session) {
-    setSession(DEFAULT_SESSION);
-    return DEFAULT_SESSION.hasPerformedPurchase;
-  }
-
-  return session.hasPerformedPurchase;
-}
-
 export const sessionCache = {
   createNewCache,
-  registerPurchase,
-  hasPurchased,
+  hasPurchasedTrial: () => getSession().hasPurchasedTrial,
+  hasPurchasedSubscription: () => getSession().hasPurchasedSubscription,
+  hasPurchasedReport: () => getSession().hasPurchasedReport,
+  hasFinishedOnboarding: () => getSession().hasFinishedOnboarding,
+  setPurchasedTrial: () => setSession({ hasPurchasedTrial: true }),
+  setPurchasedSubscription: () => setSession({ hasPurchasedSubscription: true }),
+  setPurchasedReport: () => setSession({ hasPurchasedReport: true }),
+  setFinishedOnboarding: () => setSession({ hasFinishedOnboarding: true }),
 };

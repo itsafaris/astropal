@@ -11,6 +11,7 @@ import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { eden, Reports } from "@utils/coreApi";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { useStripe } from "@stripe/react-stripe-js";
+import { sessionCache } from "src/sessionCache";
 
 const SKIP_CARD_ID = "skip";
 
@@ -39,6 +40,8 @@ export default function OnboardingReports1() {
     }
 
     await submit(report);
+
+    sessionCache.setPurchasedReport();
 
     const urlParams = parseURLParams<{
       currency: string;

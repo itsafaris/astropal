@@ -15,6 +15,7 @@ import { createInternalURL, parseURLParams } from "@components/onboarding/utils"
 import React from "react";
 import { eden } from "@utils/coreApi";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
+import { sessionCache } from "src/sessionCache";
 
 export default function OnboardingSkipTrial2() {
   const { pricingPlans } = useGlobalState2();
@@ -23,6 +24,9 @@ export default function OnboardingSkipTrial2() {
 
   async function handlePurchase() {
     await submit();
+
+    sessionCache.setPurchasedSubscription();
+
     navigateToNextStep();
   }
 

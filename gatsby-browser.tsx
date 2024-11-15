@@ -22,13 +22,18 @@ export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
 };
 
 export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }) => {
-  // Regular expression to match "/face-reading/" followed by at least one character
-  const isInFunnelUrl = /\/face-reading\/.+/.test(location.pathname);
-  const hasPurchased = sessionCache.hasPurchased();
+  const isFunnelPathname = /\/face-reading\/.+/.test(location.pathname);
+  const isFunnelOnboardingPathname = location.pathname.includes("/face-reading/success-checkout");
 
-  // if (hasPurchased && isInFunnelUrl) {
-  //   navigate(createProductURL());
-  // }
+  if (isFunnelPathname && !isFunnelOnboardingPathname && sessionCache.hasPurchasedTrial()) {
+    navigate(createProductURL());
+    return;
+  }
+
+  if (isFunnelOnboardingPathname && sessionCache.hasFinishedOnboarding()) {
+    navigate(createProductURL());
+    return;
+  }
 };
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {

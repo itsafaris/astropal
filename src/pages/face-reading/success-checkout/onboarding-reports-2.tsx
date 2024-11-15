@@ -10,6 +10,7 @@ import React from "react";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { eden, Reports } from "@utils/coreApi";
 import { useStripe } from "@stripe/react-stripe-js";
+import { sessionCache } from "src/sessionCache";
 
 export default function OnboardingGuides2() {
   const { reports } = useGlobalState2();
@@ -29,6 +30,8 @@ export default function OnboardingGuides2() {
     }
 
     await submit(premiumPack);
+
+    sessionCache.setPurchasedReport();
 
     navigateToNextStep();
   }

@@ -37,7 +37,7 @@ export default function OnboardingSkipTrial1() {
   const [request, submit] = usePayment(monthlyPlan);
 
   React.useEffect(() => {
-    const hasPurchased = sessionCache.hasPurchased();
+    const hasPurchasedTrial = sessionCache.hasPurchasedTrial();
 
     const urlParams = parseURLParams<{
       pricePaid: number;
@@ -46,7 +46,7 @@ export default function OnboardingSkipTrial1() {
       planID: string;
     }>(window.location.href);
 
-    if (!hasPurchased) {
+    if (!hasPurchasedTrial) {
       const pricePaid = (urlParams.pricePaid ?? 0) / 100;
 
       trackPixelEvent("Purchase", {
@@ -76,7 +76,7 @@ export default function OnboardingSkipTrial1() {
       // and automatically redirects users if it detects that they have purchased the product.
       // In this case, the purchase status is set to true before that route check occurs.
       // We want the opposite behavior to avoid automatic redirection when a user visits this page for the first time after a successful purchase.
-      setTimeout(sessionCache.registerPurchase, 0);
+      setTimeout(sessionCache.setPurchasedTrial, 0);
     }
   }, []);
 
@@ -96,6 +96,8 @@ export default function OnboardingSkipTrial1() {
 
   async function handlePurchase() {
     await submit();
+
+    sessionCache.setPurchasedSubscription();
 
     const urlParams = parseURLParams<{
       currency: string;
