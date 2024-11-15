@@ -82,58 +82,90 @@ export default function OnboardingReports1() {
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={2} />
 
-          <SpecialOfferBadge
-            icon="📣"
-            title="Caution!"
-            text="To prevent double charges please don't close the page and don't go back."
-          />
-
-          <Stack>
-            <Text fontSize={"xl"} fontWeight={"bold"}>
-              Choose your sign-up offer 🔥
-            </Text>
-
-            <Text fontSize={"sm"} fontWeight={"bold"} color={"brand.500"}>
-              Available only now
-            </Text>
-
-            <Stack>
-              {reports
-                .filter((it) => it.title !== "Premium pack")
-                .map((it) => {
-                  const isSelected = it.productID === selectedReportID;
-
-                  return (
-                    <ReportCard
-                      key={it.productID}
-                      report={it}
-                      isSelected={isSelected}
-                      onSelect={handleSelect}
-                    />
-                  );
-                })}
-
-              <SkipCard isSelected={selectedReportID === SKIP_CARD_ID} onSelect={handleSelect} />
-            </Stack>
-
-            <Text my={3} color="gray.500" fontSize={"sm"}>
-              *You will be charged for the add-on services or products selected at the time of
-              purchase. This is non-recurring payment.
-            </Text>
-
-            <Button
-              isLoading={request.state === "loading"}
-              size={"lg"}
-              py={7}
-              colorScheme="brand"
-              flexGrow={1}
-              onClick={handleCTAClick}
-            >
-              <Text fontSize={["sm", "md"]}>
-                {selectedReportID === "skip" ? "Continue" : "Get my copy"}{" "}
+          {sessionCache.hasPurchasedReport() ? (
+            <Stack spacing={5}>
+              <Text fontSize={"xl"} fontWeight={"bold"}>
+                🥰 You have successfully purchased the report
               </Text>
-            </Button>
-          </Stack>
+
+              <Button
+                size={"lg"}
+                py={7}
+                colorScheme="brand"
+                onClick={() => {
+                  const urlParams = parseURLParams<{
+                    currency: string;
+                    paymentType: string;
+                  }>(window.location.href);
+
+                  const url = createInternalURL(
+                    "/face-reading/success-checkout/onboarding-product",
+                    {
+                      paymentType: urlParams.paymentType,
+                      currency: urlParams.currency,
+                    }
+                  );
+
+                  navigate(url);
+                }}
+              >
+                <Text fontSize={["sm", "md"]}>Continue</Text>
+              </Button>
+            </Stack>
+          ) : (
+            <Stack>
+              <SpecialOfferBadge
+                icon="📣"
+                title="Caution!"
+                text="To prevent double charges please don't close the page and don't go back."
+              />
+
+              <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
+                Choose your sign-up offer 🔥
+              </Text>
+
+              <Text fontSize={"sm"} fontWeight={"bold"} color={"brand.500"}>
+                Available only now
+              </Text>
+
+              <Stack>
+                {reports
+                  .filter((it) => it.title !== "Premium pack")
+                  .map((it) => {
+                    const isSelected = it.productID === selectedReportID;
+
+                    return (
+                      <ReportCard
+                        key={it.productID}
+                        report={it}
+                        isSelected={isSelected}
+                        onSelect={handleSelect}
+                      />
+                    );
+                  })}
+
+                <SkipCard isSelected={selectedReportID === SKIP_CARD_ID} onSelect={handleSelect} />
+              </Stack>
+
+              <Text my={3} color="gray.500" fontSize={"sm"}>
+                *You will be charged for the add-on services or products selected at the time of
+                purchase. This is non-recurring payment.
+              </Text>
+
+              <Button
+                isLoading={request.state === "loading"}
+                size={"lg"}
+                py={7}
+                colorScheme="brand"
+                flexGrow={1}
+                onClick={handleCTAClick}
+              >
+                <Text fontSize={["sm", "md"]}>
+                  {selectedReportID === "skip" ? "Continue" : "Get my copy"}{" "}
+                </Text>
+              </Button>
+            </Stack>
+          )}
         </Stack>
       </Container>
     </Box>

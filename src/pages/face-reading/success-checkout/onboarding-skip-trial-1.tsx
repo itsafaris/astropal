@@ -120,21 +120,53 @@ export default function OnboardingSkipTrial1() {
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={1} />
 
-          <Stack spacing={5}>
-            <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
+          {sessionCache.hasPurchasedSubscription() ? (
+            <Stack spacing={5}>
+              <Text fontSize={"xl"} fontWeight={"bold"}>
+                🥰 You have successfully purchased the subscription
+              </Text>
 
-            <Text fontSize={"xl"} fontWeight={"bold"}>
-              Not planning on looking back?
-            </Text>
+              <Button
+                size={"lg"}
+                py={7}
+                colorScheme="brand"
+                onClick={() => {
+                  const urlParams = parseURLParams<{
+                    currency: string;
+                    paymentType: string;
+                  }>(window.location.href);
 
-            <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>
-              <Card onSelect={handleSkip} />
+                  const url = createInternalURL(
+                    "/face-reading/success-checkout/onboarding-reports-1",
+                    {
+                      paymentType: urlParams.paymentType,
+                      currency: urlParams.currency,
+                    }
+                  );
 
-              {monthlyPlan && (
-                <CardSpecial onSelect={handlePurchase} isLoading={request.state === "loading"} />
-              )}
-            </Grid>
-          </Stack>
+                  navigate(url);
+                }}
+              >
+                <Text fontSize={["sm", "md"]}>Continue</Text>
+              </Button>
+            </Stack>
+          ) : (
+            <Stack spacing={5}>
+              <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
+
+              <Text fontSize={"xl"} fontWeight={"bold"}>
+                Not planning on looking back?
+              </Text>
+
+              <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>
+                <Card onSelect={handleSkip} />
+
+                {monthlyPlan && (
+                  <CardSpecial onSelect={handlePurchase} isLoading={request.state === "loading"} />
+                )}
+              </Grid>
+            </Stack>
+          )}
         </Stack>
       </Container>
     </Box>
