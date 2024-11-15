@@ -16,6 +16,7 @@ import {
   StepStatus,
   StepDescription,
   StepSeparator,
+  Card,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
@@ -23,7 +24,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { CgInfinity } from "react-icons/cg";
 import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
-import { FaCheck, FaCircle, FaRegLightbulb } from "react-icons/fa";
+import { FaCheck, FaCircle, FaLockOpen, FaRegLightbulb } from "react-icons/fa";
 import { BiSupport } from "react-icons/bi";
 import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
@@ -33,7 +34,7 @@ import { Link, navigate } from "gatsby";
 import { Timer } from "@components/timer";
 import { ComponentProps, useEffect, useState } from "react";
 import React from "react";
-import { trackPixelEvent } from "@utils/tracking";
+import { trackPixelEvent, trackPosthogEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
 
 export default function SummaryPage() {
@@ -48,6 +49,7 @@ export default function SummaryPage() {
       <Container py={4} pb={20}>
         <HeroSection />
         <HowItWorks />
+        <FaceFeatures />
         <WhatsIncluded />
         <MoneyGuarantee />
         <UserReviews />
@@ -168,12 +170,7 @@ function HeroSection() {
         Get My Prediction
       </CTAButton>
 
-      <HStack justifyContent="center">
-        <Icon as={MdOutlineGroupAdd} color="gray.500" fontSize={"xl"} />
-        <Text fontWeight={"semibold"} color="gray.500">
-          776 people joined today
-        </Text>
-      </HStack>
+      <TodayUserCount />
     </Box>
   );
 }
@@ -230,6 +227,243 @@ function HowItWorks() {
         ))}
       </Stepper>
     </Box>
+  );
+}
+
+function FaceFeatures() {
+  const imgStyle = {
+    width: 200,
+    height: 200,
+  };
+
+  const features = [
+    {
+      color: "purple",
+      name: "Eyes",
+      description: (
+        <Text>
+          Eyes mirror your <Span color="purple.600">emotional state and inner thoughts</Span>
+        </Text>
+      ),
+      example: "Wide-set eyes indicate an open and trusting nature",
+      image: (
+        <StaticImage
+          src="../../images/features/eyes.png"
+          alt="face reading eyes"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    {
+      color: "pink",
+      name: "Nose",
+      description: (
+        <Text>
+          Nose shape reflects your approach to <Span color="pink.600">work and ambition</Span>
+        </Text>
+      ),
+      example: "A straight nose suggests a direct and focused personality",
+      image: (
+        <StaticImage
+          src="../../images/features/nose.png"
+          alt="face reading nose"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    {
+      color: "teal",
+      name: "Mouth",
+      description: (
+        <Text>
+          Mouth and lips show your <Span color="teal.600">relationships</Span>
+        </Text>
+      ),
+      example: "Full lips indicate a passionate and expressive character",
+      image: (
+        <StaticImage
+          src="../../images/features/mouth.png"
+          alt="face reading mouth"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    {
+      color: "blue",
+      name: "Forehead",
+      description: (
+        <Text>
+          Forehead shape indicates <Span color="blue.600">intellectual capacity</Span>
+        </Text>
+      ),
+      example: "A high forehead suggests a philosophical and analytical mind",
+      image: (
+        <StaticImage
+          src="../../images/features/forehead.png"
+          alt="face reading forehead"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    {
+      color: "orange",
+      name: "Eyebrows",
+      description: (
+        <Text>
+          Eyebrows reveal your <Span color="orange.600">self-expression</Span>
+        </Text>
+      ),
+      example: "Arched eyebrows show a quick-witted and observant nature",
+      image: (
+        <StaticImage
+          src="../../images/features/eyebrows.png"
+          alt="face reading eyebrows"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    {
+      color: "green",
+      name: "Cheekbones",
+      description: (
+        <Text>
+          Cheekbones reflect your <Span color="green.600">social influence</Span>
+        </Text>
+      ),
+      example: "Prominent cheekbones indicate charisma and natural authority",
+      image: (
+        <StaticImage
+          src="../../images/features/cheekbones.png"
+          alt="face reading cheekbones"
+          width={200}
+          height={200}
+          style={imgStyle}
+        />
+      ),
+    },
+    // {
+    //   name: "Chin",
+    //   description: "Chin structure shows determination and willpower",
+    //   example: "A strong, square chin suggests persistence and resilience",
+    // },
+    // {
+    //   name: "Ears",
+    //   description: "Ear shape and position relate to your intuition and listening skills",
+    //   example: "Large ears indicate heightened intuition and receptiveness",
+    // },
+    // {
+    //   name: "Facial proportions",
+    //   description: "Overall facial proportions reveal balance in your personality",
+    //   example: "Symmetrical features suggest inner harmony and stability",
+    // },
+    // {
+    //   name: "Facial lines",
+    //   description: "Lines on your face tell the story of your life experiences",
+    //   example: "Laugh lines around the eyes indicate a joyful and optimistic nature",
+    // },
+  ];
+
+  return (
+    <Container p={4} my={8} maxW={"container.lg"}>
+      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
+        What does your <Span color="brand.600">face</Span> reveal about you?
+      </Heading>
+
+      <Flex flexWrap={"wrap"} gap={6} justifyContent={"center"}>
+        {features.map((feature, idx) => {
+          return (
+            <Flex
+              key={idx}
+              p={4}
+              direction={"column"}
+              width={300}
+              textAlign={"center"}
+              alignItems={"center"}
+            >
+              <Text color={`${feature.color}.600`} fontSize={"lg"} fontWeight={"bold"} mb={4}>
+                {feature.name}
+              </Text>
+              <Flex direction={"column"} alignItems={"center"}>
+                <Card p={1} fontWeight={"semibold"} fontSize={"sm"} minH={50}>
+                  {feature.description}
+                </Card>
+                {feature.image}
+                <Box
+                  p={1}
+                  mx={4}
+                  bg={`${feature.color}.50`}
+                  color={`${feature.color}.600`}
+                  fontWeight={"semibold"}
+                  fontSize={"xs"}
+                  border={"1px solid"}
+                  borderColor={`${feature.color}.200`}
+                  borderRadius={"md"}
+                >
+                  <Text filter="blur(3px)">{feature.example}</Text>
+                  <Button
+                    width={"full"}
+                    colorScheme="brand"
+                    leftIcon={<Icon as={FaLockOpen} />}
+                    size="sm"
+                    mt={1}
+                    onClick={() => {
+                      trackPosthogEvent({
+                        name: "cta-click",
+                        properties: {
+                          section: "face-features",
+                        },
+                      });
+                      navigate("/face-reading/checkout");
+                    }}
+                  >
+                    Unlock
+                  </Button>
+                </Box>
+              </Flex>
+            </Flex>
+          );
+        })}
+      </Flex>
+
+      <Container
+        my={8}
+        gap={4}
+        textAlign={"center"}
+        as={Flex}
+        direction={"column"}
+        alignItems={"center"}
+      >
+        <Text fontSize={"md"} fontWeight={"semibold"}>
+          Find the real truth that is written on your face <br />{" "}
+          <Span color="brand.600">100% personalized to you</Span>
+        </Text>
+        <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
+          Unlock ALL your facial insights
+        </CTAButton>
+        <TodayUserCount />
+      </Container>
+    </Container>
+  );
+}
+
+function TodayUserCount() {
+  return (
+    <HStack justifyContent="center">
+      <Icon as={MdOutlineGroupAdd} color="gray.500" fontSize={"xl"} />
+      <Text fontWeight={"semibold"} color="gray.500">
+        776 people joined today
+      </Text>
+    </HStack>
   );
 }
 
