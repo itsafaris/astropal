@@ -46,7 +46,7 @@ export default function SummaryPage() {
     <Box>
       <TopNavigation />
 
-      <Container py={4} pb={20}>
+      <Box py={4} pb={20}>
         <HeroSection />
         <HowItWorks />
         <FaceFeatures />
@@ -55,14 +55,14 @@ export default function SummaryPage() {
         <UserReviews />
         <Footer />
         <CTABanner />
-      </Container>
+      </Box>
     </Box>
   );
 }
 
 function HeroSection() {
   return (
-    <Box>
+    <Container maxW={"container.md"}>
       <HStack justifyContent="space-between" mb={4}>
         <HStack>
           <Text fontSize="sm" fontWeight="bold" color="gray.600">
@@ -171,7 +171,7 @@ function HeroSection() {
       </CTAButton>
 
       <TodayUserCount />
-    </Box>
+    </Container>
   );
 }
 
@@ -200,7 +200,7 @@ function HowItWorks() {
   ];
 
   return (
-    <Box p={4} my={8}>
+    <Container p={4} my={8} maxW={"container.md"}>
       <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
         How does {meta.brandName} work?
       </Heading>
@@ -226,7 +226,7 @@ function HowItWorks() {
           </Step>
         ))}
       </Stepper>
-    </Box>
+    </Container>
   );
 }
 
@@ -469,7 +469,7 @@ function TodayUserCount() {
 
 function WhatsIncluded() {
   return (
-    <Box my={8}>
+    <Container my={8} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
         What's included?
       </Heading>
@@ -509,13 +509,13 @@ function WhatsIncluded() {
           <Span fontWeight={"bold"}>Daily horoscopes</Span>
         </Flex>
       </VStack>
-    </Box>
+    </Container>
   );
 }
 
 function MoneyGuarantee() {
   return (
-    <Box bg="green.50" p={3} textAlign={"center"}>
+    <Container bg="green.50" p={3} textAlign={"center"} maxW={"container.md"}>
       <Flex alignItems={"center"} color="green.600" mb={2} justifyContent={"center"} gap={2}>
         <Icon fontSize={"2xl"} as={MdVerified} />
         <Text fontSize={"lg"} fontWeight={"bold"}>
@@ -526,7 +526,7 @@ function MoneyGuarantee() {
         If you don't notice any progress after using the app for at least a week, we are ready to
         make a complete refund within 14 days.
       </Text>
-    </Box>
+    </Container>
   );
 }
 
@@ -554,7 +554,7 @@ function UserReviews() {
     },
   ];
   return (
-    <Box my={10}>
+    <Container my={10} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
         Why does everyone love <Span color="brand.600">{meta.brandName}</Span>?
       </Heading>
@@ -589,14 +589,14 @@ function UserReviews() {
           );
         })}
       </VStack>
-    </Box>
+    </Container>
   );
 }
 
 function Footer() {
   const meta = useSiteMetadata();
   return (
-    <Box textAlign={"center"} py={8}>
+    <Container textAlign={"center"} py={8} maxW={"container.md"}>
       <Text>Questions? We're here to help.</Text>
       <Flex gap={2} my={2}>
         <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
@@ -607,7 +607,7 @@ function Footer() {
         </Button>
       </Flex>
       <Text fontSize={"xs"}>©2024 {meta.brandName}. All rights reserved.</Text>
-    </Box>
+    </Container>
   );
 }
 
