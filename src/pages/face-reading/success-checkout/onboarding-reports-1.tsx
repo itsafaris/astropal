@@ -147,11 +147,6 @@ export default function OnboardingReports1() {
                 <SkipCard isSelected={selectedReportID === SKIP_CARD_ID} onSelect={handleSelect} />
               </Stack>
 
-              <Text my={3} color="gray.500" fontSize={"sm"}>
-                *You will be charged for the add-on services or products selected at the time of
-                purchase. This is non-recurring payment.
-              </Text>
-
               <Button
                 isLoading={request.state === "loading"}
                 size={"lg"}
@@ -164,6 +159,11 @@ export default function OnboardingReports1() {
                   {selectedReportID === "skip" ? "Continue" : "Get my copy"}{" "}
                 </Text>
               </Button>
+
+              <Text my={3} color="gray.500" fontSize={"sm"}>
+                *You will be charged for the add-on services or products selected at the time of
+                purchase. This is non-recurring payment.
+              </Text>
             </Stack>
           )}
         </Stack>

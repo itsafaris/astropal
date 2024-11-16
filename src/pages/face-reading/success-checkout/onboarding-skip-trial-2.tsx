@@ -1,7 +1,6 @@
 import { Box, Button, Container, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
 
-import { PiHandPalmLight } from "react-icons/pi";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
@@ -16,6 +15,7 @@ import React from "react";
 import { eden } from "@utils/coreApi";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { sessionCache } from "src/sessionCache";
+import { FaRegFaceSmileBeam } from "react-icons/fa6";
 
 export default function OnboardingSkipTrial2() {
   const { pricingPlans } = useGlobalState2();
@@ -91,7 +91,7 @@ export default function OnboardingSkipTrial2() {
                 <Stack mx="auto">
                   <Flex alignItems={"center"} gap={2}>
                     <Icon
-                      as={PiHandPalmLight}
+                      as={FaRegFaceSmileBeam}
                       color={"brand.500"}
                       backgroundColor={"brand.100"}
                       boxSize={9}
@@ -99,7 +99,7 @@ export default function OnboardingSkipTrial2() {
                       borderRadius={"md"}
                     />
                     <Text fontWeight={"semibold"} color={"brand.600"}>
-                      Unlimited palm readings
+                      Unlimited face readings
                     </Text>
                   </Flex>
 

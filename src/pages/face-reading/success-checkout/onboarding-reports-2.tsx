@@ -161,6 +161,11 @@ export default function OnboardingGuides2() {
                       Skip this offer and proceed further
                     </Text>
                   </Button>
+
+                  <Text my={3} color="gray.500" fontSize={"sm"}>
+                    *You will be charged for the add-on services or products selected at the time of
+                    purchase. This is non-recurring payment.
+                  </Text>
                 </Stack>
               </Stack>
             </Stack>
