@@ -21,7 +21,7 @@ export default function OnboardingReports1() {
   const [request, submit] = usePayment();
 
   React.useEffect(() => {
-    const id = reports[0].productID ?? undefined;
+    const id = reports[0]?.productID ?? undefined;
     setSelectedReportID(id);
   }, []);
 
