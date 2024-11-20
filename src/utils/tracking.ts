@@ -82,6 +82,7 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
     bootstrap: {
       featureFlags: {
         "summary-face-features-section": "control",
+        "paywall-after-summary": "control",
       },
     },
   });
