@@ -4,8 +4,7 @@ import {
   HStack,
   Text,
   Button,
-  Avatar,
-  AvatarGroup,
+  Image,
   Heading,
   Flex,
   Icon,
@@ -18,12 +17,12 @@ import {
   Card,
   Stack,
   Grid,
+  AspectRatio,
+  ButtonProps,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
 import { StaticImage } from "gatsby-plugin-image";
-import { CgInfinity } from "react-icons/cg";
-import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
+import { PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
 import { FaCheck, FaCircle, FaRegLightbulb, FaLock } from "react-icons/fa";
 import { TbFaceId } from "react-icons/tb";
@@ -42,6 +41,7 @@ import { keyframes } from "@emotion/react";
 import { FaInfinity } from "react-icons/fa6";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa6";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -67,7 +67,7 @@ export default function SummaryPage() {
       />
 
       <Box pb={10}>
-        <HeroSection2 />
+        <HeroSection />
         <MediaBanner />
         <HowItWorks />
         <FaceFeatures />
@@ -81,101 +81,258 @@ export default function SummaryPage() {
   );
 }
 
-function HeroSection2() {
+function HeroSection() {
   return (
     <Container maxW={"container.lg"} pt={[5, 10]} pb={[6, 14]}>
-      <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap={5}>
+      <Grid display={["none", "none", "grid"]} gridTemplateColumns={["1fr", "1fr 1fr"]} gap={5}>
         <Stack spacing={12}>
-          <Heading fontSize={["3xl", "5xl"]} fontWeight="bold" textAlign={["center", "left"]}>
-            Your Face Reading
-            <br />
-            <Text as="span" color="brand.500">
-              Is Ready!
-            </Text>
-          </Heading>
-
-          <Stack spacing={3}>
-            <Flex alignItems={"center"} gap={2}>
-              <Flex
-                justifyContent={"center"}
-                alignItems={"center"}
-                height={"40px"}
-                width={"40px"}
-                borderRadius={"md"}
-                backgroundColor={"brand.200"}
-                flexShrink={0}
-              >
-                <Icon as={FaInfinity} color={"brand.700"} boxSize={6} />
-              </Flex>
-
-              <Text>
-                <Text as="span" fontWeight={"bold"} color="brand.600">
-                  Unlimited
-                </Text>{" "}
-                insights for life transformation
-              </Text>
-            </Flex>
-
-            <Flex alignItems={"center"} gap={2}>
-              <Flex
-                justifyContent={"center"}
-                alignItems={"center"}
-                height={"40px"}
-                width={"40px"}
-                borderRadius={"md"}
-                backgroundColor={"brand.200"}
-                flexShrink={0}
-              >
-                <Icon as={MdOutlineGroupAdd} color={"brand.700"} boxSize={6} />
-              </Flex>
-
-              <Text>
-                <Text as="span" fontWeight={"bold"} color="brand.600">
-                  776
-                </Text>{" "}
-                people joined today
-              </Text>
-            </Flex>
-
-            <Flex alignItems={"center"} gap={2}>
-              <Flex
-                justifyContent={"center"}
-                alignItems={"center"}
-                height={"40px"}
-                width={"40px"}
-                borderRadius={"md"}
-                backgroundColor={"brand.200"}
-                flexShrink={0}
-              >
-                <Icon as={IoChatbubbleEllipsesOutline} color={"brand.700"} boxSize={6} />
-              </Flex>
-
-              <Stack spacing={0}>
-                <Text>
-                  Trusted by over{" "}
-                  <Text as="span" fontWeight={"bold"} color="brand.600">
-                    25 million
-                  </Text>{" "}
-                  people.
-                </Text>
-
-                <Flex alignItems={"center"} gap={1}>
-                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
-                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
-                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
-                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
-                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
-                </Flex>
-              </Stack>
-            </Flex>
-          </Stack>
-
-          <CTAButton py={6} fontSize={"lg"} trackingProps={{ section: "face-features" }} />
+          <HeroTitle />
+          <HeroFeatures />
+          <HeroCTA />
         </Stack>
 
-        <Box />
+        <HeroFaceReading />
       </Grid>
+
+      <Stack display={["flex", "flex", "none"]} pb={6} spacing={8}>
+        <HeroTitle />
+        <HeroFaceReading />
+        <HeroCTA width={"95%"} mx="auto" />
+        <HeroFeatures />
+      </Stack>
     </Container>
+  );
+}
+
+function HeroTitle() {
+  return (
+    <Heading fontSize={["3xl", "5xl"]} fontWeight="bold" textAlign={["center", "center", "left"]}>
+      Your Face Reading
+      <br />
+      <Text as="span" color="brand.500">
+        Is Ready!
+      </Text>
+    </Heading>
+  );
+}
+
+function HeroCTA(props: ButtonProps) {
+  return (
+    <CTAButton py={6} fontSize={"lg"} trackingProps={{ section: "face-features" }} {...props} />
+  );
+}
+
+function HeroFeatures() {
+  return (
+    <Stack spacing={3}>
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={FaInfinity} color={"brand.700"} boxSize={6} />
+        </Flex>
+
+        <Text>
+          <Text as="span" fontWeight={"bold"} color="brand.600">
+            Unlimited
+          </Text>{" "}
+          insights for life transformation
+        </Text>
+      </Flex>
+
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={MdOutlineGroupAdd} color={"brand.700"} boxSize={6} />
+        </Flex>
+
+        <Text>
+          <Text as="span" fontWeight={"bold"} color="brand.600">
+            776
+          </Text>{" "}
+          people joined today
+        </Text>
+      </Flex>
+
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={IoChatbubbleEllipsesOutline} color={"brand.700"} boxSize={6} />
+        </Flex>
+
+        <Stack spacing={0}>
+          <Text>
+            Trusted by over{" "}
+            <Text as="span" fontWeight={"bold"} color="brand.600">
+              25 million
+            </Text>{" "}
+            people.
+          </Text>
+
+          <Flex alignItems={"center"} gap={1}>
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+          </Flex>
+        </Stack>
+      </Flex>
+    </Stack>
+  );
+}
+
+function HeroFaceReading() {
+  const globalState = useGlobalState2();
+
+  return (
+    <Stack alignItems={"center"}>
+      <AspectRatio ratio={1} maxW={"200px"} width={"100%"}>
+        <Stack
+          justifyContent={"center"}
+          borderRadius={"xl"}
+          overflow={"hidden"}
+          backgroundColor={"gray.100"}
+          border="5px solid"
+          borderColor="gray.100"
+        >
+          {globalState.faceImageDataUrl ? (
+            <Image
+              src={globalState.faceImageDataUrl}
+              objectFit={"contain"}
+              maxWidth="100%"
+              maxHeight="100%"
+              borderRadius={"lg"}
+            />
+          ) : (
+            <StaticImage
+              alt=""
+              src={"../../images/default-user-face-image.jpg"}
+              width={300}
+              style={{
+                borderRadius: "8px",
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          )}
+        </Stack>
+      </AspectRatio>
+
+      <Stack
+        width={"300px"}
+        backgroundColor={"white"}
+        borderRadius={"xl"}
+        p={3}
+        boxShadow={"2xl"}
+        mt={-10}
+        zIndex={1}
+      >
+        <Stack spacing={0} position={"relative"}>
+          <Text mb={5} whiteSpace={"pre-wrap"} fontSize={"xs"}>
+            You possess a remarkable and harmonious blend of intellect and emotional intelligence
+            that sets you apart from others. Your warm and approachable nature
+            <Text as="span" filter="blur(2px)">
+              PageMaker including versions of Lorem Ipsum PageMaker including versions of Lorem
+              Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions of
+              Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions
+              of Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker including
+              versions of Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker
+              including versions of Lorem Ipsum PageMaker including versions of Lorem Ipsum
+              PageMaker including versions of Lorem Ipsum PageMaker including versions of Lorem
+              Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions of
+              Lorem Ipsum PageMaker including versions of Lorem Ipsum
+            </Text>
+          </Text>
+
+          <Stack
+            spacing={0}
+            position={"absolute"}
+            left={0}
+            bottom={0}
+            width={"100%"}
+            height={"90%"}
+          >
+            <Box
+              height={"100%"}
+              backgroundColor={"#ffffff85"}
+              backdropFilter="blur(5px)"
+              style={{
+                mask: "linear-gradient(transparent , white 60px)",
+              }}
+            />
+
+            <Stack
+              width={"full"}
+              px={3}
+              alignItems={"center"}
+              position={"absolute"}
+              bottom={0}
+              mb={8}
+            >
+              <Flex
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                gap={3}
+                width={"full"}
+                mb={4}
+              >
+                <Text fontSize={"lg"} lineHeight={1.3} fontWeight={"bold"}>
+                  Face Reading <br /> Accuracy:{" "}
+                </Text>
+
+                <Text fontSize={"3xl"} fontWeight={"black"} color={"green.500"}>
+                  97%
+                </Text>
+              </Flex>
+
+              <FaceReadingItem title="Personality" text="Prepared" />
+              <FaceReadingItem title="Love" text="Prepared" />
+              <FaceReadingItem title="Career" text="Prepared" />
+              <FaceReadingItem title="Special traits" text="Identified" />
+              <FaceReadingItem title="Negative traits" text="Identified" />
+            </Stack>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+}
+
+function FaceReadingItem({ title, text }: { title: string; text: string }) {
+  return (
+    <Grid width={"full"} gridTemplateColumns={"auto 1fr auto"} alignItems={"flex-end"}>
+      <Text fontWeight={"semibold"} fontSize={"sm"}>
+        {title}:
+      </Text>
+
+      <Flex borderBottom="2px dotted" borderColor={"gray.300"} mb={1} mx={2} />
+
+      <Text fontWeight={"semibold"} fontSize={"sm"} color={"green.500"}>
+        {text} <Icon as={FaCheck} />
+      </Text>
+    </Grid>
   );
 }
 
@@ -710,7 +867,7 @@ function CTAButton(props: ComponentProps<typeof Button>) {
         navigate("/face-reading/checkout");
       }}
     >
-      Get My Prediction
+      Get My Reading
     </Button>
   );
 }
