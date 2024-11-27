@@ -14,9 +14,9 @@ import {
   Stepper,
   StepIndicator,
   StepStatus,
-  StepDescription,
   StepSeparator,
   Card,
+  Stack,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
@@ -25,7 +25,6 @@ import { CgInfinity } from "react-icons/cg";
 import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
 import { FaCheck, FaCircle, FaLockOpen, FaRegLightbulb } from "react-icons/fa";
-import { BiSupport } from "react-icons/bi";
 import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
@@ -62,11 +61,9 @@ export default function SummaryPage() {
         ]}
       />
 
-      <Box pb={20}>
+      <Box pb={10}>
         <HeroSection />
-
         <MediaBanner />
-
         <HowItWorks />
         <FaceFeatures />
         <WhatsIncluded />
@@ -618,18 +615,30 @@ function UserReviews() {
 function Footer() {
   const meta = useSiteMetadata();
   return (
-    <Container textAlign={"center"} py={8} maxW={"container.md"}>
-      <Text>Questions? We're here to help.</Text>
-      <Flex gap={2} my={2}>
-        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
-          Customer Support
-        </Button>
-        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
-          Help Center
-        </Button>
-      </Flex>
-      <Text fontSize={"xs"}>©2024 {meta.brandName}. All rights reserved.</Text>
-    </Container>
+    <Box borderTop={"1px solid"} borderColor={"blackAlpha.200"}>
+      <Container textAlign={"center"} py={8} maxW={"container.md"}>
+        <Stack alignItems={"center"}>
+          <StaticImage
+            src={`../../images/intuvist-logo-black-h.png`}
+            alt="Intuvist logo"
+            height={35}
+          />
+
+          <Flex gap={2} my={2} mx={"auto"}>
+            <Button size={"sm"} as={Link} to="/contact-us" variant="text" color={"gray.500"}>
+              Customer Support
+            </Button>
+            <Button size={"sm"} as={Link} to="/contact-us" variant="text" color={"gray.500"}>
+              Help Center
+            </Button>
+          </Flex>
+
+          <Text fontSize={"xs"} color={"gray.500"}>
+            ©2024 {meta.brandName}. All rights reserved.
+          </Text>
+        </Stack>
+      </Container>
+    </Box>
   );
 }
 
