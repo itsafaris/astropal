@@ -37,6 +37,7 @@ import { trackPixelEvent, trackPosthogEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
 import { NewsBanner } from "@components/summary/NewsBanner";
 import { MediaBanner } from "@components/summary/MediaBanner";
+import { keyframes } from "@emotion/react";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -468,6 +469,7 @@ function FaceFeatures() {
             Find the real truth that is written on your face <br />{" "}
             <Span color="brand.600">100% personalized to you</Span>
           </Text>
+
           <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
             Unlock ALL your facial insights
           </CTAButton>
@@ -662,7 +664,7 @@ function CTABanner() {
   return (
     <Flex
       position={"fixed"}
-      width={"100%"}
+      width={"full"}
       left={0}
       bottom={showBanner ? 0 : "-100px"}
       zIndex={10}
@@ -671,31 +673,57 @@ function CTABanner() {
       borderTop={"2px solid"}
       borderColor={"brand.300"}
       p={1}
+      pt={2}
+      pb={3}
     >
-      <Container as={Flex} alignItems={"center"} justifyContent={"center"}>
-        <Box>
-          <Text as="span" fontWeight={"bold"} fontSize={"sm"} mr={2}>
-            Your personalized offer reserved
-          </Text>
-          <Timer />
-        </Box>
-        <CTAButton>Get my prediction</CTAButton>
+      <Container maxW="container.md">
+        <Flex
+          direction={["column", "column", "row"]}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gap={3}
+        >
+          <Flex alignItems={"center"} gap={4}>
+            <Text as="span" fontWeight={"bold"} fontSize={["sm", "sm", "md"]}>
+              Your Personalized Offer Reserved
+            </Text>
+
+            <Timer />
+          </Flex>
+
+          <CTAButton width={"full"} maxW={["100%", "250px"]}>
+            Get my prediction
+          </CTAButton>
+        </Flex>
       </Container>
     </Flex>
   );
 }
+
+const CTAPulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 function CTAButton(props: ComponentProps<typeof Button>) {
   return (
     <Button
       colorScheme="brand"
       flexShrink={0}
+      animation={`${CTAPulse} 3s infinite`}
       {...props}
       onClick={() => {
         navigate("/face-reading/checkout");
       }}
     >
-      Get my prediction
+      Get My Prediction
     </Button>
   );
 }

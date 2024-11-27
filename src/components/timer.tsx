@@ -49,17 +49,17 @@ export function Timer() {
       color="inherit"
     >
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text fontWeight="bold" fontSize={"lg"} lineHeight={1} textAlign={"center"}>
+        <Text fontWeight="bold" fontSize={"xl"} lineHeight={1} textAlign={"center"}>
           {readableTime.minutes}
         </Text>
       </Flex>
 
-      <Text fontWeight={"bold"} fontSize={"lg"} lineHeight={1}>
+      <Text fontWeight={"bold"} fontSize={"xl"} lineHeight={1}>
         :
       </Text>
 
       <Flex flexDirection="column" alignItems="center" justifyContent={"center"} gap={0}>
-        <Text fontWeight="bold" fontSize={"lg"} lineHeight={1} textAlign={"center"}>
+        <Text fontWeight="bold" fontSize={"xl"} lineHeight={1} textAlign={"center"}>
           {readableTime.seconds}
         </Text>
       </Flex>
