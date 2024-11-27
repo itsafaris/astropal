@@ -37,6 +37,7 @@ import React from "react";
 import { trackPixelEvent, trackPosthogEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
 import { NewsBanner } from "@components/summary/NewsBanner";
+import { MediaBanner } from "@components/summary/MediaBanner";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -61,8 +62,11 @@ export default function SummaryPage() {
         ]}
       />
 
-      <Box py={4} pb={20}>
+      <Box pb={20}>
         <HeroSection />
+
+        <MediaBanner />
+
         <HowItWorks />
         <FaceFeatures />
         <WhatsIncluded />
