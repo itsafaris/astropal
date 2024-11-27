@@ -219,8 +219,8 @@ function HowItWorks() {
   ];
 
   return (
-    <Container p={4} my={8} maxW={"container.md"}>
-      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
+    <Container p={4} my={8} maxW={"520px"}>
+      <Heading as="h2" fontSize="2xl" mb={8} textAlign="center">
         How does {meta.brandName} work?
       </Heading>
 
@@ -234,11 +234,14 @@ function HowItWorks() {
               />
             </StepIndicator>
 
-            <Box mb={6}>
-              <Text fontWeight={"bold"} fontSize={"lg"} color="brand.700">
+            <Box mb={8} ml={2}>
+              <Text fontWeight={"semibold"} fontSize={"lg"}>
                 {step.title}
               </Text>
-              <StepDescription>{step.description}</StepDescription>
+
+              <Text color={"gray.600"} fontSize={"sm"}>
+                {step.description}
+              </Text>
             </Box>
 
             <StepSeparator />
