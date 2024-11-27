@@ -17,6 +17,7 @@ import {
   StepSeparator,
   Card,
   Stack,
+  Grid,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
@@ -38,6 +39,9 @@ import { TopNavigation } from "@components/topnavigation";
 import { NewsBanner } from "@components/summary/NewsBanner";
 import { MediaBanner } from "@components/summary/MediaBanner";
 import { keyframes } from "@emotion/react";
+import { FaInfinity } from "react-icons/fa6";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { FaStar } from "react-icons/fa6";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -63,7 +67,7 @@ export default function SummaryPage() {
       />
 
       <Box pb={10}>
-        <HeroSection />
+        <HeroSection2 />
         <MediaBanner />
         <HowItWorks />
         <FaceFeatures />
@@ -74,6 +78,104 @@ export default function SummaryPage() {
         <CTABanner />
       </Box>
     </Box>
+  );
+}
+
+function HeroSection2() {
+  return (
+    <Container maxW={"container.lg"} pt={[5, 10]} pb={[6, 14]}>
+      <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gap={5}>
+        <Stack spacing={12}>
+          <Heading fontSize={["3xl", "5xl"]} fontWeight="bold" textAlign={["center", "left"]}>
+            Your Face Reading
+            <br />
+            <Text as="span" color="brand.500">
+              Is Ready!
+            </Text>
+          </Heading>
+
+          <Stack spacing={3}>
+            <Flex alignItems={"center"} gap={2}>
+              <Flex
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"40px"}
+                width={"40px"}
+                borderRadius={"md"}
+                backgroundColor={"brand.200"}
+                flexShrink={0}
+              >
+                <Icon as={FaInfinity} color={"brand.700"} boxSize={6} />
+              </Flex>
+
+              <Text>
+                <Text as="span" fontWeight={"bold"} color="brand.600">
+                  Unlimited
+                </Text>{" "}
+                insights for life transformation
+              </Text>
+            </Flex>
+
+            <Flex alignItems={"center"} gap={2}>
+              <Flex
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"40px"}
+                width={"40px"}
+                borderRadius={"md"}
+                backgroundColor={"brand.200"}
+                flexShrink={0}
+              >
+                <Icon as={MdOutlineGroupAdd} color={"brand.700"} boxSize={6} />
+              </Flex>
+
+              <Text>
+                <Text as="span" fontWeight={"bold"} color="brand.600">
+                  776
+                </Text>{" "}
+                people joined today
+              </Text>
+            </Flex>
+
+            <Flex alignItems={"center"} gap={2}>
+              <Flex
+                justifyContent={"center"}
+                alignItems={"center"}
+                height={"40px"}
+                width={"40px"}
+                borderRadius={"md"}
+                backgroundColor={"brand.200"}
+                flexShrink={0}
+              >
+                <Icon as={IoChatbubbleEllipsesOutline} color={"brand.700"} boxSize={6} />
+              </Flex>
+
+              <Stack spacing={0}>
+                <Text>
+                  Trusted by over{" "}
+                  <Text as="span" fontWeight={"bold"} color="brand.600">
+                    25 million
+                  </Text>{" "}
+                  people.
+                </Text>
+
+                <Flex alignItems={"center"} gap={1}>
+                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+                  <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+                </Flex>
+              </Stack>
+            </Flex>
+          </Stack>
+
+          <CTAButton py={6} fontSize={"lg"} trackingProps={{ section: "face-features" }} />
+        </Stack>
+
+        <Box />
+      </Grid>
+    </Container>
   );
 }
 
