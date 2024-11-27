@@ -24,7 +24,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { CgInfinity } from "react-icons/cg";
 import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
-import { FaCheck, FaCircle, FaLockOpen, FaRegLightbulb } from "react-icons/fa";
+import { FaCheck, FaCircle, FaRegLightbulb, FaLock } from "react-icons/fa";
 import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
@@ -218,7 +218,7 @@ function HowItWorks() {
   return (
     <Container p={4} my={8} maxW={"520px"}>
       <Heading as="h2" fontSize="2xl" mb={8} textAlign="center">
-        How does {meta.brandName} work?
+        How Does {meta.brandName} Work?
       </Heading>
 
       <Stepper index={2} orientation="vertical" gap={0} colorScheme="brand">
@@ -251,8 +251,8 @@ function HowItWorks() {
 
 function FaceFeatures() {
   const imgStyle = {
-    width: 200,
-    height: 200,
+    width: 170,
+    height: 170,
   };
 
   const features = [
@@ -261,7 +261,10 @@ function FaceFeatures() {
       name: "Eyes",
       description: (
         <Text>
-          Eyes mirror your <Span color="purple.600">emotional state and inner thoughts</Span>
+          Eyes mirror your{" "}
+          <Span fontWeight={"semibold"} color="purple.600">
+            emotional state and inner thoughts
+          </Span>
         </Text>
       ),
       example: "Wide-set eyes indicate an open and trusting nature",
@@ -269,8 +272,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/eyes.png"
           alt="face reading eyes"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -280,7 +283,10 @@ function FaceFeatures() {
       name: "Nose",
       description: (
         <Text>
-          Nose shape reflects your approach to <Span color="pink.600">work and ambition</Span>
+          Nose shape reflects your approach to{" "}
+          <Span fontWeight={"semibold"} color="pink.600">
+            work and ambition
+          </Span>
         </Text>
       ),
       example: "A straight nose suggests a direct and focused personality",
@@ -288,8 +294,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/nose.png"
           alt="face reading nose"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -299,7 +305,10 @@ function FaceFeatures() {
       name: "Mouth",
       description: (
         <Text>
-          Mouth and lips show your <Span color="teal.600">relationships</Span>
+          Mouth and lips show your{" "}
+          <Span fontWeight={"semibold"} color="teal.600">
+            relationships
+          </Span>
         </Text>
       ),
       example: "Full lips indicate a passionate and expressive character",
@@ -307,8 +316,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/mouth.png"
           alt="face reading mouth"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -318,7 +327,10 @@ function FaceFeatures() {
       name: "Forehead",
       description: (
         <Text>
-          Forehead shape indicates <Span color="blue.600">intellectual capacity</Span>
+          Forehead shape indicates{" "}
+          <Span fontWeight={"semibold"} color="blue.600">
+            intellectual capacity
+          </Span>
         </Text>
       ),
       example: "A high forehead suggests a philosophical and analytical mind",
@@ -326,8 +338,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/forehead.png"
           alt="face reading forehead"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -337,7 +349,10 @@ function FaceFeatures() {
       name: "Eyebrows",
       description: (
         <Text>
-          Eyebrows reveal your <Span color="orange.600">self-expression</Span>
+          Eyebrows reveal your{" "}
+          <Span fontWeight={"semibold"} color="orange.600">
+            self-expression
+          </Span>
         </Text>
       ),
       example: "Arched eyebrows show a quick-witted and observant nature",
@@ -345,8 +360,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/eyebrows.png"
           alt="face reading eyebrows"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -356,7 +371,10 @@ function FaceFeatures() {
       name: "Cheekbones",
       description: (
         <Text>
-          Cheekbones reflect your <Span color="green.600">social influence</Span>
+          Cheekbones reflect your{" "}
+          <Span fontWeight={"semibold"} color="green.600">
+            social influence
+          </Span>
         </Text>
       ),
       example: "Prominent cheekbones indicate charisma and natural authority",
@@ -364,114 +382,99 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/cheekbones.png"
           alt="face reading cheekbones"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
     },
-    // {
-    //   name: "Chin",
-    //   description: "Chin structure shows determination and willpower",
-    //   example: "A strong, square chin suggests persistence and resilience",
-    // },
-    // {
-    //   name: "Ears",
-    //   description: "Ear shape and position relate to your intuition and listening skills",
-    //   example: "Large ears indicate heightened intuition and receptiveness",
-    // },
-    // {
-    //   name: "Facial proportions",
-    //   description: "Overall facial proportions reveal balance in your personality",
-    //   example: "Symmetrical features suggest inner harmony and stability",
-    // },
-    // {
-    //   name: "Facial lines",
-    //   description: "Lines on your face tell the story of your life experiences",
-    //   example: "Laugh lines around the eyes indicate a joyful and optimistic nature",
-    // },
   ];
 
   return (
-    <Container p={4} my={8} maxW={"container.lg"}>
-      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
-        What does your <Span color="brand.600">face</Span> reveal about you?
-      </Heading>
+    <Box backgroundColor={"brand.50"} py={8}>
+      <Container p={4} maxW={"container.lg"}>
+        <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
+          What Does Your <Span color="brand.600">Face</Span> Reveal About You?
+        </Heading>
 
-      <Flex flexWrap={"wrap"} gap={6} justifyContent={"center"}>
-        {features.map((feature, idx) => {
-          return (
-            <Flex
-              key={idx}
-              p={4}
-              direction={"column"}
-              width={300}
-              textAlign={"center"}
-              alignItems={"center"}
-            >
-              <Text color={`${feature.color}.600`} fontSize={"lg"} fontWeight={"bold"} mb={4}>
-                {feature.name}
-              </Text>
-              <Flex direction={"column"} alignItems={"center"}>
-                <Card p={1} fontWeight={"semibold"} fontSize={"sm"} minH={50}>
-                  {feature.description}
-                </Card>
-                {feature.image}
-                <Box
-                  p={1}
-                  mx={4}
-                  bg={`${feature.color}.50`}
-                  color={`${feature.color}.600`}
-                  fontWeight={"semibold"}
-                  fontSize={"xs"}
-                  border={"1px solid"}
-                  borderColor={`${feature.color}.200`}
-                  borderRadius={"md"}
-                >
-                  <Text filter="blur(3px)">{feature.example}</Text>
-                  <Button
-                    width={"full"}
-                    colorScheme="brand"
-                    leftIcon={<Icon as={FaLockOpen} />}
-                    size="sm"
-                    mt={1}
-                    onClick={() => {
-                      trackPosthogEvent({
-                        name: "cta-click",
-                        properties: {
-                          section: "face-features",
-                        },
-                      });
-                      navigate("/face-reading/checkout");
-                    }}
+        <Flex flexWrap={"wrap"} justifyContent={"center"}>
+          {features.map((feature, idx) => {
+            return (
+              <Flex
+                key={idx}
+                p={4}
+                direction={"column"}
+                width={300}
+                textAlign={"center"}
+                alignItems={"center"}
+              >
+                <Text color={`${feature.color}.600`} fontSize={"lg"} fontWeight={"bold"} mb={4}>
+                  {feature.name}
+                </Text>
+
+                <Flex direction={"column"} alignItems={"center"}>
+                  <Card py={1} px={2} fontSize={"sm"} minH={50}>
+                    {feature.description}
+                  </Card>
+
+                  {feature.image}
+
+                  <Box
+                    p={1}
+                    mx={4}
+                    bg={`${feature.color}.50`}
+                    color={`${feature.color}.600`}
+                    fontWeight={"semibold"}
+                    fontSize={"xs"}
+                    border={"1px solid"}
+                    borderColor={`${feature.color}.200`}
+                    borderRadius={"md"}
                   >
-                    Unlock
-                  </Button>
-                </Box>
+                    <Text filter="blur(3px)">{feature.example}</Text>
+                    <Button
+                      width={"full"}
+                      colorScheme="brand"
+                      leftIcon={<Icon as={FaLock} />}
+                      size="sm"
+                      mt={1}
+                      onClick={() => {
+                        trackPosthogEvent({
+                          name: "cta-click",
+                          properties: {
+                            section: "face-features",
+                          },
+                        });
+                        navigate("/face-reading/checkout");
+                      }}
+                    >
+                      Unlock
+                    </Button>
+                  </Box>
+                </Flex>
               </Flex>
-            </Flex>
-          );
-        })}
-      </Flex>
+            );
+          })}
+        </Flex>
 
-      <Container
-        my={8}
-        gap={4}
-        textAlign={"center"}
-        as={Flex}
-        direction={"column"}
-        alignItems={"center"}
-      >
-        <Text fontSize={"md"} fontWeight={"semibold"}>
-          Find the real truth that is written on your face <br />{" "}
-          <Span color="brand.600">100% personalized to you</Span>
-        </Text>
-        <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
-          Unlock ALL your facial insights
-        </CTAButton>
-        <TodayUserCount />
+        <Container
+          mt={8}
+          gap={4}
+          textAlign={"center"}
+          as={Flex}
+          direction={"column"}
+          alignItems={"center"}
+        >
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            Find the real truth that is written on your face <br />{" "}
+            <Span color="brand.600">100% personalized to you</Span>
+          </Text>
+          <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
+            Unlock ALL your facial insights
+          </CTAButton>
+          <TodayUserCount />
+        </Container>
       </Container>
-    </Container>
+    </Box>
   );
 }
 
@@ -490,8 +493,9 @@ function WhatsIncluded() {
   return (
     <Container my={8} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
-        What's included?
+        What's Included?
       </Heading>
+
       <VStack
         spacing={4}
         alignItems={"start"}
@@ -575,7 +579,7 @@ function UserReviews() {
   return (
     <Container my={10} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
-        Why does everyone love <Span color="brand.600">{meta.brandName}</Span>?
+        Why Does Everyone Love <Span color="brand.600">{meta.brandName}</Span>?
       </Heading>
 
       <VStack spacing={8}>
