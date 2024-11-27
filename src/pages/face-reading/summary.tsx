@@ -36,6 +36,7 @@ import { ComponentProps, useEffect, useState } from "react";
 import React from "react";
 import { trackPixelEvent, trackPosthogEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
+import { NewsBanner } from "@components/summary/NewsBanner";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -45,6 +46,20 @@ export default function SummaryPage() {
   return (
     <Box>
       <TopNavigation />
+
+      <NewsBanner
+        items={[
+          { name: "Tom", text: "just discovered", highlightedText: "his hidden talents" },
+          { name: "Sophia", text: "just uncovered", highlightedText: "her health secrets" },
+          { name: "Luis", text: "just found out when", highlightedText: "he'll meet his soulmate" },
+          { name: "Anna", text: "just discovered", highlightedText: "how many kids she'll have" },
+          { name: "Mark", text: "just learned", highlightedText: "how long he'll live" },
+          { name: "Sarah", text: "just found out", highlightedText: "when she'll get married" },
+          { name: "James", text: "just unlocked", highlightedText: "his financial future" },
+          { name: "Emily", text: "just learned", highlightedText: "her career destiny" },
+          { name: "Ella", text: "just learned", highlightedText: "when she'll buy a home" },
+        ]}
+      />
 
       <Box py={4} pb={20}>
         <HeroSection />
