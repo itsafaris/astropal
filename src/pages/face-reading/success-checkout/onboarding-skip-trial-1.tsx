@@ -6,8 +6,7 @@ import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import React from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
-import { eden } from "@utils/coreApi";
-import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
+import { eden, TrialPricingPlan } from "@utils/coreApi";
 import { sessionCache } from "src/sessionCache";
 import {
   gaTrackPaidTrialPurchaseConversion,
@@ -32,9 +31,18 @@ export type RequestType =
     };
 
 export default function OnboardingSkipTrial1() {
-  const { pricingPlans } = useGlobalState2();
-  const monthlyPlan = pricingPlans[0];
-  const [request, submit] = usePayment(monthlyPlan);
+  const { trialPricingPlan: plan } = useGlobalState2();
+
+  if (!plan) {
+    console.error("missing trial pricing plan");
+    return null;
+  }
+
+  return <Content plan={plan} />;
+}
+
+function Content({ plan }: { plan: TrialPricingPlan }) {
+  const [request, submit] = usePayment(plan);
 
   React.useEffect(() => {
     const hasPurchasedTrial = sessionCache.hasPurchasedTrial();
@@ -159,11 +167,12 @@ export default function OnboardingSkipTrial1() {
               </Text>
 
               <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>
-                <Card onSelect={handleSkip} />
-
-                {monthlyPlan && (
-                  <CardSpecial onSelect={handlePurchase} isLoading={request.state === "loading"} />
-                )}
+                <Plan plan={plan} onSelect={handleSkip} />
+                <PlanSkipTrial
+                  plan={plan}
+                  onSelect={handlePurchase}
+                  isLoading={request.state === "loading"}
+                />
               </Grid>
             </Stack>
           )}
@@ -173,7 +182,9 @@ export default function OnboardingSkipTrial1() {
   );
 }
 
-function Card({ onSelect }: { onSelect: () => void }) {
+function Plan({ plan, onSelect }: { plan: TrialPricingPlan; onSelect: () => void }) {
+  const amount = plan.recurring.unit_amount;
+
   return (
     <Stack
       p={3}
@@ -182,10 +193,10 @@ function Card({ onSelect }: { onSelect: () => void }) {
       borderColor={"gray.300"}
       borderRadius={"xl"}
       spacing={3}
-      fontSize={["sm", "md"]}
+      fontSize={"sm"}
     >
       <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
-        $19 per week
+        ${(amount / 7 / 100).toFixed(2)} / day
       </Text>
 
       <Stack spacing={0}>
@@ -195,61 +206,68 @@ function Card({ onSelect }: { onSelect: () => void }) {
 
       <Stack spacing={0}>
         <Text>Billed amount</Text>
-        <Text color="gray.500">$19</Text>
-      </Stack>
-
-      <Stack spacing={0}>
-        <Text>Billed in 4 weeks</Text>
-        <Text color="gray.500">$76</Text>
+        <Text color="gray.500">${(amount / 100).toFixed(2)}</Text>
       </Stack>
 
       <Button size={"lg"} py={7} onClick={onSelect}>
-        <Text fontSize={["sm", "md"]}>Start trial</Text>
+        <Text fontSize={"sm"}>Start trial</Text>
       </Button>
     </Stack>
   );
 }
 
-function CardSpecial({ onSelect, isLoading }: { onSelect: () => void; isLoading: boolean }) {
+function PlanSkipTrial({
+  plan,
+  onSelect,
+  isLoading,
+}: {
+  plan: TrialPricingPlan;
+  onSelect: () => void;
+  isLoading: boolean;
+}) {
+  let amount = plan.recurring.unit_amount;
+  let discount = 0;
+
+  if (plan.recurring.coupon) {
+    const newAmount = plan.recurring.unit_amount - plan.recurring.coupon.amount_off;
+
+    discount = 100 - (newAmount / amount) * 100;
+    amount = newAmount;
+  }
+
   return (
     <Stack
       border={"2px solid"}
-      borderColor={"brand.500"}
+      borderColor={"yellow.400"}
       borderRadius={"xl"}
       spacing={0}
-      fontSize={["sm", "md"]}
+      fontSize={"sm"}
       overflow={"hidden"}
     >
-      <Box backgroundColor={"brand.500"} py={3}>
-        <Text textAlign={"center"} color={"white"} fontWeight={"semibold"}>
+      <Box backgroundColor={"yellow.400"} py={3}>
+        <Text textAlign={"center"} color={"yellow.900"} fontWeight={"bold"}>
           BEST VALUE 🎉
         </Text>
       </Box>
 
       <Stack p={3} pt={5} spacing={3}>
         <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
-          $2.46 per day
+          ${((amount / 7 - 1) / 100).toFixed(2)} / day
         </Text>
 
         <Stack spacing={0}>
           <Text>Billing period</Text>
-          <Text color="gray.500">Every 4 weeks</Text>
+          <Text color="gray.500">Every week</Text>
         </Stack>
 
         <Stack spacing={0}>
           <Text>Billed amount</Text>
-          <Text color="gray.500">$69</Text>
+          <Text color="gray.500">${(amount / 100).toFixed(2)}</Text>
         </Stack>
 
-        <Stack spacing={0}>
-          <Text>Billed in 4 weeks</Text>
-          <Text color="gray.500">$69</Text>
-        </Stack>
-
-        <Button isLoading={isLoading} size={"lg"} py={7} colorScheme="brand" onClick={onSelect}>
-          <Text fontSize={["sm", "md"]}>
-            Skip trial <br />
-            and accept offer
+        <Button isLoading={isLoading} size={"lg"} py={7} colorScheme="yellow" onClick={onSelect}>
+          <Text fontSize="sm">
+            Skip Trial <br /> (Save {discount.toFixed(0)}%)
           </Text>
         </Button>
       </Stack>
@@ -257,7 +275,7 @@ function CardSpecial({ onSelect, isLoading }: { onSelect: () => void; isLoading:
   );
 }
 
-function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] {
+function usePayment(plan: TrialPricingPlan): [RequestType, () => Promise<void>] {
   const { userProfile } = useGlobalState2();
   const stripe = useStripe();
 
@@ -266,7 +284,7 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
   });
 
   async function submit() {
-    if (!userProfile || !plan || !stripe) {
+    if (!userProfile || !stripe) {
       console.warn("data missing for subscription setup");
       return;
     }
@@ -282,7 +300,8 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
         method: "POST",
         body: {
           userID: userProfile.id,
-          priceID: plan.priceID,
+          priceID: plan.recurring.priceID,
+          couponID: plan.recurring.coupon?.id,
         },
       });
 
@@ -315,10 +334,10 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
         name: "purchase",
         properties: {
           currency: urlParams.currency ?? undefined,
-          value: plan.unit_amount / 100,
+          value: plan.recurring.unit_amount / 100,
           paymentType: urlParams.paymentType ?? undefined,
           contentType: "subscription",
-          contentIDs: [plan.priceID],
+          contentIDs: [plan.recurring.priceID],
         },
       });
 

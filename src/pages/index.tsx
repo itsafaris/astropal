@@ -28,8 +28,8 @@ export default function HomePage() {
         <Header />
         <Hero />
         <Features />
-        {/* <TrustedCompanies />
-        <Ratings /> */}
+        <TrustedCompanies />
+        <Ratings />
         <AppShowcase />
         <Footer />
       </VStack>

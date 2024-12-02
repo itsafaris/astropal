@@ -7,20 +7,28 @@ import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
 import { navigate } from "gatsby";
 import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
-import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { useStripe } from "@stripe/react-stripe-js";
 import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
 import React from "react";
-import { eden } from "@utils/coreApi";
+import { eden, TrialPricingPlan } from "@utils/coreApi";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { sessionCache } from "src/sessionCache";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 
 export default function OnboardingSkipTrial2() {
-  const { pricingPlans } = useGlobalState2();
-  const monthlyPlan = pricingPlans[0];
-  const [request, submit] = usePayment(monthlyPlan);
+  const { trialPricingPlan: plan } = useGlobalState2();
+
+  if (!plan) {
+    console.error("missing trial pricing plan");
+    return null;
+  }
+
+  return <Content plan={plan} />;
+}
+
+function Content({ plan }: { plan: TrialPricingPlan }) {
+  const [request, submit] = usePayment(plan);
 
   async function handlePurchase() {
     await submit();
@@ -151,7 +159,7 @@ export default function OnboardingSkipTrial2() {
                 <Box height={"2px"} width={"full"} backgroundColor={"gray.200"} />
 
                 <Text fontSize={"sm"} color={"orange.500"}>
-                  Are you sure you don't want to save $84 per year?
+                  Are you sure you don't want to save $240 per year?
                 </Text>
 
                 <Flex mx={"auto"} gap={2} alignItems={"center"} width={"full"}>
@@ -194,7 +202,7 @@ export type RequestType =
       error: string;
     };
 
-function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] {
+function usePayment(plan: TrialPricingPlan): [RequestType, () => Promise<void>] {
   const { userProfile } = useGlobalState2();
   const stripe = useStripe();
 
@@ -203,7 +211,7 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
   });
 
   async function submit() {
-    if (!userProfile || !plan || !stripe) {
+    if (!userProfile || !stripe) {
       console.warn("data missing for subscription setup");
       return;
     }
@@ -219,7 +227,8 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
         method: "POST",
         body: {
           userID: userProfile.id,
-          priceID: plan.priceID,
+          priceID: plan.recurring.priceID,
+          couponID: plan.recurring.coupon?.id,
         },
       });
 
@@ -252,10 +261,10 @@ function usePayment(plan?: OneTimeFeePrice): [RequestType, () => Promise<void>] 
         name: "purchase",
         properties: {
           currency: urlParams.currency ?? undefined,
-          value: plan.unit_amount / 100,
+          value: plan.recurring.unit_amount / 100,
           paymentType: urlParams.paymentType ?? undefined,
           contentType: "subscription",
-          contentIDs: [plan.priceID],
+          contentIDs: [plan.recurring.priceID],
         },
       });
 
