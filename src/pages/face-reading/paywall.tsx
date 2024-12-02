@@ -61,7 +61,7 @@ export default function PaywallPage(props: IPaywallPageProps) {
             const hasBadge = arr.length - 1 === idx;
 
             return (
-              <Stack spacing={0}>
+              <Stack spacing={0} key={price.priceID}>
                 {hasBadge && (
                   <Text
                     fontSize={"xs"}
@@ -74,7 +74,6 @@ export default function PaywallPage(props: IPaywallPageProps) {
                 )}
 
                 <Button
-                  key={price.priceID}
                   py={6}
                   px={0}
                   variant={"solid"}

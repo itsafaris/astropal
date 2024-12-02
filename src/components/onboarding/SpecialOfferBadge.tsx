@@ -11,7 +11,7 @@ export function SpecialOfferBadge({
 }) {
   return (
     <Flex
-      backgroundColor="blue.100"
+      backgroundColor="brand.100"
       px={3}
       py={3}
       gap={2}
