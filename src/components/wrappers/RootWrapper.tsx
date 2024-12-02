@@ -99,6 +99,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   React.useEffect(() => {
     getTrialPricingPlan()
       .then((res) => {
+        console.log(res);
         const ordered = orderBy(res.oneTimeFee, (it) => it.unit_amount);
         setTypedGlobalState((s) => ({
           ...s,
