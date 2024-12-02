@@ -30,23 +30,27 @@ export type RequestType =
       error: string;
     };
 
-export default function OnboardingSkipTrial1() {
-  const { trialPricingPlan: plan } = useGlobalState2();
+export default function Page() {
+  const { trialPricingPlan } = useGlobalState2();
 
-  if (!plan) {
+  if (!trialPricingPlan) {
     console.error("missing trial pricing plan");
     return null;
   }
 
-  return <Content plan={plan} />;
+  return <PageContent plan={trialPricingPlan} />;
 }
 
-function Content({ plan }: { plan: TrialPricingPlan }) {
+function PageContent({ plan }: { plan: TrialPricingPlan }) {
   const [request, submit] = usePayment(plan);
+  const [hasPurchasedSubscription, setHasPurchasedSubscription] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setHasPurchasedSubscription(sessionCache.hasPurchasedSubscription());
+  }, []);
 
   React.useEffect(() => {
     const hasPurchasedTrial = sessionCache.hasPurchasedTrial();
-
     const urlParams = parseURLParams<{
       pricePaid: number;
       currency: string;
@@ -88,7 +92,7 @@ function Content({ plan }: { plan: TrialPricingPlan }) {
     }
   }, []);
 
-  function handleSkip() {
+  function handleStartTrial() {
     const urlParams = parseURLParams<{
       currency: string;
       paymentType: string;
@@ -102,11 +106,15 @@ function Content({ plan }: { plan: TrialPricingPlan }) {
     navigate(url);
   }
 
-  async function handlePurchase() {
+  async function handleStartSubscription() {
     await submit();
 
     sessionCache.setPurchasedSubscription();
 
+    navigateToNextStep();
+  }
+
+  function navigateToNextStep() {
     const urlParams = parseURLParams<{
       currency: string;
       paymentType: string;
@@ -128,57 +136,60 @@ function Content({ plan }: { plan: TrialPricingPlan }) {
         <Stack textAlign={"center"} spacing={6}>
           <SpecialOfferSteps activeStepIdx={1} />
 
-          {sessionCache.hasPurchasedSubscription() ? (
-            <Stack spacing={5}>
-              <Text fontSize={"xl"} fontWeight={"bold"}>
-                🥰 You have successfully purchased the subscription
-              </Text>
-
-              <Button
-                size={"lg"}
-                py={7}
-                colorScheme="brand"
-                onClick={() => {
-                  const urlParams = parseURLParams<{
-                    currency: string;
-                    paymentType: string;
-                  }>(window.location.href);
-
-                  const url = createInternalURL(
-                    "/face-reading/success-checkout/onboarding-reports-1",
-                    {
-                      paymentType: urlParams.paymentType,
-                      currency: urlParams.currency,
-                    }
-                  );
-
-                  navigate(url);
-                }}
-              >
-                <Text fontSize={["sm", "md"]}>Continue</Text>
-              </Button>
-            </Stack>
+          {hasPurchasedSubscription ? (
+            <StepCompletedView onContinue={navigateToNextStep} />
           ) : (
-            <Stack spacing={5}>
-              <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
-
-              <Text fontSize={"xl"} fontWeight={"bold"}>
-                Not planning on looking back?
-              </Text>
-
-              <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>
-                <Plan plan={plan} onSelect={handleSkip} />
-                <PlanSkipTrial
-                  plan={plan}
-                  onSelect={handlePurchase}
-                  isLoading={request.state === "loading"}
-                />
-              </Grid>
-            </Stack>
+            <StepIncompletedView
+              plan={plan}
+              onStartTrial={handleStartTrial}
+              onStartSubscription={handleStartSubscription}
+              isPaymentLoading={request.state === "loading"}
+            />
           )}
         </Stack>
       </Container>
     </Box>
+  );
+}
+
+function StepCompletedView({ onContinue }: { onContinue: () => void }) {
+  return (
+    <Stack spacing={5}>
+      <Text fontSize={"xl"} fontWeight={"bold"}>
+        🥰 You have successfully purchased the subscription
+      </Text>
+
+      <Button size={"lg"} py={7} colorScheme="brand" onClick={onContinue}>
+        <Text fontSize={["sm", "md"]}>Continue</Text>
+      </Button>
+    </Stack>
+  );
+}
+
+function StepIncompletedView({
+  plan,
+  onStartTrial,
+  onStartSubscription,
+  isPaymentLoading,
+}: {
+  plan: TrialPricingPlan;
+  onStartTrial: () => void;
+  onStartSubscription: () => void;
+  isPaymentLoading: boolean;
+}) {
+  return (
+    <Stack spacing={5}>
+      <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
+
+      <Text fontSize={"xl"} fontWeight={"bold"}>
+        Not planning on looking back?
+      </Text>
+
+      <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>
+        <Plan plan={plan} onSelect={onStartTrial} />
+        <PlanSkipTrial plan={plan} onSelect={onStartSubscription} isLoading={isPaymentLoading} />
+      </Grid>
+    </Stack>
   );
 }
 
