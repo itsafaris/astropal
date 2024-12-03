@@ -16,6 +16,7 @@ import {
 } from "@utils/tracking";
 import { useStripe } from "@stripe/react-stripe-js";
 import { sessionCache } from "src/sessionCache";
+import { keyframes } from "@emotion/react";
 
 export type RequestType =
   | {
@@ -234,9 +235,11 @@ function StepIncompletedView({
         colorScheme="yellow"
         flexGrow={1}
         onClick={handleCTAClick}
+        animation={selectedReportID === "skip" ? undefined : `${CTAPulse} 1.2s infinite`}
+        mt={3}
       >
-        <Text fontSize={["sm", "md"]}>
-          {selectedReportID === "skip" ? "Continue" : "Get My Report"}{" "}
+        <Text fontSize={["md", "md"]}>
+          {selectedReportID === "skip" ? "Continue" : "Get My Report"}
         </Text>
       </Button>
 
@@ -247,6 +250,18 @@ function StepIncompletedView({
     </Stack>
   );
 }
+
+const CTAPulse = keyframes`
+  0% {
+    box-shadow: 0px 0px 0px 0px var(--chakra-colors-yellow-200);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 12px var(--chakra-colors-yellow-200);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 12px transparent;
+  }
+`;
 
 function ReportCard({
   isSelected,
