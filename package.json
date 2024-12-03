@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@astrodraw/astrochart": "^3.0.2",
-    "@astropal/api-client": "^2.5.0",
+    "@astropal/api-client": "^2.6.0",
     "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/react": "^2.8.0",
     "@elysiajs/eden": "^1.1.2",

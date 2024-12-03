@@ -67,7 +67,7 @@ export default function Page() {
       paymentType: string;
     }>(window.location.href);
 
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-time", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
