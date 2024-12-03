@@ -58,7 +58,17 @@ export default function Page() {
 
     sessionCache.setPurchasedReport();
 
-    navigateToNextStep();
+    const urlParams = parseURLParams<{
+      currency: string;
+      paymentType: string;
+    }>(window.location.href);
+
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-location", {
+      paymentType: urlParams.paymentType,
+      currency: urlParams.currency,
+    });
+
+    navigate(url);
   }
 
   function navigateToNextStep() {
