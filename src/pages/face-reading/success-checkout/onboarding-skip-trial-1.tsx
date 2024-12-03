@@ -164,16 +164,16 @@ function Plan({ plan, onSelect }: { plan: TrialPricingPlan; onSelect: () => void
       fontSize={"sm"}
     >
       <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
-        ${(amount / 7 / 100).toFixed(2)} / day
+        ${(amount / 100).toFixed(0)} per week
       </Text>
 
       <Stack spacing={0}>
-        <Text>Billing period</Text>
+        <Text>• Billing period:</Text>
         <Text color="gray.500">Every week</Text>
       </Stack>
 
       <Stack spacing={0}>
-        <Text>Billed amount</Text>
+        <Text>• Billed amount:</Text>
         <Text color="gray.500">${(amount / 100).toFixed(2)}</Text>
       </Stack>
 
@@ -193,14 +193,11 @@ function PlanSkipTrial({
   onSelect: () => void;
   isLoading: boolean;
 }) {
-  let amount = plan.recurring.unit_amount;
-  let discount = 0;
+  const amountOld = plan.recurring.unit_amount;
+  let amountNew = amountOld;
 
   if (plan.recurring.coupon) {
-    const newAmount = plan.recurring.unit_amount - plan.recurring.coupon.amount_off;
-
-    discount = 100 - (newAmount / amount) * 100;
-    amount = newAmount;
+    amountNew = amountOld - plan.recurring.coupon.amount_off;
   }
 
   return (
@@ -219,23 +216,29 @@ function PlanSkipTrial({
       </Box>
 
       <Stack p={3} pt={5} spacing={3}>
-        <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
-          ${((amount / 7 - 1) / 100).toFixed(2)} / day
-        </Text>
+        <Stack alignItems={"center"} spacing={0}>
+          <Text fontSize={["sm"]} color={"red"} textDecoration={"line-through"}>
+            ${(amountOld / 7 / 100).toFixed(2)} / day
+          </Text>
+
+          <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
+            ${((amountNew / 7 - 1) / 100).toFixed(2)} / day
+          </Text>
+        </Stack>
 
         <Stack spacing={0}>
-          <Text>Billing period</Text>
+          <Text>• Billing period:</Text>
           <Text color="gray.500">Every week</Text>
         </Stack>
 
         <Stack spacing={0}>
-          <Text>Billed amount</Text>
-          <Text color="gray.500">${(amount / 100).toFixed(2)}</Text>
+          <Text>• Billed amount:</Text>
+          <Text color="gray.500">${(amountNew / 100).toFixed(2)}</Text>
         </Stack>
 
         <Button isLoading={isLoading} size={"lg"} py={7} colorScheme="yellow" onClick={onSelect}>
           <Text fontSize="sm">
-            Skip Trial <br /> (Save {discount.toFixed(0)}%)
+            Skip Trial <br /> And Accept Offer
           </Text>
         </Button>
       </Stack>
