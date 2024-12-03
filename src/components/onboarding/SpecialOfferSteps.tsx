@@ -12,7 +12,7 @@ import {
   Progress,
 } from "@chakra-ui/react";
 
-const steps = [{ title: "Skip Trial" }, { title: "Add Guides" }, { title: "Access Product" }];
+const steps = [{ title: "Add Reports" }, { title: "Skip Trial" }, { title: "Access Product" }];
 
 export function SpecialOfferSteps({ activeStepIdx = 1 }: { activeStepIdx?: number }) {
   const { activeStep } = useSteps({

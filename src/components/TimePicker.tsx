@@ -32,6 +32,10 @@ const DEFAULT_TIME = { hour: 12, minute: 0, meridiem: "am" as const };
 export function TimePicker({ onSelect }: { onSelect: (time: Time) => void }) {
   const [time, setTime] = React.useState<Time>(DEFAULT_TIME);
 
+  React.useEffect(() => {
+    onSelect(time);
+  }, [time]);
+
   const handleSelect = (value: string, part: "hour" | "minute" | "meridiem") => {
     const v = part === "meridiem" ? value : parseInt(value);
     const next: Time = {
@@ -41,7 +45,6 @@ export function TimePicker({ onSelect }: { onSelect: (time: Time) => void }) {
     };
 
     setTime(next);
-    onSelect(next);
   };
 
   return (

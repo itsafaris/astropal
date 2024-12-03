@@ -8,11 +8,7 @@ import { useStripe } from "@stripe/react-stripe-js";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { eden, TrialPricingPlan } from "@utils/coreApi";
 import { sessionCache } from "src/sessionCache";
-import {
-  gaTrackPaidTrialPurchaseConversion,
-  trackPixelEvent,
-  trackPosthogPurchaseEvent,
-} from "@utils/tracking";
+import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
 
 export type RequestType =
@@ -49,49 +45,6 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
     setHasPurchasedSubscription(sessionCache.hasPurchasedSubscription());
   }, []);
 
-  React.useEffect(() => {
-    const hasPurchasedTrial = sessionCache.hasPurchasedTrial();
-    const urlParams = parseURLParams<{
-      pricePaid: number;
-      currency: string;
-      paymentType: string;
-      planID: string;
-    }>(window.location.href);
-
-    if (!hasPurchasedTrial) {
-      const pricePaid = (urlParams.pricePaid ?? 0) / 100;
-
-      trackPixelEvent("Purchase", {
-        currency: urlParams.currency,
-        value: pricePaid,
-        paymentType: urlParams.paymentType,
-        planID: urlParams.planID,
-      });
-
-      gaTrackPaidTrialPurchaseConversion({
-        value: pricePaid,
-        currency: urlParams.currency ?? "",
-      });
-
-      trackPosthogPurchaseEvent({
-        name: "purchase",
-        properties: {
-          currency: urlParams.currency ?? undefined,
-          value: pricePaid,
-          paymentType: urlParams.paymentType ?? undefined,
-          contentType: "trial",
-          contentIDs: [urlParams.planID ?? ""],
-        },
-      });
-
-      // There's a piece of code in the gatsby-browser file that tracks routes of the `face-reading` funnel
-      // and automatically redirects users if it detects that they have purchased the product.
-      // In this case, the purchase status is set to true before that route check occurs.
-      // We want the opposite behavior to avoid automatic redirection when a user visits this page for the first time after a successful purchase.
-      setTimeout(sessionCache.setPurchasedTrial, 0);
-    }
-  }, []);
-
   function handleStartTrial() {
     const urlParams = parseURLParams<{
       currency: string;
@@ -120,7 +73,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
       paymentType: string;
     }>(window.location.href);
 
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-1", {
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
@@ -134,7 +87,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
 
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
+          <SpecialOfferSteps activeStepIdx={2} />
 
           {hasPurchasedSubscription ? (
             <StepCompletedView onContinue={navigateToNextStep} />
@@ -179,7 +132,11 @@ function StepIncompletedView({
 }) {
   return (
     <Stack spacing={5}>
-      <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
+      <SpecialOfferBadge
+        icon="📣"
+        title="Caution!"
+        text="To prevent double charges please don't close the page and don't go back."
+      />
 
       <Text fontSize={"xl"} fontWeight={"bold"}>
         Not planning on looking back?
