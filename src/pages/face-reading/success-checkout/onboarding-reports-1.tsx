@@ -302,7 +302,7 @@ function ReportCard({
       <Stack spacing={0} alignItems={"flex-start"} flexGrow={1}>
         <Text
           textTransform={"uppercase"}
-          fontSize={["xs", "sm"]}
+          fontSize={"sm"}
           fontWeight={"bold"}
           color={"black"}
           textAlign={"left"}
@@ -321,7 +321,7 @@ function ReportCard({
         )}
 
         <Grid alignItems={"center"} gridTemplateColumns={"1fr 1fr"} gap={2} mt={1}>
-          <Stack alignItems={"flex-start"} spacing={0} width={"100px"}>
+          <Flex alignItems={"center"} gap={1} width={["105px", "120px"]}>
             <Text
               fontSize={["xs", "sm"]}
               color={"gray.600"}
@@ -332,22 +332,22 @@ function ReportCard({
             </Text>
 
             {report.unit_amount_before && (
-              <Text fontSize={"xs"} color={"gray.600"}>
-                (was{" "}
+              <Text fontSize={["xs", "sm"]} color={"gray.600"}>
+                (
                 <Text as="span" textDecoration={"line-through"}>
                   ${(report.unit_amount_before / 100).toFixed(2)}
                 </Text>
                 )
               </Text>
             )}
-          </Stack>
+          </Flex>
 
           <Text
             fontSize={"sm"}
             fontWeight={"semibold"}
             color={"white"}
             backgroundColor={"red.300"}
-            px={2}
+            px={1}
             py={1}
             borderRadius={"lg"}
           >
@@ -399,7 +399,7 @@ function SkipCard({
       <Stack spacing={0} alignItems={"flex-start"} flexGrow={1}>
         <Text
           textTransform={"uppercase"}
-          fontSize={["xs", "sm"]}
+          fontSize={"sm"}
           fontWeight={"bold"}
           color={"black"}
           textAlign={"left"}
@@ -408,7 +408,7 @@ function SkipCard({
         </Text>
 
         <Flex alignItems={"center"} gap={2} fontWeight={"semibold"} mt={1}>
-          <Flex alignItems={"center"} gap={1} fontWeight={"semibold"} width={"100px"}>
+          <Flex alignItems={"center"} gap={1} fontWeight={"semibold"} width={["105px", "120px"]}>
             <Text fontSize={["xs", "sm"]} color={"gray.600"} textAlign={"left"}>
               You are missing out on all reports
             </Text>
