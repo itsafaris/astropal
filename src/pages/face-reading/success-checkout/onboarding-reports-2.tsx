@@ -11,6 +11,7 @@ import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { eden, Reports } from "@utils/coreApi";
 import { useStripe } from "@stripe/react-stripe-js";
 import { sessionCache } from "src/sessionCache";
+import { keyframes } from "@emotion/react";
 
 export type RequestType =
   | {
@@ -211,8 +212,9 @@ function StepIncompletedView({
             width={"full"}
             onClick={onPurchase}
             isLoading={isPaymentLoading}
+            animation={`${CTAPulse} 1.2s infinite`}
           >
-            <Text fontSize={["sm", "md"]}>Get Extra Reports 🎉</Text>
+            <Text fontSize={["md"]}>Get Extra Reports 🎉</Text>
           </Button>
 
           <Button
@@ -237,6 +239,18 @@ function StepIncompletedView({
     </Stack>
   );
 }
+
+const CTAPulse = keyframes`
+  0% {
+    box-shadow: 0px 0px 0px 0px var(--chakra-colors-yellow-200);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 12px var(--chakra-colors-yellow-200);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 12px transparent;
+  }
+`;
 
 function usePayment(): [RequestType, (report: Reports[0]) => Promise<void>] {
   const { userProfile } = useGlobalState2();
