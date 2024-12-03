@@ -148,15 +148,12 @@ function usePayment(
 
     setRequest({ state: "loading" });
 
-    const redirectUrl = createExternalURL(
-      "/face-reading/success-checkout/onboarding-skip-trial-1",
-      {
-        paymentType: type,
-        pricePaid: planRef.current.unit_amount,
-        currency: planRef.current.currency,
-        planID: planRef.current.priceID,
-      }
-    );
+    const redirectUrl = createExternalURL("/face-reading/success-checkout/onboarding-reports-1", {
+      paymentType: type,
+      pricePaid: planRef.current.unit_amount,
+      currency: planRef.current.currency,
+      planID: planRef.current.priceID,
+    });
 
     trackPixelEvent("AddPaymentInfo");
 

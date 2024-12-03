@@ -63,7 +63,7 @@ export default function Page() {
       paymentType: string;
     }>(window.location.href);
 
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-location", {
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-time", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
@@ -77,7 +77,7 @@ export default function Page() {
       paymentType: string;
     }>(window.location.href);
 
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-skip-trial-1", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
@@ -95,7 +95,7 @@ export default function Page() {
 
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={2} />
+          <SpecialOfferSteps activeStepIdx={1} />
 
           {hasPurchasedReport ? (
             <StepCompletedView onContinue={navigateToNextStep} />

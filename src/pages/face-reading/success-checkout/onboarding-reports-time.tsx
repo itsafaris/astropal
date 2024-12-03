@@ -58,7 +58,7 @@ export default function Page() {
 
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={2} />
+          <SpecialOfferSteps activeStepIdx={1} />
 
           <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
             To help us prepare your report, could you please let us know your time of birth?

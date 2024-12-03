@@ -68,7 +68,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
       paymentType: string;
     }>(window.location.href);
 
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-1", {
+    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
       paymentType: urlParams.paymentType,
       currency: urlParams.currency,
     });
@@ -82,7 +82,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
 
       <Container pb={10} pt={3}>
         <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
+          <SpecialOfferSteps activeStepIdx={2} />
 
           {hasPurchasedSubscription ? (
             <StepCompletedView onContinue={navigateToNextStep} />
