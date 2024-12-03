@@ -265,23 +265,23 @@ function ReportCard({
       p={3}
       borderRadius={"lg"}
       border={"2px"}
-      borderColor={isSelected ? "brand.600" : "brand.400"}
-      backgroundColor={isSelected ? "brand.400" : "white"}
+      borderColor={isSelected ? "brand.600" : "brand.200"}
+      backgroundColor={isSelected ? "brand.200" : "white"}
       onClick={() => onSelect(report.productID)}
       cursor={"pointer"}
     >
       <Stack
         alignItems={"center"}
         justifyContent={"center"}
-        width={"26px"}
-        height={"26px"}
+        width={"22px"}
+        height={"22px"}
         borderRadius={"full"}
-        backgroundColor={"white"}
+        backgroundColor={isSelected ? "brand.400" : "white"}
         border="2px solid"
-        borderColor={isSelected ? "white" : "brand.400"}
+        borderColor={isSelected ? "brand.400" : "brand.300"}
         flexShrink={0}
       >
-        <Icon as={FaCheck} boxSize={4} color={isSelected ? "brand.400" : "white"} />
+        <Icon as={FaCheck} boxSize={3} color={"white"} />
       </Stack>
 
       <Stack spacing={0} alignItems={"flex-start"} flexGrow={1}>
@@ -289,36 +289,35 @@ function ReportCard({
           textTransform={"uppercase"}
           fontSize={["xs", "sm"]}
           fontWeight={"bold"}
-          color={isSelected ? "white" : "black"}
+          color={"black"}
           textAlign={"left"}
         >
           {report.title}
         </Text>
 
-        {report.description && (
-          <Text fontSize={"xs"} color={isSelected ? "white" : "gray.600"} textAlign={"left"}>
-            {report.description}
-          </Text>
+        {report.features.length > 0 && (
+          <Stack spacing={0} mt={1}>
+            {report.features.map((feature, idx) => (
+              <Text key={idx} fontSize={"xs"} color={"gray.800"} textAlign={"left"}>
+                • {feature}
+              </Text>
+            ))}
+          </Stack>
         )}
 
-        <Grid
-          alignItems={"center"}
-          gridTemplateColumns={"1fr 1fr"}
-          gap={2}
-          fontWeight={"semibold"}
-          mt={1}
-        >
-          <Stack alignItems={"flex-start"} spacing={0} fontWeight={"semibold"} width={"100px"}>
+        <Grid alignItems={"center"} gridTemplateColumns={"1fr 1fr"} gap={2} mt={1}>
+          <Stack alignItems={"flex-start"} spacing={0} width={"100px"}>
             <Text
               fontSize={["xs", "sm"]}
-              color={isSelected ? "white" : "gray.600"}
+              color={"gray.600"}
               textAlign={"left"}
+              fontWeight={"semibold"}
             >
               ${(report.unit_amount / 100).toFixed(2)}
             </Text>
 
             {report.unit_amount_before && (
-              <Text fontSize={"xs"} color={isSelected ? "whiteAlpha.700" : "gray.500"}>
+              <Text fontSize={"xs"} color={"gray.600"}>
                 (was{" "}
                 <Text as="span" textDecoration={"line-through"}>
                   ${(report.unit_amount_before / 100).toFixed(2)}
@@ -331,13 +330,13 @@ function ReportCard({
           <Text
             fontSize={"sm"}
             fontWeight={"semibold"}
-            color={"yellow.800"}
-            backgroundColor={"yellow.300"}
+            color={"white"}
+            backgroundColor={"red.300"}
             px={2}
             py={1}
             borderRadius={"lg"}
           >
-            {report.discount_label}
+            -{report.discount_label}
           </Text>
         </Grid>
       </Stack>
@@ -363,23 +362,23 @@ function SkipCard({
       p={3}
       borderRadius={"lg"}
       border={"2px"}
-      borderColor={isSelected ? "brand.600" : "brand.400"}
-      backgroundColor={isSelected ? "brand.400" : "white"}
+      borderColor={isSelected ? "brand.600" : "brand.200"}
+      backgroundColor={isSelected ? "brand.200" : "white"}
       onClick={() => onSelect(SKIP_OFFER_ID)}
       cursor={"pointer"}
     >
       <Stack
         alignItems={"center"}
         justifyContent={"center"}
-        width={"26px"}
-        height={"26px"}
+        width={"22px"}
+        height={"22px"}
         borderRadius={"full"}
-        backgroundColor={"white"}
+        backgroundColor={isSelected ? "brand.400" : "white"}
         border="2px solid"
-        borderColor={isSelected ? "white" : "brand.400"}
+        borderColor={isSelected ? "brand.400" : "brand.300"}
         flexShrink={0}
       >
-        <Icon as={FaCheck} boxSize={4} color={isSelected ? "brand.400" : "white"} />
+        <Icon as={FaCheck} boxSize={3} color={"white"} />
       </Stack>
 
       <Stack spacing={0} alignItems={"flex-start"} flexGrow={1}>
@@ -387,18 +386,15 @@ function SkipCard({
           textTransform={"uppercase"}
           fontSize={["xs", "sm"]}
           fontWeight={"bold"}
-          color={isSelected ? "white" : "black"}
+          color={"black"}
+          textAlign={"left"}
         >
           Skip offer
         </Text>
 
         <Flex alignItems={"center"} gap={2} fontWeight={"semibold"} mt={1}>
           <Flex alignItems={"center"} gap={1} fontWeight={"semibold"} width={"100px"}>
-            <Text
-              fontSize={["xs", "sm"]}
-              color={isSelected ? "white" : "gray.600"}
-              textAlign={"left"}
-            >
+            <Text fontSize={["xs", "sm"]} color={"gray.600"} textAlign={"left"}>
               You are missing out on all reports
             </Text>
           </Flex>
