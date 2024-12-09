@@ -124,12 +124,6 @@ function StepIncompletedView({
 }) {
   return (
     <Stack spacing={6}>
-      <SpecialOfferBadge
-        icon="📣"
-        title="Caution!"
-        text="To prevent double charges please don't close the page and don't go back."
-      />
-
       <Text fontSize={"xl"} fontWeight={"bold"}>
         Are you sure?
       </Text>
