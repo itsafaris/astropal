@@ -4,8 +4,7 @@ import {
   HStack,
   Text,
   Button,
-  Avatar,
-  AvatarGroup,
+  Image,
   Heading,
   Flex,
   Icon,
@@ -14,18 +13,18 @@ import {
   Stepper,
   StepIndicator,
   StepStatus,
-  StepDescription,
   StepSeparator,
   Card,
+  Stack,
+  Grid,
+  AspectRatio,
+  ButtonProps,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
 import { Span } from "@components/quizpage/components";
 import { StaticImage } from "gatsby-plugin-image";
-import { CgInfinity } from "react-icons/cg";
-import { PiChatCircleDotsFill, PiChatsCircleDuotone } from "react-icons/pi";
+import { PiChatsCircleDuotone } from "react-icons/pi";
 import { MdOutlineGroupAdd, MdVerified } from "react-icons/md";
-import { FaCheck, FaCircle, FaLockOpen, FaRegLightbulb } from "react-icons/fa";
-import { BiSupport } from "react-icons/bi";
+import { FaCheck, FaCircle, FaRegLightbulb, FaLock } from "react-icons/fa";
 import { TbFaceId } from "react-icons/tb";
 import { GiOppositeHearts } from "react-icons/gi";
 import { LuCalendarCheck } from "react-icons/lu";
@@ -36,6 +35,13 @@ import { ComponentProps, useEffect, useState } from "react";
 import React from "react";
 import { trackPixelEvent, trackPosthogEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
+import { NewsBanner } from "@components/summary/NewsBanner";
+import { MediaBanner } from "@components/summary/MediaBanner";
+import { keyframes } from "@emotion/react";
+import { FaInfinity } from "react-icons/fa6";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { FaStar } from "react-icons/fa6";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -46,8 +52,23 @@ export default function SummaryPage() {
     <Box>
       <TopNavigation />
 
-      <Box py={4} pb={20}>
+      <NewsBanner
+        items={[
+          { name: "Tom", text: "just discovered", highlightedText: "his hidden talents" },
+          { name: "Sophia", text: "just uncovered", highlightedText: "her health secrets" },
+          { name: "Luis", text: "just found out when", highlightedText: "he'll meet his soulmate" },
+          { name: "Anna", text: "just discovered", highlightedText: "how many kids she'll have" },
+          { name: "Mark", text: "just learned", highlightedText: "how long he'll live" },
+          { name: "Sarah", text: "just found out", highlightedText: "when she'll get married" },
+          { name: "James", text: "just unlocked", highlightedText: "his financial future" },
+          { name: "Emily", text: "just learned", highlightedText: "her career destiny" },
+          { name: "Ella", text: "just learned", highlightedText: "when she'll buy a home" },
+        ]}
+      />
+
+      <Box pb={10}>
         <HeroSection />
+        <MediaBanner />
         <HowItWorks />
         <FaceFeatures />
         <WhatsIncluded />
@@ -62,116 +83,256 @@ export default function SummaryPage() {
 
 function HeroSection() {
   return (
-    <Container maxW={"container.md"}>
-      <HStack justifyContent="space-between" mb={4}>
-        <HStack>
-          <Text fontSize="sm" fontWeight="bold" color="gray.600">
-            The #1 Face-reading and astrology app trusted <br /> by over{" "}
-            <Span color="brand.500">25 million </Span> people.
-          </Text>
-        </HStack>
-        <HStack bg="yellow.100" borderRadius="full" px={2} py={1}>
-          <StarIcon color="yellow.500" />
-          <Text fontWeight="bold">5.0</Text>
-        </HStack>
-      </HStack>
+    <Container maxW={"container.lg"} pt={[5, 10]} pb={[6, 14]}>
+      <Grid display={["none", "none", "grid"]} gridTemplateColumns={["1fr", "1fr 1fr"]} gap={5}>
+        <Stack spacing={12}>
+          <HeroTitle />
+          <HeroFeatures />
+          <HeroCTA />
+        </Stack>
 
-      <VStack align="start" spacing={2} mb={4}>
-        <Heading fontSize="3xl" fontWeight="bold">
-          Your Face Reading
-          <br />
-          <Span fontSize="3xl" fontWeight="bold" color="brand.500">
-            Is Ready!
-          </Span>
-        </Heading>
-      </VStack>
+        <HeroFaceReading />
+      </Grid>
 
-      <HStack mb={4}>
-        <VStack align="start" flex={1}>
-          <Text fontSize="xl" fontWeight="semibold">
-            "I've just received your face scan results. Let's discuss!"
-          </Text>
-        </VStack>
-        <Box position={"relative"}>
-          <Box
-            border="4px solid"
-            borderColor={"brand.300"}
-            borderRadius={"full"}
-            overflow={"hidden"}
-          >
-            <StaticImage
-              alt="face reader portrait"
-              src="../../images/face_reader_female.png"
-              style={{ width: 100, borderRadius: "100%" }}
-            />
-          </Box>
-          <Icon
-            as={PiChatCircleDotsFill}
-            position={"absolute"}
-            top={4}
-            left={-3}
-            color="brand.900"
-            fontSize={"4xl"}
-            transform={"scaleX(-1)"}
-          />
-        </Box>
-      </HStack>
+      <Stack display={["flex", "flex", "none"]} pb={6} spacing={8}>
+        <HeroTitle />
+        <HeroFaceReading />
+        <HeroCTA width={"95%"} mx="auto" />
+        <HeroFeatures />
+      </Stack>
+    </Container>
+  );
+}
 
-      <Text mb={4} color="gray.500" fontSize={"sm"}>
-        <Span color="brand.600" fontWeight={"bold"}>
-          Akho
-        </Span>{" "}
-        6 years in face readings and spiritual guidance.
+function HeroTitle() {
+  return (
+    <Heading fontSize={["3xl", "5xl"]} fontWeight="bold" textAlign={["center", "center", "left"]}>
+      Your Face Reading
+      <br />
+      <Text as="span" color="brand.500">
+        Is Ready!
       </Text>
+    </Heading>
+  );
+}
 
-      <Flex
-        flexDirection={"row"}
-        alignItems={"center"}
-        my={8}
-        borderTop={"1px solid"}
-        borderBottom={"1px solid"}
-        borderColor={"gray.300"}
-        py={2}
-      >
-        <Text fontWeight="bold" mb={2}>
-          Choose from 80+ face readers and astrologers.
+function HeroCTA(props: ButtonProps) {
+  return (
+    <CTAButton py={6} fontSize={"lg"} trackingProps={{ section: "face-features" }} {...props} />
+  );
+}
+
+function HeroFeatures() {
+  return (
+    <Stack spacing={3}>
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={FaInfinity} color={"brand.700"} boxSize={6} />
+        </Flex>
+
+        <Text>
+          <Text as="span" fontWeight={"bold"} color="brand.600">
+            Unlimited
+          </Text>{" "}
+          insights for life transformation
         </Text>
-
-        <AvatarGroup size="md" max={4}>
-          <Avatar overflow={"hidden"}>
-            <StaticImage alt="reader's avatar" src="../../images/reader1.png" />
-          </Avatar>
-
-          <Avatar overflow={"hidden"}>
-            <StaticImage alt="reader's avatar" src="../../images/reader5.png" />
-          </Avatar>
-
-          <Avatar overflow={"hidden"}>
-            <StaticImage alt="reader's avatar" src="../../images/reader3.png" />
-          </Avatar>
-
-          <Avatar overflow={"hidden"}>
-            <StaticImage alt="reader's avatar" src="../../images/reader4.png" />
-          </Avatar>
-        </AvatarGroup>
       </Flex>
 
-      <HStack mb={4} justifyContent={"center"}>
-        <Icon as={CgInfinity} color="orange.500" fontSize={"3xl"} />
-        <Text fontWeight="semibold">
-          Unlimited chats with a{" "}
-          <Text as="span" color="brand.500">
-            face reader
-          </Text>
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={MdOutlineGroupAdd} color={"brand.700"} boxSize={6} />
+        </Flex>
+
+        <Text>
+          <Text as="span" fontWeight={"bold"} color="brand.600">
+            776
+          </Text>{" "}
+          people joined today
         </Text>
-      </HStack>
+      </Flex>
 
-      <CTAButton width="100%" size="lg" mb={4}>
-        Get My Prediction
-      </CTAButton>
+      <Flex alignItems={"center"} gap={2}>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          height={"40px"}
+          width={"40px"}
+          borderRadius={"md"}
+          backgroundColor={"brand.200"}
+          flexShrink={0}
+        >
+          <Icon as={IoChatbubbleEllipsesOutline} color={"brand.700"} boxSize={6} />
+        </Flex>
 
-      <TodayUserCount />
-    </Container>
+        <Stack spacing={0}>
+          <Text>
+            Trusted by over{" "}
+            <Text as="span" fontWeight={"bold"} color="brand.600">
+              25 million
+            </Text>{" "}
+            people.
+          </Text>
+
+          <Flex alignItems={"center"} gap={1}>
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+            <Icon as={FaStar} color={"yellow.400"} boxSize={5} />
+          </Flex>
+        </Stack>
+      </Flex>
+    </Stack>
+  );
+}
+
+function HeroFaceReading() {
+  const globalState = useGlobalState2();
+
+  return (
+    <Stack alignItems={"center"}>
+      <AspectRatio ratio={1} maxW={"200px"} width={"100%"}>
+        <Stack
+          justifyContent={"center"}
+          borderRadius={"xl"}
+          overflow={"hidden"}
+          backgroundColor={"gray.100"}
+          border="5px solid"
+          borderColor="gray.100"
+        >
+          {globalState.faceImageDataUrl ? (
+            <Image
+              src={globalState.faceImageDataUrl}
+              objectFit={"contain"}
+              maxWidth="100%"
+              maxHeight="100%"
+              borderRadius={"lg"}
+            />
+          ) : (
+            <StaticImage
+              alt=""
+              src={"../../images/default-user-face-image.jpg"}
+              width={300}
+              style={{
+                borderRadius: "8px",
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          )}
+        </Stack>
+      </AspectRatio>
+
+      <Stack
+        width={"300px"}
+        backgroundColor={"white"}
+        borderRadius={"xl"}
+        p={3}
+        boxShadow={"2xl"}
+        mt={-10}
+        zIndex={1}
+      >
+        <Stack spacing={0} position={"relative"}>
+          <Text mb={5} whiteSpace={"pre-wrap"} fontSize={"xs"}>
+            You possess a remarkable and harmonious blend of intellect and emotional intelligence
+            that sets you apart from others. Your warm and approachable nature
+            <Text as="span" filter="blur(2px)">
+              PageMaker including versions of Lorem Ipsum PageMaker including versions of Lorem
+              Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions of
+              Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions
+              of Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker including
+              versions of Lorem Ipsum PageMaker including versions of Lorem Ipsum PageMaker
+              including versions of Lorem Ipsum PageMaker including versions of Lorem Ipsum
+              PageMaker including versions of Lorem Ipsum PageMaker including versions of Lorem
+              Ipsum PageMaker including versions of Lorem Ipsum PageMaker including versions of
+              Lorem Ipsum PageMaker including versions of Lorem Ipsum
+            </Text>
+          </Text>
+
+          <Stack
+            spacing={0}
+            position={"absolute"}
+            left={0}
+            bottom={0}
+            width={"100%"}
+            height={"90%"}
+          >
+            <Box
+              height={"100%"}
+              backgroundColor={"#ffffff85"}
+              backdropFilter="blur(5px)"
+              style={{
+                mask: "linear-gradient(transparent , white 60px)",
+              }}
+            />
+
+            <Stack
+              width={"full"}
+              px={3}
+              alignItems={"center"}
+              position={"absolute"}
+              bottom={0}
+              mb={8}
+            >
+              <Flex
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                gap={3}
+                width={"full"}
+                mb={4}
+              >
+                <Text fontSize={"lg"} lineHeight={1.3} fontWeight={"bold"}>
+                  Face Reading <br /> Accuracy:{" "}
+                </Text>
+
+                <Text fontSize={"3xl"} fontWeight={"black"} color={"green.500"}>
+                  97%
+                </Text>
+              </Flex>
+
+              <FaceReadingItem title="Personality" text="Prepared" />
+              <FaceReadingItem title="Love" text="Prepared" />
+              <FaceReadingItem title="Career" text="Prepared" />
+              <FaceReadingItem title="Special traits" text="Identified" />
+              <FaceReadingItem title="Negative traits" text="Identified" />
+            </Stack>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+}
+
+function FaceReadingItem({ title, text }: { title: string; text: string }) {
+  return (
+    <Grid width={"full"} gridTemplateColumns={"auto 1fr auto"} alignItems={"flex-end"}>
+      <Text fontWeight={"semibold"} fontSize={"sm"}>
+        {title}:
+      </Text>
+
+      <Flex borderBottom="2px dotted" borderColor={"gray.300"} mb={1} mx={2} />
+
+      <Text fontWeight={"semibold"} fontSize={"sm"} color={"green.500"}>
+        {text} <Icon as={FaCheck} />
+      </Text>
+    </Grid>
   );
 }
 
@@ -200,9 +361,9 @@ function HowItWorks() {
   ];
 
   return (
-    <Container p={4} my={8} maxW={"container.md"}>
-      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
-        How does {meta.brandName} work?
+    <Container p={4} my={8} maxW={"520px"}>
+      <Heading as="h2" fontSize="2xl" mb={8} textAlign="center">
+        How Does {meta.brandName} Work?
       </Heading>
 
       <Stepper index={2} orientation="vertical" gap={0} colorScheme="brand">
@@ -215,11 +376,14 @@ function HowItWorks() {
               />
             </StepIndicator>
 
-            <Box mb={6}>
-              <Text fontWeight={"bold"} fontSize={"lg"} color="brand.700">
+            <Box mb={8} ml={2}>
+              <Text fontWeight={"semibold"} fontSize={"lg"}>
                 {step.title}
               </Text>
-              <StepDescription>{step.description}</StepDescription>
+
+              <Text color={"gray.600"} fontSize={"sm"}>
+                {step.description}
+              </Text>
             </Box>
 
             <StepSeparator />
@@ -232,8 +396,8 @@ function HowItWorks() {
 
 function FaceFeatures() {
   const imgStyle = {
-    width: 200,
-    height: 200,
+    width: 170,
+    height: 170,
   };
 
   const features = [
@@ -242,7 +406,10 @@ function FaceFeatures() {
       name: "Eyes",
       description: (
         <Text>
-          Eyes mirror your <Span color="purple.600">emotional state and inner thoughts</Span>
+          Eyes mirror your{" "}
+          <Span fontWeight={"semibold"} color="purple.600">
+            emotional state and inner thoughts
+          </Span>
         </Text>
       ),
       example: "Wide-set eyes indicate an open and trusting nature",
@@ -250,8 +417,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/eyes.png"
           alt="face reading eyes"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -261,7 +428,10 @@ function FaceFeatures() {
       name: "Nose",
       description: (
         <Text>
-          Nose shape reflects your approach to <Span color="pink.600">work and ambition</Span>
+          Nose shape reflects your approach to{" "}
+          <Span fontWeight={"semibold"} color="pink.600">
+            work and ambition
+          </Span>
         </Text>
       ),
       example: "A straight nose suggests a direct and focused personality",
@@ -269,8 +439,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/nose.png"
           alt="face reading nose"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -280,7 +450,10 @@ function FaceFeatures() {
       name: "Mouth",
       description: (
         <Text>
-          Mouth and lips show your <Span color="teal.600">relationships</Span>
+          Mouth and lips show your{" "}
+          <Span fontWeight={"semibold"} color="teal.600">
+            relationships
+          </Span>
         </Text>
       ),
       example: "Full lips indicate a passionate and expressive character",
@@ -288,8 +461,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/mouth.png"
           alt="face reading mouth"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -299,7 +472,10 @@ function FaceFeatures() {
       name: "Forehead",
       description: (
         <Text>
-          Forehead shape indicates <Span color="blue.600">intellectual capacity</Span>
+          Forehead shape indicates{" "}
+          <Span fontWeight={"semibold"} color="blue.600">
+            intellectual capacity
+          </Span>
         </Text>
       ),
       example: "A high forehead suggests a philosophical and analytical mind",
@@ -307,8 +483,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/forehead.png"
           alt="face reading forehead"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -318,7 +494,10 @@ function FaceFeatures() {
       name: "Eyebrows",
       description: (
         <Text>
-          Eyebrows reveal your <Span color="orange.600">self-expression</Span>
+          Eyebrows reveal your{" "}
+          <Span fontWeight={"semibold"} color="orange.600">
+            self-expression
+          </Span>
         </Text>
       ),
       example: "Arched eyebrows show a quick-witted and observant nature",
@@ -326,8 +505,8 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/eyebrows.png"
           alt="face reading eyebrows"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
@@ -337,7 +516,10 @@ function FaceFeatures() {
       name: "Cheekbones",
       description: (
         <Text>
-          Cheekbones reflect your <Span color="green.600">social influence</Span>
+          Cheekbones reflect your{" "}
+          <Span fontWeight={"semibold"} color="green.600">
+            social influence
+          </Span>
         </Text>
       ),
       example: "Prominent cheekbones indicate charisma and natural authority",
@@ -345,114 +527,100 @@ function FaceFeatures() {
         <StaticImage
           src="../../images/features/cheekbones.png"
           alt="face reading cheekbones"
-          width={200}
-          height={200}
+          width={170}
+          height={170}
           style={imgStyle}
         />
       ),
     },
-    // {
-    //   name: "Chin",
-    //   description: "Chin structure shows determination and willpower",
-    //   example: "A strong, square chin suggests persistence and resilience",
-    // },
-    // {
-    //   name: "Ears",
-    //   description: "Ear shape and position relate to your intuition and listening skills",
-    //   example: "Large ears indicate heightened intuition and receptiveness",
-    // },
-    // {
-    //   name: "Facial proportions",
-    //   description: "Overall facial proportions reveal balance in your personality",
-    //   example: "Symmetrical features suggest inner harmony and stability",
-    // },
-    // {
-    //   name: "Facial lines",
-    //   description: "Lines on your face tell the story of your life experiences",
-    //   example: "Laugh lines around the eyes indicate a joyful and optimistic nature",
-    // },
   ];
 
   return (
-    <Container p={4} my={8} maxW={"container.lg"}>
-      <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
-        What does your <Span color="brand.600">face</Span> reveal about you?
-      </Heading>
+    <Box backgroundColor={"brand.50"} py={8}>
+      <Container p={4} maxW={"container.lg"}>
+        <Heading as="h2" fontSize="2xl" mb={6} textAlign="center">
+          What Does Your <Span color="brand.600">Face</Span> Reveal About You?
+        </Heading>
 
-      <Flex flexWrap={"wrap"} gap={6} justifyContent={"center"}>
-        {features.map((feature, idx) => {
-          return (
-            <Flex
-              key={idx}
-              p={4}
-              direction={"column"}
-              width={300}
-              textAlign={"center"}
-              alignItems={"center"}
-            >
-              <Text color={`${feature.color}.600`} fontSize={"lg"} fontWeight={"bold"} mb={4}>
-                {feature.name}
-              </Text>
-              <Flex direction={"column"} alignItems={"center"}>
-                <Card p={1} fontWeight={"semibold"} fontSize={"sm"} minH={50}>
-                  {feature.description}
-                </Card>
-                {feature.image}
-                <Box
-                  p={1}
-                  mx={4}
-                  bg={`${feature.color}.50`}
-                  color={`${feature.color}.600`}
-                  fontWeight={"semibold"}
-                  fontSize={"xs"}
-                  border={"1px solid"}
-                  borderColor={`${feature.color}.200`}
-                  borderRadius={"md"}
-                >
-                  <Text filter="blur(3px)">{feature.example}</Text>
-                  <Button
-                    width={"full"}
-                    colorScheme="brand"
-                    leftIcon={<Icon as={FaLockOpen} />}
-                    size="sm"
-                    mt={1}
-                    onClick={() => {
-                      trackPosthogEvent({
-                        name: "cta-click",
-                        properties: {
-                          section: "face-features",
-                        },
-                      });
-                      navigate("/face-reading/checkout");
-                    }}
+        <Flex flexWrap={"wrap"} justifyContent={"center"}>
+          {features.map((feature, idx) => {
+            return (
+              <Flex
+                key={idx}
+                p={4}
+                direction={"column"}
+                width={300}
+                textAlign={"center"}
+                alignItems={"center"}
+              >
+                <Text color={`${feature.color}.600`} fontSize={"lg"} fontWeight={"bold"} mb={4}>
+                  {feature.name}
+                </Text>
+
+                <Flex direction={"column"} alignItems={"center"}>
+                  <Card py={1} px={2} fontSize={"sm"} minH={50}>
+                    {feature.description}
+                  </Card>
+
+                  {feature.image}
+
+                  <Box
+                    p={1}
+                    mx={4}
+                    bg={`${feature.color}.50`}
+                    color={`${feature.color}.600`}
+                    fontWeight={"semibold"}
+                    fontSize={"xs"}
+                    border={"1px solid"}
+                    borderColor={`${feature.color}.200`}
+                    borderRadius={"md"}
                   >
-                    Unlock
-                  </Button>
-                </Box>
+                    <Text filter="blur(3px)">{feature.example}</Text>
+                    <Button
+                      width={"full"}
+                      colorScheme="brand"
+                      leftIcon={<Icon as={FaLock} />}
+                      size="sm"
+                      mt={1}
+                      onClick={() => {
+                        trackPosthogEvent({
+                          name: "cta-click",
+                          properties: {
+                            section: "face-features",
+                          },
+                        });
+                        navigate("/face-reading/checkout");
+                      }}
+                    >
+                      Unlock
+                    </Button>
+                  </Box>
+                </Flex>
               </Flex>
-            </Flex>
-          );
-        })}
-      </Flex>
+            );
+          })}
+        </Flex>
 
-      <Container
-        my={8}
-        gap={4}
-        textAlign={"center"}
-        as={Flex}
-        direction={"column"}
-        alignItems={"center"}
-      >
-        <Text fontSize={"md"} fontWeight={"semibold"}>
-          Find the real truth that is written on your face <br />{" "}
-          <Span color="brand.600">100% personalized to you</Span>
-        </Text>
-        <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
-          Unlock ALL your facial insights
-        </CTAButton>
-        <TodayUserCount />
+        <Container
+          mt={8}
+          gap={4}
+          textAlign={"center"}
+          as={Flex}
+          direction={"column"}
+          alignItems={"center"}
+        >
+          <Text fontSize={"md"} fontWeight={"semibold"}>
+            Find the real truth that is written on your face <br />{" "}
+            <Span color="brand.600">100% personalized to you</Span>
+          </Text>
+
+          <CTAButton size="lg" width={"100%"} trackingProps={{ section: "face-features" }}>
+            Unlock ALL your facial insights
+          </CTAButton>
+          <TodayUserCount />
+        </Container>
       </Container>
-    </Container>
+    </Box>
   );
 }
 
@@ -471,8 +639,9 @@ function WhatsIncluded() {
   return (
     <Container my={8} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={4}>
-        What's included?
+        What's Included?
       </Heading>
+
       <VStack
         spacing={4}
         alignItems={"start"}
@@ -556,7 +725,7 @@ function UserReviews() {
   return (
     <Container my={10} maxW={"container.md"}>
       <Heading fontSize={"2xl"} textAlign={"center"} mb={8}>
-        Why does everyone love <Span color="brand.600">{meta.brandName}</Span>?
+        Why Does Everyone Love <Span color="brand.600">{meta.brandName}</Span>?
       </Heading>
 
       <VStack spacing={8}>
@@ -596,18 +765,30 @@ function UserReviews() {
 function Footer() {
   const meta = useSiteMetadata();
   return (
-    <Container textAlign={"center"} py={8} maxW={"container.md"}>
-      <Text>Questions? We're here to help.</Text>
-      <Flex gap={2} my={2}>
-        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
-          Customer Support
-        </Button>
-        <Button as={Link} to="/contact-us" variant="text" leftIcon={<Icon as={BiSupport} />}>
-          Help Center
-        </Button>
-      </Flex>
-      <Text fontSize={"xs"}>©2024 {meta.brandName}. All rights reserved.</Text>
-    </Container>
+    <Box borderTop={"1px solid"} borderColor={"blackAlpha.200"}>
+      <Container textAlign={"center"} py={8} maxW={"container.md"}>
+        <Stack alignItems={"center"}>
+          <StaticImage
+            src={`../../images/intuvist-logo-black-h.png`}
+            alt="Intuvist logo"
+            height={35}
+          />
+
+          <Flex gap={2} my={2} mx={"auto"}>
+            <Button size={"sm"} as={Link} to="/contact-us" variant="text" color={"gray.500"}>
+              Customer Support
+            </Button>
+            <Button size={"sm"} as={Link} to="/contact-us" variant="text" color={"gray.500"}>
+              Help Center
+            </Button>
+          </Flex>
+
+          <Text fontSize={"xs"} color={"gray.500"}>
+            ©2024 {meta.brandName}. All rights reserved.
+          </Text>
+        </Stack>
+      </Container>
+    </Box>
   );
 }
 
@@ -627,7 +808,7 @@ function CTABanner() {
   return (
     <Flex
       position={"fixed"}
-      width={"100%"}
+      width={"full"}
       left={0}
       bottom={showBanner ? 0 : "-100px"}
       zIndex={10}
@@ -636,31 +817,57 @@ function CTABanner() {
       borderTop={"2px solid"}
       borderColor={"brand.300"}
       p={1}
+      pt={2}
+      pb={3}
     >
-      <Container as={Flex} alignItems={"center"} justifyContent={"center"}>
-        <Box>
-          <Text as="span" fontWeight={"bold"} fontSize={"sm"} mr={2}>
-            Your personalized offer reserved
-          </Text>
-          <Timer />
-        </Box>
-        <CTAButton>Get my prediction</CTAButton>
+      <Container maxW="container.md">
+        <Flex
+          direction={["column", "column", "row"]}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gap={3}
+        >
+          <Flex alignItems={"center"} gap={4}>
+            <Text as="span" fontWeight={"bold"} fontSize={["sm", "sm", "md"]}>
+              Your Personalized Offer Reserved
+            </Text>
+
+            <Timer />
+          </Flex>
+
+          <CTAButton width={"full"} maxW={["100%", "250px"]}>
+            Get my prediction
+          </CTAButton>
+        </Flex>
       </Container>
     </Flex>
   );
 }
+
+const CTAPulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 function CTAButton(props: ComponentProps<typeof Button>) {
   return (
     <Button
       colorScheme="brand"
       flexShrink={0}
+      animation={`${CTAPulse} 3s infinite`}
       {...props}
       onClick={() => {
         navigate("/face-reading/checkout");
       }}
     >
-      Get my prediction
+      Get My Reading
     </Button>
   );
 }
