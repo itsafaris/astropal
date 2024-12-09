@@ -138,11 +138,12 @@ function usePayment(
 
   async function submit(type: "express" | "card") {
     if (!userProfile || !selectedPricingPlan || !trialPricingPlan || !stripe || !elements) {
-      console.warn("data missing for subscription setup");
-      return;
-    }
+      console.error("Data missing for subscription setup");
+      setRequest({
+        state: "error",
+        error: "Something went wrong. Please try again",
+      });
 
-    if (request.state !== "initial") {
       return;
     }
 
@@ -156,7 +157,6 @@ function usePayment(
     });
 
     trackPixelEvent("AddPaymentInfo");
-
     trackPosthogEvent({
       name: "add-payment-info",
       properties: {},
@@ -171,9 +171,12 @@ function usePayment(
       // Trigger form validation and wallet collection
       const elementSubmission = await elements.submit();
       if (elementSubmission.error) {
+        const msg =
+          elementSubmission.error.message ?? "Payment failed. Try another card or payment method";
+        console.error(msg);
         setRequest({
           state: "error",
-          error: elementSubmission.error.message ?? "Element submission failed",
+          error: msg,
         });
 
         return;
@@ -189,18 +192,20 @@ function usePayment(
       });
 
       if (subscription.error) {
+        console.error(subscription.error.message);
         setRequest({
           state: "error",
-          error: subscription.error.message,
+          error: "Something went wrong. Please try again",
         });
 
         return;
       }
 
       if (!subscription.data) {
+        console.error("Subscription data is missing");
         setRequest({
           state: "error",
-          error: "missing payment intent data",
+          error: "Something went wrong. Please try again",
         });
 
         return;
@@ -210,7 +215,11 @@ function usePayment(
       // In that case subscription becomes automatically activated.
       // GOOD FOR TESTING!
       if (!subscription.data.client_secret) {
-        console.log("no client secret, payment has been paid");
+        console.error("No client secret, payment has been paid");
+        setRequest({
+          state: "error",
+          error: "Something went wrong. Please try again",
+        });
 
         return;
       }
@@ -224,10 +233,13 @@ function usePayment(
       });
 
       if (confirmation.error) {
-        console.error(confirmation.error);
+        const msg =
+          confirmation.error.message ??
+          "Your payment has been declined. Try another card or payment method";
+        console.error(msg);
         setRequest({
           state: "error",
-          error: confirmation.error.message ?? "Your payment has been declined.",
+          error: msg,
         });
 
         return;
@@ -236,7 +248,7 @@ function usePayment(
       setRequest({ state: "ok" });
     } catch (err) {
       console.error(err);
-      setRequest({ state: "error", error: String(err) });
+      setRequest({ state: "error", error: "Something went wrong. Please try again" });
     }
   }
 
