@@ -1,143 +1,61 @@
-import { Box, Button, Container, Stack, Text, Image } from "@chakra-ui/react";
-import { TopNavigation } from "@components/topnavigation";
-
-import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
-import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
-import { navigate } from "gatsby";
-import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
+import { Box, Button, Stack, Text, Image } from "@chakra-ui/react";
+import {
+  useOnboardingRouter,
+  CTAPulse,
+  SuccessfulPurchaseView,
+  OnboardingLayout,
+} from "@components/onboarding";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import React from "react";
-import { trackPosthogPurchaseEvent } from "@utils/tracking";
-import { eden, Reports } from "@utils/coreApi";
-import { useStripe } from "@stripe/react-stripe-js";
+import { Reports } from "@utils/coreApi";
 import { sessionCache } from "src/sessionCache";
-import { keyframes } from "@emotion/react";
-
-export type RequestType =
-  | {
-      state: "initial";
-    }
-  | {
-      state: "loading";
-    }
-  | {
-      state: "ok";
-    }
-  | {
-      state: "error";
-      error: string;
-    };
 
 export default function Page() {
   const { reports } = useGlobalState2();
-  const [request, submit] = usePayment();
+  const { navigateToNextPage } = useOnboardingRouter();
   const [hasPurchasedReport, setHasPurchasedReport] = React.useState<boolean>(false);
 
-  const premiumPack = reports.find((it) => it.title === "Premium pack");
-
   React.useEffect(() => {
-    setHasPurchasedReport(sessionCache.hasPurchasedReport());
+    setHasPurchasedReport(sessionCache.getReport().status === "purchase-finalized");
   }, []);
 
-  React.useEffect(() => {
-    if (!premiumPack) {
-      navigateToNextStep();
-    }
-  }, [premiumPack]);
-
-  function handleSkip() {
-    navigateToNextStep();
-  }
-
-  async function handlePurchase() {
-    //TODO: handle properly
-    if (!premiumPack) {
-      return;
-    }
-
-    await submit(premiumPack);
-
-    sessionCache.setPurchasedReport();
-
-    const urlParams = parseURLParams<{
-      currency: string;
-      paymentType: string;
-    }>(window.location.href);
-
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-time", {
-      paymentType: urlParams.paymentType,
-      currency: urlParams.currency,
-    });
-
-    navigate(url);
-  }
-
-  function navigateToNextStep() {
-    const urlParams = parseURLParams<{
-      currency: string;
-      paymentType: string;
-    }>(window.location.href);
-
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-skip-trial-1", {
-      paymentType: urlParams.paymentType,
-      currency: urlParams.currency,
-    });
-
-    navigate(url);
-  }
-
-  if (!premiumPack) {
+  const report = reports.find((it) => it.title === "Premium pack");
+  if (!report) {
     return null;
   }
 
   return (
-    <Box>
-      <TopNavigation />
-
-      <Container pb={10} pt={3}>
-        <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
-
-          {hasPurchasedReport ? (
-            <StepCompletedView onContinue={navigateToNextStep} />
-          ) : (
-            <StepIncompletedView
-              report={premiumPack}
-              onSkip={handleSkip}
-              onPurchase={handlePurchase}
-              isPaymentLoading={request.state === "loading"}
-            />
-          )}
-        </Stack>
-      </Container>
-    </Box>
+    <OnboardingLayout activeStepIdx={1}>
+      {hasPurchasedReport ? (
+        <SuccessfulPurchaseView
+          title="🥰 You have successfully purchased the report"
+          onContinue={navigateToNextPage}
+        />
+      ) : (
+        <Content
+          report={report}
+          onSkip={() => {
+            sessionCache.setReport({ status: "initial" });
+            navigateToNextPage();
+          }}
+          onPurchase={(it) => {
+            sessionCache.setReport({ status: "purchase-started", productID: it.productID });
+            navigateToNextPage();
+          }}
+        />
+      )}
+    </OnboardingLayout>
   );
 }
 
-function StepCompletedView({ onContinue }: { onContinue: () => void }) {
-  return (
-    <Stack spacing={5}>
-      <Text fontSize={"xl"} fontWeight={"bold"}>
-        🥰 You have successfully purchased the report
-      </Text>
-
-      <Button size={"lg"} py={7} colorScheme="brand" onClick={onContinue}>
-        <Text fontSize={["sm", "md"]}>Continue</Text>
-      </Button>
-    </Stack>
-  );
-}
-
-function StepIncompletedView({
+function Content({
   report,
   onSkip,
   onPurchase,
-  isPaymentLoading,
 }: {
   report: Reports[0];
   onSkip: () => void;
-  onPurchase: () => void;
-  isPaymentLoading: boolean;
+  onPurchase: (report: Reports[0]) => void;
 }) {
   return (
     <Stack spacing={6}>
@@ -204,8 +122,7 @@ function StepIncompletedView({
             py={7}
             colorScheme="yellow"
             width={"full"}
-            onClick={onPurchase}
-            isLoading={isPaymentLoading}
+            onClick={() => onPurchase(report)}
             animation={`${CTAPulse} 1.2s infinite`}
           >
             <Text fontSize={["md"]}>Get Extra Reports 🎉</Text>
@@ -232,82 +149,4 @@ function StepIncompletedView({
       </Stack>
     </Stack>
   );
-}
-
-const CTAPulse = keyframes`
-  0% {
-    box-shadow: 0px 0px 0px 0px var(--chakra-colors-yellow-200);
-  }
-  50% {
-    box-shadow: 0px 0px 0px 12px var(--chakra-colors-yellow-200);
-  }
-  100% {
-    box-shadow: 0px 0px 0px 12px transparent;
-  }
-`;
-
-function usePayment(): [RequestType, (report: Reports[0]) => Promise<void>] {
-  const { userProfile } = useGlobalState2();
-  const stripe = useStripe();
-
-  const [request, setRequest] = React.useState<RequestType>({
-    state: "initial",
-  });
-
-  async function submit(report: Reports[0]) {
-    if (!userProfile || !stripe) {
-      console.warn("data missing for report purchase setup");
-      return;
-    }
-
-    if (request.state !== "initial") {
-      return;
-    }
-
-    setRequest({ state: "loading" });
-
-    try {
-      const payment = await eden("/payments/createOneTimePayment", {
-        method: "POST",
-        body: {
-          userID: userProfile.id,
-          productID: report.productID,
-        },
-      });
-
-      if (payment.error) {
-        setRequest({
-          state: "error",
-          error: payment.error.message,
-        });
-
-        return;
-      }
-
-      const urlParams = parseURLParams<{
-        pricePaid: number;
-        currency: string;
-        paymentType: string;
-        planID: string;
-      }>(window.location.href);
-
-      trackPosthogPurchaseEvent({
-        name: "purchase",
-        properties: {
-          currency: urlParams.currency ?? undefined,
-          value: report.unit_amount / 100,
-          paymentType: urlParams.paymentType ?? undefined,
-          contentType: "one-time",
-          contentIDs: [report.productID],
-        },
-      });
-
-      setRequest({ state: "ok" });
-    } catch (err) {
-      console.error(err);
-      setRequest({ state: "error", error: String(err) });
-    }
-  }
-
-  return [request, submit];
 }

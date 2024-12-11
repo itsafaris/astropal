@@ -25,7 +25,7 @@ export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }
   const isFunnelPathname = /\/face-reading\/.+/.test(location.pathname);
   const isFunnelOnboardingPathname = location.pathname.includes("/face-reading/success-checkout");
 
-  if (isFunnelPathname && !isFunnelOnboardingPathname && sessionCache.hasPurchasedTrial()) {
+  if (isFunnelPathname && !isFunnelOnboardingPathname && sessionCache.hasConverted()) {
     navigate(createProductURL());
     return;
   }

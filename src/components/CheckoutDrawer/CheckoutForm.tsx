@@ -14,9 +14,10 @@ import { ErrorView, LoadingView } from "./components";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { eden } from "@utils/coreApi";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
-import { createExternalURL } from "@components/onboarding/utils";
+import { createCheckoutRedirectURL } from "@components/onboarding/utils";
+import { useOnboardingRouter } from "@components/onboarding/useOnboardingRouter";
 
-export type RequestType =
+type RequestType =
   | {
       state: "initial";
     }
@@ -32,10 +33,10 @@ export type RequestType =
     };
 
 export function CheckoutForm({ plan }: { plan: OneTimeFeePrice }) {
+  const [payment, submitPayment] = usePayment(plan);
   const [paymentType, setPaymentType] = React.useState<"card" | "initial">("initial");
   const [expressCheckoutReady, setExpressCheckoutReady] = React.useState(false);
   const [cardCheckoutReady, setCardCheckoutReady] = React.useState(false);
-  const [payment, submitPayment] = usePayment(plan);
 
   const isReady = cardCheckoutReady && expressCheckoutReady;
 
@@ -128,6 +129,7 @@ function usePayment(
   plan: OneTimeFeePrice
 ): [RequestType, (type: "express" | "card") => Promise<void>] {
   const planRef = React.useRef(plan);
+  const { routes } = useOnboardingRouter();
   const stripe = useStripe();
   const elements = useElements();
   const { userProfile, selectedPricingPlan, trialPricingPlan } = useGlobalState2();
@@ -149,7 +151,7 @@ function usePayment(
 
     setRequest({ state: "loading" });
 
-    const redirectUrl = createExternalURL("/face-reading/success-checkout/onboarding-reports-1", {
+    const redirectUrl = createCheckoutRedirectURL(routes.START, {
       paymentType: type,
       pricePaid: planRef.current.unit_amount,
       currency: planRef.current.currency,

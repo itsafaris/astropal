@@ -7,7 +7,6 @@ import {
   Grid,
   Heading,
   Icon,
-  Image,
   Stack,
   Text,
   VStack,

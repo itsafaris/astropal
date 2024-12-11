@@ -1,176 +1,59 @@
-import { Box, Button, Container, Flex, Grid, Icon, Image, Stack, Text } from "@chakra-ui/react";
-import { TopNavigation } from "@components/topnavigation";
+import { Button, Flex, Grid, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-
-import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
-import { FaCheck } from "react-icons/fa";
-import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
-import { navigate } from "gatsby";
-import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
-import { eden, Reports } from "@utils/coreApi";
 import {
-  gaTrackPaidTrialPurchaseConversion,
-  trackPixelEvent,
-  trackPosthogPurchaseEvent,
-} from "@utils/tracking";
-import { useStripe } from "@stripe/react-stripe-js";
+  useOnboardingRouter,
+  CTAPulse,
+  SuccessfulPurchaseView,
+  OnboardingLayout,
+} from "@components/onboarding";
+import { FaCheck } from "react-icons/fa";
+import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { Reports } from "@utils/coreApi";
 import { sessionCache } from "src/sessionCache";
-import { keyframes } from "@emotion/react";
-
-export type RequestType =
-  | {
-      state: "initial";
-    }
-  | {
-      state: "loading";
-    }
-  | {
-      state: "ok";
-    }
-  | {
-      state: "error";
-      error: string;
-    };
 
 const SKIP_OFFER_ID = "skip";
 
 export default function Page() {
   const { reports } = useGlobalState2();
-  const [request, submit] = usePayment();
-  const [hasPurchasedReport, setHasPurchasedReport] = React.useState<boolean>(false);
+  const { navigateToNextPage } = useOnboardingRouter();
+  const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchasedReport(sessionCache.hasPurchasedReport());
+    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
   }, []);
-
-  React.useEffect(() => {
-    const hasPurchasedTrial = sessionCache.hasPurchasedTrial();
-    const urlParams = parseURLParams<{
-      pricePaid: number;
-      currency: string;
-      paymentType: string;
-      planID: string;
-    }>(window.location.href);
-
-    if (!hasPurchasedTrial) {
-      const pricePaid = (urlParams.pricePaid ?? 0) / 100;
-
-      trackPixelEvent("Purchase", {
-        currency: urlParams.currency,
-        value: pricePaid,
-        paymentType: urlParams.paymentType,
-        planID: urlParams.planID,
-      });
-
-      gaTrackPaidTrialPurchaseConversion({
-        value: pricePaid,
-        currency: urlParams.currency ?? "",
-      });
-
-      trackPosthogPurchaseEvent({
-        name: "purchase",
-        properties: {
-          currency: urlParams.currency ?? undefined,
-          value: pricePaid,
-          paymentType: urlParams.paymentType ?? undefined,
-          contentType: "trial",
-          contentIDs: [urlParams.planID ?? ""],
-        },
-      });
-
-      // There's a piece of code in the gatsby-browser file that tracks routes of the `face-reading` funnel
-      // and automatically redirects users if it detects that they have purchased the product.
-      // In this case, the purchase status is set to true before that route check occurs.
-      // We want the opposite behavior to avoid automatic redirection when a user visits this page for the first time after a successful purchase.
-      setTimeout(sessionCache.setPurchasedTrial, 0);
-    }
-  }, []);
-
-  function handleSkip() {
-    const urlParams = parseURLParams<{
-      currency: string;
-      paymentType: string;
-    }>(window.location.href);
-
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-2", {
-      paymentType: urlParams.paymentType,
-      currency: urlParams.currency,
-    });
-
-    navigate(url);
-  }
-
-  async function handlePurchase(report: Reports[0]) {
-    await submit(report);
-
-    sessionCache.setPurchasedReport();
-
-    navigateToNextStep();
-  }
-
-  function navigateToNextStep() {
-    const urlParams = parseURLParams<{
-      currency: string;
-      paymentType: string;
-    }>(window.location.href);
-
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-time", {
-      paymentType: urlParams.paymentType,
-      currency: urlParams.currency,
-    });
-
-    navigate(url);
-  }
 
   return (
-    <Box>
-      <TopNavigation />
-
-      <Container pb={10} pt={3}>
-        <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
-
-          {hasPurchasedReport ? (
-            <StepCompletedView onContinue={navigateToNextStep} />
-          ) : (
-            <StepIncompletedView
-              reports={reports}
-              onSkip={handleSkip}
-              onPurchase={handlePurchase}
-              isPaymentLoading={request.state === "loading"}
-            />
-          )}
-        </Stack>
-      </Container>
-    </Box>
+    <OnboardingLayout activeStepIdx={1}>
+      {hasPurchased ? (
+        <SuccessfulPurchaseView
+          title="🥰 You have successfully purchased the report"
+          onContinue={navigateToNextPage}
+        />
+      ) : (
+        <Content
+          reports={reports}
+          onSkip={() => {
+            sessionCache.setReport({ status: "initial" });
+            navigateToNextPage();
+          }}
+          onPurchase={(it) => {
+            sessionCache.setReport({ status: "purchase-started", productID: it.productID });
+            navigateToNextPage();
+          }}
+        />
+      )}
+    </OnboardingLayout>
   );
 }
 
-function StepCompletedView({ onContinue }: { onContinue: () => void }) {
-  return (
-    <Stack spacing={5}>
-      <Text fontSize={"xl"} fontWeight={"bold"}>
-        🥰 You have successfully purchased the report
-      </Text>
-
-      <Button size={"lg"} py={7} colorScheme="brand" onClick={onContinue}>
-        <Text fontSize={["sm", "md"]}>Continue</Text>
-      </Button>
-    </Stack>
-  );
-}
-
-function StepIncompletedView({
+function Content({
   reports,
   onSkip,
   onPurchase,
-  isPaymentLoading,
 }: {
   reports: Reports;
   onSkip: () => void;
   onPurchase: (report: Reports[0]) => void;
-  isPaymentLoading: boolean;
 }) {
   const [selectedReportID, setSelectedReportID] = React.useState<string | undefined>();
 
@@ -199,8 +82,6 @@ function StepIncompletedView({
 
   return (
     <Stack>
-      <SpecialOfferBadge icon="🥰" title="Thank you!" text="Your order was successful!" />
-
       <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
         Choose your sign-up offer 🔥
       </Text>
@@ -229,7 +110,6 @@ function StepIncompletedView({
       </Stack>
 
       <Button
-        isLoading={isPaymentLoading}
         size={"lg"}
         py={7}
         colorScheme="yellow"
@@ -250,18 +130,6 @@ function StepIncompletedView({
     </Stack>
   );
 }
-
-const CTAPulse = keyframes`
-  0% {
-    box-shadow: 0px 0px 0px 0px var(--chakra-colors-yellow-200);
-  }
-  50% {
-    box-shadow: 0px 0px 0px 12px var(--chakra-colors-yellow-200);
-  }
-  100% {
-    box-shadow: 0px 0px 0px 12px transparent;
-  }
-`;
 
 function ReportCard({
   isSelected,
@@ -429,70 +297,4 @@ function SkipCard({
       </Stack>
     </Flex>
   );
-}
-
-function usePayment(): [RequestType, (report: Reports[0]) => Promise<void>] {
-  const { userProfile } = useGlobalState2();
-  const stripe = useStripe();
-
-  const [request, setRequest] = React.useState<RequestType>({
-    state: "initial",
-  });
-
-  async function submit(report: Reports[0]) {
-    if (!userProfile || !stripe) {
-      console.warn("data missing for report purchase setup");
-      return;
-    }
-
-    if (request.state !== "initial") {
-      return;
-    }
-
-    setRequest({ state: "loading" });
-
-    try {
-      const payment = await eden("/payments/createOneTimePayment", {
-        method: "POST",
-        body: {
-          userID: userProfile.id,
-          productID: report.productID,
-        },
-      });
-
-      if (payment.error) {
-        setRequest({
-          state: "error",
-          error: payment.error.message,
-        });
-
-        return;
-      }
-
-      const urlParams = parseURLParams<{
-        pricePaid: number;
-        currency: string;
-        paymentType: string;
-        planID: string;
-      }>(window.location.href);
-
-      trackPosthogPurchaseEvent({
-        name: "purchase",
-        properties: {
-          currency: urlParams.currency ?? undefined,
-          value: report.unit_amount / 100,
-          paymentType: urlParams.paymentType ?? undefined,
-          contentType: "one-time",
-          contentIDs: [report.productID],
-        },
-      });
-
-      setRequest({ state: "ok" });
-    } catch (err) {
-      console.error(err);
-      setRequest({ state: "error", error: String(err) });
-    }
-  }
-
-  return [request, submit];
 }

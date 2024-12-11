@@ -1,41 +1,24 @@
-import { Box, Button, Container, Flex, Icon, Stack, Text } from "@chakra-ui/react";
-import { TopNavigation } from "@components/topnavigation";
-
+import { Box, Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
-import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
-import { navigate } from "gatsby";
-import { SpecialOfferBadge } from "@components/onboarding/SpecialOfferBadge";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
-import { useStripe } from "@stripe/react-stripe-js";
-import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
 import React from "react";
-import { eden, TrialPricingPlan } from "@utils/coreApi";
-import { trackPosthogPurchaseEvent } from "@utils/tracking";
+import { TrialPricingPlan } from "@utils/coreApi";
 import { sessionCache } from "src/sessionCache";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
-
-export type RequestType =
-  | {
-      state: "initial";
-    }
-  | {
-      state: "loading";
-    }
-  | {
-      state: "ok";
-    }
-  | {
-      state: "error";
-      error: string;
-    };
+import {
+  OnboardingLayout,
+  SuccessfulPurchaseView,
+  useOnboardingRouter,
+  usePurchaseSubscription,
+} from "@components/onboarding";
 
 export default function Page() {
   const { trialPricingPlan } = useGlobalState2();
 
   if (!trialPricingPlan) {
-    console.error("missing trial pricing plan");
+    console.error("Skip trial 2: trial pricing plan is missing");
     return null;
   }
 
@@ -43,77 +26,37 @@ export default function Page() {
 }
 
 function PageContent({ plan }: { plan: TrialPricingPlan }) {
-  const [request, submit] = usePayment(plan);
-  const [hasPurchasedSubscription, setHasPurchasedSubscription] = React.useState<boolean>(false);
+  const [request, submit] = usePurchaseSubscription(plan);
+  const { navigateToNextPage } = useOnboardingRouter();
+  const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchasedSubscription(sessionCache.hasPurchasedSubscription());
+    setHasPurchased(sessionCache.getSubscription().status === "purchase-finalized");
   }, []);
 
-  async function handleStartSubscription() {
-    await submit();
-
-    sessionCache.setPurchasedSubscription();
-
-    navigateToNextStep();
-  }
-
-  function handleStartTrial() {
-    navigateToNextStep();
-  }
-
-  function navigateToNextStep() {
-    const urlParams = parseURLParams<{
-      currency: string;
-      paymentType: string;
-    }>(window.location.href);
-
-    const url = createInternalURL("/face-reading/success-checkout/onboarding-product", {
-      paymentType: urlParams.paymentType,
-      currency: urlParams.currency,
-    });
-
-    navigate(url);
-  }
-
   return (
-    <Box>
-      <TopNavigation />
-
-      <Container pb={10} pt={3}>
-        <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={2} />
-
-          {hasPurchasedSubscription ? (
-            <StepCompletedView onContinue={navigateToNextStep} />
-          ) : (
-            <StepIncompletedView
-              onStartTrial={handleStartTrial}
-              onStartSubscription={handleStartSubscription}
-              isPaymentLoading={request.state === "loading"}
-            />
-          )}
-        </Stack>
-      </Container>
-    </Box>
+    <OnboardingLayout activeStepIdx={2}>
+      {hasPurchased ? (
+        <SuccessfulPurchaseView
+          title="🥰 You have successfully purchased the subscription"
+          onContinue={navigateToNextPage}
+        />
+      ) : (
+        <Content
+          onStartTrial={navigateToNextPage}
+          onStartSubscription={async () => {
+            await submit();
+            sessionCache.setSubscription({ status: "purchase-finalized" });
+            navigateToNextPage();
+          }}
+          isPaymentLoading={request.state === "loading"}
+        />
+      )}
+    </OnboardingLayout>
   );
 }
 
-function StepCompletedView({ onContinue }: { onContinue: () => void }) {
-  return (
-    <Stack spacing={5}>
-      <Text fontSize={"xl"} fontWeight={"bold"}>
-        🥰 You have successfully purchased the subscription
-      </Text>
-
-      <Button size={"lg"} py={7} colorScheme="brand" onClick={onContinue}>
-        <Text fontSize={["sm", "md"]}>Continue</Text>
-      </Button>
-    </Stack>
-  );
-}
-
-function StepIncompletedView({
+function Content({
   onStartTrial,
   onStartSubscription,
   isPaymentLoading,
@@ -215,80 +158,4 @@ function StepIncompletedView({
       </Stack>
     </Stack>
   );
-}
-
-function usePayment(plan: TrialPricingPlan): [RequestType, () => Promise<void>] {
-  const { userProfile } = useGlobalState2();
-  const stripe = useStripe();
-
-  const [request, setRequest] = React.useState<RequestType>({
-    state: "initial",
-  });
-
-  async function submit() {
-    if (!userProfile || !stripe) {
-      console.warn("data missing for subscription setup");
-      return;
-    }
-
-    if (request.state !== "initial") {
-      return;
-    }
-
-    setRequest({ state: "loading" });
-
-    try {
-      const subscription = await eden("/payments/updateSubscription", {
-        method: "POST",
-        body: {
-          userID: userProfile.id,
-          priceID: plan.recurring.priceID,
-          couponID: plan.recurring.coupon?.id,
-        },
-      });
-
-      if (subscription.error) {
-        setRequest({
-          state: "error",
-          error: subscription.error.message,
-        });
-
-        return;
-      }
-
-      if (!subscription.data) {
-        setRequest({
-          state: "error",
-          error: "missing payment intent data",
-        });
-
-        return;
-      }
-
-      const urlParams = parseURLParams<{
-        pricePaid: number;
-        currency: string;
-        paymentType: string;
-        planID: string;
-      }>(window.location.href);
-
-      trackPosthogPurchaseEvent({
-        name: "purchase",
-        properties: {
-          currency: urlParams.currency ?? undefined,
-          value: plan.recurring.unit_amount / 100,
-          paymentType: urlParams.paymentType ?? undefined,
-          contentType: "subscription",
-          contentIDs: [plan.recurring.priceID],
-        },
-      });
-
-      setRequest({ state: "ok" });
-    } catch (err) {
-      console.error(err);
-      setRequest({ state: "error", error: String(err) });
-    }
-  }
-
-  return [request, submit];
 }

@@ -1,70 +1,37 @@
-import { Box, Button, Container, Stack, Text } from "@chakra-ui/react";
-import { TopNavigation } from "@components/topnavigation";
-
-import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
-import { navigate } from "gatsby";
-import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
+import { Button, Stack, Text } from "@chakra-ui/react";
 import { Time, TimePicker } from "@components/TimePicker";
 import { eden } from "@utils/coreApi";
 import React from "react";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { createTime } from "@utils/dates";
+import { useOnboardingRouter } from "@components/onboarding/useOnboardingRouter";
+import { OnboardingLayout, RequestType, SuccessfulPurchaseView } from "@components/onboarding";
+import { sessionCache } from "src/sessionCache";
 
 export default function Page() {
-  const { userProfile } = useGlobalState2();
+  const { navigateToNextPage } = useOnboardingRouter();
   const [time, setTime] = React.useState<Time | null>(null);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { submit, request } = useSubmit(time);
+  const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
-  async function submit() {
-    if (!userProfile || !time) {
-      return;
-    }
-
-    const timeTransformed = createTime(time);
-
-    try {
-      setIsLoading(true);
-
-      await eden(`/updateUserProfile`, {
-        method: "POST",
-        body: {
-          id: userProfile.id,
-          dob_local_hour: timeTransformed.time24.hour,
-          dob_local_minute: timeTransformed.time24.minute,
-        },
-      });
-
-      setIsLoading(false);
-
-      const urlParams = parseURLParams<{
-        currency: string;
-        paymentType: string;
-      }>(window.location.href);
-
-      const url = createInternalURL("/face-reading/success-checkout/onboarding-reports-location", {
-        paymentType: urlParams.paymentType,
-        currency: urlParams.currency,
-      });
-
-      navigate(url);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  React.useEffect(() => {
+    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
+  }, []);
 
   return (
-    <Box>
-      <TopNavigation />
-
-      <Container pb={10} pt={3}>
-        <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
-
+    <OnboardingLayout activeStepIdx={1}>
+      {hasPurchased ? (
+        <SuccessfulPurchaseView
+          title="🥰 You have successfully purchased the report"
+          onContinue={navigateToNextPage}
+        />
+      ) : (
+        <Stack spacing={6}>
           <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
             To help us prepare your report, could you please let us know your time of birth?
           </Text>
 
-          <TimePicker onSelect={(res) => setTime(res)} />
+          <TimePicker onSelect={setTime} />
 
           <Button
             size={"lg"}
@@ -73,12 +40,55 @@ export default function Page() {
             flexGrow={1}
             mt={2}
             onClick={submit}
-            isLoading={isLoading}
+            isLoading={request.state === "loading"}
           >
             <Text fontSize={["sm", "md"]}>Continue</Text>
           </Button>
         </Stack>
-      </Container>
-    </Box>
+      )}
+    </OnboardingLayout>
   );
+}
+
+function useSubmit(time: Time | null) {
+  const { userProfile } = useGlobalState2();
+  const { navigateToNextPage } = useOnboardingRouter();
+
+  const [request, setRequest] = React.useState<RequestType>({
+    state: "initial",
+  });
+
+  async function submit() {
+    try {
+      if (!userProfile || !time) {
+        throw new Error("data is missing");
+      }
+
+      setRequest({ state: "loading" });
+
+      const timeTransformed = createTime(time);
+      const res = await eden(`/updateUserProfile`, {
+        method: "POST",
+        body: {
+          id: userProfile.id,
+          dob_local_hour: timeTransformed.time24.hour,
+          dob_local_minute: timeTransformed.time24.minute,
+        },
+      });
+
+      if (res.error) {
+        throw new Error("failed to update user profile");
+      }
+
+      setRequest({ state: "ok" });
+
+      navigateToNextPage();
+    } catch (err) {
+      const msg = `Report time: ${String(err)}`;
+      console.error(msg);
+      setRequest({ state: "error", error: msg });
+    }
+  }
+
+  return { request, submit };
 }

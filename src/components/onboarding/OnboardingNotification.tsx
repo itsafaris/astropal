@@ -1,6 +1,6 @@
 import { Flex, Stack, Text } from "@chakra-ui/react";
 
-export function SpecialOfferBadge({
+export function OnboardingNotification({
   icon,
   title,
   text,

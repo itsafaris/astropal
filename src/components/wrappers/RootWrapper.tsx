@@ -59,12 +59,12 @@ export const useGlobalUpdate2 = () => React.useContext(GlobalUpdateContext);
 
 /** Wraps every page but is not re-mounted when chaning pages */
 export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
+  const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
   const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
   const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
     pricingPlans: [],
     reports: [],
   });
-  const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
 
   function setInGlobalState(id: string, value: (value: any) => any) {
     setGlobalState((s) => ({ ...globalState, [id]: value(s[id]) }));

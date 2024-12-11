@@ -1,16 +1,38 @@
 type UserSession = {
-  hasPurchasedTrial: boolean;
-  hasPurchasedSubscription: boolean;
-  hasPurchasedReport: boolean;
   hasFinishedOnboarding: boolean;
+  hasConverted: boolean;
+  conversionDetails: ConversionDetails;
+  report: Report;
+  subscription: Subscription;
+};
+
+type Report =
+  | {
+      status: "initial";
+    }
+  | {
+      status: "purchase-started" | "purchase-finalized";
+      productID: string;
+    };
+
+type Subscription = {
+  status: "initial" | "purchase-finalized";
+};
+
+type ConversionDetails = {
+  paymentType?: string;
+  value?: number;
+  currency?: string;
+  planID?: string;
 };
 
 const KEY = "intuvist-user-session";
 const DEFAULT_SESSION: UserSession = {
-  hasPurchasedTrial: false,
-  hasPurchasedSubscription: false,
-  hasPurchasedReport: false,
   hasFinishedOnboarding: false,
+  hasConverted: false,
+  conversionDetails: {},
+  report: { status: "initial" },
+  subscription: { status: "initial" },
 };
 
 function setSession(input: Partial<UserSession>) {
@@ -43,12 +65,14 @@ function createNewCache(): void {
 
 export const sessionCache = {
   createNewCache,
-  hasPurchasedTrial: () => getSession().hasPurchasedTrial,
-  hasPurchasedSubscription: () => getSession().hasPurchasedSubscription,
-  hasPurchasedReport: () => getSession().hasPurchasedReport,
+  hasConverted: () => getSession().hasConverted,
+  setHasConverted: () => setSession({ hasConverted: true }),
+  getConversionDetails: () => getSession().conversionDetails,
+  setConversionDetails: (conversionDetails: ConversionDetails) => setSession({ conversionDetails }),
   hasFinishedOnboarding: () => getSession().hasFinishedOnboarding,
-  setPurchasedTrial: () => setSession({ hasPurchasedTrial: true }),
-  setPurchasedSubscription: () => setSession({ hasPurchasedSubscription: true }),
-  setPurchasedReport: () => setSession({ hasPurchasedReport: true }),
-  setFinishedOnboarding: () => setSession({ hasFinishedOnboarding: true }),
+  setHasFinishedOnboarding: () => setSession({ hasFinishedOnboarding: true }),
+  getReport: () => getSession().report,
+  setReport: (report: Report) => setSession({ report }),
+  getSubscription: () => getSession().subscription,
+  setSubscription: (subscription: Subscription) => setSession({ subscription }),
 };

@@ -1,28 +1,89 @@
-import { Box, Button, Container, Stack, Text } from "@chakra-ui/react";
-import { TopNavigation } from "@components/topnavigation";
-
-import { SpecialOfferSteps } from "@components/onboarding/SpecialOfferSteps";
-import { navigate } from "gatsby";
-import { createInternalURL, parseURLParams } from "@components/onboarding/utils";
+import { Button, Stack, Text } from "@chakra-ui/react";
+import {
+  useOnboardingRouter,
+  RequestType,
+  OnboardingLayout,
+  SuccessfulPurchaseView,
+} from "@components/onboarding";
 import { LocationPicker, LocationValue } from "@components/LocationPicker";
 import React from "react";
 import { eden } from "@utils/coreApi";
 import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { trackPosthogPurchaseEvent } from "@utils/tracking";
+import { useStripe } from "@stripe/react-stripe-js";
+import { sessionCache } from "src/sessionCache";
 
 export default function Page() {
-  const { userProfile } = useGlobalState2();
+  const { navigateToNextPage } = useOnboardingRouter();
   const [location, setLocation] = React.useState<LocationValue | null>(null);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { submit, request } = useSubmit(location);
+  const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
+  }, []);
+
+  return (
+    <OnboardingLayout activeStepIdx={1}>
+      {hasPurchased ? (
+        <SuccessfulPurchaseView
+          title="🥰 You have successfully purchased the report"
+          onContinue={navigateToNextPage}
+        />
+      ) : (
+        <Stack spacing={6}>
+          <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
+            Could you please share your exact place of birth?
+          </Text>
+
+          <LocationPicker onSelect={setLocation} />
+
+          <Button
+            size={"lg"}
+            py={7}
+            colorScheme="brand"
+            flexGrow={1}
+            mt={2}
+            onClick={submit}
+            disabled={!location}
+            isLoading={request.state === "loading"}
+          >
+            <Text fontSize={["sm", "md"]}>Continue</Text>
+          </Button>
+        </Stack>
+      )}
+    </OnboardingLayout>
+  );
+}
+
+function useSubmit(location: LocationValue | null) {
+  const stripe = useStripe();
+  const { userProfile, reports } = useGlobalState2();
+  const { navigateToNextPage } = useOnboardingRouter();
+
+  const [request, setRequest] = React.useState<RequestType>({
+    state: "initial",
+  });
 
   async function submit() {
-    if (!userProfile || !location) {
-      return;
-    }
-
     try {
-      setIsLoading(true);
+      const cachedReport = sessionCache.getReport();
+      if (cachedReport.status !== "purchase-started") {
+        throw new Error("report status is incorrect");
+      }
 
-      await eden(`/updateUserProfile`, {
+      const report = reports.find((it) => it.productID === cachedReport.productID);
+      if (!report) {
+        throw new Error("report is missing");
+      }
+
+      if (!userProfile || !location || !stripe) {
+        throw new Error("data is missing");
+      }
+
+      setRequest({ state: "loading" });
+
+      const res = await eden(`/updateUserProfile`, {
         method: "POST",
         body: {
           id: userProfile.id,
@@ -33,56 +94,46 @@ export default function Page() {
         },
       });
 
-      setIsLoading(false);
+      if (res.error) {
+        throw new Error("failed to update user profile");
+      }
 
-      const urlParams = parseURLParams<{
-        currency: string;
-        paymentType: string;
-      }>(window.location.href);
-
-      const url = createInternalURL("/face-reading/success-checkout/onboarding-skip-trial-1", {
-        paymentType: urlParams.paymentType,
-        currency: urlParams.currency,
+      const payment = await eden("/payments/createOneTimePayment", {
+        method: "POST",
+        body: {
+          userID: userProfile.id,
+          productID: report.productID,
+        },
       });
 
-      navigate(url);
+      if (payment.error) {
+        throw new Error("failed to create payment");
+      }
+
+      sessionCache.setReport({ status: "purchase-finalized", productID: report.productID });
+
+      const { currency, paymentType } = sessionCache.getConversionDetails();
+
+      trackPosthogPurchaseEvent({
+        name: "purchase",
+        properties: {
+          currency,
+          value: report.unit_amount / 100,
+          paymentType,
+          contentType: "one-time",
+          contentIDs: [report.productID],
+        },
+      });
+
+      setRequest({ state: "ok" });
+
+      navigateToNextPage();
     } catch (err) {
-      console.error(err);
+      const msg = `Report location: ${String(err)}`;
+      console.error(msg);
+      setRequest({ state: "error", error: msg });
     }
   }
 
-  function handleSelect(value: LocationValue) {
-    setLocation(value);
-  }
-
-  return (
-    <Box>
-      <TopNavigation />
-
-      <Container pb={10} pt={3}>
-        <Stack textAlign={"center"} spacing={6}>
-          <SpecialOfferSteps activeStepIdx={1} />
-
-          <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
-            Could you please share your exact place of birth?
-          </Text>
-
-          <LocationPicker onSelect={handleSelect} />
-
-          <Button
-            size={"lg"}
-            py={7}
-            colorScheme="brand"
-            flexGrow={1}
-            mt={2}
-            onClick={submit}
-            disabled={!location}
-            isLoading={isLoading}
-          >
-            <Text fontSize={["sm", "md"]}>Continue</Text>
-          </Button>
-        </Stack>
-      </Container>
-    </Box>
-  );
+  return { request, submit };
 }
