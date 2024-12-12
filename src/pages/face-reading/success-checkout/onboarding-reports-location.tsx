@@ -107,6 +107,8 @@ function useSubmit(location: LocationValue | null) {
       });
 
       if (payment.error) {
+        //FIXME: this is  hack to allow user to proceed even if they dont have money
+        navigateToNextPage();
         throw new Error("failed to create payment");
       }
 
