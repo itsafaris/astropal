@@ -1,7 +1,6 @@
 import { Container, Stack, StackProps, TextProps, Text as TextRaw } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
-
-import { APP_DATA } from "src/data";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
 
 function Headline(props: TextProps) {
   return <TextRaw textAlign={"left"} fontSize={"3xl"} fontWeight={"bold"} {...props} />;
@@ -20,6 +19,8 @@ function Text(props: TextProps) {
 }
 
 export default function ContactsPage() {
+  const meta = useSiteMetadata();
+
   return (
     <Stack>
       <TopNavigation />
@@ -36,8 +37,8 @@ export default function ContactsPage() {
               We answer all of the emails within 24-72 hours (including weekends!)
             </Text>
 
-            <a style={{ color: "#005eed" }} href={`mailto:${APP_DATA.email}`}>
-              {APP_DATA.email}
+            <a style={{ color: "#005eed" }} href={`mailto:${meta.email}`}>
+              {meta.email}
             </a>
           </Section>
 
@@ -46,8 +47,8 @@ export default function ContactsPage() {
 
             <Text>If you are a content creator or affiliate and would like to work with us:</Text>
 
-            <a style={{ color: "#005eed" }} href={`mailto:${APP_DATA.email}`}>
-              {APP_DATA.email}
+            <a style={{ color: "#005eed" }} href={`mailto:${meta.email}`}>
+              {meta.email}
             </a>
           </Section>
           <Section>
@@ -55,8 +56,8 @@ export default function ContactsPage() {
 
             <Text>If you want to share any feedback with us or just to say a good word:</Text>
 
-            <a style={{ color: "#005eed" }} href={`mailto:${APP_DATA.email}`}>
-              {APP_DATA.email}
+            <a style={{ color: "#005eed" }} href={`mailto:${meta.email}`}>
+              {meta.email}
             </a>
           </Section>
         </Stack>

@@ -3,14 +3,15 @@ import {
   ListItem,
   Stack,
   StackProps,
+  textDecoration,
   TextProps,
   Text as TextRaw,
   UnorderedList,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link as LinkRaw } from "gatsby";
-import { APP_DATA } from "src/data";
 import { TopNavigation } from "@components/topnavigation";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
 
 function Headline(props: TextProps) {
   return <TextRaw textAlign={"left"} fontSize={"3xl"} fontWeight={"bold"} {...props} />;
@@ -31,7 +32,7 @@ function Text(props: TextProps) {
 function Link({ to, children }: { to: string } & React.PropsWithChildren) {
   return (
     <LinkRaw to={to}>
-      <Text as="span" color="blue.300">
+      <Text as="span" textDecoration="none">
         {children}
       </Text>
     </LinkRaw>
@@ -39,6 +40,8 @@ function Link({ to, children }: { to: string } & React.PropsWithChildren) {
 }
 
 export default function TermsAndConditionsPage() {
+  const meta = useSiteMetadata();
+
   return (
     <Stack>
       <TopNavigation />
@@ -51,28 +54,26 @@ export default function TermsAndConditionsPage() {
             <TitleXL>1. Descriptions</TitleXL>
 
             <Text>
-              These Terms of Use ("Terms") govern the use of {APP_DATA.productName}. Carefully read
+              These Terms of Use ("Terms") govern the use of {meta.brandName}. Carefully read
               through them. By clicking the “Start now” button or accessing any
               screen/feature/button associated with these Terms and agreeing to them, you consent to
               comply with these Terms.
             </Text>
 
-            <Text>
-              If you disagree with any part of these Terms, do not use {APP_DATA.productName}.
-            </Text>
+            <Text>If you disagree with any part of these Terms, do not use {meta.brandName}.</Text>
 
             <Text>
               – THESE TERMS INCLUDE AN ARBITRATION AGREEMENT, REQUIRING INDIVIDUAL DISPUTE
               RESOLUTION THROUGH ARBITRATION, NOT IN COURT. THERE IS NO JUDGE OR JURY IN ARBITRATION
               AND REVIEW IS LIMITED. ARBITRATION IS THE ONLY DISPUTE RESOLUTION METHOD FOR ISSUES
-              RELATED TO YOUR USE OF {APP_DATA.productName}, EXCEPT FOR SPECIFIC EXCEPTIONS DETAILED
-              BELOW (YOU CAN OPT-OUT OF THE ARBITRATION AGREEMENT, INCLUDING CLASS ACTION WAIVERS,
-              WITHIN 30 DAYS OF ACCEPTING THESE TERMS).
+              RELATED TO YOUR USE OF {meta.brandName.toUpperCase()}, EXCEPT FOR SPECIFIC EXCEPTIONS
+              DETAILED BELOW (YOU CAN OPT-OUT OF THE ARBITRATION AGREEMENT, INCLUDING CLASS ACTION
+              WAIVERS, WITHIN 30 DAYS OF ACCEPTING THESE TERMS).
             </Text>
 
             <Text>
-              – YOUR SUBSCRIPTION TO {APP_DATA.productName.toUpperCase()} WILL AUTOMATICALLY RENEW
-              UNLESS YOU CANCEL, AS EXPLAINED FURTHER BELOW.
+              – YOUR SUBSCRIPTION TO {meta.brandName.toUpperCase()} WILL AUTOMATICALLY RENEW UNLESS
+              YOU CANCEL, AS EXPLAINED FURTHER BELOW.
             </Text>
 
             <Stack>
@@ -108,9 +109,8 @@ export default function TermsAndConditionsPage() {
               </Text>
               <Text>
                 1.7. “Webapp” is the website used by the Buyer for purchasing Content/Additional
-                Content under these Terms (
-                <Link to={APP_DATA.webapp.title}>{APP_DATA.webapp.url}</Link>
-                ).
+                Content under these Terms. Located at{" "}
+                <Link to={meta.webapp.url}>{meta.webapp.title}</Link>.
               </Text>
               <Text>
                 1.8. “Order” indicates the Buyer's request to purchase Content/Additional
@@ -123,15 +123,14 @@ export default function TermsAndConditionsPage() {
                 purchasable for an additional fee by Buyers with a subscription to the Content.
               </Text>
               <Text>
-                1.12. “Privacy Policy” is the privacy policy available at (
-                <Link to={APP_DATA.website.title}>{APP_DATA.website.url}</Link>
-                ).
+                1.12. “Privacy Policy” is the privacy policy available at{" "}
+                <Link to={`${meta.website.url}/privacy-policy`}>Privacy Policy</Link>.
               </Text>
               <Text>
                 1.13.“Seller, the Company” refers to a company MB Vrm datalabs, registered under
                 company code 307004972, with its principal office located at Ragainės str. 3-15,
-                LT-92196 Klaipėda, Lithuania, contactable via email at {APP_DATA.email}. The
-                Seller's information is recorded in the Register of Legal Entities.
+                LT-92196 Klaipėda, Lithuania, contactable via email at {meta.email}. The Seller's
+                information is recorded in the Register of Legal Entities.
               </Text>
               <Text>
                 1.14. “Subscription” signifies a subscription to the Content for a period chosen by
@@ -145,9 +144,8 @@ export default function TermsAndConditionsPage() {
                 1.16. “Third Party” means any individual or entity not party to this Agreement.
               </Text>
               <Text>
-                1.17. “Website” refers to the site located at (
-                <Link to={APP_DATA.website.title}>{APP_DATA.website.url}</Link>
-                ).
+                1.17. “Website” refers to the site located at{" "}
+                <Link to={meta.website.url}>{meta.website.title}</Link>.
               </Text>
             </Stack>
           </Section>
@@ -373,7 +371,7 @@ export default function TermsAndConditionsPage() {
                 7.2. The Seller can change subscription prices for Content anytime, notifying the
                 Buyer via email or as per these Terms. If the Buyer disagrees with new prices, they
                 can cancel the subscription before changes take effect by notifying the Seller via
-                email at {APP_DATA.email}.
+                email at {meta.email}.
               </Text>
 
               <Text>
@@ -406,7 +404,7 @@ export default function TermsAndConditionsPage() {
 
               <Text>
                 7.9. The Buyer can cancel their subscription anytime, but no later than 24 hours
-                before automatic renewal, by emailing the Seller at {APP_DATA.email}.
+                before automatic renewal, by emailing the Seller at {meta.email}.
               </Text>
 
               <Text>
@@ -422,8 +420,8 @@ export default function TermsAndConditionsPage() {
               </Text>
 
               <Text>
-                - {APP_DATA.productName} plans are non-refundable as digital intellectual property
-                fully disclosed upon purchase.
+                - {meta.brandName} plans are non-refundable as digital intellectual property fully
+                disclosed upon purchase.
               </Text>
 
               <Text>
@@ -587,8 +585,8 @@ export default function TermsAndConditionsPage() {
                 11.1. Withdrawal: The Buyer can withdraw from the Agreement within 14 days without
                 reason, unless provision of Content/Additional Content/Services has started with
                 prior consent. Withdrawal period expires 14 days after Agreement conclusion. To
-                withdraw, the Buyer must notify the Seller via email to {APP_DATA.email}. Sending
-                notice before the 14-day period ends is sufficient.
+                withdraw, the Buyer must notify the Seller via email to {meta.email}. Sending notice
+                before the 14-day period ends is sufficient.
               </Text>
 
               <Text>
@@ -855,7 +853,7 @@ export default function TermsAndConditionsPage() {
 
             <Text>
               Should you have any inquiries regarding these Terms or the Services, feel free to
-              reach out to us at {APP_DATA.email}.
+              reach out to us at {meta.email}.
             </Text>
           </Section>
 

@@ -4,9 +4,17 @@ export type SiteMetadata = {
   brandName: string;
   title: string;
   version: string;
-  siteUrl: string;
   description: string;
   image: string;
+  email: string;
+  website: {
+    url: string;
+    title: string;
+  };
+  webapp: {
+    url: string;
+    title: string;
+  };
 };
 
 export const useSiteMetadata = (): SiteMetadata => {
@@ -17,9 +25,17 @@ export const useSiteMetadata = (): SiteMetadata => {
           brandName
           title
           version
-          siteUrl
           description
           image
+          email
+          website {
+            url
+            title
+          }
+          webapp {
+            url
+            title
+          }
         }
       }
     }

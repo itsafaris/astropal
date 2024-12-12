@@ -10,11 +10,19 @@ const config: GatsbyConfig = {
   siteMetadata: {
     brandName: "Intuvist",
     title: `Intuvist`,
-    siteUrl: isProd ? `https://www.intuvist.com` : "https://localhost:8000",
+    website: {
+      url: isProd ? `https://www.intuvist.com` : "https://localhost:8000",
+      title: "intuvist.com",
+    },
+    webapp: {
+      url: isProd ? `https://app.intuvist.com` : "https://localhost:3000",
+      title: "app.intuvist.com",
+    },
     version: pkgjson.version,
     image: "/images/meta_img.jpg",
     description:
       "Intuvist is your personalized face reading and astrology guide, offering tailored insights based on your birth details. Dive into daily forecasts, personal guidance, and inspirational wisdom, all designed to align closely with your individual path",
+    email: "info@intuvist.com",
   } satisfies SiteMetadata,
 
   flags: {

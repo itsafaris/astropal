@@ -13,14 +13,14 @@ export const SEO = ({ title, image, description, pathname, children }: SEOProps)
   const {
     title: defaultTitle,
     description: defaultDescription,
-    siteUrl,
+    website,
     image: defualtImage,
   } = useSiteMetadata();
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    url: `${siteUrl}${pathname || ``}`,
+    url: `${website.url}${pathname || ``}`,
     image: image ?? defualtImage,
     // twitterUsername,
   };

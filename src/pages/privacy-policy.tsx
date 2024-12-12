@@ -8,8 +8,8 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
+import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { Link as LinkRaw } from "gatsby";
-import { APP_DATA } from "src/data";
 
 function Headline(props: TextProps) {
   return <TextRaw textAlign={"left"} fontSize={"3xl"} fontWeight={"bold"} {...props} />;
@@ -34,14 +34,14 @@ function Text(props: TextProps) {
 function Link({ to, children }: { to: string } & React.PropsWithChildren) {
   return (
     <LinkRaw to={to}>
-      <Text as="span" color="blue.300">
-        {children}
-      </Text>
+      <Text as="span">{children}</Text>
     </LinkRaw>
   );
 }
 
 export default function PrivacyPolicyPage() {
+  const meta = useSiteMetadata();
+
   return (
     <Stack>
       <TopNavigation />
@@ -51,13 +51,13 @@ export default function PrivacyPolicyPage() {
           <Headline>Privacy Policy</Headline>
 
           <Text>
-            {APP_DATA.productName} prioritizes the safeguarding of your personal information. This
-            Privacy Policy outlines our practices concerning the collection, storage, utilization,
-            and disclosure of data. This policy is applicable to our website{" "}
-            {APP_DATA.website.title} (the “Website”), our web application {APP_DATA.webapp.title}{" "}
-            (the “Webapp”), and our corporate operations collectively known as our services (the
-            “Services”). By accessing our Services or providing us with your information, you
-            consent to the practices described in this Privacy Policy.
+            {meta.brandName} prioritizes the safeguarding of your personal information. This Privacy
+            Policy outlines our practices concerning the collection, storage, utilization, and
+            disclosure of data. This policy is applicable to our website {meta.website.title} (the
+            “Website”), our web application {meta.webapp.title} (the “Webapp”), and our corporate
+            operations collectively known as our services (the “Services”). By accessing our
+            Services or providing us with your information, you consent to the practices described
+            in this Privacy Policy.
           </Text>
 
           <Section>
@@ -77,18 +77,16 @@ export default function PrivacyPolicyPage() {
               a notification using the contact details you have provided us. By continuing to use
               the Services after such changes, you are bound by the updated Privacy Policy. We
               advise you to review this Privacy Policy regularly to stay informed about
-              {APP_DATA.productName}’s current privacy practices.
+              {meta.brandName}'s current privacy practices.
             </Text>
 
             <Text>
               In addition, you acknowledge that this Privacy Policy is part of our Terms and
               Conditions at{" "}
-              <Link to={`${APP_DATA.website.url}/terms-and-conditions`}>
-                {APP_DATA.website.title}/terms-and-conditions
-              </Link>
-              , and by reference, it is included therein. By accessing or using our Services, you
-              agree to comply with the Terms and Conditions. If you do not agree to our Terms and
-              Conditions, please refrain from using our Service.
+              <Link to={`${meta.website.url}/terms-and-conditions`}>Terms and Conditions</Link>, and
+              by reference, it is included therein. By accessing or using our Services, you agree to
+              comply with the Terms and Conditions. If you do not agree to our Terms and Conditions,
+              please refrain from using our Service.
             </Text>
           </Section>
 
@@ -111,8 +109,8 @@ export default function PrivacyPolicyPage() {
             <Text>
               The information you provide may include your name, email address, birth date, birth
               time, place of birth, and login or account credentials. If you purchase our Services
-              or products, you may provide payment details, though {APP_DATA.productName} uses
-              third-party payment processors and does not store credit card information.
+              or products, you may provide payment details, though {meta.brandName} uses third-party
+              payment processors and does not store credit card information.
             </Text>
 
             <TitleLG>Device-Related Information</TitleLG>
@@ -208,7 +206,7 @@ export default function PrivacyPolicyPage() {
               "Your personal data may be shared with payment service providers to facilitate processing your payments, transferring funds, and addressing payment-related complaints and inquiries. The shared data with payment providers is limited to what is necessary for these purposes.",
               "In certain situations where specific services are provided, we may disclose your personal data to other service providers. This can include server providers, email service providers, data analysis or marketing services, call centers, customer satisfaction surveys, or market research entities. We ensure that these subcontractors implement appropriate organizational and technical measures to protect the security and privacy of your personal data.",
               "Moreover, your personal data may be disclosed if it is required to comply with legal obligations, protect your vital interests or those of another person, or for the establishment, exercise, or defense of legal claims.",
-              `These entities may be located outside the European Union and European Economic Area. If your personal data is transferred to such entities, we will implement necessary measures as prescribed by relevant legal acts to ensure your privacy is adequately protected. This might include signing standard contractual clauses for data transfer. For more information about these safeguards, please contact us at ${APP_DATA.email}.`,
+              `These entities may be located outside the European Union and European Economic Area. If your personal data is transferred to such entities, we will implement necessary measures as prescribed by relevant legal acts to ensure your privacy is adequately protected. This might include signing standard contractual clauses for data transfer. For more information about these safeguards, please contact us at ${meta.email}.`,
               "We have never and will not sell your Personal Information to third parties without your consent.",
             ].map((it, idx) => {
               return <Text key={idx}>{it}</Text>;
@@ -275,7 +273,7 @@ export default function PrivacyPolicyPage() {
 
             <Text>
               The Site is not for individuals under 18 years of age. If you believe we have
-              collected data from such individuals, please contact us at {APP_DATA.email}.
+              collected data from such individuals, please contact us at {meta.email}.
             </Text>
           </Section>
 
@@ -347,11 +345,11 @@ export default function PrivacyPolicyPage() {
 
             <Text>
               To update contact information/preferences, remove data, or inquire about this Privacy
-              Policy, contact us at {APP_DATA.email}. Providing personal information is not
-              obligatory, but refusing may limit our ability to respond to requests or offer certain
-              Services. Opt-out of email comunicaciones by clicking unsubscribe links within
-              messages. Control cookie settings via your browser's privacy settings; opting out of
-              analytics cookies can also be done through{" "}
+              Policy, contact us at {meta.email}. Providing personal information is not obligatory,
+              but refusing may limit our ability to respond to requests or offer certain Services.
+              Opt-out of email comunicaciones by clicking unsubscribe links within messages. Control
+              cookie settings via your browser's privacy settings; opting out of analytics cookies
+              can also be done through{" "}
               <Link to={`https://tools.google.com/dlpage/gaoptout`}>
                 https://tools.google.com/dlpage/gaoptout
               </Link>
@@ -361,14 +359,14 @@ export default function PrivacyPolicyPage() {
               Depending on your jurisdiction, you may have rights regarding your data, including
               access, correction, deletion, objection, and restriction of processing. These rights
               are subject to exceptions and conditions under applicable laws. Verify your identity
-              for these requests by contacting {APP_DATA.email}.
+              for these requests by contacting {meta.email}.
             </Text>
 
             <Text>
               EU residents have the right to access and request corrections or deletions of their
-              personal data. To exercise this, contact {APP_DATA.email}. We process EU resident data
-              as needed to fulfill contracts or for legitimate business interests, and your data may
-              be transferred internationally, including to Canada and the United States.
+              personal data. To exercise this, contact {meta.email}. We process EU resident data as
+              needed to fulfill contracts or for legitimate business interests, and your data may be
+              transferred internationally, including to Canada and the United States.
             </Text>
           </Section>
 
@@ -380,7 +378,7 @@ export default function PrivacyPolicyPage() {
               updated Date” at the bottom, posting an announcement, or sending written communication
               before new policies take effect. Continued use of our Websites, Webapps, and Services
               following such notifications indicates your agreement to the revised policy. Regularly
-              review this Privacy Policy to remain informed about {APP_DATA.productName}'s current
+              review this Privacy Policy to remain informed about {meta.brandName}'s current
               practices.
             </Text>
           </Section>
@@ -390,7 +388,7 @@ export default function PrivacyPolicyPage() {
 
             <Text>
               Should you have any inquiries regarding this Privacy Policy, feel free to reach out to
-              us at {APP_DATA.email}.
+              us at {meta.email}.
             </Text>
           </Section>
 
