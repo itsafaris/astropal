@@ -39,7 +39,10 @@ export default function Page() {
             colorScheme="brand"
             flexGrow={1}
             mt={2}
-            onClick={submit}
+            onClick={() => {
+              submit();
+              navigateToNextPage();
+            }}
             isLoading={request.state === "loading"}
           >
             <Text fontSize={["sm", "md"]}>Continue</Text>
@@ -52,7 +55,6 @@ export default function Page() {
 
 function useSubmit(time: Time | null) {
   const { userProfile } = useGlobalState2();
-  const { navigateToNextPage } = useOnboardingRouter();
 
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
@@ -81,8 +83,6 @@ function useSubmit(time: Time | null) {
       }
 
       setRequest({ state: "ok" });
-
-      navigateToNextPage();
     } catch (err) {
       const msg = `Report time: ${String(err)}`;
       console.error(msg);
