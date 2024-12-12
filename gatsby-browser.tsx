@@ -23,14 +23,14 @@ export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
 
 export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }) => {
   const isFunnelPathname = /\/face-reading\/.+/.test(location.pathname);
-  const isFunnelOnboardingPathname = location.pathname.includes("/face-reading/success-checkout");
+  const isOnboardingPathname = location.pathname.includes("/face-reading/success-checkout");
 
-  if (isFunnelPathname && !isFunnelOnboardingPathname && sessionCache.hasConverted()) {
+  if (isFunnelPathname && !isOnboardingPathname && sessionCache.hasConverted()) {
     navigate(createProductURL());
     return;
   }
 
-  if (isFunnelOnboardingPathname && sessionCache.hasFinishedOnboarding()) {
+  if (isOnboardingPathname && sessionCache.hasFinishedOnboarding()) {
     navigate(createProductURL());
     return;
   }
