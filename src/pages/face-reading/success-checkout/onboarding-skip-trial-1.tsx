@@ -91,7 +91,7 @@ function Plan({ plan, onSelect }: { plan: TrialPricingPlan; onSelect: () => void
       spacing={3}
       fontSize={"sm"}
     >
-      <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
+      <Text fontSize={["md", "lg"]} fontWeight={"bold"}>
         ${(amount / 100).toFixed(0)} per week
       </Text>
 
@@ -131,26 +131,26 @@ function PlanSkipTrial({
   return (
     <Stack
       border={"2px solid"}
-      borderColor={"yellow.400"}
+      borderColor={"brand.500"}
       borderRadius={"xl"}
       spacing={0}
       fontSize={"sm"}
       overflow={"hidden"}
     >
-      <Box backgroundColor={"yellow.400"} py={3}>
-        <Text textAlign={"center"} color={"yellow.900"} fontWeight={"bold"}>
+      <Box backgroundColor={"brand.500"} py={3}>
+        <Text textAlign={"center"} color={"white"} fontWeight={"bold"}>
           BEST VALUE 🎉
         </Text>
       </Box>
 
       <Stack p={3} pt={5} spacing={3}>
         <Stack alignItems={"center"} spacing={0}>
-          <Text fontSize={["sm"]} color={"red"} textDecoration={"line-through"}>
-            ${(amountOld / 7 / 100).toFixed(2)} / day
+          <Text fontSize={["sm"]} color={"brand.600"} textDecoration={"line-through"}>
+            ${(amountOld / 7 / 100).toFixed(2)} per day
           </Text>
 
-          <Text fontSize={["lg", "xl"]} fontWeight={"bold"}>
-            ${((amountNew / 7 - 1) / 100).toFixed(2)} / day
+          <Text fontSize={["md", "lg"]} fontWeight={"bold"}>
+            ${((amountNew / 7 - 1) / 100).toFixed(2)} per day
           </Text>
         </Stack>
 
@@ -164,10 +164,8 @@ function PlanSkipTrial({
           <Text color="gray.500">${(amountNew / 100).toFixed(2)}</Text>
         </Stack>
 
-        <Button isLoading={isLoading} size={"lg"} py={7} colorScheme="yellow" onClick={onSelect}>
-          <Text fontSize="sm">
-            Skip Trial <br /> And Accept Offer
-          </Text>
+        <Button isLoading={isLoading} size={"lg"} py={7} colorScheme="brand" onClick={onSelect}>
+          <Text fontSize="sm">Skip Trial</Text>
         </Button>
       </Stack>
     </Stack>

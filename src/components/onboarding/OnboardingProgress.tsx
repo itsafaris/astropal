@@ -41,7 +41,7 @@ export function OnboardingProgress({ activeStepIdx = 1 }: { activeStepIdx?: numb
             >
               <Text
                 position={"absolute"}
-                fontSize={"xs"}
+                fontSize={["10px", "xs"]}
                 fontWeight={"semibold"}
                 textAlign={"center"}
                 top={"-40px"}
