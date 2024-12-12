@@ -44,7 +44,10 @@ export default function Page() {
             colorScheme="brand"
             flexGrow={1}
             mt={2}
-            onClick={submit}
+            onClick={() => {
+              submit();
+              navigateToNextPage();
+            }}
             disabled={!location}
             isLoading={request.state === "loading"}
           >
@@ -59,7 +62,6 @@ export default function Page() {
 function useSubmit(location: LocationValue | null) {
   const stripe = useStripe();
   const { userProfile, reports } = useGlobalState2();
-  const { navigateToNextPage } = useOnboardingRouter();
 
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
@@ -107,8 +109,6 @@ function useSubmit(location: LocationValue | null) {
       });
 
       if (payment.error) {
-        //FIXME: this is  hack to allow user to proceed even if they dont have money
-        navigateToNextPage();
         throw new Error("failed to create payment");
       }
 
@@ -128,8 +128,6 @@ function useSubmit(location: LocationValue | null) {
       });
 
       setRequest({ state: "ok" });
-
-      navigateToNextPage();
     } catch (err) {
       const msg = `Report location: ${String(err)}`;
       console.error(msg);
