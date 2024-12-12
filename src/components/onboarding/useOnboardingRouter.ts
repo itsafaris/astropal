@@ -47,12 +47,12 @@ export function useOnboardingRouter() {
       isInternal: true,
       nextRoutes: [
         {
-          route: routes.REPORTS_1,
-          condition: () => sessionCache.getReport().status !== "purchase-finalized",
-        },
-        {
           route: routes.SKIP_TRIAL_1,
           condition: () => sessionCache.getSubscription().status !== "purchase-finalized",
+        },
+        {
+          route: routes.REPORTS_1,
+          condition: () => sessionCache.getReport().status !== "purchase-finalized",
         },
         {
           route: routes.END,
@@ -73,7 +73,7 @@ export function useOnboardingRouter() {
           condition: () => sessionCache.getReport().status === "purchase-started",
         },
         {
-          route: routes.SKIP_TRIAL_1,
+          route: routes.END,
           condition: () => sessionCache.getReport().status === "purchase-finalized",
         },
       ],
@@ -83,7 +83,7 @@ export function useOnboardingRouter() {
       isInternal: true,
       nextRoutes: [
         {
-          route: routes.SKIP_TRIAL_1,
+          route: routes.END,
           condition: () => sessionCache.getReport().status === "initial",
         },
         {
@@ -91,7 +91,7 @@ export function useOnboardingRouter() {
           condition: () => sessionCache.getReport().status === "purchase-started",
         },
         {
-          route: routes.SKIP_TRIAL_1,
+          route: routes.END,
           condition: () => sessionCache.getReport().status === "purchase-finalized",
         },
       ],
@@ -105,7 +105,7 @@ export function useOnboardingRouter() {
           condition: () => sessionCache.getReport().status === "purchase-started",
         },
         {
-          route: routes.SKIP_TRIAL_1,
+          route: routes.END,
           condition: () => sessionCache.getReport().status === "purchase-finalized",
         },
       ],
@@ -115,7 +115,7 @@ export function useOnboardingRouter() {
       isInternal: true,
       nextRoutes: [
         {
-          route: routes.SKIP_TRIAL_1,
+          route: routes.END,
           condition: () => true,
         },
       ],
@@ -129,7 +129,7 @@ export function useOnboardingRouter() {
           condition: () => sessionCache.getSubscription().status === "initial",
         },
         {
-          route: routes.END,
+          route: routes.REPORTS_1,
           condition: () => sessionCache.getSubscription().status === "purchase-finalized",
         },
       ],
@@ -139,7 +139,7 @@ export function useOnboardingRouter() {
       isInternal: true,
       nextRoutes: [
         {
-          route: routes.END,
+          route: routes.REPORTS_1,
           condition: () => true,
         },
       ],

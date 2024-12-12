@@ -35,7 +35,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
   }, []);
 
   return (
-    <OnboardingLayout activeStepIdx={2}>
+    <OnboardingLayout activeStepIdx={1}>
       {hasPurchased ? (
         <SuccessfulPurchaseView
           title="🥰 You have successfully purchased the subscription"

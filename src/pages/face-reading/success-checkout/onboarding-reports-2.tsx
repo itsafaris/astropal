@@ -25,7 +25,7 @@ export default function Page() {
   }
 
   return (
-    <OnboardingLayout activeStepIdx={1}>
+    <OnboardingLayout activeStepIdx={2}>
       {hasPurchasedReport ? (
         <SuccessfulPurchaseView
           title="🥰 You have successfully purchased the report"

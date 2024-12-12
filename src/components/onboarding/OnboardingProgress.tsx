@@ -13,8 +13,8 @@ import {
 
 const steps = [
   { title: "Welcome" },
-  { title: "Add Reports" },
   { title: "Skip Trial" },
+  { title: "Add Reports" },
   { title: "Access Product" },
 ];
 
