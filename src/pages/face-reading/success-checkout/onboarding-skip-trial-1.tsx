@@ -67,7 +67,7 @@ function Content({
   return (
     <Stack spacing={5}>
       <Text fontSize={"xl"} fontWeight={"bold"}>
-        Not planning on looking back?
+        Not Planning On Looking Back?
       </Text>
 
       <Grid gridTemplateColumns={"1fr 1fr"} gap={2} alignItems={"flex-end"}>

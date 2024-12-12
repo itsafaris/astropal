@@ -67,69 +67,75 @@ function Content({
 }) {
   return (
     <Stack spacing={6}>
-      <Text fontSize={"xl"} fontWeight={"bold"}>
-        Are you sure?
-      </Text>
+      <Stack>
+        <Text fontSize={"2xl"} fontWeight={"bold"} color="brand.800">
+          Are You Sure?
+        </Text>
 
-      <Text lineHeight={1.3} fontSize={"sm"}>
-        Let our expert astrologer and face reader guide you 24/7 on your journey to life's answers.
-      </Text>
+        <Text fontSize={"sm"} mb={4}>
+          Let Our Expert Astrologer Guide You 24/7 On Your Journey to Life's Answers.
+        </Text>
+
+        <Text fontSize={"lg"} fontWeight={"semibold"}>
+          What you get:
+        </Text>
+      </Stack>
 
       <Stack spacing={4}>
         <Stack mx="auto">
           <Flex alignItems={"center"} gap={2}>
             <Icon
               as={FaRegFaceSmileBeam}
-              color={"white"}
-              backgroundColor={"brand.400"}
+              color={"brand.800"}
+              backgroundColor={"brand.200"}
               boxSize={9}
               p={2}
               borderRadius={"md"}
             />
-            <Text fontWeight={"semibold"} color={"brand.600"}>
-              Get unlimited face readings
-            </Text>
-          </Flex>
-
-          <Flex alignItems={"center"} gap={2}>
-            <Icon
-              as={GiSelfLove}
-              color={"white"}
-              backgroundColor={"brand.400"}
-              boxSize={9}
-              p={2}
-              borderRadius={"md"}
-            />
-            <Text fontWeight={"semibold"} color={"brand.600"}>
-              Get daily compatibility readings
+            <Text fontWeight={"normal"} color={"brand.600"}>
+              Unlimited face readings
             </Text>
           </Flex>
 
           <Flex alignItems={"center"} gap={2}>
             <Icon
               as={MdOutlineTipsAndUpdates}
-              color={"white"}
-              backgroundColor={"brand.400"}
+              color={"brand.800"}
+              backgroundColor={"brand.200"}
               boxSize={9}
               p={2}
               borderRadius={"md"}
             />
-            <Text fontWeight={"semibold"} color={"brand.600"}>
-              Get cosmic relationships tips
+            <Text fontWeight={"normal"} color={"brand.600"}>
+              Unlimited chats with astrologer
+            </Text>
+          </Flex>
+
+          <Flex alignItems={"center"} gap={2}>
+            <Icon
+              as={GiSelfLove}
+              color={"brand.800"}
+              backgroundColor={"brand.200"}
+              boxSize={9}
+              p={2}
+              borderRadius={"md"}
+            />
+            <Text fontWeight={"normal"} color={"brand.600"}>
+              Cosmic relationships tips
             </Text>
           </Flex>
 
           <Flex alignItems={"center"} gap={2}>
             <Icon
               as={LuCalendarCheck2}
-              color={"white"}
-              backgroundColor={"brand.400"}
+              color={"brand.800"}
+              backgroundColor={"brand.200"}
               boxSize={9}
               p={2}
               borderRadius={"md"}
             />
-            <Text fontWeight={"semibold"} color={"brand.600"}>
-              Get daily horoscopes
+            <Text fontWeight={"normal"} color={"brand.600"}>
+              Daily horoscopes
             </Text>
           </Flex>
         </Stack>
@@ -138,21 +144,27 @@ function Content({
       <Stack spacing={3}>
         <Box height={"2px"} width={"full"} backgroundColor={"gray.200"} />
 
+        <Text fontSize={"sm"} color="orange.500" textAlign={"center"}>
+          Are you sure you don't want to save $240 per year?
+        </Text>
+
         <Flex mx={"auto"} gap={2} alignItems={"center"} width={"full"}>
           <Button size={"lg"} py={7} onClick={onStartTrial}>
-            <Text fontSize={["sm", "md"]}>Skip</Text>
+            <Text fontSize={["md", "md"]} fontWeight={"normal"}>
+              Skip
+            </Text>
           </Button>
 
           <Button
             size={"lg"}
             py={7}
             px={20}
-            colorScheme="yellow"
+            colorScheme="brand"
             flexGrow={1}
             onClick={onStartSubscription}
             isLoading={isPaymentLoading}
           >
-            <Text fontSize={["sm", "md"]}>Accept This Offer (Save $240/year)</Text>
+            <Text fontSize={["md", "md"]}>Accept This Offer</Text>
           </Button>
         </Flex>
       </Stack>

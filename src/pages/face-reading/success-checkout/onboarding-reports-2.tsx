@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Text, Image } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, Image, Grid } from "@chakra-ui/react";
 import {
   useOnboardingRouter,
   CTAPulse,
@@ -59,43 +59,54 @@ function Content({
 }) {
   return (
     <Stack spacing={6}>
-      <Text fontSize={"xl"} fontWeight={"bold"}>
-        Final sign-up offer
-      </Text>
-
-      <Text lineHeight={1.3} fontSize={"sm"}>
-        Unlock your future potential with our Premium Bundle. Make informed decisions and seize
-        opportunities!
-      </Text>
-
-      <Stack spacing={4}>
-        <Text fontSize={"md"} fontWeight={"bold"} color={"brand.700"}>
-          What you get:
+      <Stack>
+        <Text fontSize={"2xl"} fontWeight={"bold"} color="brand.800">
+          Final Sign-up Offer
         </Text>
 
-        {report.imageUrl && (
-          <Image flexGrow={0} flexShrink={0} src={report.imageUrl} maxH={"100px"} mx="auto" />
-        )}
+        <Text fontSize={"sm"} mb={4}>
+          Unlock your future potential with our Premium Bundle. Make informed decisions and seize
+          opportunities!
+        </Text>
 
-        <Stack mx="auto">
+        <Text fontSize={"lg"} fontWeight={"semibold"}>
+          What you get:
+        </Text>
+      </Stack>
+
+      <Grid
+        gridTemplateColumns={"1fr 130px"}
+        gap={4}
+        alignItems={"center"}
+        backgroundColor={"brand.50"}
+        borderRadius={"md"}
+        px={3}
+        py={2}
+      >
+        <Stack alignItems={"flex-start"} backgroundColor={"brand.200"} spacing={"2px"}>
           {report.features.map((it, idx) => {
             return (
               <Text
+                py={2}
+                backgroundColor={"brand.50"}
                 mx="auto"
                 key={idx}
                 fontWeight={"semibold"}
+                fontSize={["sm", "md"]}
                 color={"brand.600"}
-                backgroundColor={"brand.100"}
-                py={2}
-                px={4}
-                borderRadius={"md"}
+                textAlign={"left"}
+                width={"100%"}
               >
                 {it}
               </Text>
             );
           })}
         </Stack>
-      </Stack>
+
+        {report.imageUrl && (
+          <Image flexGrow={0} flexShrink={0} src={report.imageUrl} maxH={"100px"} mx="auto" />
+        )}
+      </Grid>
 
       <Stack spacing={3}>
         <Box height={"2px"} width={"full"} backgroundColor={"gray.200"} />
@@ -120,12 +131,12 @@ function Content({
           <Button
             size={"lg"}
             py={7}
-            colorScheme="yellow"
+            colorScheme="brand"
             width={"full"}
             onClick={() => onPurchase(report)}
             animation={`${CTAPulse} 1.2s infinite`}
           >
-            <Text fontSize={["md"]}>Get Extra Reports 🎉</Text>
+            <Text fontSize={["md"]}>Get Extra Reports</Text>
           </Button>
 
           <Button

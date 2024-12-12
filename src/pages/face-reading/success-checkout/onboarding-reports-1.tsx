@@ -83,10 +83,10 @@ function Content({
   return (
     <Stack>
       <Text mt={6} fontSize={"xl"} fontWeight={"bold"}>
-        Choose your sign-up offer 🔥
+        Choose Your Sign-up Offer 🔥
       </Text>
 
-      <Text fontSize={"sm"} fontWeight={"bold"} color={"brand.500"}>
+      <Text fontSize={"sm"} fontWeight={"semibold"} color={"brand.600"}>
         Available only now
       </Text>
 
@@ -112,14 +112,14 @@ function Content({
       <Button
         size={"lg"}
         py={7}
-        colorScheme="yellow"
+        colorScheme="brand"
         flexGrow={1}
         onClick={handleCTAClick}
         animation={selectedReportID === "skip" ? undefined : `${CTAPulse} 1.2s infinite`}
         mt={3}
       >
         <Text fontSize={["md", "md"]}>
-          {selectedReportID === "skip" ? "Continue" : "Get My Report"}
+          {selectedReportID === "skip" ? "Continue" : "Get My Copy"}
         </Text>
       </Button>
 
@@ -148,7 +148,7 @@ function ReportCard({
       p={3}
       borderRadius={"lg"}
       border={"2px"}
-      borderColor={isSelected ? "brand.600" : "brand.200"}
+      borderColor={isSelected ? "brand.600" : "brand.300"}
       backgroundColor={isSelected ? "brand.200" : "white"}
       onClick={() => onSelect(report.productID)}
       cursor={"pointer"}
@@ -192,7 +192,7 @@ function ReportCard({
           <Flex alignItems={"center"} gap={1} width={["105px", "120px"]}>
             <Text
               fontSize={["xs", "sm"]}
-              color={"gray.600"}
+              color={"gray.500"}
               textAlign={"left"}
               fontWeight={"semibold"}
             >
@@ -200,7 +200,7 @@ function ReportCard({
             </Text>
 
             {report.unit_amount_before && (
-              <Text fontSize={["xs", "sm"]} color={"gray.600"}>
+              <Text fontSize={["xs", "sm"]} color={"gray.500"}>
                 (
                 <Text as="span" textDecoration={"line-through"}>
                   ${(report.unit_amount_before / 100).toFixed(2)}
@@ -214,7 +214,7 @@ function ReportCard({
             fontSize={"sm"}
             fontWeight={"semibold"}
             color={"white"}
-            backgroundColor={"red.300"}
+            backgroundColor={"brand.400"}
             px={1}
             py={1}
             borderRadius={"lg"}
@@ -239,13 +239,14 @@ function SkipCard({
   onSelect: (id: string) => void;
 }) {
   return (
-    <Flex
+    <Grid
       alignItems={"center"}
+      gridTemplateColumns={"auto 3fr 1fr"}
       gap={2}
       p={3}
       borderRadius={"lg"}
       border={"2px"}
-      borderColor={isSelected ? "brand.600" : "brand.200"}
+      borderColor={isSelected ? "brand.600" : "brand.300"}
       backgroundColor={isSelected ? "brand.200" : "white"}
       onClick={() => onSelect(SKIP_OFFER_ID)}
       cursor={"pointer"}
@@ -275,9 +276,14 @@ function SkipCard({
           Skip offer
         </Text>
 
-        <Flex alignItems={"center"} gap={2} fontWeight={"semibold"} mt={1}>
-          <Flex alignItems={"center"} gap={1} fontWeight={"semibold"} width={["105px", "120px"]}>
-            <Text fontSize={["xs", "sm"]} color={"gray.600"} textAlign={"left"}>
+        <Grid alignItems={"center"} gridTemplateColumns={"1fr 1fr"} gap={2} mt={1}>
+          <Flex alignItems={"center"} gap={1} width={["105px", "120px"]}>
+            <Text
+              fontSize={["xs", "sm"]}
+              color={"gray.500"}
+              textAlign={"left"}
+              fontWeight={"semibold"}
+            >
               You are missing out on all reports
             </Text>
           </Flex>
@@ -285,16 +291,16 @@ function SkipCard({
           <Text
             fontSize={"sm"}
             fontWeight={"semibold"}
-            color={"gray.700"}
-            backgroundColor={"gray.200"}
-            px={2}
+            color={"white"}
+            backgroundColor={"brand.400"}
+            px={1}
             py={1}
             borderRadius={"lg"}
           >
             100% LOST
           </Text>
-        </Flex>
+        </Grid>
       </Stack>
-    </Flex>
+    </Grid>
   );
 }
