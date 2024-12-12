@@ -51,7 +51,12 @@ export function OnboardingProgress({ activeStepIdx = 1 }: { activeStepIdx?: numb
 
               <Step gap="0">
                 <StepIndicator bg="white">
-                  <StepStatus complete={<StepIcon />} />
+                  <StepStatus
+                    complete={<StepIcon />}
+                    active={
+                      <Box height={"10px"} width={"10px"} borderRadius={"full"} bg={"brand.500"} />
+                    }
+                  />
                 </StepIndicator>
               </Step>
             </Stack>
