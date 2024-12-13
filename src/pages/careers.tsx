@@ -64,9 +64,9 @@ const HeroSection: React.FC = () => {
         market for over 4 years, we've been consistently at the forefront of innovation.
       </Text>
 
-      <Link to={createProductURL()}>
+      <Link to={"/face-reading"}>
         <Button colorScheme="teal" size="lg">
-          Explore Now
+          Take a Test
         </Button>
       </Link>
     </Stack>

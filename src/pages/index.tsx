@@ -19,7 +19,6 @@ import { StaticImage } from "gatsby-plugin-image";
 import { OrbRotating } from "@components/OrbRotating";
 import { Link } from "gatsby";
 import { AppShowcase } from "@components/businessPage/AppShowcase";
-import { createProductURL } from "@utils/urls";
 
 export default function HomePage() {
   return (
@@ -28,7 +27,7 @@ export default function HomePage() {
         <Header />
         <Hero />
         <Features />
-        <TrustedCompanies />
+        {/* <TrustedCompanies /> */}
         <Ratings />
         <AppShowcase />
         <Footer />
@@ -90,9 +89,9 @@ function Hero() {
           </Text>
 
           <Flex justifyContent="center">
-            <Link to={createProductURL()}>
+            <Link to={"/face-reading"}>
               <Button colorScheme="teal" size="lg">
-                Access Your Account
+                Take a Test
               </Button>
             </Link>
           </Flex>
