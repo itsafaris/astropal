@@ -14,6 +14,7 @@
   GATSBY_POSTHOG_HOST = "https://us.i.posthog.com"
 
 [[redirects]]
-  from = "/blog/*"
+  from = "/blog"
   to = "https://blog.intuvist.com"
   status = 301
+  force = true
