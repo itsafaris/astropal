@@ -47,6 +47,12 @@ export function Footer() {
               Contact us
             </Text>
           </Link>
+
+          <Link to={`/blog`}>
+            <Text cursor={"pointer"} as="span" fontSize={"sm"}>
+              Blog
+            </Text>
+          </Link>
         </HStack>
       </Flex>
     </Box>
