@@ -1,15 +1,13 @@
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { useStripe } from "@stripe/react-stripe-js";
 import React from "react";
 import { eden, TrialPricingPlan } from "@utils/coreApi";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
-import { sessionCache } from "src/sessionCache";
 import { RequestType } from "@components/onboarding";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 export function usePurchaseSubscription(
   plan: TrialPricingPlan
 ): [RequestType, () => Promise<void>] {
-  const { userProfile } = useGlobalState2();
   const stripe = useStripe();
 
   const [request, setRequest] = React.useState<RequestType>({
@@ -18,7 +16,8 @@ export function usePurchaseSubscription(
 
   async function submit() {
     try {
-      if (!userProfile || !stripe) {
+      const { userID, currency, paymentType } = storage.getConversionDetails();
+      if (!userID || !stripe) {
         throw new Error("data is missing");
       }
 
@@ -27,7 +26,7 @@ export function usePurchaseSubscription(
       const subscription = await eden("/payments/updateSubscription", {
         method: "POST",
         body: {
-          userID: userProfile.id,
+          userID: userID,
           priceID: plan.recurring.priceID,
           couponID: plan.recurring.coupon?.id,
         },
@@ -40,8 +39,6 @@ export function usePurchaseSubscription(
       if (!subscription.data) {
         throw new Error("subscription data is missing");
       }
-
-      const { currency, paymentType } = sessionCache.getConversionDetails();
 
       trackPosthogPurchaseEvent({
         name: "purchase",

@@ -6,7 +6,7 @@ import { useLocation } from "@gatsbyjs/reach-router";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { siteConfig } from "src/conf";
-import { useGlobalState2 } from "./RootWrapper";
+import { useRootState } from "./RootWrapper";
 
 const stripe = loadStripe(siteConfig.stripePublicKey);
 
@@ -14,7 +14,7 @@ export interface IPageWrapperProps {}
 
 export function PageWrapper(props: React.PropsWithChildren<IPageWrapperProps>) {
   const location = useLocation();
-  const { selectedPricingPlan, trialPricingPlan } = useGlobalState2();
+  const { selectedPricingPlan, trialPricingPlan } = useRootState();
   const plan = trialPricingPlan?.oneTimeFee.find((p) => p.priceID === selectedPricingPlan);
 
   // Sends custom pixel events tracking time spent during the session. Placed code here for the sake of simplicity.

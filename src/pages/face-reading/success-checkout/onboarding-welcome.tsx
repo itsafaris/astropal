@@ -5,25 +5,25 @@ import {
   trackPixelEvent,
   trackPosthogPurchaseEvent,
 } from "@utils/tracking";
-import { sessionCache } from "src/sessionCache";
 import {
   OnboardingLayout,
-  useOnboardingRouter,
   parseCheckoutRedirecURL,
   OnboardingNotification,
+  useOnboardingRouter,
 } from "@components/onboarding";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 export default function Page() {
   const { navigateToNextPage } = useOnboardingRouter();
 
   React.useEffect(() => {
-    const hasConverted = sessionCache.hasConverted();
-    if (!hasConverted) {
-      const { pricePaid, currency, paymentType, planID } = parseCheckoutRedirecURL<{
+    if (!storage.hasConverted()) {
+      const { pricePaid, currency, paymentType, planID, userID } = parseCheckoutRedirecURL<{
         pricePaid: number;
         currency: string;
         paymentType: string;
         planID: string;
+        userID: string;
       }>(window.location.href);
 
       const value = pricePaid ? pricePaid / 100 : 0;
@@ -56,12 +56,13 @@ export default function Page() {
       // In this case, the purchase status is set to true before that route check occurs.
       // We want the opposite behavior to avoid automatic redirection when a user visits this page for the first time after a successful purchase.
       setTimeout(() => {
-        sessionCache.setHasConverted();
-        sessionCache.setConversionDetails({
+        storage.setHasConverted();
+        storage.setConversionDetails({
           currency,
           paymentType,
           planID,
           value,
+          userID,
         });
       }, 0);
     }

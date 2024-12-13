@@ -2,7 +2,6 @@ import * as React from "react";
 
 import "../../styles/global.css";
 import { GlobalHead } from "./head";
-import { loadFromStorage, saveToStorage } from "@utils/localStorage";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import {
   getTrialPricingPlan,
@@ -17,58 +16,49 @@ import { LocationProvider } from "@gatsbyjs/reach-router";
 import * as Sentry from "@sentry/gatsby";
 import posthog from "posthog-js";
 
-export interface IRootWrapperProps {}
-
-const GlobalStateCtx = React.createContext<{
-  globalState: Record<string, any>;
-  setInGlobalState: (id: string, value: (current: any) => any) => void;
-}>(null as any);
-
-const GlobalStateContext = React.createContext<TypedGlobalState>({
-  pricingPlans: [],
-  reports: [],
-});
-
-const GlobalUpdateContext = React.createContext<
-  React.Dispatch<React.SetStateAction<TypedGlobalState>>
->(null as any);
-
-export type UserProfileState = {
+type UserProfile = {
   id: string;
 };
 
-export type TypedGlobalState = {
-  funnelTheme?: "relationships" | "loneliness";
+type RootState = {
   faceImageDataUrl?: string;
+  setFaceImageDataUrl: (value: string) => void;
   selectedPricingPlan?: string;
+  setSelectedPricingPlan: (value: string | undefined) => void;
   trialPricingPlan?: TrialPricingPlan;
+  setTrialPricingPlan: (value: TrialPricingPlan) => void;
   pricingPlans: PricingPlans;
+  setPricingPlans: (value: PricingPlans) => void;
   reports: Reports;
-  userProfile?: UserProfileState;
-};
-
-export type ServicesCtx = {
+  setReports: (value: Reports) => void;
+  userProfile?: UserProfile;
+  setUserProfile: (value: UserProfile) => void;
   faceLandmarker?: FaceLandmarker;
+  offerTime: number;
+  setOfferTime: (time: number) => void;
 };
 
-const ServicesContext = React.createContext<ServicesCtx>({});
+const RootStateContext = React.createContext<RootState | null>(null);
 
-export const useGlobalState2 = () => React.useContext(GlobalStateContext);
+export function useRootState(): RootState {
+  const ctx = React.useContext(RootStateContext);
+  if (!ctx) {
+    throw new Error("useRootState must be used within RootStateContext");
+  }
 
-export const useGlobalUpdate2 = () => React.useContext(GlobalUpdateContext);
+  return ctx;
+}
 
 /** Wraps every page but is not re-mounted when chaning pages */
-export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
-  const [servicesCtx, setServicesCtx] = React.useState<ServicesCtx>({});
-  const [globalState, setGlobalState] = React.useState<Record<string, any>>({});
-  const [typedGlobalState, setTypedGlobalState] = React.useState<TypedGlobalState>({
-    pricingPlans: [],
-    reports: [],
-  });
-
-  function setInGlobalState(id: string, value: (value: any) => any) {
-    setGlobalState((s) => ({ ...globalState, [id]: value(s[id]) }));
-  }
+export function RootWrapper({ children }: React.PropsWithChildren<{}>) {
+  const [faceLandmarker, setFaceLandmarker] = React.useState<FaceLandmarker | undefined>();
+  const [faceImageDataUrl, setFaceImageDataUrl] = React.useState<string | undefined>();
+  const [selectedPricingPlan, setSelectedPricingPlan] = React.useState<string | undefined>();
+  const [trialPricingPlan, setTrialPricingPlan] = React.useState<TrialPricingPlan | undefined>();
+  const [pricingPlans, setPricingPlans] = React.useState<PricingPlans>([]);
+  const [reports, setReports] = React.useState<Reports>([]);
+  const [userProfile, setUserProfile] = React.useState<UserProfile | undefined>();
+  const [offerTime, setOfferTime] = React.useState<number>(899000);
 
   React.useEffect(() => {
     // Additional data passed to Sentry that ensures easier issue debugging
@@ -81,30 +71,12 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   }, []);
 
   React.useEffect(() => {
-    const s = loadFromStorage("globalState", (s): s is TypedGlobalState => true);
-    if (s) {
-      setTypedGlobalState(s);
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (typedGlobalState) {
-      const cp = { ...typedGlobalState };
-      // this sometimes is too big to be saved in local storage
-      delete cp.faceImageDataUrl;
-      saveToStorage("globalState", cp);
-    }
-  }, [typedGlobalState]);
-
-  React.useEffect(() => {
     getTrialPricingPlan()
       .then((res) => {
         const ordered = orderBy(res.oneTimeFee, (it) => it.unit_amount);
-        setTypedGlobalState((s) => ({
-          ...s,
-          trialPricingPlan: res,
-          selectedPricingPlan: ordered[0]?.priceID,
-        }));
+
+        setTrialPricingPlan(res);
+        setSelectedPricingPlan(ordered[0]?.priceID);
       })
       .catch((err) => {
         console.error(err);
@@ -114,10 +86,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   React.useEffect(() => {
     getPricingPlans()
       .then((res) => {
-        setTypedGlobalState((s) => ({
-          ...s,
-          pricingPlans: res,
-        }));
+        setPricingPlans(res);
       })
       .catch((err) => {
         console.error(err);
@@ -127,10 +96,7 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   React.useEffect(() => {
     getReports()
       .then((res) => {
-        setTypedGlobalState((s) => ({
-          ...s,
-          reports: res.reverse(),
-        }));
+        setReports(res.reverse());
       })
       .catch((err) => {
         console.error(err);
@@ -138,55 +104,53 @@ export function RootWrapper(props: React.PropsWithChildren<IRootWrapperProps>) {
   }, []);
 
   React.useEffect(() => {
-    loadModels();
+    createFaceLandmarker()
+      .then((res) => {
+        setFaceLandmarker(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
-  async function loadModels() {
-    let f = await createFaceLandmarker();
-    setServicesCtx({ faceLandmarker: f });
-  }
+  const value = React.useMemo<RootState>(() => {
+    return {
+      faceImageDataUrl,
+      setFaceImageDataUrl,
+      selectedPricingPlan,
+      setSelectedPricingPlan,
+      trialPricingPlan,
+      setTrialPricingPlan,
+      pricingPlans,
+      setPricingPlans,
+      reports,
+      setReports,
+      userProfile,
+      setUserProfile,
+      faceLandmarker,
+      offerTime,
+      setOfferTime,
+    };
+  }, [
+    faceImageDataUrl,
+    selectedPricingPlan,
+    trialPricingPlan,
+    pricingPlans,
+    reports,
+    userProfile,
+    faceLandmarker,
+    offerTime,
+  ]);
 
   return (
-    <GlobalStateContext.Provider value={typedGlobalState ?? {}}>
-      <GlobalUpdateContext.Provider value={setTypedGlobalState}>
-        <GlobalStateCtx.Provider value={{ globalState, setInGlobalState }}>
-          <ServicesContext.Provider value={servicesCtx}>
-            <LocationProvider>
-              <GlobalHead />
+    <RootStateContext.Provider value={value}>
+      <LocationProvider>
+        <GlobalHead />
 
-              {props.children}
-            </LocationProvider>
-          </ServicesContext.Provider>
-        </GlobalStateCtx.Provider>
-      </GlobalUpdateContext.Provider>
-    </GlobalStateContext.Provider>
+        {children}
+      </LocationProvider>
+    </RootStateContext.Provider>
   );
-}
-
-type StateSetter<T> = T | ((currentState: T) => T);
-
-export function useGlobalState<T>(id: string, initialValue: T): [T, (val: StateSetter<T>) => void] {
-  const ctx = React.useContext(GlobalStateCtx);
-
-  // set initial state, hope it's right
-  if (!ctx.globalState[id]) {
-    ctx.globalState[id] = initialValue;
-  }
-
-  function setState(value: StateSetter<T>) {
-    if (value instanceof Function) {
-      ctx.setInGlobalState(id, (s) => value(s));
-      return;
-    }
-
-    ctx.setInGlobalState(id, () => value);
-  }
-
-  return [ctx.globalState[id], setState];
-}
-
-export function useServices() {
-  return React.useContext(ServicesContext);
 }
 
 async function createFaceLandmarker() {

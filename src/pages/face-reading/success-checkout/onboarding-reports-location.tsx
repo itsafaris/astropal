@@ -1,17 +1,17 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
 import {
-  useOnboardingRouter,
   RequestType,
   OnboardingLayout,
   SuccessfulPurchaseView,
+  useOnboardingRouter,
 } from "@components/onboarding";
 import { LocationPicker, LocationValue } from "@components/LocationPicker";
 import React from "react";
 import { eden } from "@utils/coreApi";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { trackPosthogPurchaseEvent } from "@utils/tracking";
 import { useStripe } from "@stripe/react-stripe-js";
-import { sessionCache } from "src/sessionCache";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 export default function Page() {
   const { navigateToNextPage } = useOnboardingRouter();
@@ -20,7 +20,7 @@ export default function Page() {
   const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
+    setHasPurchased(storage.getReport().status === "purchase-finalized");
   }, []);
 
   return (
@@ -61,7 +61,7 @@ export default function Page() {
 
 function useSubmit(location: LocationValue | null) {
   const stripe = useStripe();
-  const { userProfile, reports } = useGlobalState2();
+  const { reports } = useRootState();
 
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
@@ -69,7 +69,8 @@ function useSubmit(location: LocationValue | null) {
 
   async function submit() {
     try {
-      const cachedReport = sessionCache.getReport();
+      const { userID, currency, paymentType } = storage.getConversionDetails();
+      const cachedReport = storage.getReport();
       if (cachedReport.status !== "purchase-started") {
         throw new Error("report status is incorrect");
       }
@@ -79,7 +80,7 @@ function useSubmit(location: LocationValue | null) {
         throw new Error("report is missing");
       }
 
-      if (!userProfile || !location || !stripe) {
+      if (!userID || !location || !stripe) {
         throw new Error("data is missing");
       }
 
@@ -88,7 +89,7 @@ function useSubmit(location: LocationValue | null) {
       const res = await eden(`/updateUserProfile`, {
         method: "POST",
         body: {
-          id: userProfile.id,
+          id: userID,
           birth_place_place_id: location.placeID,
           birth_place_formatted_text: location.formattedText,
           birth_place_lat: location.lat,
@@ -103,7 +104,7 @@ function useSubmit(location: LocationValue | null) {
       const payment = await eden("/payments/createOneTimePayment", {
         method: "POST",
         body: {
-          userID: userProfile.id,
+          userID: userID,
           productID: report.productID,
         },
       });
@@ -112,9 +113,7 @@ function useSubmit(location: LocationValue | null) {
         throw new Error("failed to create payment");
       }
 
-      sessionCache.setReport({ status: "purchase-finalized", productID: report.productID });
-
-      const { currency, paymentType } = sessionCache.getConversionDetails();
+      storage.setReport({ status: "purchase-finalized", productID: report.productID });
 
       trackPosthogPurchaseEvent({
         name: "purchase",

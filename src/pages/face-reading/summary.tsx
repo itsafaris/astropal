@@ -41,7 +41,7 @@ import { keyframes } from "@emotion/react";
 import { FaInfinity } from "react-icons/fa6";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa6";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 
 export default function SummaryPage() {
   React.useEffect(() => {
@@ -203,7 +203,7 @@ function HeroFeatures() {
 }
 
 function HeroFaceReading() {
-  const globalState = useGlobalState2();
+  const { faceImageDataUrl } = useRootState();
 
   return (
     <Stack alignItems={"center"}>
@@ -216,9 +216,9 @@ function HeroFaceReading() {
           border="5px solid"
           borderColor="gray.100"
         >
-          {globalState.faceImageDataUrl ? (
+          {faceImageDataUrl ? (
             <Image
-              src={globalState.faceImageDataUrl}
+              src={faceImageDataUrl}
               objectFit={"contain"}
               maxWidth="100%"
               maxHeight="100%"

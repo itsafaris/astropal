@@ -1,14 +1,12 @@
 import * as React from "react";
-import { GatsbyBrowser, navigate } from "gatsby";
+import { GatsbyBrowser } from "gatsby";
 import { posthog } from "posthog-js";
-
 import { initPosthog, trackPixelEvent } from "./src/utils/tracking";
 import { RootWrapper } from "./src/components/wrappers/RootWrapper";
 import { PageWrapper } from "./src/components/wrappers/PageWrapper";
+import { SuccessCheckoutWrapper } from "./src/components/wrappers/SuccessCheckoutWrapper";
 import { siteConfig } from "./src/conf";
-
-import { sessionCache } from "./src/sessionCache";
-import { createProductURL } from "./src/utils/urls";
+import { registerRedirects } from "./src/components/wrappers/successCheckoutUtils";
 
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/inter";
@@ -18,22 +16,10 @@ import pkgjson from "./package.json";
 
 export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
   initPosthog(siteConfig.posthogKey, siteConfig.posthogHost, pkgjson.version);
-  sessionCache.createNewCache();
 };
 
 export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }) => {
-  const isFunnelPathname = /\/face-reading\/.+/.test(location.pathname);
-  const isOnboardingPathname = location.pathname.includes("/face-reading/success-checkout");
-
-  if (isFunnelPathname && !isOnboardingPathname && sessionCache.hasConverted()) {
-    navigate(createProductURL());
-    return;
-  }
-
-  if (isOnboardingPathname && sessionCache.hasFinishedOnboarding()) {
-    navigate(createProductURL());
-    return;
-  }
+  registerRedirects(location);
 };
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
@@ -45,6 +31,16 @@ export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) =
   return <RootWrapper>{element}</RootWrapper>;
 };
 
-export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({ element }) => {
-  return <PageWrapper>{element}</PageWrapper>;
+export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({ element, props }) => {
+  const { location } = props;
+
+  return (
+    <PageWrapper>
+      {location.pathname.includes("/success-checkout") ? (
+        <SuccessCheckoutWrapper>{element}</SuccessCheckoutWrapper>
+      ) : (
+        element
+      )}
+    </PageWrapper>
+  );
 };

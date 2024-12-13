@@ -1,32 +1,156 @@
-import { sessionCache } from "src/sessionCache";
 import { useLocation } from "@gatsbyjs/reach-router";
 import { createProductURL } from "src/utils/urls";
 import { navigate } from "gatsby";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import React from "react";
+import { storage } from "@components/wrappers/successCheckoutStorage";
+
+export const ONBOARDING_ROUTES = {
+  START: "/face-reading/success-checkout/onboarding-welcome",
+  REPORTS_1: "/face-reading/success-checkout/onboarding-reports-1",
+  REPORTS_2: "/face-reading/success-checkout/onboarding-reports-2",
+  REPORTS_TIME: "/face-reading/success-checkout/onboarding-reports-time",
+  REPORTS_LOCATION: "/face-reading/success-checkout/onboarding-reports-location",
+  SKIP_TRIAL_1: "/face-reading/success-checkout/onboarding-skip-trial-1",
+  SKIP_TRIAL_2: "/face-reading/success-checkout/onboarding-skip-trial-2",
+  END: "/face-reading/success-checkout/onboarding-product",
+};
+
+type RouteConfig = Array<{
+  route: string;
+  isInternal: boolean;
+  nextRoutes: Array<{
+    route: string;
+    condition: () => boolean;
+  }>;
+}>;
 
 export function useOnboardingRouter() {
-  const { userProfile } = useGlobalState2();
   const location = useLocation();
 
-  const [routes, setRoutes] = React.useState({
-    START: "/face-reading/success-checkout/onboarding-welcome",
-    REPORTS_1: "/face-reading/success-checkout/onboarding-reports-1",
-    REPORTS_2: "/face-reading/success-checkout/onboarding-reports-2",
-    REPORTS_TIME: "/face-reading/success-checkout/onboarding-reports-time",
-    REPORTS_LOCATION: "/face-reading/success-checkout/onboarding-reports-location",
-    SKIP_TRIAL_1: "/face-reading/success-checkout/onboarding-skip-trial-1",
-    SKIP_TRIAL_2: "/face-reading/success-checkout/onboarding-skip-trial-2",
-    END: "/face-reading/success-checkout/onboarding-product",
-    APP: createAppUrl({ userID: userProfile?.id ?? "" }),
-  });
+  const ROUTES = {
+    ...ONBOARDING_ROUTES,
+    APP: createAppUrl({ userID: storage.getConversionDetails().userID ?? "" }),
+  };
 
-  React.useEffect(() => {
-    setRoutes((routes) => ({
-      ...routes,
-      APP: createAppUrl({ userID: userProfile?.id ?? "" }),
-    }));
-  }, [userProfile]);
+  const routeConfig: RouteConfig = [
+    {
+      route: ROUTES.START,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.SKIP_TRIAL_1,
+          condition: () => storage.getSubscription().status !== "purchase-finalized",
+        },
+        {
+          route: ROUTES.REPORTS_1,
+          condition: () => storage.getReport().status !== "purchase-finalized",
+        },
+        {
+          route: ROUTES.END,
+          condition: () => true,
+        },
+      ],
+    },
+    {
+      route: ROUTES.REPORTS_1,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.REPORTS_2,
+          condition: () => storage.getReport().status === "initial",
+        },
+        {
+          route: ROUTES.REPORTS_TIME,
+          condition: () => storage.getReport().status === "purchase-started",
+        },
+        {
+          route: ROUTES.END,
+          condition: () => storage.getReport().status === "purchase-finalized",
+        },
+      ],
+    },
+    {
+      route: ROUTES.REPORTS_2,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.END,
+          condition: () => storage.getReport().status === "initial",
+        },
+        {
+          route: ROUTES.REPORTS_TIME,
+          condition: () => storage.getReport().status === "purchase-started",
+        },
+        {
+          route: ROUTES.END,
+          condition: () => storage.getReport().status === "purchase-finalized",
+        },
+      ],
+    },
+    {
+      route: ROUTES.REPORTS_TIME,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.REPORTS_LOCATION,
+          condition: () => storage.getReport().status === "purchase-started",
+        },
+        {
+          route: ROUTES.END,
+          condition: () => storage.getReport().status === "purchase-finalized",
+        },
+      ],
+    },
+    {
+      route: ROUTES.REPORTS_LOCATION,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.END,
+          condition: () => true,
+        },
+      ],
+    },
+    {
+      route: ROUTES.SKIP_TRIAL_1,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.SKIP_TRIAL_2,
+          condition: () => storage.getSubscription().status === "initial",
+        },
+        {
+          route: ROUTES.REPORTS_1,
+          condition: () => storage.getSubscription().status === "purchase-finalized",
+        },
+      ],
+    },
+    {
+      route: ROUTES.SKIP_TRIAL_2,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.REPORTS_1,
+          condition: () => true,
+        },
+      ],
+    },
+    {
+      route: ROUTES.END,
+      isInternal: true,
+      nextRoutes: [
+        {
+          route: ROUTES.APP,
+          condition: () => true,
+        },
+      ],
+    },
+    {
+      route: ROUTES.APP,
+      isInternal: true,
+      nextRoutes: [],
+    },
+  ];
 
   function createAppUrl(input: { userID: string }): string {
     const params = new URLSearchParams();
@@ -34,136 +158,13 @@ export function useOnboardingRouter() {
     return createProductURL(params.toString());
   }
 
-  const routeConfig: Array<{
-    route: string;
-    isInternal: boolean;
-    nextRoutes: Array<{
-      route: string;
-      condition: () => boolean;
-    }>;
-  }> = [
-    {
-      route: routes.START,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.SKIP_TRIAL_1,
-          condition: () => sessionCache.getSubscription().status !== "purchase-finalized",
-        },
-        {
-          route: routes.REPORTS_1,
-          condition: () => sessionCache.getReport().status !== "purchase-finalized",
-        },
-        {
-          route: routes.END,
-          condition: () => true,
-        },
-      ],
-    },
-    {
-      route: routes.REPORTS_1,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.REPORTS_2,
-          condition: () => sessionCache.getReport().status === "initial",
-        },
-        {
-          route: routes.REPORTS_TIME,
-          condition: () => sessionCache.getReport().status === "purchase-started",
-        },
-        {
-          route: routes.END,
-          condition: () => sessionCache.getReport().status === "purchase-finalized",
-        },
-      ],
-    },
-    {
-      route: routes.REPORTS_2,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.END,
-          condition: () => sessionCache.getReport().status === "initial",
-        },
-        {
-          route: routes.REPORTS_TIME,
-          condition: () => sessionCache.getReport().status === "purchase-started",
-        },
-        {
-          route: routes.END,
-          condition: () => sessionCache.getReport().status === "purchase-finalized",
-        },
-      ],
-    },
-    {
-      route: routes.REPORTS_TIME,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.REPORTS_LOCATION,
-          condition: () => sessionCache.getReport().status === "purchase-started",
-        },
-        {
-          route: routes.END,
-          condition: () => sessionCache.getReport().status === "purchase-finalized",
-        },
-      ],
-    },
-    {
-      route: routes.REPORTS_LOCATION,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.END,
-          condition: () => true,
-        },
-      ],
-    },
-    {
-      route: routes.SKIP_TRIAL_1,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.SKIP_TRIAL_2,
-          condition: () => sessionCache.getSubscription().status === "initial",
-        },
-        {
-          route: routes.REPORTS_1,
-          condition: () => sessionCache.getSubscription().status === "purchase-finalized",
-        },
-      ],
-    },
-    {
-      route: routes.SKIP_TRIAL_2,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.REPORTS_1,
-          condition: () => true,
-        },
-      ],
-    },
-    {
-      route: routes.END,
-      isInternal: true,
-      nextRoutes: [
-        {
-          route: routes.APP,
-          condition: () => true,
-        },
-      ],
-    },
-    {
-      route: routes.APP,
-      isInternal: true,
-      nextRoutes: [],
-    },
-  ];
-
   return {
-    routes,
     navigateToNextPage: () => {
+      if (!routeConfig) {
+        console.error(`Onboarding router: routeConfig is missing`);
+        return;
+      }
+
       const currentHref = location.href;
       const currentRouteConfig = routeConfig.find((it) => currentHref.includes(it.route));
       if (!currentRouteConfig) {

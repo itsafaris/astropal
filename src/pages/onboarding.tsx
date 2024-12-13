@@ -1,10 +1,9 @@
-import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
+import { QuizUI, Segment, QuizProvider } from "@martynasj/quiz-lib";
 
 import { isProdMode } from "@utils/isProdMode";
 import { trackPosthogEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
-import { clearStorage, saveToStorage } from "@utils/localStorage";
 import { calcPersonalInfo, getTypedQuizState } from "@utils/state";
 import {
   AreasOfInterestSlide,
@@ -17,12 +16,10 @@ import {
   YourBirthDateSlide,
   YourBirthPlaceSlide,
   YourBirthTimeSlide,
-  YourGenderSlide,
   YourNameSlide,
   ChooseAstrologerSlide,
   TestimonialSlide,
 } from "@components/quizpage/slides";
-import { useUserProfileState } from "src/appState";
 import posthog from "posthog-js";
 import { NatalChartStatsSlide } from "@components/quizpage/slides/natalChartStatsSlide";
 
@@ -34,13 +31,9 @@ export const Head = () => {
 
 export default function OnboardingQuiz() {
   const [mounted, setMounted] = useState(false);
-  const [_, setUserProfile] = useUserProfileState();
 
   useEffect(() => {
     setMounted(true);
-    // reset state
-    clearStorage("quizstate");
-    setUserProfile({ result: undefined, error: undefined, isLoading: false });
   }, []);
 
   if (!mounted) {
@@ -79,14 +72,12 @@ export default function OnboardingQuiz() {
         });
       }}
     >
-      <QuizStateSaver />
       <QuizUI
         containerProps={{
           minH: "100vh",
         }}
       >
         <Segment title="Progress">
-          <YourGenderSlide />
           <YourBirthDateSlide />
           <YourBirthTimeSlide />
           <YourBirthPlaceSlide />
@@ -108,15 +99,4 @@ export default function OnboardingQuiz() {
       </QuizUI>
     </QuizProvider>
   );
-}
-
-function QuizStateSaver() {
-  const q = useQuizSnapshot();
-
-  useEffect(() => {
-    const quizState = getTypedQuizState(q.slideStateByID);
-    saveToStorage("quizstate", quizState);
-  }, [q.slideStateByID]);
-
-  return null;
 }

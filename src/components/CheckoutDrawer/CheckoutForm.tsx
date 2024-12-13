@@ -13,9 +13,9 @@ import { trackPosthogEvent, trackPixelEvent } from "@utils/tracking";
 import { ErrorView, LoadingView } from "./components";
 import { OneTimeFeePrice } from "@astropal/api-client/dist/src/controllers/pricing";
 import { eden } from "@utils/coreApi";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { createCheckoutRedirectURL } from "@components/onboarding/utils";
-import { useOnboardingRouter } from "@components/onboarding/useOnboardingRouter";
+import { ONBOARDING_ROUTES } from "@components/onboarding/useOnboardingRouter";
 
 type RequestType =
   | {
@@ -129,10 +129,9 @@ function usePayment(
   plan: OneTimeFeePrice
 ): [RequestType, (type: "express" | "card") => Promise<void>] {
   const planRef = React.useRef(plan);
-  const { routes } = useOnboardingRouter();
   const stripe = useStripe();
   const elements = useElements();
-  const { userProfile, selectedPricingPlan, trialPricingPlan } = useGlobalState2();
+  const { userProfile, selectedPricingPlan, trialPricingPlan } = useRootState();
 
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
@@ -151,11 +150,12 @@ function usePayment(
 
     setRequest({ state: "loading" });
 
-    const redirectUrl = createCheckoutRedirectURL(routes.START, {
+    const redirectUrl = createCheckoutRedirectURL(ONBOARDING_ROUTES.START, {
       paymentType: type,
       pricePaid: planRef.current.unit_amount,
       currency: planRef.current.currency,
       planID: planRef.current.priceID,
+      userID: userProfile.id,
     });
 
     trackPixelEvent("AddPaymentInfo");

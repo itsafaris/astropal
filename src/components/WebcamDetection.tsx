@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useServices } from "./wrappers/RootWrapper";
+import { useRootState } from "./wrappers/RootWrapper";
 import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
@@ -14,7 +14,7 @@ export function WebcamDetection({
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const [webcamRunning, setWebcamRunning] = React.useState(false);
-  const { faceLandmarker } = useServices();
+  const { faceLandmarker } = useRootState();
   const drawingUtilsRef = React.useRef<DrawingUtils | null>(null);
   const lastVideoTimeRef = React.useRef<number | null>(null);
   const [resultsState, setResultsState] = React.useState<"ok" | "error" | "initial">("initial");

@@ -2,10 +2,9 @@ import { Box, Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { LuCalendarCheck2 } from "react-icons/lu";
 import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import React from "react";
 import { TrialPricingPlan } from "@utils/coreApi";
-import { sessionCache } from "src/sessionCache";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import {
   OnboardingLayout,
@@ -13,9 +12,10 @@ import {
   useOnboardingRouter,
   usePurchaseSubscription,
 } from "@components/onboarding";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 export default function Page() {
-  const { trialPricingPlan } = useGlobalState2();
+  const { trialPricingPlan } = useRootState();
 
   if (!trialPricingPlan) {
     console.error("Skip trial 2: trial pricing plan is missing");
@@ -31,7 +31,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
   const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchased(sessionCache.getSubscription().status === "purchase-finalized");
+    setHasPurchased(storage.getSubscription().status === "purchase-finalized");
   }, []);
 
   return (
@@ -46,7 +46,7 @@ function PageContent({ plan }: { plan: TrialPricingPlan }) {
           onStartTrial={navigateToNextPage}
           onStartSubscription={async () => {
             await submit();
-            sessionCache.setSubscription({ status: "purchase-finalized" });
+            storage.setSubscription({ status: "purchase-finalized" });
             navigateToNextPage();
           }}
           isPaymentLoading={request.state === "loading"}

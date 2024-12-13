@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { FaceDetectionComponent } from "@components/FaceDetectionComponent";
 import { NextButton } from "@components/quizpage/components";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { Slide } from "@martynasj/quiz-lib/index";
 import { isProdMode } from "@utils/isProdMode";
 import posthog from "posthog-js";
@@ -19,7 +19,7 @@ export function FaceScanAnalysisSlide(props: IFaceScanAnalysisSlideProps) {
 
 function FaceScanAnalysisContent() {
   const [isComplete, setIsComplete] = useState(false);
-  const globalState = useGlobalState2();
+  const { faceImageDataUrl } = useRootState();
 
   useEffect(() => {
     posthog.stopSessionRecording();
@@ -34,7 +34,7 @@ function FaceScanAnalysisContent() {
     <React.Fragment>
       <Box mb={4} mt={-3}>
         <FaceDetectionComponent
-          imgDataUrl={globalState.faceImageDataUrl}
+          imgDataUrl={faceImageDataUrl}
           onAnalysisComplete={() => {
             setIsComplete(true);
           }}

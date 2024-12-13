@@ -1,6 +1,6 @@
 import { Box, Button, Container, Flex, Grid, Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import { TopNavigation } from "@components/topnavigation";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { useSiteMetadata } from "@hooks/useSiteMetadata";
 import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
@@ -13,10 +13,9 @@ export interface IPaywallPageProps {}
 
 export default function PaywallPage(props: IPaywallPageProps) {
   const meta = useSiteMetadata();
-  const globalState = useGlobalState2();
-  const updateState = useGlobalUpdate2();
+  const rootState = useRootState();
 
-  const trialPricingPlan = globalState.trialPricingPlan?.oneTimeFee ?? [];
+  const trialPricingPlan = rootState.trialPricingPlan?.oneTimeFee ?? [];
   const donationPrices = sortBy([...trialPricingPlan], (it) => it.unit_amount, "desc");
   const compensationPrice = donationPrices[donationPrices.length - 1];
 
@@ -83,10 +82,10 @@ export default function PaywallPage(props: IPaywallPageProps) {
                   fontWeight={"semibold"}
                   borderWidth={2}
                   borderColor={
-                    globalState.selectedPricingPlan === price.priceID ? "brand.600" : "gray.100"
+                    rootState.selectedPricingPlan === price.priceID ? "brand.600" : "gray.100"
                   }
                   onClick={() => {
-                    updateState((s) => ({ ...s, selectedPricingPlan: price.priceID }));
+                    rootState.setSelectedPricingPlan(price.priceID);
                   }}
                 >
                   ${(price.unit_amount / 100).toFixed(2)}

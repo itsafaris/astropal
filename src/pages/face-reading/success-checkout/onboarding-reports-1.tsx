@@ -1,25 +1,25 @@
 import { Button, Flex, Grid, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import {
-  useOnboardingRouter,
   CTAPulse,
   SuccessfulPurchaseView,
   OnboardingLayout,
+  useOnboardingRouter,
 } from "@components/onboarding";
 import { FaCheck } from "react-icons/fa";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { Reports } from "@utils/coreApi";
-import { sessionCache } from "src/sessionCache";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 const SKIP_OFFER_ID = "skip";
 
 export default function Page() {
-  const { reports } = useGlobalState2();
+  const { reports } = useRootState();
   const { navigateToNextPage } = useOnboardingRouter();
   const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
+    setHasPurchased(storage.getReport().status === "purchase-finalized");
   }, []);
 
   return (
@@ -33,11 +33,11 @@ export default function Page() {
         <Content
           reports={reports}
           onSkip={() => {
-            sessionCache.setReport({ status: "initial" });
+            storage.setReport({ status: "initial" });
             navigateToNextPage();
           }}
           onPurchase={(it) => {
-            sessionCache.setReport({ status: "purchase-started", productID: it.productID });
+            storage.setReport({ status: "purchase-started", productID: it.productID });
             navigateToNextPage();
           }}
         />

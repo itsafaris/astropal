@@ -2,11 +2,14 @@ import { Button, Stack, Text } from "@chakra-ui/react";
 import { Time, TimePicker } from "@components/TimePicker";
 import { eden } from "@utils/coreApi";
 import React from "react";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
 import { createTime } from "@utils/dates";
-import { useOnboardingRouter } from "@components/onboarding/useOnboardingRouter";
-import { OnboardingLayout, RequestType, SuccessfulPurchaseView } from "@components/onboarding";
-import { sessionCache } from "src/sessionCache";
+import {
+  useOnboardingRouter,
+  OnboardingLayout,
+  RequestType,
+  SuccessfulPurchaseView,
+} from "@components/onboarding";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 
 export default function Page() {
   const { navigateToNextPage } = useOnboardingRouter();
@@ -15,7 +18,7 @@ export default function Page() {
   const [hasPurchased, setHasPurchased] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setHasPurchased(sessionCache.getReport().status === "purchase-finalized");
+    setHasPurchased(storage.getReport().status === "purchase-finalized");
   }, []);
 
   return (
@@ -54,15 +57,14 @@ export default function Page() {
 }
 
 function useSubmit(time: Time | null) {
-  const { userProfile } = useGlobalState2();
-
   const [request, setRequest] = React.useState<RequestType>({
     state: "initial",
   });
 
   async function submit() {
     try {
-      if (!userProfile || !time) {
+      const { userID } = storage.getConversionDetails();
+      if (!userID || !time) {
         throw new Error("data is missing");
       }
 
@@ -72,7 +74,7 @@ function useSubmit(time: Time | null) {
       const res = await eden(`/updateUserProfile`, {
         method: "POST",
         body: {
-          id: userProfile.id,
+          id: userID,
           dob_local_hour: timeTransformed.time24.hour,
           dob_local_minute: timeTransformed.time24.minute,
         },

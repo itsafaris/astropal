@@ -1,7 +1,7 @@
 import { Box, Flex, Icon, Image, Progress, Text } from "@chakra-ui/react";
 import { DrawingUtils, FaceLandmarker, FaceLandmarkerResult } from "@mediapipe/tasks-vision";
 import * as React from "react";
-import { useServices } from "./wrappers/RootWrapper";
+import { useRootState } from "./wrappers/RootWrapper";
 import { dataUrlToHtmlImageElement } from "@utils/image";
 import { FaCheck } from "react-icons/fa";
 
@@ -44,7 +44,7 @@ export function FaceDetectionComponent({
   const scanningAnimationDuration = 5;
 
   const $canvas = React.useRef<HTMLCanvasElement>(null);
-  const { faceLandmarker } = useServices();
+  const { faceLandmarker } = useRootState();
 
   const [faceReadingState, setFaceReadingState] = React.useState<FaceReadingState>({
     type: "initial",

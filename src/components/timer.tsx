@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Flex, Text } from "@chakra-ui/react";
-import { useGlobalState } from "./wrappers/RootWrapper";
+import { useRootState } from "./wrappers/RootWrapper";
 
 function formatTimestamp(timestamp: number): {
   minutes: string;
@@ -18,26 +18,31 @@ function formatTimestamp(timestamp: number): {
 }
 
 export function Timer() {
-  const [timestamp, setTimestamp] = useGlobalState("timer", 899000);
+  const { offerTime, setOfferTime } = useRootState();
+  const [time, setTime] = React.useState(offerTime);
 
   React.useEffect(() => {
+    let time = offerTime;
+
     const timer = setInterval(() => {
-      setTimestamp((timestamp) => {
-        if (timestamp <= 0) {
+      setTime((t) => {
+        time = t;
+        if (t <= 0) {
           clearInterval(timer);
-          return 0;
+          return t;
         }
 
-        return timestamp - 1000;
+        return t - 1000;
       });
     }, 1000);
 
     return () => {
       clearInterval(timer);
+      setOfferTime(time);
     };
   }, []);
 
-  const readableTime = formatTimestamp(timestamp);
+  const readableTime = formatTimestamp(time);
 
   return (
     <Flex

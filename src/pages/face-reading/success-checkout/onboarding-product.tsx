@@ -1,17 +1,17 @@
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import {
   OnboardingNotification,
-  useOnboardingRouter,
   OnboardingLayout,
+  useOnboardingRouter,
 } from "@components/onboarding";
+import { storage } from "@components/wrappers/successCheckoutStorage";
 import React from "react";
-import { sessionCache } from "src/sessionCache";
 
 export default function OnboardingProduct() {
   const { navigateToNextPage } = useOnboardingRouter();
 
   React.useEffect(() => {
-    sessionCache.setHasFinishedOnboarding();
+    storage.setHasFinishedOnboarding();
   }, []);
 
   return (

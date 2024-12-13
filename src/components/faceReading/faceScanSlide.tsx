@@ -14,7 +14,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { SlideHeading } from "@components/quizpage/components";
-import { useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { WebcamDetection } from "@components/WebcamDetection";
 import { Slide, useQuiz } from "@martynasj/quiz-lib/index";
 import { readFileAsDataURL } from "@utils/image";
@@ -36,7 +36,7 @@ export function FaceScanSlide(props: IFaceScanSlideProps) {
 
 export function FaceScanContent(props: IFaceScanSlideProps) {
   const { submitQuestion } = useQuiz();
-  const update = useGlobalUpdate2();
+  const rootState = useRootState();
   const { isOpen: isWebcamOpen, onOpen: onWebcamOpen, onClose: onWebcamClose } = useDisclosure();
   const imgUploadRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -53,7 +53,9 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
       return;
     }
     const dataUrl = await readFileAsDataURL(file);
-    update((v) => ({ ...v, faceImageDataUrl: dataUrl }));
+
+    rootState.setFaceImageDataUrl(dataUrl);
+
     submitQuestion();
   }
 
@@ -144,7 +146,9 @@ export function FaceScanContent(props: IFaceScanSlideProps) {
           <WebcamDetection
             onCaptureImage={(dataUrl) => {
               onWebcamClose();
-              update((v) => ({ ...v, faceImageDataUrl: dataUrl }));
+
+              rootState.setFaceImageDataUrl(dataUrl);
+
               submitQuestion();
             }}
           />

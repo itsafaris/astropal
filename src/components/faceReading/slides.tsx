@@ -21,7 +21,7 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 
 import { GiCrossedAirFlows, GiEarthSpit, GiFire, GiWaterSplash } from "react-icons/gi";
 import { getTypedQuizState, getZodiacFromState, QuizStateTyped } from "./quizState";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 
 const PULSE_ANIMATION_2 = keyframes`
   0% { box-shadow: 0 0 0 0px #805ad5; }
@@ -103,8 +103,8 @@ export function YourBirthDateSlide() {
     result?: { id: string } | null;
     error?: any;
   }>({});
-  const update = useGlobalUpdate2();
 
+  const rootState = useRootState();
   const typedState = getTypedQuizState(quizState);
 
   async function createUser(input: QuizStateTyped) {
@@ -128,9 +128,12 @@ export function YourBirthDateSlide() {
     })
       .then((result) => {
         if (!result.data) {
+          console.error("response of createNewUser has no data");
           return;
         }
-        update((s) => ({ ...s, userProfile: result.data }));
+
+        rootState.setUserProfile(result.data);
+
         submitQuestion();
       })
       .catch((err) => {
@@ -342,7 +345,7 @@ function EmailSlide_() {
   });
   const quizState = useQuizContext();
   const meta = useSiteMetadata();
-  const { userProfile } = useGlobalState2();
+  const { userProfile } = useRootState();
 
   return (
     <Flex height={"100%"} position={"relative"} flexDirection={"column"}>

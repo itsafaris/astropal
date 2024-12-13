@@ -1,12 +1,10 @@
-import { QuizUI, Segment, QuizProvider, useQuizSnapshot } from "@martynasj/quiz-lib";
+import { QuizUI, Segment, QuizProvider } from "@martynasj/quiz-lib";
 
 import { isProdMode } from "@utils/isProdMode";
 import { trackPosthogEvent, trackPixelEvent } from "@utils/tracking";
 import { SEO } from "@components/seo";
 import { useEffect, useState } from "react";
-import { clearStorage, saveToStorage } from "@utils/localStorage";
 
-import { useUserProfileState } from "src/appState";
 import {
   YourGenderSlide,
   YourBirthDateSlide,
@@ -33,13 +31,9 @@ export const Head = () => {
 
 export default function FaceReadingPage() {
   const [mounted, setMounted] = useState(false);
-  const [_, setUserProfile] = useUserProfileState();
 
   useEffect(() => {
     setMounted(true);
-    // reset state
-    clearStorage("quizstate");
-    setUserProfile({ result: undefined, error: undefined, isLoading: false });
   }, []);
 
   if (!mounted) {
@@ -79,8 +73,6 @@ export default function FaceReadingPage() {
         });
       }}
     >
-      <QuizStateSaver />
-
       <QuizUI
         headerComponent={<TopNavigation border="none" />}
         containerProps={{
@@ -107,15 +99,4 @@ export default function FaceReadingPage() {
       </QuizUI>
     </QuizProvider>
   );
-}
-
-function QuizStateSaver() {
-  const q = useQuizSnapshot();
-
-  useEffect(() => {
-    const quizState = getTypedQuizState(q.slideStateByID);
-    saveToStorage("quizstate", quizState);
-  }, [q.slideStateByID]);
-
-  return null;
 }

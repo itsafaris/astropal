@@ -13,7 +13,7 @@ export function NatalChartStatsSlide() {
   );
 }
 
-export function _NatalChartStatsSlide() {
+function _NatalChartStatsSlide() {
   const { quizState } = useQuizState();
   const p = getTypedQuizState(quizState);
 

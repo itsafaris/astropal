@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Container, Flex, Heading, Icon, Text } from "@chakra-ui/react";
-import { useGlobalState2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { Timer } from "@components/timer";
 import { FaStar } from "react-icons/fa";
 import { MdFreeCancellation, MdOutlineDiscount, MdVerified } from "react-icons/md";
@@ -9,7 +9,7 @@ import { trackPixelEvent } from "@utils/tracking";
 import { TopNavigation } from "@components/topnavigation";
 
 export default function CheckoutPage() {
-  const { trialPricingPlan, selectedPricingPlan } = useGlobalState2();
+  const { trialPricingPlan, selectedPricingPlan } = useRootState();
   const plan = trialPricingPlan?.oneTimeFee.find((p) => p.priceID === selectedPricingPlan);
   const recurringDiscount = 10;
   const currentRecurringPrice = (trialPricingPlan?.recurring.unit_amount ?? 0) / 100;

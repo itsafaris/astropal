@@ -9,10 +9,7 @@ export type TrialPricingPlan = Awaited<ReturnType<typeof getTrialPricingPlan>>;
 export type PricingPlans = Awaited<ReturnType<typeof getPricingPlans>>;
 export type Reports = Awaited<ReturnType<typeof getReports>>;
 
-export async function createNewUserProfile(
-  input: QuizStateParsed,
-  funnelTheme?: "relationships" | "loneliness"
-): Promise<{ id: string }> {
+export async function createNewUserProfile(input: QuizStateParsed): Promise<{ id: string }> {
   const r = await fetch(`${siteConfig.coreApiHost}/createNewUser`, {
     method: "POST",
     headers: {
@@ -30,7 +27,6 @@ export async function createNewUserProfile(
       birth_place_formatted_text: input.yourBirthLocation.formattedText,
       birth_place_lat: input.yourBirthLocation.lat,
       birth_place_lng: input.yourBirthLocation.long,
-      initial_sales_funnel_theme: funnelTheme,
     }),
   });
 

@@ -31,8 +31,6 @@ import {
   Fade,
   Button,
 } from "@chakra-ui/react";
-import { FaArrowDown } from "react-icons/fa";
-import { useUserProfileState } from "src/appState";
 import { QuizStateParsed, getTypedQuizState, getZodiacFromState } from "@utils/state";
 import { convertUserFromAnonymous, createNewUserProfile, updateUserProfile } from "@utils/coreApi";
 import { useEffect, useState } from "react";
@@ -45,194 +43,13 @@ import { ZodiacTitleHeader } from "@components/AstrologicalProfile";
 import { BsChevronRight } from "react-icons/bs";
 import { astrologers, getAstrologerOrDefault } from "@utils/astrologers";
 import { NatalChart } from "@components/NatalChart";
-import { useGlobalState2, useGlobalUpdate2 } from "@components/wrappers/RootWrapper";
+import { useRootState } from "@components/wrappers/RootWrapper";
 import { keyframes } from "@emotion/react";
 
 const PULSE_ANIMATION = keyframes`
   0% { box-shadow: 0 0 0 0px #e65400; }
   100% { box-shadow: 0 0 0 20px rgba(0, 0, 0, 0); }; }
 `;
-
-const PULSE_ANIMATION_2 = keyframes`
-  0% { box-shadow: 0 0 0 0px #805ad5; }
-  100% { box-shadow: 0 0 0 30px rgba(0, 0, 0, 0); }; }
-`;
-
-export function YourGenderSlide() {
-  const { funnelTheme } = useGlobalState2();
-  const updateGlobalState = useGlobalUpdate2();
-
-  React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const landingPageTheme = params.get("landing-theme");
-
-    // only reset funnel theme if explicit param is passed
-    // otherwise load initial state from storage
-    if (landingPageTheme === "relationships") {
-      updateGlobalState({ funnelTheme: "relationships" });
-    } else if (landingPageTheme != null) {
-      // any other theme defaults to loneliness
-      updateGlobalState({ funnelTheme: "loneliness" });
-    }
-  }, []);
-
-  const themeContent = funnelTheme === "relationships" ? relationshipsTheme : defaultTheme;
-
-  return (
-    <Slide
-      id="your-gender"
-      type="single"
-      variant="picture"
-      size="medium"
-      label=""
-      containerProps={{
-        px: 0,
-        py: 0,
-        bg: "black",
-      }}
-      options={[
-        {
-          text: "Female",
-          styleProps: {
-            bg: "purple.50",
-            color: "black",
-            animation: `${PULSE_ANIMATION_2} 1.5s ease-in-out  infinite`,
-            px: 1,
-            py: 1,
-            outline: "4px solid",
-            outlineColor: "purple.500",
-          },
-          imgComponent: (
-            <StaticImage
-              alt="image of a female"
-              src="../../../images/female.png"
-              placeholder="blurred"
-              style={{ borderRadius: "8px" }}
-              height={140}
-            />
-          ),
-        },
-        {
-          text: "Male",
-          styleProps: {
-            bg: "purple.50",
-            color: "black",
-            animation: `${PULSE_ANIMATION_2} 1.5s ease-in-out  infinite`,
-            px: 1,
-            py: 1,
-            outline: "4px solid",
-            outlineColor: "purple.500",
-          },
-          imgComponent: (
-            <StaticImage
-              alt="image of a male"
-              src="../../../images/male.png"
-              placeholder="blurred"
-              style={{ borderRadius: "8px" }}
-              height={140}
-            />
-          ),
-        },
-      ]}
-    >
-      <Box position={"relative"}>
-        {themeContent?.img}
-
-        <Box
-          py={24}
-          bgGradient="linear(to-b, transparent, black)"
-          position={"absolute"}
-          bottom={0}
-          width={"full"}
-        />
-      </Box>
-
-      <Box zIndex={1} mt={"-50px"}>
-        {themeContent?.headline}
-
-        <Flex
-          flexDirection={"column"}
-          alignItems={"center"}
-          textTransform={"uppercase"}
-          gap={1}
-          mb={4}
-          mt={10}
-          color="purple.200"
-        >
-          <Text fontSize={"md"} fontWeight={"semibold"} textAlign={"center"}>
-            Choose your gender to start
-          </Text>
-          <FaArrowDown />
-        </Flex>
-
-        <Box px={8}>
-          <Selector />
-        </Box>
-      </Box>
-    </Slide>
-  );
-}
-
-type ThemeContent = {
-  img: React.JSX.Element;
-  headline: React.JSX.Element;
-};
-
-const relationshipsTheme: ThemeContent = {
-  img: (
-    <StaticImage
-      src={`../../../images/landing-bg-love.jpg`}
-      alt=""
-      placeholder="none"
-      layout="fullWidth"
-      style={{ marginTop: -70 }}
-    />
-  ),
-  headline: (
-    <Text
-      textAlign={"center"}
-      fontSize={"2xl"}
-      fontWeight={"bold"}
-      lineHeight={1.4}
-      color={"white"}
-      mb={2}
-      px={4}
-    >
-      Discover Your Destiny: Accurate Astrology for{" "}
-      <Text as="span" color="purple.300" textDecoration="underline">
-        Love, Relationships and Compatibility
-      </Text>
-    </Text>
-  ),
-};
-
-const defaultTheme: ThemeContent = {
-  img: (
-    <StaticImage
-      src={`../../../images/landing-bg.jpg`}
-      alt=""
-      placeholder="none"
-      layout="fullWidth"
-      style={{ marginTop: -70 }}
-    />
-  ),
-  headline: (
-    <Text
-      textAlign={"center"}
-      fontSize={"2xl"}
-      fontWeight={"bold"}
-      lineHeight={1.4}
-      color={"white"}
-      mb={2}
-      px={4}
-    >
-      Discover Your Destiny: Accurate Astrology for{" "}
-      <Text as="span" color="purple.300" textDecoration="underline">
-        Love, Career and Life Path
-      </Text>
-    </Text>
-  ),
-};
 
 export function YourBirthTimeSlide() {
   const { submitQuestion } = useQuiz();
@@ -276,21 +93,16 @@ function YourBirthPlaceSlide_() {
   const { quizState } = useQuizState();
   const slide = useSlide();
   const actions = useQuizActions();
-  const [userProfile, setUserProfile] = useUserProfileState();
-  const globalState = useGlobalState2();
 
   const p = getTypedQuizState(quizState);
 
   async function createUser(p: QuizStateParsed) {
-    setUserProfile({ isLoading: true, result: undefined, error: undefined });
-    createNewUserProfile(p, globalState.funnelTheme)
-      .then((result) => {
-        setUserProfile({ isLoading: false, error: undefined, result });
+    createNewUserProfile(p)
+      .then(() => {
         submitQuestion();
       })
       .catch((err) => {
         console.error(err);
-        setUserProfile({ isLoading: false, error: err, result: undefined });
       });
   }
 
@@ -319,13 +131,7 @@ function YourBirthPlaceSlide_() {
       <Callout mb={8}>
         💡 If you're unsure of the exact location, enter a nearby major city.
       </Callout>
-      <NextButton
-        isLoading={userProfile.isLoading}
-        isDisabled={!!userProfile.error}
-        onClick={submit}
-      >
-        Continue
-      </NextButton>
+      <NextButton onClick={submit}>Continue</NextButton>
 
       <Button
         mt={8}
@@ -742,7 +548,6 @@ export function YourNameSlide() {
 }
 
 function NameSlideContent() {
-  const [userProfile] = useUserProfileState();
   const { submitQuestion } = useQuiz();
 
   return (
@@ -758,8 +563,6 @@ function NameSlideContent() {
       />
       <Selector mt={4} />
       <NextButton
-        isLoading={userProfile.isLoading}
-        isDisabled={userProfile.error}
         onClick={() => {
           submitQuestion();
         }}
@@ -890,7 +693,7 @@ function EmailSlide_() {
   const [requestStatus, setRequestStatus] = useState<RequestStatus>({
     isLoading: false,
   });
-  const [userProfile] = useUserProfileState();
+  const { userProfile } = useRootState();
 
   function redirectToApp(input: { userID: string; question: string }) {
     const params = new URLSearchParams();
@@ -948,7 +751,7 @@ function EmailSlide_() {
 
           try {
             const res = await updateUserProfile({
-              userID: userProfile.result!.id,
+              userID: userProfile.id,
               quizState: parsedQuizState,
             });
 
@@ -965,7 +768,7 @@ function EmailSlide_() {
 
           try {
             const res = await convertUserFromAnonymous({
-              userID: userProfile.result!.id,
+              userID: userProfile.id,
               email: parsedQuizState.email,
             });
 
@@ -990,7 +793,7 @@ function EmailSlide_() {
           // const zodiac = getZodiacFromState(parsedQuizState);
 
           redirectToApp({
-            userID: userProfile.result!.id,
+            userID: userProfile.id,
             // question: zodiac.onboardingQuestion
             question: "What is the most powerful gift highlighted in my birth chart?",
             // question: "Which single and most powerful talent is indicated by my birth chart?",
