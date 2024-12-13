@@ -13,17 +13,8 @@
   GATSBY_POSTHOG_KEY = "phc_zq8o1MJETg7eWOWcLI224iei1EhnhIbX0AM0EVLerdt"
   GATSBY_POSTHOG_HOST = "https://us.i.posthog.com"
 
-[[redirects]]
-  from = "/blog"
-  to = "https://blog.intuvist.com"
-  status = 301
-
-[[redirects]]
-  from = "/blog/"
-  to = "https://blog.intuvist.com"
-  status = 301
 
 [[redirects]]
   from = "/blog/*"
-  to = "https://blog.intuvist.com"
-  status = 301
+  to = "https://blog.intuvist.com/:splat"
+  status = 200
