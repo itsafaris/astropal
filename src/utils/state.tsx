@@ -10,8 +10,6 @@ import {
   DateValue,
 } from "@martynasj/quiz-lib";
 
-import { getZodiacSign } from "@services/zodiacService";
-
 import { toTitleCase } from "@utils/string";
 import { createTime, Time } from "./dates";
 import { createBirthOrigin, createHoroscopeData } from "./natalChart";
@@ -70,16 +68,6 @@ export function calcPersonalInfo({
     horoscope,
     yourAge,
   };
-}
-
-export function getZodiacFromState(state: QuizStateParsed) {
-  return getZodiacSign(
-    new Date(
-      state.yourBirthDate.year,
-      state.yourBirthDate.month - 1,
-      state.yourBirthDate.day
-    ).toISOString()
-  );
 }
 
 /** IMPORTANT: this function should have no derived state, only the state extracted directly from the quiz state */
