@@ -1,6 +1,5 @@
 import { Box, Button, Stack, Text, Image, Grid } from "@chakra-ui/react";
 import {
-  CTAPulse,
   SuccessfulPurchaseView,
   OnboardingLayout,
   useOnboardingRouter,
@@ -135,7 +134,6 @@ function Content({
             colorScheme="brand"
             width={"full"}
             onClick={() => onPurchase(report)}
-            animation={`${CTAPulse} 1.2s infinite`}
           >
             <Text fontSize={["md"]}>Get Extra Reports</Text>
           </Button>

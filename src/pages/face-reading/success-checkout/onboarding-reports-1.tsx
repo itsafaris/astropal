@@ -1,7 +1,6 @@
 import { Button, Flex, Grid, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import {
-  CTAPulse,
   SuccessfulPurchaseView,
   OnboardingLayout,
   useOnboardingRouter,
@@ -109,15 +108,7 @@ function Content({
         <SkipCard isSelected={selectedReportID === SKIP_OFFER_ID} onSelect={handleSelect} />
       </Stack>
 
-      <Button
-        size={"lg"}
-        py={7}
-        colorScheme="brand"
-        flexGrow={1}
-        onClick={handleCTAClick}
-        animation={selectedReportID === "skip" ? undefined : `${CTAPulse} 1.2s infinite`}
-        mt={3}
-      >
+      <Button size={"lg"} py={7} colorScheme="brand" flexGrow={1} onClick={handleCTAClick} mt={3}>
         <Text fontSize={["md", "md"]}>
           {selectedReportID === "skip" ? "Continue" : "Get My Copy"}
         </Text>
