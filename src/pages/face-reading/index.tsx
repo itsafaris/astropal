@@ -24,16 +24,16 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
           <Badge labelText="20M users' choice" text="4.8 Satisfaction Score" icon="⭐" />
         </Flex>
 
-        <Box my={4}>
+        <Flex my={4} justifyContent={"center"}>
           <StaticImage
-            src="../../images/facereading_lp.png"
+            src="../../images/facereading_lp.jpg"
             placeholder="blurred"
             alt="face reading by Intuvist"
             style={{ borderRadius: 12 }}
-            width={600}
+            width={520}
             height={440}
           />
-        </Box>
+        </Flex>
 
         <Heading textAlign={"center"} fontSize={"2xl"} mt={4}>
           <Span color="brand.500">Find your happines</Span>
