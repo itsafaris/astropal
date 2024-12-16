@@ -51,7 +51,7 @@ export function YourGenderSlide() {
           imgComponent: (
             <StaticImage
               alt="image of a female"
-              src="../../images/female.png"
+              src="../../images/female.jpg"
               placeholder="blurred"
               style={{ borderRadius: "8px" }}
               height={140}
@@ -72,7 +72,7 @@ export function YourGenderSlide() {
           imgComponent: (
             <StaticImage
               alt="image of a male"
-              src="../../images/male.png"
+              src="../../images/male.jpg"
               placeholder="blurred"
               style={{ borderRadius: "8px" }}
               height={140}

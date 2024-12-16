@@ -24,7 +24,7 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
           <Badge labelText="20M users' choice" text="4.8 Satisfaction Score" icon="⭐" />
         </Flex>
 
-        <Flex my={4} justifyContent={"center"}>
+        <Flex my={4} justifyContent={"center"} as={Link} to={"quiz"}>
           <StaticImage
             src="../../images/facereading_lp.jpg"
             placeholder="blurred"
@@ -41,7 +41,15 @@ export default function FaceReadingLandingPage(props: IFaceReadingLandingPagePro
           <Span fontSize={"2xl"}>with the most accurate face reading</Span>
         </Heading>
 
-        <Flex mt={4} gap={2} justifyContent={"center"} flexWrap={"wrap"}>
+        <Flex
+          mt={4}
+          gap={2}
+          justifyContent={"center"}
+          flexWrap={"wrap"}
+          as={Link}
+          to={"quiz"}
+          textDecoration={"none"}
+        >
           <Stack
             flexDirection={"row"}
             alignItems={"center"}
