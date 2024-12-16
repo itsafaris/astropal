@@ -80,7 +80,9 @@ export function initPosthog(token: string, apiHost: string, feVersion: string) {
     advanced_disable_feature_flags_on_first_load: true,
     advanced_disable_feature_flags: true,
     bootstrap: {
-      featureFlags: {},
+      featureFlags: {
+        "lp-new-img": "test",
+      },
     },
   });
 
