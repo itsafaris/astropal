@@ -40,12 +40,19 @@ export function usePurchaseSubscription(
         throw new Error("subscription data is missing");
       }
 
+      let value = plan.recurring.unit_amount;
+      if (plan.recurring.coupon) {
+        value = value - plan.recurring.coupon.amount_off;
+      }
+
+      value = value / 100;
+
       trackPosthogPurchaseEvent({
         name: "purchase",
         properties: {
           currency,
-          value: plan.recurring.unit_amount / 100,
-          paymentType: paymentType,
+          value,
+          paymentType,
           contentType: "subscription",
           contentIDs: [plan.recurring.priceID],
         },
