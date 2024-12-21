@@ -19,6 +19,11 @@ import { StaticImage } from "gatsby-plugin-image";
 import { OrbRotating } from "@components/OrbRotating";
 import { Link } from "gatsby";
 import { AppShowcase } from "@components/businessPage/AppShowcase";
+import { SEO } from "@components/seo";
+
+export function Head() {
+  return <SEO />;
+}
 
 export default function HomePage() {
   return (
