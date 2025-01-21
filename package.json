@@ -39,6 +39,7 @@
     "framer-motion": "^10.16.1",
     "gatsby": "^5.12.11",
     "gatsby-plugin-anchor-links": "^1.2.1",
+    "gatsby-plugin-facebook-multi-pixels": "^1.1.2",
     "gatsby-plugin-facebook-pixel": "^1.0.8",
     "gatsby-plugin-google-gtag": "^5.13.1",
     "gatsby-plugin-google-tagmanager": "^5.13.1",
