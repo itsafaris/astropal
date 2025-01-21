@@ -93,16 +93,17 @@ const config: GatsbyConfig = {
 
     {
       resolve: `gatsby-plugin-facebook-multi-pixels`,
+      // @ts-ignore
       options: [
         {
-          dev: false,
+          dev: true,
           pixelId: siteConfig.fbPixelID_1,
           alias: "fb_pixel_1",
           viewContent: true,
           pageView: true,
         },
         {
-          dev: false,
+          dev: true,
           pixelId: siteConfig.fbPixelID_2,
           alias: "fb_pixel_2",
           viewContent: true,
