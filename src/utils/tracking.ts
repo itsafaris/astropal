@@ -54,20 +54,30 @@ export function trackPixelEvent(event: string, properties?: Record<string, any>)
   if (typeof window === "undefined") {
     return;
   }
-  if (!(window as any).fbq) {
+
+  if (!!(window as any).fbq) {
+    (window as any).fbq("track", event, properties);
     return;
   }
-  (window as any).fbq("track", event, properties);
+
+  if (!!(window as any).newFbq) {
+    (window as any).newFbq("track", event, properties);
+  }
 }
 
 export function trackCustomPixelEvent(event: string, properties?: Record<string, any>) {
   if (typeof window === "undefined") {
     return;
   }
-  if (!(window as any).fbq) {
+
+  if (!!(window as any).fbq) {
+    (window as any).fbq("trackCustom", event, properties);
     return;
   }
-  (window as any).fbq("trackCustom", event, properties);
+
+  if (!!(window as any).newFbq) {
+    (window as any).newFbq("trackCustom", event, properties);
+  }
 }
 
 export function initPosthog(token: string, apiHost: string, feVersion: string) {

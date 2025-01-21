@@ -94,7 +94,8 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
-        pixelId: siteConfig.fbPixelID,
+        alias: "newFbq",
+        pixelId: siteConfig.fbPixelID_1,
       },
     },
 
