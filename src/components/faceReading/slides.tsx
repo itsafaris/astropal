@@ -373,7 +373,7 @@ function EmailSlide_() {
           const parsedQuizState = getTypedQuizState(quizState);
 
           posthog.identify(parsedQuizState.email);
-          trackPixelEvent("Lead");
+          trackPixelEvent({ event: "Lead" });
 
           if (!userProfile) {
             console.error("no user profile created");

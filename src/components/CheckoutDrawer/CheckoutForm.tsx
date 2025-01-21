@@ -158,7 +158,8 @@ function usePayment(
       userID: userProfile.id,
     });
 
-    trackPixelEvent("AddPaymentInfo");
+    trackPixelEvent({ event: "AddPaymentInfo", pixelName: "fb_pixel_1" });
+
     trackPosthogEvent({
       name: "add-payment-info",
       properties: {},

@@ -51,7 +51,7 @@ export default function FaceReadingPage() {
         trackPosthogEvent(event);
 
         if (event.name === "slide-entered") {
-          trackPixelEvent("ViewContent");
+          trackPixelEvent({ event: "ViewContent" });
         }
       }}
       onSlideSubmitted={async (state) => {

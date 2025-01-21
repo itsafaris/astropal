@@ -46,7 +46,7 @@ export function PageWrapper(props: React.PropsWithChildren<IPageWrapperProps>) {
     events.forEach((it) => {
       timeouts.push(
         setTimeout(() => {
-          trackCustomPixelEvent(it.name);
+          trackCustomPixelEvent({ event: it.name });
         }, it.timeout)
       );
     });

@@ -95,6 +95,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
         pixelId: siteConfig.fbPixelID_1,
+        alias: "fb_pixel_1",
       },
     },
 
@@ -102,6 +103,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
         pixelId: siteConfig.fbPixelID_2,
+        alias: "fb_pixel_2",
       },
     },
 

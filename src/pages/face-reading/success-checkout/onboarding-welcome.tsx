@@ -28,12 +28,18 @@ export default function Page() {
 
       const value = pricePaid ? pricePaid / 100 : 0;
 
-      trackPixelEvent("Purchase", {
-        currency,
-        value,
-        paymentType,
-        planID,
+      trackPixelEvent({
+        event: "Purchase",
+        pixelName: "fb_pixel_1",
+        properties: {
+          currency,
+          value,
+          paymentType,
+          planID,
+        },
       });
+
+      trackPixelEvent({ event: "AddPaymentInfo", pixelName: "fb_pixel_2" });
 
       gaTrackPaidTrialPurchaseConversion({
         value,

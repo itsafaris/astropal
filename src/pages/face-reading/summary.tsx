@@ -45,7 +45,7 @@ import { useRootState } from "@components/wrappers/RootWrapper";
 
 export default function SummaryPage() {
   React.useEffect(() => {
-    trackPixelEvent("AddToCart");
+    trackPixelEvent({ event: "AddToCart" });
   }, []);
 
   return (

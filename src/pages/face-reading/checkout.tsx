@@ -16,7 +16,7 @@ export default function CheckoutPage() {
   const beforeRecurringPrice = currentRecurringPrice + recurringDiscount;
 
   React.useEffect(() => {
-    trackPixelEvent("InitiateCheckout");
+    trackPixelEvent({ event: "InitiateCheckout" });
   }, []);
 
   if (!plan) {

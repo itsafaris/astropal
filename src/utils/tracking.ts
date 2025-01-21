@@ -50,33 +50,43 @@ function sendToGTM(e: TrackingEvent) {
   });
 }
 
-export function trackPixelEvent(event: string, properties?: Record<string, any>) {
+export function trackPixelEvent(input: {
+  event: string;
+  properties?: Record<string, any>;
+  pixelName?: string;
+}) {
   if (typeof window === "undefined") {
     return;
   }
 
-  if (!!(window as any).fbq) {
-    (window as any).fbq("track", event, properties);
+  if (!(window as any).fbq) {
     return;
   }
 
-  if (!!(window as any).newFbq) {
-    (window as any).newFbq("track", event, properties);
+  if (!!input.pixelName) {
+    (window as any).fbq("trackSingle", input.pixelName, input.event, input.properties);
+  } else {
+    (window as any).fbq("track", input.event, input.properties);
   }
 }
 
-export function trackCustomPixelEvent(event: string, properties?: Record<string, any>) {
+export function trackCustomPixelEvent(input: {
+  event: string;
+  properties?: Record<string, any>;
+  pixelName?: string;
+}) {
   if (typeof window === "undefined") {
     return;
   }
 
-  if (!!(window as any).fbq) {
-    (window as any).fbq("trackCustom", event, properties);
+  if (!(window as any).fbq) {
     return;
   }
 
-  if (!!(window as any).newFbq) {
-    (window as any).newFbq("trackCustom", event, properties);
+  if (!!input.pixelName) {
+    (window as any).fbq("trackSingleCustom", input.pixelName, input.event, input.properties);
+  } else {
+    (window as any).fbq("trackCustom", input.event, input.properties);
   }
 }
 

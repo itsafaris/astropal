@@ -1,7 +1,7 @@
 import { useStripe } from "@stripe/react-stripe-js";
 import React from "react";
 import { eden, TrialPricingPlan } from "@utils/coreApi";
-import { trackPosthogPurchaseEvent } from "@utils/tracking";
+import { trackPixelEvent, trackPosthogPurchaseEvent } from "@utils/tracking";
 import { RequestType } from "@components/onboarding";
 import { storage } from "@components/wrappers/successCheckoutStorage";
 
@@ -16,7 +16,7 @@ export function usePurchaseSubscription(
 
   async function submit() {
     try {
-      const { userID, currency, paymentType } = storage.getConversionDetails();
+      const { userID, currency, paymentType, planID } = storage.getConversionDetails();
       if (!userID || !stripe) {
         throw new Error("data is missing");
       }
@@ -55,6 +55,17 @@ export function usePurchaseSubscription(
           paymentType,
           contentType: "subscription",
           contentIDs: [plan.recurring.priceID],
+        },
+      });
+
+      trackPixelEvent({
+        event: "Purchase",
+        pixelName: "fb_pixel_2",
+        properties: {
+          currency,
+          value,
+          paymentType,
+          planID,
         },
       });
 
