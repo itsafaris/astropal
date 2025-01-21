@@ -24,6 +24,7 @@ export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({ element, props }
   );
 };
 
+// We have set up the fb pixel manually (without plugins) to avoid issues with 'missing_event' being sent to the pixel.
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents }) => {
   if (process.env.NODE_ENV === `production`) {
     return setHeadComponents([
