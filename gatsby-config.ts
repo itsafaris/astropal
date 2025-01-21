@@ -99,6 +99,13 @@ const config: GatsbyConfig = {
     },
 
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: siteConfig.fbPixelID_2,
+      },
+    },
+
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/favicon.jpg",
