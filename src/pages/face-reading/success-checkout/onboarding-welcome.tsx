@@ -13,6 +13,8 @@ import {
 } from "@components/onboarding";
 import { storage } from "@components/wrappers/successCheckoutStorage";
 
+import { siteConfig } from "../../../conf";
+
 export default function Page() {
   const { navigateToNextPage } = useOnboardingRouter();
 
@@ -30,7 +32,7 @@ export default function Page() {
 
       trackPixelEvent({
         event: "Purchase",
-        pixelName: "fb_pixel_1",
+        pixelID: siteConfig.fbPixelID_1,
         properties: {
           currency,
           value,
@@ -39,7 +41,7 @@ export default function Page() {
         },
       });
 
-      trackPixelEvent({ event: "AddPaymentInfo", pixelName: "fb_pixel_2" });
+      trackPixelEvent({ event: "AddPaymentInfo", pixelID: siteConfig.fbPixelID_2 });
 
       gaTrackPaidTrialPurchaseConversion({
         value,

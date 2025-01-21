@@ -17,6 +17,8 @@ import { useRootState } from "@components/wrappers/RootWrapper";
 import { createCheckoutRedirectURL } from "@components/onboarding/utils";
 import { ONBOARDING_ROUTES } from "@components/onboarding/useOnboardingRouter";
 
+import { siteConfig } from "../../conf";
+
 type RequestType =
   | {
       state: "initial";
@@ -158,7 +160,7 @@ function usePayment(
       userID: userProfile.id,
     });
 
-    trackPixelEvent({ event: "AddPaymentInfo", pixelName: "fb_pixel_1" });
+    trackPixelEvent({ event: "AddPaymentInfo", pixelID: siteConfig.fbPixelID_1 });
 
     trackPosthogEvent({
       name: "add-payment-info",

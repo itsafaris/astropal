@@ -5,6 +5,8 @@ import { trackPixelEvent, trackPosthogPurchaseEvent } from "@utils/tracking";
 import { RequestType } from "@components/onboarding";
 import { storage } from "@components/wrappers/successCheckoutStorage";
 
+import { siteConfig } from "../../conf";
+
 export function usePurchaseSubscription(
   plan: TrialPricingPlan
 ): [RequestType, () => Promise<void>] {
@@ -60,7 +62,7 @@ export function usePurchaseSubscription(
 
       trackPixelEvent({
         event: "Purchase",
-        pixelName: "fb_pixel_2",
+        pixelID: siteConfig.fbPixelID_2,
         properties: {
           currency,
           value,

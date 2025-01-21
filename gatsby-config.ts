@@ -92,41 +92,18 @@ const config: GatsbyConfig = {
     },
 
     {
-      resolve: `gatsby-plugin-facebook-multi-pixels`,
-      // @ts-ignore
-      options: [
-        {
-          dev: true,
-          pixelId: siteConfig.fbPixelID_1,
-          alias: "fb_pixel_1",
-          viewContent: true,
-          pageView: true,
-        },
-        {
-          dev: true,
-          pixelId: siteConfig.fbPixelID_2,
-          alias: "fb_pixel_2",
-          viewContent: true,
-          pageView: true,
-        },
-      ],
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: siteConfig.fbPixelID_1,
+      },
     },
 
-    // {
-    //   resolve: `gatsby-plugin-facebook-pixel`,
-    //   options: {
-    //     pixelId: siteConfig.fbPixelID_1,
-    //     alias: "fb_pixel_1",
-    //   },
-    // },
-
-    // {
-    //   resolve: `gatsby-plugin-facebook-pixel`,
-    //   options: {
-    //     pixelId: siteConfig.fbPixelID_2,
-    //     alias: "fb_pixel_2",
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: siteConfig.fbPixelID_2,
+      },
+    },
 
     {
       resolve: "gatsby-plugin-manifest",

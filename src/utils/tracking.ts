@@ -53,7 +53,7 @@ function sendToGTM(e: TrackingEvent) {
 export function trackPixelEvent(input: {
   event: string;
   properties?: Record<string, any>;
-  pixelName?: string;
+  pixelID?: string;
 }) {
   if (typeof window === "undefined") {
     return;
@@ -63,8 +63,8 @@ export function trackPixelEvent(input: {
     return;
   }
 
-  if (!!input.pixelName) {
-    (window as any).fbq("trackSingle", input.pixelName, input.event, input.properties);
+  if (!!input.pixelID) {
+    (window as any).fbq("trackSingle", input.pixelID, input.event, input.properties);
   } else {
     (window as any).fbq("track", input.event, input.properties);
   }
@@ -73,7 +73,7 @@ export function trackPixelEvent(input: {
 export function trackCustomPixelEvent(input: {
   event: string;
   properties?: Record<string, any>;
-  pixelName?: string;
+  pixelID?: string;
 }) {
   if (typeof window === "undefined") {
     return;
@@ -83,8 +83,8 @@ export function trackCustomPixelEvent(input: {
     return;
   }
 
-  if (!!input.pixelName) {
-    (window as any).fbq("trackSingleCustom", input.pixelName, input.event, input.properties);
+  if (!!input.pixelID) {
+    (window as any).fbq("trackSingleCustom", input.pixelID, input.event, input.properties);
   } else {
     (window as any).fbq("trackCustom", input.event, input.properties);
   }
