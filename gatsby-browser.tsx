@@ -24,7 +24,10 @@ export const onPreRouteUpdate: GatsbyBrowser["onPreRouteUpdate"] = ({ location }
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
   posthog.capture("$pageview");
-  trackPixelEvent("ViewContent");
+
+  if (process.env.NODE_ENV === `production`) {
+    trackPixelEvent({ event: "ViewContent" });
+  }
 };
 
 export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
